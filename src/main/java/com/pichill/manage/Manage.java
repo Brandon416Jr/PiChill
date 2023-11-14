@@ -179,7 +179,4 @@ public class Manage implements Serializable {
 				+ ", mProfilePic=" + Arrays.toString(mProfilePic) + "]";
 	}
 
-	
-	
-	
 }
