@@ -1,4 +1,4 @@
-package com.pichill.backfunction;
+package com.pichill.backFunction;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
