@@ -1,6 +1,6 @@
 package com.pichill.manage.entity;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
