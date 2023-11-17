@@ -1,6 +1,8 @@
-package com.pichill.manage;
+package com.pichill.manage.model;
 
 import java.util.List;
+
+import com.pichill.manage.entity.Manage;
 
 public interface ManageDAO {
 	public abstract void add(Manage manage); // public abstract可不加，預設就會有
