@@ -1,4 +1,4 @@
-package com.pichill.manage;
+package com.pichill.manage.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
