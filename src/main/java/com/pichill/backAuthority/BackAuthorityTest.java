@@ -1,4 +1,4 @@
-package com.pichill.backAuthority;
+package com.pichill.backauthority;
 
 import java.math.BigDecimal;
 import java.util.List;
