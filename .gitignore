@@ -9,6 +9,10 @@ target/
 <<<<<<< HEAD
 util/
 =======
+<<<<<<< HEAD
+util/
+=======
 
 src/main/resources/hibernate.cfg.xml
 >>>>>>> 9d6667c856004943c33ff1f4951919929c6cbd60
+>>>>>>> master
