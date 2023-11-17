@@ -1,5 +1,5 @@
 package com.pichill.manage.controller;
 
-public class manageServlet {
+public class ManageServlet {
 
 }
