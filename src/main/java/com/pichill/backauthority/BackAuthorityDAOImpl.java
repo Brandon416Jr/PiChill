@@ -1,4 +1,4 @@
-package com.pichill.backAuthority;
+package com.pichill.backauthority;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
