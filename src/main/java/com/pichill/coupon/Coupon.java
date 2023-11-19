@@ -3,9 +3,18 @@ package com.pichill.coupon;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class CouponVO implements Serializable {
+public class Coupon implements Serializable {
 	private Integer couponID;
 	private Integer productID;
+	
+	public Coupon(){
+		super();
+	}
+	public Coupon(Integer couponID, Integer productID) {
+		super();
+		this.couponID = couponID;
+		this.productID = productID;
+	}
 	public Integer getCouponID() {
 		return couponID;
 	}
