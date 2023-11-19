@@ -1,4 +1,4 @@
-package com.pichill.backauthority;
+package com.pichill.backauthority.entity;
 
 import java.io.Serializable;
 

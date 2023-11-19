@@ -1,7 +1,9 @@
-package com.pichill.backauthority;
+package com.pichill.backauthority.entity;
 
-import java.math.BigDecimal;
 import java.util.List;
+
+import com.pichill.backauthority.model.BackAuthorityDAO;
+import com.pichill.backauthority.model.BackAuthorityDAOImpl;
 
 
 

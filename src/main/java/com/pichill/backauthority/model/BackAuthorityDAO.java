@@ -1,6 +1,8 @@
-package com.pichill.backauthority;
+package com.pichill.backauthority.model;
 
 import java.util.List;
+
+import com.pichill.backauthority.entity.BackAuthority;
 
 public interface BackAuthorityDAO {
 	public abstract void add(BackAuthority backAutority); // public abstract可不加，預設就會有
