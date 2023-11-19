@@ -1,4 +1,4 @@
-package com.pichill.backauthority;
+package com.pichill.backauthority.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.pichill.backauthority.Util;
+import com.pichill.backauthority.entity.BackAuthority;
 
 
 public class BackAuthorityDAOImpl implements BackAuthorityDAO {

@@ -5,22 +5,62 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "manage")
 public class Manage implements Serializable {
 //	private static final long serialVersionUID = 1L; // 可加可不加
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "manageID", updatable = false)
 	private int manageID;
+	
+	@Column(name = "mName")
 	private String mName;
+	
+	@Column(name="mUserName")
 	private String mUserName;
+	
+	@Column(name="mPassword")
 	private String mPassword;
+	
+	@Column(name="mBirth")
 	private Date mBirth;
+	
+	@Column(name="mGender")
 	private Integer mGender;
+	
+	@Column(name="mTelephone")
 	private String mTelephone;
+	
+	@Column(name="mEmgContact")
 	private String mEmgContact;
+	
+	@Column(name="mEmgPhone")
 	private String mEmgPhone;
+	
+	@Column(name="mAddress")
 	private String mAddress;
+	
+	@Column(name="mHiredate")
 	private Date mHiredate;
+	
+	@Column(name="mLastLogTime")
 	private Timestamp mLastLogTime;
+	
+	@Column(name="mID")
 	private String mID;
+	
+	@Column(name="mEmail")
 	private String mEmail;
+	
+	@Column(name="mProfilePic")
 	private byte[] mProfilePic;
 	
 	public Manage() {
