@@ -2,29 +2,31 @@ package com.pichill.manage.model;
 
 import static com.pichill.util.Constants.PAGE_MAX_RESULT;
 
-import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+//import java.math.BigDecimal;
+//import java.sql.Connection;
+//import java.sql.Date;
+//import java.sql.DriverManager;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+//import javax.persistence.TypedQuery;
+//import javax.persistence.criteria.CriteriaBuilder;
+//import javax.persistence.criteria.CriteriaQuery;
+//import javax.persistence.criteria.Predicate;
+//import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.pichill.manage.Util;
+
 import com.pichill.manage.entity.Manage;
 import com.pichill.util.HibernateUtil;
+
+
 
 
 
@@ -44,55 +46,112 @@ public class ManageDAOImpl implements ManageDAO {
 	@Override
 	public Integer add(Manage manage) {
 		// TODO Auto-generated method stub
-		return (Integer) getSession().save(manage);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Integer id = (Integer) session.save(manage);
+			session.getTransaction().commit();
+			return id;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return -1;
 	}
 
 	@Override
 	public Integer update(Manage manage) {
 		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-			getSession().update(manage);
+			session.beginTransaction();
+			session.update(manage);
+			session.getTransaction().commit();
 			return 1;
 		} catch (Exception e) {
-			return -1;
+			e.printStackTrace();
+			session.getTransaction().rollback();
 		}
+		return -1;
 		
 	}
 
 	@Override
 	public Integer delete(Integer manageID) {
-		// TODO Auto-generated method stub
-		Manage manage = getSession().get(Manage.class, manageID);
-		if (manage != null) {
-			getSession().delete(manage);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Manage manage = session.get(Manage.class, manageID);
+			if (manage != null) {
+				session.delete(manage);
+			}
+			session.getTransaction().commit();
 			return 1;
-		} else {
-			return -1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
 		}
+		return -1;
 	}
 	
 	@Override
 	public Manage getManageByManageID(Integer manageID) {
-		// TODO Auto-generated method stub
-		return getSession().get(Manage.class, manageID);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Manage manage = session.get(Manage.class, manageID);
+			session.getTransaction().commit();
+			return manage;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 	@Override
 	public Manage getManageBymName(String mName) {
-		// TODO Auto-generated method stub
-		return getSession().get(Manage.class, mName);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Manage manage = session.get(Manage.class, mName);
+			session.getTransaction().commit();
+			return manage;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 	@Override
 	public Manage getManageBymEmail(String mEmail) {
-		// TODO Auto-generated method stub
-		return getSession().get(Manage.class, mEmail);
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Manage manage = session.get(Manage.class, mEmail);
+			session.getTransaction().commit();
+			return manage;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 	@Override
 	public List<Manage> getAll() {
-		// TODO Auto-generated method stub
-		return getSession().createQuery("from Manage", Manage.class).list();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			List<Manage> list = session.createQuery("from Manage", Manage.class).list();
+			session.getTransaction().commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 
@@ -100,10 +159,17 @@ public class ManageDAOImpl implements ManageDAO {
 	public List<Manage> getAll(int currentPage) {
 		// TODO Auto-generated method stub
 		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-		return getSession().createQuery("from Manage", Manage.class)
-				.setFirstResult(first)
-				.setMaxResults(PAGE_MAX_RESULT)
-				.list();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			List<Manage> list = session.createQuery("from Manage", Manage.class).list();
+			session.getTransaction().commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 
 	
