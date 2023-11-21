@@ -1,0 +1,16 @@
+.textbox {
+  /* border: 1px solid red; */
+  height: auto;
+  /* margin-right: 0; */
+  overflow: hidden;
+}
+
+.textbox .form-control {
+  /* border: 4px solid yellow; */
+  height: auto;
+  overflow: auto;
+  padding-right: 0px;
+  resize: vertical;
+  /* min-height: 40px; */
+  max-height: 200px;
+}
