@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.pichill.manage.model.ManageDAO;
 import com.pichill.manage.model.ManageDAOImpl;
-
+import com.pichill.manage.entity.Manage;
 
 public class ManageTest {
 	public static void main(String[] args) {
@@ -28,7 +28,7 @@ public class ManageTest {
 //		manage1.setmProfilePic(null);
 //		dao.add(manage1);
 //		
-		// 修改 
+		// 修改
 //		Manage manage2 = new Manage();
 //		manage2.setmName("陳煒宜");
 //		manage2.setmUserName("chengogo");
@@ -52,8 +52,8 @@ public class ManageTest {
 //		dao.delete(13000012);
 //		dao.delete(13000013);
 //		dao.delete(13000014);
-		
-		// 查詢單筆
+
+		// 查詢單筆by manageID
 //		Manage manage3 = dao.getManageByManageID(13000001);
 //		System.out.print(manage3.getmName() + ",");
 //		System.out.print(manage3.getmUserName() + ",");
@@ -69,7 +69,46 @@ public class ManageTest {
 //		System.out.print(manage3.getmID() + ",");
 //		System.out.print(manage3.getmEmail() + ",");
 //		System.out.print(manage3.getmProfilePic() + ",");
+//
+//		System.out.println("---------------------");
+
+		// 查詢單筆by mName
+//		Manage manage4 = dao.getManageBymName("劉基鴻");
 //		
+//		System.out.print(manage4.getmUserName() + ",");
+//		System.out.print(manage4.getmPassword() + ",");
+//		System.out.print(manage4.getmBirth() + ",");
+//		System.out.print(manage4.getmGender() + ",");
+//		System.out.print(manage4.getmTelephone() + ",");
+//		System.out.print(manage4.getmEmgContact() + ",");
+//		System.out.print(manage4.getmEmgPhone() + ",");
+//		System.out.print(manage4.getmAddress() + ",");
+//		System.out.print(manage4.getmHiredate() + ",");
+//		System.out.print(manage4.getmLastLogTime() + ",");
+//		System.out.print(manage4.getmID() + ",");
+//		System.out.print(manage4.getmEmail() + ",");
+//		System.out.print(manage4.getmProfilePic() + ",");
+//		System.out.print(manage4.getManageID() + ",");
+//
+//		System.out.println("---------------------");
+
+		// 查詢單筆by mEmail
+//		Manage manage5 = dao.getManageBymEmail("evie3641@gmail.com");
+//		System.out.print(manage5.getmName() + ",");
+//		System.out.print(manage5.getmUserName() + ",");
+//		System.out.print(manage5.getmPassword() + ",");
+//		System.out.print(manage5.getmBirth() + ",");
+//		System.out.print(manage5.getmGender() + ",");
+//		System.out.print(manage5.getmTelephone() + ",");
+//		System.out.print(manage5.getmEmgContact() + ",");
+//		System.out.print(manage5.getmEmgPhone() + ",");
+//		System.out.print(manage5.getmAddress() + ",");
+//		System.out.print(manage5.getmHiredate() + ",");
+//		System.out.print(manage5.getmLastLogTime() + ",");
+//		System.out.print(manage5.getmID() + ",");
+//		System.out.print(manage5.getManageID() + ",");
+//		System.out.print(manage5.getmProfilePic() + ",");
+//
 //		System.out.println("---------------------");
 
 		// 查詢多筆

@@ -1,0 +1,134 @@
+div.main-content {
+    /* border: 3px solid red; */
+    height: 100%;
+    background-color: white;
+}
+
+div.section__content2 {
+    /* border: 3px solid brown; */
+    width: 75%;
+    position: absolute;
+    right: 15px;
+}
+
+div.main-content {
+    width: 100%;
+}
+
+div.card {
+    width: 100%;
+}
+
+div.card-body {
+    width: 100%;
+}
+
+div.left-card-body,
+div.right-card-body {
+    display: block;
+    /* border: 1px solid red; */
+    width: 100%;
+    margin-bottom: 15px; /* Add some space between left and right card bodies */
+}
+
+div.left-card-body {
+    font-size: 16px;
+}
+
+div.right-card-body {
+    font-size: 16px;
+}
+
+div.row {
+    /* border: 2px solid red; */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div.col-10 {
+    /* border: 1px solid red; */
+    margin-left: 0; /* Remove extra margin */
+}
+
+.form-control-label {
+    white-space: nowrap;
+}
+
+div.row {
+    height: auto; /* Adjust height to auto for better responsiveness */
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+}
+
+div.card-footer {
+    display: flex;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    justify-content: space-between;
+}
+
+div.button {
+    margin-left: 0; /* Remove extra margin */
+}
+
+div button.btn {
+    /* border: 3px solid green; */
+    margin: 3px 5px 3px 5px;
+}
+
+@media (max-width: 768px) {
+    div.section__content2 {
+        width: 100%; /* Adjust width to full on smaller screens */
+        position: static; /* Remove absolute positioning on smaller screens */
+    }
+
+    div.left-card-body,
+    div.right-card-body {
+        margin-bottom: 10px; /* Adjust spacing on smaller screens */
+    }
+
+    div.col-10 {
+        /* border: 1px solid red; */
+        margin-left: 0; /* Remove extra margin */
+    }
+}
+
+div.card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end; /* Align items to the right */
+}
+
+
+
+div button.btn {
+    /* border: 3px solid green; */
+    margin: 3px 5px 3px 5px;
+}
+
+div.row {
+    /* border: 2px solid red; */
+    margin-top: 10px;
+    margin-bottom: 20px; /* Add some space between form groups */
+}
+
+div.col-10 {
+    /* border: 1px solid red; */
+    margin-left: 20px; /* Remove extra margin */
+}
+
+.form-control-label {
+    white-space: nowrap;
+    margin-bottom: 5px; /* Add space between label and input field */
+}
+
+@media (max-width: 768px) {
+    div.col,
+    div.col-10 {
+        width: 100%; /* Set full width on small screens */
+        margin-left: 0; /* Remove extra margin */
+    }
+}
+div.checkbox {
+    /* border: 1px solid red; */
+    margin-bottom: 5px;
+}

@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="zh-Hant">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>datatable測試</title>
+
+  <!-- jquery連結 (一定要在datatable前面!) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- datatable連結 -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+
+  <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+  <link rel="stylesheet" href="../CSS/bootstrap.min.css">
+  <style type="text/css">
+
+  </style>
+  <!-- Vendor CSS-->
+  <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+  <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+  <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+  <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+  <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+  <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+  <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+  <link href="./vendor/font-awesome-4.7/css/font-awesome.css" rel="stylesheet" media="all">
+  <link href="./vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+  <!-- <link href="./vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all"> -->
+  <!-- Main CSS-->
+  <link href="../css/main.css" rel="stylesheet" media="all">
+  <link rel="stylesheet" href="../css/all.css" media="all">
+  <style>
+
+  </style>
+</head>
+
+<body class="animsition all-employees-page">
+  <div class="page-wrapper">
+    <!-- HEADER MOBILE-->
+    <header class="header-mobile d-block d-lg-none">
+      <div class="header-mobile__bar" style="background-color: #207DCA;">
+        <div class="container-fluid">
+          <div class="header-mobile-inner">
+            <a class="logo" href="#">
+              <img src="./pic/pi_chill_text.png" alt="chill" style="height:80px" />
+            </a>
+            <button class="hamburger hamburger--slider" type="button">
+              <span class="hamburger-box">
+                <span class="hamburger-inner"></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar-mobile">
+        <div class="container-fluid">
+          <ul class="navbar-mobile__list list-unstyled">
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>員工管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有員工資料</a>
+                </li>
+                <li>
+                  <a href="#">新增員工資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>一般會員管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a class="active" href="#">所有會員資料</a>
+                </li>
+                <li>
+                  <a href="#">新增會員資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>企業會員管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有會員資料</a>
+                </li>
+                <li>
+                  <a href="#">新增會員資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>最新消息管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">表單管理</a>
+                </li>
+                <li>
+                  <a href="#">公告管理</a>
+                </li>
+                <li>
+                  <a href="#">新增公告</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>論壇管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有文章</a>
+                </li>
+                <li>
+                  <a href="#">所有留言</a>
+                </li>
+                <li>
+                  <a href="#">檢舉管理</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>球館管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有球館</a>
+                </li>
+                <li>
+                  <a href="#">申請管理</a>
+                </li>
+                <li>
+                  <a href="#">新增球館</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>預約管理</a>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>商城管理</a>
+              <ul class="list-styled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">優惠券申請</a>
+                </li>
+                <li>
+                  <a href="#">商品管理</a>
+                </li>
+                <li>
+                  <a href="#">新增商品</a>
+                </li>
+                <li>
+                  <a href="#">訂單管理</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- END HEADER MOBILE-->
+  </div>
+    <!-- MENU SIDEBAR-->
+  <div class="sidebar">
+    <aside class="menu-sidebar d-none d-lg-block">
+      <div class="menu-sidebar__content js-scrollbar1">
+        <nav class="navbar-sidebar">
+          <ul class="list-unstyled navbar__list expanded">
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>員工管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a class="active" href="#">所有員工資料</a>
+                </li>
+                <li>
+                  <a href="#">新增員工資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>一般會員管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有會員資料</a>
+                </li>
+                <li>
+                  <a href="#">新增會員資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>企業會員管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有會員資料</a>
+                </li>
+                <li>
+                  <a href="#">新增會員資料</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>最新消息管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">表單管理</a>
+                </li>
+                <li>
+                  <a href="#">公告管理</a>
+                </li>
+                <li>
+                  <a href="#">新增公告</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>論壇管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有文章</a>
+                </li>
+                <li>
+                  <a href="#">所有留言</a>
+                </li>
+                <li>
+                  <a href="#">檢舉管理</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>球館管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">所有球館</a>
+                </li>
+                <li>
+                  <a href="#">申請管理</a>
+                </li>
+                <li>
+                  <a href="#">新增球館</a>
+                </li>
+              </ul>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>預約管理</a>
+            </li>
+            <li class="has-sub">
+              <a class="js-arrow" href="#">
+                <i class="fas fa-tachometer-alt"></i>商城管理</a>
+              <ul class="list-unstyled navbar__sub-list js-sub-list">
+                <li>
+                  <a href="#">優惠券申請</a>
+                </li>
+                <li>
+                  <a href="#">商品管理</a>
+                </li>
+                <li>
+                  <a href="#">新增商品</a>
+                </li>
+                <li>
+                  <a href="#">訂單管理</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+    <!-- END MENU SIDEBAR-->
+  </div>
+    
+
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+      <!-- HEADER DESKTOP-->
+      <header class="header-desktop">
+        <div class="section__content section__content--p30">
+          <div class="container-fluid">
+            <div class="header-wrap">
+              <div class="header-logo">
+                <img class="img-logo" src="./pic/pi_chill_text.png" alt="">
+              </div>
+              <form class="form-header" action="#" method="POST">
+                <input class="au-input au-input--xl" type="text" name="search" placeholder="搜尋" />
+                <button class="au-btn--submit" type="submit">
+                  <i class="zmdi zmdi-search" style="font-size: 15px;">送出</i>
+                </button>
+              </form>
+              <div class="header-button">
+                <div class="account-wrap">
+                  <div class="account-item clearfix js-item-menu">
+                    <div class="image">
+                      <img src="./pic/Group 115.png" alt="使用者頭像" />
+                    </div>
+                    <div class="content">
+                      <a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
+                    </div>
+                    <div class="account-dropdown js-dropdown">
+                      <div class="info clearfix">
+                        <div class="image">
+                          <a href="#">
+                            <img src="./pic/Group 115.png" alt="John Doe" />
+                          </a>
+                        </div>
+                        <div class="content">
+                          <h5 class="name">
+                            <a href="#">羅裕鵬</a>
+                          </h5>
+                          <span class="email">brandon416jr@gmail.com</span>
+                        </div>
+                      </div>
+                      <div class="account-dropdown__footer">
+                        <a href="#">
+                          <i class="zmdi zmdi-power"></i>登出</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!-- END HEADER DESKTOP-->
+    </div>
+
+    <div class="page-container2">
+      <div class="table-responsive m-b-40">
+        <table id="myTable" class="table table-borderless table-data3">
+          <thead>
+            <tr>
+              <th>管理員編號</th>
+              <th>員工姓名</th>
+              <th>帳號</th>
+              <th>密碼</th>
+              <th>生日</th>
+              <th>性別</th>
+              <th>手機</th>
+              <th>緊急聯絡人</th>
+              <th>緊急連絡人電話</th>
+              <th>聯絡地址</th>
+              <th>入職日期</th>
+              <th>最後上線時間</th>
+              <th>身分證</th>
+              <th>電子信箱</th>
+              <th>大頭貼</th>
+              <th>查看</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>13000001</td>
+              <td>張嘉仁</td>
+              <td>iamsohandsome</td>
+              <td>jiliflrgir</td>
+              <td>1995-04-13</td>
+              <td>1</td>
+              <td>0983659394</td>
+              <td>張爸爸</td>
+              <td>0937294853</td>
+              <td>新北勢永和區環河西路三段122號之一14樓</td>
+              <td>2023-01-01</td>
+              <td>2023-11-11 13:33:34</td>
+              <td>G536481831</td>
+              <td>chang413@gmail.com</td>
+              <td>1ijfko4.jpg</td>
+              <td><i><a href="#">查看</a></i></td>
+            </tr>
+            <tr>
+              <td>2018-09-28 01:22</td>
+              <td>Mobile</td>
+              <td>Samsung S8 Black</td>
+              <td class="process">Processed</td>
+              <td>$756.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-27 02:12</td>
+              <td>Game</td>
+              <td>Game Console Controller</td>
+              <td class="denied">Denied</td>
+              <td>$22.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-26 23:06</td>
+              <td>Mobile</td>
+              <td>iPhone X 256Gb Black</td>
+              <td class="denied">Denied</td>
+              <td>$1199.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-25 19:03</td>
+              <td>Accessories</td>
+              <td>USB 3.0 Cable</td>
+              <td class="process">Processed</td>
+              <td>$10.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-29 05:57</td>
+              <td>Accesories</td>
+              <td>Smartwatch 4.0 LTE Wifi</td>
+              <td class="denied">Denied</td>
+              <td>$199.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-24 19:10</td>
+              <td>Camera</td>
+              <td>Camera C430W 4k</td>
+              <td class="process">Processed</td>
+              <td>$699.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-22 00:43</td>
+              <td>Computer</td>
+              <td>Macbook Pro Retina 2017</td>
+              <td class="process">Processed</td>
+              <td>$10.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-22 00:43</td>
+              <td>Computer</td>
+              <td>Macbook Pro Retina 2017</td>
+              <td class="process">Processed</td>
+              <td>$10.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2018-09-22 00:43</td>
+              <td>Computer</td>
+              <td>Macbook Pro Retina 2017</td>
+              <td class="process">Processed</td>
+              <td>$10.00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+    </div>
+
+    
+    <script>
+        var script = document.createElement('script');
+
+        script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+
+        script.type = 'text/javascript';
+
+        document.getElementsByTagName('head')[0].appendChild(script);
+    </script>
+    <script>
+        $(document).ready( function () {
+        $('#myTable').DataTable();
+        } );
+    </script>
+    <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="./database/datatables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+    
+    <script src="../JS/popper.min.js"></script>
+    <script src="../JS/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js">
+    </script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+    </script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js">
+    </script>
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+</body>
+
+</html>
