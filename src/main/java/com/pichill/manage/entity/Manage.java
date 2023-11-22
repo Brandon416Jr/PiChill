@@ -63,6 +63,9 @@ public class Manage implements Serializable {
 	@Column(name="mProfilePic", columnDefinition="longblob") // 資料庫blob型別要用columnDefinition標示!
 	private byte[] mProfilePic;
 	
+	@Column(name="mStatus")
+	private Integer mStatus;
+	
 	public Manage() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -70,7 +73,7 @@ public class Manage implements Serializable {
 
 	public Manage(int manageID, String mName, String mUserName, String mPassword, Date mBirth, Integer mGender,
 			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, Date mHiredate,
-			Timestamp mLastLogTime, String mID, String mEmail, byte[] mProfilePic) {
+			Timestamp mLastLogTime, String mID, String mEmail, byte[] mProfilePic, int mStatus) {
 		super();
 		this.manageID = manageID;
 		this.mName = mName;
@@ -87,6 +90,7 @@ public class Manage implements Serializable {
 		this.mID = mID;
 		this.mEmail = mEmail;
 		this.mProfilePic = mProfilePic;
+		this.mStatus = mStatus;
 	}
 
 	public int getManageID() {
@@ -210,13 +214,21 @@ public class Manage implements Serializable {
 		this.mProfilePic = mProfilePic;
 	}
 
+	public Integer getmStatus() {
+		return mStatus;
+	}
+
+	public void setmStatus(Integer mStatus) {
+		this.mStatus = mStatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Manage [manageID=" + manageID + ", mName=" + mName + ", mUserName=" + mUserName + ", mPassword="
 				+ mPassword + ", mBirth=" + mBirth + ", mGender=" + mGender + ", mTelephone=" + mTelephone
 				+ ", mEmgContact=" + mEmgContact + ", mEmgPhone=" + mEmgPhone + ", mAddress=" + mAddress
 				+ ", mHiredate=" + mHiredate + ", mLastLogTime=" + mLastLogTime + ", mID=" + mID + ", mEmail=" + mEmail
-				+ ", mProfilePic=" + Arrays.toString(mProfilePic) + "]";
+				+ ", mProfilePic=" + Arrays.toString(mProfilePic) + ", mStatus=" + mStatus + "]";
 	}
 
 }

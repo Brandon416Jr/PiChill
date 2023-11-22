@@ -26,6 +26,7 @@ public class ManageTest {
 //		manage1.setmID("A736125622");
 //		manage1.setmEmail("fikoslfk444@gmail.com");
 //		manage1.setmProfilePic(null);
+//		manage1.setmStatus(1);
 //		dao.insert(manage1);
 //		
 		// 修改 
@@ -44,11 +45,12 @@ public class ManageTest {
 //		manage2.setmID("K736125622");
 //		manage2.setmEmail("fikoslfk555@gmail.com");
 //		manage2.setmProfilePic(null);
+//		manage2.setmStatus(1);
 //		manage2.setManageID(13000015);
 //		
 //		dao.update(manage2);
 //		
-		// 刪除
+		// 刪除 先不要這個功能
 //		dao.delete(13000011);
 //		dao.delete(13000013);
 //		dao.delete(13000014);
@@ -69,6 +71,7 @@ public class ManageTest {
 		System.out.print(manage3.getmID() + ",");
 		System.out.print(manage3.getmEmail() + ",");
 		System.out.print(manage3.getmProfilePic() + ",");
+		System.out.print(manage3.getmStatus() + ",");
 		
 		System.out.println("---------------------");
 
@@ -89,6 +92,7 @@ public class ManageTest {
 ////			System.out.print(manage.getmID() + ",");
 ////			System.out.print(manage.getmEmail() + ",");
 ////			System.out.print(manage.getmProfilePic() + ",");
+////         System.out.print(manage.getmStatus() + ",");
 ////			System.out.println();
 //		}
 	}

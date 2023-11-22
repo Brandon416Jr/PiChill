@@ -26,9 +26,9 @@ public class ManageDAOImpl implements ManageDAO {
 	String userid = "root";
 	String passwd = "Vv4161911";
 
-	private static final String INSERT_STMT = "INSERT INTO manage(mName, mUserName, mPassword, mBirth, mGender, mTelephone, mEmgContact, mEmgPhone, mAddress, mHiredate, mLastLogTime, mID, mEmail, mProfilePic) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE = "UPDATE manage SET mName = ?, mUserName = ?, mPassword = ?, mBirth = ?, mGender = ?, mTelephone = ?, mEmgContact = ?,  mEmgPhone = ?, mAddress = ?, mHiredate = ?, mLastLogTime = ?, mID = ?,  mEmail = ?, mProfilePic = ?  WHERE manageID = ?";
-	private static final String DELETE = "DELETE FROM manage WHERE manageID = ?";
+	private static final String INSERT_STMT = "INSERT INTO manage(mName, mUserName, mPassword, mBirth, mGender, mTelephone, mEmgContact, mEmgPhone, mAddress, mHiredate, mLastLogTime, mID, mEmail, mProfilePic, mStatus) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE = "UPDATE manage SET mName = ?, mUserName = ?, mPassword = ?, mBirth = ?, mGender = ?, mTelephone = ?, mEmgContact = ?,  mEmgPhone = ?, mAddress = ?, mHiredate = ?, mLastLogTime = ?, mID = ?,  mEmail = ?, mProfilePic = ?, mStatus = ?  WHERE manageID = ?";
+//	private static final String DELETE = "DELETE FROM manage WHERE manageID = ?";
 	private static final String GET_ONE_STMT = "SELECT * FROM manage WHERE manageID = ?";
 	private static final String GET_ALL_STMT = "SELECT * FROM manage";
 	
@@ -58,6 +58,7 @@ public class ManageDAOImpl implements ManageDAO {
 			pstmt.setString(12, manage.getmID());
 			pstmt.setString(13, manage.getmEmail());
 			pstmt.setBytes(14, manage.getmProfilePic());
+			pstmt.setInt(15, manage.getmStatus());
 
 			pstmt.executeUpdate();
 
@@ -114,7 +115,8 @@ public class ManageDAOImpl implements ManageDAO {
 			pstmt.setString(12, manage.getmID());
 			pstmt.setString(13, manage.getmEmail());
 			pstmt.setBytes(14, manage.getmProfilePic());
-			pstmt.setInt(15, manage.getManageID());
+			pstmt.setInt(15, manage.getmStatus());
+			pstmt.setInt(16, manage.getManageID());
 
 			pstmt.executeUpdate();
 
@@ -146,48 +148,48 @@ public class ManageDAOImpl implements ManageDAO {
 
 	}
 
-	public void delete(Integer manageID) {
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection(url, userid, passwd);
-			pstmt = con.prepareStatement(DELETE);
-
-			pstmt.setInt(1, manageID);
-
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
-	}
+//	public void delete(Integer manageID) {
+//
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection(url, userid, passwd);
+//			pstmt = con.prepareStatement(DELETE);
+//
+//			pstmt.setInt(1, manageID);
+//
+//			pstmt.executeUpdate();
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. "
+//					+ e.getMessage());
+//			// Handle any SQL errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+//
+//	}
 
 	public Manage findByPrimaryKey(Integer manageID) {
 
@@ -224,6 +226,7 @@ public class ManageDAOImpl implements ManageDAO {
 				manage.setmID(rs.getString("mID"));
 				manage.setmEmail(rs.getString("mEmail"));
 				manage.setmProfilePic(rs.getBytes("mProfilePic"));
+				manage.setmStatus(rs.getInt("mStatus"));
 			}
 
 			// Handle any driver errors
@@ -294,6 +297,7 @@ public class ManageDAOImpl implements ManageDAO {
 				manage.setmID(rs.getString("mID"));
 				manage.setmEmail(rs.getString("mEmail"));
 				manage.setmProfilePic(rs.getBytes("mProfilePic"));
+				manage.setmStatus(rs.getInt("mStatus"));
 				list.add(manage);
 			}
 
