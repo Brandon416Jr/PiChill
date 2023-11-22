@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>管理員查看自己資料</title>
+    <link rel="stylesheet" href="./vendor/bootstrap-4.1/bootstrap.min.css" />
+    <style type="text/css"></style>
+    <!-- Vendor CSS-->
+    <link
+      href="vendor/animsition/animsition.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link
+      href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="vendor/wow/animate.css" rel="stylesheet" media="all" />
+    <link
+      href="vendor/css-hamburgers/hamburgers.min.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <link href="vendor/slick/slick.css" rel="stylesheet" media="all" />
+    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link
+      href="vendor/perfect-scrollbar/perfect-scrollbar.css"
+      rel="stylesheet"
+      media="all"
+    />
+    <!-- Main CSS-->
+    <link href="./css/main.css" rel="stylesheet" media="all" />
+    <link rel="stylesheet" href="./css/set.css" />
+    <style>
+      div.dataTables_scrollHeadInner {
+        width: 100% !important;
+      }
+
+      div.dataTables_scrollHeadInner > table.table-data3 {
+        margin: 0 auto !important;
+      }
+    </style>
+  </head>
+
+  <body class="animsition">
+    <div class="page-wrapper">
+      <!-- HEADER MOBILE-->
+      <header class="header-mobile d-block d-lg-none">
+        <div class="header-mobile__bar" style="background-color: #207dca">
+          <div class="container-fluid">
+            <div class="header-mobile-inner">
+              <a class="logo" href="index.html">
+                <img
+                  src="./pic/pi_chill_text.png"
+                  alt="chill"
+                  style="height: 80px"
+                />
+              </a>
+              <button class="hamburger hamburger--slider" type="button">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <nav class="navbar-mobile">
+          <div class="container-fluid">
+            <ul class="navbar-mobile__list list-unstyled">
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>員工管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_manage.html">所有員工資料</a>
+                  </li>
+                  <li>
+                    <a href="new_manage.html">新增員工資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>一般會員管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_gUser.html">所有會員資料</a>
+                  </li>
+                  <li>
+                    <a href="new_gUser.html">新增會員資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>企業會員管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_oUser.html">所有會員資料</a>
+                  </li>
+                  <li>
+                    <a href="new_oUser.html">新增會員資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>最新消息管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="form.html">表單管理</a>
+                  </li>
+                  <li>
+                    <a href="all_announce.html">公告管理</a>
+                  </li>
+                  <li>
+                    <a href="new_announce.html">新增公告</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>論壇管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_post.html">所有文章</a>
+                  </li>
+                  <li>
+                    <a href="all_comment.html">所有留言</a>
+                  </li>
+                  <li>
+                    <a href="report.html">檢舉管理</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>球館管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_court.html">所有球館</a>
+                  </li>
+                  <li>
+                    <a href="all_place.html">所有場地</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a href="order.html">
+                  <i class="fas fa-tachometer-alt"></i>預約管理</a
+                >
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>商城管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="product.html">商品管理</a>
+                  </li>
+                  <li>
+                    <a href="new_product.html">新增商品</a>
+                  </li>
+                  <li>
+                    <a href="product_order.html">訂單管理</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      <!-- END HEADER MOBILE-->
+
+      <!-- MENU SIDEBAR-->
+      <aside class="menu-sidebar d-none d-lg-block">
+        <!-- <div class="logo">
+                <a href="#">
+                    <img class="logo_l" src="./pic/pi_chill_text.png"/>
+                </a>
+            </div> -->
+        <div class="menu-sidebar__content js-scrollbar1">
+          <nav class="navbar-sidebar">
+            <ul class="list-unstyled navbar__list">
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>員工管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_manage.html">所有員工資料</a>
+                  </li>
+                  <li>
+                    <a href="new_manage.html">新增員工資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>一般會員管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_gUser.html">所有會員資料</a>
+                  </li>
+                  <li>
+                    <a href="new_gUser.html">新增會員資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>企業會員管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_oUser.html">所有會員資料</a>
+                  </li>
+                  <li>
+                    <a href="new_oUser.html">新增會員資料</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>最新消息管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="form.html">表單管理</a>
+                  </li>
+                  <li>
+                    <a href="all_announce.html">公告管理</a>
+                  </li>
+                  <li>
+                    <a href="new_announce.html">新增公告</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>論壇管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_post.html">所有文章</a>
+                  </li>
+                  <li>
+                    <a href="all_comment.html">所有留言</a>
+                  </li>
+                  <li>
+                    <a href="report.html">檢舉管理</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>球館管理</a
+                >
+                <ul class="list-unstyled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="all_court.html">所有球館</a>
+                  </li>
+                  <li>
+                    <a href="all_place.html">所有場地</a>
+                  </li>
+                </ul>
+              </li>
+              <li class="has-sub">
+                <a href="order.html">
+                  <i class="fas fa-tachometer-alt"></i>預約管理</a
+                >
+              </li>
+              <li class="has-sub">
+                <a class="js-arrow" href="#">
+                  <i class="fas fa-tachometer-alt"></i>商城管理</a
+                >
+                <ul class="list-styled navbar__sub-list js-sub-list">
+                  <li>
+                    <a href="product.html">商品管理</a>
+                  </li>
+                  <li>
+                    <a href="new_product.html">新增商品</a>
+                  </li>
+                  <li>
+                    <a href="product_order.html">訂單管理</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </aside>
+      <!-- END MENU SIDEBAR-->
+
+      <!-- PAGE CONTAINER-->
+      <div class="page-container">
+        <!-- HEADER DESKTOP-->
+        <header class="header-desktop">
+          <div class="section__content section__content--p30">
+            <div class="container-fluid">
+              <div class="header-wrap">
+                <div class="header-logo">
+                  <a href="index.html"
+                    ><img
+                      class="img-logo"
+                      href="index.html"
+                      src="./pic/pi_chill_text.png"
+                      alt=""
+                  /></a>
+                </div>
+                <form class="form-header" action="#" method="POST">
+                  <input
+                    class="au-input au-input--xl"
+                    type="text"
+                    name="search"
+                    placeholder="搜尋"
+                  />
+                  <button class="au-btn--submit" type="submit">
+                    <i class="zmdi zmdi-search" style="font-size: 15px">送出</i>
+                  </button>
+                </form>
+                <div class="header-button">
+                  <div class="account-wrap">
+                    <div class="account-item clearfix js-item-menu">
+                      <div class="image">
+                        <img src="./pic/Group 115.png" alt="使用者頭像" />
+                      </div>
+                      <div class="content">
+                        <a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
+                      </div>
+                      <div class="account-dropdown js-dropdown">
+                        <div class="info clearfix">
+                          <div class="image">
+                            <a href="#">
+                              <img src="./pic/Group 115.png" alt="John Doe" />
+                            </a>
+                          </div>
+                          <div class="content">
+                            <h5 class="name">
+                              <a href="#">羅裕鵬</a>
+                            </h5>
+                            <span class="email">brandon416jr@gmail.com</span>
+                          </div>
+                        </div>
+                        <div class="account-dropdown__footer">
+                          <a href="#"> <i class="zmdi zmdi-power"></i>登出</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- END HEADER DESKTOP-->
+      </div>
+
+      <div class="main-content">
+        <div class="section__content2 section__content--p30">
+          <div class="container-fluid2">
+            <div class="card">
+              <div class="card-header">
+                <strong>我的資料</strong>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="left-card-body card-block">
+                      <form
+                        action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        class="form-horizontal"
+                      >
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label
+                              for="disabled-input"
+                              class="form-control-label"
+                              >管理員編號</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="disabled-input"
+                              name="disabled-input"
+                              placeholder="13000001"
+                              disabled=""
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >員工姓名</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入姓名"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >帳號</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入帳號"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >密碼</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入密碼"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label
+                              for="disabled-input"
+                              class="form-control-label"
+                              >生日</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="disabled-input"
+                              name="disabled-input"
+                              placeholder="1998-04-16"
+                              disabled=""
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label class="form-control-label">性別</label>
+                          </div>
+                          <div class="col col-md-9">
+                            <div class="form-check">
+                              <div class="radio">
+                                <label for="radio1" class="form-check-label">
+                                  <input
+                                    type="radio"
+                                    id="radio1"
+                                    name="radios"
+                                    value="option1"
+                                    class="form-check-input"
+                                    checked
+                                    disabled
+                                  />男性
+                                </label>
+                              </div>
+                              <div class="radio">
+                                <label for="radio2" class="form-check-label">
+                                  <input
+                                    type="radio"
+                                    id="radio2"
+                                    name="radios"
+                                    value="option2"
+                                    class="form-check-input"
+                                    disabled
+                                  />女性
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >手機</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入手機號碼"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label class="form-control-label">權限</label>
+                          </div>
+                          <div class="col col-md-9">
+                            <div class="form-check">
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                  />員工管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox2" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox2"
+                                    name="checkbox2"
+                                    value="option2"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                    checked="checked"
+                                  />一般會員管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox3" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox3"
+                                    name="checkbox3"
+                                    value="option3"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                  />企業會員管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                  />最新消息管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                    checked="checked"
+                                  />論壇管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                  />球館管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                  />預約管理
+                                </label>
+                              </div>
+                              <div class="checkbox">
+                                <label for="checkbox1" class="form-check-label">
+                                  <input
+                                    type="checkbox"
+                                    id="checkbox1"
+                                    name="checkbox1"
+                                    value="option1"
+                                    class="form-check-input"
+                                    onclick="return false;"
+                                    checked="checked"
+                                  />商城管理
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="right-card-body card-block">
+                      <form
+                        action=""
+                        method="post"
+                        enctype="multipart/form-data"
+                        class="form-horizontal"
+                      >
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >緊急連絡人</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入姓名"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >緊急連絡人手機</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入手機號碼"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >聯絡地址</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入聯絡地址"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label
+                              for="disabled-input"
+                              class="form-control-label"
+                              >入職日期</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="disabled-input"
+                              name="disabled-input"
+                              placeholder="2021-11-10"
+                              disabled=""
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label
+                              for="disabled-input"
+                              class="form-control-label"
+                              >最後上線時間</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="disabled-input"
+                              name="disabled-input"
+                              placeholder="2023-07-26"
+                              disabled=""
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label
+                              for="disabled-input"
+                              class="form-control-label"
+                              >身份證字號</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="disabled-input"
+                              name="disabled-input"
+                              placeholder="D453293745"
+                              disabled=""
+                              class="form-control"
+                            />
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="text-input" class="form-control-label"
+                              >電子信箱</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="text"
+                              id="text-input"
+                              name="text-input"
+                              placeholder="請輸入電子信箱"
+                              class="form-control"
+                            />
+                            <!-- <small class="form-text text-muted">This is a help text</small> -->
+                          </div>
+                        </div>
+                        <div class="row form-group">
+                          <div class="col col-md-3">
+                            <label for="file-input" class="form-control-label"
+                              >上傳大頭貼</label
+                            >
+                          </div>
+                          <div class="col-10 col-md-8">
+                            <input
+                              type="file"
+                              id="file-input"
+                              name="file-input"
+                              class="form-control-file"
+                            />
+                            <img id="imagePreview" src="#" alt="Preview" />
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="button">
+                  <button type="reset" class="btn btn-danger btn-sm">
+                    <i class="fa fa-ban"></i> 取消
+                  </button>
+                  <button type="submit" class="btn btn-primary btn-sm">
+                    <i class="fa fa-dot-circle-o"></i> 確認
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/pic_uplaod.js"></script>
+    <!-- Jquery JS-->
+    <script src="vendor/jquery-3.2.1.min.js"></script>
+    <!-- proper.min.js first, then bootstrap.min.js -->
+    <script src="./vendor/bootstrap-4.1/popper.min.js"></script>
+    <script src="./vendor/bootstrap-4.1/bootstrap.min.js"></script>
+    <!-- Vendor JS       -->
+    <script src="vendor/slick/slick.min.js"></script>
+    <script src="vendor/wow/wow.min.js"></script>
+    <script src="vendor/animsition/animsition.min.js"></script>
+    <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+    <script src="vendor/counter-up/jquery.counterup.min.js"></script>
+    <script src="vendor/circle-progress/circle-progress.min.js"></script>
+    <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+    <script src="vendor/select2/select2.min.js"></script>
+    <!-- Main JS-->
+    <script src="js/main.js"></script>
+  </body>
+</html>
