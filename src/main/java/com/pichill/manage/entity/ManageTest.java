@@ -26,6 +26,7 @@ public class ManageTest {
 //		manage1.setmID("A736125622");
 //		manage1.setmEmail("fikoslfk444@gmail.com");
 //		manage1.setmProfilePic(null);
+//		manage1.setmStatus(1);
 //		dao.add(manage1);
 //		
 		// 修改
@@ -44,6 +45,7 @@ public class ManageTest {
 //		manage2.setmID("K736125622");
 //		manage2.setmEmail("fikoslfk555@gmail.com");
 //		manage2.setmProfilePic(null);
+//		manage2.setmStatus(1);
 //		manage2.setManageID(13000015);
 //		
 //		dao.update(manage2);
@@ -54,23 +56,24 @@ public class ManageTest {
 //		dao.delete(13000014);
 
 		// 查詢單筆by manageID
-//		Manage manage3 = dao.getManageByManageID(13000001);
-//		System.out.print(manage3.getmName() + ",");
-//		System.out.print(manage3.getmUserName() + ",");
-//		System.out.print(manage3.getmPassword() + ",");
-//		System.out.print(manage3.getmBirth() + ",");
-//		System.out.print(manage3.getmGender() + ",");
-//		System.out.print(manage3.getmTelephone() + ",");
-//		System.out.print(manage3.getmEmgContact() + ",");
-//		System.out.print(manage3.getmEmgPhone() + ",");
-//		System.out.print(manage3.getmAddress() + ",");
-//		System.out.print(manage3.getmHiredate() + ",");
-//		System.out.print(manage3.getmLastLogTime() + ",");
-//		System.out.print(manage3.getmID() + ",");
-//		System.out.print(manage3.getmEmail() + ",");
-//		System.out.print(manage3.getmProfilePic() + ",");
-//
-//		System.out.println("---------------------");
+		Manage manage3 = dao.getManageByManageID(13000001);
+		System.out.print(manage3.getmName() + ",");
+		System.out.print(manage3.getmUserName() + ",");
+		System.out.print(manage3.getmPassword() + ",");
+		System.out.print(manage3.getmBirth() + ",");
+		System.out.print(manage3.getmGender() + ",");
+		System.out.print(manage3.getmTelephone() + ",");
+		System.out.print(manage3.getmEmgContact() + ",");
+		System.out.print(manage3.getmEmgPhone() + ",");
+		System.out.print(manage3.getmAddress() + ",");
+		System.out.print(manage3.getmHiredate() + ",");
+		System.out.print(manage3.getmLastLogTime() + ",");
+		System.out.print(manage3.getmID() + ",");
+		System.out.print(manage3.getmEmail() + ",");
+		System.out.print(manage3.getmProfilePic() + ",");
+		System.out.print(manage3.getmStatus() + ",");
+
+		System.out.println("---------------------");
 
 		// 查詢單筆by mName
 //		Manage manage4 = dao.getManageBymName("劉基鴻");
@@ -88,6 +91,7 @@ public class ManageTest {
 //		System.out.print(manage4.getmID() + ",");
 //		System.out.print(manage4.getmEmail() + ",");
 //		System.out.print(manage4.getmProfilePic() + ",");
+//		System.out.print(manage4.getmStatus() + ",");
 //		System.out.print(manage4.getManageID() + ",");
 //
 //		System.out.println("---------------------");
@@ -108,6 +112,7 @@ public class ManageTest {
 //		System.out.print(manage5.getmID() + ",");
 //		System.out.print(manage5.getManageID() + ",");
 //		System.out.print(manage5.getmProfilePic() + ",");
+//		System.out.print(manage5.getmStatus() + ",");
 //
 //		System.out.println("---------------------");
 
@@ -128,6 +133,7 @@ public class ManageTest {
 			System.out.print(manage.getmID() + ",");
 			System.out.print(manage.getmEmail() + ",");
 			System.out.print(manage.getmProfilePic() + ",");
+			System.out.print(manage.getmStatus() + ",");
 			System.out.println();
 		}
 	}
