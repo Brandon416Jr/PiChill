@@ -2,6 +2,7 @@ package com.pichill.coupon;
 
 import java.io.Serializable;
 
+
 @SuppressWarnings("serial")
 public class Coupon implements Serializable {
 	private Integer couponID;
@@ -27,10 +28,4 @@ public class Coupon implements Serializable {
 	public void setProductID(Integer productID) {
 		this.productID = productID;
 	}
-	@Override
-	public String toString() {
-		return "CouponVO [couponID=" + couponID + ", productID=" + productID + "]";
-	}
-	
-	
 }

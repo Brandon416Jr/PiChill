@@ -1,17 +1,13 @@
 package com.pichill.coupon;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.pichill.time.Util;
 
-public class CouponDAOImpl implments CouponDAO{
-	private static final String INSERT_STMT= "INSERT INTO coupon(couponID, productID) VALUES(?, ?)"
+public class CouponDAOImpl implements CouponDAO{
+	private static final String INSERT_STMT= "INSERT INTO coupon(productID) VALUES(?)";
 	private static final String UPDATE_STMT = "UPDATE coupon SET couponID= ?, productID = ?";
 	private static final String DELETE_STMT = "DELETE FROM coupon WHERE couponID =? ";
 	private static final String FIND_BY_COUPONID = "SELECT * FROM coupon where couponID= ? ";
@@ -24,27 +20,79 @@ public class CouponDAOImpl implments CouponDAO{
 			ce.printStackTrace();
 		}
 	}
-
-	public void add(Coupon Coupon) {
+	
+	@Override
+	public void add(Coupon coupon) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1, coupon.);
-			pstmt.setInt(2, coupon.());
-			
-			}
+			pstmt.setInt(2, coupon.getProductID());
+			pstmt.executeUpdate();
+
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			closeResources(con, pstmt, null);
+		}
 	}
 
+//改
+	public void update(Coupon coupon) {
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(UPDATE_STMT);
+			pstmt.setInt(1, coupon.getCouponID());
+			pstmt.setInt(2, coupon.getProductID());
+			pstmt.executeUpdate();
+			
+		} catch (SQLException se) {
+			se.printStackTrace();
+		} finally {
+			closeResources(con, pstmt, null);
+		}
+		
+	}
+	//刪
 	@Override
+	public void delete(int couponID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(DELETE_STMT);
+
+			pstmt.setInt(1, couponID);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			closeResources(con, pstmt, null);
+		}
+	}
+
+
+	// 查
 	public Coupon getCouponByCouponID(Integer couponID) {
 		Coupon coupon = null;
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+
 		try {
+		
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(FIND_BY_COUPONID);
 			pstmt.setInt(1, couponID);
@@ -62,8 +110,9 @@ public class CouponDAOImpl implments CouponDAO{
 		}
 		return coupon;
 	}
-
-public List<Coupon>getAll(){
+	
+	@Override
+	public List<Coupon>getAll(){
 	List<Coupon> couponList = new ArrayList<>();
 	Coupon coupon = null;
 	Connection con = null;
@@ -74,10 +123,16 @@ public List<Coupon>getAll(){
 	pstmt = con.prepareStatement(GET_ALL);
 	rs = pstmt.executeQuery();
 	
+	while(rs.next()) {
+		coupon = new Coupon();
+		coupon.setCouponID(rs.getInt("CouponID"));
+		coupon.setCouponID(rs.getInt("productID"));
+		couponList.add(coupon);
+	}
 	}catch(SQLException se) {
 		se.printStackTrace();
 	}finally {
-		closeResources(con,pstmt,rs)};
+		closeResources(con,pstmt,rs);
 	}return couponList;
 
 }
@@ -91,6 +146,13 @@ public List<Coupon>getAll(){
 				se.printStackTrace(System.err);
 			}
 		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
 		if (con != null) {
 			try {
 				con.close();
@@ -98,5 +160,12 @@ public List<Coupon>getAll(){
 				e.printStackTrace(System.err);
 			}
 		}
+		
 	}
+	
 }
+
+		
+	
+
+

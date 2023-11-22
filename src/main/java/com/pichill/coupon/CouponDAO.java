@@ -7,10 +7,10 @@ public interface CouponDAO {
 
 	void update(Coupon coupon);
 
-	void delete(Integer CouponID);
+	void delete(int CouponID);
 
 	Coupon getCouponByCouponID(Integer couponID);
-
+	
 	List<Coupon> getAll();
 
 }
