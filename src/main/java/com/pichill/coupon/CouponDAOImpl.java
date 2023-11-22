@@ -7,7 +7,7 @@ import java.util.List;
 import com.pichill.time.Util;
 
 public class CouponDAOImpl implements CouponDAO{
-	private static final String INSERT_STMT= "INSERT INTO coupon(couponID, productID) VALUES(?, ?)";
+	private static final String INSERT_STMT= "INSERT INTO coupon(productID) VALUES(?)";
 	private static final String UPDATE_STMT = "UPDATE coupon SET couponID= ?, productID = ?";
 	private static final String DELETE_STMT = "DELETE FROM coupon WHERE couponID =? ";
 	private static final String FIND_BY_COUPONID = "SELECT * FROM coupon where couponID= ? ";
@@ -21,7 +21,7 @@ public class CouponDAOImpl implements CouponDAO{
 		}
 	}
 	
-	
+	@Override
 	public void add(Coupon coupon) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -29,7 +29,6 @@ public class CouponDAOImpl implements CouponDAO{
 		try {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
-			pstmt.setInt(1, coupon.getCouponID());
 			pstmt.setInt(2, coupon.getProductID());
 			pstmt.executeUpdate();
 
@@ -48,7 +47,7 @@ public class CouponDAOImpl implements CouponDAO{
 
 		try {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(FIND_BY_COUPONID);
+			pstmt = con.prepareStatement(UPDATE_STMT);
 			pstmt.setInt(1, coupon.getCouponID());
 			pstmt.setInt(2, coupon.getProductID());
 			pstmt.executeUpdate();
@@ -60,6 +59,30 @@ public class CouponDAOImpl implements CouponDAO{
 		}
 		
 	}
+	//刪
+	@Override
+	public void delete(int couponID) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+
+		try {
+
+			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+			pstmt = con.prepareStatement(DELETE_STMT);
+
+			pstmt.setInt(1, couponID);
+			
+			pstmt.executeUpdate();
+
+			// Handle any driver errors
+		} catch (SQLException se) {
+			se.printStackTrace();
+			// Clean up JDBC resources
+		} finally {
+			closeResources(con, pstmt, null);
+		}
+	}
+
 
 	// 查
 	public Coupon getCouponByCouponID(Integer couponID) {
@@ -87,6 +110,7 @@ public class CouponDAOImpl implements CouponDAO{
 		}
 		return coupon;
 	}
+	
 	@Override
 	public List<Coupon>getAll(){
 	List<Coupon> couponList = new ArrayList<>();
@@ -118,6 +142,13 @@ public class CouponDAOImpl implements CouponDAO{
 		if (rs != null) {
 			try {
 				rs.close();
+			} catch (SQLException se) {
+				se.printStackTrace(System.err);
+			}
+		}
+		if (pstmt != null) {
+			try {
+				pstmt.close();
 			} catch (SQLException se) {
 				se.printStackTrace(System.err);
 			}
