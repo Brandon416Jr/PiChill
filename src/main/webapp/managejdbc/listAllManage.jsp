@@ -57,7 +57,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>所有員工資料 - listAllManage.jsp</h3>
-		 <h4><a href="select_page.jsp"><img src="../image/smallLogo.png" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="select_page.jsp"><img src="../image/smallLogo.png" width="50" height="50" border="0">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -104,13 +104,13 @@
 			<td>${manage.mStatus}</td>
 <%-- 			<td>${manage.mStatus.equals("0")) ? "已離職" : "在職中"}</td> --%>
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/manage/manage.do" style="margin-bottom: 0px;">
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/managejdbc/manage.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
 			     <input type="hidden" name="manageID"  value="${manage.manageID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 <!-- 			<td> -->
-<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/manage/manage.do" style="margin-bottom: 0px;"> --%>
+<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/managejdbc/manage.do" style="margin-bottom: 0px;"> --%>
 <!-- 			     <input type="submit" value="刪除"> -->
 <%-- 			     <input type="hidden" name="manageID"  value="${manage.manageID}"> --%>
 <!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
