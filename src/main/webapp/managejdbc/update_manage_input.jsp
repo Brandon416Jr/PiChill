@@ -3,7 +3,7 @@
 <%@ page import="com.pichill.managejdbc.entity.Manage"%>
 
 <% //見com.emp.controller.EmpServlet.java第163行存入req的empVO物件 (此為從資料庫取出的empVO, 也可以是輸入格式有錯誤時的empVO物件)
-Manage manage = (Manage) request.getAttribute("manage");
+   Manage manage = (Manage) request.getAttribute("manage");
 %>
 <%-- --<%= manage==null %>--${empVO.deptno}-- <!-- line 100 --> --%>
 <html>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.managejdbc.service.ManageService;
 
-@WebServlet(name = "ManageServlet", value = "/manage/manage.do")
+@WebServlet(name = "ManageServlet", value = "/managejdbc/manage.do")
 public class ManageServlet extends HttpServlet {
 	private ManageService manageService;
 
@@ -46,19 +46,19 @@ public class ManageServlet extends HttpServlet {
 			forwardPath = getOneDisplay(req, res);
 			break;
 		case "getOne_For_Update":
-			// 來自listAllEmp.jsp的請求
+			// 來自listAllManage.jsp的請求
 			forwardPath = getOneUpdate(req, res);
 			break;
 		case "update":
-			// 來自update_emp_input.jsp的請求
+			// 來自update_manage_input.jsp的請求
 			forwardPath = update(req, res);
 			break;
 		case "insert":
-			// 來自addEmp.jsp的請求
+			// 來自addManage.jsp的請求
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/manage/select_page.jsp";
+			forwardPath = "/managejdbc/select_page.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -79,7 +79,7 @@ public class ManageServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					return "/manage/select_page.jsp";// 程式中斷
+					return "/managejdbc/select_page.jsp";// 程式中斷
 				}
 
 				Integer manageID = null;
@@ -90,7 +90,7 @@ public class ManageServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					return "/manage/select_page.jsp";// 程式中斷
+					return "/managejdbc/select_page.jsp";// 程式中斷
 				}
 
 		/*************************** 2.開始查詢資料 *****************************************/
@@ -102,12 +102,12 @@ public class ManageServlet extends HttpServlet {
 				}
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
-					return "/manage/select_page.jsp";// 程式中斷
+					return "/managejdbc/select_page.jsp";// 程式中斷
 				}
 				
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("manage", manage); // 資料庫取出的manage物件,存入req
-		return "/manage/listOneManage.jsp";
+		return "/managejdbc/listOneManage.jsp";
 	}
 
 	private String getOneUpdate(HttpServletRequest req, HttpServletResponse res) {
@@ -116,7 +116,7 @@ public class ManageServlet extends HttpServlet {
 		Manage manage = manageService.getOneManage(manageID);
 
 		req.setAttribute("manage", manage);
-		return "/manage/update_manage_input.jsp";
+		return "/managejdbc/update_manage_input.jsp";
 	}
 
 	private String update(HttpServletRequest req, HttpServletResponse res) {
@@ -248,7 +248,7 @@ public class ManageServlet extends HttpServlet {
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("manage", manage); // 含有輸入格式錯誤的manage物件,也存入req
-					return "/manage/update_manage_input.jsp"; // 程式中斷
+					return "/managejdbc/update_manage_input.jsp"; // 程式中斷
 				}
 
 		/*************************** 2.開始修改資料 *****************************************/
@@ -257,7 +257,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("manage", manage); // 資料庫update成功後,正確的的manage物件,存入req
-		return "/manage/listOneManage.jsp";
+		return "/managejdbc/listOneManage.jsp";
 	}
 
 	private String insert(HttpServletRequest req, HttpServletResponse res) {
@@ -385,7 +385,7 @@ public class ManageServlet extends HttpServlet {
 			// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
 					req.setAttribute("manage", manage); // 含有輸入格式錯誤的empVO物件,也存入req
-					return "/manage/addManage.jsp";
+					return "/managejdbc/addManage.jsp";
 		}
 
 		/*************************** 2.開始新增資料 ***************************************/
@@ -393,7 +393,7 @@ public class ManageServlet extends HttpServlet {
 		manageService.addManage(manage);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-		return "/manage/listAllManage.jsp";
+		return "/managejdbc/listAllManage.jsp";
 	}
 
 }
