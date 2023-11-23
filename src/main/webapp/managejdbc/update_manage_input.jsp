@@ -113,7 +113,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 	</tr>
 	<tr>
 		<td>入職日期:</td>
-		<td><input name="hiredate" id="f_date1" type="text" ></td>
+		<td><input name="mHiredate" type="date" ></td>
 	</tr>
 	<tr>
 		<td>最後上線時間:</td>

@@ -109,12 +109,12 @@
 			     <input type="hidden" name="manageID"  value="${manage.manageID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
-			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/manage/manage.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="§R°£">
-			     <input type="hidden" name="manageID"  value="${manage.manageID}">
-			     <input type="hidden" name="action" value="delete"></FORM>
-			</td>
+<!-- 			<td> -->
+<%-- 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/manage/manage.do" style="margin-bottom: 0px;"> --%>
+<!-- 			     <input type="submit" value="§R°£"> -->
+<%-- 			     <input type="hidden" name="manageID"  value="${manage.manageID}"> --%>
+<!-- 			     <input type="hidden" name="action" value="delete"></FORM> -->
+<!-- 			</td> -->
 		</tr>
 	</c:forEach>
 </table>
