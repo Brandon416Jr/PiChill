@@ -257,7 +257,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("manage", manage); // 資料庫update成功後,正確的的manage物件,存入req
-		return "/emp/listOneManage.jsp";
+		return "/manage/listOneManage.jsp";
 	}
 
 	private String insert(HttpServletRequest req, HttpServletResponse res) {
@@ -393,7 +393,7 @@ public class ManageServlet extends HttpServlet {
 		manageService.addManage(manage);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-		return "/emp/listAllEmp.jsp";
+		return "/manage/listAllManage.jsp";
 	}
 
 }

@@ -44,7 +44,7 @@ public class ManageDAOImpl implements ManageDAO {
 	}
 
 	@Override
-	public Integer add(Manage manage) {
+	public int insert(Manage manage) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -60,7 +60,7 @@ public class ManageDAOImpl implements ManageDAO {
 	}
 
 	@Override
-	public Integer update(Manage manage) {
+	public int update(Manage manage) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
@@ -77,7 +77,7 @@ public class ManageDAOImpl implements ManageDAO {
 	}
 
 	@Override
-	public Integer delete(Integer manageID) {
+	public int delete(Integer manageID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
