@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.managejdbc.service.ManageService;
 
-@WebServlet(name = "ManageServlet", value = "/managejdbc/manage.do")
+@WebServlet(name = "ManageServlet", value = "/managejdbc/manage.do") // 註冊檔名字不能取一樣
 public class ManageServlet extends HttpServlet {
 	private ManageService manageService;
 
@@ -147,7 +147,7 @@ public class ManageServlet extends HttpServlet {
 				String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 					if (mPassword == null || mPassword.trim().length() == 0) {
 						errorMsgs.add("管理員密碼: 請勿空白");
-					} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 						errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 					}
 
@@ -285,7 +285,7 @@ public class ManageServlet extends HttpServlet {
 				String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 					if (mPassword == null || mPassword.trim().length() == 0) {
 						errorMsgs.add("管理員密碼: 請勿空白");
-					} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 						errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 					}
 
