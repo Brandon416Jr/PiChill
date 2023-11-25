@@ -16,6 +16,8 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.criteria.CriteriaBuilder.In;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.pichill.forumpic.ForumPic;
 import com.pichill.report.Report;
 
@@ -24,7 +26,7 @@ import com.pichill.report.Report;
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "postID", updatable = false)
+	@Column(name = "postID", updatable = false , insertable=false)
     private Integer postID;
 	
 //	@ManyToOne
@@ -44,6 +46,12 @@ public class Post {
 	@Column(name = "postTitle")
     private String postTitle;
 	
+	@Override
+	public String toString() {
+		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", postType=" + postType + ", postTime=" + postTime + ", likeCnt="
+				+ likeCnt + "]";
+	}
 	@Column(name = "postContent")
     private String postContent;
 	
@@ -51,18 +59,19 @@ public class Post {
     private Integer postType;
 	
 	@Column(name = "postTime")
+	@CreationTimestamp
     private Timestamp postTime;
 	
 	@Column(name = "likeCnt")
     private Integer likeCnt;
 	
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	@OrderBy("reportID asc")
-	private Set<Report> reports;
-	
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	@OrderBy("ForumPicID asc")
-	private Set<ForumPic> forumPics;
+//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//	@OrderBy("reportID asc")
+//	private Set<Report> reports;
+//	
+//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//	@OrderBy("forumPicID asc")
+//	private Set<ForumPic> forumPics;
 //    public Post() {
 //	}
 //	public Post(Integer postID, Integer gUserID, Integer oUserID, String postTitle, String postContent, Integer postType,

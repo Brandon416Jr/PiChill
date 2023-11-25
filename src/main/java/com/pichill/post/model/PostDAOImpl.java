@@ -14,8 +14,10 @@ import javax.persistence.criteria.Root;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.pichill.post.entity.Post;
+import com.pichill.util.HibernateUtil;
 
 public class PostDAOImpl implements PostDAO{
 
@@ -34,15 +36,25 @@ public class PostDAOImpl implements PostDAO{
 
 	@Override
 	public int insert(Post entity) {
-		
+//		SessionFactory factory2 = HibernateUtil.getSessionFactory();
+//		Session session = factory2.openSession();
+//		Transaction tx = session.beginTransaction();
 		// 回傳給 service 剛新增成功的自增主鍵值
-		return (Integer) getSession().save(entity);
+//		entity.setPostTime(new java.sql.Timestamp(System.currentTimeMillis()));
+//		session.save(entity);
+//		tx.commit();
+//		return 1;
+		return(Integer)getSession().save(entity);
 	}
 
 	@Override
 	public int update(Post entity) {
 		try {
+//			SessionFactory factory2 = HibernateUtil.getSessionFactory();
+//			Session session = factory2.openSession();
+//			Transaction tx = session.beginTransaction();
 			getSession().update(entity);
+//			tx.commit();
 			return 1;
 		} catch (Exception e) {
 			return -1;
@@ -61,16 +73,32 @@ public class PostDAOImpl implements PostDAO{
 			return -1;
 		}
 	}
-
 	@Override
-	public Post getById(Integer PostID) {
-		return getSession().get(Post.class, PostID);
+	public Post getByPostID(Integer postID) {
+		getSession().clear();
+		return getSession().get(Post.class,postID);
+	}
+	
+	@Override
+	public List<Post> getByTitle(String postTitle) {
+		return getSession().createQuery("from Post WHERE postTitle like :postTitle", Post.class)
+	            .setParameter("postTitle", "%"+postTitle+"%")
+	            .list();
+	}
+	
+	@Override
+	public List<Post> getByType(Integer postType) {
+	    return getSession().createQuery("from Post WHERE postType = :postType", Post.class)
+	            .setParameter("postType", postType)
+	            .list();
 	}
 
 	@Override
 	public List<Post> getAll() {
 		return getSession().createQuery("from Post", Post.class).list();
 	}
+
+
 	
 //	@Override
 //	public List<Post> getByCompositeQuery(Map<String, String> map) {

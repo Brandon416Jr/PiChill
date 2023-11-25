@@ -11,8 +11,12 @@ public interface PostDAO {
 	int update(Post entity);
 
 	int delete(Integer postID);
-
-	Post getById(Integer PostID);
+	
+	Post getByPostID(Integer postID);
+	
+	List<Post> getByTitle(String postTitle);
+	
+	List<Post> getByType(Integer postType);
 
 	List<Post> getAll();
 

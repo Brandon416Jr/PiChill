@@ -5,42 +5,71 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.persistence.criteria.CriteriaBuilder.In;
+
 import com.pichill.post.entity.Post;
 import com.pichill.post.model.PostDAO;
 import com.pichill.post.model.PostDAOImpl;
 
-public class PostServiceImpl implements PostService{
+public class PostServiceImpl implements PostService {
 
 	private static final long PAGE_MAX_RESULT = 3;
 	private PostDAO dao;
-	
+
 	public PostServiceImpl() {
 		dao = new PostDAOImpl();
 	}
 
 	@Override
 	public Post addPost(Post post) {
-		// TODO Auto-generated method stub
-		return null;
+		Integer id = dao.insert(post);
+		post = dao.getByPostID(id);
+		return post;
+//		return dao.insert(post);//返回給controller
 	}
 
+//	public Post addPost(String postTitle,String postContent,Integer postType) {
+//		Post post = new Post();
+//		post.setPostTitle(postTitle);
+//		post.setPostContent(postContent);
+//		post.setPostType(postType);
+//		dao.insert(post);
+//	return post;
+////		return dao.insert(post);//返回給controller
+//	}
 	@Override
 	public Post updatePost(Post post) {
-		// TODO Auto-generated method stub
-		return null;
+		if (dao.update(post) == 1) {
+			return post;
+		} else
+			return null;
 	}
 
 	@Override
-	public void deletePost(Integer post) {
-		// TODO Auto-generated method stub
-		
+	public void deletePost(Integer postID) {
+		dao.delete(postID);
+	}
+	
+	@Override
+	public Post getByPostID(Integer postID) {
+		return dao.getByPostID(postID);
 	}
 
 	@Override
-	public Post getPostByPostID(Integer post) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Post> getPostByPostTitle(String postTitle) {
+		return dao.getByTitle(postTitle);
 	}
+
+	@Override
+	public List<Post> getPostByPostType(Integer postType) {
+		return dao.getByType(postType);
+	}
+
+	@Override
+	public List<Post> getAllPosts() {
+		return dao.getAll();
+	}
+
 
 //	@Override
 //	public List<Post> getAllPosts(int currentPage) {
