@@ -153,3 +153,15 @@ div.page-navigation nav.pages li.page-item {
     /* margin-bottom: 20px;  */
     /* 表格上方间距 */
 }
+
+td:last-child {
+  text-align: right; 
+}
+
+input[type="submit"] {
+  float: right;
+}
+
+div div table thead th, div div table tbody td {
+ width: 150px;
+}

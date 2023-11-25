@@ -15,7 +15,7 @@ public class ManageService {
 		dao = new ManageDAOImpl();
 	}
 
-	public void addManage(Manage manage) {
+	public void insertManage(Manage manage) {
 		dao.insert(manage);	
 	}
 

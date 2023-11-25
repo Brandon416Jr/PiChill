@@ -90,8 +90,7 @@
 			<td>${manage.mUserName}</td>
 			<td>${manage.mPassword}</td>
 			<td>${manage.mBirth}</td>
-<%-- 			<td>${manage.mGender.equals("0")) ? "男" : "女"}</td> --%>
-			<td>${manage.mGender}</td>
+			<td>${manage.mGender == 0 ? '男' : '女'}</td>
 			<td>${manage.mTelephone}</td>
 			<td>${manage.mEmgContact}</td>
 			<td>${manage.mEmgPhone}</td>
@@ -101,8 +100,7 @@
 			<td>${manage.mID}</td>
 			<td>${manage.mEmail}</td>
 <%-- 			<td>${manage.mProfilePic}</td> --%>
-			<td>${manage.mStatus}</td>
-<%-- 			<td>${manage.mStatus.equals("0")) ? "已離職" : "在職中"}</td> --%>
+			<td>${manage.mStatus == 0 ? '已離職':'在職中'}</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/managejdbc/manage.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
