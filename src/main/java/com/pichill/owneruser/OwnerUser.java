@@ -1,6 +1,5 @@
 package com.pichill.owneruser;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 
