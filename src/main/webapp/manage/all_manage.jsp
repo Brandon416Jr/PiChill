@@ -34,28 +34,47 @@ String title = "所有員工資料";
 	href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
 
 <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css"></style>
 <!-- Vendor CSS-->
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.css" rel="stylesheet"
-	media="all" />
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.css"
+	rel="stylesheet" media="all" />
 <link
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css"
 	rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/animate.css" rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet"
-	media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.css" rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.css"
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/animate.css"
 	rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/font-awesome-4.7/css/font-awesome.css"
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/css-hamburgers/hamburgers.min.css"
 	rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/vendor/font-awesome-4.7/css/font-awesome.min.css"
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.css"
 	rel="stylesheet" media="all" />
-<link href="<%=request.getContextPath()%>/backEnd-Website/css/main.css" rel="stylesheet" media="all" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/backEnd-Website/css/all.css" />
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.css"
+	rel="stylesheet" media="all" />
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.css"
+	rel="stylesheet" media="all" />
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/font-awesome-4.7/css/font-awesome.css"
+	rel="stylesheet" media="all" />
+<link
+	href="<%=request.getContextPath()%>/backEnd-Website/vendor/font-awesome-4.7/css/font-awesome.min.css"
+	rel="stylesheet" media="all" />
+<link href="<%=request.getContextPath()%>/backEnd-Website/css/main.css"
+	rel="stylesheet" media="all" />
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/css/all.css" />
 <style>
+table.dataTable tbody tr:hover {
+  background-color: #e9ecef;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%); 
+}
+
 div.dataTables_scrollHeadInner {
 	width: 100% !important;
 }
@@ -203,7 +222,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>商城管理
 						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
+							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a href="product.html">商品管理</a></li>
 								<li><a href="new_product.html">新增商品</a></li>
 								<li><a href="product_order.html">訂單管理</a></li>
@@ -236,7 +255,8 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-										<img src="<%=request.getContextPath()%>/image/Group 115.png" alt="使用者頭像" />
+										<img src="<%=request.getContextPath()%>/image/Group 115.png"
+											alt="使用者頭像" />
 									</div>
 									<div class="content">
 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
@@ -244,7 +264,8 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <img src="<%=request.getContextPath()%>/image/Group 115.png"
+												<a href="#"> <img
+													src="<%=request.getContextPath()%>/image/Group 115.png"
 													alt="John Doe" />
 												</a>
 											</div>
@@ -272,7 +293,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 
 	<div class="page-container2">
 		<div class="table-responsive m-b-40">
-			<table id="myTable" class="table table-borderless table-data3"
+			<table id="myTable" class="table table-borderless table-data3 table-hover" 
 				style="overflow-x: auto">
 				<thead>
 					<tr>
@@ -290,331 +311,340 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<th>最後上線時間</th>
 						<th>身分證</th>
 						<th>電子信箱</th>
-						<!--             <th>大頭貼</th> -->
+						<th>大頭貼</th>
 						<th>狀態</th>
 						<th>修改</th>
 					</tr>
 				</thead>
 				<tbody>
-				<c:forEach var= "manage" items="${list}">
-					<tr>
-						<td>${manage.manageID}</td>
-						<td>${manage.mName}</td>
-						<td>${manage.mUserName}</td>
-						<td>${manage.mPassword}</td>
-						<td>${manage.mBirth}</td>
-						<td>${manage.mGender == 0 ? '男' : '女'}</td>
-						<td>${manage.mTelephone}</td>
-						<td>${manage.mEmgContact}</td>
-						<td>${manage.mEmgPhone}</td>
-						<td>${manage.mAddress}</td>
-						<td>${manage.mHiredate}</td>
-						<td>${manage.mLastLogTime}</td>
-						<td>${manage.mID}</td>
-						<td>${manage.mEmail}</td>
-						<%-- 			<td>${manage.mProfilePic}</td> --%>
-						<td>${manage.mStatus == 0 ? '已離職':'在職中'}</td>
-						<td>
-							<FORM METHOD="post"
-								ACTION="<%=request.getContextPath()%>/manage/manage.do"
-								style="margin-bottom: 0px;">
-								<input class="modify-button" type="submit" value="修改" style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;"> 
-								<input type="hidden" name="manageID" value="${manage.manageID}"> 
-								<input type="hidden" name="action" value="getOne_For_Update">
-							</FORM>
-						</td>
-					</tr>
+					<c:forEach var="manage" items="${list}">
+						<tr>
+							<td>${manage.manageID}</td>
+							<td>${manage.mName}</td>
+							<td>${manage.mUserName}</td>
+							<td>${manage.mPassword}</td>
+							<td>${manage.mBirth}</td>
+							<td>${manage.mGender == 0 ? '男' : '女'}</td>
+							<td>${manage.mTelephone}</td>
+							<td>${manage.mEmgContact}</td>
+							<td>${manage.mEmgPhone}</td>
+							<td>${manage.mAddress}</td>
+							<td>${manage.mHiredate}</td>
+							<td>${manage.mLastLogTime}</td>
+							<td>${manage.mID}</td>
+							<td>${manage.mEmail}</td>
+							<td><img src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${manage.manageID}" width="100px"></td> 
+<%-- 							<td>${manage.mProfilePic}</td> --%>
+							<td>${manage.mStatus == 0 ? '已離職':'在職中'}</td>
+							<td>
+								<FORM METHOD="post"
+									ACTION="<%=request.getContextPath()%>/manage/manage.do"
+									style="margin-bottom: 0px;">
+									<input class="modify-button" type="submit" value="修改"
+										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
+									<input type="hidden" name="manageID" value="${manage.manageID}">
+									<input type="hidden" name="action" value="getOne_For_Update">
+								</FORM>
+							</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
 	</div>
-	
+
 	<script>
-    var script = document.createElement("script");
+		var script = document.createElement("script");
 
-    script.src = "https://code.jquery.com/jquery-3.4.1.min.js";
+		script.src = "https://code.jquery.com/jquery-3.4.1.min.js";
 
-    script.type = "text/javascript";
+		script.type = "text/javascript";
 
-    document.getElementsByTagName("head")[0].appendChild(script);
-  </script>
-  
-  <script>
-    $(document).ready(function () {
-      $("#myTable").DataTable({
-      
+		document.getElementsByTagName("head")[0].appendChild(script);
+	</script>
 
-        // 中文化
-        language: {
-          processing: "處理中...",
-          loadingRecords: "載入中...",
-          paginate: {
-            first: "第一頁",
-            previous: "上一頁",
-            next: "下一頁",
-            last: "最後一頁",
-          },
-          emptyTable: "目前沒有資料",
-          datetime: {
-            previous: "上一頁",
-            next: "下一頁",
-            hours: "時",
-            minutes: "分",
-            seconds: "秒",
-            amPm: ["上午", "下午"],
-            unknown: "未知",
-            weekdays: [
-              "週日",
-              "週一",
-              "週二",
-              "週三",
-              "週四",
-              "週五",
-              "週六",
-            ],
-            months: [
-              "一月",
-              "二月",
-              "三月",
-              "四月",
-              "五月",
-              "六月",
-              "七月",
-              "八月",
-              "九月",
-              "十月",
-              "十一月",
-              "十二月",
-            ],
-          },
-          searchBuilder: {
-            add: "新增條件",
-            condition: "條件",
-            deleteTitle: "刪除過濾條件",
-            button: {
-              _: "複合查詢 (%d)",
-              0: "複合查詢",
-            },
-            clearAll: "清空",
-            conditions: {
-              array: {
-                contains: "含有",
-                equals: "等於",
-                empty: "空值",
-                not: "不等於",
-                notEmpty: "非空值",
-                without: "不含",
-              },
-              date: {
-                after: "大於",
-                before: "小於",
-                between: "在其中",
-                empty: "為空",
-                equals: "等於",
-                not: "不為",
-                notBetween: "不在其中",
-                notEmpty: "不為空",
-              },
-              number: {
-                between: "在其中",
-                empty: "為空",
-                equals: "等於",
-                gt: "大於",
-                gte: "大於等於",
-                lt: "小於",
-                lte: "小於等於",
-                not: "不為",
-                notBetween: "不在其中",
-                notEmpty: "不為空",
-              },
-              string: {
-                contains: "含有",
-                empty: "為空",
-                endsWith: "字尾為",
-                equals: "等於",
-                not: "不為",
-                notEmpty: "不為空",
-                startsWith: "字首為",
-                notContains: "不含",
-                notStartsWith: "開頭不是",
-                notEndsWith: "結尾不是",
-              },
-            },
-            data: "欄位",
-            leftTitle: "群組條件",
-            logicAnd: "且",
-            logicOr: "或",
-            rightTitle: "取消群組",
-            title: {
-              _: "複合查詢 (%d)",
-              0: "複合查詢",
-            },
-            value: "內容",
-          },
-          editor: {
-            close: "關閉",
-            create: {
-              button: "新增",
-              title: "新增資料",
-              submit: "送出新增",
-            },
-            remove: {
-              button: "刪除",
-              title: "刪除資料",
-              submit: "送出刪除",
-              confirm: {
-                _: "您確定要刪除您所選取的 %d 筆資料嗎？",
-                1: "您確定要刪除您所選取的 1 筆資料嗎？",
-              },
-            },
-            error: {
-              system: "系統發生錯誤(更多資訊)",
-            },
-            edit: {
-              button: "修改",
-              title: "修改資料",
-              submit: "送出修改",
-            },
-            multi: {
-              title: "多重值",
-              info: "您所選擇的多筆資料中，此欄位包含了不同的值。若您想要將它們都改為同一個值，可以在此輸入，要不然它們會保留各自原本的值。",
-              restore: "復原",
-              noMulti: "此輸入欄需單獨輸入，不容許多筆資料一起修改",
-            },
-          },
-          autoFill: {
-            cancel: "取消",
-          },
-          buttons: {
-            copySuccess: {
-              _: "複製了 %d 筆資料",
-              1: "複製了 1 筆資料",
-            },
-            copyTitle: "已經複製到剪貼簿",
-            excel: "Excel",
-            pdf: "PDF",
-            print: "列印",
-            copy: "複製",
-            colvis: "欄位顯示",
-            colvisRestore: "重置欄位顯示",
-            csv: "CSV",
-            pageLength: {
-              "-1": "顯示全部",
-              _: "顯示 %d 筆",
-            },
-            createState: "建立狀態",
-            removeAllStates: "移除所有狀態",
-            removeState: "移除",
-            renameState: "重新命名",
-            savedStates: "儲存狀態",
-            stateRestore: "狀態 %d",
-            updateState: "更新",
-          },
-          searchPanes: {
-            collapse: {
-              _: "搜尋面版 (%d)",
-              0: "搜尋面版",
-            },
-            emptyPanes: "沒搜尋面版",
-            loadMessage: "載入搜尋面版中...",
-            clearMessage: "清空",
-            count: "{total}",
-            countFiltered: "{shown} ({total})",
-            title: "過濾條件 - %d",
-            showMessage: "顯示全部",
-            collapseMessage: "摺疊全部",
-          },
-          stateRestore: {
-            emptyError: "名稱不能空白。",
-            creationModal: {
-              button: "建立",
-              columns: {
-                search: "欄位搜尋",
-                visible: "欄位顯示",
-              },
-              name: "名稱：",
-              order: "排序",
-              paging: "分頁",
-              scroller: "卷軸位置",
-              search: "搜尋",
-              searchBuilder: "複合查詢",
-              select: "選擇",
-              title: "建立新狀態",
-              toggleLabel: "包含：",
-            },
-            duplicateError: "此狀態名稱已經存在。",
-            emptyStates: "名稱不可空白。",
-            removeConfirm: "確定要移除 %s 嗎？",
-            removeError: "移除狀態失敗。",
-            removeJoiner: "和",
-            removeSubmit: "移除",
-            removeTitle: "移除狀態",
-            renameButton: "重新命名",
-            renameLabel: "%s 的新名稱：",
-            renameTitle: "重新命名狀態",
-          },
-          select: {
-            columns: {
-              _: "選擇了 %d 欄資料",
-              1: "選擇了 1 欄資料",
-            },
-            rows: {
-              1: "選擇了 1 筆資料",
-              _: "選擇了 %d 筆資料",
-            },
-            cells: {
-              1: "選擇了 1 格資料",
-              _: "選擇了 %d 格資料",
-            },
-          },
-          zeroRecords: "沒有符合的資料",
-          aria: {
-            sortAscending: "：升冪排列",
-            sortDescending: "：降冪排列",
-          },
-          info: "顯示第 _START_ 至 _END_ 筆結果，共 _TOTAL_ 筆",
-          infoEmpty: "顯示第 0 至 0 筆結果，共 0 筆",
-          infoFiltered: "(從 _MAX_ 筆結果中過濾)",
-          infoThousands: ",",
-          lengthMenu: "顯示 _MENU_ 筆結果",
-          search: "搜尋：",
-          searchPlaceholder: "請輸入關鍵字",
-          thousands: ",",
-        },
-      });
-    });
+	<script>
+	new DataTable("#myTable", {
+		scrollX : true,
+	});
+		$(document)
+				.ready(
+						function() {
+							$("#myTable")
+									.DataTable(
+											{
+											
+												// 中文化
+												language : {
+													processing : "處理中...",
+													loadingRecords : "載入中...",
+													paginate : {
+														first : "第一頁",
+														previous : "上一頁",
+														next : "下一頁",
+														last : "最後一頁",
+													},
+													emptyTable : "目前沒有資料",
+													datetime : {
+														previous : "上一頁",
+														next : "下一頁",
+														hours : "時",
+														minutes : "分",
+														seconds : "秒",
+														amPm : [ "上午", "下午" ],
+														unknown : "未知",
+														weekdays : [ "週日",
+																"週一", "週二",
+																"週三", "週四",
+																"週五", "週六", ],
+														months : [ "一月", "二月",
+																"三月", "四月",
+																"五月", "六月",
+																"七月", "八月",
+																"九月", "十月",
+																"十一月", "十二月", ],
+													},
+													searchBuilder : {
+														add : "新增條件",
+														condition : "條件",
+														deleteTitle : "刪除過濾條件",
+														button : {
+															_ : "複合查詢 (%d)",
+															0 : "複合查詢",
+														},
+														clearAll : "清空",
+														conditions : {
+															array : {
+																contains : "含有",
+																equals : "等於",
+																empty : "空值",
+																not : "不等於",
+																notEmpty : "非空值",
+																without : "不含",
+															},
+															date : {
+																after : "大於",
+																before : "小於",
+																between : "在其中",
+																empty : "為空",
+																equals : "等於",
+																not : "不為",
+																notBetween : "不在其中",
+																notEmpty : "不為空",
+															},
+															number : {
+																between : "在其中",
+																empty : "為空",
+																equals : "等於",
+																gt : "大於",
+																gte : "大於等於",
+																lt : "小於",
+																lte : "小於等於",
+																not : "不為",
+																notBetween : "不在其中",
+																notEmpty : "不為空",
+															},
+															string : {
+																contains : "含有",
+																empty : "為空",
+																endsWith : "字尾為",
+																equals : "等於",
+																not : "不為",
+																notEmpty : "不為空",
+																startsWith : "字首為",
+																notContains : "不含",
+																notStartsWith : "開頭不是",
+																notEndsWith : "結尾不是",
+															},
+														},
+														data : "欄位",
+														leftTitle : "群組條件",
+														logicAnd : "且",
+														logicOr : "或",
+														rightTitle : "取消群組",
+														title : {
+															_ : "複合查詢 (%d)",
+															0 : "複合查詢",
+														},
+														value : "內容",
+													},
+													editor : {
+														close : "關閉",
+														create : {
+															button : "新增",
+															title : "新增資料",
+															submit : "送出新增",
+														},
+														remove : {
+															button : "刪除",
+															title : "刪除資料",
+															submit : "送出刪除",
+															confirm : {
+																_ : "您確定要刪除您所選取的 %d 筆資料嗎？",
+																1 : "您確定要刪除您所選取的 1 筆資料嗎？",
+															},
+														},
+														error : {
+															system : "系統發生錯誤(更多資訊)",
+														},
+														edit : {
+															button : "修改",
+															title : "修改資料",
+															submit : "送出修改",
+														},
+														multi : {
+															title : "多重值",
+															info : "您所選擇的多筆資料中，此欄位包含了不同的值。若您想要將它們都改為同一個值，可以在此輸入，要不然它們會保留各自原本的值。",
+															restore : "復原",
+															noMulti : "此輸入欄需單獨輸入，不容許多筆資料一起修改",
+														},
+													},
+													autoFill : {
+														cancel : "取消",
+													},
+													buttons : {
+														copySuccess : {
+															_ : "複製了 %d 筆資料",
+															1 : "複製了 1 筆資料",
+														},
+														copyTitle : "已經複製到剪貼簿",
+														excel : "Excel",
+														pdf : "PDF",
+														print : "列印",
+														copy : "複製",
+														colvis : "欄位顯示",
+														colvisRestore : "重置欄位顯示",
+														csv : "CSV",
+														pageLength : {
+															"-1" : "顯示全部",
+															_ : "顯示 %d 筆",
+														},
+														createState : "建立狀態",
+														removeAllStates : "移除所有狀態",
+														removeState : "移除",
+														renameState : "重新命名",
+														savedStates : "儲存狀態",
+														stateRestore : "狀態 %d",
+														updateState : "更新",
+													},
+													searchPanes : {
+														collapse : {
+															_ : "搜尋面版 (%d)",
+															0 : "搜尋面版",
+														},
+														emptyPanes : "沒搜尋面版",
+														loadMessage : "載入搜尋面版中...",
+														clearMessage : "清空",
+														count : "{total}",
+														countFiltered : "{shown} ({total})",
+														title : "過濾條件 - %d",
+														showMessage : "顯示全部",
+														collapseMessage : "摺疊全部",
+													},
+													stateRestore : {
+														emptyError : "名稱不能空白。",
+														creationModal : {
+															button : "建立",
+															columns : {
+																search : "欄位搜尋",
+																visible : "欄位顯示",
+															},
+															name : "名稱：",
+															order : "排序",
+															paging : "分頁",
+															scroller : "卷軸位置",
+															search : "搜尋",
+															searchBuilder : "複合查詢",
+															select : "選擇",
+															title : "建立新狀態",
+															toggleLabel : "包含：",
+														},
+														duplicateError : "此狀態名稱已經存在。",
+														emptyStates : "名稱不可空白。",
+														removeConfirm : "確定要移除 %s 嗎？",
+														removeError : "移除狀態失敗。",
+														removeJoiner : "和",
+														removeSubmit : "移除",
+														removeTitle : "移除狀態",
+														renameButton : "重新命名",
+														renameLabel : "%s 的新名稱：",
+														renameTitle : "重新命名狀態",
+													},
+													select : {
+														columns : {
+															_ : "選擇了 %d 欄資料",
+															1 : "選擇了 1 欄資料",
+														},
+														rows : {
+															1 : "選擇了 1 筆資料",
+															_ : "選擇了 %d 筆資料",
+														},
+														cells : {
+															1 : "選擇了 1 格資料",
+															_ : "選擇了 %d 格資料",
+														},
+													},
+													zeroRecords : "沒有符合的資料",
+													aria : {
+														sortAscending : "：升冪排列",
+														sortDescending : "：降冪排列",
+													},
+													info : "顯示第 _START_ 至 _END_ 筆結果，共 _TOTAL_ 筆",
+													infoEmpty : "顯示第 0 至 0 筆結果，共 0 筆",
+													infoFiltered : "(從 _MAX_ 筆結果中過濾)",
+													infoThousands : ",",
+													lengthMenu : "顯示 _MENU_ 筆結果",
+													search : "搜尋：",
+													searchPlaceholder : "請輸入關鍵字",
+													thousands : ",",
+												},
+											});
+						});
 
-    console.log({
-      paging: true,
-      ordering: false,
-      info: false,
-    });
+		console.log({
+			searching: false,
+			paging : false,
+			ordering : false,
+			info : false,
+		});
 
-    $("#example").DataTable({
-      paging: true,
-      ordering: false,
-      info: false,
-    });
+// 		$("#example").DataTable({
+// 			paging : true,
+// 			ordering : false,
+// 			info : false,
+			
+// 		});
 
-    new DataTable("#myTable", {
-      scrollX: true,
-    });
-  </script>
+// 		new DataTable("#myTable", {
+// 			scrollX : true,
+// 		});
+	</script>
 	<!-- proper.min.js first, then bootstrap.min.js -->
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/popper.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/popper.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.js"></script>
 	<!-- Vendor JS       -->
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/wow.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/counter-up/jquery.waypoints.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/counter-up/jquery.counterup.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/circle-progress/circle-progress.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/chartjs/Chart.bundle.min.js"></script>
-	<script src="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/wow.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/counter-up/jquery.waypoints.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/counter-up/jquery.counterup.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/circle-progress/circle-progress.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/chartjs/Chart.bundle.min.js"></script>
+	<script
+		src="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.js"></script>
 	<!-- Main JS-->
 	<script src="<%=request.getContextPath()%>/backEnd-Website/js/main.js"></script>
 </body>
