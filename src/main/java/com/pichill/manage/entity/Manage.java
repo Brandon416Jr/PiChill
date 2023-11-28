@@ -48,10 +48,10 @@ public class Manage implements Serializable {
 	@Column(name="mAddress")
 	private String mAddress;
 	
-	@Column(name="mHiredate")
+	@Column(name="mHiredate", updatable = false, nullable = true)
 	private Date mHiredate;
 	
-	@Column(name="mLastLogTime")
+	@Column(name="mLastLogTime", insertable = false, nullable = true)
 	private Timestamp mLastLogTime;
 	
 	@Column(name="mID", columnDefinition="char") // 資料庫char型別要用columnDefinition標示!
@@ -63,7 +63,7 @@ public class Manage implements Serializable {
 	@Column(name="mProfilePic", columnDefinition="longblob") // 資料庫blob型別要用columnDefinition標示!
 	private byte[] mProfilePic;
 	
-	@Column(name="mStatus")
+	@Column(name="mStatus" ,insertable = false, nullable = true)
 	private Integer mStatus;
 	
 	public Manage() {

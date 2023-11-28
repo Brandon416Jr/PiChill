@@ -22,26 +22,20 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-
 import com.pichill.manage.entity.Manage;
 import com.pichill.util.HibernateUtil;
-
-
-
-
-
 
 
 public class ManageDAOImpl implements ManageDAO {
 	private SessionFactory factory;
 	
-	public ManageDAOImpl() {
-		factory = HibernateUtil.getSessionFactory();
-	}
-	
-	private Session getSession() {
-		return factory.getCurrentSession();
-	}
+//	public ManageDAOImpl() {
+//		factory = HibernateUtil.getSessionFactory();
+//	}
+//	
+//	private Session getSession() {
+//		return factory.getCurrentSession();
+//	}
 
 	@Override
 	public int insert(Manage manage) {

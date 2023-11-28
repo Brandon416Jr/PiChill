@@ -43,7 +43,24 @@ Manage manage = (Manage) request.getAttribute("manage");
 	rel="stylesheet" media="all" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css" />
-<style></style>
+<style>
+/* 錯誤提示框樣式 */
+input:invalid, select:invalid {
+	box-shadow: none;
+}
+
+select:invalid {
+	color: red;
+}
+
+/* 自定義標題樣式 */
+select:invalid+.custom-message {
+	display: block;
+	color: #207dca;
+	font-weight: bold;
+	margin-top: 5px;
+}
+</style>
 </head>
 
 <body class="animsition">
@@ -187,7 +204,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>商城管理
 						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
+							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a href="product.html">商品管理</a></li>
 								<li><a href="new_product.html">新增商品</a></li>
 								<li><a href="product_order.html">訂單管理</a></li>
@@ -278,7 +295,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 							</ul>
 						</c:if>
 
-						<form action="manage.do" name="form1" method="post">
+						<form action="<%=request.getContextPath()%>/manage/manage.do" method="post" enctype="multipart/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
@@ -346,7 +363,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 													<div class="form-check">
 														<div class="radio">
 															<select name="mGender">
-																<option value="0" selected>男</option>
+																<option value="0">男</option>
 																<option value="1">女</option>
 															</select>
 														</div>
@@ -364,95 +381,118 @@ Manage manage = (Manage) request.getAttribute("manage");
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">緊急連絡人</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" name="mEmgContact"
+														value="<%=(manage == null) ? "陳連宏" : manage.getmEmgContact()%>"
+														placeholder="請輸入姓名" class="form-control" />
+													<!-- <small class="form-text text-muted">This is a help text</small> -->
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">緊急連絡人手機</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" name="mEmgPhone"
+														value="<%=(manage == null) ? "0914562187" : manage.getmEmgPhone()%>"
+														placeholder="請輸入手機號碼" class="form-control" />
+													<!-- <small class="form-text text-muted">This is a help text</small> -->
+												</div>
+											</div>
 										</div>
 									</div>
-								
-								<div class="col-lg-6">
-									<div class="right-card-body card-block">
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="text-input" class="form-control-label">緊急連絡人</label>
+
+									<div class="col-lg-6">
+										<div class="right-card-body card-block">
+											
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">聯絡地址</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<select id="city" name="city" required>
+														<option value="">請選擇縣市</option>
+													</select> <span class="custom-message">*請選擇縣市</span> <select
+														id="area" name="area" required>
+														<option value="">請選擇鄉鎮市區</option>
+													</select> <span class="custom-message">*請選擇鄉鎮市區</span>
+												</div>
 											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="text-input" name="mEmgContact"
-													value="<%=(manage == null) ? "陳連宏" : manage.getmEmgContact()%>"
-													placeholder="請輸入姓名" class="form-control" />
-												<!-- <small class="form-text text-muted">This is a help text</small> -->
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label"></label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" name="mAddress"
+														value="<%=(manage == null) ? "環河西路587號22樓" : manage.getmAddress()%>"
+														placeholder="請輸入聯絡地址" class="form-control" />
+													<!-- <small class="form-text text-muted">This is a help text</small> -->
+												</div>
 											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="text-input" class="form-control-label">緊急連絡人手機</label>
+											<!-- 										<div class="row form-group"> -->
+											<!-- 											<div class="col col-md-3"> -->
+											<!-- 												<label for="disabled-input" class="form-control-label">入職日期</label> -->
+											<!-- 											</div> -->
+											<!-- 											<div class="col-10 col-md-8"> -->
+											<!-- 												<input type="date" id="disabled-input" name="mHiredate" -->
+											<%-- 													value="<%=(manage == null) ? "2022-01-01" : manage.getmHiredate()%>" --%>
+											<!-- 													placeholder="請輸入生日" class="form-control" /> -->
+											<!-- 											</div> -->
+											<!-- 										</div> -->
+											<!-- 										<div class="row form-group"> -->
+											<!-- 											<div class="col col-md-3"> -->
+											<!-- 												<label for="disabled-input" class="form-control-label">最後上線時間</label> -->
+											<!-- 											</div> -->
+											<!-- 											<div class="col-10 col-md-8"> -->
+											<!-- 												<input type="text" id="disabled-input" name="mLastLogTime" -->
+											<!-- 													placeholder="最後上線時間" -->
+											<%-- 													value="<%=(manage == null) ? "1911-01-01 00:00:00" : manage.getmLastLogTime()%>" --%>
+											<!-- 													class="form-control" /> -->
+											<!-- 											</div> -->
+											<!-- 										</div> -->
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="disabled-input" class="form-control-label">身份證字號</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="disabled-input" name="mID"
+														placeholder="請輸入身份證字號"
+														value="<%=(manage == null) ? "A123456678" : manage.getmID()%>"
+														class="form-control" />
+												</div>
 											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="text-input" name="mEmgPhone"
-													value="<%=(manage == null) ? "0914562187" : manage.getmEmgPhone()%>"
-													placeholder="請輸入手機號碼" class="form-control" />
-												<!-- <small class="form-text text-muted">This is a help text</small> -->
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">電子信箱</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" name="mEmail"
+														value="<%=(manage == null) ? "brandon416jr@gmail.com" : manage.getmEmail()%>"
+														placeholder="請輸入電子信箱" class="form-control" />
+													<!-- <small class="form-text text-muted">This is a help text</small> -->
+												</div>
 											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="text-input" class="form-control-label">聯絡地址</label>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="file-input" class="form-control-label">上傳大頭貼</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="file" id="file-input" name="mProfilePic"
+														multiple="multiple" onclick="previewImage()"
+														class="form-control-file" /> <img id="imagePreview"
+														src="#" alt="Preview" width="100px" />
+<!-- 													<div id="blob_holder"> -->
+<!-- 														<img -->
+<%-- 															src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${param.manageID}" --%>
+<!-- 															width="100px"> -->
+<!-- 													</div> -->
+												</div>
 											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="text-input" name="mAddress"
-													value="<%=(manage == null) ? "新北市永和區環河西路587號22樓" : manage.getmAddress()%>"
-													placeholder="請輸入聯絡地址" class="form-control" />
-												<!-- <small class="form-text text-muted">This is a help text</small> -->
-											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="disabled-input" class="form-control-label">入職日期</label>
-											</div>
-											<div class="col-10 col-md-8">
-												<input type="date" id="disabled-input" name="mHiredate"
-													value="<%=(manage == null) ? "2022-01-01" : manage.getmHiredate()%>"
-													placeholder="請輸入生日" class="form-control" />
-											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="disabled-input" class="form-control-label">最後上線時間</label>
-											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="disabled-input" name="mLastLogTime"
-													placeholder="最後上線時間" class="form-control" />
-											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="disabled-input" class="form-control-label">身份證字號</label>
-											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="disabled-input" name="mID"
-													placeholder="請輸入身份證字號"
-													value="<%=(manage == null) ? "A123456678" : manage.getmID()%>"
-													class="form-control" />
-											</div>
-										</div>
-										<div class="row form-group">
-											<div class="col col-md-3">
-												<label for="text-input" class="form-control-label">電子信箱</label>
-											</div>
-											<div class="col-10 col-md-8">
-												<input type="text" id="text-input" name="mEmail"
-													value="<%=(manage == null) ? "brandon416jr@gmail.com" : manage.getmEmail()%>"
-													placeholder="請輸入電子信箱" class="form-control" />
-												<!-- <small class="form-text text-muted">This is a help text</small> -->
-											</div>
-										</div>
-										<!-- 											<div class="row form-group"> -->
-										<!-- 												<div class="col col-md-3"> -->
-										<!-- 													<label for="file-input" class="form-control-label">上傳大頭貼</label> -->
-										<!-- 												</div> -->
-										<!-- 												<div class="col-10 col-md-8"> -->
-										<!-- 													<input type="file" id="file-input" name="file-input" -->
-										<!-- 														class="form-control-file" /> -->
-										<!-- 													<img id="imagePreview" src="#" alt="Preview" /> -->
-										<!-- 												</div> -->
-										<!-- 											</div> -->
+<!-- 										</div> -->
 										<div class="row form-group">
 											<div class="col col-md-3">
 												<label for="selectLg" class="form-control-label">狀態</label>
@@ -460,9 +500,9 @@ Manage manage = (Manage) request.getAttribute("manage");
 											<div class="col-10 col-md-8">
 												<select name="mStatus" id="selectLm"
 													class="form-control-sm form-control">
-													<option value="0">請選擇</option>
-													<option value="1">已離職</option>
-													<option value="2">在職中</option>
+													<!-- 													<option value="0">請選擇</option> -->
+													<option value="0">已離職</option>
+													<option value="1">在職中</option>
 												</select>
 											</div>
 										</div>
@@ -473,21 +513,124 @@ Manage manage = (Manage) request.getAttribute("manage");
 											<input type="hidden" name="action" value="update"> <input
 												type="hidden" name="manageID"
 												value="<%=manage.getManageID()%>"> <input
-												type="submit" class="btn btn-primary btn-sm" value="送出新增">
+												type="submit" class="btn btn-primary btn-sm" value="送出修改">
 											<i class="fa fa-dot-circle-o"></i>
 										</div>
 									</div>
 								</div>
-								</div>
 							</div>
-
-						</form>
 					</div>
+
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document)
+				.ready(
+						function() {
 
+							//第一層選單
+							$
+									.ajax({
+										url : 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+										type : "get",
+										dataType : "json",
+										success : function(data) {
+											$
+													.each(
+															data,
+															function(key, value) {
+																console.log(
+																		key,
+																		value)
+																$('#city')
+																		.append(
+																				'<option value="'+data[key].CityName+'">'
+																						+ data[key].CityName
+																						+ '</option>')
+															})
+										},
+										error : function(data) {
+											alert("fail");
+										}
+									});
+
+							//第二層選單
+							$("#city")
+									.change(
+											function() {
+												cityvalue = $("#city").val(); //取值
+												$("#area").empty(); //清空上次的值
+												$("#area").css("display",
+														"inline"); //顯現
+												$
+														.ajax({
+															url : 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+															type : "get",
+															dataType : "json",
+															success : function(
+																	data) {
+
+																// 																eachval = data[cityvalue].AreaList; //鄉鎮
+																eachval = [];
+																for (let i = 0; i < data.length; i++) {
+																	if (data[i].CityName == cityvalue) {
+																		eachval = data[i].AreaList;
+																	}
+																}
+
+																$
+																		.each(
+																				eachval,
+																				function(
+																						key,
+																						value) {
+																					$(
+																							'#area')
+																							.append(
+																									'<option value="'+eachval[key].AreaName+'">'
+																											+ eachval[key].AreaName
+																											+ '</option>')
+																				});
+															},
+															error : function() {
+																alert("fail");
+															}
+														});
+											});
+
+							//選完後跳出選擇值
+							$("#area")
+									.change(
+											function() {
+												cityvalue = $("#city").val(); //縣市
+												areavalue = $("#area").val(); //鄉鎮
+
+												$
+														.ajax({
+															url : 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+															type : "get",
+															dataType : "json",
+															success : function(
+																	data) {
+																alert(data[cityvalue].CityName
+																		+ "-"
+																		+ data[cityvalue].AreaList[areavalue].AreaName);
+															},
+															error : function() {
+																alert("fail");
+															}
+
+														});
+											})
+
+						});
+	</script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/js/pic_uplaod.js"></script>
 	<!-- Jquery JS-->
