@@ -8,7 +8,7 @@ import com.pichill.manage.service.ManageService;
 import com.pichill.manage.entity.Manage;
 
 @WebServlet("/manage/DBGifReader")
-public class DBGifReaderController extends HttpServlet {
+public class DBJPGReaderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
