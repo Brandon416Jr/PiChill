@@ -1,25 +1,54 @@
-package com.pichill.report;
+package com.pichill.report.entity;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.pichill.comment.entity.Comment;
+import com.pichill.manage.entity.Manage;
+import com.pichill.post.entity.Post;
 
 @Entity
 @Table(name = "report")
 public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "reportID",updatable = false)
 	private Integer reportID;
-	private Integer manageID;
+	
+	@ManyToOne
+	@JoinColumn(name = "manageID",referencedColumnName = "manageID")
+	private Manage manage;
+//	private Integer manageID;
+	
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID")
+	private Post post;
 	private Integer postID;
-	private Integer commentID;
+	
+	@ManyToOne
+	@JoinColumn(name = "commentID",referencedColumnName = "commentID")
+	private Comment comment;
+//	private Integer commentID;
+	
+	@Column(name = "reportTime")
+	@CreationTimestamp
 	private Timestamp reportTime;
+	
+	@Column(name = "reportStatus")
 	private Integer reportStatus;
+	
+	@Column(name = "reportType")
 	private Integer reportType;
 
 	public Report() {
@@ -31,9 +60,9 @@ public class Report {
 			Integer reportStatus, Integer reportType) {
 		super();
 		this.reportID = reportID;
-		this.manageID = manageID;
+//		this.manageID = manageID;
 		this.postID = postID;
-		this.commentID = commentID;
+//		this.commentID = commentID;
 		this.reportTime = reportTime;
 		this.reportStatus = reportStatus;
 		this.reportType = reportType;
@@ -47,13 +76,13 @@ public class Report {
 		this.reportID = reportID;
 	}
 
-	public Integer getManageID() {
-		return manageID;
-	}
-
-	public void setManageID(Integer manageID) {
-		this.manageID = manageID;
-	}
+//	public Integer getManageID() {
+//		return manageID;
+//	}
+//
+//	public void setManageID(Integer manageID) {
+//		this.manageID = manageID;
+//	}
 
 	public Integer getPostID() {
 		return postID;
@@ -63,13 +92,13 @@ public class Report {
 		this.postID = postID;
 	}
 
-	public Integer getCommentID() {
-		return commentID;
-	}
-
-	public void setCommentID(Integer commentID) {
-		this.commentID = commentID;
-	}
+//	public Integer getCommentID() {
+//		return commentID;
+//	}
+//
+//	public void setCommentID(Integer commentID) {
+//		this.commentID = commentID;
+//	}
 
 	public Timestamp getReportTime() {
 		return reportTime;
