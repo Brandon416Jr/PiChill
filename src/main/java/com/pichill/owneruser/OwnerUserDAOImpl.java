@@ -28,10 +28,7 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 		}
 	}
 
-	private OwnerUserDAOImpl ownerUserList;
-	// 萬用複合查詢(傳入參數型態Map)(回傳 List)
-//        public List<EmpVO> getAll(Map<String, String[]> map); 
-
+	
 	@Override
 	public void add(OwnerUser ownerUser) {
 		Connection con = null;
@@ -40,27 +37,27 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, ownerUser.getoUserID());
-			pstmt.setString(2, ownerUser.getoName());
-			pstmt.setString(3, ownerUser.getoPassword());
-			pstmt.setString(4, ownerUser.getoIDNum());
-			pstmt.setString(5, ownerUser.getCompiled());
-			pstmt.setString(6, ownerUser.getoName());
-			pstmt.setInt(7, ownerUser.getoGender());
-			pstmt.setDate(8, ownerUser.getoBirth());
-			pstmt.setString(9, ownerUser.getoTelephone());
-			pstmt.setString(10, ownerUser.getoAddress());
-			pstmt.setString(11, ownerUser.getoBankCode());
-			pstmt.setString(12, ownerUser.getoBankAccount());
-			pstmt.setBytes(13, ownerUser.getoProfilePic());
-			pstmt.setDate(14, ownerUser.getoRegisterTime());
-			pstmt.setTimestamp(15, ownerUser.getoLastLogTime());
-			pstmt.setInt(16, ownerUser.getoPostAmount());
-			pstmt.setInt(17, ownerUser.getoReportCnt());
+//			pstmt.setInt(1, ownerUser.getoUserID());
+			pstmt.setString(1, ownerUser.getoName());
+			pstmt.setString(2, ownerUser.getoPassword());
+			pstmt.setString(3, ownerUser.getoIDNum());
+			pstmt.setString(4, ownerUser.getCompiled());
+			pstmt.setString(5, ownerUser.getoName());
+			pstmt.setInt(6, ownerUser.getoGender());
+			pstmt.setDate(7, ownerUser.getoBirth());
+			pstmt.setString(8, ownerUser.getoTelephone());
+			pstmt.setString(9, ownerUser.getoAddress());
+			pstmt.setString(10, ownerUser.getoBankCode());
+			pstmt.setString(11, ownerUser.getoBankAccount());
+			pstmt.setBytes(12, ownerUser.getoProfilePic());
+			pstmt.setDate(13, ownerUser.getoRegisterTime());
+			pstmt.setTimestamp(14, ownerUser.getoLastLogTime());
+			pstmt.setInt(15, ownerUser.getoPostAmount());
+			pstmt.setInt(16, ownerUser.getoReportCnt());
+			pstmt.setInt(17, ownerUser.getCouponArriveCnt());
 			pstmt.setInt(18, ownerUser.getCouponArriveCnt());
-			pstmt.setInt(19, ownerUser.getCouponArriveCnt());
-			pstmt.setInt(20, ownerUser.getRsvdCnts());
-			pstmt.setString(21, ownerUser.getoEmail());
+			pstmt.setInt(19, ownerUser.getRsvdCnts());
+			pstmt.setString(20, ownerUser.getoEmail());
 
 			pstmt.executeUpdate();
 

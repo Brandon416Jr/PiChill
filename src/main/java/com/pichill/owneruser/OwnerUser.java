@@ -3,27 +3,85 @@ package com.pichill.owneruser;
 import java.sql.Date;
 import java.sql.Timestamp;
 
-public class OwnerUser implements java.io.Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Type;
+
+
+
+@Entity
+
+@Table(name = "owneruser")
+public class OwnerUser {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "oUserID")
 	private Integer oUserID;
+	
+	@Column(name = "oUserName")
 	private String oUserName;
+	
+	@Column(name = "oPassword")
 	private String oPassword;
+	
+	@Column(name = "oIDNum" , columnDefinition = "char")
 	private String oIDNum;
+	
+	@Column(name = "compiled")
 	private String compiled;
+	
+	@Column(name = "oName")
 	private String oName;
+	
+	@Column(name = "oGender") 
 	private Integer oGender;
+	
+	@Column(name = "oBirth")
 	private Date oBirth;
+	
+	@Column(name = "oTelephone")
 	private String oTelephone;
+	
+	@Column(name = "oAddress")
 	private String oAddress;
+	
+	@Column(name = "oBankCode", columnDefinition = "char")
 	private String oBankCode;
+	
+	@Column(name = "oBankAccount")
 	private String oBankAccount;
+	
+	@Column(name = "oProfilePic" , columnDefinition = "longblob")
 	private byte[] oProfilePic;
+	
+	@Column(name = "oRegisterTime")
 	private Date oRegisterTime;
+	
+	@Column(name = "oLastLogTime")
 	private Timestamp oLastLogTime;
+	
+	@Column(name = "oPostAmount")
 	private Integer oPostAmount;
+	
+	@Column(name = "oReportCnt")
 	private Integer oReportCnt;
+	
+	@Column(name = "courtArriveCnt")
 	private Integer courtArriveCnt;
+	
+	@Column(name = "couponArriveCnt")
 	private Integer couponArriveCnt;
+	
+	@Column(name = "rsvdCnts")
 	private Integer rsvdCnts;
+	
+	@Column(name = "oEmail")
 	private String oEmail;
 	
 	
@@ -35,6 +93,7 @@ public class OwnerUser implements java.io.Serializable{
 					 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
 					 Date oRegisterTime, Timestamp oLastLogTime, Integer oPostAmount, Integer oReportCnt,
 					 Integer courtArriveCnt, Integer couponArriveCnt, Integer rsvdCnts, String oEmail) {
+		super();
 		this.oUserID = oUserID;
 		this.oUserName = oUserName;
 		this.oPassword = oPassword;
