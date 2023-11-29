@@ -191,7 +191,7 @@ public class GeneralUserServlet extends HttpServlet {
 		Integer piAmount = 0;
 
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
-		Integer couponAmount = 0;
+//		Integer couponAmount = 0;
 
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer gPostAmount = 0;
@@ -225,9 +225,9 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setgGender(gGender);
 		generalUser.setgPassword(gPassword);
 		generalUser.setgIDNum(gIDNum);
-//		generalUser.setNicknameID(nicknameID);
+		generalUser.setNicknameID(nicknameID);
 		generalUser.setPiAmount(piAmount);
-		generalUser.setCouponAmount(couponAmount);
+//		generalUser.setCouponAmount(couponAmount);
 		generalUser.setgPostAmount(gPostAmount);
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);
@@ -322,7 +322,7 @@ public class GeneralUserServlet extends HttpServlet {
 
 		Integer piAmount = 0;
 
-		Integer couponAmount = 0;
+//		Integer couponAmount = 0;
 
 		Integer gPostAmount = 0;
 
@@ -353,7 +353,7 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setgIDNum(gIDNum);
 		generalUser.setNicknameID(nicknameID);
 		generalUser.setPiAmount(piAmount);
-		generalUser.setCouponAmount(couponAmount);
+//		generalUser.setCouponAmount(couponAmount);
 		generalUser.setgPostAmount(gPostAmount);
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);

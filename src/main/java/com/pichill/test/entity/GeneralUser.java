@@ -49,8 +49,8 @@ public class GeneralUser {
 	@Column(name="piAmount",insertable = false)
 	private Integer piAmount;
 	
-	@Column(name="couponAmount",insertable = false)
-	private Integer couponAmount;
+//	@Column(name="couponAmount",insertable = false)
+//	private Integer couponAmount;
 	
 	@Column(name="gPostAmount",insertable = false)
 	private Integer gPostAmount;
@@ -84,7 +84,7 @@ public class GeneralUser {
 	}
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
-			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount, Integer couponAmount,
+			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount,
 			Integer gPostAmount, Integer commentAmount, Integer gReportCnt, Date gRegistDate, Timestamp gLastLogTime,
 			Date gBirth, Integer purchaseCnt, Integer yoyakuCnt, byte[] gProfilePic) {
 		super();
@@ -99,7 +99,7 @@ public class GeneralUser {
 		this.gIDNum = gIDNum;
 		this.nicknameID = nicknameID;
 		this.piAmount = piAmount;
-		this.couponAmount = couponAmount;
+//		this.couponAmount = couponAmount;
 		this.gPostAmount = gPostAmount;
 		this.commentAmount = commentAmount;
 		this.gReportCnt = gReportCnt;
@@ -199,13 +199,13 @@ public class GeneralUser {
 		this.piAmount = piAmount;
 	}
 
-	public Integer getCouponAmount() {
-		return couponAmount;
-	}
-
-	public void setCouponAmount(Integer couponAmount) {
-		this.couponAmount = couponAmount;
-	}
+//	public Integer getCouponAmount() {
+//		return couponAmount;
+//	}
+//
+//	public void setCouponAmount(Integer couponAmount) {
+//		this.couponAmount = couponAmount;
+//	}
 
 	public Integer getgPostAmount() {
 		return gPostAmount;
@@ -284,7 +284,7 @@ public class GeneralUser {
 		return "GeneralUser [gUserID=" + gUserID + ", gName=" + gName + ", gTelephone=" + gTelephone + ", gEmail="
 				+ gEmail + ", gAddress=" + gAddress + ", status=" + status + ", gGender=" + gGender + ", gPassword="
 				+ gPassword + ", gIDNum=" + gIDNum + ", nicknameID=" + nicknameID + ", piAmount=" + piAmount
-				+ ", couponAmount=" + couponAmount + ", gPostAmount=" + gPostAmount + ", commentAmount=" + commentAmount
+				+ ", couponAmount=" + ", gPostAmount=" + gPostAmount + ", commentAmount=" + commentAmount
 				+ ", gReportCnt=" + gReportCnt + ", gRegistDate=" + gRegistDate + ", gLastLogTime=" + gLastLogTime
 				+ ", gBirth=" + gBirth + ", purchaseCnt=" + purchaseCnt + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
 				+ Arrays.toString(gProfilePic) + "]";

@@ -12,7 +12,7 @@ import com.pichill.backauthority.Util;
 import com.pichill.backauthority.entity.BackAuthority;
 
 
-public class BackAuthorityDAOImpl implements BackAuthorityDAO {
+public class BackAuthorityJDBCDAOImpl implements BackAuthorityDAO {
 	private static final String INSERT_STMT = "INSERT INTO backAuthority(manageID, backFunctionID) VALUES (?, ?)";
 	private static final String UPDATE_STMT = "UPDATE backAuthority SET manageID = ?, backFunctionID = ? WHERE backAuthorityID = ?";
 	private static final String DELETE_STMT = "DELETE FROM backAuthority WHERE backAuthorityID  = ?";
@@ -28,7 +28,7 @@ public class BackAuthorityDAOImpl implements BackAuthorityDAO {
 	}
 	
 	@Override
-	public void add(BackAuthority backAutority) {
+	public int add(BackAuthority backAutority) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -42,6 +42,7 @@ public class BackAuthorityDAOImpl implements BackAuthorityDAO {
 			pstmt.setInt(2, backAutority.getBackFunctionID());
 
 			pstmt.executeUpdate();
+			return 1;
 
 			// Handle any driver errors
 		} catch (SQLException se) {
@@ -50,10 +51,11 @@ public class BackAuthorityDAOImpl implements BackAuthorityDAO {
 		} finally {
 			closeResources(con, pstmt, null);
 		}
+		return 0;
 	}
 
 	@Override
-	public void update(BackAuthority backAutority) {
+	public int update(BackAuthority backAutority) {
 		// TODO Auto-generated method stub
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -77,63 +79,64 @@ public class BackAuthorityDAOImpl implements BackAuthorityDAO {
 		} finally {
 			closeResources(con, pstmt, null);
 		}
+		return 0;
 	}
 
-	@Override
-	public void delete(Integer backAuthorityID) {
-		// TODO Auto-generated method stub
-		Connection con = null;
-		PreparedStatement pstmt = null;
+//	@Override
+//	public void delete(Integer backAuthorityID) {
+//		// TODO Auto-generated method stub
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//
+//			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+//			pstmt = con.prepareStatement(DELETE_STMT);
+//
+//			pstmt.setInt(1, backAuthorityID);
+//			
+//			pstmt.executeUpdate();
+//
+//			// Handle any driver errors
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			// Clean up JDBC resources
+//		} finally {
+//			closeResources(con, pstmt, null);
+//		}
+//	}
 
-		try {
-
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(DELETE_STMT);
-
-			pstmt.setInt(1, backAuthorityID);
-			
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (SQLException se) {
-			se.printStackTrace();
-			// Clean up JDBC resources
-		} finally {
-			closeResources(con, pstmt, null);
-		}
-	}
-
-	@Override
-	public BackAuthority getBackAuthorityByBackAuthorityID(Integer backAuthorityID) {
-		// TODO Auto-generated method stub
-		BackAuthority backAuthority = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(FIND_BY_PK);
-			pstmt.setInt(1, backAuthorityID);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				backAuthority = new BackAuthority();
-				backAuthority.setBackAuthorityID(rs.getInt("backAuthorityID"));
-				backAuthority.setManageID(rs.getInt("manageID"));
-				backAuthority.setBackFunctionID(rs.getInt("backFunctionID"));
-				
-			}
-
-		} catch (SQLException se) {
-			se.printStackTrace();
-			// Clean up JDBC resources
-		} finally {
-			closeResources(con, pstmt, rs);
-		}
-		return backAuthority;
-	}
+//	@Override
+//	public BackAuthority getBackAuthorityByBackAuthorityID(Integer backAuthorityID) {
+//		// TODO Auto-generated method stub
+//		BackAuthority backAuthority = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+//			pstmt = con.prepareStatement(FIND_BY_PK);
+//			pstmt.setInt(1, backAuthorityID);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				backAuthority = new BackAuthority();
+//				backAuthority.setBackAuthorityID(rs.getInt("backAuthorityID"));
+//				backAuthority.setManageID(rs.getInt("manageID"));
+//				backAuthority.setBackFunctionID(rs.getInt("backFunctionID"));
+//				
+//			}
+//
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			// Clean up JDBC resources
+//		} finally {
+//			closeResources(con, pstmt, rs);
+//		}
+//		return backAuthority;
+//	}
 
 	@Override
 	public List<BackAuthority> getAll() {

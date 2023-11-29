@@ -23,7 +23,7 @@ public class TestGeneralUser {
 //		gen.setgIDNum("Q222156886");
 //		gen.setNicknameID(null);
 //		gen.setPiAmount(null);
-//		gen.setCouponAmount(null);
+
 //		gen.setgPostAmount(3);
 //		gen.setCommentAmount(5);
 //		gen.setgReportCnt(0);
@@ -37,7 +37,7 @@ public class TestGeneralUser {
 
 		// 修改
 		GeneralUser gen1 = new GeneralUser();
-		gen1.setgUserID(11000015);
+		gen1.setgUserID(11000002);
 		gen1.setgName("無痾痾");
 		gen1.setgTelephone("0921000456");
 		gen1.setgEmail("abc456@gmail.com");
@@ -48,7 +48,7 @@ public class TestGeneralUser {
 		gen1.setgIDNum("A222142123");
 		gen1.setNicknameID(null);
 		gen1.setPiAmount(null);
-		gen1.setCouponAmount(null);
+//		gen1.setCouponAmount(null);
 		gen1.setgPostAmount(null);
 		gen1.setCommentAmount(4);
 		gen1.setgReportCnt(0);
