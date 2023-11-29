@@ -33,11 +33,11 @@ public class PlaceDAOImpl implements PlaceDAO {
 			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
 			pstmt = con.prepareStatement(INSERT_STMT);
 
-			pstmt.setInt(1, place.getPlaceID());
-			pstmt.setInt(2, place.getCourtID());
-			pstmt.setString(3, place.getPlaceName());
-			pstmt.setInt(4, place.getPlaceFee());
-			pstmt.setInt(5, place.getBall());
+			// pstmt.setInt(1, place.getPlaceID());
+			pstmt.setInt(1, place.getCourtID());
+			pstmt.setString(2, place.getPlaceName());
+			pstmt.setInt(3, place.getPlaceFee());
+			pstmt.setInt(4, place.getBall());
 
 			pstmt.executeUpdate();
 

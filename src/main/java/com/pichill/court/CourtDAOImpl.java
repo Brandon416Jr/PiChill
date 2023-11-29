@@ -39,15 +39,16 @@ public class CourtDAOImpl implements CourtDAO{
 				pstmt = con.prepareStatement(INSERT_STMT);
 
 				pstmt.setInt(1, court.getoUserID());
-				pstmt.setTimestamp(2, court.getCourtOnTime());
-				pstmt.setTimestamp(3, court.getCourtApplyTime());
-				pstmt.setString(4, court.getCourtName());
-				pstmt.setBytes(5, court.getCourtPic());
-				pstmt.setString(6, court.getCourtTelephone());
-				pstmt.setString(7, court.getCourtAddress());
-				pstmt.setString(8, court.getCourtRule());
-				pstmt.setString(9, court.getLoc());
-				pstmt.setInt(10, court.getCourtApplyStatus());
+				pstmt.setInt(2, court.getManageID());
+				pstmt.setTimestamp(3, court.getCourtOnTime());
+				pstmt.setTimestamp(4, court.getCourtApplyTime());
+				pstmt.setString(5, court.getCourtName());
+				pstmt.setBytes(6, court.getCourtPic());
+				pstmt.setString(7, court.getCourtTelephone());
+				pstmt.setString(8, court.getCourtAddress());
+				pstmt.setString(9, court.getCourtRule());
+				pstmt.setString(10, court.getLoc());
+				pstmt.setInt(11, court.getCourtApplyStatus());
 
 				pstmt.executeUpdate();
 
@@ -81,8 +82,8 @@ public class CourtDAOImpl implements CourtDAO{
 				pstmt.setInt(10, court.getCourtApplyStatus());
 				pstmt.setInt(11, court.getCourtID());
 							
-				
 				pstmt.executeUpdate();
+				
 
 			} catch (SQLException se) {
 				se.printStackTrace();
@@ -178,7 +179,6 @@ public class CourtDAOImpl implements CourtDAO{
 					court.setCourtRule(rs.getString("courtRule"));
 					court.setLoc(rs.getString("loc"));
 					court.setCourtApplyStatus(rs.getInt("courtApplyStatus"));
-					
 					courtList.add(court);
 				}
 			} catch (SQLException se) {

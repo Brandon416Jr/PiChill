@@ -1,16 +1,39 @@
 package com.pichill.place;
 
-public class Place implements java.io.Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+
+@Table(name = "place")
+public class Place {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "placeID")
 	private Integer placeID;
+	
+	@Column(name = "courtID")
 	private Integer courtID;
+	
+	@Column(name = "placeName", columnDefinition = "varchar")
 	private String placeName;
+	
+	@Column(name = "placeFee")
 	private Integer placeFee;
+	
+	@Column(name = "ball")
 	private Integer ball;
 	
 	public Place() {
 	}
 	
 	public Place(Integer placeID, Integer courtID, String placeName, Integer placeFee, Integer ball) {
+		super();
 		this.placeID = placeID;
 		this.courtID = courtID;
 		this.placeName = placeName;
