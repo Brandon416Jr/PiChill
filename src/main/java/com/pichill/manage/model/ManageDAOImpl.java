@@ -22,26 +22,20 @@ import java.util.Map;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-
 import com.pichill.manage.entity.Manage;
 import com.pichill.util.HibernateUtil;
-
-
-
-
-
 
 
 public class ManageDAOImpl implements ManageDAO {
 	private SessionFactory factory;
 	
-	public ManageDAOImpl() {
-		factory = HibernateUtil.getSessionFactory();
-	}
-	
-	private Session getSession() {
-		return factory.getCurrentSession();
-	}
+//	public ManageDAOImpl() {
+//		factory = HibernateUtil.getSessionFactory();
+//	}
+//	
+//	private Session getSession() {
+//		return factory.getCurrentSession();
+//	}
 
 	@Override
 	public int insert(Manage manage) {
@@ -76,23 +70,23 @@ public class ManageDAOImpl implements ManageDAO {
 		
 	}
 
-	@Override
-	public int delete(Integer manageID) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Manage manage = session.get(Manage.class, manageID);
-			if (manage != null) {
-				session.delete(manage);
-			}
-			session.getTransaction().commit();
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return -1;
-	}
+//	@Override
+//	public int delete(Integer manageID) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			Manage manage = session.get(Manage.class, manageID);
+//			if (manage != null) {
+//				session.delete(manage);
+//			}
+//			session.getTransaction().commit();
+//			return 1;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.getTransaction().rollback();
+//		}
+//		return -1;
+//	}
 	
 	@Override
 	public Manage getManageByManageID(Integer manageID) {
@@ -109,35 +103,35 @@ public class ManageDAOImpl implements ManageDAO {
 		return null;
 	}
 
-	@Override
-	public Manage getManageBymName(String mName) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Manage manage = session.get(Manage.class, mName);
-			session.getTransaction().commit();
-			return manage;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return null;
-	}
+//	@Override
+//	public Manage getManageBymName(String mName) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			Manage manage = session.get(Manage.class, mName);
+//			session.getTransaction().commit();
+//			return manage;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.getTransaction().rollback();
+//		}
+//		return null;
+//	}
 
-	@Override
-	public Manage getManageBymEmail(String mEmail) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			Manage manage = session.get(Manage.class, mEmail);
-			session.getTransaction().commit();
-			return manage;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return null;
-	}
+//	@Override
+//	public Manage getManageBymEmail(String mEmail) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			Manage manage = session.get(Manage.class, mEmail);
+//			session.getTransaction().commit();
+//			return manage;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.getTransaction().rollback();
+//		}
+//		return null;
+//	}
 
 	@Override
 	public List<Manage> getAll() {
@@ -155,22 +149,22 @@ public class ManageDAOImpl implements ManageDAO {
 	}
 
 
-	@Override
-	public List<Manage> getAll(int currentPage) {
-		// TODO Auto-generated method stub
-		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			List<Manage> list = session.createQuery("from Manage", Manage.class).list();
-			session.getTransaction().commit();
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return null;
-	}
+//	@Override
+//	public List<Manage> getAll(int currentPage) {
+//		// TODO Auto-generated method stub
+//		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			List<Manage> list = session.createQuery("from Manage", Manage.class).list();
+//			session.getTransaction().commit();
+//			return list;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			session.getTransaction().rollback();
+//		}
+//		return null;
+//	}
 
 	
 	

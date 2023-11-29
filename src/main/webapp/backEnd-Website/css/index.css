@@ -1,0 +1,12 @@
+div.content-search {
+  /* border: 1px solid red; */
+  width: 50%;
+  position: fixed;
+  right: 12.5%;
+  top: 20%;
+}
+
+li.content-search {
+  /* border: 1px solid red; */
+  margin: 20px;
+}

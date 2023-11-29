@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.managejdbc.service.ManageService;
 
-@WebServlet(name = "ManageServlet", value = "/managejdbc/manage.do")
+@WebServlet(name = "ManageServlet", value = "/managejdbc/manage.do") // 註冊檔名字不能取一樣
 public class ManageServlet extends HttpServlet {
 	private ManageService manageService;
 
@@ -94,8 +94,8 @@ public class ManageServlet extends HttpServlet {
 				}
 
 		/*************************** 2.開始查詢資料 *****************************************/
-		ManageService manageSvc = new ManageService();
-		Manage manage = manageSvc.getOneManage(manageID);
+//		ManageService manageSvc = new ManageService();
+		Manage manage = manageService.getOneManage(manageID);
 		
 				if (manage == null) {
 					errorMsgs.add("查無資料");
@@ -147,7 +147,7 @@ public class ManageServlet extends HttpServlet {
 				String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 					if (mPassword == null || mPassword.trim().length() == 0) {
 						errorMsgs.add("管理員密碼: 請勿空白");
-					} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 						errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 					}
 
@@ -285,7 +285,7 @@ public class ManageServlet extends HttpServlet {
 				String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 					if (mPassword == null || mPassword.trim().length() == 0) {
 						errorMsgs.add("管理員密碼: 請勿空白");
-					} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+					} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 						errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 					}
 
@@ -334,6 +334,17 @@ public class ManageServlet extends HttpServlet {
 						mHiredate = new java.sql.Date(System.currentTimeMillis());
 						errorMsgs.add("請輸入日期!");
 					}
+					
+					
+					
+//					Date mHiredate = null;
+//
+//					String value = req.getParameter("mHiredate");
+//					if(value == null) {
+//						mHiredate = new java.sql.Date(System.currentTimeMillis()); 
+//					} else {
+//						mHiredate = java.sql.Date.valueOf(value);
+//					}
 
 			// 詢問這種時間怎麼取得
 				java.sql.Timestamp mLastLogTime = null;
@@ -343,6 +354,14 @@ public class ManageServlet extends HttpServlet {
 						mLastLogTime = new java.sql.Timestamp(System.currentTimeMillis());
 						errorMsgs.add("請輸入管理員最後上線時間!");
 					}
+//					Timestamp mLastLogTime = null;
+
+//					String value2 = req.getParameter("mLastLogTime");
+//					if(value2 == null) {
+//					  mLastLogTime = new Timestamp(System.currentTimeMillis()); 
+//					} else {
+//					  mLastLogTime = Timestamp.valueOf(value2);
+//					}
 
 				String mID = req.getParameter("mID");
 				String idnoRegex = "^[A-Z][12][0-9]{8}$";
@@ -364,6 +383,7 @@ public class ManageServlet extends HttpServlet {
 				Byte[] mProfilePic = null;
 
 				Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
+//				Integer mStatus = null;
 
 				Manage manage = new Manage();
 				manage.setmName(mName);

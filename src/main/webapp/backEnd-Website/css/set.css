@@ -23,6 +23,10 @@ div.card-body {
     width: 100%;
 }
 
+div.row {
+	 display: block;
+}
+
 div.left-card-body,
 div.right-card-body {
     display: block;
@@ -40,7 +44,7 @@ div.right-card-body {
 }
 
 div.row {
-    /* border: 2px solid red; */
+/*     border: 2px solid red; */
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -61,6 +65,7 @@ div.row {
 }
 
 div.card-footer {
+	border: 2px solid red; 
     display: flex;
     flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: space-between;
@@ -132,3 +137,35 @@ div.checkbox {
     /* border: 1px solid red; */
     margin-bottom: 5px;
 }
+
+div.error {
+	margin-left: 20px;
+}
+
+/* .left-card-body .form-group { */
+/*   width: 300px; */
+/* } */
+
+/* .left-card-body { */
+/*   display: flex; */
+/*   flex-direction: column; */
+/* } */
+
+/* .form-group { */
+/*   display: flex;   */
+/*   align-items: center; */
+/* } */
+
+/* .left-card-body { */
+/*   display: grid; */
+/*   grid-template-columns: 1fr 4fr; */
+/*   grid-gap: 10px;  */
+/* } */
+
+/* .form-control-label { */
+/*   grid-column: 1;  */
+/* } */
+
+/* .col-10 { */
+/*   grid-column: 2; */
+/* } */

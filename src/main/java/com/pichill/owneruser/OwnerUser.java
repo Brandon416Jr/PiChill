@@ -1,6 +1,5 @@
 package com.pichill.owneruser;
 
-import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 

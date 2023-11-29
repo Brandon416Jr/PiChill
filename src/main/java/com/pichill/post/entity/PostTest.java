@@ -1,6 +1,8 @@
-package com.pichill.post;
+package com.pichill.post.entity;
 
 import java.util.List;
+import com.pichill.post.model.PostDAO;
+import com.pichill.post.model.PostDAOImpl;
 
 public class PostTest {
 
@@ -16,7 +18,7 @@ public class PostTest {
 		post1.setPostType(0);		
 		post1.setPostTime(java.sql.Timestamp.valueOf("2023-11-10 12:00:00"));		
 		post1.setLikeCnt(9999);	
-		dao.add(post1);
+		dao.insert(post1);
 //		
 		//修改
 		Post post2 = new Post();

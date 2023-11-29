@@ -26,13 +26,13 @@ public class ManageTest {
 //		manage1.setmID("A736125622");
 //		manage1.setmEmail("fikoslfk444@gmail.com");
 //		manage1.setmProfilePic(null);
-//		manage1.setmStatus(1);
+//		manage1.setmStatus(null);
 //		dao.insert(manage1);
 //		
 		// 修改
 		Manage manage2 = new Manage();
 		
-		manage2.setmName("羅煒宜");
+		manage2.setmName("羅煒痾");
 		manage2.setmUserName("chengogo");
 		manage2.setmPassword("144kd4l4");
 		manage2.setmBirth(java.sql.Date.valueOf("1997-12-12"));
@@ -47,7 +47,7 @@ public class ManageTest {
 		manage2.setmEmail("fikoslfk555@gmail.com");
 		manage2.setmProfilePic(null);
 		manage2.setmStatus(1);
-		manage2.setManageID(13000014);
+		manage2.setManageID(13000010);
 //		
 //		
 //		
