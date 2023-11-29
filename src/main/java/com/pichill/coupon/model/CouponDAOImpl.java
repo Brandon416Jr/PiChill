@@ -1,17 +1,21 @@
-package com.pichill.coupon;
+package com.pichill.coupon.model;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.pichill.coupon.Util;
+import com.pichill.coupon.entity.Coupon;
 
-public class CouponDAOImpl implements CouponDAO{
-	private static final String INSERT_STMT= "INSERT INTO coupon(productID) VALUES (?)";
+public class CouponDAOImpl implements CouponDAO {
+	private static final String INSERT_STMT= "INSERT INTO coupon(productID) VALUES(?)";
 	private static final String UPDATE_STMT = "UPDATE coupon SET couponID= ?, productID = ?";
 	private static final String DELETE_STMT = "DELETE FROM coupon WHERE couponID =? ";
 	private static final String FIND_BY_COUPONID = "SELECT * FROM coupon where couponID= ? ";
-//	private static final String FIND_BY_PRODUCTID = "SELECT * FROM coupon where productID= ? ";
 	private static final String GET_ALL = "SELECT * FROM coupon";
 
 	static {
@@ -111,32 +115,6 @@ public class CouponDAOImpl implements CouponDAO{
 		}
 		return coupon;
 	}
-//	@Override
-//	public Product getProdctByProductID(Integer productID) {
-//		Product product= null;
-//		Connection con = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//
-//		try {
-//		
-//			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-//			pstmt = con.prepareStatement(FIND_BY_PRODUCTID);
-//			pstmt.setInt(1, productID);
-//			rs = pstmt.executeQuery();
-//			while (rs.next()) {
-//				product = new Coupon();
-//				product.setCouponID(rs.getInt("couponID"));
-//				product.setProductID(rs.getInt("productID"));
-//
-//			}
-//		} catch (SQLException se) {
-//			se.printStackTrace();
-//		} finally {
-//			closeResources(con, pstmt, rs);
-//		}
-//		return product;
-//	}
 	
 	@Override
 	public List<Coupon>getAll(){
@@ -152,8 +130,10 @@ public class CouponDAOImpl implements CouponDAO{
 	
 	while(rs.next()) {
 		coupon = new Coupon();
-		coupon.setCouponID(rs.getInt("CouponID"));
+		coupon.setCouponID(rs.getInt("couponID"));
 		coupon.setCouponID(rs.getInt("productID"));
+//		coupon.setProductID(rs.getInt("productID"));
+//		coupon.setProductID(rs.getInt("couponID"));
 		couponList.add(coupon);
 	}
 	}catch(SQLException se) {
@@ -165,6 +145,7 @@ public class CouponDAOImpl implements CouponDAO{
 }
 
 	private void closeResources(Connection con, PreparedStatement pstmt, ResultSet rs) {
+		// TODO Auto-generated method stub
 		if (rs != null) {
 			try {
 				rs.close();
@@ -189,9 +170,5 @@ public class CouponDAOImpl implements CouponDAO{
 		
 	}
 	
+
 }
-
-		
-	
-
-
