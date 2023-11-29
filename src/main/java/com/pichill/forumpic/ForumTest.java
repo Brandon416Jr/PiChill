@@ -2,6 +2,9 @@ package com.pichill.forumpic;
 
 import java.util.List;
 
+import com.pichill.forumpic.model.ForumPicDAO;
+import com.pichill.forumpic.model.ForumPicDAOImpl;
+
 public class ForumTest {
 
 	public static void main(String[] args) {

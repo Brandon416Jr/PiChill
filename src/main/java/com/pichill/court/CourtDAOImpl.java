@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pichill.comment.Comment;
+import com.pichill.comment.entity.Comment;
 import com.pichill.court.Util;
 
 

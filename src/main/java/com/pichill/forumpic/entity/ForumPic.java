@@ -1,22 +1,37 @@
-package com.pichill.forumpic;
+package com.pichill.forumpic.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "forumpic")
 public class ForumPic {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "forumPicID",updatable = false , insertable = false)
     private Integer forumPicID;
+	
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	 private Post post;
+	@Column(name = "postID")
     private Integer postID;
+	
+	@Column(name = "postPic")
     private byte[] postPic;
+	
+	@Column(name = "picTime")
+	@CreationTimestamp
     private Timestamp picTime;
 	
     public ForumPic() {

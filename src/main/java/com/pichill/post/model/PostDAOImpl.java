@@ -62,8 +62,8 @@ public class PostDAOImpl implements PostDAO{
 	}
 
 	@Override
-	public int delete(Integer id) {
-		Post post = getSession().get(Post.class, id);
+	public int delete(Integer postID) {
+		Post post = getSession().get(Post.class, postID);
 		if (post != null) {
 			getSession().delete(post);
 			// 回傳給 service，1代表刪除成功

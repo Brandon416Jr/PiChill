@@ -2,6 +2,10 @@ package com.pichill.like;
 
 import java.util.List;
 
+import com.pichill.like.entity.Like;
+import com.pichill.like.model.LikeDAO;
+import com.pichill.like.model.LikeDAOImpl;
+
 public class LikeTest {
 
 	public static void main(String[] args) {
