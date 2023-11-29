@@ -5,10 +5,10 @@ import java.util.List;
 import com.pichill.backauthority.entity.BackAuthority;
 
 public interface BackAuthorityDAO {
-	public abstract void add(BackAuthority backAutority); // public abstract可不加，預設就會有
-	void update(BackAuthority backAutority);
-	void delete(Integer backAuthorityID); // 刪除需要篩選條件
-	BackAuthority getBackAuthorityByBackAuthorityID(Integer backAuthorityID); 
+	int add(BackAuthority backAutority); // public abstract可不加，預設就會有
+	int update(BackAuthority backAutority);
+//	void delete(Integer backAuthorityID); // 刪除需要篩選條件
+//	BackAuthority getBackAuthorityByBackAuthorityID(Integer backAuthorityID); 
 	List<BackAuthority> getAll();
 
 }

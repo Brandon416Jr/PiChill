@@ -2,11 +2,28 @@ package com.pichill.backauthority.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "backAuthority")
 public class BackAuthority implements Serializable {
 //	private static final long serialVersionUID = 1L; // 可加可不加
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "backAuthorityID", updatable = false)
 	private Integer backAuthorityID;
+	
+	@Column(name = "manageID")
 	private Integer manageID;
+	
+	@Column(name = "backFunctionID")
 	private Integer backFunctionID;
+	
 	
 	public BackAuthority() {
 		super();

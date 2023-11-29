@@ -1,4 +1,4 @@
-package com.pichill.util;
+package com.pichill.manage;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.pichill.manage.entity.Manage;
+import com.pichill.util.HibernateUtil;
 
 public class ManageBlobInitializer {
 

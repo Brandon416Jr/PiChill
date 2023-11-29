@@ -14,38 +14,38 @@ import com.pichill.backfunction.entity.BackFunction;
 
 
 
-public class BackFunctionDAOImpl implements BackFunctionDAO{
+public class BackFunctionJDBCDAOImpl implements BackFunctionDAO{
 	private static final String FIND_BY_PK = "SELECT * FROM backFunction WHERE backFunctionID = ?";
 	private static final String GET_ALL = "SELECT * FROM  backFunction";
-	@Override
-	public BackFunction getBackFunctionBybackFunctionID(Integer backFunctionID) {
-		// TODO Auto-generated method stub
-		BackFunction backFunction = null;
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		try {
-
-			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
-			pstmt = con.prepareStatement(FIND_BY_PK);
-			pstmt.setInt(1, backFunctionID);
-			rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				backFunction = new BackFunction();
-				backFunction.setBackFunctionID(rs.getInt("backFunctionID"));
-				backFunction.setBackFunctionName(rs.getString("BackFunctionName"));
-			}
-
-		} catch (SQLException se) {
-			se.printStackTrace();
-			// Clean up JDBC resources
-		} finally {
-			closeResources(con, pstmt, rs);
-		}
-		return backFunction;
-	}
+//	@Override
+//	public BackFunction getBackFunctionBybackFunctionID(Integer backFunctionID) {
+//		// TODO Auto-generated method stub
+//		BackFunction backFunction = null;
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//		ResultSet rs = null;
+//
+//		try {
+//
+//			con = DriverManager.getConnection(Util.URL, Util.USER, Util.PASSWORD);
+//			pstmt = con.prepareStatement(FIND_BY_PK);
+//			pstmt.setInt(1, backFunctionID);
+//			rs = pstmt.executeQuery();
+//
+//			while (rs.next()) {
+//				backFunction = new BackFunction();
+//				backFunction.setBackFunctionID(rs.getInt("backFunctionID"));
+//				backFunction.setBackFunctionName(rs.getString("BackFunctionName"));
+//			}
+//
+//		} catch (SQLException se) {
+//			se.printStackTrace();
+//			// Clean up JDBC resources
+//		} finally {
+//			closeResources(con, pstmt, rs);
+//		}
+//		return backFunction;
+//	}
 
 	@Override
 	public List<BackFunction> getAll() {

@@ -3,13 +3,13 @@ package com.pichill.backauthority.entity;
 import java.util.List;
 
 import com.pichill.backauthority.model.BackAuthorityDAO;
-import com.pichill.backauthority.model.BackAuthorityDAOImpl;
+import com.pichill.backauthority.model.BackAuthorityHibernateDAOImpl;
 
 
 
 public class BackAuthorityTest {
 	public static void main(String[] args) {
-		BackAuthorityDAO dao = new BackAuthorityDAOImpl();
+		BackAuthorityDAO dao = new BackAuthorityHibernateDAOImpl();
 
 		// 新增
 //		BackAuthority backAuthority1 = new BackAuthority();
@@ -24,14 +24,7 @@ public class BackAuthorityTest {
 //		backAuthority2.setBackAuthorityID(41000011);
 //		dao.update(backAuthority2);
 		
-		// 刪除
-//		dao.delete(41000011);
 
-		// 查詢單筆
-//		BackAuthority backAuthority3 = dao.getBackAuthorityByBackAuthorityID(41000008);
-//		System.out.print(backAuthority3.getManageID() + ",");
-//		System.out.println(backAuthority3.getBackFunctionID() + ",");
-//		System.out.println("---------------------");
 		
 		// 查詢多筆
 		List<BackAuthority> list = dao.getAll();
