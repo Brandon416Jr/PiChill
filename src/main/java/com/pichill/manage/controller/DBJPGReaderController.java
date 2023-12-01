@@ -5,9 +5,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import com.pichill.manage.service.ManageService;
-import com.pichill.manage.entity.Manage;
+//import com.pichill.manage.entity.Manage;
 
-@WebServlet("/manage/DBGifReader")
+@WebServlet("/manage/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

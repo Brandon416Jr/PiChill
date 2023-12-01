@@ -15,7 +15,7 @@ import com.pichill.post.entity.Post;
 import com.pichill.backstage.post.service.PostServiceBack;
 
 
-@WebServlet("/postBack/postb.do")
+@WebServlet(name = "PostBackServlet", value="/postback/postb.do")
 public class PostServletBack extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -213,7 +213,7 @@ public class PostServletBack extends HttpServlet {
 				postSvcB.deletePostBack(postID);
 
 				/*************************** 3.刪除完成,準備轉交(Send the Success view) ***********/
-				String url = "/postBack/all_post.jsp";
+				String url = "/backstage/postBack/all_post.jsp";
 				RequestDispatcher successView = req.getRequestDispatcher(url);// 刪除成功後,轉交回送出刪除的來源網頁
 				successView.forward(req, res);
 			}

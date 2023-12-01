@@ -60,7 +60,7 @@ public class ManageServlet extends HttpServlet {
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/manage/all_manage.jsp";
+			forwardPath = "/backstage/manage/all_manage.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -138,7 +138,7 @@ public class ManageServlet extends HttpServlet {
 //	return "/manage/set_manage.jsp"+param;
 	
 		req.setAttribute("manage", manage);
-		return "/manage/set_manage.jsp";
+		return "/backstage/manage/set_manage.jsp";
 	}
 
 	private String update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -286,7 +286,7 @@ public class ManageServlet extends HttpServlet {
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("manage", manage); // 含有輸入格式錯誤的manage物件,也存入req
-			return "/manage/set_manage.jsp"; // 程式中斷
+			return "/backstage/manage/set_manage.jsp"; // 程式中斷
 		}
 
 		/*************************** 2.開始修改資料 *****************************************/
@@ -295,7 +295,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("manage", manage); // 資料庫update成功後,正確的的manage物件,存入req
-		return "/manage/all_manage.jsp";
+		return "/backstage/manage/all_manage.jsp";
 	}
 
 	private String insert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -436,7 +436,7 @@ public class ManageServlet extends HttpServlet {
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("manage", manage); // 含有輸入格式錯誤的empVO物件,也存入req
-			return "/manage/new_manage.jsp";
+			return "/backstage/manage/new_manage.jsp";
 		}
 
 		/*************************** 2.開始新增資料 ***************************************/
@@ -444,7 +444,7 @@ public class ManageServlet extends HttpServlet {
 		manageService.insertManage(manage);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-		return "/manage/all_manage.jsp";
+		return "/backstage/manage/all_manage.jsp";
 	}
 
 }
