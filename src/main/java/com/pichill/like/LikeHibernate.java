@@ -7,6 +7,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.pichill.like.entity.Like;
+
 public class LikeHibernate {
 	public static void main(String[] args) {
 		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();

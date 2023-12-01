@@ -2,27 +2,76 @@ package com.pichill.court;
 
 import java.sql.Timestamp;
 
-public class Court implements java.io.Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+
+@Table(name = "Court")
+public class Court {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "courtID")
 	private Integer courtID;
+	
+	@Column(name = "oUserID")
 	private Integer oUserID;
+	
+	@Column(name = "manageID")
 	private Integer manageID;
+	
+	@Column(name = "courtOnTime")
 	private Timestamp courtOnTime;
+	
+	@Column(name = "courtApplyTime")
 	private Timestamp courtApplyTime;
+	
+	@Column(name = "courtName")
 	private String courtName;
+	
+	@Column(name = "courtPic" , columnDefinition = "longblob")
 	private byte[] courtPic;
+	
+	@Column(name = "courtTelephone")
 	private String courtTelephone;
+	
+	@Column(name = "courtAddress")
 	private String courtAddress;
+	
+	@Column(name = "courtRule" , columnDefinition = "text")
 	private String courtRule;
+	
+	@Column(name = "loc")
 	private String loc;
+	
+	@Column(name = "courtApplyStatus")
 	private Integer courtApplyStatus;
 	
-	public Integer getCourtApplyStatus() {
-		return courtApplyStatus;
+	public Court() {
 	}
-
-	public void setCourtApplyStatus(Integer courtApplyStatus) {
+	
+	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc) {
+		this.courtID = courtID;
+		this.oUserID = oUserID;
+		this.manageID = manageID;
+		this.courtOnTime = courtOnTime;
+		this.courtApplyTime = courtApplyTime;
+		this.courtName = courtName;
+		this.courtPic = courtPic;
+		this.courtTelephone = courtTelephone;
+		this.courtAddress = courtAddress;
+		this.courtRule = courtRule;
+		this.loc = loc;
 		this.courtApplyStatus = courtApplyStatus;
 	}
+	
+	
+
 
 	public Integer getCourtID() {
 		return courtID;
@@ -112,22 +161,12 @@ public class Court implements java.io.Serializable{
 		this.loc = loc;
 	}
 
-	public Court() {
+	public Integer getCourtApplyStatus() {
+		return courtApplyStatus;
 	}
 
-	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc) {
-		this.courtID = courtID;
-		this.oUserID = oUserID;
-		this.manageID = manageID;
-		this.courtOnTime = courtOnTime;
-		this.courtApplyTime = courtApplyTime;
-		this.courtName = courtName;
-		this.courtPic = courtPic;
-		this.courtTelephone = courtTelephone;
-		this.courtAddress = courtAddress;
-		this.courtRule = courtRule;
-		this.loc = loc;
+	public void setCourtApplyStatus(Integer courtApplyStatus) {
+		this.courtApplyStatus = courtApplyStatus;
 	}
-	
 	
 }

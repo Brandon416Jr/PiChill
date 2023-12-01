@@ -7,6 +7,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.pichill.forumpic.entity.ForumPic;
+
 public class ForumPicHibernate {
 	public static void main(String[] args) {
 		StandardServiceRegistry registry = new StandardServiceRegistryBuilder().configure().build();

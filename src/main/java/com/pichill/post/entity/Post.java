@@ -18,8 +18,8 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.pichill.forumpic.ForumPic;
-import com.pichill.report.Report;
+import com.pichill.forumpic.entity.ForumPic;
+import com.pichill.report.entity.Report;
 
 @Entity
 @Table(name = "post")
@@ -46,13 +46,7 @@ public class Post {
 	@Column(name = "postTitle")
     private String postTitle;
 	
-	@Override
-	public String toString() {
-		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", postTitle=" + postTitle
-				+ ", postContent=" + postContent + ", postType=" + postType + ", postTime=" + postTime + ", likeCnt="
-				+ likeCnt + "]";
-	}
-	@Column(name = "postContent")
+	@Column(name = "postContent",columnDefinition = "text")
     private String postContent;
 	
 	@Column(name = "postType")
@@ -148,4 +142,10 @@ public class Post {
 		this.likeCnt = likeCnt;
 	}
       
+	@Override
+	public String toString() {
+		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", postTitle=" + postTitle
+				+ ", postContent=" + postContent + ", postType=" + postType + ", postTime=" + postTime + ", likeCnt="
+				+ likeCnt + "]";
+	}
 }

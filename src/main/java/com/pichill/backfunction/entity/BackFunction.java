@@ -2,9 +2,24 @@ package com.pichill.backfunction.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "backFunction")
 public class BackFunction implements Serializable {
 //	private static final long serialVersionUID = 1L; // 可加可不加
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "backFunctionID", updatable = false, insertable = false)
 	private Integer backFunctionID;
+	
+	@Column(name = "backFunctionName")
 	private String backFunctionName;
 	
 	public BackFunction() {
