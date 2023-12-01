@@ -26,20 +26,20 @@ public class Report {
 	@Column(name = "reportID",updatable = false)
 	private Integer reportID;
 	
-	@ManyToOne
-	@JoinColumn(name = "manageID",referencedColumnName = "manageID")
-	private Manage manage;
-//	private Integer manageID;
+//	@ManyToOne
+//	@JoinColumn(name = "manageID",referencedColumnName = "manageID")
+//	private Manage manage;
+	private Integer manageID;
 	
-	@ManyToOne
-	@JoinColumn(name = "postID",referencedColumnName = "postID")
-	private Post post;
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	private Post post;
 	private Integer postID;
 	
-	@ManyToOne
-	@JoinColumn(name = "commentID",referencedColumnName = "commentID")
-	private Comment comment;
-//	private Integer commentID;
+//	@ManyToOne
+//	@JoinColumn(name = "commentID",referencedColumnName = "commentID")
+//	private Comment comment;
+	private Integer commentID;
 	
 	@Column(name = "reportTime")
 	@CreationTimestamp
@@ -60,9 +60,9 @@ public class Report {
 			Integer reportStatus, Integer reportType) {
 		super();
 		this.reportID = reportID;
-//		this.manageID = manageID;
+		this.manageID = manageID;
 		this.postID = postID;
-//		this.commentID = commentID;
+		this.commentID = commentID;
 		this.reportTime = reportTime;
 		this.reportStatus = reportStatus;
 		this.reportType = reportType;
@@ -76,13 +76,13 @@ public class Report {
 		this.reportID = reportID;
 	}
 
-//	public Integer getManageID() {
-//		return manageID;
-//	}
-//
-//	public void setManageID(Integer manageID) {
-//		this.manageID = manageID;
-//	}
+	public Integer getManageID() {
+		return manageID;
+	}
+
+	public void setManageID(Integer manageID) {
+		this.manageID = manageID;
+	}
 
 	public Integer getPostID() {
 		return postID;
@@ -92,13 +92,13 @@ public class Report {
 		this.postID = postID;
 	}
 
-//	public Integer getCommentID() {
-//		return commentID;
-//	}
-//
-//	public void setCommentID(Integer commentID) {
-//		this.commentID = commentID;
-//	}
+	public Integer getCommentID() {
+		return commentID;
+	}
+
+	public void setCommentID(Integer commentID) {
+		this.commentID = commentID;
+	}
 
 	public Timestamp getReportTime() {
 		return reportTime;
