@@ -39,7 +39,7 @@ public class Comment {
 //	private Post post;
 	private Integer postID;
 	
-	@Column(name = "commentContent")
+	@Column(name = "commentContent", columnDefinition = "text")
 	private String commentContent;
 	
 	@Column(name = "commentTime")
