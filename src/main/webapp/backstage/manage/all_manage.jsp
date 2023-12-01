@@ -7,8 +7,8 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-ManageService manageSvc = new ManageService();
-List<Manage> list = manageSvc.getAll();
+ManageService manageService = new ManageService();
+List<Manage> list = manageService.getAll();
 pageContext.setAttribute("list", list);
 %>
 
@@ -18,12 +18,7 @@ pageContext.setAttribute("list", list);
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<%
-String title = "所有員工資料";
-%>
-
-<title><%=title%></title>
+<title>所有員工資料</title>
 
 <!-- jquery連結 (一定要在datatable前面!) -->
 <script
@@ -65,16 +60,14 @@ String title = "所有員工資料";
 <link
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/font-awesome-4.7/css/font-awesome.min.css"
 	rel="stylesheet" media="all" />
+<!-- <link href="./vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all"> -->
+<!-- Main CSS-->
 <link href="<%=request.getContextPath()%>/backEnd-Website/css/main.css"
 	rel="stylesheet" media="all" />
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/backEnd-Website/css/all.css" />
+	href="<%=request.getContextPath()%>/backEnd-Website/css/all.css"
+	media="all" />
 <style>
-table.dataTable tbody tr:hover {
-  background-color: #e9ecef;
-  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%); 
-}
-
 div.dataTables_scrollHeadInner {
 	width: 100% !important;
 }
@@ -176,7 +169,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								class="fas fa-tachometer-alt"></i>員工管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="all_manage.jsp">所有員工資料</a></li>
+								<li><a class="active" href="#">所有員工資料</a></li>
 								<li><a href="new_manage.jsp">新增員工資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
@@ -222,7 +215,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>商城管理
 						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
+							<ul class="list-styled navbar__sub-list js-sub-list">
 								<li><a href="product.html">商品管理</a></li>
 								<li><a href="new_product.html">新增商品</a></li>
 								<li><a href="product_order.html">訂單管理</a></li>
@@ -231,6 +224,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 				</nav>
 			</div>
 		</aside>
+		<!-- END MENU SIDEBAR-->
 	</div>
 
 	<!-- PAGE CONTAINER-->
@@ -288,12 +282,12 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 				</div>
 			</div>
 		</header>
+		<!-- END HEADER DESKTOP-->
 	</div>
-
 
 	<div class="page-container2">
 		<div class="table-responsive m-b-40">
-			<table id="myTable" class="table table-borderless table-data3 table-hover" 
+			<table id="myTable" class="table table-borderless table-data3"
 				style="overflow-x: auto">
 				<thead>
 					<tr>
@@ -313,7 +307,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<th>電子信箱</th>
 						<th>大頭貼</th>
 						<th>狀態</th>
-						<th>修改</th>
+						<th>查看</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -333,8 +327,10 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							<td>${manage.mLastLogTime}</td>
 							<td>${manage.mID}</td>
 							<td>${manage.mEmail}</td>
-							<td><img src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${manage.manageID}" width="100px"></td> 
-<%-- 							<td>${manage.mProfilePic}</td> --%>
+							<td><img
+								src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=${manage.manageID}"
+								width="100px"></td>
+							<%-- 							<td>${manage.mProfilePic}</td> --%>
 							<td>${manage.mStatus == 0 ? '已離職':'在職中'}</td>
 							<td>
 								<FORM METHOD="post"
@@ -353,27 +349,17 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 		</div>
 	</div>
 
-	<script>
-		var script = document.createElement("script");
-
-		script.src = "https://code.jquery.com/jquery-3.4.1.min.js";
-
-		script.type = "text/javascript";
-
-		document.getElementsByTagName("head")[0].appendChild(script);
-	</script>
 
 	<script>
-	new DataTable("#myTable", {
-		scrollX : true,
-	});
 		$(document)
 				.ready(
 						function() {
 							$("#myTable")
 									.DataTable(
 											{
-											
+												// paging: true, 
+												// searching: true, 
+
 												// 中文化
 												language : {
 													processing : "處理中...",
@@ -602,23 +588,26 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						});
 
 		console.log({
-			searching: false,
-			paging : false,
+			paging : true,
 			ordering : false,
 			info : false,
 		});
 
-// 		$("#example").DataTable({
-// 			paging : true,
-// 			ordering : false,
-// 			info : false,
-			
-// 		});
+		$("#example").DataTable({
+			paging : true,
+			ordering : false,
+			info : false,
+		});
 
-// 		new DataTable("#myTable", {
-// 			scrollX : true,
-// 		});
+		new DataTable("#myTable", {
+			scrollX : true,
+		});
 	</script>
+	<!-- <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
+    <script src="./database/datatables.min.js"></script> -->
+	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> -->
+
 	<!-- proper.min.js first, then bootstrap.min.js -->
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/popper.min.js"></script>
@@ -648,5 +637,4 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 	<!-- Main JS-->
 	<script src="<%=request.getContextPath()%>/backEnd-Website/js/main.js"></script>
 </body>
-
 </html>

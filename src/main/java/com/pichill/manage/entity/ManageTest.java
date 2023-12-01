@@ -30,28 +30,28 @@ public class ManageTest {
 //		dao.insert(manage1);
 //		
 		// 修改
-		Manage manage2 = new Manage();
-		
-		manage2.setmName("羅煒痾");
-		manage2.setmUserName("chengogo");
-		manage2.setmPassword("144kd4l4");
-		manage2.setmBirth(java.sql.Date.valueOf("1997-12-12"));
-		manage2.setmGender(0);
-		manage2.setmTelephone("0922222222");
-		manage2.setmEmgContact("陳致融");
-		manage2.setmEmgPhone("0911111111");
-		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
-		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
-		manage2.setmLastLogTime(java.sql.Timestamp.valueOf("2012-12-31 23:59:59"));
-		manage2.setmID("K736125622");
-		manage2.setmEmail("fikoslfk555@gmail.com");
-		manage2.setmProfilePic(null);
-		manage2.setmStatus(1);
-		manage2.setManageID(13000010);
+//		Manage manage2 = new Manage();
 //		
-//		
-//		
-		dao.update(manage2);
+//		manage2.setmName("羅煒痾");
+//		manage2.setmUserName("chengogo");
+//		manage2.setmPassword("144kd4l4");
+//		manage2.setmBirth(java.sql.Date.valueOf("1997-12-12"));
+//		manage2.setmGender(0);
+//		manage2.setmTelephone("0922222222");
+//		manage2.setmEmgContact("陳致融");
+//		manage2.setmEmgPhone("0911111111");
+//		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
+//		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
+//		manage2.setmLastLogTime(java.sql.Timestamp.valueOf("2012-12-31 23:59:59"));
+//		manage2.setmID("K736125622");
+//		manage2.setmEmail("fikoslfk555@gmail.com");
+//		manage2.setmProfilePic(null);
+//		manage2.setmStatus(1);
+//		manage2.setManageID(13000010);
+////		
+////		
+////		
+//		dao.update(manage2);
 //		
 		// 刪除
 //		dao.delete(13000012);
@@ -124,25 +124,25 @@ public class ManageTest {
 //		System.out.println("---------------------");
 
 		// 查詢多筆
-//		List<Manage> list = dao.getAll();
-//		for (Manage manage : list) {
-//		System.out.print(manage.getManageID() + ",");
-//			System.out.print(manage.getmName() + ",");
-//			System.out.print(manage.getmUserName() + ",");
-//			System.out.print(manage.getmPassword() + ",");
-//			System.out.print(manage.getmBirth() + ",");
-//			System.out.print(manage.getmGender() + ",");
-//			System.out.print(manage.getmTelephone() + ",");
-//			System.out.print(manage.getmEmgContact() + ",");
-//			System.out.print(manage.getmEmgPhone() + ",");
-//			System.out.print(manage.getmAddress() + ",");
-//			System.out.print(manage.getmHiredate() + ",");
-//			System.out.print(manage.getmLastLogTime() + ",");
-//			System.out.print(manage.getmID() + ",");
-//			System.out.print(manage.getmEmail() + ",");
-//			System.out.print(manage.getmProfilePic() + ",");
-//			System.out.print(manage.getmStatus() + ",");
-//			System.out.println();
-//		}
+		List<Manage> list = dao.getAll();
+		for (Manage manage : list) {
+		System.out.print(manage.getManageID() + ",");
+			System.out.print(manage.getmName() + ",");
+			System.out.print(manage.getmUserName() + ",");
+			System.out.print(manage.getmPassword() + ",");
+			System.out.print(manage.getmBirth() + ",");
+			System.out.print(manage.getmGender() + ",");
+			System.out.print(manage.getmTelephone() + ",");
+			System.out.print(manage.getmEmgContact() + ",");
+			System.out.print(manage.getmEmgPhone() + ",");
+			System.out.print(manage.getmAddress() + ",");
+			System.out.print(manage.getmHiredate() + ",");
+			System.out.print(manage.getmLastLogTime() + ",");
+			System.out.print(manage.getmID() + ",");
+			System.out.print(manage.getmEmail() + ",");
+			System.out.print(manage.getmProfilePic() + ",");
+			System.out.print(manage.getmStatus() + ",");
+			System.out.println();
+		}
 	}
 }
