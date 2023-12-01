@@ -27,10 +27,10 @@ public class Like {
 	@Column(name = "gUserID")
 	private Integer gUserID;
 	
-	@ManyToOne
-	@JoinColumn(name = "postID",referencedColumnName = "postID")
-	private Post post;
-//	private Integer postID;
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	private Post post;
+	private Integer postID;
 	
 	public Like() {
 		super();
@@ -40,7 +40,7 @@ public class Like {
 		super();
 		this.likeID = likeID;
 		this.gUserID = gUserID;
-//		this.postID = postID;
+		this.postID = postID;
 	}
 	public Integer getLikeID() {
 		return likeID;
@@ -54,12 +54,12 @@ public class Like {
 	public void setgUserID(Integer gUserID) {
 		this.gUserID = gUserID;
 	}
-//	public Integer getPostID() {
-//		return postID;
-//	}
-//	public void setPostID(Integer postID) {
-//		this.postID = postID;
-//	}
+	public Integer getPostID() {
+		return postID;
+	}
+	public void setPostID(Integer postID) {
+		this.postID = postID;
+	}
 	
 	
 }

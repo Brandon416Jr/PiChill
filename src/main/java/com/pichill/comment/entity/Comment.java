@@ -34,10 +34,10 @@ public class Comment {
 	@Column(name = "gUserID")
 	private Integer gUserID;
 	
-	@ManyToOne
-	@JoinColumn(name = "postID",referencedColumnName = "postID")
-	private Post post;
-//	private Integer postID;
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	private Post post;
+	private Integer postID;
 	
 	@Column(name = "commentContent")
 	private String commentContent;
@@ -46,9 +46,9 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp commentTime;
 	
-	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
-	@OrderBy("reportID asc")
-	private Set<Report> reports;
+//	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
+//	@OrderBy("reportID asc")
+//	private Set<Report> reports;
 	public Comment() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -57,7 +57,7 @@ public class Comment {
 		super();
 		this.commentID = commentID;
 		this.gUserID = gUserID;
-//		this.postID = postID;
+		this.postID = postID;
 		this.commentContent = commentContent;
 		this.commentTime = commentTime;
 	}
@@ -73,12 +73,12 @@ public class Comment {
 	public void setgUserID(Integer gUserID) {
 		this.gUserID = gUserID;
 	}
-//	public Integer getPostID() {
-//		return postID;
-//	}
-//	public void setPostID(Integer postID) {
-//		this.postID = postID;
-//	}
+	public Integer getPostID() {
+		return postID;
+	}
+	public void setPostID(Integer postID) {
+		this.postID = postID;
+	}
 	public String getCommentContent() {
 		return commentContent;
 	}
