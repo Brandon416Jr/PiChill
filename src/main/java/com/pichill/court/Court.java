@@ -53,9 +53,10 @@ public class Court {
 	private Integer courtApplyStatus;
 	
 	public Court() {
-	}
+        super();
+    }
 	
-	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc) {
+	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc, Integer courtApplyStatus) {
 		this.courtID = courtID;
 		this.oUserID = oUserID;
 		this.manageID = manageID;
