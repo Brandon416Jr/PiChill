@@ -70,10 +70,8 @@ public class Court {
 		this.loc = loc;
 		this.courtApplyStatus = courtApplyStatus;
 	}
-	
-	
 
-
+// 測試用註解
 	public Integer getCourtID() {
 		return courtID;
 	}
