@@ -1,10 +1,19 @@
-package com.pichill.cart;
+package com.pichill.cart.entity;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Cart implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
+
+@Entity
+@Table(name="cart")
+public class Cart{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="cartID", updatable = false)
 	private Integer cartID;
 	private Integer productID;
 	private Integer gUserID;
@@ -42,6 +51,11 @@ public class Cart implements Serializable{
 
 	public void setgUserID(Integer gUserID) {
 		this.gUserID = gUserID;
+	}
+
+	@Override
+	public String toString() {
+		return "Cart [cartID=" + cartID + ", productID=" + productID + ", gUserID=" + gUserID + "]";
 	}
 	
 	
