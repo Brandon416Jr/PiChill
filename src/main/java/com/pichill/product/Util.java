@@ -1,4 +1,4 @@
-package com.pichill.generaluser;
+package com.pichill.product;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

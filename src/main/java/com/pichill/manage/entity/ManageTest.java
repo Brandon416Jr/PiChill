@@ -48,11 +48,11 @@ public class ManageTest {
 //		manage2.setmProfilePic(null);
 //		manage2.setmStatus(1);
 //		manage2.setManageID(13000010);
-////		
-////		
-////		
-//		dao.update(manage2);
 //		
+//		
+//		
+//		dao.update(manage2);
+		
 		// 刪除
 //		dao.delete(13000012);
 //		dao.delete(13000013);
