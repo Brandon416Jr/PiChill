@@ -36,15 +36,15 @@ public class PostDAOImpl implements PostDAO{
 
 	@Override
 	public int insert(Post entity) {
-//		SessionFactory factory2 = HibernateUtil.getSessionFactory();
-//		Session session = factory2.openSession();
-//		Transaction tx = session.beginTransaction();
-		// 回傳給 service 剛新增成功的自增主鍵值
+		SessionFactory factory2 = HibernateUtil.getSessionFactory();
+		Session session = factory2.openSession();
+		Transaction tx = session.beginTransaction();
+//		 回傳給 service 剛新增成功的自增主鍵值
 //		entity.setPostTime(new java.sql.Timestamp(System.currentTimeMillis()));
-//		session.save(entity);
-//		tx.commit();
-//		return 1;
-		return(Integer)getSession().save(entity);
+		session.save(entity);
+		tx.commit();
+		return 1;
+//		return(Integer)getSession().save(entity);
 	}
 
 	@Override

@@ -26,39 +26,46 @@ import com.pichill.report.entity.Report;
 public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "postID", updatable = false , insertable=false)
-    private Integer postID;
-	
+	@Column(name = "postID", updatable = false, insertable = false)
+	private Integer postID;
+
 //	@ManyToOne
 //	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
 //    private GUser gUser;
-	
+
 	@Column(name = "gUserID")
 	private Integer gUserID;
-	
+
 //	@ManyToOne
 //	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
 //    private OUser oUser;
-	
+
 	@Column(name = "oUserID")
 	private Integer oUserID;
-	
+
+//@ManyToOne
+//@JoinColumn(name= "placeID",referencedColumnName = "placeID")
+//private PlaceID placeID;
+
+	@Column(name = "placeID")
+	private Integer placeID;
+
 	@Column(name = "postTitle")
-    private String postTitle;
-	
-	@Column(name = "postContent",columnDefinition = "text")
-    private String postContent;
-	
+	private String postTitle;
+
+	@Column(name = "postContent", columnDefinition = "text")
+	private String postContent;
+
 	@Column(name = "postType")
-    private Integer postType;
-	
+	private Integer postType;
+
 	@Column(name = "postTime")
 	@CreationTimestamp
-    private Timestamp postTime;
-	
+	private Timestamp postTime;
+
 	@Column(name = "likeCnt")
-    private Integer likeCnt;
-	
+	private Integer likeCnt;
+
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("reportID asc")
 //	private Set<Report> reports;
@@ -79,69 +86,79 @@ public class Post {
 //		this.postTime = postTime;
 //		this.likeCnt = likeCnt;
 //	}
-	
+
 	public Integer getPostID() {
 		return postID;
 	}
+
 	public void setPostID(Integer postID) {
 		this.postID = postID;
 	}
-	
+
 	public Integer getgUserID() {
 		return gUserID;
 	}
+
 	public void setgUserID(Integer gUserID) {
-		this.gUserID= gUserID;
+		this.gUserID = gUserID;
 	}
+
 	public Integer getoUserID() {
 		return oUserID;
 	}
+
 	public void setoUserID(Integer oUserID) {
 		this.oUserID = oUserID;
 	}
-//	public GUser getGUser() {
-//		return gUser;
-//	}
-//	public void setGUserID(GUser gUser) {
-//		this.gUser = gUser;
-//	}
-//	public OUser getOUser() {
-//		return oUser;
-//	}
-//	public void setOUser(OUser oUser) {
-//		this.oUser = oUser;
-//	}
+
+	public Integer getPlaceID() {
+		return placeID;
+	}
+
+	public void setPlaceID(Integer placeID) {
+		this.placeID = placeID;
+	}
+
 	public String getPostTitle() {
 		return postTitle;
 	}
+
 	public void setPostTitle(String postTitle) {
 		this.postTitle = postTitle;
 	}
+
 	public String getPostContent() {
 		return postContent;
 	}
+
 	public void setPostContent(String postContent) {
 		this.postContent = postContent;
 	}
+
 	public Integer getPostType() {
 		return postType;
 	}
+
 	public void setPostType(Integer postType) {
 		this.postType = postType;
 	}
+
 	public Timestamp getPostTime() {
 		return postTime;
 	}
+
 	public void setPostTime(Timestamp postTime) {
 		this.postTime = postTime;
 	}
+
 	public Integer getLikeCnt() {
 		return likeCnt;
 	}
+
 	public void setLikeCnt(Integer likeCnt) {
 		this.likeCnt = likeCnt;
 	}
-      
+
 	@Override
 	public String toString() {
 		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", postTitle=" + postTitle
