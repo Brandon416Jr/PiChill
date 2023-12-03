@@ -1,5 +1,6 @@
 package com.pichill.court;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 
 @Table(name = "Court")
@@ -16,7 +18,7 @@ public class Court {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "courtID")
+	@Column(name = "courtID", updatable = false) //PK鍵不用更新
 	private Integer courtID;
 	
 	@Column(name = "oUserID")
@@ -52,11 +54,19 @@ public class Court {
 	@Column(name = "courtApplyStatus")
 	private Integer courtApplyStatus;
 	
+	
+	@Column(name = "courtOpenTime")
+	private Time courtOpenTime;
+
+	
+	@Column(name = "courtCloseTime")
+	private Time courtCloseTime;
+	
 	public Court() {
         super();
     }
 	
-	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc, Integer courtApplyStatus) {
+	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc, Integer courtApplyStatus, Time courtOpenTime, Time courtCloseTime) {
 		this.courtID = courtID;
 		this.oUserID = oUserID;
 		this.manageID = manageID;
@@ -69,9 +79,11 @@ public class Court {
 		this.courtRule = courtRule;
 		this.loc = loc;
 		this.courtApplyStatus = courtApplyStatus;
+		this.courtOpenTime = courtOpenTime;
+		this.courtCloseTime = courtCloseTime;
 	}
 
-// 測試用註解
+
 	public Integer getCourtID() {
 		return courtID;
 	}
@@ -167,5 +179,21 @@ public class Court {
 	public void setCourtApplyStatus(Integer courtApplyStatus) {
 		this.courtApplyStatus = courtApplyStatus;
 	}
+	public Time getCourtOpenTime() {
+		return courtOpenTime;
+	}
+
+	public void setCourtOpenTime(Time courtOpenTime) {
+		this.courtOpenTime = courtOpenTime;
+	}
+
+	public Time getCourtCloseTime() {
+		return courtCloseTime;
+	}
+
+	public void setCourtCloseTime(Time courtCloseTime) {
+		this.courtCloseTime = courtCloseTime;
+	}
+
 	
 }

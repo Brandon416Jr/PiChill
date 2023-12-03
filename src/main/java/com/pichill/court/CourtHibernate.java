@@ -22,7 +22,7 @@ public class CourtHibernate {
 		
 		//交易區間
 		Court court = new Court();
-		court.setCourtID(61000011);
+//		court.setCourtID(61000011);
 		court.setoUserID(12000004);
 		court.setManageID(null);
 		court.setCourtOnTime(java.sql.Timestamp.valueOf("2023-11-27 15:45:00"));
@@ -34,6 +34,8 @@ public class CourtHibernate {
 		court.setCourtRule("暫無");
 		court.setLoc("松山區");
 		court.setCourtApplyStatus(0);
+		court.setCourtOpenTime(java.sql.Time.valueOf("07:00:00"));
+		court.setCourtCloseTime(java.sql.Time.valueOf("22:00:00"));
 		session.save(court);
 
 		tx.commit();
