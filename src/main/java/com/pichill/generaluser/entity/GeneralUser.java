@@ -1,32 +1,79 @@
-package com.pichill.generaluser;
+package com.pichill.generaluser.entity;
 
-import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Arrays;
 
-public class GeneralUser implements Serializable {
-	
-	private static final long serialVersionUID = 1L;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="generaluser")
+public class GeneralUser {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="gUserID", updatable = false)
 	private Integer gUserID;
+	
+	@Column(name="gName")
 	private String gName;
+	
+	@Column(name="gTelephone")
 	private String gTelephone;
+	
+	@Column(name="gEmail")
 	private String gEmail;
+	
+	@Column(name="gAddress")
 	private String gAddress;
+	
+	@Column(name="status")
 	private Integer status;
+	
+	@Column(name="gGender")
 	private Integer gGender;
+	
+	@Column(name="gPassword")
 	private String gPassword;
+	
+	@Column(name="gIDNum", columnDefinition = "char")
 	private String gIDNum;
+	
+	@Column(name="nicknameID")
 	private String nicknameID;
+	
+	@Column(name="piAmount",insertable = false)
 	private Integer piAmount;
-	private Integer couponAmount;
+	
+	@Column(name="gPostAmount",insertable = false)
 	private Integer gPostAmount;
+	
+	@Column(name="commentAmount",insertable = false)
 	private Integer commentAmount;
+	
+	@Column(name="gReportCnt",insertable = false)
 	private Integer gReportCnt;
+	
+	@Column(name="gRegistDate", updatable = false)
 	private Date gRegistDate;
+	
+	@Column(name="gLastLogTime")
 	private Timestamp gLastLogTime;
+	
+	@Column(name="gBirth")
 	private Date gBirth;
+	
+	@Column(name="purchaseCnt",insertable = false, updatable = false)
 	private Integer purchaseCnt;
+	
+	@Column(name="yoyakuCnt",insertable = false, updatable = false)
 	private Integer yoyakuCnt;
+	
+	@Column(name="gProfilePic", columnDefinition = "longblob")
 	private byte[] gProfilePic;
 	
 	public GeneralUser() {
@@ -34,7 +81,7 @@ public class GeneralUser implements Serializable {
 	}
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
-			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount, Integer couponAmount,
+			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount,
 			Integer gPostAmount, Integer commentAmount, Integer gReportCnt, Date gRegistDate, Timestamp gLastLogTime,
 			Date gBirth, Integer purchaseCnt, Integer yoyakuCnt, byte[] gProfilePic) {
 		super();
@@ -49,7 +96,6 @@ public class GeneralUser implements Serializable {
 		this.gIDNum = gIDNum;
 		this.nicknameID = nicknameID;
 		this.piAmount = piAmount;
-		this.couponAmount = couponAmount;
 		this.gPostAmount = gPostAmount;
 		this.commentAmount = commentAmount;
 		this.gReportCnt = gReportCnt;
@@ -149,14 +195,6 @@ public class GeneralUser implements Serializable {
 		this.piAmount = piAmount;
 	}
 
-	public Integer getCouponAmount() {
-		return couponAmount;
-	}
-
-	public void setCouponAmount(Integer couponAmount) {
-		this.couponAmount = couponAmount;
-	}
-
 	public Integer getgPostAmount() {
 		return gPostAmount;
 	}
@@ -229,8 +267,20 @@ public class GeneralUser implements Serializable {
 		this.gProfilePic = gProfilePic;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "GeneralUser [gUserID=" + gUserID + ", gName=" + gName + ", gTelephone=" + gTelephone + ", gEmail="
+				+ gEmail + ", gAddress=" + gAddress + ", status=" + status + ", gGender=" + gGender + ", gPassword="
+				+ gPassword + ", gIDNum=" + gIDNum + ", nicknameID=" + nicknameID + ", piAmount=" + piAmount
+				+ ", gPostAmount=" + gPostAmount + ", commentAmount=" + commentAmount + ", gReportCnt=" + gReportCnt
+				+ ", gRegistDate=" + gRegistDate + ", gLastLogTime=" + gLastLogTime + ", gBirth=" + gBirth
+				+ ", purchaseCnt=" + purchaseCnt + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
+				+ Arrays.toString(gProfilePic) + "]";
 	}
+
+	
+
+	
+	
 
 }

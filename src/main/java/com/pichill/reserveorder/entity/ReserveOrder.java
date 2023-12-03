@@ -1,11 +1,20 @@
-package com.pichill.reserveorder;
+package com.pichill.reserveorder.entity;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ReserveOrder implements Serializable{
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-	private static final long serialVersionUID = 1L;
+@Entity
+@Table(name="reserveorder")
+public class ReserveOrder {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="reserveOrderID", updatable = false)
 	private Integer reserveOrderID;
 	private Integer gUserID;
 	private Integer oUserID;
@@ -116,9 +125,15 @@ public class ReserveOrder implements Serializable{
 		this.totalCost = totalCost;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	@Override
+	public String toString() {
+		return "ReserveOrder [reserveOrderID=" + reserveOrderID + ", gUserID=" + gUserID + ", oUserID=" + oUserID
+				+ ", timeID=" + timeID + ", placeID=" + placeID + ", couponID=" + couponID + ", orderTime=" + orderTime
+				+ ", orderNum=" + orderNum + ", orderStatus=" + orderStatus + ", totalCost=" + totalCost + "]";
 	}
+
+
+	
 
 	
 
