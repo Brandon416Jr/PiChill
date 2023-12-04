@@ -1,28 +1,42 @@
 後台網頁
+
+完成 & 測試成功:
 1. manage
-完成，測試成功
+
+9. place
+
+13. contactus
+
+完成 but 測試不完全:
+5. post
+完成，刪除沒成功，小細節要修 Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`pichill`.`comment`, CONSTRAINT `COMMENT_POSTID_FK` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`))
+
+6. comment
+完成但刪除沒成功
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`pichill`.`report`, CONSTRAINT `REPORT_COMMENTID_FK` FOREIGN KEY (`commentID`) REFERENCES `comment` (`commentID`))
+cascadetype.all
+
+未寫完:
 2. generalUser
 未寫
+
 3. ownerUser
 未寫
+
 4. announcement
-未寫
-5. post
-完成，案刪除沒成功，小細節要修
-Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`pichill`.`comment`, CONSTRAINT `COMMENT_POSTID_FK` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`))
-6. comment
-網頁完成，servlet、service還未寫
+寫完程式，網頁未寫
+
 7. report
 未寫
+
 8. court
 網頁未寫完
-9. place
-未寫
+
 10. product
-未寫
+寫完程式，網頁未寫
+
 11. productOrder
-未寫
+寫完程式，網頁未寫
+
 12. reserveOrder
 未寫
-13. contactus
-完成，測試成功

@@ -23,10 +23,6 @@ public class ManageService {
 		dao.update(manage);
 	}
 
-//	public void deleteManage(Integer manageID) {
-//		dao.delete(manageID);
-//	}
-
 	public Manage getOneManage(Integer manageID) {
 		return dao.getManageByManageID(manageID);
 	}
@@ -34,4 +30,8 @@ public class ManageService {
 	public List<Manage> getAll() {
 		return dao.getAll();
 	}
+	
+//	public void deleteManage(Integer manageID) {
+//	dao.delete(manageID);
+//}
 }
