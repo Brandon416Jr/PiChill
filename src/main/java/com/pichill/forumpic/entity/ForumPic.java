@@ -27,7 +27,7 @@ public class ForumPic {
 	@Column(name = "postID")
     private Integer postID;
 	
-	@Column(name = "postPic")
+	@Column(name = "postPic", columnDefinition = "longblob")
     private byte[] postPic;
 	
 	@Column(name = "picTime")
