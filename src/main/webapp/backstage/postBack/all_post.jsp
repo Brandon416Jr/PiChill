@@ -73,12 +73,19 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/backEnd-Website/css/form.css"
 	media="all" />
 <style>
-div.dataTables_scrollHeadInner {
-	width: 100% !important;
-}
+/* div.dataTables_scrollHeadInner { */
+/* 	width: 100% !important; */
+/* } */
 
-div.dataTables_scrollHeadInner>table.table-data3 {
-	margin: 0 auto !important;
+/* div.dataTables_scrollHeadInner>table.table-data3 { */
+/* 	margin: 0 auto !important; */
+/* } */
+
+td:nth-child(6) {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
 }
 </style>
 </head>
@@ -298,6 +305,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<th>貼文編號</th>
 						<th>一般會員編號</th>
 						<th>企業會員編號</th>
+						<th>場地編號</th>
 						<th>標題</th>
 						<th>內文</th>
 						<th>貼文類別</th>
@@ -313,6 +321,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							<td>${post.postID}</td>
 							<td>${post.gUserID}</td>
 							<td>${post.oUserID}</td>
+							<td>${post.placeID}</td>
 							<td>${post.postTitle}</td>
 							<td>${post.postContent}</td>
 							<td>${post.postType}</td>

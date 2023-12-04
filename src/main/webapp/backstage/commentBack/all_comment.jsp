@@ -72,13 +72,13 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/backEnd-Website/css/comments.css"
 	media="all" />
 <style>
-div.dataTables_scrollHeadInner {
-	width: 100% !important;
-}
+/* div.dataTables_scrollHeadInner { */
+/* 	width: 100% !important; */
+/* } */
 
-div.dataTables_scrollHeadInner>table.table-data3 {
-	margin: 0 auto !important;
-}
+/* div.dataTables_scrollHeadInner>table.table-data3 { */
+/* 	margin: 0 auto !important; */
+/* } */
 </style>
 </head>
 <body class="animsition all-employees-page">
