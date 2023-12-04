@@ -12,8 +12,8 @@ import java.util.List;
 
 
 public class OwnerUserDAOImpl implements OwnerUserDAO {
-	private static final String INSERT_STMT = "INSERT INTO owneruser(oUserID,oUserName,oPassword,oIDNum,compiled,oName,oGender,oBirth,oTelephone,oAddress,oBankCode,oBankAccount,oProfilePic,oRegisterTime,oLastLogTime,oPostAmount,oReportCnt,courtArriveCnt,couponArriveCnt,rsvdCnts,oEmail)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_STMT = "UPDATE Owneruser SET oUserName=?,oPassword=?,oIDNum=?,compiled=?,oName=?,oGender=?,oBirth=?,oTelephone=?,oAddress=?,oBankCode=?,oBankAccount=?,oProfilePic = ?,oRegisterTime=?,oLastLogTime = ?,oPostAmount = ?,oReportCnt = ?,courtArriveCnt,couponArriveCnt = ?,rsvdCnts = ?,oEmail = ?WHERE oUserID = ? ";
+	private static final String INSERT_STMT = "INSERT INTO owneruser(oUserID,oUserName,oPassword,oIDNum,compiled,oName,oGender,oBirth,oTelephone,oAddress,oBankCode,oBankAccount,oProfilePic,oRegisterDate,oPostAmount,oReportCnt,courtArriveCnt,couponArriveCnt,rsvdCnts,oEmail)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_STMT = "UPDATE Owneruser SET oUserName=?,oPassword=?,oIDNum=?,compiled=?,oName=?,oGender=?,oBirth=?,oTelephone=?,oAddress=?,oBankCode=?,oBankAccount=?,oProfilePic = ?,oRegisterDate=?,oPostAmount = ?,oReportCnt = ?,courtArriveCnt,couponArriveCnt = ?,rsvdCnts = ?,oEmail = ?WHERE oUserID = ? ";
 	private static final String DELETE_STMT = "DELETE FROM owneruser WHERE oUserID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM owneruser WHERE oUserID = ?";
 	private static final String GET_ALL = "SELECT * FROM owneruser";
@@ -50,14 +50,13 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 			pstmt.setString(10, ownerUser.getoBankCode());
 			pstmt.setString(11, ownerUser.getoBankAccount());
 			pstmt.setBytes(12, ownerUser.getoProfilePic());
-			pstmt.setDate(13, ownerUser.getoRegisterTime());
-			pstmt.setTimestamp(14, ownerUser.getoLastLogTime());
-			pstmt.setInt(15, ownerUser.getoPostAmount());
-			pstmt.setInt(16, ownerUser.getoReportCnt());
+			pstmt.setDate(13, ownerUser.getoRegisterDate());
+			pstmt.setInt(14, ownerUser.getoPostAmount());
+			pstmt.setInt(15, ownerUser.getoReportCnt());
+			pstmt.setInt(16, ownerUser.getCourtArriveCnt());
 			pstmt.setInt(17, ownerUser.getCouponArriveCnt());
-			pstmt.setInt(18, ownerUser.getCouponArriveCnt());
-			pstmt.setInt(19, ownerUser.getRsvdCnts());
-			pstmt.setString(20, ownerUser.getoEmail());
+			pstmt.setInt(18, ownerUser.getRsvdCnts());
+			pstmt.setString(19, ownerUser.getoEmail());
 
 			pstmt.executeUpdate();
 
@@ -80,7 +79,7 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 			pstmt = con.prepareStatement(UPDATE_STMT);
 
 			pstmt.setInt(1, owneruser.getoUserID());
-			pstmt.setString(2, owneruser.getoName());
+			pstmt.setString(2, owneruser.getoUserName());
 			pstmt.setString(3, owneruser.getoPassword());
 			pstmt.setString(4, owneruser.getoIDNum());
 			pstmt.setString(5, owneruser.getCompiled());
@@ -92,14 +91,13 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 			pstmt.setString(11, owneruser.getoBankCode());
 			pstmt.setString(12, owneruser.getoBankAccount());
 			pstmt.setBytes(13, owneruser.getoProfilePic());
-			pstmt.setDate(14, owneruser.getoRegisterTime());
-			pstmt.setTimestamp(15, owneruser.getoLastLogTime());
-			pstmt.setInt(16, owneruser.getoPostAmount());
-			pstmt.setInt(17, owneruser.getoReportCnt());
+			pstmt.setDate(14, owneruser.getoRegisterDate());
+			pstmt.setInt(15, owneruser.getoPostAmount());
+			pstmt.setInt(16, owneruser.getoReportCnt());
+			pstmt.setInt(17, owneruser.getCourtArriveCnt());
 			pstmt.setInt(18, owneruser.getCouponArriveCnt());
-			pstmt.setInt(19, owneruser.getCouponArriveCnt());
-			pstmt.setInt(20, owneruser.getRsvdCnts());
-			pstmt.setString(21, owneruser.getoEmail());
+			pstmt.setInt(19, owneruser.getRsvdCnts());
+			pstmt.setString(20, owneruser.getoEmail());
 
 			pstmt.executeUpdate();
 
@@ -166,6 +164,7 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 				ownerUser.setoBankCode(rs.getString("oBankCode"));
 				ownerUser.setoBankAccount(rs.getString("oBankAccount"));
 				ownerUser.setoProfilePic(rs.getBytes("oProfilePic"));
+				ownerUser.setoRegisterDate(rs.getDate("oRegisterDate"));
 				ownerUser.setoPostAmount(rs.getInt("oPostAmount"));
 				ownerUser.setoReportCnt(rs.getInt("oReportCnt"));
 				ownerUser.setCourtArriveCnt(rs.getInt("courtArriveCnt"));
@@ -213,6 +212,7 @@ public class OwnerUserDAOImpl implements OwnerUserDAO {
 				ownerUser.setoBankCode(rs.getString("oBankCode"));
 				ownerUser.setoBankAccount(rs.getString("oBankAccount"));
 				ownerUser.setoProfilePic(rs.getBytes("oProfilePic"));
+				ownerUser.setoRegisterDate(rs.getDate("oRegisterDate"));
 				ownerUser.setoPostAmount(rs.getInt("oPostAmount"));
 				ownerUser.setoReportCnt(rs.getInt("oReportCnt"));
 				ownerUser.setCourtArriveCnt(rs.getInt("courtArriveCnt"));

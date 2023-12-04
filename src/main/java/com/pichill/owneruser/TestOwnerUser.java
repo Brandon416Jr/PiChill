@@ -25,8 +25,7 @@ public class TestOwnerUser {
 //		ownerUser1.setoProfilePic(null);
 //		ownerUser1.setoBankAccount("810100097303");
 //		ownerUser1.setoProfilePic(null);
-//		ownerUser1.setoRegisterTime(java.sql.Date.valueOf("2023-10-09"));
-//		ownerUser1.setoLastLogTime(java.sql.Timestamp.valueOf("2023-11-09 12:03:01"));
+//		ownerUser1.setoRegisterDate(java.sql.Date.valueOf("2023-10-09"));
 //		ownerUser1.setoPostAmount(0);
 //		ownerUser1.setoReportCnt(0);
 //		ownerUser1.setCourtArriveCnt(0);
@@ -51,8 +50,7 @@ public class TestOwnerUser {
 //		ownerUser1.setoProfilePic(null);
 //		ownerUser1.setoBankAccount("810100097303");
 //		ownerUser1.setoProfilePic(null);
-//		ownerUser1.setoRegisterTime(java.sql.Date.valueOf("2023-10-09"));
-//		ownerUser1.setoLastLogTime(java.sql.Timestamp.valueOf("2023-11-09 12:03:01"));
+//		ownerUser1.setoRegisterDate(java.sql.Date.valueOf("2023-10-09"));
 //		ownerUser1.setoPostAmount(0);
 //		ownerUser1.setoReportCnt(0);
 //		ownerUser1.setCourtArriveCnt(0);
