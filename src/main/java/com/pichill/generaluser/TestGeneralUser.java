@@ -1,6 +1,8 @@
 package com.pichill.generaluser;
 
-import java.util.List;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.generaluser.model.GeneralUserDAO;
+import com.pichill.generaluser.model.GeneralUserDAOImpl;	
 
 public class TestGeneralUser {
 	public static void main(String[] args) {
@@ -9,7 +11,7 @@ public class TestGeneralUser {
 		
 		// 新增
 		GeneralUser gen = new GeneralUser();
-		gen.setgName("王Peter");
+		gen.setgName("王大明");
 		gen.setgTelephone("0921001123");
 		gen.setgEmail("hng1123@gmail.com");
 		gen.setgAddress("新北市土城區學士路124巷5號");
@@ -19,12 +21,10 @@ public class TestGeneralUser {
 		gen.setgIDNum("F129514683");
 		gen.setNicknameID(null);
 		gen.setPiAmount(null);
-		gen.setCouponAmount(null);
 		gen.setgPostAmount(2);
 		gen.setCommentAmount(3);
 		gen.setgReportCnt(0);
 		gen.setgRegistDate(java.sql.Date.valueOf("2023-09-09"));
-		gen.setgLastLogTime(java.sql.Timestamp.valueOf("2023-10-11 09:09:09"));
 		gen.setgBirth(java.sql.Date.valueOf("1998-05-09"));
 		gen.setPurchaseCnt(5);
 		gen.setYoyakuCnt(3);
@@ -45,12 +45,10 @@ public class TestGeneralUser {
 //		gen1.setgIDNum("A222142123");
 //		gen1.setNicknameID(null);
 //		gen1.setPiAmount(null);
-//		gen1.setCouponAmount(null);
 //		gen1.setgPostAmount(null);
 //		gen1.setCommentAmount(4);
 //		gen1.setgReportCnt(0);
 //		gen1.setgRegistDate(java.sql.Date.valueOf("2023-09-10"));
-//		gen1.setgLastLogTime(java.sql.Timestamp.valueOf("2023-10-12 08:09:09"));
 //		gen1.setgBirth(java.sql.Date.valueOf("1990-05-13"));
 //		gen1.setPurchaseCnt(5);
 //		gen1.setYoyakuCnt(3);
@@ -74,12 +72,10 @@ public class TestGeneralUser {
 //		System.out.print(gen2.getgIDNum() + ",");
 //		System.out.print(gen2.getNicknameID() + ",");
 //		System.out.print(gen2.getPiAmount() + ",");
-//		System.out.print(gen2.getCouponAmount() + ",");
 //		System.out.print(gen2.getgPostAmount() + ",");
 //		System.out.print(gen2.getCommentAmount() + ",");
 //		System.out.print(gen2.getgReportCnt() + ",");
 //		System.out.print(gen2.getgRegistDate() + ",");
-//		System.out.print(gen2.getgLastLogTime() + ",");
 //		System.out.print(gen2.getgBirth() + ",");
 //		System.out.print(gen2.getPurchaseCnt() + ",");
 //		System.out.print(gen2.getYoyakuCnt() + ",");
@@ -99,12 +95,10 @@ public class TestGeneralUser {
 //			System.out.print(gen3.getgIDNum() + ",");
 //			System.out.print(gen3.getNicknameID() + ",");
 //			System.out.print(gen3.getPiAmount() + ",");
-//			System.out.print(gen3.getCouponAmount() + ",");
 //			System.out.print(gen3.getgPostAmount() + ",");
 //			System.out.print(gen3.getCommentAmount() + ",");
 //			System.out.print(gen3.getgReportCnt() + ",");
 //			System.out.print(gen3.getgRegistDate() + ",");
-//			System.out.print(gen3.getgLastLogTime() + ",");
 //			System.out.print(gen3.getgBirth() + ",");
 //			System.out.print(gen3.getPurchaseCnt() + ",");
 //			System.out.print(gen3.getYoyakuCnt() + ",");
