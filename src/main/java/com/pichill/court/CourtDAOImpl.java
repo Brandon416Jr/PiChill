@@ -14,8 +14,8 @@ import com.pichill.court.Util;
 
 
 public class CourtDAOImpl implements CourtDAO{
-	private static final String INSERT_STMT= "INSERT INTO court(oUserID,manageID,courtOnTime,courtApplyTime,courtName,courtPic,courtTelephone,courtAddress,courtRule,loc,courtApplyStatus)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_STMT= "UPDATE Court SET oUserID=?,manageID=?,courtOnTime=?,courtApplyTime=?,courtName=?,courtPic=?,courtTelephone=?,courtAddress=?,courtRule=?,loc=?,courtApplyStatus=? WHERE courtID = ? ";
+	private static final String INSERT_STMT= "INSERT INTO court(oUserID,manageID,courtOnTime,courtApplyTime,courtName,courtPic,courtTelephone,courtAddress,courtRule,loc,courtApplyStatus,courtOpenTime,courtCloseTime)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_STMT= "UPDATE Court SET oUserID=?,manageID=?,courtOnTime=?,courtApplyTime=?,courtName=?,courtPic=?,courtTelephone=?,courtAddress=?,courtRule=?,loc=?,courtApplyStatus=?,courtOpenTime=?,courtCloseTime=? WHERE courtID = ? ";
 	private static final String DELETE_STMT= "DELETE FROM court WHERE courtID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM court WHERE courtID = ?";
 	private static final String GET_ALL= "SELECT * FROM court";  
@@ -49,7 +49,8 @@ public class CourtDAOImpl implements CourtDAO{
 				pstmt.setString(9, court.getCourtRule());
 				pstmt.setString(10, court.getLoc());
 				pstmt.setInt(11, court.getCourtApplyStatus());
-
+				pstmt.setTime(12, court.getCourtOpenTime());
+				pstmt.setTime(13, court.getCourtCloseTime());
 				pstmt.executeUpdate();
 
 			} catch (SQLException se) {
