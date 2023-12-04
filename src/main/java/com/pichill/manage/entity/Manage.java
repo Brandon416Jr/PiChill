@@ -51,8 +51,7 @@ public class Manage implements Serializable {
 	@Column(name="mHiredate", updatable = false, nullable = true)
 	private Date mHiredate;
 	
-	@Column(name="mLastLogTime", insertable = false, nullable = true)
-	private Timestamp mLastLogTime;
+	
 	
 	@Column(name="mID", columnDefinition="char") // 資料庫char型別要用columnDefinition標示!
 	private String mID;
@@ -73,7 +72,7 @@ public class Manage implements Serializable {
 
 	public Manage(int manageID, String mName, String mUserName, String mPassword, Date mBirth, Integer mGender,
 			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, Date mHiredate,
-			Timestamp mLastLogTime, String mID, String mEmail, byte[] mProfilePic, int mStatus) {
+			String mID, String mEmail, byte[] mProfilePic, int mStatus) {
 		super();
 		this.manageID = manageID;
 		this.mName = mName;
@@ -86,7 +85,6 @@ public class Manage implements Serializable {
 		this.mEmgPhone = mEmgPhone;
 		this.mAddress = mAddress;
 		this.mHiredate = mHiredate;
-		this.mLastLogTime = mLastLogTime;
 		this.mID = mID;
 		this.mEmail = mEmail;
 		this.mProfilePic = mProfilePic;
@@ -181,13 +179,7 @@ public class Manage implements Serializable {
 		this.mHiredate = mHiredate;
 	}
 
-	public Timestamp getmLastLogTime() {
-		return mLastLogTime;
-	}
-
-	public void setmLastLogTime(Timestamp mLastLogTime) {
-		this.mLastLogTime = mLastLogTime;
-	}
+	
 
 	public String getmID() {
 		return mID;
@@ -227,7 +219,7 @@ public class Manage implements Serializable {
 		return "Manage [manageID=" + manageID + ", mName=" + mName + ", mUserName=" + mUserName + ", mPassword="
 				+ mPassword + ", mBirth=" + mBirth + ", mGender=" + mGender + ", mTelephone=" + mTelephone
 				+ ", mEmgContact=" + mEmgContact + ", mEmgPhone=" + mEmgPhone + ", mAddress=" + mAddress
-				+ ", mHiredate=" + mHiredate + ", mLastLogTime=" + mLastLogTime + ", mID=" + mID + ", mEmail=" + mEmail
+				+ ", mHiredate=" + mHiredate + ", mLastLogTime="  + ", mID=" + mID + ", mEmail=" + mEmail
 				+ ", mProfilePic=" + Arrays.toString(mProfilePic) + ", mStatus=" + mStatus + "]";
 	}
 

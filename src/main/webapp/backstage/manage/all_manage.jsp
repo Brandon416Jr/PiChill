@@ -103,7 +103,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						</a>
 							<ul class="list-styled navbar__sub-list js-sub-list">
 								<li><a href="#">所有員工資料</a></li>
-								<li><a href="new_manage.html">新增員工資料</a></li>
+								<li><a href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -170,7 +170,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a class="active" href="#">所有員工資料</a></li>
-								<li><a href="new_manage.jsp">新增員工資料</a></li>
+								<li><a href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -302,7 +302,6 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 						<th>緊急連絡人電話</th>
 						<th>聯絡地址</th>
 						<th>入職日期</th>
-						<th>最後上線時間</th>
 						<th>身分證</th>
 						<th>電子信箱</th>
 						<th>大頭貼</th>
@@ -324,7 +323,6 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							<td>${manage.mEmgPhone}</td>
 							<td>${manage.mAddress}</td>
 							<td>${manage.mHiredate}</td>
-							<td>${manage.mLastLogTime}</td>
 							<td>${manage.mID}</td>
 							<td>${manage.mEmail}</td>
 							<td><img
@@ -349,7 +347,15 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 		</div>
 	</div>
 
+  <script>
+    var script = document.createElement("script");
 
+    script.src = "https://code.jquery.com/jquery-3.4.1.min.js";
+
+    script.type = "text/javascript";
+
+    document.getElementsByTagName("head")[0].appendChild(script);
+  </script>
 	<script>
 		$(document)
 				.ready(

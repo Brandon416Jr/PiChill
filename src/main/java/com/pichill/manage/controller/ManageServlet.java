@@ -225,14 +225,7 @@ public class ManageServlet extends HttpServlet {
 //						errorMsgs.add("請輸入日期!");
 //					}
 
-		// 詢問這種時間怎麼取得
-		Timestamp mLastLogTime = null;
-//					try {
-//						mLastLogTime = java.sql.Timestamp.valueOf(req.getParameter("mLastLogTime").trim());
-//					} catch (IllegalArgumentException e) {
-//						mLastLogTime = new java.sql.Timestamp(System.currentTimeMillis());
-//						errorMsgs.add("請輸入管理員最後上線時間!");
-//					}
+
 
 		String mID = req.getParameter("mID");
 		String idnoRegex = "^[A-Z][12][0-9]{8}$";
@@ -277,7 +270,6 @@ public class ManageServlet extends HttpServlet {
 		manage.setmEmgPhone(mEmgPhone);
 		manage.setmAddress(mAddress);
 		manage.setmHiredate(mHiredate);
-		manage.setmLastLogTime(mLastLogTime);
 		manage.setmID(mID);
 		manage.setmEmail(mEmail);
 		manage.setmProfilePic(mProfilePic);
@@ -379,15 +371,6 @@ public class ManageServlet extends HttpServlet {
 //						errorMsgs.add("請輸入日期!");
 //					}
 
-		// 詢問這種時間怎麼取得
-		java.sql.Timestamp mLastLogTime = null;
-//					try {
-//						mLastLogTime = java.sql.Timestamp.valueOf(req.getParameter("mLastLogTime").trim());
-//					} catch (IllegalArgumentException e) {
-//						mLastLogTime = new java.sql.Timestamp(System.currentTimeMillis());
-//						errorMsgs.add("請輸入管理員最後上線時間!");
-//					}
-
 		String mID = req.getParameter("mID");
 		String idnoRegex = "^[A-Z][12][0-9]{8}$";
 		if (mID == null || mID.trim().isEmpty()) {
@@ -427,7 +410,6 @@ public class ManageServlet extends HttpServlet {
 		manage.setmEmgPhone(mEmgPhone);
 		manage.setmAddress(mAddress);
 		manage.setmHiredate(mHiredate);
-		manage.setmLastLogTime(mLastLogTime);
 		manage.setmID(mID);
 		manage.setmEmail(mEmail);
 		manage.setmProfilePic(mProfilePic);

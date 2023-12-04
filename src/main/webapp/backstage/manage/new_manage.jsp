@@ -280,7 +280,7 @@ select:invalid+.custom-message {
 						<div class="card-header">
 							<strong>新增員工資料</strong>
 							<h4>
-								<a href="all_manage.jsp"><img src="../image/smallLogo.png"
+								<a href="all_manage.jsp"><img src="<%=request.getContextPath()%>/image/smallLogo.png"
 									width="20" height="20" border="0">回所有員工</a>
 							</h4>
 						</div>

@@ -42,7 +42,6 @@ public class ManageTest {
 //		manage2.setmEmgPhone("0911111111");
 //		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
 //		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
-//		manage2.setmLastLogTime(java.sql.Timestamp.valueOf("2012-12-31 23:59:59"));
 //		manage2.setmID("K736125622");
 //		manage2.setmEmail("fikoslfk555@gmail.com");
 //		manage2.setmProfilePic(null);
@@ -71,7 +70,6 @@ public class ManageTest {
 //		System.out.print(manage3.getmEmgPhone() + ",");
 //		System.out.print(manage3.getmAddress() + ",");
 //		System.out.print(manage3.getmHiredate() + ",");
-//		System.out.print(manage3.getmLastLogTime() + ",");
 //		System.out.print(manage3.getmID() + ",");
 //		System.out.print(manage3.getmEmail() + ",");
 //		System.out.print(manage3.getmProfilePic() + ",");
@@ -93,7 +91,6 @@ public class ManageTest {
 //		System.out.print(manage4.getmEmgPhone() + ",");
 //		System.out.print(manage4.getmAddress() + ",");
 //		System.out.print(manage4.getmHiredate() + ",");
-//		System.out.print(manage4.getmLastLogTime() + ",");
 //		System.out.print(manage4.getmID() + ",");
 //		System.out.print(manage4.getmEmail() + ",");
 //		System.out.print(manage4.getmProfilePic() + ",");
@@ -137,7 +134,6 @@ public class ManageTest {
 			System.out.print(manage.getmEmgPhone() + ",");
 			System.out.print(manage.getmAddress() + ",");
 			System.out.print(manage.getmHiredate() + ",");
-			System.out.print(manage.getmLastLogTime() + ",");
 			System.out.print(manage.getmID() + ",");
 			System.out.print(manage.getmEmail() + ",");
 			System.out.print(manage.getmProfilePic() + ",");
