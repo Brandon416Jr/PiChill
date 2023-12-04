@@ -61,9 +61,6 @@ public class GeneralUser {
 	@Column(name="gRegistDate", updatable = false)
 	private Date gRegistDate;
 	
-	@Column(name="gLastLogTime")
-	private Timestamp gLastLogTime;
-	
 	@Column(name="gBirth")
 	private Date gBirth;
 	
@@ -82,7 +79,7 @@ public class GeneralUser {
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
 			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount,
-			Integer gPostAmount, Integer commentAmount, Integer gReportCnt, Date gRegistDate, Timestamp gLastLogTime,
+			Integer gPostAmount, Integer commentAmount, Integer gReportCnt, Date gRegistDate,
 			Date gBirth, Integer purchaseCnt, Integer yoyakuCnt, byte[] gProfilePic) {
 		super();
 		this.gUserID = gUserID;
@@ -100,7 +97,6 @@ public class GeneralUser {
 		this.commentAmount = commentAmount;
 		this.gReportCnt = gReportCnt;
 		this.gRegistDate = gRegistDate;
-		this.gLastLogTime = gLastLogTime;
 		this.gBirth = gBirth;
 		this.purchaseCnt = purchaseCnt;
 		this.yoyakuCnt = yoyakuCnt;
@@ -227,14 +223,6 @@ public class GeneralUser {
 		this.gRegistDate = gRegistDate;
 	}
 
-	public Timestamp getgLastLogTime() {
-		return gLastLogTime;
-	}
-
-	public void setgLastLogTime(Timestamp gLastLogTime) {
-		this.gLastLogTime = gLastLogTime;
-	}
-
 	public Date getgBirth() {
 		return gBirth;
 	}
@@ -273,9 +261,8 @@ public class GeneralUser {
 				+ gEmail + ", gAddress=" + gAddress + ", status=" + status + ", gGender=" + gGender + ", gPassword="
 				+ gPassword + ", gIDNum=" + gIDNum + ", nicknameID=" + nicknameID + ", piAmount=" + piAmount
 				+ ", gPostAmount=" + gPostAmount + ", commentAmount=" + commentAmount + ", gReportCnt=" + gReportCnt
-				+ ", gRegistDate=" + gRegistDate + ", gLastLogTime=" + gLastLogTime + ", gBirth=" + gBirth
-				+ ", purchaseCnt=" + purchaseCnt + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
-				+ Arrays.toString(gProfilePic) + "]";
+				+ ", gRegistDate=" + gRegistDate + ", gBirth=" + gBirth + ", purchaseCnt=" + purchaseCnt + ", yoyakuCnt=" 
+				+ yoyakuCnt + ", gProfilePic=" + Arrays.toString(gProfilePic) + "]";
 	}
 
 	

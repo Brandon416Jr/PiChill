@@ -209,9 +209,6 @@ public class GeneralUserServlet extends HttpServlet {
 		// 頁面不顯示直接先給空值
 		Date gRegistDate = null;
 
-//      頁面不顯示直接先給空值
-		Timestamp gLastLogTime = null;
-
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		GeneralUser generalUser = new GeneralUser();
 		generalUser.setgUserID(gUserID);
@@ -229,7 +226,6 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);
 		generalUser.setgRegistDate(gRegistDate);
-		generalUser.setgLastLogTime(gLastLogTime);
 		generalUser.setgBirth(gBirth);
 		generalUser.setPurchaseCnt(purchaseCnt);
 		generalUser.setYoyakuCnt(yoyakuCnt);
@@ -335,7 +331,6 @@ public class GeneralUserServlet extends HttpServlet {
 
 		Date gRegistDate = null;
 
-		Timestamp gLastLogTime = null;
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		GeneralUser generalUser = new GeneralUser();
@@ -353,7 +348,6 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);
 		generalUser.setgRegistDate(gRegistDate);
-		generalUser.setgLastLogTime(gLastLogTime);
 		generalUser.setgBirth(gBirth);
 		generalUser.setPurchaseCnt(purchaseCnt);
 		generalUser.setYoyakuCnt(yoyakuCnt);
