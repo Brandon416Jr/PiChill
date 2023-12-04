@@ -60,11 +60,9 @@ public class OwnerUser {
 	@Column(name = "oProfilePic" , columnDefinition = "longblob")
 	private byte[] oProfilePic;
 	
-	@Column(name = "oRegisterTime")
-	private Date oRegisterTime;
-	
-	@Column(name = "oLastLogTime")
-	private Timestamp oLastLogTime;
+	@Column(name = "oRegisterDate ", updatable = false)
+	private Date oRegisterDate;
+
 	
 	@Column(name = "oPostAmount")
 	private Integer oPostAmount;
@@ -91,7 +89,7 @@ public class OwnerUser {
 	public OwnerUser(Integer oUserID, String oUserName, String oPassword, String oIDNum, 
 					 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
 					 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
-					 Date oRegisterTime, Timestamp oLastLogTime, Integer oPostAmount, Integer oReportCnt,
+					 Date oRegisterDate, Integer oPostAmount, Integer oReportCnt,
 					 Integer courtArriveCnt, Integer couponArriveCnt, Integer rsvdCnts, String oEmail) {
 		super();
 		this.oUserID = oUserID;
@@ -107,8 +105,7 @@ public class OwnerUser {
 		this.oBankCode = oBankCode;
 		this.oBankAccount = oBankAccount;
 		this.oProfilePic = oProfilePic;
-		this.oRegisterTime = oRegisterTime;
-		this.oLastLogTime = oLastLogTime;
+		this.oRegisterDate = oRegisterDate;
 		this.oPostAmount = oPostAmount;
 		this.oReportCnt = oReportCnt;
 		this.courtArriveCnt = courtArriveCnt;
@@ -195,18 +192,13 @@ public class OwnerUser {
 	public void setoProfilePic(byte[] oProfilePic) {
 		this.oProfilePic = oProfilePic;
 	}
-	public Date getoRegisterTime() {
-		return oRegisterTime;
+	public Date getoRegisterDate() {
+		return oRegisterDate;
 	}
-	public void setoRegisterTime(Date oRegisterTime) {
-		this.oRegisterTime = oRegisterTime;
+	public void setoRegisterDate(Date oRegisterDate) {
+		this.oRegisterDate = oRegisterDate;
 	}
-	public Timestamp getoLastLogTime() {
-		return oLastLogTime;
-	}
-	public void setoLastLogTime(Timestamp oLastLogTime) {
-		this.oLastLogTime = oLastLogTime;
-	}
+	
 	public Integer getoPostAmount() {
 		return oPostAmount;
 	}

@@ -34,8 +34,7 @@ public class OwnerUserHibernate {
 		ownerUser.setoBankCode("008");
 		ownerUser.setoBankAccount("810100097303");
 		ownerUser.setoProfilePic(null);
-		ownerUser.setoRegisterTime(java.sql.Date.valueOf("2023-10-09"));
-		ownerUser.setoLastLogTime(java.sql.Timestamp.valueOf("2023-11-09 12:03:01"));
+		ownerUser.setoRegisterDate(java.sql.Date.valueOf("2023-10-09"));
 		ownerUser.setoPostAmount(0);
 		ownerUser.setoReportCnt(0);
 		ownerUser.setCourtArriveCnt(0);
