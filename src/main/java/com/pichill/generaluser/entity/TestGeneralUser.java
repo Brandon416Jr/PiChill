@@ -27,7 +27,6 @@ public class TestGeneralUser {
 //		gen.setCommentAmount(5);
 //		gen.setgReportCnt(0);
 //		gen.setgRegistDate(java.sql.Date.valueOf("2023-09-10"));
-//		gen.setgLastLogTime(java.sql.Timestamp.valueOf("2023-10-15 10:10:10"));
 //		gen.setgBirth(java.sql.Date.valueOf("2000-02-20"));
 //		gen.setPurchaseCnt(5);
 //		gen.setYoyakuCnt(3);
@@ -51,7 +50,6 @@ public class TestGeneralUser {
 //		gen1.setCommentAmount(4);
 //		gen1.setgReportCnt(0);
 //		gen1.setgRegistDate(java.sql.Date.valueOf("2023-09-10"));
-//		gen1.setgLastLogTime(java.sql.Timestamp.valueOf("2023-10-12 08:09:09"));
 //		gen1.setgBirth(java.sql.Date.valueOf("1990-05-13"));
 //		gen1.setPurchaseCnt(5);
 //		gen1.setYoyakuCnt(3);
@@ -75,7 +73,6 @@ public class TestGeneralUser {
 //		System.out.print(gen3.getCommentAmount() + ",");
 //		System.out.print(gen3.getgReportCnt() + ",");
 //		System.out.print(gen3.getgRegistDate() + ",");
-//		System.out.print(gen3.getgLastLogTime() + ",");
 //		System.out.print(gen3.getgBirth() + ",");
 //		System.out.print(gen3.getPurchaseCnt() + ",");
 //		System.out.print(gen3.getYoyakuCnt() + ",");
@@ -99,7 +96,6 @@ public class TestGeneralUser {
 			System.out.print(gen3.getCommentAmount() + ",");
 			System.out.print(gen3.getgReportCnt() + ",");
 			System.out.print(gen3.getgRegistDate() + ",");
-			System.out.print(gen3.getgLastLogTime() + ",");
 			System.out.print(gen3.getgBirth() + ",");
 			System.out.print(gen3.getPurchaseCnt() + ",");
 			System.out.print(gen3.getYoyakuCnt() + ",");
