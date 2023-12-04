@@ -327,7 +327,7 @@ pageContext.setAttribute("list", list);
 									style="margin-bottom: 0px;">
 									<input class="modify-button" type="submit" value="§R°£"
 										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
-									<input type="hidden" name="postID" value="${comment.commentID}">
+									<input type="hidden" name="commentID" value="${comment.commentID}">
 									<input type="hidden" name="action" value="delete">
 								</FORM></td>
 						</tr>
