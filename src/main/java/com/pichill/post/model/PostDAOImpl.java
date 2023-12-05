@@ -21,7 +21,7 @@ import com.pichill.util.HibernateUtil;
 
 public class PostDAOImpl implements PostDAO{
 
-	private static final int PAGE_MAX_RESULT = 3;
+	private static final int PAGE_MAX_RESULT = 4;
 	private SessionFactory factory;
 
 	public PostDAOImpl() {
@@ -136,19 +136,19 @@ public class PostDAOImpl implements PostDAO{
 //		return query.getResultList();
 //	}
 
-//	@Override
-//	public List<Post> getAll(int currentPage) {
-//		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-//		return getSession().createQuery("from Post", Post.class)
-//				.setFirstResult(first)
-//				.setMaxResults(PAGE_MAX_RESULT)
-//				.list();
-//	}
-//
-//	@Override
-//	public long getTotal() {
-//		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
-//	}
+	@Override
+	public List<Post> getAll(int currentPage) {
+		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+		return getSession().createQuery("from Post", Post.class)
+				.setFirstResult(first)
+				.setMaxResults(PAGE_MAX_RESULT)
+				.list();
+	}
+
+	@Override
+	public long getTotal() {
+		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
+	}
 
 }
 //import java.sql.Connection;

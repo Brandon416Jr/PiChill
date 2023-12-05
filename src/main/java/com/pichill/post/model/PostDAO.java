@@ -22,7 +22,7 @@ public interface PostDAO {
 
 //	List<Post> getByCompositeQuery(Map<String, String> map);
 
-//	List<Post> getAll(int currentPage);
-//
-//	long getTotal();
+	List<Post> getAll(int currentPage);
+
+	long getTotal();
 }

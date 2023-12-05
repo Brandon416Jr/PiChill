@@ -21,7 +21,7 @@ public interface PostService {
 		
 	List<Post>getAllPosts();
 	
-//	int getPageTotal();
+	int getPageTotal();
 //	
 //	List<Post>getPostsByCompositeQuery(Map<String,String[]>map);
 	
