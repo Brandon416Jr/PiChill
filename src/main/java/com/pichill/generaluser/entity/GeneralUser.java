@@ -37,6 +37,9 @@ public class GeneralUser {
 	@Column(name="gGender")
 	private Integer gGender;
 	
+	@Column(name="gUsername")
+	private String gUsername;
+	
 	@Column(name="gPassword")
 	private String gPassword;
 	
@@ -45,9 +48,6 @@ public class GeneralUser {
 	
 	@Column(name="nicknameID")
 	private String nicknameID;
-	
-	@Column(name="piAmount",insertable = false)
-	private Integer piAmount;
 	
 	@Column(name="gPostAmount",insertable = false)
 	private Integer gPostAmount;
@@ -64,23 +64,20 @@ public class GeneralUser {
 	@Column(name="gBirth")
 	private Date gBirth;
 	
-	@Column(name="purchaseCnt",insertable = false, updatable = false)
-	private Integer purchaseCnt;
-	
 	@Column(name="yoyakuCnt",insertable = false, updatable = false)
 	private Integer yoyakuCnt;
 	
 	@Column(name="gProfilePic", columnDefinition = "longblob")
 	private byte[] gProfilePic;
-	
+
 	public GeneralUser() {
 		super();
 	}
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
-			Integer gGender, String gPassword, String gIDNum, String nicknameID, Integer piAmount,
-			Integer gPostAmount, Integer commentAmount, Integer gReportCnt, Date gRegistDate,
-			Date gBirth, Integer purchaseCnt, Integer yoyakuCnt, byte[] gProfilePic) {
+			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
+			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
+			byte[] gProfilePic) {
 		super();
 		this.gUserID = gUserID;
 		this.gName = gName;
@@ -89,16 +86,15 @@ public class GeneralUser {
 		this.gAddress = gAddress;
 		this.status = status;
 		this.gGender = gGender;
+		this.gUsername = gUsername;
 		this.gPassword = gPassword;
 		this.gIDNum = gIDNum;
 		this.nicknameID = nicknameID;
-		this.piAmount = piAmount;
 		this.gPostAmount = gPostAmount;
 		this.commentAmount = commentAmount;
 		this.gReportCnt = gReportCnt;
 		this.gRegistDate = gRegistDate;
 		this.gBirth = gBirth;
-		this.purchaseCnt = purchaseCnt;
 		this.yoyakuCnt = yoyakuCnt;
 		this.gProfilePic = gProfilePic;
 	}
@@ -159,6 +155,14 @@ public class GeneralUser {
 		this.gGender = gGender;
 	}
 
+	public String getgUsername() {
+		return gUsername;
+	}
+
+	public void setgUsername(String gUsername) {
+		this.gUsername = gUsername;
+	}
+
 	public String getgPassword() {
 		return gPassword;
 	}
@@ -181,14 +185,6 @@ public class GeneralUser {
 
 	public void setNicknameID(String nicknameID) {
 		this.nicknameID = nicknameID;
-	}
-
-	public Integer getPiAmount() {
-		return piAmount;
-	}
-
-	public void setPiAmount(Integer piAmount) {
-		this.piAmount = piAmount;
 	}
 
 	public Integer getgPostAmount() {
@@ -231,14 +227,6 @@ public class GeneralUser {
 		this.gBirth = gBirth;
 	}
 
-	public Integer getPurchaseCnt() {
-		return purchaseCnt;
-	}
-
-	public void setPurchaseCnt(Integer purchaseCnt) {
-		this.purchaseCnt = purchaseCnt;
-	}
-
 	public Integer getYoyakuCnt() {
 		return yoyakuCnt;
 	}
@@ -258,12 +246,16 @@ public class GeneralUser {
 	@Override
 	public String toString() {
 		return "GeneralUser [gUserID=" + gUserID + ", gName=" + gName + ", gTelephone=" + gTelephone + ", gEmail="
-				+ gEmail + ", gAddress=" + gAddress + ", status=" + status + ", gGender=" + gGender + ", gPassword="
-				+ gPassword + ", gIDNum=" + gIDNum + ", nicknameID=" + nicknameID + ", piAmount=" + piAmount
+				+ gEmail + ", gAddress=" + gAddress + ", status=" + status + ", gGender=" + gGender + ", gUsername="
+				+ gUsername + ", gPassword=" + gPassword + ", gIDNum=" + gIDNum + ", nicknameID=" + nicknameID
 				+ ", gPostAmount=" + gPostAmount + ", commentAmount=" + commentAmount + ", gReportCnt=" + gReportCnt
-				+ ", gRegistDate=" + gRegistDate + ", gBirth=" + gBirth + ", purchaseCnt=" + purchaseCnt + ", yoyakuCnt=" 
-				+ yoyakuCnt + ", gProfilePic=" + Arrays.toString(gProfilePic) + "]";
+				+ ", gRegistDate=" + gRegistDate + ", gBirth=" + gBirth + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
+				+ Arrays.toString(gProfilePic) + "]";
 	}
+
+	
+	
+	
 
 	
 
