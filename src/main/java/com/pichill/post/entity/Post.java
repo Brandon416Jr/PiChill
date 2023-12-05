@@ -45,7 +45,7 @@ public class Post {
 
 //@ManyToOne
 //@JoinColumn(name= "placeID",referencedColumnName = "placeID")
-//private PlaceID placeID;
+//private Place place;
 
 	@Column(name = "placeID")
 	private Integer placeID;

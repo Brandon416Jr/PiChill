@@ -184,13 +184,6 @@ public class GeneralUserServlet extends HttpServlet {
 		// default null，頁面不顯示直接先給空值
 		String nicknameID = null;
 
-
-//		頁面不顯示，所以直接給0，之後用程式碼去計算
-		Integer piAmount = 0;
-
-//		頁面不顯示，所以直接給0，之後用程式碼去計算
-//		Integer couponAmount = 0;
-
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer gPostAmount = 0;
 
@@ -221,13 +214,11 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setgPassword(gPassword);
 		generalUser.setgIDNum(gIDNum);
 		generalUser.setNicknameID(nicknameID);
-		generalUser.setPiAmount(piAmount);
 		generalUser.setgPostAmount(gPostAmount);
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);
 		generalUser.setgRegistDate(gRegistDate);
 		generalUser.setgBirth(gBirth);
-		generalUser.setPurchaseCnt(purchaseCnt);
 		generalUser.setYoyakuCnt(yoyakuCnt);
 		
 		generalUser.toString();
@@ -315,15 +306,11 @@ public class GeneralUserServlet extends HttpServlet {
 
 		String nicknameID = null;
 
-		Integer piAmount = 0;
-
 		Integer gPostAmount = 0;
 
 		Integer commentAmount = 0;
 
 		Integer gReportCnt = 0;
-
-		Integer purchaseCnt = 0;
 
 		Integer yoyakuCnt = 0;
 
@@ -343,13 +330,11 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUser.setgPassword(gPassword);
 		generalUser.setgIDNum(gIDNum);
 		generalUser.setNicknameID(nicknameID);
-		generalUser.setPiAmount(piAmount);
 		generalUser.setgPostAmount(gPostAmount);
 		generalUser.setCommentAmount(commentAmount);
 		generalUser.setgReportCnt(gReportCnt);
 		generalUser.setgRegistDate(gRegistDate);
 		generalUser.setgBirth(gBirth);
-		generalUser.setPurchaseCnt(purchaseCnt);
 		generalUser.setYoyakuCnt(yoyakuCnt);
 //		generalUser.setgProfilePic(gProfilePic);
 

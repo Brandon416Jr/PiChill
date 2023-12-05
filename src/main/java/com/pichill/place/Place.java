@@ -14,7 +14,7 @@ public class Place {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "placeID")
+	@Column(name = "placeID", updatable = false) //PK鍵不用更新
 	private Integer placeID;
 	
 	@Column(name = "courtID")

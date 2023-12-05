@@ -21,7 +21,6 @@ import com.pichill.like.entity.Like;
 import com.pichill.post.entity.Post;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
-
 @Entity
 @Table(name="generaluser")
 public class GeneralUser {
@@ -109,6 +108,8 @@ public class GeneralUser {
 	public GeneralUser() {
 		super();
 	}
+
+	
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
 			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,

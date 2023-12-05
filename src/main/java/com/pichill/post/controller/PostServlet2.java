@@ -51,29 +51,49 @@ public class PostServlet2 extends HttpServlet {
 			out.flush();
 		}
 	}
-//======新增========
+	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+	    res.setContentType("application/json; charset=UTF-8");
+
+	    String postTitle = req.getParameter("postTitle");
+	    if (postTitle != null) {
+	        // 如果存在 postTitle 參數，執行標題搜尋邏輯
+	        getByTitle(req, res, postTitle);
+	    } else {
+	        // 否則執行新增文章邏輯
+	        addPost(req, res);
+	    }
+	}
+	//=======標題搜尋===========
+	private void getByTitle(HttpServletRequest req, HttpServletResponse res, String postTitle) throws IOException {
+	    
+	    PostService postSvc = new PostServiceImpl();
+	    List<Post> posts = postSvc.getPostByPostTitle(postTitle);
+
+	    // 將搜尋結果轉為 JSON 格式並發送到前端
+	    String json = new Gson().toJson(posts);
+	    PrintWriter out = res.getWriter();
+	    out.print(json);
+	    out.flush();
+	}
+//======新增========
+	protected void addPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		res.setContentType("application/json; charset=UTF-8");
 
 		PostService postSvc = new PostServiceImpl();
-
 		String postTitle = req.getParameter("postTitle");
 		String postContent = req.getParameter("postContent");
 //        Integer postType = Integer.parseInt(req.getParameter("postType"));
 //        String postTimeStr = req.getParameter("postTime");
-//        java.sql.Timestamp postTime = java.sql.Timestamp.valueOf(postTimeStr);
 
 		Post post = new Post();
 		post.setPostTitle(postTitle);
 		post.setPostContent(postContent);
 //        post.setPostType(postType);
-//        post.setPostTime(postTime);
-
+		
 		Post addedPost = postSvc.addPost(post);
-
 		String json = new Gson().toJson(addedPost);
-
 		PrintWriter out = res.getWriter();
 		out.print(json);
 		out.flush();

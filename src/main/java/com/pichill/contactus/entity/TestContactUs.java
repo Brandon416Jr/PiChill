@@ -39,17 +39,17 @@ public class TestContactUs {
 				// 刪除
 //				dao.delete(22000011);
 				// 查詢單筆
-				ContactUs contactUs3 = dao.getContactUsByFormID(22000001);
-				System.out.print(contactUs3.getOUserID() + ",");
-				System.out.println(contactUs3.getGUserID() + ",");
-				System.out.println(contactUs3.getFormPurpose() + ",");
-				System.out.println(contactUs3.getFormContent() + ",");
-				System.out.println(contactUs3.getFormPic() + ",");
-				System.out.println(contactUs3.getFormTime() + ",");
-				System.out.println(contactUs3.getFormStatus() + ",");
-				System.out.println(contactUs3.getFormType() + ",");
-				
-				System.out.println("---------------------");
+//				ContactUs contactUs3 = dao.getContactUsByFormID(22000001);
+//				System.out.print(contactUs3.getOUserID() + ",");
+//				System.out.println(contactUs3.getGUserID() + ",");
+//				System.out.println(contactUs3.getFormPurpose() + ",");
+//				System.out.println(contactUs3.getFormContent() + ",");
+//				System.out.println(contactUs3.getFormPic() + ",");
+//				System.out.println(contactUs3.getFormTime() + ",");
+//				System.out.println(contactUs3.getFormStatus() + ",");
+//				System.out.println(contactUs3.getFormType() + ",");
+//				
+//				System.out.println("---------------------");
 
 //				// 查詢多筆
 //				List<ContactUs> list = dao.getAll();

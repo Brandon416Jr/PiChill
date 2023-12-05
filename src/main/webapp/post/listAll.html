@@ -879,21 +879,21 @@ div.star_block>span.star.-on {
 	<!-- <label for="burger">☰</label>
         <input type="hidden" id="burger"> -->
 	<aside class=aside>
-		
-			<div class="card" style="width: 22rem;">
-				<div class="card-body">
-					<h5 class="card-title">
-						<img src="../image/Group 37.png" alt="SVG">版主
-					</h5>
-					<p class="card-text">
-						歡迎各位π郎來到Pichill論壇，請務必遵守以下版規: <br> • 發表文章時，需使用適當分類，以利版友查詢。<br>
-						1.[討論]所有相關運動的閒談、問題及討論皆可使用。於本版發佈之問券，內容須與運動相關，並經版主同意後發布。<br>
-						2.[揪團]<br> • 若用戶遭檢舉且版主判定內容屬實，將停止其論壇發文及留言功能7日並刪除文章。
-					</p>
-				</div>
+
+		<div class="card" style="width: 22rem;">
+			<div class="card-body">
+				<h5 class="card-title">
+					<img src="../image/Group 37.png" alt="SVG">版主
+				</h5>
+				<p class="card-text">
+					歡迎各位π郎來到Pichill論壇，請務必遵守以下版規: <br> • 發表文章時，需使用適當分類，以利版友查詢。<br>
+					1.[討論]所有相關運動的閒談、問題及討論皆可使用。於本版發佈之問券，內容須與運動相關，並經版主同意後發布。<br>
+					2.[揪團]<br> • 若用戶遭檢舉且版主判定內容屬實，將停止其論壇發文及留言功能7日並刪除文章。
+				</p>
 			</div>
-			<!------推撥範例------->
-			<div id="promote-list">
+		</div>
+		<!------推撥範例------->
+		<div id="promote-list">
 			<div class="card mb-3" id=article3 style="width: 22rem;">
 				<div class="row g-0">
 					<div class="col-md-8">
@@ -929,7 +929,7 @@ div.star_block>span.star.-on {
 						</div>
 					</div>
 				</div>
-</div>
+			</div>
 	</aside>
 
 	<main class=main>
@@ -1165,178 +1165,173 @@ div.star_block>span.star.-on {
 	</footer>
 
 	<!--========發文燈箱========-->
-	<div class="modal fade" id="exampleModal" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
+	<form id="addpost">
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="container text-center">
+							<!--========討論版發文的內容==========-->
+							<div id="discussionContent">
+								<div class="row align-items-center">
+									<div class="col-3">
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton1"
+												data-bs-toggle="dropdown" aria-expanded="false">討論版
+											</button>
+											<ul class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton1">
+												<li><a class="dropdown-item" id="discuss" href="#">討論版</a></li>
+												<li><a class="dropdown-item" id="group" href="#">揪團版</a></li>
+										</div>
+									</div>
+									<div class="col-4">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="flexCheckDefault"> <label
+												class="form-check-label" for="flexCheckDefault">
+												匿名發文 </label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="form-floating" id="title">
+										<textarea class="form-control"
+											placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+										<label for="floatingTextarea">請輸入標題</label>
+									</div>
+									<div class="form-floating" id="comment">
+										<textarea class="form-control"
+											placeholder="Leave a comment here" id="floatingTextarea2"
+											style="height: 100px"></textarea>
+										<label for="floatingTextarea2">請輸入內文</label>
+									</div>
+								</div>
+								<div>
+									<label>上傳圖片：</label> <input type="file" id="p_file" multiple>
+									<div id="preview">
+										<span class="text">預覽圖</span>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="post-button" id="pb-discuss">發布</button>
+								</div>
+							</div>
+	</form>
+	<!--========揪團版發文的內容==========-->
+	<div id="gatheringContent" style="display: none;">
+		<div class="row align-items-center">
+			<div class="col-3">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						id="dropdownMenuButton1" data-bs-toggle="dropdown"
+						aria-expanded="false">揪團版</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<li><a class="dropdown-item" id="discuss1" href="#">討論版</a></li>
+						<li><a class="dropdown-item" id="group1" href="#">揪團版</a></li>
 				</div>
-				<div class="modal-body">
-					<div class="container text-center">
-						<!--========討論版發文的內容==========-->
-						<div id="discussionContent">
-							<div class="row align-items-center">
-								<div class="col-3">
-									<div class="dropdown">
-										<button class="btn btn-secondary dropdown-toggle"
-											type="button" id="dropdownMenuButton1"
-											data-bs-toggle="dropdown" aria-expanded="false">討論版
-										</button>
-										<ul class="dropdown-menu"
-											aria-labelledby="dropdownMenuButton1">
-											<li><a class="dropdown-item" id="discuss" href="#">討論版</a></li>
-											<li><a class="dropdown-item" id="group" href="#">揪團版</a></li>
-									</div>
-								</div>
-								<div class="col-4">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" value=""
-											id="flexCheckDefault"> <label
-											class="form-check-label" for="flexCheckDefault"> 匿名發文
-										</label>
-									</div>
-								</div>
-							</div>
-							<div>
-								<div class="form-floating" id="title">
-									<textarea class="form-control"
-										placeholder="Leave a comment here" id="floatingTextarea"></textarea>
-									<label for="floatingTextarea">請輸入標題</label>
-								</div>
-								<div class="form-floating" id="comment">
-									<textarea class="form-control"
-										placeholder="Leave a comment here" id="floatingTextarea2"
-										style="height: 100px"></textarea>
-									<label for="floatingTextarea2">請輸入內文</label>
-								</div>
-							</div>
-							<div>
-								<label>上傳圖片：</label> <input type="file" id="p_file" multiple>
-								<div id="preview">
-									<span class="text">預覽圖</span>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="post-button" id="pb-discuss">發布</button>
-							</div>
-						</div>
-						<!--========揪團版發文的內容==========-->
-						<div id="gatheringContent" style="display: none;">
-							<div class="row align-items-center">
-								<div class="col-3">
-									<div class="dropdown">
-										<button class="btn btn-secondary dropdown-toggle"
-											type="button" id="dropdownMenuButton1"
-											data-bs-toggle="dropdown" aria-expanded="false">揪團版
-										</button>
-										<ul class="dropdown-menu"
-											aria-labelledby="dropdownMenuButton1">
-											<li><a class="dropdown-item" id="discuss1" href="#">討論版</a></li>
-											<li><a class="dropdown-item" id="group1" href="#">揪團版</a></li>
-									</div>
-								</div>
-							</div>
-							<div>
-								<div class="form-floating" id="title">
-									<textarea class="form-control"
-										placeholder="Leave a comment here" id="floatingTextarea3"></textarea>
-									<label for="floatingTextarea3">請輸入標題</label>
-								</div>
-								<div class="content">
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col-2" id="datecol">日期:</div>
-											<div class="col-3" id="datecol2">
-												<div class="btn-group">
-													<button class="btn btn-secondary btn-sm dropdown-toggle"
-														type="button" data-bs-toggle="dropdown"
-														aria-expanded="false">2023/11/20</button>
-													<ul class="dropdown-menu">...
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<br>
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col-2" id="timecol">時間:</div>
-											<div class="col-3" id="timecol2">
-												<div class="btn-group">
-													<button class="btn btn-secondary btn-sm dropdown-toggle"
-														type="button" data-bs-toggle="dropdown"
-														aria-expanded="false">08:00~09:00</button>
-													<ul class="dropdown-menu">...
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<br>
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col-2" id="locatecol">地點:</div>
-											<div class="col-3" id="locatecol2">
-												<div class="btn-group">
-													<button class="btn btn-secondary btn-sm dropdown-toggle"
-														type="button" data-bs-toggle="dropdown"
-														aria-expanded="false">陽明籃球館</button>
-													<ul class="dropdown-menu">...
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<br>
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col-2" id="ballcol">球類:</div>
-											<div class="col-2" id="ballcol2">
-												<div class="btn-group">
-													<button class="btn btn-secondary btn-sm dropdown-toggle"
-														type="button" data-bs-toggle="dropdown"
-														aria-expanded="false">籃球</button>
-													<ul class="dropdown-menu">...
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-									<br>
-									<div class="container text-center">
-										<div class="row align-items-start">
-											<div class="col-2" id="costcol">費用:</div>
-											<div class="col-2" id="costcol2">
-												<input type="text" class="cost" placeholder="請輸入金額">
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="form-floating" id="comment">
-									<textarea class="form-control"
-										placeholder="Leave a comment here" id="floatingTextarea4"
-										style="height: 100px"></textarea>
-									<label for="floatingTextarea4">請輸入內文</label>
-								</div>
-							</div>
-
-							<div>
-								<label>上傳圖片：</label> <input type="file" id="p_file2">
-								<div id="preview2">
-									<span class="text">預覽圖</span>
-								</div>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="post-button" id="pb-group">發布</button>
+			</div>
+		</div>
+		<div>
+			<div class="form-floating" id="title">
+				<textarea class="form-control" placeholder="Leave a comment here"
+					id="floatingTextarea3"></textarea>
+				<label for="floatingTextarea3">請輸入標題</label>
+			</div>
+			<div class="content">
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="datecol">日期:</div>
+						<div class="col-3" id="datecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">2023/11/20</button>
+								<ul class="dropdown-menu">...
+								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="timecol">時間:</div>
+						<div class="col-3" id="timecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">08:00~09:00</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="locatecol">地點:</div>
+						<div class="col-3" id="locatecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">陽明籃球館</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="ballcol">球類:</div>
+						<div class="col-2" id="ballcol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">籃球</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="costcol">費用:</div>
+						<div class="col-2" id="costcol2">
+							<input type="text" class="cost" placeholder="請輸入金額">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-floating" id="comment">
+				<textarea class="form-control" placeholder="Leave a comment here"
+					id="floatingTextarea4" style="height: 100px"></textarea>
+				<label for="floatingTextarea4">請輸入內文</label>
 			</div>
 		</div>
+
+		<div>
+			<label>上傳圖片：</label> <input type="file" id="p_file2">
+			<div id="preview2">
+				<span class="text">預覽圖</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="post-button" id="pb-group">發布</button>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
 	</div>
 	</div>
 
@@ -1516,161 +1511,161 @@ div.star_block>span.star.-on {
         });
 
         //====================發佈文章到列表(討論板)=================================
-        // 監聽發布按鈕的點擊事件
-        $('#pb-discuss').on('click', function () {
-            // 發佈討論文章
-            publishPost('discussion');
-        });
+//         // 監聽發布按鈕的點擊事件
+//         $('#pb-discuss').on('click', function () {
+//             // 發佈討論文章
+//             publishPost('discussion');
+//         });
 
-        function publishPost(postType) {
-            // 獲取發文表單中的標題和內容
-            var newPostTitle = $('#floatingTextarea').val();
-            var newPostContent = $('#floatingTextarea2').val();
-            var selectedImage = $('#p_file').prop('files')[0];
+//         function publishPost(postType) {
+//             // 獲取發文表單中的標題和內容
+//             var newPostTitle = $('#floatingTextarea').val();
+//             var newPostContent = $('#floatingTextarea2').val();
+//             var selectedImage = $('#p_file').prop('files')[0];
 
-            var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
-            var newPostElement = `
-        <div class="card mb-3" id="article2" style="max-width: 700px;">
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h1 class="modal-title fs-5">
-                            <img src="../image/cat.jpg" alt="大頭貼">
-                            <div>
-                                <a class="post_user">貓貓</a>
-                                <div class="post_time">30分鐘前</div>
-                            </div>
-                        </h1>
-                        <button type="button" class="edit">
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            <span class="tooltip-text">編輯</span>
-                        </button>
-                        <button type="button" class="delete" id="deleteButton">
-                            <i class="fa-regular fa-trash-can"></i>
-                            <span class="tooltip-text">刪除</span>
-                        </button>
-                        <h5 class="card-title">${newPostTitle}</h5>
-                        <p class="card-text">${newPostContent}</p>
-                    </div>
-                </div>
-                <div class="col-md-4" id="piccontainer">
-                ${imageElement}
-            </div>
-                <div class="container text-center">
-                    <div class="row align-items-start" id="card-footer">
-                        <div class="col-2" id="likecol">
-                            <button type="button" class="fa-regular fa-thumbs-up"> 0</button>
-                        </div>
-                        <div class="col-2" id="commentcol">
-                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">0</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
+//             var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
+//             var newPostElement = `
+//         <div class="card mb-3" id="article2" style="max-width: 700px;">
+//             <div class="row g-0">
+//                 <div class="col-md-8">
+//                     <div class="card-body">
+//                         <h1 class="modal-title fs-5">
+//                             <img src="../image/cat.jpg" alt="大頭貼">
+//                             <div>
+//                                 <a class="post_user">貓貓</a>
+//                                 <div class="post_time">30分鐘前</div>
+//                             </div>
+//                         </h1>
+//                         <button type="button" class="edit">
+//                             <i class="fa-regular fa-pen-to-square"></i>
+//                             <span class="tooltip-text">編輯</span>
+//                         </button>
+//                         <button type="button" class="delete" id="deleteButton">
+//                             <i class="fa-regular fa-trash-can"></i>
+//                             <span class="tooltip-text">刪除</span>
+//                         </button>
+//                         <h5 class="card-title">${newPostTitle}</h5>
+//                         <p class="card-text">${newPostContent}</p>
+//                     </div>
+//                 </div>
+//                 <div class="col-md-4" id="piccontainer">
+//                 ${imageElement}
+//             </div>
+//                 <div class="container text-center">
+//                     <div class="row align-items-start" id="card-footer">
+//                         <div class="col-2" id="likecol">
+//                             <button type="button" class="fa-regular fa-thumbs-up"> 0</button>
+//                         </div>
+//                         <div class="col-2" id="commentcol">
+//                             <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">0</button>
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>`;
 
-            // 將新文章添加到文章列表
-            $('#post-list').prepend(newPostElement);
-            $('#floatingTextarea').val('');
-            $('#floatingTextarea2').val('');
-            $('#p_file').val('');
+//             // 將新文章添加到文章列表
+//             $('#post-list').prepend(newPostElement);
+//             $('#floatingTextarea').val('');
+//             $('#floatingTextarea2').val('');
+//             $('#p_file').val('');
 
-        }
+//         }
 
-        //===================發布文章(揪團版)=============================
-        $('#pb-group').on('click', function () {
-            // 發佈揪團文章
-            publishGroupPost();
-        });
+//         //===================發布文章(揪團版)=============================
+//         $('#pb-group').on('click', function () {
+//             // 發佈揪團文章
+//             publishGroupPost();
+//         });
 
-        function publishGroupPost() {
-            var newPostTitle = $('#floatingTextarea3').val();
-            var newPostContent = $('#floatingTextarea4').val();
-            var selectedImage = $('#p_file2').prop('files')[0];
+//         function publishGroupPost() {
+//             var newPostTitle = $('#floatingTextarea3').val();
+//             var newPostContent = $('#floatingTextarea4').val();
+//             var selectedImage = $('#p_file2').prop('files')[0];
 
-            var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
+//             var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
 
-            var date = $('#datecol2').text();
-            var time = $('#timecol2').text();
-            var location = $('#locatecol2').text();
-            var sport = $('#ballcol2').text();
-            var cost = $('#costcol2 input').val();
+//             var date = $('#datecol2').text();
+//             var time = $('#timecol2').text();
+//             var location = $('#locatecol2').text();
+//             var sport = $('#ballcol2').text();
+//             var cost = $('#costcol2 input').val();
 
-            var newGroupPostElement = `
-        <div class="card mb-3" id="article2" style="max-width: 700px;">
-            <div class="row g-0">
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            <img src="../image/dog.jpg" alt="大頭貼">
-                            <div>
-                                <a class="post_user">小吉</a>
-                                <div class="post_time">5天前</div>
-                            </div>
-                        </h1>
-                        <!-- <button type="button" class="edit" > <i class="fa-regular fa-pen-to-square"></i>編輯</button>
-                        <button type="button" class="delete" > <i class="fa-regular fa-trash-can"></i>刪除</button> -->
+//             var newGroupPostElement = `
+//         <div class="card mb-3" id="article2" style="max-width: 700px;">
+//             <div class="row g-0">
+//                 <div class="col-md-8">
+//                     <div class="card-body">
+//                         <h1 class="modal-title fs-5" id="exampleModalLabel">
+//                             <img src="../image/dog.jpg" alt="大頭貼">
+//                             <div>
+//                                 <a class="post_user">小吉</a>
+//                                 <div class="post_time">5天前</div>
+//                             </div>
+//                         </h1>
+//                         <!-- <button type="button" class="edit" > <i class="fa-regular fa-pen-to-square"></i>編輯</button>
+//                         <button type="button" class="delete" > <i class="fa-regular fa-trash-can"></i>刪除</button> -->
 
-                        <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <span class="tooltip-text">檢舉</span>
-                        </button>
-                        <h5 class="card-title">${newPostTitle}</h5>
-                        <div class="container text-left">
-                            <div class="row">
-                                <div class="col-2 col-sm-2">日期:</div>
-                                <div class="col-2 col-sm-4">${date}</div>
-                                <div class="w-100 d-none d-md-block"></div>
+//                         <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+//                             <i class="fa-solid fa-triangle-exclamation"></i>
+//                             <span class="tooltip-text">檢舉</span>
+//                         </button>
+//                         <h5 class="card-title">${newPostTitle}</h5>
+//                         <div class="container text-left">
+//                             <div class="row">
+//                                 <div class="col-2 col-sm-2">日期:</div>
+//                                 <div class="col-2 col-sm-4">${date}</div>
+//                                 <div class="w-100 d-none d-md-block"></div>
 
-                                <div class="col-2 col-sm-2">時間:</div>
-                                <div class="col-2 col-sm-4">${time}</div>
-                                <div class="w-100 d-none d-md-block"></div>
+//                                 <div class="col-2 col-sm-2">時間:</div>
+//                                 <div class="col-2 col-sm-4">${time}</div>
+//                                 <div class="w-100 d-none d-md-block"></div>
 
-                                <div class="col-2 col-sm-2">地點:</div>
-                                <div class="col-2 col-sm-4">${location}</div>
-                                <div class="w-100 d-none d-md-block"></div>
+//                                 <div class="col-2 col-sm-2">地點:</div>
+//                                 <div class="col-2 col-sm-4">${location}</div>
+//                                 <div class="w-100 d-none d-md-block"></div>
 
-                                <div class="col-2 col-sm-2">球類:</div>
-                                <div class="col-2 col-sm-4">${sport}</div>
-                                <div class="w-100 d-none d-md-block"></div>
+//                                 <div class="col-2 col-sm-2">球類:</div>
+//                                 <div class="col-2 col-sm-4">${sport}</div>
+//                                 <div class="w-100 d-none d-md-block"></div>
 
-                                <div class="col-2 col-sm-2">費用:</div>
-                                <div class="col-2 col-sm-4">${cost}</div>
-                            </div>
-                        </div>
-                        <p class="card-text2">${newPostContent}</p>
-                    </div>
-                </div>
-                <div class="col-md-4" id="piccontainer">
-                ${imageElement}
-            </div>
-                <div class="container text-center">
-                    <div class="row align-items-start" id="card-footer">
-                        <div class="col-2" id="likecol">
-                            <button type="button" class="fa-regular fa-thumbs-up"> 87
-                        </div>
-                        <div class="col-2" id="commentcol">
-                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                data-bs-target="#exampleModal5"> 1
-                            </div>
-                        <div class="col-2" id="pluscol">
-                            <button type="button" class="fa-regular fa-square-plus"> +1
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>`;
-            $('#post-list').prepend(newGroupPostElement);
+//                                 <div class="col-2 col-sm-2">費用:</div>
+//                                 <div class="col-2 col-sm-4">${cost}</div>
+//                             </div>
+//                         </div>
+//                         <p class="card-text2">${newPostContent}</p>
+//                     </div>
+//                 </div>
+//                 <div class="col-md-4" id="piccontainer">
+//                 ${imageElement}
+//             </div>
+//                 <div class="container text-center">
+//                     <div class="row align-items-start" id="card-footer">
+//                         <div class="col-2" id="likecol">
+//                             <button type="button" class="fa-regular fa-thumbs-up"> 87
+//                         </div>
+//                         <div class="col-2" id="commentcol">
+//                             <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
+//                                 data-bs-target="#exampleModal5"> 1
+//                             </div>
+//                         <div class="col-2" id="pluscol">
+//                             <button type="button" class="fa-regular fa-square-plus"> +1
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>`;
+//             $('#post-list').prepend(newGroupPostElement);
 
-            $('#floatingTextarea3').val('');
-            $('#floatingTextarea4').val('');
-            $('#p_file2').val('');
+//             $('#floatingTextarea3').val('');
+//             $('#floatingTextarea4').val('');
+//             $('#p_file2').val('');
 
 
             // 這裡可以加上其他你可能需要的邏輯或操作
-            $('#exampleModal').modal('hide');
+//             $('#exampleModal').modal('hide');
             // 例如，如果有一個揪團文章後要執行的其他操作，可以在這裡添加
-        }
+//         }
 
         //====================留言=========================//
         $(function () {
@@ -1787,14 +1782,12 @@ div.star_block>span.star.-on {
     
    //==============所有文章=============//
    $(document).ready(function () {
-	    // AJAX request to fetch posts
 	    $.ajax({
 	        type: "GET",
 	        url: "post.do",
 	        dataType: "json",
 	        contentType: "application/json; charset=utf-8",
 	        success: function (data) {
-	            // Handle the response data
 	            data.forEach(function (post) {
 	                if (post.postType === 0) {
 	                    publishPost(post.postID,post.postTitle, post.postContent, post.postType, post.postTime, post.likeCnt);
@@ -1973,50 +1966,92 @@ div.star_block>span.star.-on {
         
 	    }
 //=============新增文章===============//
-// 	   $("#pb-discuss").on("click", function () {
-
+	   $("#pb-discuss").on("click", function () {
 // 	        var boardType = $("#discuss").hasClass("active") ? "討論版" : "揪團版";
 
 // 	        var isAnonymous = $("#flexCheckDefault").prop("checked");
-
-// 	        var newPostTitle = $("#floatingTextarea").val();
-// 	        var newPostContent = $("#floatingTextarea2").val();
+	        var newPostTitle = $("#floatingTextarea").val();
+	        var newPostContent = $("#floatingTextarea2").val();
 
 // 	        var selectedImage = $("#p_file")[0].files[0];
-
-// 	        // 使用 FormData 來處理包含檔案的表單數據
-// 	        var formData = new FormData();
-// 	        formData.append("boardType", boardType); // 修正此行
-// 	        formData.append("isAnonymous", isAnonymous); // 如果需要
-// 	        formData.append("postTitle", newPostTitle);
-// 	        formData.append("postContent", newPostContent);
+	        // 使用 FormData 來處理包含檔案的表單數據
+	        var formData = new FormData();
+// 	        formData.append("boardType", boardType); // 
+// 	        formData.append("isAnonymous", isAnonymous); // 
+	        formData.append("postTitle", newPostTitle);
+	        formData.append("postContent", newPostContent);
 // 	        formData.append("selectedImage", selectedImage);
+	        console.log("newPostTitle:", newPostTitle);
+	        console.log("newPostContent:", newPostContent);
+	        $.ajax({
+	            type: "POST",
+	            url: "post.do", 
+	            data: formData,
+	            processData: false, 
+	            contentType: false, 
+	            success: function (response) {
+	            	console.log("伺服器回應:", response);
+	            	var newPost=
+	            	`<div class="card mb-3" id="article2" style="max-width: 700px;">
+	              <div class="row g-0">
+	                  <div class="col-md-8">
+	                      <div class="card-body">
+	                          <h1 class="modal-title fs-5">
+	                              <img src="../image/cat.jpg" alt="大頭貼">
+	                              <div>
+	                                  <a class="post_user">貓貓</a>
+	                                  <div class="post_time">30分鐘前</div>
+	                              </div>
+	                          </h1>
+	                          <button type="button" class="edit">
+	                              <i class="fa-regular fa-pen-to-square"></i>
+	                              <span class="tooltip-text">編輯</span>
+	                          </button>
+	                          <button type="button" class="delete" id="deleteButton">
+	                              <i class="fa-regular fa-trash-can"></i>
+	                              <span class="tooltip-text">刪除</span>
+	                          </button>
+	                          <h5 class="card-title">${newPostTitle}</h5>
+	                          <p class="card-text">${newPostContent}</p>
+	                      </div>
+	                  </div>
+	                  <div class="col-md-4" id="piccontainer">
+	                  ${imageElement}
+	              </div>
+	                  <div class="container text-center">
+	                      <div class="row align-items-start" id="card-footer">
+	                          <div class="col-2" id="likecol">
+	                              <button type="button" class="fa-regular fa-thumbs-up"> 0</button>
+	                          </div>
+	                          <div class="col-2" id="commentcol">
+	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">0</button>
+	                          </div>
+	                      </div>
+	                  </div>
+	              </div>
+	          </div>`;
 
-// 	        console.log("newPostContent:", newPostContent);
+	              // 將新文章添加到文章列表
+	              $('#post-list').prepend(newPost);
+	              $('#floatingTextarea').val('');
+	              $('#floatingTextarea2').val('');
+	              $('#p_file').val('');
 
-// 	        $.ajax({
-// 	            type: "POST",
-// 	            url: "post.do", 
-// 	            data: formData,
-// 	            processData: false, // 不處理數據
-// 	            contentType: false, // 不設置 content-type
-// 	            success: function (response) {
-	            	
-// 	                console.log("發布成功:", response);
-// 	            },
-// 	            error: function (xhr, status, error) {
-// 	                console.error("發生錯誤:", status, error);
-// 	            }
-// 	        });
-// 	    });
+	                console.log("發布成功:", response);
+	            },
+	            error: function (xhr, status, error) {
+	                console.error("發生錯誤:", status, error);
+	            }
+	        });
+	    });
 
 // 	    // 設置討論版和揪團版的切換事件
 // 	    $("#discuss, #group").on("click", function () {
 // 	        $(this).toggleClass("active");
 // 	        $(this).siblings().removeClass("active");
 // 	    });
-//=============編輯文章===============//
-//===找到原先的值===//
+// =============編輯文章===============//
+// ===找到原先的值===//
 $(document).on("click", ".edit", function () {
 // console.log("click");
     var postID = $(this).data("post-id");
@@ -2043,7 +2078,7 @@ $(document).on("click", ".edit", function () {
 // // 	console.log("bbb");
 // var postID = $(this).data("post-id");
 // var newPostTitle = $("#floatingTextarea").val();
-// var newPostContent = $("#floatingTextarea2").val();
+ //   var newPostContent = $("#floatingTextarea2").val();
 // var postData = {
 //         postID: postID,
 //         postTitle:newPostTitle,
@@ -2082,6 +2117,70 @@ $(document).on("click", ".edit", function () {
 	            }
 	        });
 	    });
+	    //=========標題搜尋==============//
+	   $("#search-button").click(function () {
+           // 獲取輸入的標題關鍵字
+           var postTitle = $("#search-input").val();
+
+           // 使用AJAX向伺服器端腳本發送請求
+           $.ajax({
+               type: "POST", // 或 "GET"
+               url: "post.do", // 伺服器端Servlet的路徑
+               data: { postTitle: postTitle },
+               success: function (data) {
+            	   $("#post-list").empty();
+                   // 將伺服器返回的結果顯示在搜索結果區域
+                   console.log(data);
+                   var posts = data;
+                  
+                   for (var i = 0; i < posts.length; i++) {
+                       $("#post-list").append(`
+                    		   <div class="card mb-3" id="article2" style="max-width: 700px;">
+                               <div class="row g-0">
+                                   <div class="col-md-8">
+                                       <div class="card-body">
+                                           <h1 class="modal-title fs-5">
+                                               <img src="../image/cat.jpg" alt="大頭貼">
+                                               <div>
+                                                   <a class="post_user">貓貓</a>
+                                                   <div class="post_time">${posts[i].postTime}</div>
+                                               </div>
+                                           </h1>
+                                           <button type="button" class="edit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                           <i class="fa-regular fa-pen-to-square"></i>
+                                               <span class="tooltip-text">編輯</span>
+                                           </button>
+                                           <button type="button" class="delete" id="deleteButton" data-post-id="${posts[i].postId}">
+                                               <i class="fa-regular fa-trash-can"></i>
+                                               <span class="tooltip-text">刪除</span>
+                                           </button>
+                                           <h5 class="card-title">${posts[i].postTitle}</h5>
+                                           <p class="card-text">${posts[i].postContent}</p>
+                                       </div>
+                                   </div>
+                                   <div class="col-md-4" id="piccontainer">
+                                   ${posts[i].imageElement}
+                               </div>
+                                   <div class="container text-center">
+                                       <div class="row align-items-start" id="card-footer">
+                                           <div class="col-2" id="likecol">
+                                               <button type="button" class="fa-regular fa-thumbs-up">${posts[i].likeCnt}</button>
+                                           </div>
+                                           <div class="col-2" id="commentcol">
+                                               <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal">0</button>
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                           </div>
+                       `);
+                   }
+                   var newUrl = "http://localhost:8081/PiChill/post/listAll.html.html?q=" + encodeURIComponent(postTitle);
+                   history.pushState({ search: postTitle }, null, newUrl);
+               }
+           });
+       });
 	});
    
     </script>
