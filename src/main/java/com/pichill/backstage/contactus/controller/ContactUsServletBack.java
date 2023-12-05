@@ -96,6 +96,8 @@ public class ContactUsServletBack extends HttpServlet {
 		} else {
 			gUserID = null;
 		}
+		
+		
 
 //		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 

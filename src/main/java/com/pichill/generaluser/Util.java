@@ -20,7 +20,7 @@ public class Util {
 
 	public static final String USER = "root";
 
-	public static final String PASSWORD = "123456";
+	public static final String PASSWORD = "chinfun520";
 
 	public static void closeResources(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		if (rs != null) {

@@ -1,4 +1,4 @@
-package com.pichill.owneruser.entity;
+package com.pichill.owneruser;
 
 import java.util.List;
 
