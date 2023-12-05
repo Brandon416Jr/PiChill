@@ -8,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.pichill.generaluser.entity.GeneralUser;
 
 @Entity
 @Table(name="reserveorder")
@@ -17,6 +21,12 @@ public class ReserveOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="reserveOrderID", updatable = false)
 	private Integer reserveOrderID;
+	
+	// fetch 預設為 EAGER
+//	@ManyToOne
+//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID")
+	// (name=自己(FK), referencedColumnName = 對應到的PK)
+//	private GeneralUser generalUser;
 	
 	@Column(name="gUserID")
 	private Integer gUserID;
