@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.pichill.owneruser.OwnerUser;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
 public class OwnerUserDAOImplBack implements OwnerUserDAOBack {

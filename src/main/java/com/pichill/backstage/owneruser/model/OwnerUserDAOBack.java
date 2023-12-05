@@ -2,7 +2,7 @@ package com.pichill.backstage.owneruser.model;
 
 import java.util.List;
 
-import com.pichill.owneruser.OwnerUser;
+import com.pichill.owneruser.entity.OwnerUser;
 
 
 

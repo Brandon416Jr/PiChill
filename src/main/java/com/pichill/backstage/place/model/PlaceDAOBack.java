@@ -1,5 +1,12 @@
 package com.pichill.backstage.place.model;
 
-public interface PlaceDAOBack {
+import java.util.List;
 
+import com.pichill.place.Place;
+
+
+
+public interface PlaceDAOBack {
+	Place getPlaceByPlaceID(Integer placeID); 
+	List<Place> getAll();
 }
