@@ -1,6 +1,4 @@
 後台網頁
-
-完成 & 測試成功:
 1. manage
 
 9. place
@@ -24,13 +22,20 @@ cascadetype.all
 寫完程式，網頁未寫
 
 4. announcement
-寫完程式，網頁未寫
-
+未寫
+5. post
+完成，案刪除沒成功，小細節要修
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Cannot delete or update a parent row: a foreign key constraint fails (`pichill`.`comment`, CONSTRAINT `COMMENT_POSTID_FK` FOREIGN KEY (`postID`) REFERENCES `post` (`postID`))
+6. comment
+網頁完成，servlet、service還未寫
 7. report
 寫完程式，網頁未寫
 8. court
+<<<<<<< HEAD
 寫完程式，網頁未寫完
 
 
-10. reserveOrder
+=======
+網頁未寫完
+9. place
 未寫
