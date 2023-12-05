@@ -5,7 +5,7 @@ import java.util.List;
 import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.backstage.announcement.model.AnnouncementDAOBack;
 import com.pichill.backstage.announcement.model.AnnouncementDAOImplBack;
-import com.pichill.manage.entity.Manage;
+
 
 public class AnnouncementServiceBack {
 	private final AnnouncementDAOBack dao;

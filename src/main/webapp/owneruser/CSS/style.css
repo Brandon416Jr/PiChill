@@ -1,0 +1,287 @@
+#intro .jumbotron {
+    height: 70vh;
+    margin-bottom: 0px;
+}
+
+h1 {
+    font-family: 'Noto Sans TC',
+        sans-serif;
+}
+
+h3 {
+    font-size: 36px;
+    line-height: 1.5;
+}
+
+p {
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+.btn {
+    background: #FF9F1B;
+    color: white;
+    padding: 9px 26px;
+    border-radius: 20px;
+}
+
+#intro .container {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+/* =========header=========== */
+header {
+    background-color: #207DCA;
+    position: sticky;
+    top: 0;
+    width: 100%;
+}
+
+header nav img {
+    width: 160px;
+}
+
+header li {
+    margin: 10 40px;
+}
+
+/* #navbarSupportedContent{
+
+} */
+
+li {
+    border: 0px;
+    display: inline-block;
+
+    /*inline-block行內區塊
+    ．以inline的方式呈現，但同時擁有block的屬性
+    ．可設定元素的寬高/margin/padding
+    ．可水平排列*/
+    position: relative;  /*相對定位元素*/
+    z-index: 0;
+    background-color: transparent;
+    /*transparent表示背景透明*/
+    font-family: Futura, Tahoma, sans-serif;
+    color: #ffffff;
+    padding: 10px;
+    margin-left: 0px;
+
+}
+
+/* li::before {
+    content: "'";
+    color: transparent;
+    position: absolute;
+    /*位置:絕對位置*/
+    /* width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    z-index: -1; */
+    /*Z軸*/
+    /* border-radius: 3px; */
+    /*圓角屬性*/
+    /* background-color: #50d8cf;
+    transform: skew(-30deg); */ 
+    /*transform屬性可改 CSS 可視化格式模型（visual formatting model）的空間維度。
+        使用此屬性，元素可以被平移、旋轉、縮放和傾斜*/
+
+    /* -webkit-transform: skew(-40deg);
+    -o-transform: skew(-40deg);
+    -moz-transform: skew(-30deg);
+    -ms-transform: skew(-30deg);
+} */
+
+
+
+/* =======footer=============== */
+footer {
+    background-color: #207DCA;
+}
+
+footer nav img {
+    width: 100px;
+}
+
+footer li {
+    margin: 0 10px;
+}
+
+li {
+    color: white;
+}
+
+
+
+
+
+/* ============側邊欄位============= */
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&display=swap");
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css");
+
+* {
+    margin: 20;
+    padding: 10;
+    list-style: none;
+} */
+
+html,
+body {
+    height: 100%;
+}
+
+.side-menu {
+    width: 260px;
+    height: 100%;
+    padding: 50px 0;
+    box-sizing: border-box;
+    background-image: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 5px 0px 10px hsla(240, 40%, 15%, .6);
+}
+
+.side-menu form {
+    display: flex;
+    margin: 0 10px 50px;
+    border-radius: 100px;
+    border: 1px solid rgb(255, 255, 255, .4);
+}
+
+.side-menu form input,
+.side-menu form button {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    padding: 5px 10px;
+}
+
+.side-menu form input {
+    width: 230px;
+}
+
+.side-menu form button {
+    width: 50px;
+}
+
+.side-menu form input:focus,
+.side-menu form button:focus {
+    outline: none;
+}
+
+nav a {
+    display: block;
+    padding: 10px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+nav a+a::before {
+    content: '';
+    position: absolute;
+    border-top: 1px solid rgb(255, 255, 255, .4);
+    left: 10px;
+    right: 10px;
+    top: 0;
+}
+
+nav a .fa {
+    margin-right: 1.1em;
+    transform: scale(0);
+    transition: .3s;
+}
+
+nav a:hover .fa {
+    margin-right: 0em;
+    transform: scale(1);
+}
+
+
+
+/* =============內容介紹============ */
+
+@import url("https://fonts.googleapis.com/css?family=Noto+Sans+TC:100,300,400,500,700,900&display=swap");
+*{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+body{
+	padding: 100px 10;
+	background: white 100% 100%;
+}
+.wrap{
+	width: 1200px;
+	margin: auto;
+}
+
+.item{
+	display: flex;
+	align-items: center;
+	margin-bottom: 70px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.item h2{ 
+	font-weight: 900;
+	margin-bottom: 1em;
+}
+.item p{ 
+	font-weight: 300;
+	line-height: 1.6;
+}
+.item .pic{
+	width: 55%;
+	flex-shrink: 0;
+}
+.item .pic img{
+	width: 100%;
+	vertical-align: middle;
+}
+.item .txt{
+	width: 55%;
+	flex-shrink: 0;
+	padding: 80px 30px;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 1;
+}
+.item > :first-child{
+	margin-right: -10%;
+}
+.item:nth-child(1) .txt{
+	background-color: rgba(240, 174, 193, .8);
+}
+.item:nth-child(2) .txt{
+	background-color: rgba(42, 253, 208, .8);
+}
+.item:nth-child(3) .txt{
+	background-color: rgba(254, 201, 121, .8);
+}
+.item:nth-child(4) .txt{
+	background-color: rgba(149, 219, 214, .8);
+}
+
+
+/* =============行事曆區============ */
+
+
+.cal{
+    width: 800px;
+    height: 800px;
+    background: white;
+    display: flex;
+    position: relative;
+    justify-content: center;
+    left: 350px;
+}
+#calendar{
+    width: 800px;
+    height: 800px;
+    display: flex;
+    position: relative;
+}

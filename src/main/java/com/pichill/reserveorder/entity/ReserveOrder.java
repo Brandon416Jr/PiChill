@@ -1,5 +1,6 @@
 package com.pichill.reserveorder.entity;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -7,7 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.pichill.generaluser.entity.GeneralUser;
 
 @Entity
 @Table(name="reserveorder")
@@ -16,29 +21,53 @@ public class ReserveOrder {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="reserveOrderID", updatable = false)
 	private Integer reserveOrderID;
+	
+	// fetch 預設為 EAGER
+//	@ManyToOne
+//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID")
+	// (name=自己(FK), referencedColumnName = 對應到的PK)
+//	private GeneralUser generalUser;
+	
+	@Column(name="gUserID")
 	private Integer gUserID;
+	
+	@Column(name="oUserID")
 	private Integer oUserID;
+	
+	@Column(name="reserveDate")
+	private Date reserveDate;
+	
+	@Column(name="timeID")
 	private Integer timeID;
+	
+	@Column(name="placeID")
 	private Integer placeID;
-	private Integer couponID;
+	
+	@Column(name="orderTime")
 	private Timestamp orderTime;
+	
+	@Column(name="orderNum")
 	private Integer orderNum;
+	
+	@Column(name="orderStatus")
 	private Integer orderStatus;
+	
+	@Column(name="totalCost")
 	private Integer totalCost;
 
 	public ReserveOrder() {
 		super();
 	}
 
-	public ReserveOrder(Integer reserveOrderID, Integer gUserID, Integer oUserID, Integer timeID, Integer placeID,
-			Integer couponID, Timestamp orderTime, Integer orderNum, Integer orderStatus, Integer totalCost) {
+	public ReserveOrder(Integer reserveOrderID, Integer gUserID, Integer oUserID, Date reserveDate, Integer timeID,
+			Integer placeID, Timestamp orderTime, Integer orderNum, Integer orderStatus, Integer totalCost) {
 		super();
 		this.reserveOrderID = reserveOrderID;
 		this.gUserID = gUserID;
 		this.oUserID = oUserID;
+		this.reserveDate = reserveDate;
 		this.timeID = timeID;
 		this.placeID = placeID;
-		this.couponID = couponID;
 		this.orderTime = orderTime;
 		this.orderNum = orderNum;
 		this.orderStatus = orderStatus;
@@ -69,6 +98,14 @@ public class ReserveOrder {
 		this.oUserID = oUserID;
 	}
 
+	public Date getReserveDate() {
+		return reserveDate;
+	}
+
+	public void setReserveDate(Date reserveDate) {
+		this.reserveDate = reserveDate;
+	}
+
 	public Integer getTimeID() {
 		return timeID;
 	}
@@ -83,14 +120,6 @@ public class ReserveOrder {
 
 	public void setPlaceID(Integer placeID) {
 		this.placeID = placeID;
-	}
-
-	public Integer getCouponID() {
-		return couponID;
-	}
-
-	public void setCouponID(Integer couponID) {
-		this.couponID = couponID;
 	}
 
 	public Timestamp getOrderTime() {
@@ -128,10 +157,12 @@ public class ReserveOrder {
 	@Override
 	public String toString() {
 		return "ReserveOrder [reserveOrderID=" + reserveOrderID + ", gUserID=" + gUserID + ", oUserID=" + oUserID
-				+ ", timeID=" + timeID + ", placeID=" + placeID + ", couponID=" + couponID + ", orderTime=" + orderTime
-				+ ", orderNum=" + orderNum + ", orderStatus=" + orderStatus + ", totalCost=" + totalCost + "]";
+				+ ", reserveDate=" + reserveDate + ", timeID=" + timeID + ", placeID=" + placeID + ", orderTime="
+				+ orderTime + ", orderNum=" + orderNum + ", orderStatus=" + orderStatus + ", totalCost=" + totalCost
+				+ "]";
 	}
 
+	
 
 	
 

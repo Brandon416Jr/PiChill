@@ -11,7 +11,6 @@ public class Util {
 
 	// MySQL 8.0.13以後只需保留serverTimezone設定即可
 	public static final String URL = "jdbc:mysql://localhost:3306/PiChill?"
-//			"jdbc:mysql://localhost:3306/PiChill?"
 //			+ "useSSL=false&"                   // 不使用加密連線 (需有憑證才行)
 			+ "rewriteBatchedStatements=true&"  // 批次更新需要此資訊
 			+ "serverTimezone=Asia/Taipei";   // 設定時區資訊
