@@ -15,12 +15,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-//import com.pichill.comment.entity.Comment;
-//import com.pichill.contactus.entity.ContactUs;
-//import com.pichill.like.entity.Like;
-//import com.pichill.post.entity.Post;
-//import com.pichill.reserveorder.entity.ReserveOrder;
-
+import com.pichill.comment.entity.Comment;
+import com.pichill.contactus.entity.ContactUs;
+import com.pichill.like.entity.Like;
+import com.pichill.post.entity.Post;
+import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
 @Table(name="generaluser")
@@ -113,30 +112,35 @@ public class GeneralUser {
 	
 
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
-		Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
-		Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
-		byte[] gProfilePic) {
-	super();
-	this.gUserID = gUserID;
-	this.gName = gName;
-	this.gTelephone = gTelephone;
-	this.gEmail = gEmail;
-	this.gAddress = gAddress;
-	this.status = status;
-	this.gGender = gGender;
-	this.gUsername = gUsername;
-	this.gPassword = gPassword;
-	this.gIDNum = gIDNum;
-	this.nicknameID = nicknameID;
-	this.gPostAmount = gPostAmount;
-	this.commentAmount = commentAmount;
-	this.gReportCnt = gReportCnt;
-	this.gRegistDate = gRegistDate;
-	this.gBirth = gBirth;
-	this.yoyakuCnt = yoyakuCnt;
-	this.gProfilePic = gProfilePic;
-}
-
+			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
+			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
+			byte[] gProfilePic, Set<Like> like, Set<Post> post, Set<Comment> comment, Set<ContactUs> contactUs,
+			Set<ReserveOrder> reserveOrder) {
+		super();
+		this.gUserID = gUserID;
+		this.gName = gName;
+		this.gTelephone = gTelephone;
+		this.gEmail = gEmail;
+		this.gAddress = gAddress;
+		this.status = status;
+		this.gGender = gGender;
+		this.gUsername = gUsername;
+		this.gPassword = gPassword;
+		this.gIDNum = gIDNum;
+		this.nicknameID = nicknameID;
+		this.gPostAmount = gPostAmount;
+		this.commentAmount = commentAmount;
+		this.gReportCnt = gReportCnt;
+		this.gRegistDate = gRegistDate;
+		this.gBirth = gBirth;
+		this.yoyakuCnt = yoyakuCnt;
+		this.gProfilePic = gProfilePic;
+//		this.like = like;
+//		this.post = post;
+//		this.comment = comment;
+//		this.contactUs = contactUs;
+//		this.reserveOrder = reserveOrder;
+	}
 
 	public Integer getgUserID() {
 		return gUserID;
