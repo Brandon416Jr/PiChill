@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.pichill.backstage.announcement.entity.Announcement;
-import com.pichill.manage.entity.Manage;
 import com.pichill.util.HibernateUtil;
 
 public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
