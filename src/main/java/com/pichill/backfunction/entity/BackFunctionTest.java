@@ -3,17 +3,12 @@ package com.pichill.backfunction.entity;
 import java.util.List;
 
 import com.pichill.backfunction.model.BackFunctionDAO;
-import com.pichill.backfunction.model.BackFunctionDAOImpl;
+import com.pichill.backfunction.model.BackFunctionHibernateDAOImpl;
 
 public class BackFunctionTest {
 	public static void main(String[] args) {
-		BackFunctionDAO dao = new BackFunctionDAOImpl();
+		BackFunctionDAO dao = new BackFunctionHibernateDAOImpl();
 
-		// 查詢單筆
-//		BackFunction backFunction3 = dao.getBackFunctionBybackFunctionID(4);
-//		System.out.print(backFunction3.getBackFunctionID() + ",");
-//		System.out.println(backFunction3.getBackFunctionName() + ",");
-//		System.out.println("---------------------");
 
 		// 查詢多筆
 		List<BackFunction> list = dao.getAll();

@@ -14,8 +14,8 @@ import com.pichill.court.Util;
 
 
 public class CourtDAOImpl implements CourtDAO{
-	private static final String INSERT_STMT= "INSERT INTO court(oUserID,manageID,courtOnTime,courtApplyTime,courtName,courtPic,courtTelephone,courtAddress,courtRule,loc,courtApplyStatus)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_STMT= "UPDATE Court SET oUserID=?,manageID=?,courtOnTime=?,courtApplyTime=?,courtName=?,courtPic=?,courtTelephone=?,courtAddress=?,courtRule=?,loc=?,courtApplyStatus=? WHERE courtID = ? ";
+	private static final String INSERT_STMT= "INSERT INTO court(oUserID,manageID,courtOnTime,courtApplyTime,courtName,courtPic,courtTelephone,courtAddress,courtRule,loc,courtApplyStatus,courtOpenTime,courtCloseTime)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String UPDATE_STMT= "UPDATE Court SET oUserID=?,manageID=?,courtOnTime=?,courtApplyTime=?,courtName=?,courtPic=?,courtTelephone=?,courtAddress=?,courtRule=?,loc=?,courtApplyStatus=?,courtOpenTime=?,courtCloseTime=? WHERE courtID = ? ";
 	private static final String DELETE_STMT= "DELETE FROM court WHERE courtID = ?";
 	private static final String FIND_BY_PK = "SELECT * FROM court WHERE courtID = ?";
 	private static final String GET_ALL= "SELECT * FROM court";  
@@ -39,16 +39,18 @@ public class CourtDAOImpl implements CourtDAO{
 				pstmt = con.prepareStatement(INSERT_STMT);
 
 				pstmt.setInt(1, court.getoUserID());
-				pstmt.setTimestamp(2, court.getCourtOnTime());
-				pstmt.setTimestamp(3, court.getCourtApplyTime());
-				pstmt.setString(4, court.getCourtName());
-				pstmt.setBytes(5, court.getCourtPic());
-				pstmt.setString(6, court.getCourtTelephone());
-				pstmt.setString(7, court.getCourtAddress());
-				pstmt.setString(8, court.getCourtRule());
-				pstmt.setString(9, court.getLoc());
-				pstmt.setInt(10, court.getCourtApplyStatus());
-
+				pstmt.setInt(2, court.getManageID());
+				pstmt.setTimestamp(3, court.getCourtOnTime());
+				pstmt.setTimestamp(4, court.getCourtApplyTime());
+				pstmt.setString(5, court.getCourtName());
+				pstmt.setBytes(6, court.getCourtPic());
+				pstmt.setString(7, court.getCourtTelephone());
+				pstmt.setString(8, court.getCourtAddress());
+				pstmt.setString(9, court.getCourtRule());
+				pstmt.setString(10, court.getLoc());
+				pstmt.setInt(11, court.getCourtApplyStatus());
+				pstmt.setTime(12, court.getCourtOpenTime());
+				pstmt.setTime(13, court.getCourtCloseTime());
 				pstmt.executeUpdate();
 
 			} catch (SQLException se) {
@@ -81,8 +83,8 @@ public class CourtDAOImpl implements CourtDAO{
 				pstmt.setInt(10, court.getCourtApplyStatus());
 				pstmt.setInt(11, court.getCourtID());
 							
-				
 				pstmt.executeUpdate();
+				
 
 			} catch (SQLException se) {
 				se.printStackTrace();
@@ -178,7 +180,6 @@ public class CourtDAOImpl implements CourtDAO{
 					court.setCourtRule(rs.getString("courtRule"));
 					court.setLoc(rs.getString("loc"));
 					court.setCourtApplyStatus(rs.getInt("courtApplyStatus"));
-					
 					courtList.add(court);
 				}
 			} catch (SQLException se) {

@@ -19,16 +19,17 @@ public class TestCourt {
 //		court1.setCourtRule("暫無");
 //		court1.setLoc("松山區");
 //		court1.setCourtApplyStatus(0);
-
+//		court1.setCourtOpenTime(java.sql.Time.valueOf("07:00:00"));
+//		court1.setCourtCloseTime(java.sql.Time.valueOf("22:00:00"));
 //
 //		// 修改
-//		Place place2 = new Place();
-//		place1.setPlaceID(62000001);
-//		place1.setCourtID(61000011);
-//		place1.setPlaceName("飛龍運動館");
-//		place1.setPlaceFee(430);
-//		place1.setBall(2);
-//		dao.update(place2);
+//		Court court2 = new Court();
+//		court1.setPlaceID(62000001);
+//		court1.setCourtID(61000011);
+//		court1.setPlaceName("飛龍運動館");
+//		court1.setPlaceFee(430);
+//		court1.setBall(2);
+//		dao.update(court2);
 //
 //		// 刪除
 //		dao.delete(62000011);
@@ -46,7 +47,8 @@ public class TestCourt {
 //		System.out.print(court3.getCourtRule() + ",");
 //		System.out.println(court3.getLoc() + ",");
 //		System.out.println(court3.getCourtApplyStatus() + ",");
-
+//		System.out.println(court3.getCourtOpenTime() + ",");
+//		System.out.println(court3.getCourtCloseTime() + ",");
 	
 		System.out.println("---------------------");
 
@@ -65,7 +67,9 @@ public class TestCourt {
 			System.out.print(court.getCourtRule() + ",");
 			System.out.print(court.getLoc() + ",");
 			System.out.print(court.getCourtApplyStatus() + ",");
-		
+			System.out.print(court.getCourtOpenTime() + ",");
+			System.out.print(court.getCourtCloseTime() + ",");
+			
 			System.out.println();
 		}
 	}

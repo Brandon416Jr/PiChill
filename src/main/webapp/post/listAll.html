@@ -1263,6 +1263,7 @@ div.star_block>span.star.-on {
 				<br>
 				<div class="container text-center">
 					<div class="row align-items-start">
+
 						<div class="col-2" id="timecol">時間:</div>
 						<div class="col-3" id="timecol2">
 							<div class="btn-group">
@@ -1277,6 +1278,7 @@ div.star_block>span.star.-on {
 				<br>
 				<div class="container text-center">
 					<div class="row align-items-start">
+
 						<div class="col-2" id="locatecol">地點:</div>
 						<div class="col-3" id="locatecol2">
 							<div class="btn-group">
@@ -2123,10 +2125,12 @@ $(document).on("click", ".edit", function () {
            // 獲取輸入的標題關鍵字
            var postTitle = $("#search-input").val();
 
+
            if (!postTitle.trim()) {
                alert("請輸入標題關鍵字再進行搜尋");
                return; // 中止搜索操作
            }
+
            // 使用AJAX向伺服器端腳本發送請求
            $.ajax({
                type: "POST", // 或 "GET"
@@ -2139,7 +2143,9 @@ $(document).on("click", ".edit", function () {
                    var posts = data;
                   
                    for (var i = 0; i < posts.length; i++) {
+
                 	   var imageElement = posts[i].imageElement ? posts[i].imageElement : '';
+
                        $("#post-list").append(`
                     		   <div class="card mb-3" id="article2" style="max-width: 700px;">
                                <div class="row g-0">
@@ -2165,7 +2171,9 @@ $(document).on("click", ".edit", function () {
                                        </div>
                                    </div>
                                    <div class="col-md-4" id="piccontainer">
+
                                    ${imageElement}
+
                                </div>
                                    <div class="container text-center">
                                        <div class="row align-items-start" id="card-footer">

@@ -5,7 +5,7 @@ import java.util.List;
 import com.pichill.backfunction.entity.BackFunction;
 
 public interface BackFunctionDAO {
-	BackFunction getBackFunctionBybackFunctionID(Integer backFunctionID); 
+//	abstract BackFunction getBackFunctionBybackFunctionID(Integer backFunctionID); 
 	List<BackFunction> getAll();
 
 }
