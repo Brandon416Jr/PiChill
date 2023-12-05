@@ -12,11 +12,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-
+//測試註解120500000000000000000000000000000000000000
 
 @Entity
 
-@Table(name = "owneruser")
+@Table(name = "owneruser") 
 public class OwnerUser {
 	
 	@Id
