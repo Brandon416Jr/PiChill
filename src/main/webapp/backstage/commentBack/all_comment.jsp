@@ -313,7 +313,7 @@ pageContext.setAttribute("list", list);
 							<td>${comment.commentTime}</td>
 							<td>
 								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/commentback/commentb.do"
+									ACTION="<%=request.getContextPath()%>/comment/commentb.do"
 									style="margin-bottom: 0px;">
 									<input class="modify-button" type="submit" value="修改"
 										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
@@ -323,7 +323,7 @@ pageContext.setAttribute("list", list);
 							</td>
 							<!-- 查看要可以直接連到前台那篇文章 -->
 							<td><FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/commentback/commentb.do"
+									ACTION="<%=request.getContextPath()%>/comment/commentb.do"
 									style="margin-bottom: 0px;">
 									<input class="modify-button" type="submit" value="刪除"
 										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">

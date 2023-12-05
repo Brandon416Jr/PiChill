@@ -15,12 +15,12 @@ public class ManageService {
 		dao = new ManageDAOImpl();
 	}
 
-	public void insertManage(Manage manage) {
-		dao.insert(manage);	
+	public int insertManage(Manage manage) {
+		return dao.insert(manage);	
 	}
 
-	public void updateManage(Manage manage) {
-		dao.update(manage);
+	public int updateManage(Manage manage) {
+		return dao.update(manage);
 	}
 
 	public Manage getOneManage(Integer manageID) {
