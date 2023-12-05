@@ -8,7 +8,7 @@ import org.hibernate.SessionFactory;
 import com.pichill.owneruser.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
-public class OwnerUserDAOImplBack implements ownerUserDAOBack {
+public class OwnerUserDAOImplBack implements OwnerUserDAOBack {
 	private SessionFactory factory;
 
 	@Override

@@ -6,7 +6,7 @@ import com.pichill.owneruser.OwnerUser;
 
 
 
-public interface ownerUserDAOBack {
+public interface OwnerUserDAOBack {
 	int update(OwnerUser ownerUser);
 	OwnerUser getOwnerUserByoUserID(Integer oUserID); 
 	List<OwnerUser> getAll();
