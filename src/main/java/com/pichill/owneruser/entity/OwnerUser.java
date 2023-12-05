@@ -1,4 +1,4 @@
-package com.pichill.owneruser;
+package com.pichill.owneruser.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -73,9 +73,6 @@ public class OwnerUser {
 	@Column(name = "courtArriveCnt")
 	private Integer courtArriveCnt;
 	
-	@Column(name = "couponArriveCnt")
-	private Integer couponArriveCnt;
-	
 	@Column(name = "rsvdCnts")
 	private Integer rsvdCnts;
 	
@@ -90,7 +87,7 @@ public class OwnerUser {
 					 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
 					 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
 					 Date oRegisterDate, Integer oPostAmount, Integer oReportCnt,
-					 Integer courtArriveCnt, Integer couponArriveCnt, Integer rsvdCnts, String oEmail) {
+					 Integer courtArriveCnt, Integer rsvdCnts, String oEmail) {
 		super();
 		this.oUserID = oUserID;
 		this.oUserName = oUserName;
@@ -109,7 +106,6 @@ public class OwnerUser {
 		this.oPostAmount = oPostAmount;
 		this.oReportCnt = oReportCnt;
 		this.courtArriveCnt = courtArriveCnt;
-		this.couponArriveCnt = couponArriveCnt;
 		this.rsvdCnts = rsvdCnts;
 		this.oEmail = oEmail;
 	}
@@ -216,12 +212,6 @@ public class OwnerUser {
 	}
 	public void setCourtArriveCnt(Integer courtArriveCnt) {
 		this.courtArriveCnt = courtArriveCnt;
-	}
-	public Integer getCouponArriveCnt() {
-		return couponArriveCnt;
-	}
-	public void setCouponArriveCnt(Integer couponArriveCnt) {
-		this.couponArriveCnt = couponArriveCnt;
 	}
 	public Integer getRsvdCnts() {
 		return rsvdCnts;
