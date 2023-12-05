@@ -137,7 +137,7 @@ public class ReserveOrderServletBack extends HttpServlet {
 
 		/*************************** 2.開始修改資料 *****************************************/
 		reserveOrderSvcB.updateReserveOrder(reserveOrder);
-		req.setAttribute("reserveOrder", reserveOrderSvcB.getOneReserveOrder(RID));
+		req.setAttribute("reserveOrder", reserveOrderSvcB.getOneReserveOrder(reserveOrderID));
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("reserveOrder", reserveOrder); // 資料庫update成功後,正確的的manage物件,存入req

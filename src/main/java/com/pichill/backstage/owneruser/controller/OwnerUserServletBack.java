@@ -15,9 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
-import com.pichill.manage.entity.Manage;
-import com.pichill.manage.service.ManageService;
-import com.pichill.owneruser.OwnerUser;
+import com.pichill.owneruser.entity.OwnerUser;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "OwnerUserBServlet", value = "/owneruser/owneruserb.do")
