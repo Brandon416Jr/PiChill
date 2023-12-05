@@ -76,12 +76,12 @@ public class PostServiceImpl implements PostService {
 //		return dao.getAll(currentPage);
 //	}
 //
-//	@Override
-//	public int getPageTotal() {
-//		long total =dao.getTotal();
-//		int pageQty = (int)(total%PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
-//		return pageQty;
-//	}
+	@Override
+	public int getPageTotal() {
+		long total =dao.getTotal();
+		int pageQty = (int)(total%PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
+		return pageQty;
+	}
 //
 //	@Override
 //	public List<Post> getPostsByCompositeQuery(Map<String, String[]> map) {
