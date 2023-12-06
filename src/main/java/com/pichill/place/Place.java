@@ -17,7 +17,7 @@ public class Place {
 	@Column(name = "placeID", updatable = false) //PK鍵不用更新
 	private Integer placeID;
 	
-	@Column(name = "courtID")
+	@Column(name = "courtID" , updatable = false)
 	private Integer courtID;
 	
 	@Column(name = "placeName", columnDefinition = "varchar")

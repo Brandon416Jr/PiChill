@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity
 @Table(name = "contactus")
@@ -23,32 +25,33 @@ public class ContactUs {
 //	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
 //    private GUser gUser;
 
-	@Column(name = "gUserID")
+	@Column(name = "gUserID", updatable = false)
 	private Integer gUserID;
 
 //	@ManyToOne
 //	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
 //    private OUser oUser;
 
-	@Column(name = "oUserID")
+	@Column(name = "oUserID", updatable = false)
 	private Integer oUserID;
 
-	@Column(name = "formPurpose" , columnDefinition = "varchar")
+	@Column(name = "formPurpose" , columnDefinition = "varchar", updatable = false)
 	private String formPurpose;
 
-	@Column(name = "formContent" , columnDefinition = "text")
+	@Column(name = "formContent" , columnDefinition = "text", updatable = false)
 	private String formContent;
 	
-	@Column(name = "formPic" , columnDefinition = "longblob")
+	@Column(name = "formPic" , columnDefinition = "longblob", updatable = false)
 	private byte[] formPic;
 	
-	@Column(name = "formTime")
+	@Column(name = "formTime" ,  updatable = false)
+	@CreationTimestamp
 	private Timestamp formTime;
 	
 	@Column(name = "formStatus")
 	private Integer formStatus;
 	
-	@Column(name = "formType")
+	@Column(name = "formType" , updatable = false)
 	private Integer formType;
 	
 	

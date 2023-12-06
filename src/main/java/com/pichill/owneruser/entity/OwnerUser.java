@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Type;
 
-//測試註解120500000000000000000000000000000000000000
+//測試註解12050000000000
 
 @Entity
 
@@ -30,7 +30,7 @@ public class OwnerUser {
 	@Column(name = "oPassword")
 	private String oPassword;
 	
-	@Column(name = "oIDNum" , columnDefinition = "char")
+	@Column(name = "oIDNum" , columnDefinition = "char" , updatable = false)
 	private String oIDNum;
 	
 	@Column(name = "compiled")
@@ -39,10 +39,10 @@ public class OwnerUser {
 	@Column(name = "oName")
 	private String oName;
 	
-	@Column(name = "oGender") 
+	@Column(name = "oGender" , updatable = false)
 	private Integer oGender;
 	
-	@Column(name = "oBirth")
+	@Column(name = "oBirth" , updatable = false)
 	private Date oBirth;
 	
 	@Column(name = "oTelephone")
@@ -60,7 +60,7 @@ public class OwnerUser {
 	@Column(name = "oProfilePic" , columnDefinition = "longblob")
 	private byte[] oProfilePic;
 	
-	@Column(name = "oRegisterDate ", updatable = false)
+	@Column(name = "oRegisterDate ", updatable = false ,insertable = false)
 	private Date oRegisterDate;
 
 	
@@ -134,10 +134,10 @@ public class OwnerUser {
 	public void setoIDNum(String oIDNum) {
 		this.oIDNum = oIDNum;
 	}
-	public String getCompiled() {
+	public String getcompiled() {
 		return compiled;
 	}
-	public void setCompiled(String compiled) {
+	public void setcompiled(String compiled) {
 		this.compiled = compiled;
 	}
 	public String getoName() {
