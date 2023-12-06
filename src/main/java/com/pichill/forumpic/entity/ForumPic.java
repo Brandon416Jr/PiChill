@@ -24,13 +24,13 @@ public class ForumPic {
 //	@ManyToOne
 //	@JoinColumn(name = "postID",referencedColumnName = "postID")
 //	 private Post post;
-	@Column(name = "postID")
+	@Column(name = "postID",updatable = false)
     private Integer postID;
 	
 	@Column(name = "postPic", columnDefinition = "longblob")
     private byte[] postPic;
 	
-	@Column(name = "picTime")
+	@Column(name = "picTime",updatable = false)
 	@CreationTimestamp
     private Timestamp picTime;
 	

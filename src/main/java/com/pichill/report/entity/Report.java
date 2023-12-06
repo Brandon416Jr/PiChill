@@ -27,21 +27,24 @@ public class Report {
 	private Integer reportID;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "manageID",referencedColumnName = "manageID")
+//	@JoinColumn(name = "manageID",referencedColumnName = "manageID",updatable = false)
 //	private Manage manage;
+	@Column(name = "manageID",updatable = false)
 	private Integer manageID;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
 //	private Post post;
+	@Column(name = "postID",updatable = false)
 	private Integer postID;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "commentID",referencedColumnName = "commentID")
+//	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
 //	private Comment comment;
+	@Column(name = "commentID",updatable = false)
 	private Integer commentID;
 	
-	@Column(name = "reportTime")
+	@Column(name = "reportTime", updatable = false)
 	@CreationTimestamp
 	private Timestamp reportTime;
 	
