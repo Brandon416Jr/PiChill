@@ -147,7 +147,7 @@ public class GeneralUserServletBack extends HttpServlet {
 		
 		// 再問問格式驗證!
 				String nicknameID = req.getParameter("nicknameID");
-				String nickReg = "^[A-Z][12][0-9]{8}$";
+				String nickReg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\\w\\s]).{10}$";
 				if (nicknameID == null || nicknameID.trim().isEmpty()) {
 					nicknameID = null;
 				} else if (!nicknameID.trim().matches(nickReg)) {

@@ -30,10 +30,10 @@ public class Manage implements Serializable {
 	@Column(name="mPassword")
 	private String mPassword;
 	
-	@Column(name="mBirth")
+	@Column(name="mBirth", updatable = false)
 	private Date mBirth;
 	
-	@Column(name="mGender")
+	@Column(name="mGender",updatable = false)
 	private Integer mGender;
 	
 	@Column(name="mTelephone")
@@ -48,7 +48,7 @@ public class Manage implements Serializable {
 	@Column(name="mAddress")
 	private String mAddress;
 	
-	@Column(name="mHiredate", updatable = false, nullable = true)
+	@Column(name="mHiredate", updatable = false)
 	private Date mHiredate;
 	
 	

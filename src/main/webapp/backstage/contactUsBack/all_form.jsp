@@ -173,8 +173,10 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								class="fas fa-tachometer-alt"></i>員工管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
-								<li><a href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+								<li><a class="active"
+									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -315,7 +317,10 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							<td>${contactUs.GUserID}</td>
 							<td>${contactUs.formPurpose}</td>
 							<td>${contactUs.formContent}</td>
-							<td>${contactUs.formPic}</td>
+							<%-- 							<td>${contactUs.formPic}</td> --%>
+							<td><img
+								src="<%=request.getContextPath()%>/contactus/DBJPGReader?formID=${contactUs.formID}"
+								width="100px"></td>
 							<td>${contactUs.formTime}</td>
 							<td>${contactUs.formStatus == 0 ? '未處理' : '已處理'}</td>
 							<td>${contactUs.formType == 0 ? '一般' : '公告'}</td>

@@ -15,7 +15,7 @@ import com.pichill.post.entity.Post;
 import com.pichill.backstage.post.service.PostServiceBack;
 
 
-@WebServlet(name = "PostBackServlet", value="/postback/postb.do")
+@WebServlet(name = "PostBServlet", value="/post/postb.do")
 public class PostServletBack extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

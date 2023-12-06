@@ -23,7 +23,7 @@ import com.pichill.contactus.entity.ContactUs;
  */
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
-@WebServlet(name = "ContactUsBackServlet", value = "/contactus/contactusb.do")
+@WebServlet(name = "ContactUsBServlet", value = "/contactus/contactusb.do")
 public class ContactUsServletBack extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ContactUsServiceBack contactUsSvcB;
@@ -45,6 +45,9 @@ public class ContactUsServletBack extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		if(action == null) {
+			  action = "default"; // 給預設值
+			}
 		String forwardPath = "";
 		switch (action) {
 
@@ -123,17 +126,17 @@ public class ContactUsServletBack extends HttpServlet {
 //		if (formContent == null || formContent.trim().isEmpty())
 //			errorMsgs.add("請輸入內容");
 
-		byte[] formPic = null;
-//		InputStream in = req.getPart("formPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
 //		byte[] formPic = null;
-//		if(in.available()!=0){
-//			formPic = new byte[in.available()];
-//			in.read(formPic);
-//			in.close();
-//		}  else {
-//			ContactUsServiceBack contactUsSvcB = new ContactUsServiceBack();
-//			formPic = contactUsSvcB.getOneForm(formID).getFormPic();
-//		}
+		InputStream in = req.getPart("formPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+		byte[] formPic = null;
+		if(in.available()!=0){
+			formPic = new byte[in.available()];
+			in.read(formPic);
+			in.close();
+		}  else {
+			ContactUsServiceBack contactUsSvcB = new ContactUsServiceBack();
+			formPic = contactUsSvcB.getOneForm(formID).getFormPic();
+		}
 
 		Timestamp formTime;
 

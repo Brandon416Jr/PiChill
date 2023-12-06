@@ -282,7 +282,7 @@ Court court = (Court) request.getAttribute("court");
 								</c:forEach>
 							</ul>
 						</c:if>
-						<form action="" method="post" enctype="multipart/form-data"
+						<form action="courtb.do" method="post" enctype="multipart/form-data"
 							class="form-horizontal">
 							<div class="card-body">
 								<div class="row">

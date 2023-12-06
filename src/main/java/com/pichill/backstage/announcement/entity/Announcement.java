@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 @Entity
 @Table(name ="announcement")
 public class Announcement {
@@ -33,7 +35,8 @@ public class Announcement {
 	@Column(name = "annoPic", columnDefinition = "longblob")
 	private byte[] annoPic;
 	
-	@Column(name = "annoTime")
+	@Column(name = "annoTime", updatable = false)
+	@CreationTimestamp
 	private Timestamp annoTime;
 	
 	@Column(name = "annoStatus")

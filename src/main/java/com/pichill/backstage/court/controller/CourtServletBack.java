@@ -22,7 +22,7 @@ import com.pichill.court.Court;
  * Servlet implementation class CourtServletBack
  */
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
-@WebServlet(name = "CourtServletBack", value = "/court/courtb.do")
+@WebServlet(name = "CourtBServlet", value = "/court/courtb.do")
 public class CourtServletBack extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CourtServiceBack courtSvcB;

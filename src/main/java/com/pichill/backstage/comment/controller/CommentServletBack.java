@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.comment.service.CommentServiceBack;
 
-@WebServlet(name = "CommentBackServlet", value="/comment/commentb.do")
+@WebServlet(name = "CommentBServlet", value="/comment/commentb.do")
 public class CommentServletBack extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);

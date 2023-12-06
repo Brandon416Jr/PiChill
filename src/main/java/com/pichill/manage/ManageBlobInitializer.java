@@ -15,7 +15,7 @@ public class ManageBlobInitializer {
 
 	public static void main(String[] args) throws IOException {
 		
-		File dir = new File("src/main/resources/img/");
+		File dir = new File("src/main/resources/img/manage/");
 		String[] fileNames = dir.list();
 		Arrays.sort(fileNames);
 		
