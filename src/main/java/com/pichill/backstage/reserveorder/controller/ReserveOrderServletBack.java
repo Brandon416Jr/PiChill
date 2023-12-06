@@ -20,7 +20,7 @@ import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
-@WebServlet(name = "ReserveOrderBServlet", value = "/generaluser/generaluserb.do")
+@WebServlet(name = "ReserveOrderBServlet", value = "/reserveorder/reserveorderb.do")
 public class ReserveOrderServletBack extends HttpServlet {
 	private ReserveOrderServiceBack reserveOrderSvcB;
 
