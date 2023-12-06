@@ -75,4 +75,16 @@ public class PostDAOImplBack implements PostDAO {
 		return null;
 	}
 
+	@Override
+	public List<Post> getAll(int currentPage) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getTotal() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

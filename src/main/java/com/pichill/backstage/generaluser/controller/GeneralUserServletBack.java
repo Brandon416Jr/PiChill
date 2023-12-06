@@ -121,6 +121,14 @@ public class GeneralUserServletBack extends HttpServlet {
 
 		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
 
+		String gUsername = req.getParameter("gUsername");
+		String gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
+		if (gUsername == null || gUsername.trim().length() == 0) {
+			errorMsgs.add("會員帳號: 請勿空白");
+		} else if (!gUsername.trim().matches(gUsernameReg)) { // 以下練習正則(規)表示式(regular-expression)
+			errorMsgs.add("會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
+		}
+		
 		String gPassword = req.getParameter("gPassword");
 		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 		if (gPassword == null || gPassword.trim().length() == 0) {
@@ -179,6 +187,7 @@ public class GeneralUserServletBack extends HttpServlet {
 		generalUser.setgAddress(gAddress);
 		generalUser.setStatus(status);
 		generalUser.setgGender(gGender);
+		generalUser.setgUsername(gUsername);
 		generalUser.setgPassword(gPassword);
 		generalUser.setgIDNum(gIDNum);
 		generalUser.setNicknameID(nicknameID);
