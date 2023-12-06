@@ -86,7 +86,7 @@ header.header {
 
 /*=====aside=====*/
 aside.aside {
-/* 	border: 1px solid blue; */
+	/* 	border: 1px solid blue; */
 	/* background-color: red; */
 	position: absolute;
 	top: var(--header-height);
@@ -115,7 +115,7 @@ aside.aside {
 /*=====main=====*/
 main.main {
 	position: relative;
-	border: 1px solid rgb(206, 202, 202); 
+	border: 1px solid rgb(206, 202, 202);
 	background-color: #f7f7f7;
 	width: calc(100% -var(--aside-width));
 	margin-right: var(--aside-width);
@@ -179,6 +179,7 @@ main.main {
 }
 
 h5.card-title {
+	width: 22rem;
 	margin-top: 10px;
 }
 
@@ -862,11 +863,10 @@ div.star_block>span.star.-on {
 
 
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a href="#" class="nav-link">最新消息</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">公告</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">商城</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"><img
 							src="../image/face.svg" alt="SVG"> 會員中心</a></li>
 				</ul>
@@ -1204,14 +1204,17 @@ div.star_block>span.star.-on {
 								</div>
 								<div>
 									<div class="form-floating" id="title">
+										<input type="hidden" class="discussType" name="discussType"
+											value="0">
 										<textarea class="form-control"
-											placeholder="Leave a comment here" id="floatingTextarea"></textarea>
+											placeholder="Leave a comment here" id="floatingTextarea"
+											name="postTitle"></textarea>
 										<label for="floatingTextarea">請輸入標題</label>
 									</div>
 									<div class="form-floating" id="comment">
 										<textarea class="form-control"
 											placeholder="Leave a comment here" id="floatingTextarea2"
-											style="height: 100px"></textarea>
+											name="postComment" style="height: 100px"></textarea>
 										<label for="floatingTextarea2">請輸入內文</label>
 									</div>
 								</div>
@@ -1242,6 +1245,7 @@ div.star_block>span.star.-on {
 		</div>
 		<div>
 			<div class="form-floating" id="title">
+				<input type="hidden" class="groupType" name="groupType" value="1">
 				<textarea class="form-control" placeholder="Leave a comment here"
 					id="floatingTextarea3"></textarea>
 				<label for="floatingTextarea3">請輸入標題</label>
@@ -1572,6 +1576,7 @@ div.star_block>span.star.-on {
 //             $('#floatingTextarea').val('');
 //             $('#floatingTextarea2').val('');
 //             $('#p_file').val('');
+//             document.getElementById('preview').innerHTML = '';
 
 //         }
 
@@ -1971,27 +1976,46 @@ div.star_block>span.star.-on {
 //=============新增文章===============//
 	   $("#pb-discuss").on("click", function () {
 // 	        var boardType = $("#discuss").hasClass("active") ? "討論版" : "揪團版";
-
 // 	        var isAnonymous = $("#flexCheckDefault").prop("checked");
 	        var newPostTitle = $("#floatingTextarea").val();
 	        var newPostContent = $("#floatingTextarea2").val();
+	        var discussType=$(".discussType").val();
+	        let currentDate = new Date();
+	     // 使用 toLocaleString 方法格式化日期時間為字串
+	     let formattedTime = currentDate.toLocaleString('en-US', { 
+	         year: 'numeric', 
+	         month: 'short', 
+	         day: 'numeric', 
+	         hour: 'numeric', 
+	         minute: 'numeric', 
+	         second: 'numeric', 
+	         hour12: true 
+	     });
 
-// 	        var selectedImage = $("#p_file")[0].files[0];
-	        // 使用 FormData 來處理包含檔案的表單數據
-	        var formData = new FormData();
+// 	        var selectedImage = $("#p_file")[0].files[0];	
 // 	        formData.append("boardType", boardType); // 
 // 	        formData.append("isAnonymous", isAnonymous); // 
-	        formData.append("postTitle", newPostTitle);
-	        formData.append("postContent", newPostContent);
+// let formData = new FormData();
+// formData.append=("postTitle",newPostTitle);
+// formData.append=("postContent",newPostContent);
+// formData.append=("discussType",discussType);
 // 	        formData.append("selectedImage", selectedImage);
-	        console.log("newPostTitle:", newPostTitle);
-	        console.log("newPostContent:", newPostContent);
+           let formData={
+            "action": "insert",
+	    	"postTitle": newPostTitle,
+	    	"postContent": newPostContent,
+	    	"discussType": discussType,
+             };
+// 	        console.log("newPostTitle:", newPostTitle);
+// 	        console.log("newPostContent:", newPostContent);
+// 	        console.log("discussType:", discussType);
 	        $.ajax({
 	            type: "POST",
 	            url: "post.do", 
 	            data: formData,
-	            processData: false, 
-	            contentType: false, 
+	            dataType:"json",
+// 	            processData: false, 
+// 	            contentType: false, 
 	            success: function (response) {
 	            	console.log("伺服器回應:", response);
 	            	var newPost=
@@ -2003,7 +2027,7 @@ div.star_block>span.star.-on {
 	                              <img src="../image/cat.jpg" alt="大頭貼">
 	                              <div>
 	                                  <a class="post_user">貓貓</a>
-	                                  <div class="post_time">30分鐘前</div>
+	                                  <div class="post_time">${formattedTime}</div>
 	                              </div>
 	                          </h1>
 	                          <button type="button" class="edit">
@@ -2019,7 +2043,7 @@ div.star_block>span.star.-on {
 	                      </div>
 	                  </div>
 	                  <div class="col-md-4" id="piccontainer">
-	                  ${imageElement}
+
 	              </div>
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
@@ -2039,7 +2063,7 @@ div.star_block>span.star.-on {
 	              $('#floatingTextarea').val('');
 	              $('#floatingTextarea2').val('');
 	              $('#p_file').val('');
-
+                  document.getElementById('preview').innerHTML = '';
 	                console.log("發布成功:", response);
 	            },
 	            error: function (xhr, status, error) {
@@ -2106,12 +2130,16 @@ $(document).on("click", ".edit", function () {
 //=============刪除文章===============//
 	   $("#post-list").on("click", ".delete", function (){
 // 	        console.log("aaa");
-	        var postID = $(this).data("post-id");
+	        var postID = $(this).attr("data-post-id");
+		   alert(postID);
 	        //        deletePost(postID);
 	        $.ajax({
 	            type: "DELETE",
 	            url: "post.do",
-	            data: { postID: postID },
+	            data: {
+	            	"action":"delete",
+	            	"postID": postID 
+	            	},
 	            success: function (data) {
 	                console.log("Delete Success:", data);
 	            },
@@ -2135,7 +2163,9 @@ $(document).on("click", ".edit", function () {
            $.ajax({
                type: "POST", // 或 "GET"
                url: "post.do", // 伺服器端Servlet的路徑
-               data: { postTitle: postTitle },
+               data: {
+            	   "action":"get_By_Title",
+            	   "postTitle": postTitle },
                success: function (data) {
             	   $("#post-list").empty();
                    // 將伺服器返回的結果顯示在搜索結果區域

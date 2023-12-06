@@ -29,20 +29,21 @@ public class Comment {
 	private Integer commentID;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID")
+//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)
 //	private GUser gUser;
-	@Column(name = "gUserID")
+	@Column(name = "gUserID", updatable = false)
 	private Integer gUserID;
 	
 //	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID")
+//	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
 //	private Post post;
+	@Column(name = "postID", updatable = false)
 	private Integer postID;
 	
 	@Column(name = "commentContent", columnDefinition = "text")
 	private String commentContent;
 	
-	@Column(name = "commentTime")
+	@Column(name = "commentTime", updatable = false)
 	@CreationTimestamp
 	private Timestamp commentTime;
 	

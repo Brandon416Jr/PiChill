@@ -1,6 +1,7 @@
 package com.pichill.post.entity;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -30,17 +31,17 @@ public class Post {
 	private Integer postID;
 
 //	@ManyToOne
-//	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
+//	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false, insertable = false)
 //    private GUser gUser;
 
-	@Column(name = "gUserID")
+	@Column(name = "gUserID", updatable = false, insertable = false)
 	private Integer gUserID;
 
 //	@ManyToOne
-//	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
+//	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
 //    private OUser oUser;
 
-	@Column(name = "oUserID")
+	@Column(name = "oUserID", updatable = false, insertable = false)
 	private Integer oUserID;
 
 //@ManyToOne
@@ -59,13 +60,19 @@ public class Post {
 	@Column(name = "postType")
 	private Integer postType;
 
-	@Column(name = "postTime")
+	@Column(name = "postTime", updatable = false)
 	@CreationTimestamp
 	private Timestamp postTime;
+	
+	@Column(name = "postPic", columnDefinition = "longblob")
+	private byte[] postPic;
 
 	@Column(name = "likeCnt")
 	private Integer likeCnt;
-
+	
+	@Column(name = "commentCnt")
+	private Integer commentCnt;
+	
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("reportID asc")
 //	private Set<Report> reports;
@@ -73,19 +80,6 @@ public class Post {
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("forumPicID asc")
 //	private Set<ForumPic> forumPics;
-//    public Post() {
-//	}
-//	public Post(Integer postID, Integer gUserID, Integer oUserID, String postTitle, String postContent, Integer postType,
-//			Timestamp postTime, Integer likeCnt) {
-//		this.postID = postID;
-//		this.gUserID = gUserID;
-//		this.oUserID = oUserID;
-//		this.postTitle = postTitle;
-//		this.postContent = postContent;
-//		this.postType = postType;
-//		this.postTime = postTime;
-//		this.likeCnt = likeCnt;
-//	}
 
 	public Integer getPostID() {
 		return postID;
@@ -151,6 +145,14 @@ public class Post {
 		this.postTime = postTime;
 	}
 
+	public byte[] getPostPic() {
+		return postPic;
+	}
+
+	public void setPostPic(byte[] postPic) {
+		this.postPic = postPic;
+	}
+
 	public Integer getLikeCnt() {
 		return likeCnt;
 	}
@@ -159,10 +161,22 @@ public class Post {
 		this.likeCnt = likeCnt;
 	}
 
+	public Integer getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(Integer commentCnt) {
+		this.commentCnt = commentCnt;
+	}
+
 	@Override
 	public String toString() {
-		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", postTitle=" + postTitle
-				+ ", postContent=" + postContent + ", postType=" + postType + ", postTime=" + postTime + ", likeCnt="
-				+ likeCnt + "]";
+		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", placeID=" + placeID
+				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType + ", postTime="
+				+ postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt + ", commentCnt="
+				+ commentCnt + "]";
 	}
+
+
+	
 }
