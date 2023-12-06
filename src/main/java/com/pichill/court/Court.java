@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 
 @Entity
 
@@ -27,10 +29,11 @@ public class Court {
 	@Column(name = "manageID")
 	private Integer manageID;
 	
-	@Column(name = "courtOnTime")
+	@Column(name = "courtOnTime" , updatable = false)
 	private Timestamp courtOnTime;
 	
-	@Column(name = "courtApplyTime")
+	@Column(name = "courtApplyTime", updatable = false)
+	@CreationTimestamp
 	private Timestamp courtApplyTime;
 	
 	@Column(name = "courtName")
