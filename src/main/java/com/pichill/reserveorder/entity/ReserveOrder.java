@@ -28,31 +28,31 @@ public class ReserveOrder {
 	// (name=自己(FK), referencedColumnName = 對應到的PK)
 //	private GeneralUser generalUser;
 	
-	@Column(name="gUserID")
+	@Column(name="gUserID", updatable = false)
 	private Integer gUserID;
 	
-	@Column(name="oUserID")
+	@Column(name="oUserID", updatable = false)
 	private Integer oUserID;
 	
 	@Column(name="reserveDate")
 	private Date reserveDate;
 	
-	@Column(name="timeID")
+	@Column(name="timeID", updatable = false)
 	private Integer timeID;
 	
-	@Column(name="placeID")
+	@Column(name="placeID", updatable = false)
 	private Integer placeID;
 	
-	@Column(name="orderTime")
+	@Column(name="orderTime", updatable = false, insertable = false)
 	private Timestamp orderTime;
 	
-	@Column(name="orderNum")
+	@Column(name="orderNum", updatable = false)
 	private Integer orderNum;
 	
 	@Column(name="orderStatus")
 	private Integer orderStatus;
 	
-	@Column(name="totalCost")
+	@Column(name="totalCost", updatable = false)
 	private Integer totalCost;
 
 	public ReserveOrder() {
@@ -161,11 +161,5 @@ public class ReserveOrder {
 				+ orderTime + ", orderNum=" + orderNum + ", orderStatus=" + orderStatus + ", totalCost=" + totalCost
 				+ "]";
 	}
-
-	
-
-	
-
-	
 
 }

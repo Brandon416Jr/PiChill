@@ -26,11 +26,11 @@ private SessionFactory factory;
 			session.beginTransaction();
 			Integer id = (Integer) session.save(generalUser);
 			session.getTransaction().commit();
-			System.out.println("嗨3");
+			System.out.println("新增成功!");
 			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("交易有錯3");
+			System.out.println("新增交易有錯QQ");
 			session.getTransaction().rollback();
 		}
 		return -1;
@@ -43,11 +43,11 @@ private SessionFactory factory;
 			session.beginTransaction();
 			session.update(generalUser);
 			session.getTransaction().commit();
-			System.out.println("嗨4");
+			System.out.println("修改成功!");
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("交易有錯4");
+			System.out.println("修改交易有錯QQ");
 			session.getTransaction().rollback();
 		}
 		return -1;
@@ -61,9 +61,11 @@ private SessionFactory factory;
 			session.beginTransaction();
 			GeneralUser generalUser = session.get(GeneralUser.class, gUserID);
 			session.getTransaction().commit();
+			System.out.println("查單筆成功!");
 			return generalUser;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("查單筆失敗QQ");
 			session.getTransaction().rollback();
 		}
 		return null;
@@ -76,9 +78,11 @@ private SessionFactory factory;
 			session.beginTransaction();
 			List<GeneralUser> list = session.createQuery("from GeneralUser", GeneralUser.class).list();
 			session.getTransaction().commit();
+			System.out.println("查全部成功!");
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("查全部失敗QQ");
 			session.getTransaction().rollback();
 		}
 		return null;
