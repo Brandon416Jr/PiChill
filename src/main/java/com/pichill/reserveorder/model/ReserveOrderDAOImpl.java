@@ -25,21 +25,6 @@ public class ReserveOrderDAOImpl implements ReserveOrderDAO {
 	}
 
 	@Override
-	public int update(ReserveOrder reserveOrder) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-			session.update(reserveOrder);
-			session.getTransaction().commit();
-			return 1;
-		} catch (Exception e) {
-			e.printStackTrace();
-			session.getTransaction().rollback();
-		}
-		return -1;
-	}
-
-	@Override
 	public int delete(Integer reserveOrderID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {

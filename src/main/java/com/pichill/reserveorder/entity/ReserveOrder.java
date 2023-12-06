@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import com.pichill.generaluser.entity.GeneralUser;
 
 @Entity
@@ -43,7 +45,8 @@ public class ReserveOrder {
 	@Column(name="placeID", updatable = false)
 	private Integer placeID;
 	
-	@Column(name="orderTime", updatable = false, insertable = false)
+	@Column(name="orderTime", updatable = false)
+	@CreationTimestamp
 	private Timestamp orderTime;
 	
 	@Column(name="orderNum", updatable = false)

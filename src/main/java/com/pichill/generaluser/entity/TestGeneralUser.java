@@ -12,24 +12,24 @@ public class TestGeneralUser {
 		GeneralUserDAO dao = new GeneralUserDAOImpl();
 
 		// 新增
-//		GeneralUser gen = new GeneralUser();
-//		gen.setgName("王小明");
-//		gen.setgTelephone("0922000321");
-//		gen.setgEmail("cmg321@gmail.com");
-//		gen.setgAddress("新北市土城區學士路28巷3號");
-//		gen.setStatus(0);
-//		gen.setgGender(0);
-//		gen.setgUsername("abcdefg");
-//		gen.setgPassword("qaz123");
-//		gen.setgIDNum("Q222156886");
-//		gen.setNicknameID(null);
-//		gen.setgPostAmount(3);
-//		gen.setCommentAmount(5);
-//		gen.setgReportCnt(0);
-//		gen.setgBirth(java.sql.Date.valueOf("2000-02-20"));
-//		gen.setYoyakuCnt(3);
-//		gen.setgProfilePic(null);
-//		dao.add(gen);
+		GeneralUser gen = new GeneralUser();
+		gen.setgName("王小明");
+		gen.setgTelephone("0922000321");
+		gen.setgEmail("cmg321@gmail.com");
+		gen.setgAddress("新北市土城區學士路28巷3號");
+		gen.setStatus(0);
+		gen.setgGender(0);
+		gen.setgUsername("abcdefg");
+		gen.setgPassword("qaz123");
+		gen.setgIDNum("Q222156886");
+		gen.setNicknameID(null);
+		gen.setgPostAmount(3);
+		gen.setCommentAmount(5);
+		gen.setgReportCnt(0);
+		gen.setgBirth(java.sql.Date.valueOf("2000-02-20"));
+		gen.setYoyakuCnt(3);
+		gen.setgProfilePic(null);
+		dao.add(gen);
 
 		// 修改
 //		GeneralUser gen1 = new GeneralUser();
@@ -74,27 +74,27 @@ public class TestGeneralUser {
 //		System.out.println(gen2.getgProfilePic());
 
 		// 查詢多筆
-		List<GeneralUser> list = dao.getAll();
-		for (GeneralUser gen3 : list) {
-			System.out.print(gen3.getgUserID() + ",");
-			System.out.print(gen3.getgName() + ",");
-			System.out.print(gen3.getgTelephone() + ",");
-			System.out.print(gen3.getgEmail() + ",");
-			System.out.print(gen3.getgAddress() + ",");
-			System.out.print(gen3.getStatus() + ",");
-			System.out.print(gen3.getgGender() + ",");
-			System.out.print(gen3.getgUsername() + ",");
-			System.out.print(gen3.getgPassword() + ",");
-			System.out.print(gen3.getgIDNum() + ",");
-			System.out.print(gen3.getNicknameID() + ",");
-			System.out.print(gen3.getgPostAmount() + ",");
-			System.out.print(gen3.getCommentAmount() + ",");
-			System.out.print(gen3.getgReportCnt() + ",");
-			System.out.print(gen3.getgRegistDate() + ",");
-			System.out.print(gen3.getgBirth() + ",");
-			System.out.print(gen3.getYoyakuCnt() + ",");
-			System.out.println(gen3.getgProfilePic());
-			System.out.println();
-		}
+//		List<GeneralUser> list = dao.getAll();
+//		for (GeneralUser gen3 : list) {
+//			System.out.print(gen3.getgUserID() + ",");
+//			System.out.print(gen3.getgName() + ",");
+//			System.out.print(gen3.getgTelephone() + ",");
+//			System.out.print(gen3.getgEmail() + ",");
+//			System.out.print(gen3.getgAddress() + ",");
+//			System.out.print(gen3.getStatus() + ",");
+//			System.out.print(gen3.getgGender() + ",");
+//			System.out.print(gen3.getgUsername() + ",");
+//			System.out.print(gen3.getgPassword() + ",");
+//			System.out.print(gen3.getgIDNum() + ",");
+//			System.out.print(gen3.getNicknameID() + ",");
+//			System.out.print(gen3.getgPostAmount() + ",");
+//			System.out.print(gen3.getCommentAmount() + ",");
+//			System.out.print(gen3.getgReportCnt() + ",");
+//			System.out.print(gen3.getgRegistDate() + ",");
+//			System.out.print(gen3.getgBirth() + ",");
+//			System.out.print(gen3.getYoyakuCnt() + ",");
+//			System.out.println(gen3.getgProfilePic());
+//			System.out.println();
+//		}
 	}
 }
