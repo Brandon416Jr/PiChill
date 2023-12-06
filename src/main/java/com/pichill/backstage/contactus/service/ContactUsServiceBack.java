@@ -15,8 +15,8 @@ public class ContactUsServiceBack {
 		dao = new ContactUsDAOImplBack();
 	}
 	
-	public void updateContactUs(ContactUs contactUs) {
-		dao.update(contactUs);
+	public int updateContactUs(ContactUs contactUs) {
+		return dao.update(contactUs);
 	}
 	
 	public ContactUs getOneForm(Integer formID) {

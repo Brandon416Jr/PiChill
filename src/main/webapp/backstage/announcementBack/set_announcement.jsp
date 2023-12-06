@@ -279,7 +279,7 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 								</c:forEach>
 							</ul>
 						</c:if>
-						<form action="" method="post" enctype="multipart/form-data">
+						<form action="announcementb.do" method="post" enctype="multipart/form-data">
 						<div class="card-body">
 							<div class="row">
 								<div class="col-lg-12">

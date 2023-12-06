@@ -270,7 +270,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 						<div class="card-header">
 							<strong>修改 ${contactUs.formID} 表單</strong>
 							<h4>
-								<a href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp"><img src="../image/smallLogo.png"
+								<a href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp"><img src="<%=request.getContextPath()%>/image/smallLogo.png"
 									width="20" height="20" border="0">回所有表單</a>
 							</h4>
 						</div>
@@ -290,7 +290,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 								<div class="col-lg-12">
 									<div class="card-body card-block">
 										<form
-											action="<%=request.getContextPath()%>/contactus/contactusb.do"
+											action="contactusb.do"
 											method="post" enctype="multipart/form-data"
 											class="form-horizontal">
 											<div class="row form-group">
@@ -347,22 +347,22 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
-											<!-- 											<div class="row form-group"> -->
-											<!-- 												<div class="col col-md-3"> -->
-											<!-- 													<label for="file-input" class="form-control-label">上傳大頭貼</label> -->
-											<!-- 												</div> -->
-											<!-- 												<div class="col-10 col-md-8"> -->
-											<!-- 													<input type="file" id="file-input" name="mProfilePic" -->
-											<!-- 														multiple="multiple" onclick="previewImage()" -->
-											<!-- 														class="form-control-file" /> <img id="imagePreview" -->
-											<!-- 														src="#" alt="Preview" width="100px" /> -->
-											<!-- 													<div id="blob_holder"> -->
-											<!-- 														<img -->
-											<%-- 															src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${param.manageID}" --%>
-											<!-- 															width="100px"> -->
-											<!-- 													</div> -->
-											<!-- 												</div> -->
-											<!-- 											</div> -->
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="file-input" class="form-control-label">照片</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="file" id="file-input" name="formPic" disabled="disabled"
+														multiple="multiple" onclick="previewImage()"
+														class="form-control-file" /> <img id="imagePreview"
+														src="#" alt="Preview" width="100px" />
+<!-- 													<div id="blob_holder"> -->
+<!-- 														<img -->
+<%-- 															src="<%=request.getContextPath()%>/contactus/DBGifReader?formID=${param.manageID}" --%>
+<!-- 															width="100px"> -->
+<!-- 													</div> -->
+												</div>
+											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
 													<label for="text-input" class="form-control-label">時間</label>

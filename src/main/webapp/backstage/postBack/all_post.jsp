@@ -339,7 +339,7 @@ td:nth-child(6) {
 							</td>
 							<!-- 查看要可以直接連到前台那篇文章 -->
 							<td><FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/postback/postb.do"
+									ACTION="<%=request.getContextPath()%>/post/postb.do"
 									style="margin-bottom: 0px;">
 									<input class="modify-button" type="submit" value="刪除"
 										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
