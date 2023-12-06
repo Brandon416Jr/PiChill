@@ -13,7 +13,7 @@ public class TestGeneralUser {
 
 		// 新增
 		GeneralUser gen = new GeneralUser();
-		gen.setgName("王大明");
+		gen.setgName("王小明");
 		gen.setgTelephone("0922000321");
 		gen.setgEmail("cmg321@gmail.com");
 		gen.setgAddress("新北市土城區學士路28巷3號");
@@ -26,7 +26,6 @@ public class TestGeneralUser {
 		gen.setgPostAmount(3);
 		gen.setCommentAmount(5);
 		gen.setgReportCnt(0);
-		gen.setgRegistDate(java.sql.Date.valueOf("2023-09-10"));
 		gen.setgBirth(java.sql.Date.valueOf("2000-02-20"));
 		gen.setYoyakuCnt(3);
 		gen.setgProfilePic(null);
@@ -48,7 +47,6 @@ public class TestGeneralUser {
 //		gen1.setgPostAmount(null);
 //		gen1.setCommentAmount(4);
 //		gen1.setgReportCnt(0);
-//		gen1.setgRegistDate(java.sql.Date.valueOf("2023-09-10"));
 //		gen1.setgBirth(java.sql.Date.valueOf("1990-05-13"));
 //		gen1.setYoyakuCnt(3);
 //		gen1.setgProfilePic(null);

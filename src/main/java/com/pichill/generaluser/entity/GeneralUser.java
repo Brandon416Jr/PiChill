@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.pichill.comment.entity.Comment;
 import com.pichill.contactus.entity.ContactUs;
@@ -44,7 +46,7 @@ public class GeneralUser {
 	@Column(name="status")
 	private Integer status;
 	
-	@Column(name="gGender")
+	@Column(name="gGender", updatable = false)
 	private Integer gGender;
 	
 	@Column(name="gUsername")
@@ -53,7 +55,7 @@ public class GeneralUser {
 	@Column(name="gPassword")
 	private String gPassword;
 	
-	@Column(name="gIDNum", columnDefinition = "char")
+	@Column(name="gIDNum", columnDefinition = "char", updatable = false)
 	private String gIDNum;
 	
 	@Column(name="nicknameID")
@@ -68,10 +70,10 @@ public class GeneralUser {
 	@Column(name="gReportCnt",insertable = false)
 	private Integer gReportCnt;
 	
-	@Column(name="gRegistDate", updatable = false)
+	@Column(name="gRegistDate", updatable = false, insertable = false)
 	private Date gRegistDate;
 	
-	@Column(name="gBirth")
+	@Column(name="gBirth", updatable = false)
 	private Date gBirth;
 	
 	@Column(name="yoyakuCnt",insertable = false, updatable = false)
@@ -109,13 +111,10 @@ public class GeneralUser {
 		super();
 	}
 
-	
-
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
 			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
 			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
-			byte[] gProfilePic, Set<Like> like, Set<Post> post, Set<Comment> comment, Set<ContactUs> contactUs,
-			Set<ReserveOrder> reserveOrder) {
+			byte[] gProfilePic) {
 		super();
 		this.gUserID = gUserID;
 		this.gName = gName;
@@ -135,12 +134,39 @@ public class GeneralUser {
 		this.gBirth = gBirth;
 		this.yoyakuCnt = yoyakuCnt;
 		this.gProfilePic = gProfilePic;
+	}
+	
+
+//	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
+//			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
+//			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
+//			byte[] gProfilePic, Set<Like> like, Set<Post> post, Set<Comment> comment, Set<ContactUs> contactUs,
+//			Set<ReserveOrder> reserveOrder) {
+//		super();
+//		this.gUserID = gUserID;
+//		this.gName = gName;
+//		this.gTelephone = gTelephone;
+//		this.gEmail = gEmail;
+//		this.gAddress = gAddress;
+//		this.status = status;
+//		this.gGender = gGender;
+//		this.gUsername = gUsername;
+//		this.gPassword = gPassword;
+//		this.gIDNum = gIDNum;
+//		this.nicknameID = nicknameID;
+//		this.gPostAmount = gPostAmount;
+//		this.commentAmount = commentAmount;
+//		this.gReportCnt = gReportCnt;
+//		this.gRegistDate = gRegistDate;
+//		this.gBirth = gBirth;
+//		this.yoyakuCnt = yoyakuCnt;
+//		this.gProfilePic = gProfilePic;
 //		this.like = like;
 //		this.post = post;
 //		this.comment = comment;
 //		this.contactUs = contactUs;
 //		this.reserveOrder = reserveOrder;
-	}
+//	}
 
 	public Integer getgUserID() {
 		return gUserID;
