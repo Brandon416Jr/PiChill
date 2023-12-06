@@ -32,7 +32,7 @@ public class Court {
 	@Column(name = "courtOnTime" , updatable = false)
 	private Timestamp courtOnTime;
 	
-	@Column(name = "courtApplyTime" ,insertable = false, updatable = false)
+	@Column(name = "courtApplyTime", updatable = false)
 	@CreationTimestamp
 	private Timestamp courtApplyTime;
 	
