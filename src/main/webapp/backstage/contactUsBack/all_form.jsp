@@ -83,86 +83,6 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 </style>
 </head>
 <body class="animsition all-employees-page">
-	<div class="page-wrapper">
-		<!-- HEADER MOBILE-->
-		<header class="header-mobile d-block d-lg-none">
-			<div class="header-mobile__bar" style="background-color: #207dca">
-				<div class="container-fluid">
-					<div class="header-mobile-inner">
-						<a class="logo" href="index.html"> <img
-							src="./pic/pi_chill_text.png" alt="chill" style="height: 80px" />
-						</a>
-						<button class="hamburger hamburger--slider" type="button">
-							<span class="hamburger-box"> <span class="hamburger-inner"></span>
-							</span>
-						</button>
-					</div>
-				</div>
-			</div>
-			<nav class="navbar-mobile">
-				<div class="container-fluid">
-					<ul class="navbar-mobile__list list-unstyled">
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>員工管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_manage.html">所有員工資料</a></li>
-								<li><a href="new_manage.html">新增員工資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>一般會員管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a class="active" href="all_gUser.html">所有會員資料</a></li>
-								<li><a href="new_gUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>企業會員管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_oUser.html">所有會員資料</a></li>
-								<li><a href="new_oUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>最新消息管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="#">表單管理</a></li>
-								<li><a href="all_announce.html">公告管理</a></li>
-								<li><a href="new_announce.html">新增公告</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>論壇管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_post.html">所有文章</a></li>
-								<li><a href="all_comment.html">所有留言</a></li>
-								<li><a href="report.html">檢舉管理</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>球館管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_court.html">所有球館</a></li>
-								<li><a href="all_place.html">所有場地</a></li>
-							</ul></li>
-						<li class="has-sub"><a href="order.html"> <i
-								class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>商城管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="product.html">商品管理</a></li>
-								<li><a href="new_product.html">新增商品</a></li>
-								<li><a href="product_order.html">訂單管理</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
-		<!-- END HEADER MOBILE-->
-	</div>
 	<!-- MENU SIDEBAR-->
 	<div class="sidebar">
 		<aside class="menu-sidebar d-none d-lg-block">
@@ -173,8 +93,7 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								class="fas fa-tachometer-alt"></i>員工管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active"
-									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
+								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
 							</ul></li>
@@ -182,50 +101,55 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								class="fas fa-tachometer-alt"></i>一般會員管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_gUser.html">所有會員資料</a></li>
-								<li><a href="new_gUser.html">新增會員資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/generalUserBack/new_gUser.jsp">新增會員資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>企業會員管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_oUser.html">所有會員資料</a></li>
-								<li><a href="new_oUser.html">新增會員資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/ownerUserBack/new_oUser.jsp">新增會員資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>最新消息管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="#">表單管理</a></li>
-								<li><a href="all_announce.html">公告管理</a></li>
-								<li><a href="new_announce.html">新增公告</a></li>
+								<li><a
+									href="#">表單管理</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announce.jsp">公告管理</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announce.jsp">新增公告</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>論壇管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_post.html">所有文章</a></li>
-								<li><a href="all_comment.html">所有留言</a></li>
-								<li><a href="report.html">檢舉管理</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/postBack/all_comment.jsp">所有留言</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/postBack/report.jsp">檢舉管理</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>球館管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_court.html">所有球館</a></li>
-								<li><a href="all_place.html">所有場地</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
 							</ul></li>
-						<li class="has-sub"><a href="order.html"> <i
-								class="fas fa-tachometer-alt"></i>預約管理
+						<li class="has-sub"><a
+							href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">
+								<i class="fas fa-tachometer-alt"></i>預約管理
 						</a></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>商城管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="product.html">商品管理</a></li>
-								<li><a href="new_product.html">新增商品</a></li>
-								<li><a href="product_order.html">訂單管理</a></li>
-							</ul></li>
 					</ul>
 				</nav>
 			</div>
@@ -241,39 +165,46 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<div class="header-logo">
-							<a href="index.html"><img class="img-logo" href="index.html"
+							<a href="<%=request.getContextPath()%>/backstage/index.jsp"><img
+								class="img-logo"
 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
+<!-- 							<a href="index.html"><img class="img-logo"  -->
+<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 						</div>
-						<form class="form-header" action="#" method="POST">
-							<input class="au-input au-input--xl" type="text" name="search"
-								placeholder="搜尋" />
-							<button class="au-btn--submit" type="submit">
-								<i class="zmdi zmdi-search" style="font-size: 15px">送出</i>
-							</button>
-						</form>
 						<div class="header-button">
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-										<img src="<%=request.getContextPath()%>/image/Group 115.png"
+<!-- 										<img -->
+<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+<!-- 											alt="使用者頭像" />  -->
+											<img
+											src="<%=request.getContextPath()%>/image/Group 115.png"
 											alt="使用者頭像" />
 									</div>
 									<div class="content">
 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
+<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <img
+												<a href="#"> 
+<!-- 												<img -->
+<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+<!-- 											alt="使用者頭像" />  -->
+												<img
 													src="<%=request.getContextPath()%>/image/Group 115.png"
 													alt="John Doe" />
 												</a>
 											</div>
 											<div class="content">
 												<h5 class="name">
-													<a href="my_data.html">羅裕鵬</a>
+													<a href="#">羅裕鵬</a>
+<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 												</h5>
 												<span class="email">brandon416jr@gmail.com</span>
+<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">

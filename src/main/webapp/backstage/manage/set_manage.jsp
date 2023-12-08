@@ -7,6 +7,7 @@
 Manage manage = (Manage) request.getAttribute("manage");
 %>
 
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -65,155 +66,80 @@ select:invalid+.custom-message {
 
 <body class="animsition">
 	<div class="page-wrapper">
-		<!-- HEADER MOBILE-->
-		<header class="header-mobile d-block d-lg-none">
-			<div class="header-mobile__bar" style="background-color: #207dca">
-				<div class="container-fluid">
-					<div class="header-mobile-inner">
-						<a class="logo" href="index.html"> <img
-							src="./pic/pi_chill_text.png" alt="chill" style="height: 80px" />
-						</a>
-						<button class="hamburger hamburger--slider" type="button">
-							<span class="hamburger-box"> <span class="hamburger-inner"></span>
-							</span>
-						</button>
-					</div>
-				</div>
-			</div>
-			<nav class="navbar-mobile">
-				<div class="container-fluid">
-					<ul class="navbar-mobile__list list-unstyled">
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>員工管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_manage.html">所有員工資料</a></li>
-								<li><a href="#">新增員工資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>一般會員管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_gUser.html">所有會員資料</a></li>
-								<li><a href="new_gUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>企業會員管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_oUser.html">所有會員資料</a></li>
-								<li><a href="new_oUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>最新消息管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="form.html">表單管理</a></li>
-								<li><a href="all_announce.html">公告管理</a></li>
-								<li><a href="new_announce.html">新增公告</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>論壇管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_post.html">所有文章</a></li>
-								<li><a href="all_comment.html">所有留言</a></li>
-								<li><a href="report.html">檢舉管理</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>球館管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="all_court.html">所有球館</a></li>
-								<li><a href="all_place.html">所有場地</a></li>
-							</ul></li>
-						<li class="has-sub"><a href="order.html"> <i
-								class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>商城管理
-						</a>
-							<ul class="list-styled navbar__sub-list js-sub-list">
-								<li><a href="product.html">商品管理</a></li>
-								<li><a href="new_product.html">新增商品</a></li>
-								<li><a href="product_order.html">訂單管理</a></li>
-							</ul></li>
-					</ul>
-				</div>
-			</nav>
-		</header>
-		<!-- END HEADER MOBILE-->
-
 		<!-- MENU SIDEBAR-->
-		<aside class="menu-sidebar d-none d-lg-block">
-			<!-- <div class="logo">
-                <a href="#">
-                    <img class="logo_l" src="./pic/pi_chill_text.png"/>
-                </a>
-            </div> -->
-			<div class="menu-sidebar__content js-scrollbar1">
-				<nav class="navbar-sidebar">
-					<ul class="list-unstyled navbar__list">
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>員工管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_manage.jsp">所有員工資料</a></li>
-								<li><a href="new_manage.jsp">新增員工資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>一般會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_gUser.html">所有會員資料</a></li>
-								<li><a href="new_gUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>企業會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_oUser.html">所有會員資料</a></li>
-								<li><a href="new_oUser.html">新增會員資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>最新消息管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="form.html">表單管理</a></li>
-								<li><a href="all_announce.html">公告管理</a></li>
-								<li><a href="new_announce.html">新增公告</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>論壇管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_post.html">所有文章</a></li>
-								<li><a href="all_comment.html">所有留言</a></li>
-								<li><a href="report.html">檢舉管理</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>球館管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="all_court.html">所有球館</a></li>
-								<li><a href="all_place.html">所有場地</a></li>
-							</ul></li>
-						<li class="has-sub"><a href="order.html"> <i
-								class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>商城管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a href="product.html">商品管理</a></li>
-								<li><a href="new_product.html">新增商品</a></li>
-								<li><a href="product_order.html">訂單管理</a></li>
-							</ul></li>
-					</ul>
-				</nav>
-			</div>
-		</aside>
-		<!-- END MENU SIDEBAR-->
+		<div class="sidebar">
+			<aside class="menu-sidebar d-none d-lg-block">
+				<div class="menu-sidebar__content js-scrollbar1">
+					<nav class="navbar-sidebar">
+						<ul class="list-unstyled navbar__list expanded">
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>員工管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a class="active"
+										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>一般會員管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/generalUserBack/new_gUser.jsp">新增會員資料</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>企業會員管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/ownerUserBack/new_oUser.jsp">新增會員資料</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>最新消息管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/contactUsBack/form.jsp">表單管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/all_announce.jsp">公告管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/new_announce.jsp">新增公告</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>論壇管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/postBack/all_comment.jsp">所有留言</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/postBack/report.jsp">檢舉管理</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>球館管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
+								</ul></li>
+							<li class="has-sub"><a
+								href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">
+									<i class="fas fa-tachometer-alt"></i>預約管理
+							</a></li>
+						</ul>
+					</nav>
+				</div>
+			</aside>
+			<!-- END MENU SIDEBAR-->
+		</div>
 
 		<!-- PAGE CONTAINER-->
 		<div class="page-container">
@@ -223,39 +149,42 @@ select:invalid+.custom-message {
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<div class="header-logo">
-								<a href="index.html"><img class="img-logo" href="index.html"
+								<a href="<%=request.getContextPath()%>/backstage/index.jsp"><img
+									class="img-logo"
 									src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
+								<!-- 							<a href="index.html"><img class="img-logo"  -->
+								<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 							</div>
-							<form class="form-header" action="#" method="POST">
-								<input class="au-input au-input--xl" type="text" name="search"
-									placeholder="搜尋" />
-								<button class="au-btn--submit" type="submit">
-									<i class="zmdi zmdi-search" style="font-size: 15px">送出</i>
-								</button>
-							</form>
 							<div class="header-button">
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
+											<!-- 										<img -->
+											<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+											<!-- 											alt="使用者頭像" />  -->
 											<img src="<%=request.getContextPath()%>/image/Group 115.png"
 												alt="使用者頭像" />
 										</div>
 										<div class="content">
 											<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
+											<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <img
+													<a href="#"> <!-- 												<img --> <%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+														<!-- 											alt="使用者頭像" />  --> <img
 														src="<%=request.getContextPath()%>/image/Group 115.png"
 														alt="John Doe" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="my_data.html">羅裕鵬</a>
+														<a href="#">羅裕鵬</a>
+														<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 													</h5>
 													<span class="email">brandon416jr@gmail.com</span>
+													<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
@@ -278,11 +207,12 @@ select:invalid+.custom-message {
 				<div class="container-fluid2">
 					<div class="card">
 						<div class="card-header">
-							<strong>修改 ${manage.mName} 員工資料</strong>
+							<strong>修改${manage.mName}員工資料</strong>
 							<h4>
 								<a
 									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp"><img
-									src="<%=request.getContextPath()%>/image/smallLogo.png" width="20" height="20" border="0">回所有員工</a>
+									src="<%=request.getContextPath()%>/image/smallLogo.png"
+									width="20" height="20" border="0">回所有員工</a>
 							</h4>
 						</div>
 
@@ -296,8 +226,8 @@ select:invalid+.custom-message {
 							</ul>
 						</c:if>
 
-						<form action="manage.do"
-							method="post" enctype="multipart/form-data">
+						<FORM ACTION="manage.do" METHOD="post"
+							enctype="multipart/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
@@ -353,6 +283,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="date" id="disabled-input" name="mBirth"
+														disabled="disabled"
 														value="<%=(manage == null) ? "1982-06-01" : manage.getmBirth()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
@@ -367,7 +298,7 @@ select:invalid+.custom-message {
 															<%
 															int gender = manage.getmGender();
 															%>
-															<select name="mGender">
+															<select name="mGender" disabled="disabled">
 																<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option>
 																<option value="1" <%=gender == 1 ? "selected" : ""%>>女</option>
 															</select>
@@ -419,7 +350,7 @@ select:invalid+.custom-message {
 													<label for="text-input" class="form-control-label">聯絡地址</label>
 												</div>
 												<div class="col-10 col-md-8">
-												
+
 													<select id="city" name="city" required>
 														<option value="">請選擇縣市</option>
 													</select> <span class="custom-message">*請選擇縣市</span> <select
@@ -439,34 +370,24 @@ select:invalid+.custom-message {
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
-											<!-- 										<div class="row form-group"> -->
-											<!-- 											<div class="col col-md-3"> -->
-											<!-- 												<label for="disabled-input" class="form-control-label">入職日期</label> -->
-											<!-- 											</div> -->
-											<!-- 											<div class="col-10 col-md-8"> -->
-											<!-- 												<input type="date" id="disabled-input" name="mHiredate" -->
-											<%-- 													value="<%=(manage == null) ? "2022-01-01" : manage.getmHiredate()%>" --%>
-											<!-- 													placeholder="請輸入生日" class="form-control" /> -->
-											<!-- 											</div> -->
-											<!-- 										</div> -->
-											<!-- 										<div class="row form-group"> -->
-											<!-- 											<div class="col col-md-3"> -->
-											<!-- 												<label for="disabled-input" class="form-control-label">最後上線時間</label> -->
-											<!-- 											</div> -->
-											<!-- 											<div class="col-10 col-md-8"> -->
-											<!-- 												<input type="text" id="disabled-input" name="mLastLogTime" -->
-											<!-- 													placeholder="最後上線時間" -->
-											<%-- 													value="<%=(manage == null) ? "1911-01-01 00:00:00" : manage.getmLastLogTime()%>" --%>
-											<!-- 													class="form-control" /> -->
-											<!-- 											</div> -->
-											<!-- 										</div> -->
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="disabled-input" class="form-control-label">入職日期</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="date" id="disabled-input" name="mHiredate"
+														disabled="disabled"
+														value="<%=(manage == null) ? "2022-01-01" : manage.getmHiredate()%>"
+														placeholder="請輸入生日" class="form-control" />
+												</div>
+											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
 													<label for="disabled-input" class="form-control-label">身份證字號</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="mID"
-														placeholder="請輸入身份證字號"
+														disabled="disabled" placeholder="請輸入身份證字號"
 														value="<%=(manage == null) ? "A123456678" : manage.getmID()%>"
 														class="form-control" />
 												</div>
@@ -484,13 +405,13 @@ select:invalid+.custom-message {
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="file-input" class="form-control-label">上傳大頭貼</label>
+													<label for="file-input" class="form-control-label">大頭貼</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="file" id="file-input" name="mProfilePic"
-														multiple="multiple" onclick="previewImage()"
-														class="form-control-file" /> <img id="imagePreview"
-														src="#" alt="Preview" width="100px" />
+													<input type="file" id="picture" onchange="preview()"
+														name="mProfilePic" multiple="multiple"
+														onclick="previewImage()" class="form-control-file" /> <img
+														id="preview" src="#" alt="Preview" width="100px" />
 													<!-- 													<div id="blob_holder"> -->
 													<!-- 														<img -->
 													<%-- 															src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${param.manageID}" --%>
@@ -521,21 +442,22 @@ select:invalid+.custom-message {
 											<div class="col-12 col-md-8">
 												<input type="hidden" name="action" value="update"> <input
 													type="hidden" name="manageID"
-													value="<%=manage.getManageID()%>"> <input
-													type="submit" class="btn btn-primary btn-sm" value="送出修改">
-												<i class="fa fa-dot-circle-o"></i>
+													value="<%=manage.getManageID()%>"> 
+												<input type="submit" class="btn btn-primary btn-sm"
+													value="送出修改"> <i class="fa fa-dot-circle-o"></i>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 
-						</form>
+						</FORM>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>

@@ -2,12 +2,13 @@ package com.pichill.backstage.reserveorder.service;
 
 import java.util.List;
 
+import com.pichill.backstage.reserveorder.model.ReserveOrderDAOBack;
 import com.pichill.backstage.reserveorder.model.ReserveOrderDAOImplBack;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.reserveorder.model.ReserveOrderDAO;
 
 public class ReserveOrderServiceBack {
-	private final ReserveOrderDAO dao;
+	private final ReserveOrderDAOBack dao;
 	
 	public ReserveOrderServiceBack() {
 		dao = new ReserveOrderDAOImplBack();

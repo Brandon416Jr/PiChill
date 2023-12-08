@@ -71,7 +71,7 @@ public class ReserveOrderServletBack extends HttpServlet {
 
 		ReserveOrder reserveOrder = reserveOrderSvcB.getOneReserveOrder(reserveOrderID);
 
-		req.setAttribute("generalUreserveOrderser", reserveOrder);
+		req.setAttribute("reserveOrder", reserveOrder);
 		return "/backstage/reserveOrderBack/set_reserveOrder.jsp";
 	}
 	

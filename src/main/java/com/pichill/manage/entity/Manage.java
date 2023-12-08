@@ -53,7 +53,7 @@ public class Manage implements Serializable {
 	
 	
 	
-	@Column(name="mID", columnDefinition="char") // 資料庫char型別要用columnDefinition標示!
+	@Column(name="mID", columnDefinition="char", updatable = false) // 資料庫char型別要用columnDefinition標示!
 	private String mID;
 	
 	@Column(name="mEmail")
