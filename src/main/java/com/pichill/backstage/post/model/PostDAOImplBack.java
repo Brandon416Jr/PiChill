@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.pichill.manage.entity.Manage;
 import com.pichill.post.entity.Post;
 import com.pichill.post.model.PostDAO;
 import com.pichill.util.HibernateUtil;
@@ -59,7 +60,16 @@ public class PostDAOImplBack implements PostDAO {
 
 	@Override
 	public Post getByPostID(Integer postID) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Post post = session.get(Post.class, postID);
+			session.getTransaction().commit();
+			return post;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
 		return null;
 	}
 

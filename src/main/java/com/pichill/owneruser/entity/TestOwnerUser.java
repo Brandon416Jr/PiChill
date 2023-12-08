@@ -2,12 +2,12 @@ package com.pichill.owneruser.entity;
 
 import java.util.List;
 
-import com.pichill.owneruser.OwnerUserDAO;
-import com.pichill.owneruser.OwnerUserDAOImpl;
+//import com.pichill.owneruser.OwnerUserDAO;
+//import com.pichill.owneruser.OwnerUserDAOImpl;
 
 public class TestOwnerUser {
 	public static void main(String[] args) {
-		OwnerUserDAO dao = new OwnerUserDAOImpl();
+//		OwnerUserDAO dao = new OwnerUserDAOImpl();
 
 		// 新增
 //		OwnerUser ownerUser1 = new OwnerUser();
@@ -64,10 +64,10 @@ public class TestOwnerUser {
 //		dao.delete(12000011);
 
 		// 查詢單筆
-		OwnerUser ownerUser3 = dao.findByPK(12000001);
-		System.out.print(ownerUser3.getoUserName() + ",");
-		System.out.println(ownerUser3.getoPassword() + ",");
-		System.out.println("---------------------");
+//		OwnerUser ownerUser3 = dao.findByPK(12000001);
+//		System.out.print(ownerUser3.getoUserName() + ",");
+//		System.out.println(ownerUser3.getoPassword() + ",");
+//		System.out.println("---------------------");
 
 		// 查詢多筆
 //		List<OwnerUser> list = dao.getAll();

@@ -7,7 +7,6 @@ import com.pichill.post.entity.Post;
 public interface PostService {
 //dao的save方法還回主鍵值 再透過主鍵值用get方法找到資料庫的物件
 	Post addPost(Post post);
-//	Post addPost(String postTitle,String postContent,Integer postType);
 	
 	Post updatePost(Post post);
 	
@@ -18,8 +17,14 @@ public interface PostService {
 	List<Post> getPostByPostTitle(String postTitle);
 	
 	List<Post> getPostByPostType(Integer postType);
+	
+	List<Post> getBygUserID(Integer gUserID);
+	
+	List<Post> getByoUserID(Integer oUserID);
+	
+	List<Post> getByCommentCnt(Integer commentCnt);
 		
-	List<Post>getAllPosts();
+	List<Post>getAllPosts(int currentPage);
 	
 	int getPageTotal();
 //	

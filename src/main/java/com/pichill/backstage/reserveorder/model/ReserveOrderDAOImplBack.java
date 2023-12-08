@@ -6,10 +6,10 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.pichill.reserveorder.entity.ReserveOrder;
-import com.pichill.reserveorder.model.ReserveOrderDAO;
+import com.pichill.backstage.reserveorder.model.ReserveOrderDAOBack;
 import com.pichill.util.HibernateUtil;
 
-public class ReserveOrderDAOImplBack implements ReserveOrderDAO {
+public class ReserveOrderDAOImplBack implements ReserveOrderDAOBack {
 	private SessionFactory factory;
 	
 	@Override
@@ -69,6 +69,8 @@ public class ReserveOrderDAOImplBack implements ReserveOrderDAO {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	
 
 
 }
