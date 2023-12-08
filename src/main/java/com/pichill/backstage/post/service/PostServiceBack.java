@@ -16,6 +16,10 @@ public class PostServiceBack {
 	public void deletePostBack(Integer postID) {
 		dao.delete(postID);
 	}
+	
+	public Post getOnePost(Integer postID) {
+		return dao.getByPostID(postID);
+	}
 
 	public List<Post> getAll() {
 		return dao.getAll();

@@ -1,5 +1,6 @@
-需要有照片:  announcement、contactUs、court、generalUser、ownerUser、manage
+需要有照片:  announcement、contactUs、court、generalUser、ownerUser、manage、post
 
+@CreationTimestamp
 
 generalUser [registDate] => insertable = "false", updatable = "false"
 generalUser [gBirth, gIDNum, gGender] => updatable = "false"
@@ -31,3 +32,6 @@ forumPic [postID] => updatable = "false"
 
 reserveOrder [orderTime] => insertable = "false", updatable = "false"
 reserveOrder [oUserID, gUserID, timeID, placeID, orderNum, totalCost] => updatable = "false"
+
+測試:
+all_comment成功

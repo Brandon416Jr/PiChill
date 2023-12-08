@@ -196,7 +196,7 @@ public class OwnerUserServletBack extends HttpServlet {
 		ownerUser.setoUserName(oUserName);
 		ownerUser.setoPassword(oPassword);
 		ownerUser.setoIDNum(oIDNum);
-		ownerUser.setCompiled(compiled);
+		ownerUser.setcompiled(compiled);
 		ownerUser.setoName(oName);
 		ownerUser.setoGender(oGender);
 		ownerUser.setoBirth(oBirth);
