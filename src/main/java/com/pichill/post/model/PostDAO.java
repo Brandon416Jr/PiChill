@@ -17,6 +17,12 @@ public interface PostDAO {
 	List<Post> getByTitle(String postTitle);
 	
 	List<Post> getByType(Integer postType);
+	
+	List<Post> getBygUserID(Integer gUserID);
+	
+	List<Post> getByoUserID(Integer oUserID);
+	
+	List<Post> getByCommentCnt(Integer commentCnt);
 
 	List<Post> getAll();
 

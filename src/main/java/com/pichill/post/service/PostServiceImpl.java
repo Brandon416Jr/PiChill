@@ -13,7 +13,7 @@ import com.pichill.post.model.PostDAOImpl;
 
 public class PostServiceImpl implements PostService {
 
-	private static final long PAGE_MAX_RESULT = 3;
+	private static final long PAGE_MAX_RESULT = 4;
 	private PostDAO dao;
 
 	public PostServiceImpl() {
@@ -28,21 +28,20 @@ public class PostServiceImpl implements PostService {
 //		return dao.insert(post);//返回給controller
 	}
 
-//	public Post addPost(String postTitle,String postContent,Integer postType) {
-//		Post post = new Post();
-//		post.setPostTitle(postTitle);
-//		post.setPostContent(postContent);
-//		post.setPostType(postType);
-//		dao.insert(post);
-//	return post;
-////		return dao.insert(post);//返回給controller
-//	}
 	@Override
 	public Post updatePost(Post post) {
-		if (dao.update(post) == 1) {
-			return post;
-		} else
-			return null;
+	    try {
+	        int result = dao.update(post);
+	        if (result == 1) {
+	            return post;
+	        } else {            
+	        	System.out.println ("Failed to update post with ID: " + post.getPostID());
+	            return null;
+	        }
+	    } catch (Exception e) {
+	    	System.out.printf("Error updating post", e);
+	        return null;
+	    }
 	}
 
 	@Override
@@ -66,16 +65,30 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> getAllPosts() {
-		return dao.getAll();
+	public List<Post> getBygUserID(Integer gUserID) {
+		return dao.getBygUserID(gUserID);
 	}
 
+	@Override
+	public List<Post> getByoUserID(Integer oUserID) {
+		return dao.getByoUserID(oUserID);
+	}
 
+	@Override
+	public List<Post> getByCommentCnt(Integer commentCnt) {
+		return dao.getByCommentCnt(commentCnt);
+	}
+	
 //	@Override
-//	public List<Post> getAllPosts(int currentPage) {
-//		return dao.getAll(currentPage);
+//	public List<Post> getAllPosts() {
+//		return dao.getAll();
 //	}
-//
+
+	@Override
+	public List<Post> getAllPosts(int currentPage) {
+		return dao.getAll(currentPage);
+	}
+
 	@Override
 	public int getPageTotal() {
 		long total =dao.getTotal();
@@ -107,4 +120,6 @@ public class PostServiceImpl implements PostService {
 //		
 //		return dao.getByCompositeQuery(query);
 //	}
+
+
 }
