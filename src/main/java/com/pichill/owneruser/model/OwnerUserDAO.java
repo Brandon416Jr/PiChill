@@ -6,6 +6,6 @@ import com.pichill.owneruser.entity.OwnerUser;
 public interface OwnerUserDAO{
 	int add(OwnerUser ownerUser);
 	int update(OwnerUser ownerUser);
-	OwnerUser getOwnerUserOUserID(Integer oUserID);
+	OwnerUser getOwnerUserByOUserID(Integer oUserID);
 	List<OwnerUser> getAll();
 }
