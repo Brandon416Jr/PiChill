@@ -1,0 +1,69 @@
+/* input 設定 */
+input{
+    width: 213px;
+}
+input#gName{
+    position: relative;
+    left: 50px;
+}
+input#gUsername{
+    position: relative;
+    left: 50px;
+}
+input#gEmail{
+    position: relative;
+    left: 20px;
+}
+input#gPassword{
+    position: relative;
+    left: 50px;
+}
+input#gIDNum{
+    position: relative;
+    left: 3px;
+}
+input#gGender{
+    position: relative;
+    left: 50px;
+    width: 213px;
+    height: 30px;
+}
+input#gBirth{
+    height: 30px;
+    position: relative;
+    left: 3px;
+}
+input#gTelephone{
+    position: relative;
+    left: 20px;
+}
+input#gAddress{
+    position: relative;
+    left: 20px;
+}
+
+
+/* 顯示預覽圖 */
+#preview-box {
+    max-width: 150px;
+    max-height: 150px;
+    overflow: hidden;
+    /* border: 1px solid red; */
+    position: relative;
+    left: 450px;
+    bottom: 475px;
+}
+
+#preview-img {
+    width: 100%;
+    height: auto;
+    /* border: 1px solid blue; */
+}
+#imageInput{
+    position: relative;
+    left: 450px;
+    bottom: 475px;
+    /* border: 1px solid green; */
+}
+
+

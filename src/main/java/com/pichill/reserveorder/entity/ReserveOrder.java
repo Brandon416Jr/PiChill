@@ -36,7 +36,7 @@ public class ReserveOrder {
 	@Column(name="oUserID", updatable = false)
 	private Integer oUserID;
 	
-	@Column(name="reserveDate")
+	@Column(name="reserveDate", updatable = false)
 	private Date reserveDate;
 	
 	@Column(name="timeID", updatable = false)
