@@ -7,6 +7,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.pichill.owneruser.entity.OwnerUser;
+
 
 public class OwnerUserHibernate {
 	public static void main(String[] args) {
@@ -25,7 +27,7 @@ public class OwnerUserHibernate {
 		ownerUser.setoUserName("hfhjfj888@gmail.com");
 		ownerUser.setoPassword("SHE5566firy");
 		ownerUser.setoIDNum("A189920113");
-		ownerUser.setCompiled("85116896");
+		ownerUser.setcompiled("85116896");
 		ownerUser.setoName("李又善");
 		ownerUser.setoGender(0);
 		ownerUser.setoBirth(java.sql.Date.valueOf("1990-09-09"));
@@ -38,7 +40,6 @@ public class OwnerUserHibernate {
 		ownerUser.setoPostAmount(0);
 		ownerUser.setoReportCnt(0);
 		ownerUser.setCourtArriveCnt(0);
-		ownerUser.setCouponArriveCnt(0);
 		ownerUser.setRsvdCnts(0);
 		ownerUser.setoEmail("hfhjfj888@gmail.com");
 		session.save(ownerUser);

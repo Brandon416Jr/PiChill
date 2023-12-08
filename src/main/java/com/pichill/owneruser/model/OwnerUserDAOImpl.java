@@ -62,7 +62,7 @@ private SessionFactory factory;
 	
 
 	@Override
-	public OwnerUser findByPK(Integer oUserID) {
+	public OwnerUser getOwnerUserByOUserID(Integer oUserID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -90,6 +90,8 @@ private SessionFactory factory;
 		}
 		return null;
 	}
+
+
 	
 }
 	
