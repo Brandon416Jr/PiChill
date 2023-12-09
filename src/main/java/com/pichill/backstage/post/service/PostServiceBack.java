@@ -2,12 +2,12 @@ package com.pichill.backstage.post.service;
 
 import java.util.List;
 
-import com.pichill.post.model.PostDAO;
+import com.pichill.backstage.post.model.PostDAOBack;
 import com.pichill.backstage.post.model.PostDAOImplBack;
 import com.pichill.post.entity.Post;
 
 public class PostServiceBack {
-	private final PostDAO dao;
+	private final PostDAOBack dao;
 
 	public PostServiceBack() {
 		dao = new PostDAOImplBack();

@@ -10,7 +10,7 @@ import com.pichill.post.entity.Post;
 import com.pichill.post.model.PostDAO;
 import com.pichill.util.HibernateUtil;
 
-public class PostDAOImplBack implements PostDAO {
+public class PostDAOImplBack implements PostDAOBack {
 	private SessionFactory factory;
 
 	@Override
@@ -46,11 +46,7 @@ public class PostDAOImplBack implements PostDAO {
 		return null;
 	}
 
-	@Override
-	public int insert(Post entity) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+
 
 	@Override
 	public int update(Post entity) {
@@ -73,28 +69,6 @@ public class PostDAOImplBack implements PostDAO {
 		return null;
 	}
 
-	@Override
-	public List<Post> getByTitle(String postTitle) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Post> getByType(Integer postType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Post> getAll(int currentPage) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public long getTotal() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 }
