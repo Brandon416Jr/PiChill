@@ -73,6 +73,7 @@ public class PostDAOImpl implements PostDAO{
 			return -1;
 		}
 	}
+	
 	@Override
 	public Post getByPostID(Integer postID) {
 		getSession().clear();
@@ -92,12 +93,55 @@ public class PostDAOImpl implements PostDAO{
 	            .setParameter("postType", postType)
 	            .list();
 	}
-
+	
+	@Override
+	public List<Post> getBygUserID(Integer gUserID) {
+		return getSession().createQuery("from Post WHERE gUserID = :gUserID", Post.class)
+	            .setParameter("gUserID", gUserID)
+	            .list();
+	}
+	
+	@Override
+	public List<Post> getByoUserID(Integer oUserID) {
+		return getSession().createQuery("from Post WHERE oUserID = :oUserID", Post.class)
+	            .setParameter("oUserID", oUserID)
+	            .list();
+	}
+	
+	@Override
+	public List<Post> getByCommentCnt(Integer commentCnt) {
+		return getSession().createQuery("from Post Order by commentCnt desc",Post.class)
+				.setParameter("commentCnt",commentCnt)
+				.list();
+	}
+	
 	@Override
 	public List<Post> getAll() {
 		return getSession().createQuery("from Post", Post.class).list();
 	}
+	
+	@Override
+	public List<Post> getAll(int currentPage) {
+	    int first = (currentPage - 1) * PAGE_MAX_RESULT;
+	    List<Post> posts;
 
+	    if (currentPage == 1 || currentPage == 2) {
+	        posts = getSession().createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
+	                .setFirstResult(first)
+	                .setMaxResults(PAGE_MAX_RESULT)
+	                .list();
+	    } else {
+	        posts = getSession().createQuery("from Post where postType = 2 order by postID desc", Post.class)
+	                .list();
+	    }
+
+	    return posts;
+	}
+	@Override
+	public long getTotal() {
+		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
+	}
+}
 
 	
 //	@Override
@@ -136,21 +180,6 @@ public class PostDAOImpl implements PostDAO{
 //		return query.getResultList();
 //	}
 
-	@Override
-	public List<Post> getAll(int currentPage) {
-		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-		return getSession().createQuery("from Post", Post.class)
-				.setFirstResult(first)
-				.setMaxResults(PAGE_MAX_RESULT)
-				.list();
-	}
-
-	@Override
-	public long getTotal() {
-		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
-	}
-
-}
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.PreparedStatement;

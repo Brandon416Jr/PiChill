@@ -21,8 +21,8 @@ public class OwnerUserService {
 		dao.update(ownerUser);
 	}
 	
-	public OwnerUser getOneGeneralUser(Integer oUserID) {
-		return dao.findByPK(oUserID);
+	public OwnerUser getOneOwnerUser(Integer oUserID) {
+		return dao.getOwnerUserByOUserID(oUserID);
 	}
 
 

@@ -14,14 +14,61 @@ public class ManageService {
 	public ManageService() {
 		dao = new ManageDAOImpl();
 	}
-
+	
 	public int insertManage(Manage manage) {
-		return dao.insert(manage);	
+		return dao.insert(manage);
 	}
-
+	
 	public int updateManage(Manage manage) {
 		return dao.update(manage);
 	}
+
+//	public Manage insertManage(String mName, String mUserName, String mPassword, Date mBirth, Integer mGender,
+//			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, Date mHiredate,
+//			String mID, String mEmail, byte[] mProfilePic, int mStatus) {
+//		    Manage manage = new Manage();
+//		    manage.setmName(mName);
+//    		manage.setmUserName(mUserName);
+//    		manage.setmPassword(mPassword);
+//    		manage.setmBirth(mBirth);
+//    		manage.setmGender(mGender);
+//    		manage.setmTelephone(mTelephone);
+//    		manage.setmEmgContact(mEmgContact);
+//    		manage.setmEmgPhone(mEmgPhone);
+//    		manage.setmAddress(mAddress);
+//    		manage.setmHiredate(mHiredate);
+//    		manage.setmID(mID);
+//    		manage.setmEmail(mEmail);
+//    		manage.setmProfilePic(mProfilePic);
+//    		manage.setmStatus(mStatus);
+//	        dao.insert(manage);
+//	        return manage;
+//	}
+//
+//	public Manage updateManage(int manageID, String mName, String mUserName, String mPassword, Date mBirth, Integer mGender,
+//			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, Date mHiredate,
+//			String mID, String mEmail, byte[] mProfilePic, int mStatus) {
+//		 Manage manage = dao.getManageByManageID(manageID); 
+//	        if (manage != null) {
+//	    		manage.setManageID(manageID);
+//	        	manage.setmName(mName);
+//	    		manage.setmUserName(mUserName);
+//	    		manage.setmPassword(mPassword);
+//	    		manage.setmBirth(mBirth);
+//	    		manage.setmGender(mGender);
+//	    		manage.setmTelephone(mTelephone);
+//	    		manage.setmEmgContact(mEmgContact);
+//	    		manage.setmEmgPhone(mEmgPhone);
+//	    		manage.setmAddress(mAddress);
+//	    		manage.setmHiredate(mHiredate);
+//	    		manage.setmID(mID);
+//	    		manage.setmEmail(mEmail);
+//	    		manage.setmProfilePic(mProfilePic);
+//	    		manage.setmStatus(mStatus);
+//	            dao.update(manage);
+//	        }
+//	        return dao.getManageByManageID(manageID);
+//	}
 
 	public Manage getOneManage(Integer manageID) {
 		return dao.getManageByManageID(manageID);

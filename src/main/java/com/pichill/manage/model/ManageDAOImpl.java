@@ -27,28 +27,37 @@ import com.pichill.util.HibernateUtil;
 
 
 public class ManageDAOImpl implements ManageDAO {
-	private SessionFactory factory;
+	private final SessionFactory factory;
 	
-//	public ManageDAOImpl() {
-//		factory = HibernateUtil.getSessionFactory();
-//	}
-//	
-//	private Session getSession() {
-//		return factory.getCurrentSession();
-//	}
+	public ManageDAOImpl() {
+		factory = HibernateUtil.getSessionFactory();
+	}
+
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
 
 	@Override
 	public int insert(Manage manage) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
 		try {
 			session.beginTransaction();
-			Integer id = (Integer) session.save(manage);
+//			Integer id = (Integer) session.save(manage);
+			session.save(manage);
+			
 			session.getTransaction().commit();
-			return id;
+			System.out.println("交易成功");
+			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+			System.out.println("交易失敗");
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return -1;
 	}
@@ -57,14 +66,21 @@ public class ManageDAOImpl implements ManageDAO {
 	public int update(Manage manage) {
 		// TODO Auto-generated method stub
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
 		try {
 			session.beginTransaction();
 			session.update(manage);
 			session.getTransaction().commit();
+			System.out.println("交易成功");
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+			System.out.println("交易失敗");
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return -1;
 		
@@ -91,6 +107,7 @@ public class ManageDAOImpl implements ManageDAO {
 	@Override
 	public Manage getManageByManageID(Integer manageID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
 		try {
 			session.beginTransaction();
 			Manage manage = session.get(Manage.class, manageID);
@@ -99,6 +116,10 @@ public class ManageDAOImpl implements ManageDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return null;
 	}
@@ -144,7 +165,7 @@ public class ManageDAOImpl implements ManageDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
-		}
+		} 
 		return null;
 	}
 

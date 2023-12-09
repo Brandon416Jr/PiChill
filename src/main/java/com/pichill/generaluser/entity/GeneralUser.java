@@ -31,7 +31,7 @@ public class GeneralUser {
 	@Column(name="gUserID", updatable = false)
 	private Integer gUserID;
 	
-	@Column(name="gName")
+	@Column(name="gName", updatable = false)
 	private String gName;
 	
 	@Column(name="gTelephone")
