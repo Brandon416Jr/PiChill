@@ -22,12 +22,12 @@ public interface PostService {
 	
 	List<Post> getByoUserID(Integer oUserID);
 	
-	List<Post> getByCommentCnt(Integer commentCnt);
+	List<Post> getByCommentCnt();
 		
 	List<Post>getAllPosts(int currentPage);
 	
 	int getPageTotal();
-//	
+	
 //	List<Post>getPostsByCompositeQuery(Map<String,String[]>map);
 	
 }

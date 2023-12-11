@@ -22,7 +22,7 @@ public interface PostDAO {
 	
 	List<Post> getByoUserID(Integer oUserID);
 	
-	List<Post> getByCommentCnt(Integer commentCnt);
+	List<Post> getByCommentCnt();
 
 	List<Post> getAll();
 

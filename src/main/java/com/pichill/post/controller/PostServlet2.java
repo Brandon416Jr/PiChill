@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,6 +20,7 @@ import com.pichill.manage.service.ManageService;
 import com.pichill.post.entity.Post;
 import com.pichill.post.service.PostService;
 import com.pichill.post.service.PostServiceImpl;
+
 import com.google.gson.Gson;
 import com.google.protobuf.Timestamp;
 
@@ -74,6 +76,7 @@ public class PostServlet2 extends HttpServlet {
 
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		res.setContentType("application/json; charset=UTF-8");
+		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		if ("insert".equals(action)) {
 
@@ -138,6 +141,7 @@ public class PostServlet2 extends HttpServlet {
 			String postTitle = req.getParameter("postTitle");
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getPostByPostTitle(postTitle);
+			
 
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			String json = new Gson().toJson(posts);
@@ -145,6 +149,51 @@ public class PostServlet2 extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
+		if ("get_By_gUserID".equals(action)) {
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+			PostService postSvc = new PostServiceImpl();
+			List<Post> posts = postSvc.getBygUserID(11000001);
+
+			// 將搜尋結果轉為 JSON 格式並發送到前端
+			String json = new Gson().toJson(posts);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		if ("get_By_postID".equals(action)) {
+			Integer postID = Integer.valueOf(req.getParameter("postID"));
+			PostService postSvc = new PostServiceImpl();
+			Post post = postSvc.getByPostID(postID);
+			// 將搜尋結果轉為 JSON 格式並發送到前端
+			String json = new Gson().toJson(post);
+			PrintWriter out = res.getWriter();
+			System.out.println(json);
+			out.print(json);
+			out.flush();
+		}
+		if ("get_By_Type".equals(action)) {
+			Integer postType = Integer.valueOf(req.getParameter("postType"));
+			PostService postSvc = new PostServiceImpl();
+			List<Post> posts = postSvc.getPostByPostType(postType);
+
+			// 將搜尋結果轉為 JSON 格式並發送到前端
+			String json = new Gson().toJson(posts);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		if ("get_By_Comment".equals(action)) {
+
+			PostService postSvc = new PostServiceImpl();
+			List<Post> posts = postSvc.getByCommentCnt();
+
+			// 將搜尋結果轉為 JSON 格式並發送到前端
+			String json = new Gson().toJson(posts);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		
 		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
 
 			List<String> errorMsgs = new LinkedList<String>();
@@ -176,7 +225,7 @@ public class PostServlet2 extends HttpServlet {
 		
 					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 					Integer postID = Integer.valueOf(req.getParameter("postID").trim());
-					System.out.println(postID);
+					
 					String postTitle = req.getParameter("postTitle");
 					String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
 					if (postTitle == null || postTitle.trim().length() == 0) {
@@ -188,8 +237,7 @@ public class PostServlet2 extends HttpServlet {
 					if (postContent == null || postContent.trim().length() == 0) {
 						errorMsgs.add("內文請勿空白");
 					}	
-					System.out.println(postTitle);
-					System.out.println(postContent);
+
 					Post post = new Post();
 					post.setPostID(postID);
 					post.setPostTitle(postTitle);

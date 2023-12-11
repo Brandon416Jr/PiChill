@@ -57,7 +57,7 @@ public class Post {
 	@Column(name = "postContent", columnDefinition = "text")
 	private String postContent;
 
-	@Column(name = "postType")
+	@Column(name = "postType",updatable = false)
 	private Integer postType;
 
 	@Column(name = "postTime", updatable = false)
@@ -67,10 +67,10 @@ public class Post {
 	@Column(name = "postPic", columnDefinition = "longblob")
 	private byte[] postPic;
 
-	@Column(name = "likeCnt")
+	@Column(name = "likeCnt", updatable = false)
 	private Integer likeCnt;
 	
-	@Column(name = "commentCnt")
+	@Column(name = "commentCnt", updatable = false)
 	private Integer commentCnt;
 	
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
