@@ -1,5 +1,6 @@
 package com.pichill.court;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
 
@@ -8,19 +9,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.pichill.place.Place;
 
 
 @Entity
 
 @Table(name = "Court")
-public class Court {
+public class Court implements Serializable{
 	
-	@Id
+	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "courtID", updatable = false) //PK鍵不用更新
+	@Column(name = "courtID", updatable = false, insertable=false) //PK鍵不用更新
+//	@OneToMany(mappedBy = "courtID")
 	private Integer courtID;
 	
 	@Column(name = "oUserID")
@@ -86,6 +93,14 @@ public class Court {
 		this.courtCloseTime = courtCloseTime;
 	}
 
+//	@ManyToOne
+//	@JoinColumn(name = "courtID" , referencedColumnName = "courtID")
+//	private Place place;
+	
+
+//	public void setPlace(Place place) {
+//		this.place = place;
+//	}
 
 	public Integer getCourtID() {
 		return courtID;
@@ -103,100 +118,108 @@ public class Court {
 		this.oUserID = oUserID;
 	}
 
-	public Integer getManageID() {
+	public Integer getmanageID() {
 		return manageID;
 	}
 
-	public void setManageID(Integer manageID) {
+	public void setmanageID(Integer manageID) {
 		this.manageID = manageID;
 	}
 
-	public Timestamp getCourtOnTime() {
+	public Timestamp getcourtOnTime() {
 		return courtOnTime;
 	}
 
-	public void setCourtOnTime(Timestamp courtOnTime) {
+	public void setcourtOnTime(Timestamp courtOnTime) {
 		this.courtOnTime = courtOnTime;
 	}
 
-	public Timestamp getCourtApplyTime() {
+	public Timestamp getcourtApplyTime() {
 		return courtApplyTime;
 	}
 
-	public void setCourtApplyTime(Timestamp courtApplyTime) {
+	public void setcourtApplyTime(Timestamp courtApplyTime) {
 		this.courtApplyTime = courtApplyTime;
 	}
 
-	public String getCourtName() {
+	public String getcourtName() {
 		return courtName;
 	}
 
-	public void setCourtName(String courtName) {
+	public void setcourtName(String courtName) {
 		this.courtName = courtName;
 	}
 
-	public byte[] getCourtPic() {
+	public byte[] getcourtPic() {
 		return courtPic;
 	}
 
-	public void setCourtPic(byte[] courtPic) {
+	public void setcourtPic(byte[] courtPic) {
 		this.courtPic = courtPic;
 	}
 
-	public String getCourtTelephone() {
+	public String getcourtTelephone() {
 		return courtTelephone;
 	}
 
-	public void setCourtTelephone(String courtTelephone) {
+	public void setcourtTelephone(String courtTelephone) {
 		this.courtTelephone = courtTelephone;
 	}
 
-	public String getCourtAddress() {
+	public String getcourtAddress() {
 		return courtAddress;
 	}
 
-	public void setCourtAddress(String courtAddress) {
+	public void setcourtAddress(String courtAddress) {
 		this.courtAddress = courtAddress;
 	}
 
-	public String getCourtRule() {
+	public String getcourtRule() {
 		return courtRule;
 	}
 
-	public void setCourtRule(String courtRule) {
+	public void setcourtRule(String courtRule) {
 		this.courtRule = courtRule;
 	}
 
-	public String getLoc() {
+	public String getloc() {
 		return loc;
 	}
 
-	public void setLoc(String loc) {
+	public void setloc(String loc) {
 		this.loc = loc;
 	}
 
-	public Integer getCourtApplyStatus() {
+	public Integer getcourtApplyStatus() {
 		return courtApplyStatus;
 	}
 
-	public void setCourtApplyStatus(Integer courtApplyStatus) {
+	public void setcourtApplyStatus(Integer courtApplyStatus) {
 		this.courtApplyStatus = courtApplyStatus;
 	}
-	public Time getCourtOpenTime() {
+	public Time getcourtOpenTime() {
 		return courtOpenTime;
 	}
 
-	public void setCourtOpenTime(Time courtOpenTime) {
+	
+	public void setcourtOpenTime(Time courtOpenTime) {
 		this.courtOpenTime = courtOpenTime;
 	}
 
-	public Time getCourtCloseTime() {
+	public Time getcourtCloseTime() {
 		return courtCloseTime;
 	}
 
-	public void setCourtCloseTime(Time courtCloseTime) {
+	public void setcourtCloseTime(Time courtCloseTime) {
 		this.courtCloseTime = courtCloseTime;
 	}
 
-	
+	// for join placeID from place
+//    public com.pichill.place.Place getPlace() {
+//        com.pichill.place.PlaceService placeSvc = new com.pichill.place.PlaceService();
+//        com.pichill.place.Place place = placeSvc.getOnePlace(placeName);
+//        com.pichill.place.Place place1 = placeSvc.getOnePlace(placeFee);
+//        com.pichill.place.Place place2 = placeSvc.getOnePlace(ball);
+//	    return place;
+//    }
 }
