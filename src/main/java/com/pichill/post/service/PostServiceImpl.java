@@ -19,13 +19,26 @@ public class PostServiceImpl implements PostService {
 	public PostServiceImpl() {
 		dao = new PostDAOImpl();
 	}
-
+//	public Post addPost(Post post) {
+//		Integer id = dao.insert(post);
+//		post = dao.getByPostID(id);
+//		return post;
+////		return dao.insert(post);//返回給controller
+//	}
 	@Override
 	public Post addPost(Post post) {
-		Integer id = dao.insert(post);
-		post = dao.getByPostID(id);
-		return post;
-//		return dao.insert(post);//返回給controller
+	    Integer id = dao.insert(post);
+//	    System.out.println("=================");
+//	    System.out.println(id);
+	    post = dao.getByPostID(id);
+
+//	    if (post != null) {
+//	        System.out.println("Post Time: " + post.getPostTime());
+//	    } else {
+//	        System.out.println("Failed to retrieve post.");
+//	    }
+//
+	    return post;
 	}
 
 	@Override
@@ -75,8 +88,8 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> getByCommentCnt(Integer commentCnt) {
-		return dao.getByCommentCnt(commentCnt);
+	public List<Post> getByCommentCnt() {
+		return dao.getByCommentCnt();
 	}
 	
 //	@Override
@@ -95,7 +108,7 @@ public class PostServiceImpl implements PostService {
 		int pageQty = (int)(total%PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
 		return pageQty;
 	}
-//
+
 //	@Override
 //	public List<Post> getPostsByCompositeQuery(Map<String, String[]> map) {
 //		Map<String, String> query = new HashMap<>();

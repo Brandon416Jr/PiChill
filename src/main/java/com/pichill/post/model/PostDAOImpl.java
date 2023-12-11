@@ -1,8 +1,9 @@
 package com.pichill.post.model;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -36,15 +37,15 @@ public class PostDAOImpl implements PostDAO{
 
 	@Override
 	public int insert(Post entity) {
-		SessionFactory factory2 = HibernateUtil.getSessionFactory();
-		Session session = factory2.openSession();
-		Transaction tx = session.beginTransaction();
+//		SessionFactory factory2 = HibernateUtil.getSessionFactory();
+//		Session session = factory2.openSession();
+//		Transaction tx = session.beginTransaction();
 //		 回傳給 service 剛新增成功的自增主鍵值
 //		entity.setPostTime(new java.sql.Timestamp(System.currentTimeMillis()));
-		session.save(entity);
-		tx.commit();
-		return 1;
-//		return(Integer)getSession().save(entity);
+//		session.save(entity);
+//		tx.commit();
+//		return 1;
+		return(Integer)getSession().save(entity);
 	}
 
 	@Override
@@ -76,8 +77,13 @@ public class PostDAOImpl implements PostDAO{
 	
 	@Override
 	public Post getByPostID(Integer postID) {
-		getSession().clear();
-		return getSession().get(Post.class,postID);
+		 try {
+		        getSession().clear();
+		        return getSession().get(Post.class, postID);
+		    } catch (Exception e) {
+		        e.printStackTrace(); // 或使用日誌庫記錄異常
+		        return null;
+		    }
 	}
 	
 	@Override
@@ -109,12 +115,21 @@ public class PostDAOImpl implements PostDAO{
 	}
 	
 	@Override
-	public List<Post> getByCommentCnt(Integer commentCnt) {
+	public List<Post> getByCommentCnt() {
 		return getSession().createQuery("from Post Order by commentCnt desc",Post.class)
-				.setParameter("commentCnt",commentCnt)
 				.list();
 	}
-	
+//	@Override
+//	public List<Post> getByCommentCnt() {
+//	Date currentDate = new Date();
+//    Calendar calendar = Calendar.getInstance();
+//    calendar.setTime(currentDate);
+//    calendar.add(Calendar.DAY_OF_MONTH, -3);
+//    Date threeDaysAgo = calendar.getTime();
+//return getSession().createQuery("from Post WHERE postTime >= :threeDaysAgo ORDER BY commentCnt DESC",Post.class)
+//		.setParameter("threeDaysAgo", threeDaysAgo)
+//		.list();
+//	}
 	@Override
 	public List<Post> getAll() {
 		return getSession().createQuery("from Post", Post.class).list();
@@ -156,30 +171,28 @@ public class PostDAOImpl implements PostDAO{
 //		List<Predicate> predicates = new ArrayList<>();
 //
 //		for (Map.Entry<String, String> row : map.entrySet()) {
+//			if ("postTitle".equals(row.getKey())) {
+//			predicates.add(builder.like(root.get("postTitle"), "%" + row.getValue() + "%"));
+//		}
 //			if ("gUserID".equals(row.getKey())) {
 //				predicates.add(builder.like(root.get("gUserID"), "%" + row.getValue() + "%"));
 //			}
-//
-//			if ("oUserID".equals(row.getKey())) {
-//				predicates.add(builder.like(root.get("oUserID"), "%" + row.getValue() + "%"));
-//			}
-//
-//			if ("postTitle".equals(row.getKey())) {
-//				predicates.add(builder.like(root.get("postTitle"), "%" + row.getValue() + "%"));
-//			}
-//			
-//			if ("postContent".equals(row.getKey())) {
-//				predicates.add(builder.like(root.get("postContent"), "%" + row.getValue() + "%"));
-//			}
 //		}
-//
 //		criteria.where(builder.and(predicates.toArray(new Predicate[predicates.size()])));
 //		criteria.orderBy(builder.desc(root.get("postID")));
 //		TypedQuery<Post> query = getSession().createQuery(criteria);
 //
 //		return query.getResultList();
 //	}
+//}
 
+//if ("postTitle".equals(row.getKey())) {
+//	predicates.add(builder.like(root.get("postTitle"), "%" + row.getValue() + "%"));
+//}
+//
+//if ("postType".equals(row.getKey())) {
+//	predicates.add(builder.like(root.get("postType"), "%" + row.getValue() + "%"));
+//}
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.PreparedStatement;
