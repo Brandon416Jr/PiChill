@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.manage.service.ManageService;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.owneruser.service.OwnerUserService;
 
@@ -213,12 +212,12 @@ public class OwnerUserServlet extends HttpServlet {
 			in.read(oProfilePic);
 			in.close();
 		} else {
-			OwnerUserService ownerService = new OwnerUserService();
-			oProfilePic = ownerService.getOneOwnerUser(oUserID).getoProfilePic();
+			OwnerUserService ownerUserService = new OwnerUserService();
+			oProfilePic = ownerUserService.getOneOwnerUser(oUserID).getoProfilePic();
 		}
 
 		// 頁面不顯示直接先給空值
-		Date oRegisterDate = null;
+		Date oRegisterDate = Date.valueOf(req.getParameter("oRegisterDate"));
 		
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer oPostAmount = 0;

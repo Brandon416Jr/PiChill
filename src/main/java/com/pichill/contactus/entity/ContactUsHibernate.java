@@ -21,14 +21,14 @@ public class ContactUsHibernate {
 		
 		//交易區間
 		ContactUs contactUs = new ContactUs();
-		contactUs.setGUserID(null);
-		contactUs.setOUserID(12000001);
-		contactUs.setFormPurpose("如何上架球館?");
-		contactUs.setFormContent("如何上架球館?");
-		contactUs.setFormPic(null);
-		contactUs.setFormTime(java.sql.Timestamp.valueOf("2023-11-28 12:03:01"));
-		contactUs.setFormStatus(0);
-		contactUs.setFormType(0);
+		contactUs.setgUserID(null);
+		contactUs.setoUserID(12000001);
+		contactUs.setformPurpose("如何上架球館?");
+		contactUs.setformContent("如何上架球館?");
+		contactUs.setformPic(null);
+		contactUs.setformTime(java.sql.Timestamp.valueOf("2023-11-28 12:03:01"));
+		contactUs.setformStatus(0);
+		contactUs.setformType(0);
 		session.save(contactUs);
 
 		tx.commit();

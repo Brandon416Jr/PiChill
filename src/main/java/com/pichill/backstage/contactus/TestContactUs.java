@@ -1,7 +1,7 @@
 package com.pichill.backstage.contactus;
 
-import com.pichill.contactus.entity.ContactUs;
-import com.pichill.contactus.model.ContactUsDAO;
+import com.pichill.backstage.contactus.entity.ContactUs;
+import com.pichill.backstage.contactus.model.ContactUsDAOBack;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import com.pichill.backstage.contactus.model.ContactUsDAOImplBack;
 
 public class TestContactUs {
 	public static void main(String[] args) {
-		ContactUsDAO dao = new ContactUsDAOImplBack();
+		ContactUsDAOBack dao = new ContactUsDAOImplBack();
 		
 				// 新增
 //				ContactUs contactUs= new ContactUs();
@@ -26,13 +26,13 @@ public class TestContactUs {
 				// 修改
 				ContactUs contactUs2= new ContactUs();
 
-				contactUs2.setOUserID(12000004);
-				contactUs2.setGUserID(null);
-				contactUs2.setFormPurpose("如何在商城購買優惠券?");
-				contactUs2.setFormContent("如何在商城購買優惠券?");
+				contactUs2.setoUserID(12000001);
+				contactUs2.setgUserID(null);
+				contactUs2.setFormPurpose("關於上架球館問題");
+				contactUs2.setFormContent("一次只能上架一座球館嗎?");
 				contactUs2.setFormPic(null);
-				contactUs2.setFormTime(java.sql.Timestamp.valueOf("2022-12-31 23:59:59"));
-				contactUs2.setFormStatus(0);
+				contactUs2.setFormTime(java.sql.Timestamp.valueOf("2023-11-13 12:05:13"));
+				contactUs2.setFormStatus(1);
 				contactUs2.setFormType(0);
 				contactUs2.setFormID(22000001);				
 				dao.update(contactUs2);

@@ -3,13 +3,13 @@ package com.pichill.backstage.contactus.service;
 
 import java.util.List;
 
+import com.pichill.backstage.contactus.model.ContactUsDAOBack;
 import com.pichill.backstage.contactus.model.ContactUsDAOImplBack;
-import com.pichill.contactus.entity.ContactUs;
-import com.pichill.contactus.model.ContactUsDAO;
+import com.pichill.backstage.contactus.entity.ContactUs;
 
 
 public class ContactUsServiceBack {
-	private final ContactUsDAO dao;
+	private final ContactUsDAOBack dao;
 	
 	public ContactUsServiceBack() {
 		dao = new ContactUsDAOImplBack();

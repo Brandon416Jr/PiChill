@@ -1,4 +1,4 @@
-package com.pichill.contactus;
+package com.pichill.owneruser;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,14 +8,13 @@ import java.util.Arrays;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.pichill.contactus.entity.ContactUs;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
-public class ContactUsManageBlobInitializer {
-
-	public static void main(String[] args) throws IOException {
-
-		File dir = new File("src/main/webapp/owneruser/pic/contactuspic");
+public class OwnerUserBlobInitializer {
+public static void main(String[] args) throws IOException {
+		
+		File dir = new File("src/main/resources/oProfilePic/");
 		String[] fileNames = dir.list();
 		Arrays.sort(fileNames);
 
@@ -27,28 +26,28 @@ public class ContactUsManageBlobInitializer {
 
 			for (int i = 0; i < fileNames.length; i++) {
 				FileInputStream fis = new FileInputStream(new File(dir, fileNames[i]));
-				byte[] formPic = fis.readAllBytes();
+				byte[] oProfilePic = fis.readAllBytes();
 
-				ContactUs contactUs = session.get(ContactUs.class, i + 22000001);
-
-				if (contactUs != null) {
-					contactUs.setFormPic(formPic);
-				} else {
-					System.out.println("contactUs object with ID " + (i + 1) + " not found in the database.");
+				OwnerUser owneruser = session.get(OwnerUser.class, i + 12000001);
+				
+				if (owneruser != null) {
+					owneruser.setoProfilePic(oProfilePic);
+				}else {
+					System.out.println("找不到編號為" + (i+1) + "的會員");
 				}
 
 				fis.close();
 			}
 
 			session.getTransaction().commit();
-			System.out.println("上傳圖片完成");
+			System.out.println("圖片上傳完成");
 
 		} catch (Exception e) {
 			factory.getCurrentSession().getTransaction().rollback();
 			e.printStackTrace();
+
 		} finally {
 			HibernateUtil.shutdown();
 		}
-
 	}
 }

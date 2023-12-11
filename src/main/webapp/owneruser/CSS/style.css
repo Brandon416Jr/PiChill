@@ -38,6 +38,7 @@ header {
     position: sticky;
     top: 0;
     width: 100%;
+    z-index: 3;
 }
 
 header nav img {
@@ -267,21 +268,4 @@ body{
 }
 
 
-/* =============行事曆區============ */
 
-
-.cal{
-    width: 800px;
-    height: 800px;
-    background: white;
-    display: flex;
-    position: relative;
-    justify-content: center;
-    left: 350px;
-}
-#calendar{
-    width: 800px;
-    height: 800px;
-    display: flex;
-    position: relative;
-}

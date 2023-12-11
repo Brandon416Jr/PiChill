@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.announcement.service.AnnouncementServiceBack;
 
-@WebServlet("/backstage/announcement/DBJPGReader")
+@WebServlet("/announcement/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

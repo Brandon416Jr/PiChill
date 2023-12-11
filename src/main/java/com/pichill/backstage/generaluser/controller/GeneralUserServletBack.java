@@ -82,122 +82,123 @@ public class GeneralUserServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-
-		String gName = req.getParameter("gName");
-		String gNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
-		if (gName == null || gName.trim().length() == 0) {
-			errorMsgs.add("會員姓名: 請勿空白");
-		} else if (!gName.trim().matches(gNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-			errorMsgs.add("會員姓名: 只能是中文, 且長度必需大於2個字");
-		}
-
-		String gTelephone = req.getParameter("gTelephone");
-		String gTelephoneReg = "^09[0-9]{8}$";
-		if (gTelephone == null || gTelephone.trim().isEmpty()) {
-			errorMsgs.add("手機: 請勿空白");
-		} else if (!gTelephone.trim().matches(gTelephoneReg)) {
-			errorMsgs.add("請輸入正確的手機格式");
-		}
-
-		String gEmail = req.getParameter("gEmail");
-		String gEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-		if (gEmail == null || gEmail.trim().isEmpty()) {
-			errorMsgs.add("Email: 請勿空白");
-		} else if (!gEmail.trim().matches(gEmailReg)) {
-			errorMsgs.add("請輸入正確的Email格式");
-		}
-
-		String address = req.getParameter("gAddress");
-		if (address == null || address.trim().isEmpty())
-			errorMsgs.add("請輸入地址");
-
-		String city = req.getParameter("city");
-
-		String area = req.getParameter("area");
-
-		String gAddress = city + area + address;
+		GeneralUser generalUser = gUserSvcB.getOneGeneralUser(gUserID);
+//
+//		String gName = req.getParameter("gName");
+//		String gNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
+//		if (gName == null || gName.trim().length() == 0) {
+//			errorMsgs.add("會員姓名: 請勿空白");
+//		} else if (!gName.trim().matches(gNameReg)) { // 以下練習正則(規)表示式(regular-expression)
+//			errorMsgs.add("會員姓名: 只能是中文, 且長度必需大於2個字");
+//		}
+//
+//		String gTelephone = req.getParameter("gTelephone");
+//		String gTelephoneReg = "^09[0-9]{8}$";
+//		if (gTelephone == null || gTelephone.trim().isEmpty()) {
+//			errorMsgs.add("手機: 請勿空白");
+//		} else if (!gTelephone.trim().matches(gTelephoneReg)) {
+//			errorMsgs.add("請輸入正確的手機格式");
+//		}
+//
+//		String gEmail = req.getParameter("gEmail");
+//		String gEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+//		if (gEmail == null || gEmail.trim().isEmpty()) {
+//			errorMsgs.add("Email: 請勿空白");
+//		} else if (!gEmail.trim().matches(gEmailReg)) {
+//			errorMsgs.add("請輸入正確的Email格式");
+//		}
+//
+//		String address = req.getParameter("gAddress");
+//		if (address == null || address.trim().isEmpty())
+//			errorMsgs.add("請輸入地址");
+//
+//		String city = req.getParameter("city");
+//
+//		String area = req.getParameter("area");
+//
+//		String gAddress = city + area + address;
 
 		Integer status = Integer.valueOf(req.getParameter("status"));
 
-		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
+//		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
 
-		String gUsername = req.getParameter("gUsername");
-		String gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
-		if (gUsername == null || gUsername.trim().length() == 0) {
-			errorMsgs.add("會員帳號: 請勿空白");
-		} else if (!gUsername.trim().matches(gUsernameReg)) { // 以下練習正則(規)表示式(regular-expression)
-			errorMsgs.add("會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
-		}
-		
-		String gPassword = req.getParameter("gPassword");
-		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
-		if (gPassword == null || gPassword.trim().length() == 0) {
-			errorMsgs.add("管理員密碼: 請勿空白");
-		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
-		}
+//		String gUsername = req.getParameter("gUsername");
+//		String gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
+//		if (gUsername == null || gUsername.trim().length() == 0) {
+//			errorMsgs.add("會員帳號: 請勿空白");
+//		} else if (!gUsername.trim().matches(gUsernameReg)) { // 以下練習正則(規)表示式(regular-expression)
+//			errorMsgs.add("會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
+//		}
+//		
+//		String gPassword = req.getParameter("gPassword");
+//		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
+//		if (gPassword == null || gPassword.trim().length() == 0) {
+//			errorMsgs.add("管理員密碼: 請勿空白");
+//		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
+//			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
+//		}
 
-		String gIDNum = req.getParameter("gIDNum");
-		String idnoRegex = "^[A-Z][12][0-9]{8}$";
-		if (gIDNum == null || gIDNum.trim().isEmpty()) {
-			errorMsgs.add("身份證: 請勿空白");
-		} else if (!gIDNum.trim().matches(idnoRegex)) {
-			errorMsgs.add("請輸入正確的身份證格式");
-		}
+//		String gIDNum = req.getParameter("gIDNum");
+//		String idnoRegex = "^[A-Z][12][0-9]{8}$";
+//		if (gIDNum == null || gIDNum.trim().isEmpty()) {
+//			errorMsgs.add("身份證: 請勿空白");
+//		} else if (!gIDNum.trim().matches(idnoRegex)) {
+//			errorMsgs.add("請輸入正確的身份證格式");
+//		}
 		
 		// 再問問格式驗證!
-				String nicknameID = req.getParameter("nicknameID");
-				String nickReg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\\w\\s]).{10}$";
-				if (nicknameID == null || nicknameID.trim().isEmpty()) {
-					nicknameID = null;
-				} else if (!nicknameID.trim().matches(nickReg)) {
-					errorMsgs.add("請輸入正確的匿名ID格式");
-				}
+//				String nicknameID = req.getParameter("nicknameID");
+//				String nickReg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\\w\\s]).{10}$";
+//				if (nicknameID == null || nicknameID.trim().isEmpty()) {
+//					nicknameID = null;
+//				} else if (!nicknameID.trim().matches(nickReg)) {
+//					errorMsgs.add("請輸入正確的匿名ID格式");
+//				}
 
-		Integer gPostAmount = Integer.valueOf(req.getParameter("gPostAmount"));
+//		Integer gPostAmount = Integer.valueOf(req.getParameter("gPostAmount"));
+//
+//		Integer commentAmount = Integer.valueOf(req.getParameter("commentAmount"));
+//
+//		Integer gReportCnt = Integer.valueOf(req.getParameter("gReportCnt"));
 
-		Integer commentAmount = Integer.valueOf(req.getParameter("commentAmount"));
+//		Date gRegistDate = null;
+//		try {
+//			gRegistDate = java.sql.Date.valueOf(req.getParameter("gRegistDate").trim());
+//		} catch (IllegalArgumentException e) {
+//			gRegistDate = new java.sql.Date(System.currentTimeMillis());
+//			errorMsgs.add("請輸入日期!");
+//		}
+//		
+//		Date gBirth = null;
+//		try {
+//			gBirth = java.sql.Date.valueOf(req.getParameter("gBirth").trim());
+//		} catch (IllegalArgumentException e) {
+//			errorMsgs.add("請輸入生日!");
+//		}
+//
+//		Integer yoyakuCnt = Integer.valueOf(req.getParameter("yoyakuCnt"));
+//
+//		byte[] gProfilePic = null;
 
-		Integer gReportCnt = Integer.valueOf(req.getParameter("gReportCnt"));
-
-		Date gRegistDate = null;
-		try {
-			gRegistDate = java.sql.Date.valueOf(req.getParameter("gRegistDate").trim());
-		} catch (IllegalArgumentException e) {
-			gRegistDate = new java.sql.Date(System.currentTimeMillis());
-			errorMsgs.add("請輸入日期!");
-		}
-		
-		Date gBirth = null;
-		try {
-			gBirth = java.sql.Date.valueOf(req.getParameter("gBirth").trim());
-		} catch (IllegalArgumentException e) {
-			errorMsgs.add("請輸入生日!");
-		}
-
-		Integer yoyakuCnt = Integer.valueOf(req.getParameter("yoyakuCnt"));
-
-		byte[] gProfilePic = null;
-
-		GeneralUser generalUser = new GeneralUser();
+//		GeneralUser generalUser = new GeneralUser();
 		generalUser.setgUserID(gUserID);
-		generalUser.setgName(gName);
-		generalUser.setgTelephone(gTelephone);
-		generalUser.setgEmail(gEmail);
-		generalUser.setgAddress(gAddress);
+//		generalUser.setgName(gName);
+//		generalUser.setgTelephone(gTelephone);
+//		generalUser.setgEmail(gEmail);
+//		generalUser.setgAddress(gAddress);
 		generalUser.setStatus(status);
-		generalUser.setgGender(gGender);
-		generalUser.setgUsername(gUsername);
-		generalUser.setgPassword(gPassword);
-		generalUser.setgIDNum(gIDNum);
-		generalUser.setNicknameID(nicknameID);
-		generalUser.setgPostAmount(gPostAmount);
-		generalUser.setCommentAmount(commentAmount);
-		generalUser.setgReportCnt(gReportCnt);
-		generalUser.setgRegistDate(gRegistDate);
-		generalUser.setgBirth(gBirth);
-		generalUser.setYoyakuCnt(yoyakuCnt);
-		generalUser.setgProfilePic(gProfilePic);
+//		generalUser.setgGender(gGender);
+//		generalUser.setgUsername(gUsername);
+//		generalUser.setgPassword(gPassword);
+//		generalUser.setgIDNum(gIDNum);
+//		generalUser.setNicknameID(nicknameID);
+//		generalUser.setgPostAmount(gPostAmount);
+//		generalUser.setCommentAmount(commentAmount);
+//		generalUser.setgReportCnt(gReportCnt);
+//		generalUser.setgRegistDate(gRegistDate);
+//		generalUser.setgBirth(gBirth);
+//		generalUser.setYoyakuCnt(yoyakuCnt);
+//		generalUser.setgProfilePic(gProfilePic);
 		
 		
 		// Send the use back to the form, if there were errors

@@ -98,75 +98,75 @@ public class ContactUs {
 //
 //	}
 
-	public Integer getFormID() {
+	public Integer getformID() {
 		return formID;
 	}
 
-	public void setFormID(Integer formID) {
+	public void setformID(Integer formID) {
 		this.formID = formID;
 	}
 
-	public Integer getOUserID() {
+	public Integer getoUserID() {
 		return oUserID;
 	}
 
-	public void setOUserID(Integer oUserID) {
+	public void setoUserID(Integer oUserID) {
 		this.oUserID = oUserID;
 	}
 
-	public Integer getGUserID() {
+	public Integer getgUserID() {
 		return gUserID;
 	}
 
-	public void setGUserID(Integer gUserID) {
+	public void setgUserID(Integer gUserID) {
 		this.gUserID = gUserID;
 	}
 
-	public String getFormPurpose() {
+	public String getformPurpose() {
 		return formPurpose;
 	}
 
-	public void setFormPurpose(String formPurpose) {
+	public void setformPurpose(String formPurpose) {
 		this.formPurpose = formPurpose;
 	}
 
-	public String getFormContent() {
+	public String getformContent() {
 		return formContent;
 	}
 
-	public void setFormContent(String formContent) {
+	public void setformContent(String formContent) {
 		this.formContent = formContent;
 	}
 
-	public byte[] getFormPic() {
+	public byte[] getformPic() {
 		return formPic;
 	}
 
-	public void setFormPic(byte[] formPic) {
+	public void setformPic(byte[] formPic) {
 		this.formPic = formPic;
 	}
 
-	public Timestamp getFormTime() {
+	public Timestamp getformTime() {
 		return formTime;
 	}
 
-	public void setFormTime(Timestamp formTime) {
+	public void setformTime(Timestamp formTime) {
 		this.formTime = formTime;
 	}
 
-	public Integer getFormStatus() {
+	public Integer getformStatus() {
 		return formStatus;
 	}
 
-	public void setFormStatus(Integer formStatus) {
+	public void setformStatus(Integer formStatus) {
 		this.formStatus = formStatus;
 	}
 	
-	public Integer getFormType() {
+	public Integer getformType() {
 		return formType;
 	}
 
-	public void setFormType(Integer formType) {
+	public void setformType(Integer formType) {
 		this.formType = formType;
 	}
 }
