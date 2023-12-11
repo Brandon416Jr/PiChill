@@ -11,11 +11,11 @@ import org.hibernate.SessionFactory;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.util.HibernateUtil;
 
-public class ContactUsManageBlobInitializer {
+public class ContactUsBlobInitializer {
 
 	public static void main(String[] args) throws IOException {
 
-		File dir = new File("src/main/webapp/owneruser/pic/contactuspic");
+		File dir = new File("src/main/resources/formPic");
 		String[] fileNames = dir.list();
 		Arrays.sort(fileNames);
 
@@ -32,7 +32,7 @@ public class ContactUsManageBlobInitializer {
 				ContactUs contactUs = session.get(ContactUs.class, i + 22000001);
 
 				if (contactUs != null) {
-					contactUs.setFormPic(formPic);
+					contactUs.setformPic(formPic);
 				} else {
 					System.out.println("contactUs object with ID " + (i + 1) + " not found in the database.");
 				}

@@ -7,7 +7,7 @@ import com.pichill.contactus.model.ContactUsDAO;
 import com.pichill.contactus.model.ContactUsDAOImpl;
 
 
-public class ContactUsServiceImpl implements ContactUsService {
+public class ContactUsServiceImpl extends ContactUsService {
 	
 	private static final long PAGE_MAX_RESULT = 3;  
 	//“max-results”參數可讓您提前指定您希望接收的結果數量。最大值為10,000。若要取得超過10,000行的結果，必須使用分頁功能多次呼叫API。
@@ -17,13 +17,13 @@ public class ContactUsServiceImpl implements ContactUsService {
 		dao = new ContactUsDAOImpl();
 		
 	}
-		@Override
-		public ContactUs addContactUs(ContactUs contactUs) {
-			Integer id = dao.insert(contactUs);
-			contactUs = dao.getByFormID(id);
-			return contactUs;
-//			return dao.insert(contactUs);//返回給controller
-		}
+//		@Override
+//		public ContactUs addContactUs(ContactUs contactUs) {
+//			Integer id = dao.add(contactUs);
+//			contactUs = dao.getContactUsByFormID(id);
+//			return contactUs;
+//			return dao.add(contactUs);//返回給controller
+//		}
 
 //		public ContactUs addContactUs(String postTitle,String postContent,Integer postType) {
 //			ContactUs post = new Post();
@@ -44,40 +44,40 @@ public class ContactUsServiceImpl implements ContactUsService {
 		
 
 
-		@Override
-		public List<ContactUs> getContactUsByformPurpose(String formPurpose) {
-			return dao.getByPurpose(formPurpose);
-		}
-
-		@Override
-		public ContactUs updateContactUs(ContactUs contactUs) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public ContactUs getByPostID(Integer formID) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public List<ContactUs> getContactUsByformType(Integer formType) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		@Override
-		public List<ContactUs> getContactUsByformContent(String formContent) {
-			return dao.getByContent(formContent);
-		}
-
-		@Override
-		public List<ContactUs> getContactUsByformPic(byte[] formPic) {
-			return dao.getByformPic(formPic);
-		}
-		
-		@Override
-		public List<ContactUs> getAllContactUss() {
-			return dao.getAll();
-		}
+//		@Override
+//		public List<ContactUs> getContactUsByformPurpose(String formPurpose) {
+//			return dao.getByPurpose(formPurpose);
+//		}
+//
+//		@Override
+//		public ContactUs updateContactUs(ContactUs contactUs) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		@Override
+//		public ContactUs getByPostID(Integer formID) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		@Override
+//		public List<ContactUs> getContactUsByformType(Integer formType) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		@Override
+//		public List<ContactUs> getContactUsByformContent(String formContent) {
+//			return dao.getByContent(formContent);
+//		}
+//
+//		@Override
+//		public List<ContactUs> getContactUsByformPic(byte[] formPic) {
+//			return dao.getByformPic(formPic);
+//		}
+//		
+//		@Override
+//		public List<ContactUs> getAll() {
+//			return dao.getAll();
+//		}
 
 
 //		@Override
