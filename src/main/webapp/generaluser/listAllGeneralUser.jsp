@@ -68,14 +68,17 @@
 	<tr>
 		<th>會員編號</th>
 		<th>會員姓名</th>
-		<th>帳號(電子信箱)</th>
+		<th>帳號</th>
 		<th>密碼</th>
+		<th>暱稱</th>
+		<th>電子信箱</th>
 		<th>身分證字號</th>
 		<th>性別</th>
 		<th>出生年月日</th>
-		<th>聯絡電話</th>
+		<th>手機號碼</th>
 		<th>聯絡地址</th>
 		<th>帳號狀態</th>
+		<th>大頭貼</th>
 		<th>修改</th>
 <!-- 		<th>刪除</th> -->
 	</tr>
@@ -85,14 +88,18 @@
 		<tr>
 			<td>${generalUser.gUserID}</td>
 			<td>${generalUser.gName}</td>
-			<td>${generalUser.gEmail}</td>
+			<td>${generalUser.gUsername}</td>
 			<td>${generalUser.gPassword}</td>
+			<td>${generalUser.nicknameID}</td>
+			<td>${generalUser.gEmail}</td>
 			<td>${generalUser.gIDNum}</td>
-			<td>${generalUser.gGender}</td>
+			<td>${generalUser.gGender == 0 ? '男':'女'}</td>
 			<td>${generalUser.gBirth}</td>
 			<td>${generalUser.gTelephone}</td>
 			<td>${generalUser.gAddress}</td>
-			<td>${generalUser.status}</td> 
+			<td>${generalUser.status == 0 ? 'normal' : '討論版停權'}</td> 
+			<td>${generalUser.gProfilePic}</td>
+			
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="修改">
