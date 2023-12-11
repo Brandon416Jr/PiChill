@@ -3,9 +3,9 @@ package com.pichill.court;
 import java.util.List;
 
 	public interface CourtDAO{
-		void add(Court court);
-		void update(Court court);
+		int insert(Court court);
+		int update(Court court);
 		void delete(int courtID);
-		public Court findByPK(Integer courtID);
+		public Court getCourtByCourtID(Integer courtID);
 		public List<Court> getAll();
 	}

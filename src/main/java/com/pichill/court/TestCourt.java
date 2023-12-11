@@ -53,24 +53,24 @@ public class TestCourt {
 		System.out.println("---------------------");
 
 //		// 查詢多筆
-		List<Court>list = dao.getAll();
-		for (Court court:list) {
-			System.out.print(court.getCourtID() + ",");
-			System.out.print(court.getoUserID() + ",");
-			System.out.print(court.getManageID() + ",");
-			System.out.print(court.getCourtOnTime() + ",");
-			System.out.print(court.getCourtApplyTime() + ",");
-			System.out.print(court.getCourtName() + ",");
-			System.out.print(court.getCourtPic() + ",");
-			System.out.print(court.getCourtTelephone() + ",");
-			System.out.print(court.getCourtAddress() + ",");
-			System.out.print(court.getCourtRule() + ",");
-			System.out.print(court.getLoc() + ",");
-			System.out.print(court.getCourtApplyStatus() + ",");
-			System.out.print(court.getCourtOpenTime() + ",");
-			System.out.print(court.getCourtCloseTime() + ",");
-			
-			System.out.println();
-		}
+//		List<Court>list = dao.getAll();
+//		for (Court court:list) {
+//			System.out.print(court.getCourtID() + ",");
+//			System.out.print(court.getoUserID() + ",");
+//			System.out.print(court.getManageID() + ",");
+//			System.out.print(court.getCourtOnTime() + ",");
+//			System.out.print(court.getCourtApplyTime() + ",");
+//			System.out.print(court.getCourtName() + ",");
+//			System.out.print(court.getCourtPic() + ",");
+//			System.out.print(court.getCourtTelephone() + ",");
+//			System.out.print(court.getCourtAddress() + ",");
+//			System.out.print(court.getCourtRule() + ",");
+//			System.out.print(court.getLoc() + ",");
+//			System.out.print(court.getCourtApplyStatus() + ",");
+//			System.out.print(court.getCourtOpenTime() + ",");
+//			System.out.print(court.getCourtCloseTime() + ",");
+//			
+//			System.out.println();
+//		}
 	}
 }

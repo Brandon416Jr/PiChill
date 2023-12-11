@@ -33,7 +33,7 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 	}
 
 	@Override
-	public int insert(ContactUs entity) {
+	public int add(ContactUs entity) {
 //		SessionFactory factory2 = HibernateUtil.getSessionFactory();
 //		Session session = factory2.openSession();
 //		Transaction tx = session.beginTransaction();
@@ -72,38 +72,38 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 		}
 	}
 	@Override
-	public ContactUs getByFormID(Integer formID) {
+	public ContactUs getContactUsByFormID(Integer formID) {
 		getSession().clear();
 		return getSession().get(ContactUs.class,formID);
 	}
 	
-	@Override
-	public List<ContactUs> getByPurpose(String formPurpose) {
-		return getSession().createQuery("from ContactUs WHERE formPurpose like :formPurpose", ContactUs.class)
-	            .setParameter("formPurpose", "%"+formPurpose+"%")
-	            .list();
-	}
-	
-	@Override
-	public List<ContactUs> getByContent(String formContent) {
-		return getSession().createQuery("from ContactUs WHERE formContent like :formContent", ContactUs.class)
-	            .setParameter("formContent", "%"+formContent+"%")
-	            .list();
-	}
-	
-	@Override
-	public List<ContactUs> getByformPic(byte[] formPic) {
-		return getSession().createQuery("from ContactUs WHERE formPic like :formPic", ContactUs.class)
-	            .setParameter("formPic", "%"+formPic+"%")
-	            .list();
-	}
-	
-	@Override
-	public List<ContactUs> getByType(Integer formType) {
-	    return getSession().createQuery("from Post WHERE formType = :formType", ContactUs.class)
-	            .setParameter("postType", formType)
-	            .list();
-	}
+//	@Override
+//	public List<ContactUs> getByPurpose(String formPurpose) {
+//		return getSession().createQuery("from ContactUs WHERE formPurpose like :formPurpose", ContactUs.class)
+//	            .setParameter("formPurpose", "%"+formPurpose+"%")
+//	            .list();
+//	}
+//	
+//	@Override
+//	public List<ContactUs> getByContent(String formContent) {
+//		return getSession().createQuery("from ContactUs WHERE formContent like :formContent", ContactUs.class)
+//	            .setParameter("formContent", "%"+formContent+"%")
+//	            .list();
+//	}
+//	
+//	@Override
+//	public List<ContactUs> getByformPic(byte[] formPic) {
+//		return getSession().createQuery("from ContactUs WHERE formPic like :formPic", ContactUs.class)
+//	            .setParameter("formPic", "%"+formPic+"%")
+//	            .list();
+//	}
+//	
+//	@Override
+//	public List<ContactUs> getByType(Integer formType) {
+//	    return getSession().createQuery("from Post WHERE formType = :formType", ContactUs.class)
+//	            .setParameter("postType", formType)
+//	            .list();
+//	}
 
 	@Override
 	public List<ContactUs> getAll() {
