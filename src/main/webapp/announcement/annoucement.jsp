@@ -1,12 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.contactus.model.*"%>
+<%@ page import="com.pichill.announcementgetone.model.*"%>
 
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pichill聯絡我們</title>
+    <title>Pichill公告查詢</title>
     <link rel="stylesheet" href="./CSS1/bootstrap.min.css">
     <link rel="stylesheet" href="./CSS/index3.css">
     <link rel="stylesheet" href="./CSS/table.css">
@@ -57,26 +57,26 @@
 </c:if>
 
 <ul>
-  <li><a href='listAllContactUs.jsp'>List</a> all Form.  <br><br></li>
+  <li><a href='listAnnouncement.jsp'>List</a> all Form.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="contactus.do" ><!-- 送出成功後回到列表 -->
+    <FORM METHOD="post" ACTION="announcement.do" ><!-- 送出成功後回到列表 -->
         <b>輸入主旨:</b>
-        <input type="text" name="formTitle" >
+        <input type="text" name="annoTitle" >
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="contactus" scope="page" class="com.pichill.contactus.service.ContactUsServiceImpl" />
+  <jsp:useBean id="announcement" scope="page" class="com.pichill.announcementgetone.service.AnnouncementGetOneSvcImpl" />
    
   <li>
      <FORM METHOD="post" ACTION="contactus.do" >
-       <b>選擇要公告或一般事務:</b>
-       <select size="1" name="formType">
-         <c:forEach var="form" items="${contactUsService.all}" > 
-          <option value="${contactUs.formType}">${contactUs.formType}
+       <b>選擇要查詢之公告:</b>
+       <select size="1" name="announceID">
+         <c:forEach var="form" items="${announcementService.all}" > 
+          <option value="${announcement.annoTitle}">${announcement.annoTitle}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
