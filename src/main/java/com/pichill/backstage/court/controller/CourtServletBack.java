@@ -174,7 +174,7 @@ public class CourtServletBack extends HttpServlet {
 		} else {
 			CourtServiceBack service = new CourtServiceBack();
 			Court court2 = service.getOneCourt(courtID);
-			courtApplyStatus = court2.getCourtApplyStatus();
+			courtApplyStatus = court2.getcourtApplyStatus();
 		}
 		
 //		Court court = new Court();
@@ -189,7 +189,7 @@ public class CourtServletBack extends HttpServlet {
 //		court.setCourtAddress(courtAddress);
 //		court.setCourtRule(courtRule);
 //		court.setLoc(loc);
-		court.setCourtApplyStatus (courtApplyStatus );
+		court.setcourtApplyStatus (courtApplyStatus );
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {

@@ -16,12 +16,12 @@ private final CourtDAO dao;
 		dao = new CourtDAOImplBack();
 	}
 	
-	public void updateCourt(Court court) {
-		dao.update(court);
+	public int updateCourt(Court court) {
+		return dao.update(court);
 	}
 	
 	public Court getOneCourt(Integer courtID) {
-		return dao.findByPK(courtID);
+		return dao.getCourtByCourtID(courtID);
 	}
 	
 	public List<Court> getAll() {
