@@ -72,16 +72,24 @@
 		<td><%=generalUser.getgUserID()%></td>
 	</tr>
 <tr>
-		<td>會員姓名:</td>
+		<td>姓名:</td>
 		<td><input type="TEXT" name="gName" value="<%= (generalUser==null)? "劉晉歆" : generalUser.getgName()%>" size="45"/></td>
 	</tr>
 	<tr>
-		<td>帳號(電子信箱):</td>
-		<td><input type="TEXT" name="gEmail"   value="<%= (generalUser==null)? "carlisle1306@gmail.com" : generalUser.getgEmail()%>" size="45"/></td>
+		<td>帳號:</td>
+		<td><input type="TEXT" name="gUsername"   value="<%= (generalUser==null)? "jiojilellee" : generalUser.getgUsername()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>密碼:</td>
 		<td><input type="TEXT" name="gPassword"   value="<%= (generalUser==null)? "v3PBw9Rs" : generalUser.getgPassword()%>" size="45"/></td>
+	</tr>
+	<tr>
+		<td>暱稱:</td>
+		<td><input type="TEXT" name="nicknameID"   value="<%= (generalUser==null)? "bibibibibi" : generalUser.getNicknameID()%>" size="45"/></td>
+	</tr>
+	<tr>
+		<td>電子信箱:</td>
+		<td><input type="TEXT" name="gEmail"   value="<%= (generalUser==null)? "carlisle1306@gmail.com" : generalUser.getgEmail()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>身分證字號:</td>
@@ -97,23 +105,27 @@
 	</tr>
 	<tr>
 		<td>出生年月日:</td>
-		<td><input name="gBirth" id="f_date1" type="text" ></td>
+		<td><input name="gBirth" id="f_date1" type="text"></td>
 	</tr>
 	<tr>
-		<td>聯絡電話:</td>
+		<td>手機號碼:</td>
 		<td><input type="TEXT" name="gTelephone"   value="<%= (generalUser==null)? "0988059202" : generalUser.getgTelephone()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>聯絡地址:</td>
 		<td><input type="TEXT" name="gAddress"  value="<%= (generalUser==null)? "臺北市中山區新生北路3段40號6樓" : generalUser.getgAddress()%>" size="45"/></td>
 	</tr>
-	<tr>
+	<tr hidden>
 		<td>帳號狀態:<font color=red><b>*</b></font></td>
 		<td><select name="status">
 <!-- 			<option value="">選取狀態</option> -->
 			<option value="0">normal</option>
 			<option value="1">討論版停權</option>
 		</select></td>
+	</tr>
+	<tr>
+		<td>大頭貼:</td>
+		<td><%=generalUser.getgProfilePic()%></td>
 	</tr>
 
 </table>

@@ -38,15 +38,32 @@ header.header{
 
 
 /*=== header導覽列 ===*/
+
 .nav-link{
   color: white;
   margin: 15px;
+  font-weight: bold;
 }
 
 ul.nav.nav-pills{
   position: relative;
   right: 30px;
 }
+#head{
+  position: relative;
+  top:8px;
+}
+#heads{
+  position: relative;
+  top:5px;
+}
+/* header大頭貼剪裁成圓形 */
+img.rounded-circle{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+
 /*======================= body 區域 ============================*/
 div.main_content{
     margin: 0 auto;
@@ -96,13 +113,24 @@ aside.aside h2.h6{
 .my-2{
   font-size: 16px;
   color: #FF9F1B;
-  margin: 0 0 0 60px;
+  margin: 8px 0 8px 60px;
 }
 
 /*=== 下拉選單 ===*/
 .d-inline-flex{
   font-size: 16px;
   color: #207DCA;
+}
+
+/* 側邊欄 */
+aside.aside a.asidearea{
+  font-size: 16px;
+  color:#207DCA;
+  margin: 0 0 0 12px;
+  text-decoration:none;
+}
+aside.aside a.asidearea:hover{
+  color: #FF9F1B;
 }
 
 aside.aside div.parent_container{
@@ -163,6 +191,7 @@ form.bararea{
   margin: 0;
   padding: 0 0 0 8px;
   width: 800px;
+  /* height: 600px; */
 }
 
 input#reserveDate{
@@ -237,6 +266,11 @@ ul.pagination{
   left: 40%;
   width:170px;
 }
+
+li::marker{
+  width: 0;
+  height: 0;
+}
 /*======================= footer 區域 ============================*/
 footer.footer{
     /* border: 1px solid black;  */
@@ -244,6 +278,7 @@ footer.footer{
     /* width: 720px; */
     margin: 10px auto 0 auto;
     overflow: -moz-hidden-unscrollable;
+    z-index: 1;
 }
 
 @media (min-width: 576px) and (max-width: 767.98px){
@@ -257,6 +292,3 @@ footer.footer{
         width: 100%;
     }
 }
-
-
-
