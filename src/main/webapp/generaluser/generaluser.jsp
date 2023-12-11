@@ -86,7 +86,7 @@
 
 			<FORM METHOD="post" ACTION="generaluser.do" enctype="multipart/form-data" class="bararea">
                 <span>會員編號:</span>
-                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>"/>
+                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>" disabled/>
                 <br><br>
                 <span>姓名:</span>
                 <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "劉晉歆" : generalUser.getgName()%>"/>
@@ -107,7 +107,7 @@
                 <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "P130192176" : generalUser.getgIDNum()%>"/>
                 <br><br>
                 <span>性別:</span>
-                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? "0" : generalUser.getgGender()%>"/>
+                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? 0 : generalUser.getgGender()%>"/>
                 <br><br>
                 <span>出生年月日:</span>
                 <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1983-07-26" : generalUser.getgBirth()%>"/>
@@ -117,15 +117,27 @@
                 <br><br>
                 <span>聯絡地址:</span>
                 <input type="text" id="gAddress" name="gAddress" value="<%= (generalUser==null)? "臺北市中山區新生北路3段40號6樓" : generalUser.getgAddress()%>"/>
+                
+<!-- 				<div> -->
+<!-- 					<select id="city" name="city" required><option value="">請選擇縣市</option></select> -->
+<!-- 					<span class="custom-message">*請選擇縣市</span>  -->
+<!-- 					<select id="area" name="area" required><option value="">請選擇鄉鎮市區</option></select> -->
+<!-- 					<span class="custom-message">*請選擇鄉鎮市區</span> -->
+<!-- 				</div> -->
+											
+<!-- 				<div> -->
+<!-- 					<input type="text" id="text-input" name="mAddress" -->
+<%-- 					value="<%=(generalUser == null) ? "環河西路587號22樓" : generalUser.getgAddress()%>" --%>
+<!-- 					placeholder="請輸入聯絡地址" class="form-control" /> -->
+<!-- 				</div> -->
                 <br><br>
                 <span hidden>帳號狀態:</span>
-                <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? "0" : generalUser.getStatus()%>"/>
-                
-                <input type="file" id="gProfilePic" name="gProfilePic" onclick="previewImage()" multiple="multiple" />
+                <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? 0 : generalUser.getStatus()%>"/>
+                <br><br>
+                <span>大頭貼:</span><br>
                 <div id="blob_holder"><img src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${param.gUserID}" width="100px"></div>
+                <input type="file" id="gProfilePic" name="gProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
-                
-                
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="gUserID" value="<%=generalUser.getgUserID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">

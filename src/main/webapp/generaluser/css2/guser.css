@@ -68,29 +68,7 @@ input#gTelephone{
 input#gAddress{
     position: relative;
     left: 20px;
+    width: 300px;
 }
 
-
-/* 顯示預覽圖 */
-#preview-box {
-    max-width: 150px;
-    max-height: 150px;
-    overflow: hidden;
-    /* border: 1px solid black; */
-    position: relative;
-    left: 450px;
-    bottom: 580px;
-}
-
-#preview-img {
-    width: 100%;
-    height: auto;
-    /* border: 1px solid blue; */
-}
-#imageInput{
-    position: relative;
-    left: 450px;
-    bottom: 580px;
-    /* border: 1px solid green; */
-}
 

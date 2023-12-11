@@ -118,7 +118,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <span hidden>帳號狀態:</span>
                 <input type="hidden" id="status" name="status" value="${generalUser.status == 0 ? 'normal' : '討論版停權'}" disabled>
                 
-                <span>照片:</span>
+                <span>大頭貼:</span><br>
                 <input type="file" id="gProfilePic" name="gProfilePic" previewImage() multiple="multiple" hidden/>
                 <img src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" width="100px">
                 
