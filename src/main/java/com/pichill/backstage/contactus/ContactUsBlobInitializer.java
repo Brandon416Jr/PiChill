@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.pichill.contactus.entity.ContactUs;
+import com.pichill.backstage.contactus.entity.ContactUs;
 import com.pichill.util.HibernateUtil;
 
 public class ContactUsBlobInitializer {

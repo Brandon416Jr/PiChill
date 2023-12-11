@@ -2,6 +2,7 @@ package com.pichill.backstage.announcement.entity;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import org.hibernate.annotations.CreationTimestamp;
 @Entity
 @Table(name ="announcement")
 public class Announcement {
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "announceID", updatable = false)
@@ -129,6 +132,31 @@ public class Announcement {
 		return "Announcement [announceID=" + announceID + ", manageID=" + manageID + ", formID=" + formID
 				+ ", annoTitle=" + annoTitle + ", annoContent=" + annoContent + ", annoPic=" + Arrays.toString(annoPic)
 				+ ", annoTime=" + annoTime + ", annoStatus=" + annoStatus + "]";
+	}
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(annoPic);
+		result = prime * result
+				+ Objects.hash(annoContent, annoStatus, annoTime, annoTitle, announceID, formID, manageID);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Announcement other = (Announcement) obj;
+		return Objects.equals(annoContent, other.annoContent) && Arrays.equals(annoPic, other.annoPic)
+				&& Objects.equals(annoStatus, other.annoStatus) && Objects.equals(annoTime, other.annoTime)
+				&& Objects.equals(annoTitle, other.annoTitle) && Objects.equals(announceID, other.announceID)
+				&& Objects.equals(formID, other.formID) && Objects.equals(manageID, other.manageID);
 	}
 
 }

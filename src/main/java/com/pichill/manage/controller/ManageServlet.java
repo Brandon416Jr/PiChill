@@ -277,10 +277,10 @@ public class ManageServlet extends HttpServlet {
 	private String insert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("成功insert");
 		// 錯誤處理
-		Map<String, String[]> parameterMap = req.getParameterMap();
-		Manage manage = testUtil.paramMappingFunction(parameterMap, new Manage());
-		
-		System.out.println("manage:"+manage);
+//		Map<String, String[]> parameterMap = req.getParameterMap();
+//		Manage manage = testUtil.paramMappingFunction(parameterMap, new Manage());
+//		
+//		System.out.println("manage:"+manage);
 		
 		List<String> errorMsgs = new ArrayList<>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -354,12 +354,12 @@ public class ManageServlet extends HttpServlet {
 		String mAddress = city + area + address;
 
 		Date mHiredate = new java.sql.Date(System.currentTimeMillis());
-//					try {
-//						mHiredate = java.sql.Date.valueOf(req.getParameter("mHiredate").trim());
-//					} catch (IllegalArgumentException e) {
-//						mHiredate = new java.sql.Date(System.currentTimeMillis());
-//						errorMsgs.add("請輸入日期!");
-//					}
+		try {
+			mHiredate = java.sql.Date.valueOf(req.getParameter("mHiredate").trim());
+		} catch (IllegalArgumentException e) {
+			mHiredate = new java.sql.Date(System.currentTimeMillis());
+			errorMsgs.add("請輸入日期!");
+		}
 
 		String mID = req.getParameter("mID");
 		String idnoRegex = "^[A-Z][12][0-9]{8}$";
@@ -389,7 +389,7 @@ public class ManageServlet extends HttpServlet {
 		Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
 //				Integer mStatus = null;
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-//		Manage manage = new Manage();
+		Manage manage = new Manage();
 		manage.setmName(mName);
 		manage.setmUserName(mUserName);
 		manage.setmPassword(mPassword);

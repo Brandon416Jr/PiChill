@@ -1,5 +1,7 @@
 package com.pichill.frontstage.generaluser.model;
 
-public interface GeneralUserDAOFront {
+import com.pichill.generaluser.entity.GeneralUser;
 
+public interface GeneralUserDAOFront {
+	int insert(GeneralUser generalUser);
 }

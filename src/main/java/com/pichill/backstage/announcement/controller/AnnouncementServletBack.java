@@ -1,7 +1,7 @@
 package com.pichill.backstage.announcement.controller;
 
 import java.io.IOException;
-
+import java.io.InputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +19,14 @@ import com.pichill.backstage.announcement.service.AnnouncementServiceBack;
 
 
 
+
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "AnnouncementBServlet", value = "/announcement/announcementb.do")
 public class AnnouncementServletBack extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private AnnouncementServiceBack annoSvcB;
 
 	@Override
@@ -42,6 +47,12 @@ public class AnnouncementServletBack extends HttpServlet {
 
 		String action = req.getParameter("action");
 		String forwardPath = "";
+		
+		if(action != null){
+			  action.hashCode(); 
+			} else {
+				System.out.println("action為空值");
+			}
 		switch (action) {
 //		case "getOne_For_Display":
 //			// // 來自index.jsp的請求
@@ -86,56 +97,71 @@ public class AnnouncementServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
+		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
 
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 		if (manageID != null) {
 			manageID = Integer.valueOf(req.getParameter("manageID"));
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("manageID cannot null!");
 		}
 		
-		Integer formID = Integer.valueOf(req.getParameter("formID"));
-		if (formID != null) {
-			formID = Integer.valueOf(req.getParameter("formID"));
-		} else {
-			errorMsgs.add("not null!");
-		}
+//		Integer formID = Integer.valueOf(req.getParameter("formID"));
+//		if (formID != null) {
+//			formID = Integer.valueOf(req.getParameter("formID"));
+//		} else {
+//			errorMsgs.add("not null!");
+//		}
 		
 		String annoTitle = req.getParameter("annoTitle");
 		if (annoTitle != null) {
 			annoTitle = req.getParameter("annoTitle");
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("annoTitle cannot null!");
 		}
 		
 		String annoContent = req.getParameter("annoContent");
 		if (annoContent != null) {
 			annoContent = req.getParameter("annoContent");
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("annoContent cannot null!");
 		}
 		
+		InputStream in = req.getPart("annoPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
 		byte[] annoPic = null;
-		
-		Timestamp annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
-		if (req.getParameter("annoTime") != null) {
-			// 如果請求中有傳時間參數,使用該時間
-			annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
-		} else {
-			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
-			errorMsgs.add("not null!");
+		if(in.available()!=0){
+			annoPic = new byte[in.available()];
+			in.read(annoPic);
+			in.close();
+		}  else {
+			AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
+			annoPic = annoSvcB.getOneAnnouncement(announceID).getAnnoPic();
 		}
+		
+//		Timestamp annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
+//		if (req.getParameter("annoTime") != null) {
+//			// 如果請求中有傳時間參數,使用該時間
+//			annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
+//		} else {
+//			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
+//			errorMsgs.add("not null!");
+//		}
 		
 		Integer annoStatus = Integer.valueOf(req.getParameter("annoStatus"));
+		if (annoStatus == null) {
+			annoStatus = announcement.getAnnoStatus();
+		} else {
+			
+		}
 		
-		Announcement announcement = new Announcement();
+//		Announcement announcement = new Announcement();
 		announcement.setAnnounceID(announceID);
 		announcement.setManageID(manageID);
-		announcement.setFormID(formID);
+//		announcement.setFormID(formID);
 		announcement.setAnnoTitle(annoTitle);
 		announcement.setAnnoContent(annoContent);
 		announcement.setAnnoPic(annoPic);
-		announcement.setAnnoTime(annoTime);
+//		announcement.setAnnoTime(annoTime);
 		announcement.setAnnoStatus(annoStatus);
 
 		// Send the use back to the form, if there were errors
@@ -162,42 +188,51 @@ public class AnnouncementServletBack extends HttpServlet {
 		if (manageID != null) {
 			manageID = Integer.valueOf(req.getParameter("manageID"));
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("manageID not null!");
 		}
 		
 		Integer formID = Integer.valueOf(req.getParameter("formID"));
 		if (formID != null) {
 			formID = Integer.valueOf(req.getParameter("formID"));
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("formID not null!");
 		}
 		
 		String annoTitle = req.getParameter("annoTitle");
 		if (annoTitle != null) {
 			annoTitle = req.getParameter("annoTitle");
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("annoTitle not null!");
 		}
 		
 		String annoContent = req.getParameter("annoContent");
 		if (annoContent != null) {
 			annoContent = req.getParameter("annoContent");
 		} else {
-			errorMsgs.add("not null!");
+			errorMsgs.add("annoContent not null!");
 		}
 		
+		InputStream in = req.getPart("annoPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
 		byte[] annoPic = null;
+		if(in.available()!=0){
+			annoPic = new byte[in.available()];
+			in.read(annoPic);
+			in.close();
+		}  else errorMsgs.add("公告照片: 請上傳照片");
 		
-		Timestamp annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
-		if (req.getParameter("annoTime") != null) {
-			// 如果請求中有傳時間參數,使用該時間
-			annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
-		} else {
-			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
-			errorMsgs.add("not null!");
-		}
-		
+		Timestamp annoTime = null;
+//		if (req.getParameter("annoTime") != null) {
+//			// 如果請求中有傳時間參數,使用該時間
+//			annoTime = java.sql.Timestamp.valueOf(req.getParameter("annoTime").trim());
+//		} else {
+//			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
+//			errorMsgs.add("annoTime cannot null!");
+//		}
+//		
 		Integer annoStatus = Integer.valueOf(req.getParameter("annoStatus"));
+		if (annoStatus == null) {
+			errorMsgs.add("表單狀態: 請選擇");
+		}
 		
 		Announcement announcement = new Announcement();
 		announcement.setManageID(manageID);
@@ -207,6 +242,7 @@ public class AnnouncementServletBack extends HttpServlet {
 		announcement.setAnnoPic(annoPic);
 		announcement.setAnnoTime(annoTime);
 		announcement.setAnnoStatus(annoStatus);
+		
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("announcement", announcement); // 含有輸入格式錯誤的empVO物件,也存入req

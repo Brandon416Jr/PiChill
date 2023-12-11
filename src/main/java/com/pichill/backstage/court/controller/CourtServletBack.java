@@ -17,6 +17,7 @@ import com.pichill.backstage.contactus.service.ContactUsServiceBack;
 import com.pichill.backstage.court.service.CourtServiceBack;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.court.Court;
+import com.pichill.manage.entity.Manage;
 
 /**
  * Servlet implementation class CourtServletBack
@@ -87,84 +88,85 @@ public class CourtServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer courtID = Integer.valueOf(req.getParameter("courtID"));
+		Court court = courtSvcB.getOneCourt(courtID);
 		
-		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+//		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+//		
+//		Integer manageID;
+//		if(req.getParameter("manageID") != null) {
+//			manageID = Integer.valueOf(req.getParameter("manageID"));
+//		} else {
+//			manageID = null;
+//		}
+//		
+//		Timestamp courtOnTime;
+//		if (req.getParameter("courtOnTime") != null && !req.getParameter("courtOnTime").trim().equals("")) {
+//			// 如果請求中有傳時間參數,使用該時間
+//			courtOnTime = java.sql.Timestamp.valueOf(req.getParameter("courtOnTime").trim());
+//		} else {
+//			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtOnTime = court2.getCourtOnTime();
+//		}
+//		
+//		Timestamp courtApplyTime;
+//		if (req.getParameter("courtApplyTime") != null && !req.getParameter("courtApplyTime").trim().equals("")) {
+//			// 如果請求中有傳時間參數,使用該時間
+//			courtApplyTime = java.sql.Timestamp.valueOf(req.getParameter("courtApplyTime").trim());
+//		} else {
+//			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtApplyTime = court2.getCourtApplyTime();
+//		}
+//		
+//		String courtName;
+//		if (req.getParameter("courtName") != null) {
+//			courtName = req.getParameter("courtName");
+//		} else {
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtName = court2.getCourtName();
+//		}
 		
-		Integer manageID;
-		if(req.getParameter("manageID") != null) {
-			manageID = Integer.valueOf(req.getParameter("manageID"));
-		} else {
-			manageID = null;
-		}
+//		byte[] courtPic = null;
+//		
+//		String courtTelephone = req.getParameter("courtTelephone");
+//		if (req.getParameter("courtName") != null) {
+//			courtTelephone = req.getParameter("courtTelephone");
+//		} else {
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtTelephone = court2.getCourtTelephone();
+//		}
 		
-		Timestamp courtOnTime;
-		if (req.getParameter("courtOnTime") != null && !req.getParameter("courtOnTime").trim().equals("")) {
-			// 如果請求中有傳時間參數,使用該時間
-			courtOnTime = java.sql.Timestamp.valueOf(req.getParameter("courtOnTime").trim());
-		} else {
-			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtOnTime = court2.getCourtOnTime();
-		}
-		
-		Timestamp courtApplyTime;
-		if (req.getParameter("courtApplyTime") != null && !req.getParameter("courtApplyTime").trim().equals("")) {
-			// 如果請求中有傳時間參數,使用該時間
-			courtApplyTime = java.sql.Timestamp.valueOf(req.getParameter("courtApplyTime").trim());
-		} else {
-			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtApplyTime = court2.getCourtApplyTime();
-		}
-		
-		String courtName;
-		if (req.getParameter("courtName") != null) {
-			courtName = req.getParameter("courtName");
-		} else {
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtName = court2.getCourtName();
-		}
-		
-		byte[] courtPic = null;
-		
-		String courtTelephone = req.getParameter("courtTelephone");
-		if (req.getParameter("courtName") != null) {
-			courtTelephone = req.getParameter("courtTelephone");
-		} else {
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtTelephone = court2.getCourtTelephone();
-		}
-		
-		String courtAddress = req.getParameter("courtAddress");
-		if (req.getParameter("courtAddress") != null) {
-			courtAddress = req.getParameter("courtAddress");
-		} else {
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtAddress = court2.getCourtAddress();
-		}
-		
-		String courtRule = req.getParameter("courtRule");
-		if (req.getParameter("courtRule") != null) {
-			courtTelephone = req.getParameter("courtRule");
-		} else {
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			courtRule = court2.getCourtRule();
-		}
-		
-		String loc = req.getParameter("loc");
-		if (req.getParameter("loc") != null) {
-			courtTelephone = req.getParameter("loc");
-		} else {
-			CourtServiceBack service = new CourtServiceBack();
-			Court court2 = service.getOneCourt(courtID);
-			loc = court2.getLoc();
-		}
+//		String courtAddress = req.getParameter("courtAddress");
+//		if (req.getParameter("courtAddress") != null) {
+//			courtAddress = req.getParameter("courtAddress");
+//		} else {
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtAddress = court2.getCourtAddress();
+//		}
+//		
+//		String courtRule = req.getParameter("courtRule");
+//		if (req.getParameter("courtRule") != null) {
+//			courtTelephone = req.getParameter("courtRule");
+//		} else {
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			courtRule = court2.getCourtRule();
+//		}
+//		
+//		String loc = req.getParameter("loc");
+//		if (req.getParameter("loc") != null) {
+//			courtTelephone = req.getParameter("loc");
+//		} else {
+//			CourtServiceBack service = new CourtServiceBack();
+//			Court court2 = service.getOneCourt(courtID);
+//			loc = court2.getLoc();
+//		}
 
 		Integer courtApplyStatus;
 		if(req.getParameter("courtApplyStatus") != null) {
@@ -175,18 +177,18 @@ public class CourtServletBack extends HttpServlet {
 			courtApplyStatus = court2.getCourtApplyStatus();
 		}
 		
-		Court court = new Court();
+//		Court court = new Court();
 		court.setCourtID(courtID);
-		court.setoUserID(oUserID);
-		court.setManageID(manageID);
-		court.setCourtOnTime(courtOnTime);
-		court.setCourtApplyTime(courtApplyTime);
-		court.setCourtName(courtName);
-		court.setCourtPic(courtPic);
-		court.setCourtTelephone(courtTelephone);
-		court.setCourtAddress(courtAddress);
-		court.setCourtRule(courtRule);
-		court.setLoc(loc);
+//		court.setoUserID(oUserID);
+//		court.setManageID(manageID);
+//		court.setCourtOnTime(courtOnTime);
+//		court.setCourtApplyTime(courtApplyTime);
+//		court.setCourtName(courtName);
+//		court.setCourtPic(courtPic);
+//		court.setCourtTelephone(courtTelephone);
+//		court.setCourtAddress(courtAddress);
+//		court.setCourtRule(courtRule);
+//		court.setLoc(loc);
 		court.setCourtApplyStatus (courtApplyStatus );
 
 		// Send the use back to the form, if there were errors
