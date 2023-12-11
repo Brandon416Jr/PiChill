@@ -7,13 +7,12 @@
 //import javax.servlet.ServletException;
 //import javax.servlet.ServletRequest;
 //import javax.servlet.ServletResponse;
-//import javax.servlet.annotation.WebFilter;
 //
 //import org.hibernate.SessionFactory;
 //
 //import com.pichill.util.HibernateUtil;
 //
-//@WebFilter(urlPatterns = { "/*" })
+//
 //public class OpenSessionInViewFilter implements Filter {
 //
 //	@Override

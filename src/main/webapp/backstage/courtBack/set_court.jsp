@@ -47,6 +47,9 @@ Court court = (Court) request.getAttribute("court");
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set_form.css"
 	media="all" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
+	media="all" />
 <style></style>
 </head>
 <body class="animsition">
@@ -70,8 +73,7 @@ Court court = (Court) request.getAttribute("court");
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/new_gUser.jsp">新增會員資料</a></li>
+							
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>企業會員管理
@@ -79,19 +81,18 @@ Court court = (Court) request.getAttribute("court");
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/new_oUser.jsp">新增會員資料</a></li>
+								
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>最新消息管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/form.jsp">表單管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announce.jsp">公告管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announce.jsp">新增公告</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>論壇管理
@@ -102,7 +103,7 @@ Court court = (Court) request.getAttribute("court");
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/postBack/all_comment.jsp">所有留言</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/report.jsp">檢舉管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/postBack/all_report.jsp">檢舉管理</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>球館管理
@@ -113,10 +114,13 @@ Court court = (Court) request.getAttribute("court");
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
 							</ul></li>
-						<li class="has-sub"><a
-							href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">
-								<i class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
+						<li class="has-sub"><a class="js-arrow" href="#">
+									<i class="fas fa-tachometer-alt"></i>預約管理
+							</a>
+							<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
+								</ul></li>
 					</ul>
 				</nav>
 			</div>
@@ -132,12 +136,25 @@ Court court = (Court) request.getAttribute("court");
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<div class="header-logo">
-							<a href="<%=request.getContextPath()%>/backstage/index.jsp"><img
+							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
 								class="img-logo"
 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
 <!-- 							<a href="index.html"><img class="img-logo"  -->
 <%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 						</div>
+						
+						<div class="welcome">
+								<div class="flex">
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+									<p class="welcome">π Chill後臺管理系統</p>
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+								</div>
+							</div>
+						
 						<div class="header-button">
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -212,7 +229,7 @@ Court court = (Court) request.getAttribute("court");
 								</c:forEach>
 							</ul>
 						</c:if>
-						<form action="courtb.do" method="post" enctype="multipart/form-data"
+						<form action="${pageContext.request.contextPath }/court/courtb.do" method="post" enctype="multipart/form-data"
 							class="form-horizontal">
 							<div class="card-body">
 								<div class="row">
@@ -295,6 +312,11 @@ Court court = (Court) request.getAttribute("court");
 														class="form-control-file" /> <img id="imagePreview"
 														src="#" alt="Preview" width="100px" />
 												</div>
+												<div id="blob_holder">
+														<img
+															src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${court.courtID}"
+															width="100px">
+													</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
@@ -311,8 +333,8 @@ Court court = (Court) request.getAttribute("court");
 													<label for="text-input" class="form-control-label">球館地址</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" name="text-input"
-														placeholder="新北市土城區土城路一段113號2樓" class="form-control" />
+													<input type="text" id="text-input" name="text-input" disabled="disabled"
+														value="<%=court.getCourtAddress()%>"  class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>

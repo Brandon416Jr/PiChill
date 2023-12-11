@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.pichill.contactus.entity.ContactUs;
-import com.pichill.contactus.model.ContactUsDAO;
+import com.pichill.backstage.contactus.entity.ContactUs;
+import com.pichill.backstage.contactus.model.ContactUsDAOBack;
 import com.pichill.util.HibernateUtil;
 
-public class ContactUsDAOImplBack implements ContactUsDAO {
+public class ContactUsDAOImplBack implements ContactUsDAOBack {
 	@Override
 	public List<ContactUs> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -31,10 +31,12 @@ public class ContactUsDAOImplBack implements ContactUsDAO {
 			session.beginTransaction();
 			session.update(contactUs);
 			session.getTransaction().commit();
+			System.out.println("交易成功");
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+			System.out.println("交易失敗");
 		}
 		return -1;
 	}
@@ -56,43 +58,5 @@ public class ContactUsDAOImplBack implements ContactUsDAO {
 		return null;
 	}
 	
-	
-	
-
-	@Override
-	public int delete(Integer formID) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-	
-	@Override
-	public List<ContactUs> getByPurpose(String formPurpose) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ContactUs> getByContent(String formContent) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ContactUs> getByformPic(byte[] formPic) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ContactUs> getByType(Integer formType) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int insert(ContactUs entity) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

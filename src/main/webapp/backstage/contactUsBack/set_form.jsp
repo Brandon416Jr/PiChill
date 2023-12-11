@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.contactus.entity.ContactUs"%>
+<%@ page import="com.pichill.backstage.contactus.entity.ContactUs"%>
 
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
@@ -48,6 +48,9 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set_form.css"
 	media="all" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
+	media="all" />
 <style></style>
 </head>
 
@@ -72,8 +75,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/new_gUser.jsp">新增會員資料</a></li>
+
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>企業會員管理
@@ -81,19 +83,18 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/new_oUser.jsp">新增會員資料</a></li>
+								
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>最新消息管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/form.jsp">表單管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announce.jsp">公告管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announce.jsp">新增公告</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>論壇管理
@@ -115,10 +116,13 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
 							</ul></li>
-						<li class="has-sub"><a
-							href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">
-								<i class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
+						<li class="has-sub"><a class="js-arrow" href="#">
+									<i class="fas fa-tachometer-alt"></i>預約管理
+							</a>
+							<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
+								</ul></li>
 					</ul>
 				</nav>
 			</div>
@@ -134,12 +138,25 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<div class="header-logo">
-							<a href="<%=request.getContextPath()%>/backstage/index.jsp"><img
+							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
 								class="img-logo"
 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
 <!-- 							<a href="index.html"><img class="img-logo"  -->
 <%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 						</div>
+						
+						<div class="welcome">
+								<div class="flex">
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+									<p class="welcome">π Chill後臺管理系統</p>
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+								</div>
+							</div>
+						
 						<div class="header-button">
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -218,7 +235,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 								<div class="col-lg-12">
 									<div class="card-body card-block">
 										<form
-											action="contactusb.do"
+											action="${pageContext.request.contextPath }/contactus/contactusb.do"
 											method="post" enctype="multipart/form-data"
 											class="form-horizontal">
 											<div class="row form-group">
@@ -237,7 +254,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="oUserID" value="<%=contactUs.getOUserID()%>"
+														name="oUserID" value="<%=contactUs.getoUserID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -247,7 +264,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="gUserID" value="<%=contactUs.getGUserID()%>"
+														name="gUserID" value="<%=contactUs.getgUserID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -284,11 +301,11 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 														multiple="multiple" onclick="previewImage()"
 														class="form-control-file" /> <img id="imagePreview"
 														src="#" alt="Preview" width="100px" />
-<!-- 													<div id="blob_holder"> -->
-<!-- 														<img -->
-<%-- 															src="<%=request.getContextPath()%>/contactus/DBGifReader?formID=${param.manageID}" --%>
-<!-- 															width="100px"> -->
-<!-- 													</div> -->
+													<div id="blob_holder">
+														<img
+															src="<%=request.getContextPath()%>/contactus/DBGifReader?formID=${contactUs.formID}"
+															width="100px">
+													</div>
 												</div>
 											</div>
 											<div class="row form-group">
