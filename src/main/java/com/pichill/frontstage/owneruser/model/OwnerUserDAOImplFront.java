@@ -3,6 +3,7 @@ package com.pichill.frontstage.owneruser.model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
@@ -36,5 +37,20 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 					}
 				}
 				return -1;
+	}
+	
+	@Override
+	public OwnerUser findByPK(Integer oUserID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			OwnerUser ownerUser = session.get(OwnerUser.class, oUserID);
+			session.getTransaction().commit();
+			return ownerUser;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
 	}
 }

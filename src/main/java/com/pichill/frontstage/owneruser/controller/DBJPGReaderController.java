@@ -1,4 +1,4 @@
-package com.pichill.backstage.court.controller;
+package com.pichill.frontstage.owneruser.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,21 +9,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.pichill.backstage.court.service.CourtServiceBack;
 
-@WebServlet("/court/DBJPGReader")
+import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
+
+@WebServlet("/owneruserf/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+private static final long serialVersionUID = 1L;
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		res.setContentType("image/jpg");
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
-			Integer courtID = Integer.valueOf(req.getParameter("courtID"));
-			CourtServiceBack courtSvcB = new CourtServiceBack();
-			out.write(courtSvcB.getOneCourt(courtID).getcourtPic());
+			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+			OwnerUserServiceFront oUserSvcF = new OwnerUserServiceFront();
+			out.write(oUserSvcF.getOneOwnerUser(oUserID).getoProfilePic());
 		} catch (Exception e) {
 			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");

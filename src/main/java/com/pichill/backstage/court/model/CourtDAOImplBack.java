@@ -15,18 +15,20 @@ public class CourtDAOImplBack implements CourtDAO{
 	
 
 	@Override
-	public void update(Court court) {
+	public int update(Court court) {
 		// TODO Auto-generated method stub
 				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 				try {
 					session.beginTransaction();
 					session.update(court);
 					session.getTransaction().commit();
+					return 1;
 					
 				} catch (Exception e) {
 					e.printStackTrace();
 					session.getTransaction().rollback();
 				}
+				return -1;
 			
 		
 	}
@@ -47,7 +49,7 @@ public class CourtDAOImplBack implements CourtDAO{
 	}
 	
 	@Override
-	public Court findByPK(Integer courtID) {
+	public Court getCourtByCourtID(Integer courtID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
@@ -75,8 +77,9 @@ public class CourtDAOImplBack implements CourtDAO{
 	
 	
 	@Override
-	public void add(Court court) {
+	public int insert(Court court) {
 		// TODO Auto-generated method stub
+		return 0;
 		
 	}
 

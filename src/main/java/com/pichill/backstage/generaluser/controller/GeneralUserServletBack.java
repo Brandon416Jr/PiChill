@@ -133,9 +133,9 @@ public class GeneralUserServletBack extends HttpServlet {
 //		String gPassword = req.getParameter("gPassword");
 //		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 //		if (gPassword == null || gPassword.trim().length() == 0) {
-//			errorMsgs.add("管理員密碼: 請勿空白");
+//			errorMsgs.add("密碼: 請勿空白");
 //		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
+//			errorMsgs.add("密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 //		}
 
 //		String gIDNum = req.getParameter("gIDNum");
