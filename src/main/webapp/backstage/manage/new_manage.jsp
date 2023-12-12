@@ -43,7 +43,11 @@ Manage manage = (Manage) request.getAttribute("manage");
 	rel="stylesheet" media="all" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css" />
+	<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
+	media="all" />
 <style>
+
 /* 錯誤提示框樣式 */
 input:invalid, select:invalid {
 	box-shadow: none;
@@ -85,8 +89,7 @@ select:invalid+.custom-message {
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/new_gUser.jsp">新增會員資料</a></li>
+								
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>企業會員管理
@@ -94,19 +97,18 @@ select:invalid+.custom-message {
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/new_oUser.jsp">新增會員資料</a></li>
+								
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>最新消息管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/form.jsp">表單管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announce.jsp">公告管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announce.jsp">新增公告</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>論壇管理
@@ -117,7 +119,7 @@ select:invalid+.custom-message {
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/postBack/all_comment.jsp">所有留言</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/report.jsp">檢舉管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/postBack/all_report.jsp">檢舉管理</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>球館管理
@@ -128,10 +130,13 @@ select:invalid+.custom-message {
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
 							</ul></li>
-						<li class="has-sub"><a
-							href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">
-								<i class="fas fa-tachometer-alt"></i>預約管理
-						</a></li>
+						<li class="has-sub"><a class="js-arrow" href="#">
+									<i class="fas fa-tachometer-alt"></i>預約管理
+							</a>
+							<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
+								</ul></li>
 					</ul>
 				</nav>
 			</div>
@@ -147,12 +152,25 @@ select:invalid+.custom-message {
 				<div class="container-fluid">
 					<div class="header-wrap">
 						<div class="header-logo">
-							<a href="<%=request.getContextPath()%>/backstage/index.jsp"><img
+							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
 								class="img-logo"
 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
 <!-- 							<a href="index.html"><img class="img-logo"  -->
 <%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 						</div>
+						
+						<div class="welcome">
+								<div class="flex">
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+									<p class="welcome">π Chill後臺管理系統</p>
+									<div class="s-logo">
+										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+									</div>
+								</div>
+							</div>
+						
 						<div class="header-button">
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
@@ -177,7 +195,7 @@ select:invalid+.custom-message {
 <!-- 											alt="使用者頭像" />  -->
 												<img
 													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="John Doe" />
+													alt="" />
 												</a>
 											</div>
 											<div class="content">
@@ -229,8 +247,8 @@ select:invalid+.custom-message {
 						</div>
 
 
-						<FORM ACTION="manage.do" METHOD="post"
-							enctype="multipart/form-data" name= "form1">
+						<FORM ACTION="${pageContext.request.contextPath }/manage/manage.do" METHOD="post"
+							enctype="multipart/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">

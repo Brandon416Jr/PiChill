@@ -1,37 +1,48 @@
 需要有照片:  announcement、contactUs、court、generalUser、ownerUser、manage、post
 
-@CreationTimestamp
-
-generalUser [registDate] => insertable = "false", updatable = "false"
-generalUser [gBirth, gIDNum, gGender] => updatable = "false"
-
-ownerUser [registerDate] => insertable = "false", updatable = "false"
-ownerUser [oBirth, oIDNum, oGender] => updatable = "false"
-
-manage [mHiredate, mGender, mBirth] => updatable = "false"
-
-court [courtApplyTime] => insertable = "false", updatable = "false"
-court [courtOnTime] => updatable = "false"
-
-place [courtID] => updatable = "false"
-
-post [postTime, oUserID, gUserID] => insertable = "false", updatable = "false"
-
-contactUs [formTime] => insertable = "false", updatable = "false"
-contactUs [formType, formPurpose, formContent, formPic, gUserID, oUserID] => updatable = "false"
-
-announcement [annoTime] => insertable = "false", updatable = "false"
-
-comment [commentTime, gUserID, postID] => updatable = "false"
-
-report [reportTime] => insertable = "false", updatable = "false"
-report [manageID, commentID, postID] => updatable = "false"
-
-forumPic [picTime] => insertable = "false", updatable = "false"
-forumPic [postID] => updatable = "false"
-
-reserveOrder [orderTime] => insertable = "false", updatable = "false"
-reserveOrder [oUserID, gUserID, timeID, placeID, orderNum, totalCost] => updatable = "false"
-
 測試:
-all_comment成功
+manage: 
+修改、列全部: done
+新增: done
+
+generalUser: 
+列全部: done
+修改: done
+
+ownerUser: 
+列全部: done
+修改: done
+
+contactUs: 
+列全部: done
+修改: done
+
+announcement: 
+列全部: done
+修改: done
+新增: done
+
+post: 
+列全部: done
+刪除: 因為FK問題無法刪除 之後要join comment table
+
+comment: 
+列全部: done
+刪除: done
+
+report:
+列全部: done
+刪除: done
+
+reserveOrder: 
+列全部: done
+修改: done
+
+place: 
+列全部: done
+
+court: 
+列全部: done
+修改: done
+
+共通問題: 點進修改時，圖片顯示原本的資料

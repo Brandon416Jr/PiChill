@@ -1,12 +1,40 @@
+
+#form1{
+    width: 400px;
+}
+#btn1{
+    width: 60px;
+    height: 30px;
+}
+
+/* 側邊欄 */
+aside.aside a.asidearea{
+    font-size: 16px;
+    color:#207DCA;
+    margin: 0 0 0 12px;
+    text-decoration:none;
+}
+aside.aside a.asidearea:hover{
+    color: #FF9F1B;
+}
+
 /* input 設定 */
 input{
     width: 213px;
+}
+input#guserID{
+    position: relative;
+    left: 20px;
 }
 input#gName{
     position: relative;
     left: 50px;
 }
 input#gUsername{
+    position: relative;
+    left: 50px;
+}
+input#nicknameID{
     position: relative;
     left: 50px;
 }
@@ -48,10 +76,10 @@ input#gAddress{
     max-width: 150px;
     max-height: 150px;
     overflow: hidden;
-    /* border: 1px solid red; */
+    /* border: 1px solid black; */
     position: relative;
     left: 450px;
-    bottom: 475px;
+    bottom: 580px;
 }
 
 #preview-img {
@@ -62,8 +90,7 @@ input#gAddress{
 #imageInput{
     position: relative;
     left: 450px;
-    bottom: 475px;
+    bottom: 580px;
     /* border: 1px solid green; */
 }
-
 

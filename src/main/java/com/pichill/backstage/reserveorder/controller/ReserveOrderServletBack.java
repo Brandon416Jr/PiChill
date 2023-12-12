@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.backstage.generaluser.service.GeneralUserServiceBack;
 import com.pichill.backstage.reserveorder.service.ReserveOrderServiceBack;
 import com.pichill.generaluser.entity.GeneralUser;
@@ -67,6 +68,7 @@ public class ReserveOrderServletBack extends HttpServlet {
 	private String getOneUpdate(HttpServletRequest req, HttpServletResponse res) {
 //		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 //		req.setAttribute("errorMsgs", errorMsgs);
+		System.out.println("成功getOneUpdate");
 		Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
 
 		ReserveOrder reserveOrder = reserveOrderSvcB.getOneReserveOrder(reserveOrderID);
@@ -82,48 +84,52 @@ public class ReserveOrderServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
+		ReserveOrder reserveOrder = reserveOrderSvcB.getOneReserveOrder(reserveOrderID);
 
-		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-		
-		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
-
-		Date reserveDate = null;
-		try {
-			reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-		} catch (IllegalArgumentException e) {
-			errorMsgs.add("請輸入日期!");
-		}
-		
-		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
-
-		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
-
-		Timestamp orderTime = java.sql.Timestamp.valueOf(req.getParameter("orderTime").trim());
-		if (req.getParameter("orderTime") != null) {
-			// 如果請求中有傳時間參數,使用該時間
-			orderTime = java.sql.Timestamp.valueOf(req.getParameter("orderTime").trim());
-		} else {
-			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
-			errorMsgs.add("not null!");
-		}
-
-		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
+//		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+//		
+//		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+//
+//		Date reserveDate = null;
+//		try {
+//			reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
+//		} catch (IllegalArgumentException e) {
+//			errorMsgs.add("請輸入日期!");
+//		}
+//		
+//		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
+//
+//		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
+//
+//		Timestamp orderTime = java.sql.Timestamp.valueOf(req.getParameter("orderTime").trim());
+//		if (req.getParameter("orderTime") != null) {
+//			// 如果請求中有傳時間參數,使用該時間
+//			orderTime = java.sql.Timestamp.valueOf(req.getParameter("orderTime").trim());
+//		} else {
+//			// 如果請求沒有傳時間參數,查詢資料庫中原有的時間
+//			errorMsgs.add("not null!");
+//		}
+//
+//		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
 
 		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus"));
+		if (orderStatus == null) {
+			errorMsgs.add("orderStatus cannot be null!");
+		}
 		
-		Integer totalCost = Integer.valueOf(req.getParameter("totalCost"));
+//		Integer totalCost = Integer.valueOf(req.getParameter("totalCost"));
 
-		ReserveOrder reserveOrder = new ReserveOrder();
+//		ReserveOrder reserveOrder = new ReserveOrder();
 		reserveOrder.setReserveOrderID(reserveOrderID);
-		reserveOrder.setgUserID(gUserID);
-		reserveOrder.setoUserID(oUserID);
-		reserveOrder.setReserveDate(reserveDate);
-		reserveOrder.setTimeID(timeID);
-		reserveOrder.setPlaceID(placeID);
-		reserveOrder.setOrderTime(orderTime);
-		reserveOrder.setOrderNum(orderNum);
+//		reserveOrder.setgUserID(gUserID);
+//		reserveOrder.setoUserID(oUserID);
+//		reserveOrder.setReserveDate(reserveDate);
+//		reserveOrder.setTimeID(timeID);
+//		reserveOrder.setPlaceID(placeID);
+//		reserveOrder.setOrderTime(orderTime);
+//		reserveOrder.setOrderNum(orderNum);
 		reserveOrder.setOrderStatus(orderStatus);
-		reserveOrder.setTotalCost(totalCost);
+//		reserveOrder.setTotalCost(totalCost);
 
 
 
