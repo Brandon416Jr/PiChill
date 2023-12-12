@@ -36,7 +36,7 @@
                 <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/pic/face.svg" alt="SVG"/> 會員中心</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
 
               
@@ -55,12 +55,15 @@
                         <li class="my-2">
                           <a class="asidearea" href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp">會員資料</a> 
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">球館預約紀錄</a>                         
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">聯絡我們</a>                         
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">登出</a>                           
                         </li>
@@ -84,9 +87,9 @@
 			</c:if>
             
 
-			<FORM METHOD="post" ACTION="generaluser.do" enctype="multipart/form-data" class="bararea">
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" enctype="multipart/form-data" class="bararea">
                 <span>會員編號:</span>
-                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>"/>
+                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>" disabled/>
                 <br><br>
                 <span>姓名:</span>
                 <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "劉晉歆" : generalUser.getgName()%>"/>
@@ -107,7 +110,7 @@
                 <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "P130192176" : generalUser.getgIDNum()%>"/>
                 <br><br>
                 <span>性別:</span>
-                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? "0" : generalUser.getgGender()%>"/>
+                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? 0 : generalUser.getgGender()%>"/>
                 <br><br>
                 <span>出生年月日:</span>
                 <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1983-07-26" : generalUser.getgBirth()%>"/>
@@ -116,16 +119,25 @@
                 <input type="text" id="gTelephone" name="gTelephone" value="<%= (generalUser==null)? "0988059202" : generalUser.getgTelephone()%>"/>
                 <br><br>
                 <span>聯絡地址:</span>
-                <input type="text" id="gAddress" name="gAddress" value="<%= (generalUser==null)? "臺北市中山區新生北路3段40號6樓" : generalUser.getgAddress()%>"/>
-                <br><br>
-                <span hidden>帳號狀態:</span>
-                <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? "0" : generalUser.getStatus()%>"/>
-                
-                <input type="file" id="gProfilePic" name="gProfilePic" onclick="previewImage()" multiple="multiple" />
-                <div id="blob_holder"><img src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${param.gUserID}" width="100px"></div>
+                <!-- 第一層選單 -->
+                <select id = "city" name="city" required>
+                    <option value = "">請選擇縣市</option>
+                </select>
                 <br>
+                <!-- 第二層選單 -->
+                <select id = "area" name="area" required>
+                    <option value = "">請選擇鄉鎮市區</option>
+                </select>
+                <div><input type="text" id="gAddress" name="gAddress" placeholder="請輸入聯絡地址" 
+                value="<%= (generalUser==null) ? "新生北路3段40號6樓" : generalUser.getgAddress()%>"/></div>
                 
+                <span hidden>帳號狀態:</span>
+                <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? 0 : generalUser.getStatus()%>"/>
                 
+                <span>大頭貼:</span><br>
+                <div id="blob_holder"><img src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${param.gUserID}" width="100px"></div>
+                <input type="file" id="gProfilePic" name="gProfilePic" onclick="previewImage()" multiple="multiple" />
+                <br>
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="gUserID" value="<%=generalUser.getgUserID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
@@ -161,6 +173,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
+<!--======================================= 照片上傳 / 預覽 =======================================-->
     <script type="text/javascript">
 		//清除提示信息
 		function hideContent(d) {
@@ -211,6 +224,78 @@
 			}
 		}
 	</script>
+	
+<!--======================================= 地址連動式選單 =======================================-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+      $(document).ready(function(){
+      
+        //第一層選單
+          $.ajax({
+              url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',              
+              type: "get",
+              dataType: "json",
+              success: function (data) {
+            console.log(data);
+            $.each(data,function(key,value){
+              console.log(key,value)
+              $('#city').append('<option value="'+data[key].CityName+'">'+ data[key].CityName + '</option>')
+            })
+          },
+              error: function (data) {
+                  alert("fail");
+              }
+          });
+          
+        //第二層選單
+        $("#city").change(function(){
+          cityvalue = $("#city").val();  //取值
+          $("#area").empty(); //清空上次的值
+          $("#area").css("display","inline"); //顯現
+          $.ajax({
+            url:'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+            type:"get",
+            dataType:"json",
+            success:function(data){
+            
+              eachval=[]; //鄉鎮
+              for (let i = 0; i < data.length; i++) {
+					if (data[i].CityName == cityvalue) {
+						eachval = data[i].AreaList;
+					}
+				}
+              
+              $.each(eachval,function(key,value){
+                $('#area').append('<option value="'+eachval[key].AreaName+'">'+ eachval[key].AreaName+ '</option>')
+              });
+            },
+            error:function(){
+              alert("fail");
+            }
+            
+          });
+        });
+        
+        //選完後跳出選擇值
+        $("#area").change(function(){
+          cityvalue=$("#city").val();  //縣市
+          areavalue=$("#area").val();  //鄉鎮
+          $.ajax({
+            url:'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',
+            type:"get",
+            dataType:"json",
+            success:function(data){
+              alert(data[cityvalue].CityName+"-"+data[cityvalue].AreaList[areavalue].AreaName);
+            },
+            error:function(){
+              alert("fail");
+            }
+            
+          });
+        })
+        
+      });
+    </script>
     
 </body>
 </html>

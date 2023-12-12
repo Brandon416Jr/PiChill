@@ -52,7 +52,7 @@
   
   
   <li>
-    <FORM METHOD="post" ACTION="generaluser.do" >
+    <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" >
         <b>輸入會員編號 (如11000001):</b>
         <input type="text" name="gUserID">
         <input type="hidden" name="action" value="getOne_For_Display">

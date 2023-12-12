@@ -42,7 +42,7 @@ public class GeneralUserServlet extends HttpServlet {
 		String forwardPath = "";
 		switch (action) {
 		case "getOne_For_Display":
-			// // 來自select_page.jsp的請求
+			// 來自select_page.jsp的請求
 			forwardPath = getOneDisplay(req, res);
 			break;
 		case "getOne_For_Update":
@@ -50,13 +50,9 @@ public class GeneralUserServlet extends HttpServlet {
 			forwardPath = getOneUpdate(req, res);
 			break;
 		case "update":
-			// 來自update_GeneralUser_input.jsp的請求
+			// 來自generaluser.jsp的請求
 			forwardPath = update(req, res);
 			break;
-//		case "insert":
-//			// 來自addGeneralUser.jsp的請求
-//			forwardPath = insert(req, res);
-//			break;
 		default:
 			forwardPath = "/generaluser/select_page.jsp";
 		}
@@ -209,9 +205,19 @@ public class GeneralUserServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的手機號碼格式");
 		}
 
-		String gAddress = req.getParameter("gAddress");
-		if (gAddress == null || gAddress.trim().isEmpty())
+//		String gAddress = req.getParameter("gAddress");
+//		if (gAddress == null || gAddress.trim().isEmpty())
+//			errorMsgs.add("請輸入地址");
+		
+		String address = req.getParameter("gAddress");
+		if (address == null || address.trim().isEmpty())
 			errorMsgs.add("請輸入地址");
+
+		String city = req.getParameter("city");
+
+		String area = req.getParameter("area");
+
+		String gAddress = city + area + address;
 		
 
 		Integer status = 0;

@@ -18,6 +18,7 @@ aside.aside a.asidearea:hover{
     color: #FF9F1B;
 }
 
+
 /* input 設定 */
 input{
     width: 213px;
@@ -65,32 +66,34 @@ input#gTelephone{
     position: relative;
     left: 20px;
 }
-input#gAddress{
+input#gAddress1{
     position: relative;
     left: 20px;
+    width: 300px;
 }
 
-
-/* 顯示預覽圖 */
-#preview-box {
-    max-width: 150px;
-    max-height: 150px;
-    overflow: hidden;
-    /* border: 1px solid black; */
+input#gAddress{
     position: relative;
-    left: 450px;
-    bottom: 580px;
+    left: 92px;
+    width: 300px;
 }
 
-#preview-img {
-    width: 100%;
-    height: auto;
-    /* border: 1px solid blue; */
-}
-#imageInput{
+select#city{
     position: relative;
-    left: 450px;
-    bottom: 580px;
-    /* border: 1px solid green; */
+    left: 20px;
+    width: 213px;
+    height: 30px;
+    margin-bottom: 10px;
 }
+
+select#area{
+    position: relative;
+    left: 92px;
+    width: 213px;
+    height: 30px; 
+    margin-bottom: 10px;
+}
+
+
+
 
