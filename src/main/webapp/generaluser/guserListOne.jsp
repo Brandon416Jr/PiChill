@@ -34,7 +34,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/select_page.jsp" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/pic/face.svg" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/select_page.jsp" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
 
               
@@ -53,12 +53,15 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                         <li class="my-2">
                           <a class="asidearea" href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp">會員資料</a> 
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">球館預約紀錄</a>                         
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">聯絡我們</a>                         
                         </li>
+                        <li>&nbsp</li>
                         <li class="my-2">
                           <a class="asidearea" href="">登出</a>                           
                         </li>
@@ -113,7 +116,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <input type="text" id="gTelephone" name="gTelephone" value="${generalUser.gTelephone}" disabled>
                 <br><br>
                 <span>聯絡地址:</span>
-                <input type="text" id="gAddress" name="gAddress" value="${generalUser.gAddress}" disabled>
+                <input type="text" id="gAddress1" name="gAddress" value="${generalUser.gAddress}" disabled>
                 <br><br>
                 <span hidden>帳號狀態:</span>
                 <input type="hidden" id="status" name="status" value="${generalUser.status == 0 ? 'normal' : '討論版停權'}" disabled>
@@ -121,9 +124,6 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <span>大頭貼:</span><br>
                 <input type="file" id="gProfilePic" name="gProfilePic" previewImage() multiple="multiple" hidden/>
                 <img src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" width="100px">
-                
-<%--                 <div id="preview-box"><img id="preview-img" src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" width="100px" alt="預覽圖"></div>        --%>
-<!--                 <input type="file" id="imageInput" accept="image/*" onchange="previewImage()"> -->
                 <br>
                 
             <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" enctype="multipart/form-data" class="bararea">  
@@ -163,7 +163,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
       
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- 顯示預覽圖 -->
+    <!--======================================= 顯示預覽圖 =======================================-->
     <script>
 	    function previewImage() {
 			var gProfilePic1 = document.getElementById("gProfilePic");
