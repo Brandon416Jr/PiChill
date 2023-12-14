@@ -13,7 +13,7 @@ import com.pichill.util.HibernateUtil;
 
 
 public class OwnerUserDAOImpl implements OwnerUserDAO {
-private SessionFactory factory;
+private  final SessionFactory factory;
 	
 	public OwnerUserDAOImpl() {
 		factory = HibernateUtil.getSessionFactory();
@@ -23,21 +23,27 @@ private SessionFactory factory;
 		return factory.getCurrentSession();
 	}
 	
-
 	
 	@Override
 	public int add(OwnerUser ownerUser) {
+		
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		
 		try {
 			session.beginTransaction();
-			Integer id = (Integer) session.save(ownerUser);
+//			Integer id = (Integer) session.save(ownerUser);
+			session.save(ownerUser);
 			session.getTransaction().commit();
-			System.out.println("嗨3");
-			return id;
+			System.out.println("交易成功");
+			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("交易有錯3");
+			System.out.println("交易失敗");
 			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return -1;
 	}
@@ -50,15 +56,20 @@ private SessionFactory factory;
 			session.beginTransaction();
 			session.update(ownerUser);
 			session.getTransaction().commit();
-			System.out.println("嗨4");
+			System.out.println("交易成功");
 			return 1;
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.out.println("交易有錯4");
+			System.out.println("交易失敗");
 			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return -1;
 	}
+
 	
 
 	@Override
@@ -72,6 +83,10 @@ private SessionFactory factory;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
 		}
 		return null;
 	}
@@ -90,8 +105,6 @@ private SessionFactory factory;
 		}
 		return null;
 	}
-
-
 	
 }
 	
