@@ -6,9 +6,9 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-    PostServiceImpl postSvc = new PostServiceImpl();
-    List<Post> list = postSvc.getAllPosts();
-    pageContext.setAttribute("list",list);
+//     PostServiceImpl postSvc = new PostServiceImpl();
+// //     List<Post> list = postSvc.getAllPosts();
+//     pageContext.setAttribute("list",list);
 %>
 
 
