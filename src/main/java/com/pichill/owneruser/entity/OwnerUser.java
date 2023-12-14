@@ -1,8 +1,7 @@
 package com.pichill.owneruser.entity;
 
+import java.io.Serializable;
 import java.sql.Date;
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,18 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Type;
 
-//測試註解12050000000000
 
 @Entity
 
 @Table(name = "owneruser") 
-public class OwnerUser {
+public class OwnerUser implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "oUserID")
+	
 	private Integer oUserID;
 	
 	@Column(name = "oUserName")

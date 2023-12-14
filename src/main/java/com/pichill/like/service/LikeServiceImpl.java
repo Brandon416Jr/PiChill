@@ -21,23 +21,28 @@ public class LikeServiceImpl implements LikeService {
 		return like;
 	}
 
-//	@Override
-//	public Like updateLike(Like like) {
-//		if (dao.update(like) == 1) {
-//			return like;
-//		} else
-//			return null;
-//	}
-
 	@Override
-	public void delete(Integer likeID) {
-		dao.delete(likeID);
+	public Like updateLike(Like like) {
+		if (dao.update(like) == 1) {
+			return like;
+		} else
+			return null;
 	}
+//
+//	@Override
+//	public void delete(Integer likeID) {
+//		dao.delete(likeID);
+//	}
 
 	@Override
 	public Like getByLikeID(Integer likeID) {
 		return dao.getByLikeID(likeID);
 
+	}
+
+	@Override
+	public Like getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
+		return dao.getLikeByPostIDAndUserID(postID, gUserID);
 	}
 
 //	@Override

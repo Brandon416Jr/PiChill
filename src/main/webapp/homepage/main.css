@@ -1,0 +1,98 @@
+/* ====================== aside 區 ====================== */
+
+/* 側邊欄 */
+div#card{
+    width:200px;
+    /* position: relative;
+    left:20%;
+    bottom: 100px; */
+    margin-top: 86px;
+    margin-left: 65px;
+}
+a.btn1.btn-primary{
+    /* border: 1px solid black; */
+    text-decoration:none;
+    padding: 5px 15px 5px 15px;
+    /* width:100px; */
+    /* height:40px; */
+    /* border:0; */
+    background-color:#FF9F1B;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+}
+a.btn1.btn-primary:hover{
+    color:#FF9F1B;
+    background-color:#fff;
+    border:2px #FF9F1B solid;
+}
+/* ====================== main 區 ====================== */
+
+/* 幻燈片 */
+main.main div#carouselExampleInterval{
+    margin-right: 80px;
+    position: relative;
+    top: 40px;
+}
+/* 最新消息(外框) */
+div.news{
+    border: 1px solid grey;
+    background: #DAE4F4;
+    border-radius: 8px;
+    margin-top: 100px;
+    margin-right: 80px;
+}
+/* 內文與框的距離 */
+div.newbor{
+    margin-top: 15px;
+    
+}
+
+/* 最新消息(文字) */
+p.fresh{
+    font-size: 24px;
+    color: #000000;
+    font-weight: bold;
+    border: #000000;
+    border-radius: 8px 8px 0 0;
+    margin: 15px 0 10px 40px;
+}
+div.texts{
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+}
+span.text{
+    /* border: 1px solid red; */
+    font-size: 18px;
+    margin-left: 40px;
+}
+/* > see more */
+a.see{
+    /* border: 1px solid black; */
+    text-decoration:none;
+    color: #FF9F1B;
+    position: absolute;
+    right: 120px;
+}
+p.line{
+    color: #DFDFDF;
+}
+
+/*=== 送出按鈕 ===*/
+input#more{
+    border:0;
+    background-color:#FF9F1B;
+    color:#fff;
+    border-radius:8px;
+    cursor:pointer;
+    position: relative;
+    /* top:2px; */
+    bottom: 20px;
+    left: 40%;
+}
+  
+input#more:hover{
+    color:#FF9F1B;
+    background-color:#fff;
+    border:2px #FF9F1B solid;
+  }  

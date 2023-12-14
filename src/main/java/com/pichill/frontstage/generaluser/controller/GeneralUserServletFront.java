@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.generaluser.entity.GeneralUser;
 
-@MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024
+@MultipartConfig(fileSizeThreshold = 1 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024
 		* 1024)
 @WebServlet(name = "GeneralUserFServlet", value = "/generaluser/generaluserf.do")
 public class GeneralUserServletFront extends HttpServlet {
@@ -53,12 +53,12 @@ public class GeneralUserServletFront extends HttpServlet {
 			// 來自new_manage.jsp的請求
 			forwardPath = insert(req, res);
 			break;
-		case "checkAccount":
-			// 來自new_manage.jsp的請求
-			forwardPath = checkAccount(req, res);
-			break;
+//		case "checkAccount":
+//			// 來自new_manage.jsp的請求
+//			forwardPath = checkAccount(req, res);
+//			break;
 		default:
-			forwardPath = "/frontstage/generalUserFront/gUserLogin.jsp";
+			forwardPath = "/login/gLogin/gUserLogin.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -114,7 +114,7 @@ public class GeneralUserServletFront extends HttpServlet {
 		Integer status = 0;
 
 		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
-		if (gGender == null) {
+		if (gGender == 3) {
 			errorMsgs.put("gGender", "請選擇性別");
 		}
 
@@ -125,6 +125,13 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gUsername.trim().matches(gUsernameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("gUsername", "會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
+
+		Boolean gUser = gUserSvcF.existsUsername(gUsername);
+		System.out.println(gUser);
+		if (gUser) {
+			errorMsgs.put("gUsername", "此帳號已存在");	
+		} 
+		
 
 		String gPassword = req.getParameter("gPassword");
 		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
@@ -154,7 +161,7 @@ public class GeneralUserServletFront extends HttpServlet {
 		if (nicknameID == null || nicknameID.trim().isEmpty()) {
 			nicknameID = "";
 		} else if (!nicknameID.trim().matches(nickReg)) {
-			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式:字數大於10個，可以有符號、大小寫英文及數字，請勿填寫中文");
+			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式:字數10個，可以有符號、大小寫英文及數字，請勿填寫中文");
 		}
 
 		Integer gPostAmount = 0;
@@ -216,8 +223,20 @@ public class GeneralUserServletFront extends HttpServlet {
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("generalUser", generalUser); // 含有輸入格式錯誤的empVO物件,也存入req
-			return "/frontstage/generalUserFront/gUserRegist.jsp";
+			return "/login/gLogin/gUserRegist.jsp";
 		}
+		
+//		Boolean gUser = gUserSvcF.existsUsername(generalUser.getgUsername());
+//		if (gUser) {
+//			errorMsgs.put("gUsername", "此帳號已存在");
+//		} 
+//		Boolean gUser = gUserSvcF.existsUsername(gUsername);
+//		if (gUser == true) {
+//			errorMsgs.put("gUsername", "此帳號已存在");
+//			req.setAttribute("generalUser", generalUser); 
+//			return "/frontstage/generalUserFront/gUserRegist.jsp";
+//		} 
+
 
 		/*************************** 2.開始新增資料 ***************************************/
 
@@ -225,32 +244,47 @@ public class GeneralUserServletFront extends HttpServlet {
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 
-		return "/frontstage/generalUserFront/gUserLogin.jsp";
+		return "/login/gLogin/gUserLogin.jsp";
 	}
 
-	private String checkAccount(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String gUsername = req.getParameter("gUsername");
-		System.out.println("進來比對了");
-		boolean isAccountExists = checkAccountInDatabase(gUsername);
-		if(isAccountExists) {
-			  req.setAttribute("errorMsgs", "帳號已被註冊");
-			  return "/frontstage/generalUserFront/gUserRegist.jsp"; 
-			}
-//		req.setAttribute("exists", isAccountExists); 
-		return "/frontstage/generalUserFront/gUserRegist.jsp";
-	}
+//	private String checkAccount(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+//		String gUsername = req.getParameter("gUsername");
+//		System.out.println("進來比對了");
+//		boolean isAccountExists = checkAccountInDatabase(gUsername);
+//		
+//
+//	    res.setContentType("application/json");
+//	    res.setCharacterEncoding("UTF-8");
+//	    res.getWriter().write("{\"exists\":" + isAccountExists + "}");
+////		if(isAccountExists) {
+////			  req.setAttribute("errorMsgs", "帳號已被註冊");
+////			  return "/frontstage/generalUserFront/gUserRegist.jsp"; 
+////			}
+////		req.setAttribute("exists", isAccountExists); 
+//		return "/frontstage/generalUserFront/gUserRegist.jsp";
+//	}
 
-	private boolean checkAccountInDatabase(String gUsername) {
-		GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
-		GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
-		System.out.println("Checking account in database: " + gUsername);
-
-		if (generalUser != null) {
-			System.out.println("Retrieved member email from database: " + generalUser.getgUsername());
-			return true;
-		} else {
-			return false;
-		}
-		
-	}
+//	private boolean checkAccountInDatabase(String gUsername) {
+//		GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
+//		GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
+//		System.out.println("Checking account in database: " + gUsername);
+//
+//		if (generalUser != null) {
+//			System.out.println("Retrieved member email from database: " + generalUser.getgUsername());
+//			return true;
+//		} else {
+//			return false;
+//		}
+////		if(generalUser.size() > 0) {
+////			  // 用戶名存在
+////			  return true;
+////			} else {
+////			  // 未找到用戶名
+////				for(GeneralUser generalUsers : generalUser) {
+////					  System.out.println(generalUsers.getgUsername()); 
+////					}
+////			  return false; 
+////			}
+//		
+//	}
 }

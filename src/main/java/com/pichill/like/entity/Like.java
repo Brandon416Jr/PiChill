@@ -27,11 +27,13 @@ public class Like {
 	@Column(name = "gUserID")
 	private Integer gUserID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID")
-//	private Post post;
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID")
+	private Post post;
+//	private Integer postID;
 	
+	@Column(name = "likeStatus")
+	private Integer likeStatus;
 	public Like() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -40,7 +42,7 @@ public class Like {
 		super();
 		this.likeID = likeID;
 		this.gUserID = gUserID;
-		this.postID = postID;
+//		this.postID = postID;
 	}
 	public Integer getLikeID() {
 		return likeID;
@@ -54,12 +56,24 @@ public class Like {
 	public void setgUserID(Integer gUserID) {
 		this.gUserID = gUserID;
 	}
-	public Integer getPostID() {
-		return postID;
+//	public Integer getPostID() {
+//		return postID;
+//	}
+//	public void setPostID(Integer postID) {
+//		this.postID = postID;
+//	}
+	public Integer getLikeStatus() {
+		return likeStatus;
 	}
-	public void setPostID(Integer postID) {
-		this.postID = postID;
+	public void setLikeStatus(Integer likeStatus) {
+		this.likeStatus = likeStatus;
 	}
 	
+	public Post getPost() {
+		return post;
+	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
 	
 }

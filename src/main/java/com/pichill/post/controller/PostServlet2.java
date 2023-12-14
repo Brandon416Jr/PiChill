@@ -67,7 +67,6 @@ public class PostServlet2 extends HttpServlet {
 			req.setAttribute("posts", posts);
 			req.setAttribute("currentPage", currentPage);
 			String json = new Gson().toJson(posts);
-
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -79,9 +78,17 @@ public class PostServlet2 extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		if ("insert".equals(action)) {
-
+			List<String> errorMsgs = new LinkedList<String>();
+			req.setAttribute("errorMsgs", errorMsgs);
 			String postTitle = req.getParameter("postTitle");
+			String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{2,10}$";
+			if (postTitle == null || postTitle.trim().length() == 0) {
+				errorMsgs.add("標題 請勿空白");
+			}
 			String postContent = req.getParameter("postContent");
+			if (postContent == null || postContent.trim().length() == 0) {
+				errorMsgs.add("內容請勿空白");
+			}
 			Integer postType = Integer.parseInt(req.getParameter("discussType"));
 			InputStream in = req.getPart("postPic").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
 			byte[] postPic = null;
@@ -90,14 +97,19 @@ public class PostServlet2 extends HttpServlet {
 				in.read(postPic);
 				in.close();
 			}
+			Integer likeCnt = 0;
+			Integer commentCnt = 0;
 			Post post = new Post();
 			post.setPostTitle(postTitle);
 			post.setPostContent(postContent);
 			post.setPostType(postType);
 			post.setPostPic(postPic);
+			post.setLikeCnt(likeCnt);
+			post.setCommentCnt(commentCnt);
 			PostService postSvc = new PostServiceImpl();
 			Post addedPost = postSvc.addPost(post);
 			String json = new Gson().toJson(addedPost);
+			
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -167,10 +179,11 @@ public class PostServlet2 extends HttpServlet {
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			String json = new Gson().toJson(post);
 			PrintWriter out = res.getWriter();
-			System.out.println(json);
+//			System.out.println("json = " + json);
 			out.print(json);
 			out.flush();
 		}
+		
 		if ("get_By_Type".equals(action)) {
 			Integer postType = Integer.valueOf(req.getParameter("postType"));
 			PostService postSvc = new PostServiceImpl();
@@ -237,14 +250,24 @@ public class PostServlet2 extends HttpServlet {
 					if (postContent == null || postContent.trim().length() == 0) {
 						errorMsgs.add("內文請勿空白");
 					}	
-
+					InputStream in = req.getPart("postPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+					byte[] postPic = null;
+					if(in.available()!=0){
+						postPic  = new byte[in.available()];
+						in.read(postPic );
+						in.close();
+					}  else {
+						PostService postSvc = new PostServiceImpl();
+						postPic = postSvc.getByPostID(postID).getPostPic();
+					}
 					Post post = new Post();
 					post.setPostID(postID);
 					post.setPostTitle(postTitle);
 					post.setPostContent(postContent);
+					post.setPostPic(postPic);
 					PostService postSvc = new PostServiceImpl();
-					Post updatededPost = postSvc.updatePost(post);
-					String json = new Gson().toJson(updatededPost);
+					Post updatedPost = postSvc.updatePost(post);
+					String json = new Gson().toJson(updatedPost);
 					PrintWriter out = res.getWriter();
 					out.print(json);
 					out.flush();

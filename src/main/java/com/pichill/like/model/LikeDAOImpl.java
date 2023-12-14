@@ -10,10 +10,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.pichill.comment.entity.Comment;
 import com.pichill.like.Util;
 import com.pichill.like.entity.Like;
+import com.pichill.post.entity.Post;
+import com.pichill.util.HibernateUtil;
 
 public class LikeDAOImpl implements LikeDAO {
 private SessionFactory factory;
@@ -27,7 +30,6 @@ private SessionFactory factory;
 	@Override
 	public int add(Like like) {
 		return (Integer)getSession().save(like);
-
 	}
 	@Override
 	public int update(Like like) {
@@ -57,6 +59,13 @@ private SessionFactory factory;
 	public List<Like> getAll() {
 		return getSession().createQuery("from Like",Like.class).list();
 
+	}
+	@Override
+	public Like getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
+		return getSession().createQuery("from Like WHERE postID = :postID AND gUserID = :gUserID", Like.class)
+		.setParameter("postID", postID)
+	    .setParameter("gUserID", gUserID)
+	    .uniqueResult();
 	}
 }
 //	private static final String INSERT_STMT = "INSERT INTO `like`(gUserID,postID)VALUES(?,?)";

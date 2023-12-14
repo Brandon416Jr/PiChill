@@ -50,7 +50,7 @@ margin-left: 5px;
             <div class="login-form">
               <form action="" method="post">
                 <div class="form-group">
-                  <label>使用者信箱 (email)</label>
+                  <label>使用者帳號</label>
                   <input class="au-input au-input--full" type="email" name="email" placeholder="Email" />
                 </div>
                 <div class="form-group">

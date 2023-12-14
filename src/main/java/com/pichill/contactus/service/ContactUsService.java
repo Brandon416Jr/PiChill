@@ -21,7 +21,7 @@ public class ContactUsService {
 		dao.update(contactUs);
 	}
 	
-	public ContactUs getContactUsByFormID(Integer formID) {
+	public ContactUs getOneContactUs(Integer formID) {
 		return dao.getContactUsByFormID(formID);
 	}
 

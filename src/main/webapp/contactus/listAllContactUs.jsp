@@ -8,7 +8,7 @@
 <%
 ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
     /* List<ContactUs> list = contactUsService.getAllPosts(); */
-    List<ContactUs> list = contactUsService.getAllContactUss();
+    List<ContactUs> list = contactUsService.getAll();
     pageContext.setAttribute("list",list);
 %>
 

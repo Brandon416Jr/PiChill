@@ -1,7 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.pichill.contactus.model.*"%>
+<%@ page import="java.util.*"%>
+<%@ page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
-
 <% //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
    ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 %>
@@ -69,11 +71,11 @@
 <table>
 	<tr>
 		<td>主旨:</td>
-		<td><input type="TEXT" name="formPurpose" value="<%= (contactUs==null)? "廁所的燈壞了" : contactUs.getFormPurpose()%>" size="45"/></td>
+		<td><input type="TEXT" name="formPurpose" value="<%= (contactUs==null)? "廁所的燈壞了" : contactUs.getformPurpose()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>內文:</td>
-		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)?  "教室裡有人嗎？" : contactUs.getFormContent()%>"  size="45"/></td>
+		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)?  "教室裡有人嗎？" : contactUs.getformContent()%>"  size="45"/></td>
 	</tr>
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>

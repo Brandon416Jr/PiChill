@@ -12,10 +12,10 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+@Entity
+@Table(name ="announcement")
 public class AnnouncementGetOne {
-	@Entity
-	@Table(name ="announcement")
-	public class Announcement {
+	
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "announceID", updatable = false)
@@ -43,12 +43,12 @@ public class AnnouncementGetOne {
 		@Column(name = "annoStatus")
 		private Integer annoStatus;
 
-		public Announcement() {
+		public AnnouncementGetOne() {
 			super();
 			// TODO Auto-generated constructor stub
 		}
 
-		public Announcement(Integer announceID, Integer manageID, Integer formID, String annoTitle, String annoContent,
+		public AnnouncementGetOne(Integer announceID, Integer manageID, Integer formID, String annoTitle, String annoContent,
 				byte[] annoPic, Timestamp annoTime, Integer annoStatus) {
 			super();
 			this.announceID = announceID;
@@ -133,5 +133,3 @@ public class AnnouncementGetOne {
 		}
 
 	}
-	
-}

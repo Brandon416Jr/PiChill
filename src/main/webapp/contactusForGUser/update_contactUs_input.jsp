@@ -69,15 +69,15 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 <table>
 	<tr>
 		<td>文章標題:</td>
-		<td><input type="TEXT" name="formTitle" value="<%= (contactUs==null)? "教室裡有人嗎？" : contactUs.getFormPurpose()%>" size="45"/></td>
+		<td><input type="TEXT" name="formTitle" value="<%= (contactUs==null)? "教室裡有人嗎？" : contactUs.getformPurpose()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>內文:</td>
-		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)? "小孩你們還活著嗎？" : contactUs.getFormContent()%>" size="45"/></td>
+		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)? "小孩你們還活著嗎？" : contactUs.getformContent()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="postType">
+		<td><select size="1" name="formType">
 <%--          <c:forEach var="post" items="${postSvc.all}" >  --%>
                      <option value = "0">一般</option>
                     <option value = "1">公告</option>
@@ -88,7 +88,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="formID" value="<%=contactUs.getFormID()%>">
+<input type="hidden" name="formID" value="<%=contactUs.getformID()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 
@@ -96,20 +96,19 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 
 <!-- =========================================以下為 datetimepicker 之相關設定========================================== -->
 
-<%-- <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" /> --%> --%>
-<%-- <%-- <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script> --%> --%>
-<%-- <%-- <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script> --%> --%>
-
-<!-- <!-- <style> --> -->
+<%-- <%-- <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" /> --%>
+<%-- <%-- <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script> --%>
+<%-- <%-- <script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script> --%>
+<!-- <!-- <style> -->
 <!-- /*   .xdsoft_datetimepicker .xdsoft_datepicker { */ -->
 <!-- /*            width:  300px;   /* width:  300px; */ */ -->
 <!-- /*   } */ -->
 <!-- /*   .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box { */ -->
 <!-- /*            height: 151px;   /* height:  151px; */ */ -->
 <!-- /*   } */ -->
-<!-- <!-- </style> --> -->
+<!-- <!-- </style> -->
 
-<!-- <!-- <script> --> -->
+<!-- <!-- <script> -->
 <!-- //         $.datetimepicker.setLocale('zh'); -->
 <!-- //         $('#f_date1').datetimepicker({ -->
 <!-- //            theme: '',              //theme: 'dark', -->

@@ -1,0 +1,1610 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pichill</title>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: 10px;
+	background: #F7F7F7;
+}
+
+img {
+	max-width: 100%;
+}
+
+html {
+	--header-height: 79.42px;
+	--aside-width: 400px;
+	--footer-height: 101.96px;
+}
+
+/*=====header=====*/
+header.header {
+	/* border: 1px solid black; */
+	background-color: #207DCA;
+	position: sticky;
+	margin: 0 auto 10px auto;
+	top: 0;
+	z-index: 5;
+}
+
+@media all and (min-width: 576px) and (max-width: 767.98px) {
+	header.header {
+		width: 540px;
+	}
+
+	/* header.header ul.nav{
+      display: none;
+      }
+      label{
+      display: block;
+      }
+    #burger:checked + ul{
+      display:block;
+      } */
+}
+
+@media ( max-width : 575.98px) {
+	header.header {
+		width: 100%;
+	}
+
+	/* header.header ul.nav{
+      display: none;
+      }
+    label{
+      display: block;
+      }
+    #burger:checked + ul{
+      display:block;
+      } */
+}
+
+/*=== header導覽列 ===*/
+.nav-link {
+	color: white;
+	margin: 15px;
+}
+
+/*=====aside=====*/
+aside.aside {
+	/* 	border: 1px solid blue; */
+	/* background-color: red; */
+	position: absolute;
+	top: var(--header-height);
+	bottom: var(--footer-height);
+	width: 31%;
+	top: 100px;
+	right: 10px;
+	top: 100px;
+	/* bottom: 0; */
+	height: 100vh;
+	overflow-y: auto;
+	/* 這個屬性使區塊可以滾動 */
+}
+
+.card-body img {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.aside {
+	font-size: 85%;
+}
+
+/*=====main=====*/
+main.main {
+	position: relative;
+	border: 1px solid rgb(206, 202, 202);
+	background-color: #f7f7f7;
+	width: calc(100% -var(--aside-width));
+	margin-right: var(--aside-width);
+	min-height: calc(100vh - var(--header-height)- var(--footer-height));
+}
+
+/*建立貼文*/
+#create-post-button {
+	background-color: #F7F7F7;
+	color: #333;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	margin-left: 100px;
+	text-align: center;
+	padding: 5px 10px 5px 5px;
+	width: 65%;
+}
+
+/* 新增的搜索框样式 */
+.search-box {
+	margin-top: 10px;
+	text-align: center;
+	padding: 5px 10px 5px 5px;
+	width: 95%;
+}
+
+#search-input {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 400px;
+}
+
+#search-button {
+	padding: 5px 10px;
+	background-color: #333;
+	color: #fff;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+#search-options {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/*================文章範例(討論版)=============*/
+.modal-title img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.modal-title {
+	display: flex;
+	align-items: center;
+}
+
+h5.card-title {
+	width: 22rem;
+	margin-top: 10px;
+}
+
+.card.mb-3.article {
+	margin-left: 30px;
+}
+
+a.post_user {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
+.post_time {
+	font-size: 0.6rem;
+	/* 調整時間字體大小 */
+	color: #777;
+	text-align: center;
+}
+
+.post_owner {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.0rem;
+	font-weight: bold;
+}
+
+.post_timer {
+	font-size: 0.6rem;
+	/* 調整時間字體大小 */
+	color: #777;
+	text-align: center;
+}
+
+.edit_discuss {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 50px;
+}
+
+.edit_group {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 50px;
+}
+
+.delete {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 10px;
+}
+
+/* .edit, .delete {
+      position: relative;
+      cursor: pointer;
+      border: none;
+      background: none;
+    } */
+.tooltip-text {
+	visibility: hidden;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: 125%;
+	left: 50%;
+	margin-left: -40px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.edit_discuss:hover .tooltip-text, .edit_group:hover .tooltip-text,
+	.delete:hover .tooltip-text, .report:hover .tooltip-text {
+	visibility: visible;
+	opacity: 1;
+}
+
+.report {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 10px;
+}
+
+#piccontainer {
+	max-width: 250px;
+	max-height: 200px;
+	overflow: hidden;
+	/* 超過區塊大小的部分隱藏 */
+}
+
+.card-body {
+	padding-bottom: 5px;
+}
+
+#articlepic {
+	width: 200px;
+	max-height: 200px;
+	height: auto;
+	position: relative;
+	top: 30%;
+	left: 20px;
+	margin-right: 10px;
+}
+
+#card-footer {
+	margin-bottom: 5px;
+	position: relative;
+}
+
+button.fa-regular {
+	border: 0;
+	background-color: white;
+}
+
+.card.mb-3.article .card-text {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+	/* 設定行數上限為 2 行 */
+}
+
+.card.mb-3.article .card-text2 {
+	display: none;
+}
+
+#article3 {
+	margin-top: 10px;
+}
+
+nav {
+	text-align: center;
+	/* 文字置中 */
+	margin-top: 20px;
+	/* 上邊距 */
+	position: relative;
+	left: 38%;
+}
+
+/*=====footer=====*/
+footer.footer {
+	/* border: 1px solid black;  */
+	background-color: #207DCA;
+	/* width: 720px; */
+	margin: 10px auto 0 auto;
+}
+
+@media ( min-width : 576px) and (max-width: 767.98px) {
+	footer.footer {
+		width: 540px;
+	}
+}
+
+@media ( max-width : 575.98px) {
+	footer.footer {
+		width: 100%;
+	}
+}
+
+/*=======建立貼文燈箱(討論版)========*/
+div.col {
+	width: 20px;
+}
+
+div.form-check {
+	margin-left: 20px;
+}
+
+#title {
+	/* border: 1px solid black; */
+	margin-top: 20px;
+	width: 440px;
+}
+
+#comment {
+	/* border: 1px solid black; */
+	margin-top: 20px;
+	margin-bottom: 20px;
+	width: 440px;
+	height: 100px;
+}
+
+div.post-pic {
+	border: 1px solid black;
+	margin-top: 20px;
+	height: 150px;
+}
+
+button.post-button {
+	border: 1px solid black;
+	margin-top: 20px;
+	width: 700px;
+}
+
+button.save-button_discuss {
+	border: 1px solid black;
+	margin-top: 20px;
+	width: 700px;
+}
+
+button.save-button_group {
+	border: 1px solid black;
+	margin-top: 20px;
+	width: 700px;
+}
+
+#preview {
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	display: inline-block;
+	width: 250px;
+	min-height: 300px;
+	position: relative;
+}
+
+#preview span.text {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#preview img.preview_img {
+	width: 100%;
+}
+
+#preview_edit {
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	display: inline-block;
+	width: 250px;
+	min-height: 300px;
+	position: relative;
+}
+
+#preview_edit span.text {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#preview_edit img.preview_img {
+	width: 100%;
+}
+
+#preview2 {
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	display: inline-block;
+	width: 250px;
+	min-height: 300px;
+	position: relative;
+}
+
+#preview2 span.text {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#preview2 img.preview_img {
+	width: 100%;
+}
+
+#preview2_edit {
+	border: 1px solid lightgray;
+	margin-top: 10px;
+	display: inline-block;
+	width: 250px;
+	min-height: 300px;
+	position: relative;
+}
+
+#preview2_edit span.text {
+	position: absolute;
+	display: inline-block;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: -1;
+	color: lightgray;
+}
+
+#preview2_edit img.preview_img {
+	width: 100%;
+}
+/*==============(揪團版)==================*/
+div.form-check {
+	margin-left: 20px;
+}
+
+input.title {
+	border: 1px solid black;
+	margin-top: 20px;
+	width: 440px;
+}
+
+.content {
+	margin-top: 20px;
+}
+
+#peoplecol {
+	padding: 3px 0 0 0;
+}
+
+#peoplecol2 {
+	padding-left: 0;
+}
+
+#datecol {
+	padding: 3px 0 0 0;
+}
+
+#datecol2 {
+	padding-left: 0;
+}
+
+#timecol {
+	padding: 3px 0 0 0;
+}
+
+#timecol2 {
+	padding-left: 0;
+}
+
+#locatecol {
+	padding: 3px 0 0 0;
+}
+
+#locatecol2 {
+	padding-left: 0;
+}
+
+#ballcol {
+	padding: 3px 0 0 0;
+}
+
+#ballcol2 {
+	padding-left: 0;
+}
+
+#costcol {
+	padding: 3px 0 0 0;
+	margin-bottom: 20px;
+}
+
+#costcol2 {
+	padding-left: 0;
+}
+
+input.cost {
+	width: 100px;
+}
+
+/*=================查看文章=================*/
+.modal-header img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+.edit-m {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 100px;
+}
+
+.delete-m {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 60px;
+}
+
+/* .edit, .delete {
+      position: relative;
+      cursor: pointer;
+      border: none;
+      background: none;
+    } */
+.tooltip-text2 {
+	visibility: hidden;
+	background-color: #333;
+	color: #fff;
+	text-align: center;
+	border-radius: 5px;
+	padding: 5px;
+	position: absolute;
+	z-index: 1;
+	bottom: -30%;
+	left: 50%;
+	margin-left: -60px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.edit-m:hover .tooltip-text2, .delete-m:hover .tooltip-text2, .report-m:hover .tooltip-text2
+	{
+	visibility: visible;
+	opacity: 1;
+}
+
+.report-m {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 60px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* html{
+font-size: 62.5%;
+} */
+body {
+	margin: 0;
+	background: rgb(10, 0, 36);
+	background: radial-gradient(circle, rgba(10, 0, 36, 0.1110819327731093)
+		0%, rgba(9, 9, 121, 0.1110819327731093) 5%,
+		rgba(0, 212, 255, 0.04665616246498594) 100%);
+}
+
+article.task_container {
+	width: 750px;
+	margin: 10px auto 0;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 1px 1px 5px gray;
+}
+
+h1.title1 {
+	font-size: 2.4rem;
+	margin: 0 0 10px 0;
+}
+
+/* ===== 任務新增 ===== */
+div.task_add_block {
+	font-size: 0;
+	transition: transform .5s, box-shadow .5s;
+}
+
+div.task_add_block.-on {
+	box-shadow: 0 0 5px gray;
+	transform: scale(1.01);
+	transform-origin: center center;
+}
+
+div.task_add_block input.task_name {
+	width: calc(100% - 50px);
+	border: 1px solid lightgray;
+	border-radius: 3px 0 0 3px;
+	height: 40px;
+	font-size: 1rem;
+	padding: 5px 10px;
+	outline: none;
+	display: inline-block;
+	vertical-align: top;
+}
+
+input.task_name::placeholder {
+	color: lightgray;
+}
+
+div.task_add_block button.task_add {
+	display: inline-block;
+	width: 50px;
+	height: 40px;
+	vertical-align: top;
+	border: 1px solid lightgray;
+	border-left: 0;
+	background-color: white;
+	box-shadow: none;
+	font-size: 1rem;
+	cursor: pointer;
+	outline: none;
+	border-radius: 0 3px 3px 0;
+}
+
+div.task_add_block button.task_add:active {
+	box-shadow: 1px 1px 3px lightgray inset, -1px -1px 3px lightgray inset;
+	background-color: #fcfcfc;
+	font-size: 1rem;
+}
+
+/* ===== 任務列表 ===== */
+div.task_list_parent {
+	margin-top: 10px;
+}
+
+div.task_list_parent ul.task_list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+div.task_list_parent ul.task_list>li {
+	margin-bottom: 20px;
+	border-bottom: 1px solid gray;
+	padding-bottom: 10px;
+}
+
+div.task_list_parent ul.task_list>li:first-child {
+	border-top: 1px solid black;
+	padding-top: 10px;
+}
+
+div.task_list_parent ul.task_list>li:first-child button.btn_up {
+	background-color: lightgray !important;
+	cursor: not-allowed !important;
+	color: gray;
+}
+
+div.task_list_parent ul.task_list>li:last-child {
+	margin-bottom: 0;
+	border-bottom: 0;
+}
+
+div.task_list_parent ul.task_list>li:last-child button.btn_down {
+	background-color: lightgray !important;
+	cursor: not-allowed !important;
+	color: gray;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex {
+	display: flex;
+	/* border: 1px solid black; */
+}
+
+/* div.task_list_parent ul.task_list>li>div.item_flex>div {
+/* border: 1px solid blue; */
+/* } */
+div.task_list_parent ul.task_list>li>div.item_flex>div.left_block {
+	width: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.left_block>div.comment_img img
+	{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	margin-right: 5px;
+	font-size: 2rem;
+}
+
+a.comment_user {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+
+.comment_time {
+	font-size: 0.6rem;
+	/* 調整時間字體大小 */
+	color: #777;
+	/* 調整時間字體顏色 */
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.left_block div.btn_flex
+	{
+	display: flex;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.left_block div.btn_flex>button
+	{
+	flex-grow: 1;
+	outline: none;
+	height: 40px;
+	font-size: 1.6rem;
+	padding: 0;
+	margin: 0;
+	background: none;
+	background-color: white;
+	border: 0;
+	cursor: pointer;
+	border: 1px solid #eee;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.middle_block {
+	font-size: 0.8rem;
+	flex-grow: 1;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: left;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.middle_block p.para
+	{
+	font-size: 1.3rem;
+	text-align: left;
+	padding-top: 20px;
+	margin: 0;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.right_block {
+	width: 100px;
+	flex-shrink: 0;
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.right_block div.btn_flex
+	{
+	display: flex;
+	/* 	flex-direction: column; */
+}
+
+div.task_list_parent ul.task_list>li>div.item_flex>div.right_block div.btn_flex>button
+	{
+	flex-grow: 1;
+	outline: none;
+	height: 40px;
+	font-size: 1rem;
+	padding: 0;
+	margin: 0;
+	background: none;
+	background-color: white;
+	border: 0;
+	cursor: pointer;
+	/* 	border: 1px solid #eee; */
+}
+
+div.middle_block input.task_name_update {
+	width: 100%;
+	border: 1px solid lightgray;
+	border-radius: 3px 0 0 3px;
+	height: 40px;
+	font-size: 1.3rem;
+	padding: 5px 10px;
+	outline: none;
+}
+
+div.middle_block input.task_name_update::placeholder {
+	color: lightgray;
+}
+
+.-none {
+	display: none;
+}
+
+/* ===== 清空按鈕 ===== */
+button.btn_empty {
+	float: right;
+	background: none;
+	background-color: white;
+	padding: 0;
+	margin: 0;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	height: 30px;
+	width: 50px;
+	outline: none;
+	font-size: 1.6rem;
+	cursor: pointer;
+}
+
+/* ===== 重要性的星號 ===== */
+div.star_block {
+	display: inline-block;
+}
+
+div.star_block>span.star {
+	cursor: pointer;
+	display: inline-block;
+	margin-right: 3px;
+}
+
+div.star_block>span.star.-on {
+	color: yellow;
+}
+
+#likecol {
+	padding: 0;
+	margin-top: 10px;
+}
+
+#commentcol {
+	padding: 0;
+	margin-top: 10px;
+}
+
+#pluscol {
+	padding: 0;
+	margin-top: 10px;
+}
+
+.fa-thumbs-up {
+	margin-bottom: 5px;
+	/* 調整按讚按鈕和下一個元素的距離 */
+}
+</style>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+	crossorigin="anonymous"></script>
+<script src="../vendors/jquery/jquery-3.4.1.min.js"></script>
+<script src="https://kit.fontawesome.com/2bd4419edb.js"
+	crossorigin="anonymous"></script>
+<script src="index.js"></script>
+<script src="postAjax.js"></script>
+<script src="otherAjax.js"></script>
+
+</head>
+
+<body>
+	<header class="header">
+		<div class="container">
+			<header class="d-flex flex-wrap justify-content-center py-1">
+				<a href="/"
+					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="../image/headerlogo.svg" alt="SVG">
+				</a>
+
+
+				<ul class="nav nav-pills">
+					<li class="nav-item"><a href="#" class="nav-link">公告</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"><img
+							src="../image/face.svg" alt="SVG"> 會員中心</a></li>
+				</ul>
+
+				<!-- <label for="burger">☰</label>
+              <input type="hidden" id="burger"> -->
+			</header>
+		</div>
+	</header>
+
+	<!-- <label for="burger">☰</label>
+        <input type="hidden" id="burger"> -->
+	<aside class=aside>
+
+		<div class="card" style="width: 22rem;">
+			<div class="card-body">
+				<h5 class="card-title">
+					<img src="../image/Group 37.png" alt="SVG">版主
+				</h5>
+				<p class="card-text">
+					歡迎各位π郎來到Pichill論壇，請務必遵守以下版規: <br> • 發表文章時，需使用適當分類，以利版友查詢。<br>
+					1.[討論]所有相關運動的閒談、問題及討論皆可使用。於本版發佈之問券，內容須與運動相關，並經版主同意後發布。<br>
+					2.[揪團]<br> • 若用戶遭檢舉且版主判定內容屬實，將停止其論壇發文及留言功能7日並刪除文章。
+				</p>
+			</div>
+		</div>
+		<!------推撥範例------->
+		<div id="promote-list">
+			<div class="card mb-3" id=article3 style="width: 22rem;">
+				<div class="row g-0">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">
+								<img src="../image/Capybara.jpg" alt="大頭貼">
+								<div>
+									<a class="post_owner">水豚君</a>
+									<div class="post_timer">30分鐘前</div>
+								</div>
+							</h1>
+							<h5 class="card-title">歡迎大家來運動!</h5>
+							<p class="card-text">
+							<div class="container text" s>
+								<div class="row" style="width: 22rem">
+									<div class="col-2 col-sm-3">日期:</div>
+									<div class="col-2 col-sm-4">2023/11/20</div>
+									<div class="w-100 d-none d-md-block"></div>
+
+									<div class="col-2 col-sm-3">時間:</div>
+									<div class="col-2 col-sm-4">08:00~09:00</div>
+									<div class="w-100 d-none d-md-block"></div>
+
+									<div class="col-2 col-sm-3">地點:</div>
+									<div class="col-2 col-sm-4">陽明籃球館</div>
+									<div class="w-100 d-none d-md-block"></div>
+
+									<div class="col-2 col-sm-3">球類:</div>
+									<div class="col-2 col-sm-4">籃球</div>
+								</div>
+							</div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+	</aside>
+
+	<main class=main>
+		<!--建立貼文-->
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+			data-bs-target="#exampleModal" id="create-post-button">
+			在想些什麼...</button>
+		<!--搜尋文章-->
+		<div class="search-box">
+			<input type="text" id="search-input" placeholder="搜尋文章...">
+			<button id="search-button">搜尋</button>
+			<select id="search-options">
+				<option value="newest">最新</option>
+				<option value="hot">熱門</option>
+				<option value="my-posts">我的文章</option>
+				<option value="discussions">討論版</option>
+				<option value="events">揪團版</option>
+			</select>
+		</div>
+		<!-- 文章列表 -->
+		<div id="post-list">
+			<!-- 文章由JavaScript添加到此 -->
+		</div>
+		<!--========編輯發文燈箱========-->
+		<form id="updatepost">
+			<div class="modal fade" id="exampleModal_edit" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="container text-center">
+								<!--========討論版發文的內容==========-->
+								<div id="discussionContent_edit">
+									<div class="row align-items-center">
+										<div class="col-3">
+											<button class="btn btn-secondary" type="button"
+												id="dropdownMenuButton1" disabled>討論版</button>
+										</div>
+										<div class="col-4">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" value=""
+													id="flexCheckDefault"> <label
+													class="form-check-label" for="flexCheckDefault">
+													匿名發文 </label>
+											</div>
+										</div>
+									</div>
+									<div>
+										<div class="form-floating" id="title">
+											<input type="hidden" class="discussType" name="discussType"
+												value="0">
+											<textarea class="form-control"
+												placeholder="Leave a comment here"
+												id="floatingTextarea_edit" name="postTitle"></textarea>
+											<label for="floatingTextarea">請輸入標題</label>
+										</div>
+										<div class="form-floating" id="comment">
+											<textarea class="form-control"
+												placeholder="Leave a comment here"
+												id="floatingTextarea2_edit" name="postComment"
+												style="height: 100px"></textarea>
+											<label for="floatingTextarea2">請輸入內文</label>
+										</div>
+									</div>
+									<div>
+										<label>上傳圖片：</label> <input type="file" id="p_file_edit"
+											multiple>
+										<div id="preview_edit">
+											<span class="text">預覽圖</span>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="save-button_discuss"
+											id="save-discuss" data-post-id="${postID}">儲存</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+			</div>
+		</form>
+		<!--========揪團版發文的內容==========-->
+		<form id="updatepost2">
+			<div class="modal fade" id="exampleModal_edit2" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-scrollable">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="container text-center">
+								<div id="gatheringContent_edit" >
+									<div class="row align-items-center">
+										<div class="col-3">
+											<button class="btn btn-secondary" type="button"
+												id="dropdownMenuButton1" disabled>揪團版</button>
+										</div>
+									</div>
+									<div>
+										<div class="form-floating" id="title">
+											<input type="hidden" class="groupType" name="groupType"
+												value="1">
+											<textarea class="form-control"
+												placeholder="Leave a comment here"
+												id="floatingTextarea3_edit"></textarea>
+											<label for="floatingTextarea3">請輸入標題</label>
+										</div>
+										<div class="content">
+											<div class="container text-center">
+												<div class="row align-items-start">
+													<div class="col-2" id="datecol">日期:</div>
+													<div class="col-3" id="datecol2">
+														<div class="btn-group">
+															<button class="btn btn-secondary btn-sm dropdown-toggle"
+																type="button" data-bs-toggle="dropdown"
+																aria-expanded="false">2023/11/20</button>
+															<ul class="dropdown-menu">...
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="container text-center">
+												<div class="row align-items-start">
+
+													<div class="col-2" id="timecol">時間:</div>
+													<div class="col-3" id="timecol2">
+														<div class="btn-group">
+															<button class="btn btn-secondary btn-sm dropdown-toggle"
+																type="button" data-bs-toggle="dropdown"
+																aria-expanded="false">08:00~09:00</button>
+															<ul class="dropdown-menu">...
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="container text-center">
+												<div class="row align-items-start">
+
+													<div class="col-2" id="locatecol">地點:</div>
+													<div class="col-3" id="locatecol2">
+														<div class="btn-group">
+															<button class="btn btn-secondary btn-sm dropdown-toggle"
+																type="button" data-bs-toggle="dropdown"
+																aria-expanded="false">陽明籃球館</button>
+															<ul class="dropdown-menu">...
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="container text-center">
+												<div class="row align-items-start">
+													<div class="col-2" id="ballcol">球類:</div>
+													<div class="col-2" id="ballcol2">
+														<div class="btn-group">
+															<button class="btn btn-secondary btn-sm dropdown-toggle"
+																type="button" data-bs-toggle="dropdown"
+																aria-expanded="false">籃球</button>
+															<ul class="dropdown-menu">...
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+											<br>
+											<div class="container text-center">
+												<div class="row align-items-start">
+													<div class="col-2" id="costcol">費用:</div>
+													<div class="col-2" id="costcol2">
+														<input type="text" class="cost" placeholder="請輸入金額">
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-floating" id="comment">
+											<textarea class="form-control"
+												placeholder="Leave a comment here"
+												id="floatingTextarea4_edit" style="height: 100px"></textarea>
+											<label for="floatingTextarea4">請輸入內文</label>
+										</div>
+									</div>
+
+									<div>
+										<label>上傳圖片：</label> <input type="file" id="p_file2_edit">
+										<div id="preview2_edit">
+											<span class="text">預覽圖</span>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="save-button_group"
+											id="save-group" data-post-id="${postID}">儲存</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				</div>
+				</div>
+			</div>
+</form>
+
+			<!--==== 檢舉Modal ======-->
+			<div class="modal fade" id="exampleModal2" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm modal-dialog-centered ">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">檢舉</h1>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault1"> <label
+									class="form-check-label" for="flexRadioDefault1"> 違反版規
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault2" checked>
+								<label class="form-check-label" for="flexRadioDefault2">
+									內容不實 </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault1"> <label
+									class="form-check-label" for="flexRadioDefault1"> 惡意洗版
+								</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault2" checked>
+								<label class="form-check-label" for="flexRadioDefault2">
+									仇恨言論 </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault2" checked>
+								<label class="form-check-label" for="flexRadioDefault2">
+									商業宣傳內容 </label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="radio"
+									name="flexRadioDefault" id="flexRadioDefault2" checked>
+								<label class="form-check-label" for="flexRadioDefault2">
+									其他 </label>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary" id="send_report">送出</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination" id="page">
+					<!-- Previous Page Button -->
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="1"> <span aria-hidden="true">&laquo;</span></a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="1">1</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="2">2</a></li>
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="3">3</a></li>
+					<!-- Next Page Button -->
+					<li class="page-item"><a class="page-link" href="#"
+						data-page="4" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+				</ul>
+			</nav>
+	</main>
+
+	<footer class="footer">
+
+		<div class="container">
+			<header class="d-flex flex-wrap justify-content-center py-3">
+				<a href="/"
+					class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="../image/footerlogo.svg" alt="SVG">
+				</a>
+
+				<ul class="nav nav-pills">
+					<li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"></a></li>
+					<li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"></a></li>
+					<li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"></a></li>
+					<li class="nav-item"><a href="#" class="nav-link"></a></li>
+
+				</ul>
+			</header>
+		</div>
+	</footer>
+
+	<!--========發文燈箱========-->
+	<form id="addpost">
+		<div class="modal fade" id="exampleModal" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="container text-center">
+							<!--========討論版發文的內容==========-->
+							<div id="discussionContent">
+								<div class="row align-items-center">
+									<div class="col-3">
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton1"
+												data-bs-toggle="dropdown" aria-expanded="false">討論版
+											</button>
+											<ul class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton1">
+												<li><a class="dropdown-item" id="discuss" href="#">討論版</a></li>
+												<li><a class="dropdown-item" id="group" href="#">揪團版</a></li>
+										</div>
+									</div>
+									<div class="col-4">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" value=""
+												id="flexCheckDefault"> <label
+												class="form-check-label" for="flexCheckDefault">
+												匿名發文 </label>
+										</div>
+									</div>
+								</div>
+								<div>
+									<div class="form-floating" id="title">
+										<input type="hidden" class="discussType" name="discussType"
+											value="0">
+										<textarea class="form-control"
+											placeholder="Leave a comment here" id="floatingTextarea"
+											name="postTitle"></textarea>
+										<label for="floatingTextarea">請輸入標題</label>
+									</div>
+									<div class="form-floating" id="comment">
+										<textarea class="form-control"
+											placeholder="Leave a comment here" id="floatingTextarea2"
+											name="postComment" style="height: 100px"></textarea>
+										<label for="floatingTextarea2">請輸入內文</label>
+									</div>
+								</div>
+								<div>
+									<label>上傳圖片：</label> <input type="file" id="p_file" multiple>
+									<div id="preview">
+										<span class="text">預覽圖</span>
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="post-button" id="pb-discuss">發布</button>
+								</div>
+							</div>
+	</form>
+	<!--========揪團版發文的內容==========-->
+	<div id="gatheringContent" style="display: none;">
+		<div class="row align-items-center">
+			<div class="col-3">
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button"
+						id="dropdownMenuButton1" data-bs-toggle="dropdown"
+						aria-expanded="false">揪團版</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+						<li><a class="dropdown-item" id="discuss1" href="#">討論版</a></li>
+						<li><a class="dropdown-item" id="group1" href="#">揪團版</a></li>
+				</div>
+			</div>
+		</div>
+		<div>
+			<div class="form-floating" id="title">
+				<input type="hidden" class="groupType" name="groupType" value="1">
+				<textarea class="form-control" placeholder="Leave a comment here"
+					id="floatingTextarea3"></textarea>
+				<label for="floatingTextarea3">請輸入標題</label>
+			</div>
+			<div class="content">
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="datecol">日期:</div>
+						<div class="col-3" id="datecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">2023/11/20</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+
+						<div class="col-2" id="timecol">時間:</div>
+						<div class="col-3" id="timecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">08:00~09:00</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+
+						<div class="col-2" id="locatecol">地點:</div>
+						<div class="col-3" id="locatecol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">陽明籃球館</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="ballcol">球類:</div>
+						<div class="col-2" id="ballcol2">
+							<div class="btn-group">
+								<button class="btn btn-secondary btn-sm dropdown-toggle"
+									type="button" data-bs-toggle="dropdown" aria-expanded="false">籃球</button>
+								<ul class="dropdown-menu">...
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="costcol">費用:</div>
+						<div class="col-2" id="costcol2">
+							<input type="text" class="cost" placeholder="請輸入金額">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-floating" id="comment">
+				<textarea class="form-control" placeholder="Leave a comment here"
+					id="floatingTextarea4" style="height: 100px"></textarea>
+				<label for="floatingTextarea4">請輸入內文</label>
+			</div>
+		</div>
+
+		<div>
+			<label>上傳圖片：</label> <input type="file" id="p_file2">
+			<div id="preview2">
+				<span class="text">預覽圖</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="post-button" id="pb-group">發布</button>
+		</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+	</div>
+
+	<!--======== Modal查看文章(討論版)========= -->
+	<div class="modal fade" id="exampleModal5" tabindex="-1"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-scrollable modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5">
+						<img src="../image/cat.jpg" alt="大頭貼">
+						<div>
+							<a class="post_user">貓貓</a>
+							<div class="post_time">${postTime}</div>
+						</div>
+					</h1>
+					<button type="button" class="edit-m">
+						<i class="fa-regular fa-pen-to-square"></i> <span
+							class="tooltip-text2">編輯</span>
+					</button>
+					<button type="button" class="delete-m" id="deleteButton">
+						<i class="fa-regular fa-trash-can"></i> <span
+							class="tooltip-text2">刪除</span>
+					</button>
+					<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span class="tooltip-text">檢舉</span>
+                        </button> -->
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="card">
+						<div class="card-body">
+							<h5 class="card-title article0"></h5>
+							<p class="card-text article1"></p>
+						</div>
+						<img src="../image/CATBALL.jpg" class="card-img-bottom" alt="...">
+					</div>
+					<div class="container text-center">
+						<div class="row align-items-start">
+							<div class="col-2" id="likecol">
+								<i class="fa-regular fa-thumbs-up"></i> 123
+							</div>
+							<div class="col-2" id="commentcol">
+								<i class="fa-regular fa-comment"></i> 99
+							</div>
+							<article class="task_container">
+								<div class="task_add_block">
+									<input type="text" class="task_name" placeholder="留言…">
+									<button type="button" class="task_add">送出</button>
+								</div>
+
+								<div class="task_list_parent">
+									<ul class="task_list">
+									</ul>
+								</div>
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+		//====================留言=========================//
+		$(function() {
+
+			// ==== 待辦事項文字框的 focus 事件及 blur 事件觸發 ===== //
+			$("input.task_name").on("focus", function() {
+				$(this).closest("div.task_add_block").addClass("-on");
+				//$("div.task_add_block").addClass("-on");
+			});
+			$("input.task_name").on("blur", function() {
+				$(this).closest("div.task_add_block").removeClass("-on");
+				//$("div.task_add_block").removeClass("-on");
+			});
+		});
+
+		//=======變更搜尋框的文字======
+		updateSearchPlaceholder();
+		$("#search-options").change(function() {
+			console.log("aa");
+			updateSearchPlaceholder();
+		});
+		// 更新搜索框的 placeholder
+		function updateSearchPlaceholder() {
+			var selectedOption = $("#search-options").val();
+			var placeholderText = getPlaceholderText(selectedOption);
+			$("#search-input").attr("placeholder", placeholderText);
+		}
+		function getPlaceholderText(selectedOption) {
+			switch (selectedOption) {
+			case "discussions":
+				return "搜尋討論版文章...";
+			case "events":
+				return "搜尋揪團版文章...";
+			default:
+				return "搜尋文章...";
+			}
+		}
+	</script>
+
+</body>
+
+</html>

@@ -106,19 +106,14 @@ label.pwd-see2 {
 							</a>
 						</div>
 						<div class="login-form">
-							<c:forEach var="msg" items="${errorMsgs}">
-   ${msg}
-</c:forEach>
 							<form
 								action="${pageContext.request.contextPath }/generaluser/generaluserf.do"
 								method="post" enctype="multipart/form-data">
 								<div class="form-group">
-									<label>帳號</label><font color=red>${errorMsgs.gUsername}</font>
+									<label for="gUsername">帳號</label><font color=red>${errorMsgs.gUsername}</font>
 									<input class="au-input au-input--full" type="text"
-										name="gUsername" placeholder="請輸入帳號"
+										name="gUsername" placeholder="請輸入帳號" id="gUsername"
 										value="<%=(generalUser == null) ? "" : generalUser.getgUsername()%>">
-										<input type="hidden" name="action" value="checkAccount"><input
-											type="submit" class="btn-primary btn-sm" value="檢查">
 								</div>
 								<div class="form-group">
 									<label>信箱</label><font color=red>${errorMsgs.gEmail}</font> <input
@@ -166,7 +161,7 @@ label.pwd-see2 {
 								<div class="form-group">
 									<label>性別</label><font color=red>${errorMsgs.gGender}</font> <select
 										class="au-input au-input--full" name="gGender">
-										<!-- 										<option value="">請選擇性別</option> -->
+																				<option value="3">請選擇性別</option>
 										<option value="0">男</option>
 										<option value="1">女</option>
 									</select>
@@ -255,6 +250,60 @@ label.pwd-see2 {
 	%>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+// 	$(document).ready(function() {
+
+		
+// 		var timeout;
+// 		$('#gUsername').on('input', function() {
+// 		    clearTimeout(timeout);
+// 		    timeout = setTimeout(function() {
+// 		        var gUsername = $('#gUsername').val();
+// 		        var gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
+// 		        if (gUsername !== "") {
+// 		        	if (!gUsername.trim().match(gUsernameReg)) {
+// 		                $("#accountExistsMessage").text("不符合帳號格式");
+// 		                $("#accountExistsMessage").css("color", "red");
+// 		            } else {
+// 				            $.ajax({
+<%-- 				                url: "<%=request.getContextPath()%>/generaluser/generaluserf.do?action=checkAccount", --%>
+// 				                method: "POST",
+// 				                data: { "gUsername": gUsername },
+// 				                success: function(data) {
+// 				                    console.log("ttt");
+// 				                    if (data.exists) {
+// 				                        $("#accountExistsMessage").text("此帳號已存在");
+// 				                        $("#accountExistsMessage").css("color", "red");
+// 				                    } else {
+// 				                        $("#accountExistsMessage").text("此帳號可使用");
+// 				                        $("#accountExistsMessage").css("color", "blue");
+// 				                    }
+// 				                },
+// 				                error: function() {
+// 				                    $("#accountExistsMessage").text("檢查帳號有錯誤");
+// 				                }
+// 				            });
+// 		              }      
+// 		        } else {
+// 		            $("#accountExistsMessage").text('');
+// 		        }
+// 		    }, 500); // 500毫秒延遲
+// 		});
+		
+// 		var memberemailInput = $("#memberemail");
+// 	    var errorMsgMemberEmail = $("font[color='red']");
+
+// 	     // 監聽輸入框的輸入事件
+// 	     gUsernameInput.on('input', function() {
+// 	        // 獲取輸入框的值
+// 	        var inputValue = gUsernameInput.val();
+
+// 	        // 如果輸入框中有文字，清除錯誤訊息
+// 	        if (inputValue.trim() !== "") {
+// 	            errorMsggUsername.text('');
+// 	        }
+// 	    });
+	</script>
 	<script>
 		$(document)
 				.ready(
