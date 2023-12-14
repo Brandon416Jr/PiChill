@@ -69,11 +69,11 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 <table>
 	<tr>
 		<td>文章標題:</td>
-		<td><input type="TEXT" name="formTitle" value="<%= (contactUs==null)? "教室裡有人嗎？" : contactUs.getFormPurpose()%>" size="45"/></td>
+		<td><input type="TEXT" name="formTitle" value="<%= (contactUs==null)? "教室裡有人嗎？" : contactUs.getformPurpose()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>內文:</td>
-		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)? "小孩你們還活著嗎？" : contactUs.getFormContent()%>" size="45"/></td>
+		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)? "小孩你們還活著嗎？" : contactUs.getformContent()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
@@ -88,7 +88,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 </table>
 <br>
 <input type="hidden" name="action" value="update">
-<input type="hidden" name="formID" value="<%=contactUs.getFormID()%>">
+<input type="hidden" name="formID" value="<%=contactUs.getformID()%>">
 <input type="submit" value="送出修改"></FORM>
 </body>
 

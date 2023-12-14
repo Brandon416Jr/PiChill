@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.announcementgetone.model.*"%>
-
+<!-- 用來搜公告的頁面 -->
 <html>
 <head>
     <meta charset="UTF-8">
@@ -69,10 +69,10 @@
     </FORM>
   </li>
 
-  <jsp:useBean id="announcement" scope="page" class="com.pichill.announcementgetone.service.AnnouncementGetOneSvcImpl" />
+  <jsp:useBean id="announcement" scope="page" class="com.pichill.announcementgetone.service.AnnouncementGetOneService" />
    
   <li>
-     <FORM METHOD="post" ACTION="contactus.do" >
+     <FORM METHOD="post" ACTION="/announcement/announcement.do" >
        <b>選擇要查詢之公告:</b>
        <select size="1" name="announceID">
          <c:forEach var="form" items="${announcementService.all}" > 
@@ -99,10 +99,10 @@
 </ul>
 
 
-<h3>文章管理</h3>
+<h3>	公告管理</h3>
 
 <ul>
-  <li><a href='addContactUs.jsp'>Add</a> a new form.</li>
+  <li><a href="listAnnouncement.jsp">Add</a> a new form.</li>
 </ul>
 
 </body>

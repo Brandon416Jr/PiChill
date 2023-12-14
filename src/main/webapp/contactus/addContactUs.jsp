@@ -69,11 +69,11 @@
 <table>
 	<tr>
 		<td>主旨:</td>
-		<td><input type="TEXT" name="formPurpose" value="<%= (contactUs==null)? "廁所的燈壞了" : contactUs.getFormPurpose()%>" size="45"/></td>
+		<td><input type="TEXT" name="formPurpose" value="<%= (contactUs==null)? "廁所的燈壞了" : contactUs.getformPurpose()%>" size="45"/></td>
 	</tr>
 	<tr>
 		<td>內文:</td>
-		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)?  "教室裡有人嗎？" : contactUs.getFormContent()%>"  size="45"/></td>
+		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)?  "教室裡有人嗎？" : contactUs.getformContent()%>"  size="45"/></td>
 	</tr>
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
