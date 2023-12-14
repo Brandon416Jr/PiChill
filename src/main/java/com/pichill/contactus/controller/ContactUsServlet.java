@@ -185,7 +185,7 @@ public class ContactUsServlet extends HttpServlet {
 		in.close();
 	} else {
 		ContactUsService ContactUsService = new ContactUsService();
-		formPic = contactUsService.getContactUsByFormID(formID).getformPic();
+		formPic = contactUsService.getOneContactUs(formID).getformPic();
 	}
 
 	// 取得當前系統時間
