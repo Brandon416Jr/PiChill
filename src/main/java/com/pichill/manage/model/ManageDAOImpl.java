@@ -13,6 +13,8 @@ import static com.pichill.util.Constants.PAGE_MAX_RESULT;
 import java.util.List;
 import java.util.Map;
 
+import org.hibernate.query.Query;
+
 //import javax.persistence.TypedQuery;
 //import javax.persistence.criteria.CriteriaBuilder;
 //import javax.persistence.criteria.CriteriaQuery;
@@ -124,6 +126,26 @@ public class ManageDAOImpl implements ManageDAO {
 		return null;
 	}
 
+	@Override
+	public Manage getManageBymUserName(String mUserName) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+
+		try {
+			session.beginTransaction();
+			Manage manage = session.get(Manage.class, mUserName);
+			session.getTransaction().commit();
+			return manage;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return null;
+	}
+	
 //	@Override
 //	public Manage getManageBymName(String mName) {
 //		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -187,7 +209,31 @@ public class ManageDAOImpl implements ManageDAO {
 //		return null;
 //	}
 
-	
+	public Manage findByUserNamePassword(String mUserName, String mPassword) {
+	    Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+	    try {
+	        session.beginTransaction();
+
+	        String hql = "from Manage where mUserName = :mUserName and mPassword = :mPassword";
+	        Query<Manage> query = session.createQuery(hql, Manage.class);
+	        query.setParameter("mUserName", mUserName);
+	        query.setParameter("mPassword", mPassword);
+
+	        Manage manage = query.uniqueResult(); // Assuming there should be only one matching user.
+
+	        session.getTransaction().commit();
+	        return manage;
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	        session.getTransaction().rollback();
+	    } finally {
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	    }
+	    return null;
+	}
+
 	
 	
 	

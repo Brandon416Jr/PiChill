@@ -1,5 +1,7 @@
 package com.pichill.frontstage.generaluser.service;
 
+import java.util.List;
+
 import com.pichill.frontstage.generaluser.model.GeneralUserDAOFront;
 import com.pichill.frontstage.generaluser.model.GeneralUserDAOImplFront;
 import com.pichill.generaluser.entity.GeneralUser;
@@ -19,7 +21,7 @@ public class GeneralUserServiceFront {
 		return dao.findByPK(gUserID);
 	}
 	
-	public GeneralUser getGeneralUserBygUsername(String gUsername) {
+	public List<GeneralUser> getGeneralUserBygUsername(String gUsername) {
 		return dao.findByGeneralUsergUsername(gUsername);
 	}
 	

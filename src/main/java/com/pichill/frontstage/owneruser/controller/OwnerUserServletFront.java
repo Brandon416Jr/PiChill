@@ -55,7 +55,7 @@ public class OwnerUserServletFront extends HttpServlet {
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/frontstage/OwnerUserFront/oUserLogin.jsp";
+			forwardPath = "/login/oLogin/oUserLogin.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -81,6 +81,12 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oUserName.trim().matches(oUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("oUserName", "會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
+		
+		Boolean oUser = oUserSvcF.existsUsername(oUserName);
+		System.out.println(oUser);
+		if (oUser) {
+			errorMsgs.put("oUserName", "此帳號已存在");	
+		} 
 		
 		String oPassword = req.getParameter("oPassword");
 		String oPasswordReg = "^[a-zA-Z0-9]{8,12}$";
@@ -226,7 +232,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("ownerUser", ownerUser); // 含有輸入格式錯誤的empVO物件,也存入req
-			return "/frontstage/ownerUserFront/oUserRegist.jsp";
+			return "/login/oLogin/oUserRegist.jsp";
 		}
 
 		/*************************** 2.開始新增資料 ***************************************/
@@ -235,6 +241,6 @@ public class OwnerUserServletFront extends HttpServlet {
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		
-		return "/frontstage/ownerUserFront/oUserLogin.jsp";
+		return "/login/oLogin/oUserLogin.jsp";
 	}
 }

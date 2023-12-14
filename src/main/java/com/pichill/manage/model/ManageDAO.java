@@ -9,7 +9,9 @@ public interface ManageDAO {
 	int insert(Manage manage); // public abstract可不加，預設就會有
 	int update(Manage manage);
 	Manage getManageByManageID(Integer manageID); 
+	Manage getManageBymUserName(String mUserName); 
 	List<Manage> getAll();
+	Manage findByUserNamePassword(String mUserName,String mPassword);
 //	int delete(Integer manageID); // 刪除需要篩選條件
 	
 //	Manage getManageBymName(String mName); 

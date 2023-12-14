@@ -22,6 +22,11 @@ public class ManageService {
 	public int updateManage(Manage manage) {
 		return dao.update(manage);
 	}
+	
+	public Manage userAuth(String mUserName, String mPassword) {
+    	return dao.findByUserNamePassword(mUserName, mPassword);
+        
+    }
 
 //	public Manage insertManage(String mName, String mUserName, String mPassword, Date mBirth, Integer mGender,
 //			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, Date mHiredate,
@@ -72,6 +77,10 @@ public class ManageService {
 
 	public Manage getOneManage(Integer manageID) {
 		return dao.getManageByManageID(manageID);
+	}
+	
+	public Manage getOneManage(String mUserName) {
+		return dao.getManageBymUserName(mUserName);
 	}
 
 	public List<Manage> getAll() {

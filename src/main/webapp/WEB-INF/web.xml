@@ -31,4 +31,22 @@
 <!-- 		<url-pattern>/upload</url-pattern> -->
 <!-- 	</servlet-mapping> -->
 
+
+<!-- 	定義過濾器 -->
+	<filter>
+		<filter-name>ManageLoginFilter</filter-name>
+		<filter-class>com.pichill.manage.filter.ManageLoginFilter</filter-class>
+	</filter>
+
+<!-- 	配置過濾器 -->
+	<filter-mapping>
+		<filter-name>ManageLoginFilter</filter-name>
+		<url-pattern>/backstage/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+
 </web-app>

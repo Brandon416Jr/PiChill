@@ -18,4 +18,10 @@ private final OwnerUserDAOFront dao;
 	public OwnerUser getOneOwnerUser(Integer oUserID) {
 		return dao.findByPK(oUserID);
 	}
+	
+	public boolean existsUsername(String oUserName) {
+        // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
+        boolean exists = dao.isUsernameExists(oUserName);
+        return exists;
+    }
 }
