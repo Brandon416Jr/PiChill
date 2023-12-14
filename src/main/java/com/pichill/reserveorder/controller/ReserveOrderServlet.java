@@ -54,7 +54,7 @@ public class ReserveOrderServlet extends HttpServlet {
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/generaluser/select_page.jsp";
+			forwardPath = "/generaluser/guserListOne.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -80,7 +80,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/generaluser/guserListOne.jsp";// 程式中斷
 		}
 
 		Integer reserveOrderID = null;
@@ -91,7 +91,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/generaluser/guserListOne.jsp";// 程式中斷
 		}
 		
 	/*=========================================== 2.開始查詢資料 ===========================================*/
@@ -103,13 +103,13 @@ public class ReserveOrderServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/generaluser/guserListOne.jsp";// 程式中斷
 		}
 
 	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
 		
 		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的generalUser物件,存入req
-		return "/generaluser/listOneReserveOrder.jsp";
+		return "/generaluser/allOrder.jsp";
 	}
 	
 
@@ -189,14 +189,14 @@ public class ReserveOrderServlet extends HttpServlet {
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("reserveOrder", reserveOrder); // 含有輸入格式錯誤的reserveOrder物件,也存入req
-			return "/reserveorder/addReserveOrder.jsp";
+			return "/reserveorder/reserveOrderList.jsp";
 		}
 
 	/*=========================================== 2.開始新增資料 ===========================================*/
 		reserveOrderService.addReserveOrder(reserveOrder);
 
 	/*================================= 3.新增完成,準備轉交(Send the Success view) ==========================*/
-		return "/reserveorder/listAllReserveOrder.jsp";
+		return "/reserveorder/allOrder.jsp";
 
 	}
 	

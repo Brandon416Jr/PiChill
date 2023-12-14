@@ -252,7 +252,6 @@ public class GeneralUserServlet extends HttpServlet {
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer yoyakuCnt = 0;
 
-
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		GeneralUser generalUser = new GeneralUser();
 		generalUser.setgUserID(gUserID);

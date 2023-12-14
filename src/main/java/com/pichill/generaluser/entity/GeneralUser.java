@@ -102,8 +102,9 @@ public class GeneralUser {
 //	@OrderBy("formID asc") 
 //	private Set<ContactUs> contactUs; // Set不重複
 //	
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generaluser", cascade = CascadeType.ALL)
+	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+//	// (mappedBy = "generalUser")的generalUser指的是新增的GeneralUser generalUser部門物件的屬性
 //	@OrderBy("reserveOrderID asc") 
 //	private Set<ReserveOrder> reserveOrder; // Set不重複
 
@@ -111,10 +112,11 @@ public class GeneralUser {
 		super();
 	}
 
+	
 	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
 			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
 			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
-			byte[] gProfilePic) {
+			byte[] gProfilePic, Set<ReserveOrder> reserveOrder) {
 		super();
 		this.gUserID = gUserID;
 		this.gName = gName;
@@ -135,38 +137,7 @@ public class GeneralUser {
 		this.yoyakuCnt = yoyakuCnt;
 		this.gProfilePic = gProfilePic;
 	}
-	
 
-//	public GeneralUser(Integer gUserID, String gName, String gTelephone, String gEmail, String gAddress, Integer status,
-//			Integer gGender, String gUsername, String gPassword, String gIDNum, String nicknameID, Integer gPostAmount,
-//			Integer commentAmount, Integer gReportCnt, Date gRegistDate, Date gBirth, Integer yoyakuCnt,
-//			byte[] gProfilePic, Set<Like> like, Set<Post> post, Set<Comment> comment, Set<ContactUs> contactUs,
-//			Set<ReserveOrder> reserveOrder) {
-//		super();
-//		this.gUserID = gUserID;
-//		this.gName = gName;
-//		this.gTelephone = gTelephone;
-//		this.gEmail = gEmail;
-//		this.gAddress = gAddress;
-//		this.status = status;
-//		this.gGender = gGender;
-//		this.gUsername = gUsername;
-//		this.gPassword = gPassword;
-//		this.gIDNum = gIDNum;
-//		this.nicknameID = nicknameID;
-//		this.gPostAmount = gPostAmount;
-//		this.commentAmount = commentAmount;
-//		this.gReportCnt = gReportCnt;
-//		this.gRegistDate = gRegistDate;
-//		this.gBirth = gBirth;
-//		this.yoyakuCnt = yoyakuCnt;
-//		this.gProfilePic = gProfilePic;
-//		this.like = like;
-//		this.post = post;
-//		this.comment = comment;
-//		this.contactUs = contactUs;
-//		this.reserveOrder = reserveOrder;
-//	}
 
 	public Integer getgUserID() {
 		return gUserID;
@@ -370,6 +341,7 @@ public class GeneralUser {
 //		this.reserveOrder = reserveOrder;
 //	}
 
+
 	@Override
 	public String toString() {
 		return "GeneralUser [gUserID=" + gUserID + ", gName=" + gName + ", gTelephone=" + gTelephone + ", gEmail="
@@ -379,5 +351,6 @@ public class GeneralUser {
 				+ ", gRegistDate=" + gRegistDate + ", gBirth=" + gBirth + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
 				+ Arrays.toString(gProfilePic) + "]";
 	}
+
 
 }

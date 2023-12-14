@@ -1,0 +1,160 @@
+/*======================= aside 區域 ============================*/
+aside.aside a.step1{
+    font-size: 16px;
+    font-weight: bold;
+    color:#FF9F1B;
+    margin: 0 0 10px 12px;
+    text-decoration:none;
+}
+aside.aside a.step2{
+    font-size: 16px;
+    color:#207DCA;
+    margin: 0 0 0 12px;
+    text-decoration:none;
+}
+aside.aside a.step3{
+    font-size: 16px;
+    font-weight: bold;
+    color:#FF9F1B;
+    margin: 0 0 0 12px;
+    text-decoration:none;
+}
+.list-unstyled li a.step1::before {
+        content: " ▶"; /* Unicode右箭頭符號 */
+    }
+/*======================= main 區域 ============================*/
+.choice{
+    position: relative;
+    left: 80px;
+    width: 800px;
+}
+select#ball{
+    border: 1px solid grey;
+}
+select#loc{
+    border: 1px solid grey;
+}
+select#court{
+    border: 1px solid grey;
+}
+select#place{
+    border: 1px solid grey;
+}
+#label{
+    margin-bottom: 5px;
+}
+
+/* 預約日期 */
+input#reservedate{
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 398.67px;
+    height: 37.33px;
+    padding: 3px 10px 3px 15px;
+}
+#p{
+    margin-bottom: 5px;
+}
+select#time{
+    border: 1px solid grey;
+}
+
+input#orderNum{
+    border: 1px solid grey;
+    width: 398.67px;
+    height: 37.33px;
+    border-radius: 5px;
+    padding: 1px 15px;
+}
+
+#formDisplay{
+    border: 1px solid red;
+    line-height: 30px;
+}
+
+p.detail{
+    color: #FF9F1B;
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0;
+}
+
+p.line1{
+    color: grey;
+    margin: 0;
+}
+
+/* list */
+div.list{
+    border: 0.5px solid rgb(197, 197, 197);
+    background-color: #FFFFFF;
+    width: 600px;
+    height: 730px;
+    color: #207DCA;
+    display: inline-block;
+    margin-top: 30px;
+}
+/* title */
+p#title{
+    font-size: 40px;
+    font-weight: bold;
+    color: #207DCA;
+    line-height: 50px;
+    position: relative;
+    top: 50px;
+    left: 60px;
+}
+p#line{
+    position: relative;
+    top: 60px;
+    left: 45px;
+    border-bottom: 2px solid #FF9F1B;
+    width: 500px;
+}
+p#titles{
+    font-size: 18px;
+    font-weight: bold;
+    color: #207DCA;
+    position: relative;
+    top: 55px;
+    left: 60px;
+}
+p#line2{
+    position: relative;
+    top: 48px;
+    left: 45px;
+    border-bottom: 2px solid #FF9F1B;
+    width: 500px;
+}
+/* 明細內容 */
+form.bararea{
+    position: relative;
+    top: 55px;
+    left: 53px;
+}
+p#line3{
+    position: relative;
+    top: 20px;
+    right: 15px;
+    border-bottom: 2px solid #FF9F1B;
+    width: 500px;
+}
+
+span#total{
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+}
+
+span#totalcost{
+    font-weight: bold;
+    position: relative;
+    top: 20px;
+}
+
+div.next1{
+    position: relative;
+    top: 55px;
+    right: 20px;
+
+}
