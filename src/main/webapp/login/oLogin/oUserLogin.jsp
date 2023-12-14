@@ -5,19 +5,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>一般會員登入</title>
+  <title>企業會員登入</title>
   <link rel="stylesheet" href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
-  <!-- Vendor CSS-->
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/animate.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
-  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all" />
-  <!-- Main CSS-->
-  <link href="<%=request.getContextPath()%>/backEnd-Website/css/login.css" rel="stylesheet" media="all" />
-   <style type="text/css">
+  <style type="text/css">
     button.au-btn {
       /* border: 2px solid red; */
       background-color: #207DCA;
@@ -32,6 +22,16 @@ label.pwd-see2 {
 margin-left: 5px;
 }
   </style>
+  <!-- Vendor CSS-->
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/wow/animate.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+  <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all" />
+  <!-- Main CSS-->
+  <link href="<%=request.getContextPath()%>/backEnd-Website/css/login.css" rel="stylesheet" media="all" />
 </head>
 <body class="animsition">
   <div class="all">
@@ -44,13 +44,13 @@ margin-left: 5px;
           <div class="login-content">
             <div class="login-logo">
               <a href="#">
-                <img src="<%=request.getContextPath()%>/backEnd-Website/pic/g_login.png" alt="CoolAdmin" />
+                <img src="<%=request.getContextPath()%>/backEnd-Website/pic/o_login1.png" alt="CoolAdmin" />
               </a>
             </div>
             <div class="login-form">
-              <form action="" method="post">
+              <form action="index.html" method="post">
                 <div class="form-group">
-                  <label>使用者帳號</label>
+                  <label>使用者信箱 (email)</label>
                   <input class="au-input au-input--full" type="email" name="email" placeholder="Email" />
                 </div>
                 <div class="form-group">
@@ -69,14 +69,20 @@ margin-left: 5px;
                     <a href="#">忘記密碼?</a>
                   </label>
                 </div>
-                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" >
+                <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">
                   登入
                 </button>
+                <!-- <div class="social-login-content">
+                                        <div class="social-button">
+                                            <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
+                                            <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
+                                        </div>
+                                    </div> -->
               </form>
               <div class="register-link">
                 <p>
                   你尚未有帳號?
-                  <a href="${pageContext.request.contextPath }/frontstage/generalUserFront/gUserRegist.jsp">我要註冊</a>
+                  <a href="${pageContext.request.contextPath }/login/oLogin/oUserRegist.jsp">我要註冊</a>
                 </p>
               </div>
             </div>

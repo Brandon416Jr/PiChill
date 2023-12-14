@@ -1,9 +1,30 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-
+<%@ page import="com.pichill.manage.entity.Manage"%>
+<%@ page import="com.pichill.manage.model.*"%>
+<%@ page import="com.pichill.manage.service.ManageService"%>
 
 <%-- 此頁練習採用 EL 的寫法取值 --%>
+
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+%>
+
+<%
+response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+response.setHeader("Cache-Control", "post-check=0, pre-check=0");
+response.setHeader("Pragma", "no-cache");
+%>
+
+<%
+Object mUserName = session.getAttribute("mUserName"); // 從 session內取出 (key) adminVO的值
+if (mUserName == null) { // 如為 null, 代表此user未登入過 , 才做以下工作
+	session.setAttribute("location", request.getRequestURI()); //*工作1 : 同時記下目前位置 , 以便於login.html登入成功後 , 能夠直接導至此網頁
+	response.sendRedirect(request.getContextPath() + "/login/mLogin/manageLogin.jsp"); //*工作2 : 請該user去登入網頁(login.html) , 進行登入
+	return;
+}
+%>
 
 
 
@@ -65,7 +86,7 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
 	media="all" />
-	
+
 <style>
 div.dataTables_scrollHeadInner {
 	width: 100% !important;
@@ -73,6 +94,17 @@ div.dataTables_scrollHeadInner {
 
 div.dataTables_scrollHeadInner>table.table-data3 {
 	margin: 0 auto !important;
+}
+
+.account-dropdown__footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn {
+	margin-left: auto;
+	width: 100%;
+	box-sizing: border-box;
 }
 </style>
 </head>
@@ -139,10 +171,10 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/courtBack/all_place.jsp">所有場地</a></li>
 								</ul></li>
-							<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>預約管理
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>預約管理
 							</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
 								</ul></li>
@@ -161,20 +193,26 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<div class="header-logo">
-								<a href="${pageContext.request.contextPath }/backstage/login/index.jsp"><img
+								<a
+									href="${pageContext.request.contextPath }/backstage/login/index.jsp"><img
 									class="img-logo"
-									src="${pageContext.request.contextPath }/image/bigLogo.png" alt="" /></a>
+									src="${pageContext.request.contextPath }/image/bigLogo.png"
+									alt="" /></a>
 								<!-- 							<a href="index.html"><img class="img-logo"  -->
 								<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 							</div>
 							<div class="welcome">
 								<div class="flex">
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 									<p class="welcome">π Chill後臺管理系統</p>
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 								</div>
 							</div>
@@ -182,10 +220,11 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<!-- 										<img -->
-											<%-- 											src="${pageContext.request.contextPath }/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-											<!-- 											alt="使用者頭像" />  -->
-											<img src="${pageContext.request.contextPath }/image/Group 115.png"
+											<!-- 											<img -->
+											<%-- 												src="${pageContext.request.contextPath }/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+											<!-- 												alt="使用者頭像" /> -->
+											<img
+												src="${pageContext.request.contextPath }/image/Group 115.png"
 												alt="使用者頭像" />
 										</div>
 										<div class="content">
@@ -195,24 +234,28 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <!-- 												<img --> <%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-														<!-- 											alt="使用者頭像" />  --> <img
+													<a href="#"> <!-- 													 <img --> <%-- 														src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
+														<!-- 														alt="使用者頭像" />  --> <img
 														src="${pageContext.request.contextPath }/image/Group 115.png"
 														alt="John Doe" />
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">羅裕鵬</a>
-														<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
+																												<a href="#">羅裕鵬</a>
+<!-- 														<a -->
+<%-- 															href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName()%></a> --%>
 													</h5>
-													<span class="email">brandon416jr@gmail.com</span>
-													<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+																										<span class="email">brandon416jr@gmail.com</span>
+<%-- 													<span class="email"><%=manage.getmEmail()%></span> --%>
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
-												<a href="#"> <i class="zmdi zmdi-power"></i>登出
-												</a>
+												<form method="POST"
+													action="<%=request.getContextPath()%>/manage/manage.do">
+													<button class="btn btn-danger">登出</button>
+													<input type="hidden" name="action" value="logout">
+												</form>
 											</div>
 										</div>
 									</div>
@@ -227,7 +270,20 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 
 
 	</div>
+	<script>
+		history.pushState(null, null, document.URL);
+		window.addEventListener('popstate', function() {
+			history.pushState(null, null, document.URL);
+		});
 
+		function ajaxLogoutCallback() {
+			// 登出操作
+			history.pushState(null, null, document.URL);
+			window.addEventListener('popstate', function() {
+				history.pushState(null, null, document.URL);
+			});
+		}
+	</script>
 	<!-- <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
     <script src="./database/datatables.min.js"></script> -->
 	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

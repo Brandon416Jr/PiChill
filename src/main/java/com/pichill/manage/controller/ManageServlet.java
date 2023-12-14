@@ -61,6 +61,9 @@ public class ManageServlet extends HttpServlet {
 			// 來自new_manage.jsp的請求
 			forwardPath = insert(req, res);
 			break;
+		case "logout":
+			forwardPath = logout(req, res);
+			break;
 		default:
 			forwardPath = "/backstage/manage/all_manage.jsp";
 		}
@@ -418,6 +421,20 @@ public class ManageServlet extends HttpServlet {
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		
 		return "/backstage/manage/all_manage.jsp";
+	}
+	
+	private String logout(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 登出，终止session
+            System.out.println("成功登出");
+        }
+
+        res.setHeader("Cache-Control","no-cache"); 
+        res.setHeader("Pragma","no-cache");
+        res.setDateHeader ("Expires", 0);
+        
+        return "/login/mLogin/manageLogin.jsp";
 	}
 
 }

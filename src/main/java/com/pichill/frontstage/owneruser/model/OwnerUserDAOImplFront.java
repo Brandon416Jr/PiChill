@@ -3,7 +3,7 @@ package com.pichill.frontstage.owneruser.model;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
@@ -12,6 +12,10 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 	
 	public OwnerUserDAOImplFront() {
 		factory = HibernateUtil.getSessionFactory();
+	}
+	
+	private Session getSession() {
+		return factory.getCurrentSession();
 	}
 
 	@Override
@@ -53,4 +57,38 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 		}
 		return null;
 	}
+	
+	public boolean isUsernameExists(String oUserName) {
+		Session session = getSession();
+		try {
+			session.beginTransaction();
+			System.out.println("查詢前");
+			OwnerUser ownerUser = (OwnerUser) session.createQuery("FROM OwnerUser WHERE oUserName = :oUserName")
+					.setParameter("oUserName", oUserName).uniqueResult();
+			System.out.println("查詢後");
+
+			session.getTransaction().commit();
+			System.out.println("交易後");
+			if (ownerUser != null) {
+				System.out.println("有找到相同會員帳號");
+				System.out.println(ownerUser);
+				return true;
+			} else {
+				System.out.println("沒有找到相同會員帳號");
+				return false;
+			}
+
+		} catch (Exception e) {
+			System.out.println("例外處理");
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		System.out.println("最後跑到這");
+		return false; // 如果發生異常或没有找到會員，也返回false
+	}
+	
 }

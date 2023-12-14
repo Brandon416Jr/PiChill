@@ -4,7 +4,7 @@ import java.io.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class ManageLoginFilter {
+public class ManageLoginFilter extends HttpFilter implements Filter {
 	private FilterConfig config;
 
 	public void init(FilterConfig config) {
@@ -22,11 +22,12 @@ public class ManageLoginFilter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		// 【取得 session】
 		HttpSession session = req.getSession();
+		System.out.println("經過過濾器了");
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("account");
+		Object account = session.getAttribute("mUserName");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login.html");
+			res.sendRedirect(req.getContextPath() + "/mlogin/manageLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

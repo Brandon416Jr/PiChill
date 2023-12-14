@@ -227,7 +227,7 @@ label.pwd-see2 {
 							<div class="register-link">
 								<p>
 									已經有帳號了嗎? <a
-										href="${pageContext.request.contextPath }/frontstage/generalUserFront/gUserLogin.jsp">登入</a>
+										href="${pageContext.request.contextPath }/login/gLogin/gUserLogin.jsp">登入</a>
 								</p>
 							</div>
 						</div>
