@@ -9,5 +9,6 @@ public interface LikeDAO {
 	int update(Like like);
 	int delete(int likeID);
 	Like getByLikeID(Integer likeID);
+	Like getLikeByPostIDAndUserID(Integer postID,Integer gUserID);
 	List<Like> getAll();
 }

@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.forumpic.entity.ForumPic;
+import com.pichill.like.entity.Like;
 import com.pichill.report.entity.Report;
 
 @Entity
@@ -76,7 +77,11 @@ public class Post {
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("reportID asc")
 //	private Set<Report> reports;
-//	
+
+//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//	@OrderBy("likeID asc")
+//	private Set<Like> likes;
+	
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("forumPicID asc")
 //	private Set<ForumPic> forumPics;
@@ -169,6 +174,13 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
+//	public Set<Like>getLikes(){
+//		return likes;
+//	}
+//	
+//	public void setLikes(Set<Like>likes) {
+//		this.likes = likes;
+//	}
 	@Override
 	public String toString() {
 		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", placeID=" + placeID
