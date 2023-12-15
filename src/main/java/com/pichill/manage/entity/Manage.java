@@ -19,7 +19,7 @@ public class Manage implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "manageID", updatable = false)
-	private int manageID;
+	private Integer manageID;
 	
 	@Column(name = "mName")
 	private String mName;

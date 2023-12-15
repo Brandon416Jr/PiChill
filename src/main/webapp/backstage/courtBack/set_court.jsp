@@ -50,7 +50,17 @@ Court court = (Court) request.getAttribute("court");
 	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
 	media="all" />
-<style></style>
+<style>
+.account-dropdown__footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn {
+	margin-left: auto;
+	width: 100%;
+	box-sizing: border-box;
+}</style>
 </head>
 <body class="animsition">
 	<!-- MENU SIDEBAR-->
@@ -192,8 +202,11 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>µn¥X
-											</a>
+											<form method="POST"
+													action="<%=request.getContextPath()%>/manage/manage.do">
+													<button class="btn btn-danger">µn¥X</button>
+													<input type="hidden" name="action" value="logout">
+												</form>
 										</div>
 									</div>
 								</div>

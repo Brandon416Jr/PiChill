@@ -64,6 +64,16 @@ select:invalid+.custom-message {
 	font-weight: bold;
 	margin-top: 5px;
 }
+.account-dropdown__footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn {
+	margin-left: auto;
+	width: 100%;
+	box-sizing: border-box;
+}
 </style>
 </head>
 
@@ -208,8 +218,11 @@ select:invalid+.custom-message {
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>登出
-											</a>
+											<form method="POST"
+													action="<%=request.getContextPath()%>/manage/manage.do">
+													<button class="btn btn-danger">登出</button>
+													<input type="hidden" name="action" value="logout">
+												</form>
 										</div>
 									</div>
 								</div>
@@ -425,8 +438,10 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<select name="mStatus" id="selectLm"
 														class="form-control-sm form-control">
+														<option value="3">請選擇</option>
 														<option value="0">已離職</option>
 														<option value="1">在職中</option>
+														<option value="2">系統管理員</option>
 													</select>
 												</div>
 											</div>

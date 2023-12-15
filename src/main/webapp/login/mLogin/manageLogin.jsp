@@ -22,7 +22,7 @@ response.setHeader("Pragma", "no-cache");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>管理員登入頁面</title>
+<title>管理員登入</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <!-- Vendor CSS-->
@@ -83,7 +83,7 @@ label.pwd-see2 {
 							</a>
 						</div>
 						<div class="login-form">
-							<form action="<%=request.getContextPath()%>/mloginhandler"
+							<form action="<%=request.getContextPath()%>/mloginhandler"  id="loginForm"
 								method="post">
 								<div class="form-group">
 									<label>帳號</label><font color=red>${requestScope.errorMsgs.mUserName}</font>
@@ -101,23 +101,16 @@ label.pwd-see2 {
 											class="pwd-see2" for="togglePwd">顯示密碼</label>
 									</div>
 								</div>
-								<!--                 <div class="login-checkbox"> -->
-								<!--                   <label> -->
-								<!--                     <input type="checkbox" name="remember" />記住我的帳號 -->
-								<!--                   </label> -->
-								<!--                   <label> -->
-								<!--                     <a href="#">忘記密碼?</a> -->
-								<!--                   </label> -->
-								<!--                 </div> -->
+								<div class="form-group">
+									<label>驗證碼</label> <input class="au-input au-input--full"
+										type="text" name="checkCode" placeholder="請輸入驗證碼" /> <img
+										id="yzm_img" src="${pageContext.request.contextPath}/valistr"
+										style="cursor: pointer" onclick="changeYZM(this)" /> <span
+										id="valistr_msg"></span>
+								</div>
 								<button class="au-btn au-btn--block au-btn--green m-b-20"
 									type="submit">登入</button>
 								<div class="error-message">${requestScope.errorMsgs.mStatus}</div>
-								<!-- <div class="social-login-content">
-                                        <div class="social-button">
-                                            <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
-                                            <button class="au-btn au-btn--block au-btn--blue2">sign in with twitter</button>
-                                        </div>
-                                    </div> -->
 							</form>
 						</div>
 					</div>
@@ -129,6 +122,59 @@ label.pwd-see2 {
 			</div>
 		</div>
 	</div>
+	<script>
+		/**
+		 * 校驗欄位是否為空
+		 */
+		function checkNull(name, msg) {
+			setMsg(name, "")
+			var v = document.getElementsByName(name)[0].value;
+			if (v == "") {
+				setMsg(name, msg)
+				return false;
+			}
+			return true;
+		}
+		/**
+		 * 為輸入項設定提示訊息
+		 */
+		function setMsg(name, msg) {
+			var span = document.getElementById(name + "_msg");
+			span.innerHTML = "<font color='red'>" + msg + "</font>";
+		}
+		/**
+		 * 點選更換驗證碼
+		 */
+		function changeYZM(imgObj) {
+			imgObj.src = "${pageContext.request.contextPath}/valistr?time="
+					+ new Date().getTime();
+		}
+	</script>
+	<script>
+		$('form').submit(function(e) {
+			e.preventDefault();
+
+			// 驗證代碼
+		})
+
+		var code = $('input[name=checkCode]').val();
+
+		$.ajax({
+			url : '/checkCode',
+			data : {
+				code : code
+			},
+			 success: function (res) {
+		            if (res.success) {
+		                // Validation passed, submit the form
+		                $('#loginForm').submit();
+		            } else {
+		                // Validation failed, show an error message
+		                alert('驗證碼錯誤!');
+		            }
+		        }
+		});
+	</script>
 	<script>
 		history.pushState(null, null, document.URL);
 		window.addEventListener('popstate', function() {

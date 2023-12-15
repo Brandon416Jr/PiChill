@@ -79,7 +79,19 @@ pageContext.setAttribute("list", list);
 /* div.dataTables_scrollHeadInner>table.table-data3 { */
 /* 	margin: 0 auto !important; */
 /* } */
-</style> 
+
+.account-dropdown__footer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.btn {
+	margin-left: auto;
+	width: 100%;
+	box-sizing: border-box;
+}
+</style>
+
 </head>
 
 <body class="animsition all-employees-page">
@@ -223,8 +235,11 @@ pageContext.setAttribute("list", list);
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
-											<a href="#"> <i class="zmdi zmdi-power"></i>登出
-											</a>
+											<form method="POST"
+													action="<%=request.getContextPath()%>/logout.do">
+													<button class="btn btn-danger">登出</button>
+													<input type="hidden" name="action" value="logout">
+												</form>
 										</div>
 									</div>
 								</div>
@@ -281,7 +296,7 @@ pageContext.setAttribute("list", list);
 								src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=${manage.manageID}"
 								width="100px"></td>
 							<%-- 							<td>${manage.mProfilePic}</td> --%>
-							<td>${manage.mStatus == 0 ? '已離職':'在職中'}</td>
+							<td>${manage.mStatus == 0 ? '已離職' : (manage.mStatus == 1 ? '在職中' : '系統管理員')}</td>
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/manage/manage.do"

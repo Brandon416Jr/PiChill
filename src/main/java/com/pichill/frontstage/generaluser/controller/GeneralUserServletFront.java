@@ -100,6 +100,12 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gEmail.trim().matches(gEmailReg)) {
 			errorMsgs.put("gEmail", "請輸入正確的Email格式");
 		}
+		
+		Boolean gUserE = gUserSvcF.existsEmail(gEmail);
+		System.out.println(gUserE);
+		if (gUserE) {
+			errorMsgs.put("gEmail", "此信箱已被註冊過");	
+		} 
 
 		String address = req.getParameter("gAddress");
 		if (address == null || address.trim().isEmpty())
@@ -126,9 +132,9 @@ public class GeneralUserServletFront extends HttpServlet {
 			errorMsgs.put("gUsername", "會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 
-		Boolean gUser = gUserSvcF.existsUsername(gUsername);
-		System.out.println(gUser);
-		if (gUser) {
+		Boolean gUserUN = gUserSvcF.existsUsername(gUsername);
+		System.out.println(gUserUN);
+		if (gUserUN) {
 			errorMsgs.put("gUsername", "此帳號已存在");	
 		} 
 		
@@ -155,6 +161,12 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gIDNum.trim().matches(idnoRegex)) {
 			errorMsgs.put("gIDNum", "請輸入正確的身份證格式");
 		}
+		
+		Boolean gUserI = gUserSvcF.existsIDNum(gIDNum);
+		System.out.println(gUserI);
+		if (gUserI) {
+			errorMsgs.put("gIDNum", "一個人只能註冊一個帳號!");	
+		} 
 
 		String nicknameID = req.getParameter("nicknameID");
 		String nickReg = "^[a-zA-Z0-9_@$%^]{10}$";
@@ -163,6 +175,13 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!nicknameID.trim().matches(nickReg)) {
 			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式:字數10個，可以有符號、大小寫英文及數字，請勿填寫中文");
 		}
+		
+		Boolean gUserNN = gUserSvcF.existsNicknameID(nicknameID);
+		System.out.println(gUserNN);
+		if (gUserNN) {
+			errorMsgs.put("nicknameID", "此暱稱ID已存在!");	
+		} 
+
 
 		Integer gPostAmount = 0;
 

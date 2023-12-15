@@ -82,9 +82,9 @@ public class OwnerUserServletFront extends HttpServlet {
 			errorMsgs.put("oUserName", "會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 		
-		Boolean oUser = oUserSvcF.existsUsername(oUserName);
-		System.out.println(oUser);
-		if (oUser) {
+		Boolean oUserUN = oUserSvcF.existsUsername(oUserName);
+		System.out.println(oUserUN);
+		if (oUserUN) {
 			errorMsgs.put("oUserName", "此帳號已存在");	
 		} 
 		
@@ -111,6 +111,12 @@ public class OwnerUserServletFront extends HttpServlet {
 			errorMsgs.put("oIDNum", "請輸入正確的身份證格式");
 		}
 		
+		Boolean oUserI = oUserSvcF.existsIDNum(oIDNum);
+		System.out.println(oUserI);
+		if (oUserI) {
+			errorMsgs.put("oIDNum", "一個人只能註冊一次!");	
+		} 
+		
 		String compiled = req.getParameter("compiled");
 		String compiledReg = "^[0-9]{8}$";
 		if (compiled == null || oIDNum.trim().isEmpty()) {
@@ -118,6 +124,12 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!compiled.trim().matches(compiledReg)) {
 			errorMsgs.put("compiled", "請輸入正確的統編格式");
 		}
+		
+		Boolean oUserC = oUserSvcF.existsCompiled(compiled);
+		System.out.println(oUserC);
+		if (oUserC) {
+			errorMsgs.put("compiled", "此統編已被註冊過");	
+		} 
 		
 		String oName = req.getParameter("oName");
 		String oNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
@@ -203,6 +215,12 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oEmail.trim().matches(oEmailReg)) {
 			errorMsgs.put("oEmail", "請輸入正確的Email格式");
 		}
+		
+		Boolean oUserE = oUserSvcF.existsEmail(oEmail);
+		System.out.println(oUserE);
+		if (oUserE) {
+			errorMsgs.put("oEmail", "此信箱已被註冊過");	
+		} 
 		
 		String agree = req.getParameter("agree");
 		 if (agree == null) {
