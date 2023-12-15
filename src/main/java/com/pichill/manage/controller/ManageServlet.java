@@ -243,6 +243,9 @@ public class ManageServlet extends HttpServlet {
 		}
 
 		Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
+		if (mStatus == 3) {
+			errorMsgs.add("請選擇員工狀態");
+		}
 
 //		Manage manage = new Manage();
 		manage.setManageID(manageID);
@@ -390,6 +393,9 @@ public class ManageServlet extends HttpServlet {
 		}  else errorMsgs.add("員工照片: 請上傳照片");
 
 		Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
+		if (mStatus == 3) {
+			errorMsgs.add("請選擇員工狀態");
+		}
 //				Integer mStatus = null;
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Manage manage = new Manage();

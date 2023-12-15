@@ -9,4 +9,8 @@ public interface GeneralUserDAOFront {
 	GeneralUser findByPK(Integer gUserID);
 	List<GeneralUser> findByGeneralUsergUsername(String gUsername);
 	boolean isUsernameExists(String gUsername);
+	boolean isEmailExists(String gEmail);
+	boolean isIDNumExists(String gUDNum);
+	boolean isNicknameIDExists(String nicknameID);
+	GeneralUser findByUserNamePassword(String gUsername, String gPassword);
 }

@@ -234,8 +234,4 @@ public class ManageDAOImpl implements ManageDAO {
 	    return null;
 	}
 
-	
-	
-	
-	
 }

@@ -27,10 +27,11 @@ public class ManageLoginFilter extends HttpFilter implements Filter {
 		Object account = session.getAttribute("mUserName");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/mlogin/manageLogin.jsp");
+			res.sendRedirect(req.getContextPath() + "/login/mlogin/manageLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);
+			
 		}
 	}
 
