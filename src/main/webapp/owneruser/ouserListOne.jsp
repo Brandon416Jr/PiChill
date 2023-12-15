@@ -1,42 +1,39 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
-    
-<%
-//從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
-OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
-%>  
-    
-    
-<!DOCTYPE html>
+<%@ page import="com.pichill.owneruser.entity.*"%>
 
+<%
+//從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
+OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
+%> 
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>ownerUser</title>
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
-  
-  
-  <style>
-.phone1 {
-	width: 200px;
-	height: 200px;
-	background-image: url('img_flowers.jpg');
-	background-repeat: no-repeat;
-	background-size: contain;
-	/* border: 1px solid red; */
-	position: absolute;
-	right: 100px;
-	/* z-index: -1; */
-}
-  </style>
-  
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>ouserListOne</title>
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css">
+	    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
+	    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
+	<style>
+		.phone1 {
+			width: 200px;
+			height: 200px;
+			background-image: url('img_flowers.jpg');
+			background-repeat: no-repeat;
+			background-size: contain;
+			/* border: 1px solid red; */
+			position: absolute;
+			right: 100px;
+			/* z-index: -1; */
+			}
+  	</style>
+
 </head>
 <body>
+
 
 <!----------------------------------------------- header 區 ------------------------------------------------------->
 	<header class="header">
@@ -101,6 +98,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 			</div>
 		</aside>
 
+
     <!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
             <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員資料</h2>
@@ -116,8 +114,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 			</c:if>
 
 
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" enctype="multipart/form-data" class="bararea">
-          		<span>企業會員編號:</span>
+<span>企業會員編號:</span>
                 <input type="text" id="ouserID" name="ouserID" value="<%=ownerUser.getoUserID()%>" disabled/>
                 <br><br>                            
       
@@ -199,24 +196,27 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
-                <input type="hidden" name="action" value="update">
-				<input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">
-                <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
+ 	 			<br>
+
+ 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" enctype="multipart/form-data" class="bararea">  
+                <input type="hidden" name="action" value="getOne_For_Update">
+				<input type="hidden" name="oUserID" value="${ownerUser.oUserID}">
+                <input type="submit" id="next" value="修改" style="width:150px; height:44px;">
                 <br><br><br>
                 <br><br>
-         </FORM>      
-       </div>
-   </main>
-<!--     </div> -->
+            </form>
 
-    
-    <!----------------------------------------------- footer 區 ------------------------------------------------------->
+
+  </main>
+    </div>  
+
+<!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
       
         <div class="container">
           <header class="d-flex flex-wrap justify-content-center py-3">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-              <img src = "<%=request.getContextPath()%>/owneruser/pic/footerlogo.svg" alt="SVG"/>     
+              <img src = "<%=request.getContextPath()%>/generaluser/pic/footerlogo.svg" alt="SVG"/>     
             </a>
           
             <ul class="nav nav-pillss">
@@ -232,29 +232,14 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
           </header>
         </div>
       </footer>
-
+      
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-<!--======================================= 照片上傳 / 預覽 =======================================-->
-    <script type="text/javascript">
-		//清除提示信息
-		function hideContent(d) {
-		     document.getElementById(d).style.display = "none";
-		}
-		
-		//照片上傳-預覽用
-		var filereader_support = typeof FileReader != 'undefined';
-		if (!filereader_support) {
-			alert("No FileReader support");
-		}
-		acceptedTypes = {
-				'image/png' : true,
-				'image/jpeg' : true,
-				'image/gif' : true
-		};
-		function previewImage() {
+    <!--======================================= 顯示預覽圖 =======================================-->
+    <script>
+	    function previewImage() {
 			var oProfilePic1 = document.getElementById("oProfilePic");
-			oProfilePic1.addEventListener("change", function(event) {
+			gProfilePic1.addEventListener("show", function(event) {
 				var files = event.target.files || event.dataTransfer.files;
 				for (var i = 0; i < files.length; i++) {
 					previewfile(files[i])
@@ -276,46 +261,9 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 					blob_holder.appendChild(image);
 				};
 				reader.readAsDataURL(file);
-				document.getElementById('submit').disabled = false;
-			} else {
-				blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
-						+ "<br>" + "● ContentTyp: " + file.type
-						+ "<br>" + "● size: " + file.size + "bytes"
-						+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
-				document.getElementById('submit').disabled = true;
-			}
+			} 
 		}
-	</script>
-	
-
-   
-    
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </script>
 
 </body>
 </html>
