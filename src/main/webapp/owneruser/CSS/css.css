@@ -41,11 +41,26 @@ header.header{
 .nav-link{
   color: white;
   margin: 15px;
+  font-weight: bold;
 }
 
 ul.nav.nav-pills{
   position: relative;
   right: 30px;
+}
+#head{
+  position: relative;
+  top:8px;
+}
+#heads{
+  position: relative;
+  top:5px;
+}
+/* header大頭貼剪裁成圓形 */
+img.rounded-circle{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 /*======================= body 區域 ============================*/
 div.main_content{
@@ -105,6 +120,7 @@ aside.aside h2.h6{
   color: #207DCA;
 }
 
+/* 側邊欄 */
 aside.aside div.parent_container{
   /* width: 350px; */
   margin-right: 50px;
@@ -113,7 +129,18 @@ aside.aside div.parent_container{
   font-size: 1rem; 
   box-sizing: border-box;
 }
+aside.aside a.asidearea:hover{
+  color: #FF9F1B;
+}
 
+aside.aside div.parent_container{
+  /* width: 350px; */
+  margin-right: 50px;
+  display: inline-block;
+  vertical-align: top; 
+  font-size: 1rem; 
+  box-sizing: border-box;
+}
 
 /*======================= main 區域 ============================*/
 main.main{

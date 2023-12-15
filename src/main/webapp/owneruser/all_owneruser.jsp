@@ -96,17 +96,12 @@
 			<td>${ownerUser.oBankCode}</td>
 			<td>${ownerUser.oBankAccount}</td>
 			<td>${ownerUser.oEmail}</td>
-			<td><img src="<%=request.getContextPath()%>/ownerUser/DBJPGReader?oUserID=${ownerUser.oUserID}"
-			width="100px"></td>
+			<td>${ownerUser.oProfilePic}</td>
 			<td>
-				<FORM METHOD="post"
-					ACTION="<%=request.getContextPath()%>/ownerUser/ownerUser.do"
-					style="margin-bottom: 0px;">
-					<input type="submit" value="修改"
-					style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
-					<input type="hidden" name="oUserID" value="${ownerUser.oUserID}">
-					<input type="hidden" name="action" value="getOne_For_Update">
-				</FORM>
+			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" style="margin-bottom: 0px;">
+			     <input type="submit" value="修改">
+			     <input type="hidden" name="oUserID"  value="${ownerUser.oUserID}">
+			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>
 		</tr>
 	</c:forEach>
@@ -119,7 +114,7 @@
 
 		script.type = "text/javascript";
 
-		document.getElementsByTagName("head")[0].appendChild(script);
+// 		document.getElementsByTagName("head")[0].appendChild(script);
 	</script>
 </body>
 </html>
