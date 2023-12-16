@@ -285,7 +285,7 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUserService.updateGeneralUser(generalUser);
 		req.setAttribute("generalUser", generalUserService.getOneGeneralUser(gUserID));
 
-	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
+	/*================================= 3.修改完成,準備轉交(Send the Success view) ==========================*/
 		
 		req.setAttribute("generalUser", generalUser); // 資料庫update成功後,正確的的generalUser物件,存入req
 		return "/generaluser/guserListOne.jsp";

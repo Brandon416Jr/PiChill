@@ -61,13 +61,14 @@
   </li>
 
   <jsp:useBean id="generalUserSvc" scope="page" class="com.pichill.generaluser.service.GeneralUserService" />
+  <jsp:useBean id="reserveOrderSvc" scope="page" class="com.pichill.reserveorder.service.ReserveOrderService" />
    
   <li>
-     <FORM METHOD="post" ACTION="generaluser.do" >
-       <b>選擇會員編號:</b>
-       <select size="1" name="gUserID">
-         <c:forEach var="generalUser" items="${generalUserSvc.all}" > 
-          <option value="${generalUser.gUserID}">${generalUser.gUserID}
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" >
+       <b>選擇預約訂單編號:</b>
+       <select size="1" name="reserveOrderID">
+         <c:forEach var="reserveOrder" items="${reserveOrderSvc.all}" > 
+          <option value="${reserveOrder.reserveOrderID}">${reserveOrder.reserveOrderID}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">

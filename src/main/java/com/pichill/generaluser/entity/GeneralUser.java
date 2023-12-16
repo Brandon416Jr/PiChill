@@ -17,10 +17,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.pichill.comment.entity.Comment;
-import com.pichill.contactus.entity.ContactUs;
-import com.pichill.like.entity.Like;
-import com.pichill.post.entity.Post;
+//import com.pichill.comment.entity.Comment;
+//import com.pichill.contactus.entity.ContactUs;
+//import com.pichill.forumlike.entity.forumLike;
+//import com.pichill.post.entity.Post;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
@@ -83,22 +83,22 @@ public class GeneralUser {
 	private byte[] gProfilePic;
 	
 //	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generaluser", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
 //	@OrderBy("likeID asc") 
 //	private Set<Like> like; // Set不重複
 //	
 //	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generaluser", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
 //	@OrderBy("postID asc") 
 //	private Set<Post> post; // Set不重複
 //	
 //	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generaluser", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
 //	@OrderBy("commentID asc") 
 //	private Set<Comment> comment; // Set不重複
 //	
 //	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generaluser", cascade = CascadeType.ALL)
+//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
 //	@OrderBy("formID asc") 
 //	private Set<ContactUs> contactUs; // Set不重複
 //	

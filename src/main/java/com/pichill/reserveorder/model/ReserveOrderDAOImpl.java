@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.util.HibernateUtil;
 
@@ -52,5 +53,21 @@ public class ReserveOrderDAOImpl implements ReserveOrderDAO {
 			session.getTransaction().rollback();
 		}
 		return null;
+	}
+	@Override
+	public int update(ReserveOrder reserveOrder) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.update(reserveOrder);
+			session.getTransaction().commit();
+			System.out.println("修改成功!");
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("修改交易有錯QQ");
+			session.getTransaction().rollback();
+		}
+		return -1;
 	}
 }

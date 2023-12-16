@@ -8,11 +8,10 @@
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder"); //GeneralUserServlet.java(Concroller), 存入req的generalUser物件
 // GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-// ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-// List<ReserveOrder> list = reserveOrderSvc.getAll();
-// pageContext.setAttribute("list", list);
+ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+List<ReserveOrder> list = reserveOrderSvc.getAll();
+pageContext.setAttribute("list", list);
 %>
 <!DOCTYPE html>
 <html>
@@ -68,7 +67,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 					<li class="nav-item"><a
 						href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp"
 						class="nav-link"><img
-<%-- 							src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" --%>
+							src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}"
 							alt="SVG" class="rounded-circle" /> 會員中心</a></li>
 				</ul>
 
@@ -152,7 +151,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 					</thead>
 
 					<tbody>
-<%-- 						<c:forEach var="reserveOrder" items="${list}"> --%>
+						<c:forEach var="reserveOrder" items="${list}">
 							<!-- 資料內容 -->
 							<tr>
 								<td>${reserveOrder.reserveOrderID}</td>
@@ -163,7 +162,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 								<td>${reserveOrder.placeID}</td>
 								<td>${reserveOrder.orderTime}</td>
 								<td>${reserveOrder.orderNum}</td>
-								<td>${reserveOrder.orderStatus == 0 ? '訂單取消' : '訂單成立'}</td>
+								<td>${reserveOrder.orderStatus}</td>
 								<td>${reserveOrder.totalCost}</td>
 								<td>
 									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
@@ -174,7 +173,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 									</FORM>
 								</td>
 							</tr>
-<%-- 						</c:forEach> --%>
+						</c:forEach>
 					</tbody>
 
 				</table>

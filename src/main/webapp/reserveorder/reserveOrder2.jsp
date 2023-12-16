@@ -78,55 +78,55 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			
+	<jsp:useBean id="generalUserSvc" scope="page" class="com.pichill.generaluser.service.GeneralUserService" />	
+	<jsp:useBean id="ownerUserSvc" scope="page" class="com.pichill.owneruser.service.OwnerUserService" />	
+      
       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data" class="choice">
             <br>
-            <!-- 選擇球類 -->
+            <!-- 選擇一般會員編號 -->
             <div class="col">
               <div class="col" id="choose">
-                <label for="country" id="label">選擇球類</label>
-                <select class="form-select" id="ball" name="ball" required>
-                  <option value="0">籃球</option>
-                  <option value="1">排球</option>
-                  <option value="2">羽球</option>
+                <label for="country" id="label">選擇一般會員編號</label>
+                <select class="form-select" id="ball" name="gUserID">
+                <c:forEach var="generalUser" items="${generalUserSvc.all}" > 
+		          <option value="${generalUser.gUserID}">${generalUser.gUserID}
+		        </c:forEach> 
+<!--                   <option value="11000001">11000001</option> -->
+<!--                   <option value="11000002">11000002</option> -->
+<!--                   <option value="11000003">11000003</option> -->
+<!--                   <option value="11000004">11000004</option> -->
+<!--                   <option value="11000005">11000005</option> -->
+<!--                   <option value="11000006">11000006</option> -->
+<!--                   <option value="11000007">11000007</option> -->
+<!--                   <option value="11000008">11000008</option> -->
+<!--                   <option value="11000009">11000009</option> -->
+<!--                   <option value="11000010">11000010</option> -->
                 </select>
               </div>
               <br>
-            <!-- 選擇地區 -->
+            <!-- 選擇企業會員編號 -->
             <div class="col">
               <div class="col" id="choose">
-                <label for="country" id="label">選擇地區</label>
-                <select class="form-select" id="loc" name="loc" required>
-                  <option value="">松山區</option>
-                  <option>中正區</option>
-                  <option>中山區</option>
+                <label for="country" id="label">選擇企業會員編號</label>
+                <select class="form-select" id="loc" name="oUserID">
+                  <option value="12000001">12000001</option>
+                  <option value="12000002">12000002</option>
+                  <option value="12000003">12000003</option>
+                  <option value="12000004">12000004</option>
+                  <option value="12000005">12000005</option>
+                  <option value="12000006">12000006</option>
+                  <option value="12000007">12000007</option>
+                  <option value="12000008">12000008</option>
+                  <option value="12000009">12000009</option>
+                  <option value="12000010">12000010</option>
                 </select>
               </div>
               <br>
-            <!-- 選擇球館 -->
-            <div class="col">
-              <div class="col" id="choose">
-                <label for="country" id="label">選擇球館</label>
-                <select class="form-select" id="court" name="court" required>
-                  <option value=""></option>
-                  <option>...</option>
-                </select>
-              </div>
-              <br>
-              <!-- 選擇場地 -->
-            <div class="col">
-              <div class="col" id="choose">
-                <label for="country" id="label">選擇場地</label>
-                <select class="form-select" id="place" name="place" required>
-                  <option value=""></option>
-                  <option>...</option>
-                </select>
-              </div>
-              <br>
-            <!-- 預約日期 -->
+            
+              <!-- 預約日期 -->
               <div class="col">
                 <p for="reservedate" id="p">預約日期</p>
-                <input type="date" id="reservedate" name="reservedate">
+                <input type="date" id="reservedate" name="reservedate" value="<%=(reserveOrder == null) ? "2023-10-04" : reserveOrder.getReserveDate()%>">
               </div>
         
             <br>
@@ -134,8 +134,7 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">預約時段</label>
-                <select class="form-select" id="time" name="time" required>
-                  <option value="">請選擇時段</option>
+                <select class="form-select" id="time" name="timeID" placeholder="請選擇時段">
                   <option value="0">00:00-01:00</option>
                   <option value="1">01:00-02:00</option>
                   <option value="2">02:00-03:00</option>
@@ -163,17 +162,60 @@
                 </select>
               </div>
             <br>
+              <!-- 選擇場地 -->
+            <div class="col">
+              <div class="col" id="choose">
+                <label for="country" id="label">選擇場地</label>
+                <select class="form-select" id="place" name="placeID" required>
+                  <option value="62000001">62000001</option>
+                  <option value="62000002">62000002</option>
+                  <option value="62000003">62000003</option>
+                  <option value="62000004">62000004</option>
+                  <option value="62000005">62000005</option>
+                  <option value="62000006">62000006</option>
+                  <option value="62000007">62000007</option>
+                  <option value="62000008">62000008</option>
+                  <option value="62000009">62000009</option>
+                  <option value="62000010">62000010</option>
+                </select>
+              </div>
+              <br>
+            <!-- 下單時間 -->
+<!--             <div class="col"> -->
+<!--               <div class="col" id="choose" hidden> -->
+<!--                 <label for="coupon" id="label">下單時間</label><br> -->
+<%--                   <input type="text" id="orderTime" name="orderTime" value="${reserveOrder.orderTime}"> --%>
+<!--               </div> -->
+<!--             <br> -->
             <!-- 人數 -->
             <div class="col">
               <div class="col" id="choose">
                 <label for="coupon" id="label">人數</label><br>
-                  <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數">
+                  <input type="text" id="orderNum" name="orderNum" value="<%=(reserveOrder == null) ? "2" : reserveOrder.getOrderNum()%>" placeholder="請輸入預約人數">
               </div>
             <br>
+            <!-- 訂單狀態 -->
+            <div class="col">
+              <div class="col" id="choose">
+                <label for="country" id="label">訂單狀態</label>
+                <select class="form-select" id="court" name="orderStatus" required>
+                  <option value="0">訂單取消</option>
+				  <option value="1">訂單成立</option>
+				  <option value="2">訂單已完成</option>
+                </select>
+              </div>
+              <br>
+            <!-- 訂單總金額 -->  
+            <div class="col">
+              <div class="col" id="choose">
+                <label for="coupon" id="label">訂單總金額</label><br>
+                  <input type="text" id="totalCost" name="totalCost" value="<%=(reserveOrder == null) ? "1000" : reserveOrder.getTotalCost()%>" placeholder="請輸入金額">
+              </div>
+            <br>
+            
             <input type="hidden" name="action" value="insert">
 <%-- 			<input type="hidden" name="reserveOrderID" value="<%=reserveOrder.getReserveOrderID()%>"> --%>
-            <input type="submit" id="next" value="下一步" style="width:150px; height:44px;">&nbsp;
-            <input type="reset" id="next" value="取消" style="width:150px; height:44px;">
+            <input type="submit" id="next" value="新增" style="width:150px; height:44px;">&nbsp;
             <br><br>
             <br><br>
         </form>
