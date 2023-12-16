@@ -1,4 +1,4 @@
-package com.pichill.like.model;
+package com.pichill.forumlike.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -13,26 +13,26 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.pichill.comment.entity.Comment;
-import com.pichill.like.Util;
-import com.pichill.like.entity.Like;
+import com.pichill.forumlike.Util;
+import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.post.entity.Post;
 import com.pichill.util.HibernateUtil;
 
-public class LikeDAOImpl implements LikeDAO {
+public class ForumLikeDAOImpl implements ForumLikeDAO {
 private SessionFactory factory;
 	
-	public LikeDAOImpl() {
+	public ForumLikeDAOImpl() {
 		factory = com.pichill.util.HibernateUtil.getSessionFactory();
 	}
 	private Session getSession() {
 		return factory.getCurrentSession();
 	}
 	@Override
-	public int add(Like like) {
+	public int add(ForumLike like) {
 		return (Integer)getSession().save(like);
 	}
 	@Override
-	public int update(Like like) {
+	public int update(ForumLike like) {
 		try {
 			getSession().update(like);
 			return 1;
@@ -42,7 +42,7 @@ private SessionFactory factory;
 	}
 	@Override
 	public int delete(int likeID) {
-		Like like = getSession().get(Like.class,likeID);
+		ForumLike like = getSession().get(ForumLike.class,likeID);
 		if(like!=null) {
 			getSession().delete(like);
 			return 1;
@@ -51,18 +51,18 @@ private SessionFactory factory;
 		}
 	}
 	@Override
-	public Like getByLikeID(Integer likeID) {
+	public ForumLike getByLikeID(Integer likeID) {
 		getSession().clear();
-		return getSession().get(Like.class,likeID);
+		return getSession().get(ForumLike.class,likeID);
 	}
 	@Override
-	public List<Like> getAll() {
-		return getSession().createQuery("from Like",Like.class).list();
+	public List<ForumLike> getAll() {
+		return getSession().createQuery("from ForumLike",ForumLike.class).list();
 
 	}
 	@Override
-	public Like getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
-		return getSession().createQuery("from Like WHERE postID = :postID AND gUserID = :gUserID", Like.class)
+	public ForumLike getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
+		return getSession().createQuery("from ForumLike WHERE postID = :postID AND gUserID = :gUserID", ForumLike.class)
 		.setParameter("postID", postID)
 	    .setParameter("gUserID", gUserID)
 	    .uniqueResult();
@@ -211,3 +211,4 @@ private SessionFactory factory;
 //		return likeList;
 //	}
 //}
+

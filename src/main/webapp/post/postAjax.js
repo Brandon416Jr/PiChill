@@ -23,7 +23,7 @@ $(document).ready(function() {
 	});
 
 	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
-
+		postContent = postContent.replace(/\n/g, '<br>');
 		var selectedImage = $('#p_file').prop('files')[0];
 		var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` :
 			postPic ? `<img src="${postPic}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
@@ -57,7 +57,7 @@ $(document).ready(function() {
             <div class="container text-center">
                 <div class="row align-items-start" id="card-footer">
                     <div class="col-2" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up" id="likebutton"> ${likeCnt > 0 ? likeCnt : ''}</button>
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt > 0 ? likeCnt : ''}</button>
                     </div>
                     <div class="col-2" id="commentcol" data-post-id="${postID}">
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${commentCnt > 0 ? commentCnt : ''}</button>
@@ -71,6 +71,7 @@ $(document).ready(function() {
 	}
 
 	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
+		postContent = postContent.replace(/\n/g, '<br>');
 		var selectedImage = $('#p_file').prop('files')[0];
 		var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` :
 			postPic ? `<img src="${postPic}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
@@ -92,7 +93,10 @@ $(document).ready(function() {
                                     <div class="post_time">${postTime}</div>
                                 </div>
                             </h1>
-                            <!-- <button type="button" class="edit_group" > <i class="fa-regular fa-pen-to-square"></i>編輯</button>
+                     <!--                    <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
+                                          <i class="fa-regular fa-pen-to-square"></i>
+                                             <span class="tooltip-text">編輯</span>
+                                         </button>
                             <button type="button" class="delete" > <i class="fa-regular fa-trash-can"></i>刪除</button> -->
 
                             <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="reportButton" data-post-id="${postID}">
@@ -131,11 +135,11 @@ $(document).ready(function() {
                     <div class="container text-center">
                         <div class="row align-items-start" id="card-footer">
                             <div class="col-2" id="likecol" data-post-id="${postID}">
-                                <button type="button" class="fa-regular fa-thumbs-up" id="likebutton"> ${likeCnt}
+                                <button type="button" class="fa-regular fa-thumbs-up likebutton">  ${likeCnt > 0 ? likeCnt : ''}
                             </div>
                             <div class="col-2" id="commentcol" data-post-id="${postID}">
                                 <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal5" > ${commentCnt}
+                                    data-bs-target="#exampleModal5" >  ${commentCnt > 0 ? commentCnt : ''}
                                 </div>
                             <div class="col-2" id="pluscol">
                                 <button type="button" class="fa-regular fa-square-plus"> +1
@@ -262,6 +266,14 @@ $(document).ready(function() {
 		var discussType = $(".discussType").val();
 		var selectedFiles = $("#p_file")[0].files;
 
+		if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		}else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
+		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert");
 		formData.append("postTitle", newPostTitle);
@@ -280,7 +292,7 @@ $(document).ready(function() {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
 				fetchAndDisplayLatestData(response.postID, newPostTitle, newPostContent, response.postTime, selectedFiles);
-
+				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
 			error: function(xhr, status, error) {
@@ -320,6 +332,7 @@ $(document).ready(function() {
                         </button>
 		                          <h5 class="card-title">${newPostTitle}</h5>
 		                          <p class="card-text">${newPostContent}</p>
+		                          
 		                      </div>
 		                  </div>
 		                  <div class="col-md-4" id="piccontainer">
@@ -328,7 +341,7 @@ $(document).ready(function() {
 		                  <div class="container text-center">
 		                      <div class="row align-items-start" id="card-footer">
 		                          <div class="col-2" id="likecol" data-post-id="${postID}">
-		                              <button type="button" class="fa-regular fa-thumbs-up" id="likebutton"> ${likeCnt}</button>
+		                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt}</button>
 		                          </div>
 		                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                                <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
@@ -338,7 +351,6 @@ $(document).ready(function() {
 		                  </div>
 		              </div>
 		          </div>`;
-
 				// 將新文章添加到文章列表
 				$('#post-list').prepend(newPost);
 				$('#floatingTextarea').val('');
@@ -363,6 +375,14 @@ $(document).ready(function() {
 		var groupType = $(".groupType").val();
 		var selectedFiles = $("#p_file")[0].files;
 
+		if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		}else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
+		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert_group");
 		formData.append("postTitle", newPostTitle);
@@ -381,7 +401,7 @@ $(document).ready(function() {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
 				fetchAndDisplayLatestData2(response.postID, newPostTitle, newPostContent, response.postTime, selectedFiles);
-
+				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
 			error: function(xhr, status, error) {
@@ -396,6 +416,8 @@ $(document).ready(function() {
 			type: "GET",
 			url: "post.do",  // 替換成實際的後端處理檔案或API端點
 			success: function(data) {
+				var likeCnt = "";
+				var commentCnt = "";
 				var newPost = `
 	            	    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
 	              <div class="row g-0">
@@ -449,11 +471,11 @@ $(document).ready(function() {
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
 	                          <div class="col-2" id="likecol">
-	                              <button type="button" class="fa-regular fa-thumbs-up"> 87
+	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt}
 	                          </div>
 	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal5" > 1
+	                                  data-bs-target="#exampleModal5" > ${commentCnt}
 	                              </div>
 	                          <div class="col-2" id="pluscol">
 	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -479,7 +501,95 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		fetchAndDisplayLatestData();
 	});
+//===========新增文章(推撥)==========
+	$("#pb-promote").on("click", function() {
+		var newPostTitle = $("#floatingTextarea5").val();
+		var newPostContent = $("#floatingTextarea6").val();
+console.log(newPostTitle);
+		if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		} else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
+		newPostContent = newPostContent.replace(/\n/g, '<br>');
+		let formData = new FormData();
+		formData.append("action", "insert_promote");
+		formData.append("postTitle", newPostTitle);
+		formData.append("postContent", newPostContent);
 
+		$.ajax({
+			type: "POST",
+			url: "post.do",
+			data: formData,
+			dataType: "json",
+			processData: false,
+			contentType: false,
+			success: function(response) {
+				console.log("伺服器回應:", response);
+				// 	            	var newPostID = response.postID;
+				fetchAndDisplayLatestData3(response.postID, newPostTitle, newPostContent, response.postTime);
+				$("#exampleModal").modal("hide");
+				console.log("發布成功:", response);
+			},
+			error: function(xhr, status, error) {
+				console.error("發生錯誤:", status, error);
+			}
+		});
+	});
+
+	function fetchAndDisplayLatestData3(postID, newPostTitle, newPostContent, postTime) {
+		// 發送請求以獲取最新資料
+		$.ajax({
+			type: "GET",
+			url: "post.do",  // 替換成實際的後端處理檔案或API端點
+			success: function(data) {
+				var newPost = `
+	            	<div id="promote-list">
+			<div class="card mb-3" id=article3 style="width: 22rem;">
+				<div class="row g-0">
+					<div class="col-md-8">
+						<div class="card-body">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">
+								<img src="../image/Capybara.jpg" alt="大頭貼">
+								<div>
+									<a class="post_owner">水豚君</a>
+									<div class="post_timer">${postTime}</div>
+								</div>
+							</h1>
+							  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                              <span class="tooltip-text">編輯</span>
+                          </button>
+                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-trash-can"></i>
+                              <span class="tooltip-text">刪除</span>
+                          </button>
+							<h5 class="card-title">${newPostTitle}</h5>
+	                          <p class="card-text">${newPostContent}</p>
+	                      </div>
+							</div>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>`
+				$('#promote-list').prepend(newPost);
+
+				$('#floatingTextarea5').val('');
+				$('#floatingTextarea6').val('');
+				$('#exampleModal').modal('hide');
+			},
+			error: function(xhr, status, error) {
+				console.error("發生錯誤:", status, error);
+			}
+		});
+	}
+	// 初始化時獲取一次最新資料
+	$(document).ready(function() {
+		fetchAndDisplayLatestData3();
+	});
 	// =============編輯文章===============//
 	// ===找到原先的值(討論)===//
 	$("#post-list").on("click", ".edit_discuss", function() {
@@ -494,9 +604,10 @@ $(document).ready(function() {
 			data: { "postID": postID },
 			dataType: "json",
 			success: function(postData) {
-				console.log("aa")
+				//				console.log("aa")
+				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea_edit").val(postData.postTitle);
-				$("#floatingTextarea2_edit").val(postData.postContent);
+				$("#floatingTextarea2_edit").val(PostContent);
 				var postPic = postData.postPic;
 				$("#preview_edit").html(`<img src="${postPic}" alt="預覽圖">`);
 
@@ -509,9 +620,10 @@ $(document).ready(function() {
 	});
 	//===找到原先的值(揪團)===//
 	$("#post-list").on("click", ".edit_group", function() {
-		console.log("click");
+//		console.log("click");
 		var postID = $(this).data("post-id");
 		var saveButton = $(".save-button_group");
+
 		$.ajax({
 			action: "getOne_For_Update",
 			type: "GET",
@@ -519,9 +631,10 @@ $(document).ready(function() {
 			data: { "postID": postID },
 			dataType: "json",
 			success: function(postData) {
-				console.log("aa")
+				//				console.log("aa")
+				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea3_edit").val(postData.postTitle);
-				$("#floatingTextarea4_edit").val(postData.postContent);
+				$("#floatingTextarea4_edit").val(PostContent);
 				var postPic = postData.postPic;
 				$("#preview2_edit").html(`<img src="${postPic}" alt="預覽圖">`);
 
@@ -539,7 +652,13 @@ $(document).ready(function() {
 		var newPostTitle = $("#floatingTextarea_edit").val();
 		var newPostContent = $("#floatingTextarea2_edit").val();
 		var newPostPic = $("#p_file_edit")[0].files[0];
-
+	if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		}else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
 		var formData = new FormData();
 		formData.append("action", "update");
 		formData.append("postID", postID);
@@ -581,6 +700,13 @@ $(document).ready(function() {
 		var newPostTitle = $("#floatingTextarea3_edit").val();
 		var newPostContent = $("#floatingTextarea4_edit").val();
 		var newPostPic = $("#p_file2_edit")[0].files[0];
+			if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		}else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
 		var formData = new FormData();
 		formData.append("action", "update");
 		formData.append("postID", postID);
@@ -655,8 +781,9 @@ $(document).ready(function() {
 			dataType: "Json",
 			success: function(postData) {
 				// 	        	console.log("aa")
+				var formattedPostContent = postData.postContent.replace(/<br>/g, '\n');
 				$(".card-title.article0").text(postData.postTitle);
-				$(".card-text.article1").text(postData.postContent);
+				$(".card-text.article1").text(formattedPostContent);
 				//             console.log(postData.postTitle);
 				//             console.log(postData.postContent);
 				// 	            var postPic = postData.postPic;
@@ -722,13 +849,13 @@ $(document).ready(function() {
                                    ${imageElement}
                                </div>
                                    <div class="container text-center">
-                                       <div class="row align-items-start" id="card-footer">
-                                           <div class="col-2" id="likecol">
-                                               <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}</button>
+                                       <div class="row align-items-start" id="card-footer" >
+                                           <div class="col-2" id="likecol" data-post-id="${postID}">
+                                               <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
                                            </div>
                                            <div class="col-2" id="commentcol" data-post-id="${postID}">
                                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal5"> 1
+                                               data-bs-target="#exampleModal5"> ${posts[i].commentCnt>0?posts[i].commentCnt:''}
                                            </div>
                                        </div>
                                    </div>
@@ -749,10 +876,10 @@ $(document).ready(function() {
     	                                  <div class="post_time">${posts[i].postTime}</div>
     	                              </div>
     	                          </h1>
-    	                          <button type="button" class="edit_group" data-post-id="${postID}">
-                                  <i class="fa-regular fa-pen-to-square"></i>
-                                  <span class="tooltip-text">編輯</span>
-                              </button>
+    	                            <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
+                                          <i class="fa-regular fa-pen-to-square"></i>
+                                              <span class="tooltip-text">編輯</span>
+                                          </button>
                               <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                                   <i class="fa-regular fa-trash-can"></i>
                                   <span class="tooltip-text">刪除</span>
@@ -790,11 +917,11 @@ $(document).ready(function() {
     	                  <div class="container text-center">
     	                      <div class="row align-items-start" id="card-footer">
     	                          <div class="col-2" id="likecol">
-    	                              <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}
+    	                              <button type="button" class="fa-regular fa-thumbs-up likebutton">  ${posts[i].likeCnt>0?posts[i].likeCnt:''}
     	                          </div>
     	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
     	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-    	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt}
+    	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
     	                              </div>
     	                          <div class="col-2" id="pluscol">
     	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -871,12 +998,12 @@ $(document).ready(function() {
                                 </div>
                                     <div class="container text-center">
                                         <div class="row align-items-start" id="card-footer">
-                                            <div class="col-2" id="likecol">
-                                                <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}</button>
+                                            <div class="col-2" id="likecol" data-post-id="${postID}">
+                                                <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
                                             </div>
                                             <div class="col-2" id="commentcol" data-post-id="${postID}">
                                             <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal5" > 1
+                                                data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
                                             </div>
                                         </div>
                                     </div>
@@ -899,10 +1026,10 @@ $(document).ready(function() {
               	                                  <div class="post_time">${posts[i].postTime}</div>
               	                              </div>
               	                          </h1>
-              	                          <button type="button" class="edit_group" data-post-id="${postID}">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                            <span class="tooltip-text">編輯</span>
-                                        </button>
+              	                           <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
+                                          <i class="fa-regular fa-pen-to-square"></i>
+                                              <span class="tooltip-text">編輯</span>
+                                          </button>
                                         <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                                             <i class="fa-regular fa-trash-can"></i>
                                             <span class="tooltip-text">刪除</span>
@@ -939,12 +1066,12 @@ $(document).ready(function() {
               	              </div>
               	                  <div class="container text-center">
               	                      <div class="row align-items-start" id="card-footer">
-              	                          <div class="col-2" id="likecol">
-              	                              <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}
+              	                          <div class="col-2" id="likecol" data-post-id="${postID}">
+              	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}
               	                          </div>
               	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
               	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-              	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt}
+              	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
               	                              </div>
               	                          <div class="col-2" id="pluscol">
               	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -1016,12 +1143,12 @@ $(document).ready(function() {
                               </div>
                                   <div class="container text-center">
                                       <div class="row align-items-start" id="card-footer">
-                                          <div class="col-2" id="likecol">
-                                              <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}</button>
+                                          <div class="col-2" id="likecol" data-post-id="${postID}">
+                                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
                                           </div>
                                           <div class="col-2" id="commentcol" data-post-id="${postID}">
                                           <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                              data-bs-target="#exampleModal5" > 1
+                                              data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
                                           </div>
                                       </div>
                                   </div>
@@ -1042,10 +1169,10 @@ $(document).ready(function() {
    	                                  <div class="post_time">${posts[i].postTime}</div>
    	                              </div>
    	                          </h1>
-   	                          <button type="button" class="edit_group" data-post-id="${postID}">
-                                 <i class="fa-regular fa-pen-to-square"></i>
-                                 <span class="tooltip-text">編輯</span>
-                             </button>
+   	                          <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
+                                          <i class="fa-regular fa-pen-to-square"></i>
+                                              <span class="tooltip-text">編輯</span>
+                                          </button>
                              <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                                  <i class="fa-regular fa-trash-can"></i>
                                  <span class="tooltip-text">刪除</span>
@@ -1082,12 +1209,12 @@ $(document).ready(function() {
    	              </div>
    	                  <div class="container text-center">
    	                      <div class="row align-items-start" id="card-footer">
-   	                          <div class="col-2" id="likecol">
-   	                              <button type="button" class="fa-regular fa-thumbs-up"> ${posts[i].likeCnt}
+   	                          <div class="col-2" id="likecol" data-post-id="${postID}">
+   	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}
    	                          </div>
    	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
    	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-   	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt}
+   	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
    	                              </div>
    	                          <div class="col-2" id="pluscol">
    	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -1147,7 +1274,7 @@ $(document).ready(function() {
 					console.log(data);
 					var filteredPosts = data;
 					displayPosts(filteredPosts);
-					var newUrl = "http://localhost:8081/PiChill/post/listAll.html.html?q=" + encodeURIComponent(postTitle);
+					var newUrl = "http://localhost:8081/PiChill/post/forum.html.html?q=" + encodeURIComponent(postTitle);
 					history.pushState({ search: postTitle }, null, newUrl);
 				}
 			});
@@ -1194,12 +1321,12 @@ $(document).ready(function() {
                            </div>
                                <div class="container text-center">
                                    <div class="row align-items-start" id="card-footer">
-                                       <div class="col-2" id="likecol">
-                                           <button type="button" class="fa-regular fa-thumbs-up">${likeCnt}</button>
+                                       <div class="col-2" id="likecol" data-post-id="${postID}">
+                                           <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt>0?likeCnt:''}</button>
                                        </div>
                                        <div class="col-2" id="commentcol" data-post-id="${postID}">
                                        <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                           data-bs-target="#exampleModal5" > 1
+                                           data-bs-target="#exampleModal5" > ${commentCnt>0?commentCnt:''}
                                        </div>
                                    </div>
                                </div>
@@ -1221,10 +1348,10 @@ $(document).ready(function() {
 	                                  <div class="post_time">${postTime}</div>
 	                              </div>
 	                          </h1>
-	                          <button type="button" class="edit_group" data-post-id="${postID}">
-                              <i class="fa-regular fa-pen-to-square"></i>
-                              <span class="tooltip-text">編輯</span>
-                          </button>
+	                          <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
+                                          <i class="fa-regular fa-pen-to-square"></i>
+                                              <span class="tooltip-text">編輯</span>
+                                          </button>
                           <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
@@ -1262,11 +1389,11 @@ $(document).ready(function() {
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
 	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-	                              <button type="button" class="fa-regular fa-thumbs-up"> ${likeCnt}
+	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt>0?likeCnt:''}
 	                          </div>
 	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal5" > ${commentCnt}
+	                                  data-bs-target="#exampleModal5" > ${commentCnt>0?commentCnt:''}
 	                              </div>
 	                          <div class="col-2" id="pluscol">
 	                              <button type="button" class="fa-regular fa-square-plus"> +1
