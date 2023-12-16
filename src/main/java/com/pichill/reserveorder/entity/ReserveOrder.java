@@ -26,8 +26,7 @@ public class ReserveOrder {
 	
 	// fetch 預設為 EAGER
 //	@ManyToOne
-//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID")
-	// (name=自己(FK), referencedColumnName = 對應到的PK)
+//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)//(name=自己(FK), referencedColumnName = 對應到的PK)
 //	private GeneralUser generalUser;
 	
 	@Column(name="gUserID", updatable = false)
