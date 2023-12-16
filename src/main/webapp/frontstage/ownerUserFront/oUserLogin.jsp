@@ -9,10 +9,16 @@
   <link rel="stylesheet" href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
   <style type="text/css">
     button.au-btn {
-      /* border: 2px solid red; */
-      background-color: #207DCA;
-      /* margin: 5px; */
-    }
+	/* border: 2px solid red; */
+	background-color: #207DCA;
+	/* margin: 5px; */
+}
+
+button.au-btn:hover {
+	/* border: 2px solid red; */
+	background-color: orange;
+	/* margin: 5px; */
+}
     div.pwd-see {
 	display: flex;
   	align-items: center;

@@ -50,4 +50,8 @@ public class GeneralUserServiceFront {
     	return dao.findByUserNamePassword(gUsername, gPassword);
         
     }
+	
+	public GeneralUser getGeneralUserBygEmail(String gEmail) {
+		return dao.findBygEmail(gEmail);
+	}
 }

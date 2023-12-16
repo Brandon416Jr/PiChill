@@ -131,11 +131,11 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 			session.getTransaction().commit();
 			System.out.println("交易後");
 			if (generalUser != null) {
-				System.out.println("有找到相同會員帳號");
+				System.out.println("有找到相同會員信箱");
 				System.out.println(generalUser);
 				return true;
 			} else {
-				System.out.println("沒有找到相同會員帳號");
+				System.out.println("沒有找到相同會員信箱");
 				return false;
 			}
 
@@ -165,11 +165,11 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 			session.getTransaction().commit();
 			System.out.println("交易後");
 			if (generalUser != null) {
-				System.out.println("有找到相同會員帳號");
+				System.out.println("有找到相同會員身分證");
 				System.out.println(generalUser);
 				return true;
 			} else {
-				System.out.println("沒有找到相同會員帳號");
+				System.out.println("沒有找到相同會員身分證");
 				return false;
 			}
 
@@ -199,11 +199,11 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 			session.getTransaction().commit();
 			System.out.println("交易後");
 			if (generalUser != null) {
-				System.out.println("有找到相同會員帳號");
+				System.out.println("有找到相同會員暱稱ID");
 				System.out.println(generalUser);
 				return true;
 			} else {
-				System.out.println("沒有找到相同會員帳號");
+				System.out.println("沒有找到相同會員暱稱ID");
 				return false;
 			}
 
@@ -243,5 +243,25 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 	        }
 	    }
 	    return null;
+	}
+	
+	public GeneralUser findBygEmail(String gEmail) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			GeneralUser generalUser = (GeneralUser) session.createQuery("FROM GeneralUser WHERE gEmail = :gEmail")
+	                 .setParameter("gEmail",gEmail)
+	                 .uniqueResult();
+			session.getTransaction().commit();
+			return generalUser;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	    }
+		return null;
 	}
 }

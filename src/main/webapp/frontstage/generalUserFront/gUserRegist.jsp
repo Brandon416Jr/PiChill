@@ -88,6 +88,18 @@ div.pwd-see {
 label.pwd-see2 {
 	margin-left: 5px;
 }
+
+input.btn {
+/* border: 1px solid red; */
+background-color: #207DCA;
+width: 100%;
+color: white;
+}
+
+input.btn:hover {
+  background-color: orange;
+}
+
 </style>
 </head>
 <body class="animsition">
@@ -218,7 +230,7 @@ label.pwd-see2 {
 								</div>
 								<div class="row form-group">
 									<div class="col-1 col-md-8">
-										<input type="hidden" name="action" value="insert"><input
+										<input class="btn" type="hidden" name="action" value="insert"><input
 											type="submit" class="btn btn-primary btn-sm" value="µù¥U">
 										<i class="fa fa-dot-circle-o"></i>
 									</div>

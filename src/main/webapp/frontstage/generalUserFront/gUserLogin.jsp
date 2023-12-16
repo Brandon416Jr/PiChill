@@ -18,11 +18,17 @@
   <!-- Main CSS-->
   <link href="<%=request.getContextPath()%>/backEnd-Website/css/login.css" rel="stylesheet" media="all" />
    <style type="text/css">
-    button.au-btn {
-      /* border: 2px solid red; */
-      background-color: #207DCA;
-      /* margin: 5px; */
-    }
+   button.au-btn {
+	/* border: 2px solid red; */
+	background-color: #207DCA;
+	/* margin: 5px; */
+}
+
+button.au-btn:hover {
+	/* border: 2px solid red; */
+	background-color: orange;
+	/* margin: 5px; */
+}
     div.pwd-see {
 	display: flex;
   	align-items: center;

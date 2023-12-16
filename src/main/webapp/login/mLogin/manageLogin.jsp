@@ -57,6 +57,12 @@ button.au-btn {
 	/* margin: 5px; */
 }
 
+button.au-btn:hover {
+	/* border: 2px solid red; */
+	background-color: orange;
+	/* margin: 5px; */
+}
+
 div.pwd-see {
 	display: flex;
 	align-items: center;
@@ -110,7 +116,7 @@ label.pwd-see2 {
 								</div>
 								<button class="au-btn au-btn--block au-btn--green m-b-20"
 									type="submit">µn¤J</button>
-								<div class="error-message">${requestScope.errorMsgs.mStatus}</div>
+								<div  class="error-message" style="color: red;">${requestScope.errorMsgs.mStatus}</div>
 							</form>
 						</div>
 					</div>

@@ -13,4 +13,6 @@ public interface GeneralUserDAOFront {
 	boolean isIDNumExists(String gUDNum);
 	boolean isNicknameIDExists(String nicknameID);
 	GeneralUser findByUserNamePassword(String gUsername, String gPassword);
+	GeneralUser findBygEmail(String gEmail);
+
 }
