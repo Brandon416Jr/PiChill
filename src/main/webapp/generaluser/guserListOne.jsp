@@ -29,10 +29,10 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
               
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="main.html" class="nav-link" id="head">首頁</a></li>
+                <li class="nav-item"><a href="main.jsp" class="nav-link" id="head">首頁</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">公告</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="head">我要預約</a></li>
+                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder2.jsp" class="nav-link" id="head">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/select_page.jsp" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
@@ -55,7 +55,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">球館預約紀錄</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/reserveorder/allOrder.jsp">球館預約紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">

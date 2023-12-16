@@ -19,6 +19,9 @@ public class ReserveOrderService {
 		dao.add(reserveOrder);	
 	}
 
+	public void updateReserveOrder(ReserveOrder reserveOrder) {
+		dao.update(reserveOrder);
+	}
 	
 	public ReserveOrder getOneReserveOrder(Integer reserveOrderID) {
 		return dao.findByPK(reserveOrderID);
@@ -28,4 +31,6 @@ public class ReserveOrderService {
 	public List<ReserveOrder> getAll() {
 		return dao.getAll();
 	}
+	
+	
 }

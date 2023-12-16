@@ -1,0 +1,89 @@
+/*======================= aside 區域 ============================*/
+aside.aside {
+	width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 1rem;
+	margin-right: 10px;
+	border: 1px solid green;
+}
+
+@media ( max-width : 575.98px) {
+	div.main_content {
+		width: 100%;
+	}
+}
+/*======================= main 區域 ============================*/
+main.main {
+	width: calc(100% - 250px - 10px);
+	height: auto;
+	display: inline-block;
+	vertical-align: top;
+	font-size: 1rem;
+	border: 1px solid blue;
+	box-sizing: border-box;
+}
+
+@media ( max-width : 575.98px) {
+	aside.aside, main.main {
+		display: block;
+		width: 100%;
+	}
+	aside.aside {
+		margin: 0 0 10px 0;
+	}
+	main.main {
+		margin: 0 auto;
+	}
+}
+
+th {
+	border-top: 1px solid #acacac;
+	border-left: 1px solid #d1d1d1;
+	font-size: 12px;
+	width: auto;
+}
+
+th#th {
+	border-right: 1px solid #d1d1d1;
+	font-size: 12px;
+	width: auto;
+}
+
+td {
+	font-size: 12px;
+	width: auto;
+}
+
+table#table_id {
+	position: relative;
+	top: 20px;
+	/*     width: 1000px; */
+/* 	left: -10px; */
+}
+
+div#datatable {
+	margin-top: 50px;
+}
+
+div#table_id_info {
+	margin-top: 30px;
+}
+
+div#table_id_paginate {
+	margin-top: 30px;
+}
+
+a.paginate_button.current {
+	background-color: #DAE4F4;
+	border: 3px solid red;
+}
+
+input#cancel {
+	width: 35px; 
+	border : 0;
+	background-color: #FF9F1B;
+	color: #fff;
+	border-radius: 2px;
+	cursor: pointer;
+}

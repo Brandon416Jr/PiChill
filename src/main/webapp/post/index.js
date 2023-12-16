@@ -19,24 +19,24 @@
 
             // 點擊選單切換內容
             document.getElementById("discuss1").addEventListener("click", function () {
-                console.log("討論版被點擊");
+//                console.log("討論版被點擊");
                 // 關閉揪團版，顯示討論版
                 gatheringContent.style.display = "none";
                 discussionContent.style.display = "block";
             });
 
             document.getElementById("group").addEventListener("click", function () {
-                console.log("揪團版被點擊");
+//                console.log("揪團版被點擊");
                 // 關閉討論版，顯示揪團版
                 discussionContent.style.display = "none";
                 gatheringContent.style.display = "block";
             });
 
-            // 發布按鈕點擊時觸發
-            document.querySelector(".post-button").addEventListener("click", function () {
-                // 在這裡處理發布的邏輯
-                modal.hide();
-            });
+//            // 發布按鈕點擊時觸發
+//            document.querySelector(".post-button").addEventListener("click", function () {
+//                // 在這裡處理發布的邏輯
+//                modal.hide();
+//            });
         });
 
         //============上傳圖片跟預覽================

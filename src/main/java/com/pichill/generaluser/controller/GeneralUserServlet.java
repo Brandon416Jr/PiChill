@@ -252,7 +252,6 @@ public class GeneralUserServlet extends HttpServlet {
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer yoyakuCnt = 0;
 
-
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		GeneralUser generalUser = new GeneralUser();
 		generalUser.setgUserID(gUserID);
@@ -286,7 +285,7 @@ public class GeneralUserServlet extends HttpServlet {
 		generalUserService.updateGeneralUser(generalUser);
 		req.setAttribute("generalUser", generalUserService.getOneGeneralUser(gUserID));
 
-	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
+	/*================================= 3.修改完成,準備轉交(Send the Success view) ==========================*/
 		
 		req.setAttribute("generalUser", generalUser); // 資料庫update成功後,正確的的generalUser物件,存入req
 		return "/generaluser/guserListOne.jsp";
