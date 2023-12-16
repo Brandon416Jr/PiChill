@@ -21,7 +21,7 @@ public class Util {
 	
 	public static final String USER = "root";
 	
-	public static final String PASSWORD = "123456";
+	public static final String PASSWORD = "Abbabb12";
 	
 	public static void closeresources(Connection con, PreparedStatement pstmt, ResultSet rs) {
 		if (rs != null) {

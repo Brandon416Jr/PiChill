@@ -20,7 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.forumpic.entity.ForumPic;
-import com.pichill.like.entity.Like;
+import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.report.entity.Report;
 
 @Entity

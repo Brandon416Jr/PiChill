@@ -1,4 +1,4 @@
-package com.pichill.like;
+package com.pichill.forumlike;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
