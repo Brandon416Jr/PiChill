@@ -129,7 +129,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("owneruser");
 				</ul>
 			</c:if>
 		
-			<FORM METHOD="post" ACTION="owneruser/owneruser.do" name="form1">
+			<FORM METHOD="post" ACTION="owneruser.do" name="form1">
 				<br> 
 				<p> 
 	 			<span style="color: #FF0000;">前有<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" 
@@ -199,7 +199,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("owneruser");
 					<br> 
 					
 					<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
-					<label for="oTelephone">出生年月日:</label>
+					<label for="obirth">出生年月日:</label>
 					<input name="oBirth" id="f_date1" type="text">
 					
 					<br> 

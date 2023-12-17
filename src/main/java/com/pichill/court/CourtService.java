@@ -5,15 +5,23 @@ import java.util.List;
 import com.pichill.court.Court;
 import com.pichill.court.CourtDAO;
 import com.pichill.court.CourtDAOImpl;
+import com.pichill.place.Place;
+import com.pichill.place.PlaceDAO;
+import com.pichill.place.PlaceDAOImpl;
 
 public class CourtService {
 	private final CourtDAO dao;
+	private PlaceDAO placeDao;
+	
 	public CourtService() {
 		dao = new CourtDAOImpl();
+		placeDao = new  PlaceDAOImpl();
 	}
 
+	
+	
 	public int insertCourt(Court court) {
-		return dao.insert(court);	
+		return dao.add(court);	
 	}
 
 	public int updateCourt(Court court) {
@@ -28,7 +36,8 @@ public class CourtService {
 		return dao.getAll();
 	}
 	
-//	public void deleteManage(Integer manageID) {
-//	dao.delete(manageID);
-//}
+	public void insertPlace(List<Place> list) {
+		
+		placeDao.addList(list);
+	}
 }

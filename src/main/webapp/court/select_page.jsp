@@ -1,11 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
-<title>PiChill OwnerUser: Home</title>
+<meta charset="UTF-8">
 
+<title>PiChill Court: Home</title>
 <style>
   table#table-1 {
 	width: 450px;
@@ -26,15 +29,13 @@
     display: inline;
   }
 </style>
-
 </head>
 <body bgcolor='white'>
-
 <table id="table-1">
-   <tr><td><h3>PiChill OwnerUser: Home</h3><h4>( 測試版~ )</h4></td></tr>
+   <tr><td><h3>PiChill Court: Home</h3><h4>( 測試版~ )</h4></td></tr>
 </table>
 
-<p>This is the Home page for PiChill GeneralUser: Home</p>
+<p>This is the Home page for PiChill Court: Home</p>
 
 <h3>資料查詢:</h3>
 	
@@ -49,26 +50,26 @@
 </c:if>
 
 <ul>
-  <li><a href='all_owneruser.jsp'>List</a> all OwnerUsers.  <br><br></li>
+  <li><a href='all_court.jsp'>List</a> all Court.  <br><br></li>
   
   
   <li>
-    <FORM METHOD="post" ACTION="owneruser.do" >
-        <b>輸入會員編號 (如12000001):</b>
-        <input type="text" name="oUserID">
+    <FORM METHOD="post" ACTION="court.do" >
+        <b>輸入球館編號 (如61000001):</b>
+        <input type="text" name="courtID">
         <input type="hidden" name="action" value="getOne_For_Display">
         <input type="submit" value="送出">
     </FORM>
   </li>
 
-  <jsp:useBean id="ownerUserSvc" scope="page" class="com.pichill.owneruser.service.OwnerUserService" />
+  <jsp:useBean id="courtSvc" scope="page" class="com.pichill.court.CourtService" />
    
   <li>
-     <FORM METHOD="post" ACTION="ownerluser.do" >
+     <FORM METHOD="post" ACTION="court.do" >
        <b>選擇會員編號:</b>
-       <select size="1" name="oUserID">
-         <c:forEach var="ownerUser" items="${ownerUserSvc.all}" > 
-          <option value="${ownerUser.oUserID}">${ownerUser.oUserID}
+       <select size="1" name="courtID">
+         <c:forEach var="court" items="${courtSvc.all}" > 
+          <option value="${court.courtID}">${court.courtID}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -77,11 +78,11 @@
   </li>
   
   <li>
-     <FORM METHOD="post" ACTION="owneruser.do" >
-       <b>選擇會員姓名:</b>
-       <select size="1" name="oUserID">
-         <c:forEach var="ownerUser" items="${ownerUserSvc.all}" > 
-          <option value="${ownerUser.oUserID}">${ownerUser.oName}
+     <FORM METHOD="post" ACTION="court.do" >
+       <b>選擇球館名稱:</b>
+       <select size="1" name="courtID">
+         <c:forEach var="court" items="${courtSvc.all}" > 
+          <option value="${court.courtID}">${court.courtName}
          </c:forEach>   
        </select>
        <input type="hidden" name="action" value="getOne_For_Display">
@@ -91,11 +92,29 @@
 </ul>
 
 
-<h3>會員管理</h3>
+<h3>球館管理</h3>
 
 <ul>
-  <li><a href='new_OwnerUser.jsp'>Add</a> a new OwnerUser.</li>
+  <li><a href='new_court.jsp'>Add</a> a new Court.</li>
 </ul>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 </html>

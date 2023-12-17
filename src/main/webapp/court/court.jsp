@@ -1,28 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
+<%@ page import="com.pichill.court.Court"%>
     
 <%
-//從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
-OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
+//從資料庫取出的court, 也可以是輸入格式有錯誤時的court物件
+Court court = (Court) request.getAttribute("court");
 %>  
     
-    
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>ownerUser</title>
+    <title>球館管理</title>
+    
     <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
   
-  
+  <!----------------匯入jquery ------------------------>
+    <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous">
+    </script>
+    
   <style>
-.phone1 {
+	.phone1 {
 	width: 200px;
 	height: 200px;
 	background-image: url('img_flowers.jpg');
@@ -32,9 +36,12 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 	position: absolute;
 	right: 100px;
 	/* z-index: -1; */
-}
+	}
+	input[type="courtAddress"] {
+  	cursor: pointer;
+  	width: 450px;
+	}
   </style>
-  
 </head>
 <body>
 
@@ -101,9 +108,9 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 			</div>
 		</aside>
 
-    <!----------------------------------------------- main 區 ------------------------------------------------------->
+<!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
-            <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員資料</h2>
+            <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">球館管理</h2>
             
             <%-- 錯誤表列 --%>
 			<c:if test="${not empty errorMsgs}">
@@ -115,108 +122,97 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 				</ul>
 			</c:if>
 
-
-		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" enctype="multipart/form-data" class="bararea">
-          		<span>企業會員編號:</span>
-                <input type="text" id="ouserID" name="ouserID" value="<%=ownerUser.getoUserID()%>" disabled/>
-                <br><br>                            
-      
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>帳號:</span>
-                <input type="text" id="oUserName" name="oUserName" style = "width:250px;" value="<%= (ownerUser == null) ? "yehshaa0106" : ownerUser.getoUserName()%>" />
+		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/court/court.do" enctype="multipart/form-data" class="bararea">
+			<span>球館編號:</span>
+				<input type="text" id="courtID" name="courtID" value="<%=court.getCourtID()%>" disabled/>
+				<br><br>
+<!-- 			<span>企業會員編號:</span> -->
+<%-- 				<input type="text" id="ouserID" name="ouserID" value="<%=court.getoUserID()%>" disabled/> --%>
+<!-- 				<br><br> -->
+<!-- 			<span>管理員編號編號:</span> -->
+<%-- 				<input type="text" id="manageID" name="manageID" value="<%=court.getmanageID()%>" disabled/> --%>
+<!-- 				<br><br> -->
+		    <span>上架時間:</span>
+                <input type="text" id="oPassword" name="courtOnTime" value="<%=court.getcourtOnTime()%>" disabled/>
                 <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>密碼:</span>
-                <input type="text" id="oPassword" name="oPassword" value="<%= (ownerUser == null) ? "LtaS845r" : ownerUser.getoPassword()%>"/>
+		 	<span>申請上架時間:</span>
+                <input type="text" id="courtApplyTime" name="courtApplyTime" value="<%=court.getcourtApplyTime()%>" disabled/>
                 <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>統編:</span>
-                <input type="text" id="compiled" style="position: relative; left: 17px;" name="compiled" value="<%= (ownerUser == null) ? "09071688" : ownerUser.getcompiled()%> " required/>
+		
+		 	<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>球館名稱:</span>
+                <input type="text" id="courtName" style="position: relative; left: 17px;" name="courtName" value="<%= (court == null) ? "飛龍運動館" : court.getcourtName()%> " required/>
                 <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>場館負責人姓名:</span>
-                <input type="text" id="oName" name="oName" value="<%= (ownerUser==null)? "葉夢華" : ownerUser.getoName()%>"/>
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>球館電話:</span>
+                <input type="text" id="courtTelephone" style="position: relative; left: 17px;" name="courtTelephone" value="<%= (court == null) ? "022562622" : court.getcourtTelephone()%> " required/>
                 <br><br>
-                
-    		    <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>性別:</span>
-<%--            <input type="text" id="oGender" name="oGender" value="<%= (ownerUser==null)? 1 : ownerUser.getoGender()%>"/> --%>
-                <% int gender = ownerUser.getoGender(); %>
-				<select name="oGender" disabled="disabled">
-				<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option>
-				<option value="1" <%=gender == 1 ? "selected" : ""%>>女</option>
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>球館地址:</span>
+                <input type="text" id="courtAddress" style="position: relative; left: 17px;" name="courtAddress" value="<%= (court == null) ? "臺北市大安區通化街11巷95號1樓" : court.getcourtAddress()%> " required/>
+                <br><br>		
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>球館須知:</span>
+                <input type="text" id="courtRule" style="width:400px ; height:300px ;position: relative; left: 17px;" name="courtRule" 
+                value="<%= (court == null) ? "本場館禁止吸菸、飲食、喝酒，不可私下教學。 <br>禁止燃放鞭炮、酗酒、鬥毆、夜宿及任何妨礙公共安全秩序、違反公序良俗或妨害風化之行為。 個人貴重物品、財物請自行妥善保管，若遺失本館恕不負責。 禁止攜帶雨具及寵物進入中心，輔助盲人同胞的導盲犬不在此限。 患有高血壓、糖尿病、心臟病、傳染病、飯後一小時內、血壓過低、酒後、嚴重睡眠不足時或其他任何身體不適者，禁止使用本設備。 若因使用不當造成設備/器材毀損，本中心有權要求損壞賠償。 未經同意禁止使用館內插座，如因活動或租借場地，需先付費後方能使用。 本須知如有未盡事宜，得另行增列、修訂之，並以現場公告或服務人員說明為準。" 
+                		: court.getcourtRule()%> " required/>
+                <br><br>
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>地區:</span>
+                <input type="text" id="loc" style="position: relative; left: 50px;" name="loc" value="<%= (court == null) ? "大安區" : court.getloc()%> " required/>
+                <br><br>		
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>開館時間:</span>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtOpenTime" value="<%= (court == null) ? "07:00:00" : court.getcourtOpenTime()%> " required/>
+                <br><br>	
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>開館時間:</span>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtCloseTime" value="<%= (court == null) ? "21:00:00" : court.getcourtCloseTime()%> " required/>
+                <br><br>	
+		
+		
+		        <span>申請狀態:</span>
+                <% int courtAS = court.getcourtApplyStatus(); %>
+				<select name="courtApplyStatus 申" disabled="disabled">
+					<option value="0" <%=courtAS == 0 ? "selected" : ""%>>審核中</option>
+					<option value="1" <%=courtAS == 1 ? "selected" : ""%>>審核通過</option>
+					<option value="1" <%=courtAS == 1 ? "selected" : ""%>>審核未通過</option>
 				</select>
                 <br><br>
                 
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>場館負責人身分證字號:</span>
-                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser == null) ? "H212810987" : ownerUser.getoIDNum()%>"/>
-                <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">                  
-                <span>出生年月日:</span>
-                <input type="text" id="oBirth" name="oBirth" value="<%= (ownerUser==null)? "1990-01-06" : ownerUser.getoBirth()%>"/>
-                <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20px" height="20">   
-                <span>連絡電話:</span>
-                <input type="text" id="oTelephone" name="oTelephone" value="<%= (ownerUser == null) ? "0934862754" : ownerUser.getoTelephone()%>"/>
-                <font color="#FF0000" size="-1" nowrap="">如:0912345678。</font> 
-                <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
-                <span>聯絡地址:</span>
-                 <input type="text" id="oAddress" style = "width:250px;" name="oAddress" placeholder="請輸入聯絡地址" 
-                value="<%= (ownerUser == null) ? "新北市新店區民權路98號6樓" : ownerUser.getoAddress()%>"/>
-               <br><br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
-                <span>銀行代號：</span> 
- 				<input type="text" id="oBankCode" name="oBankCode" value="<%=(ownerUser == null) ? "808" : ownerUser.getoBankCode()%>"  placeholder="如:012" required> 
- 				<br> 
- 				<br>
- 				
- 				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
-				<span>銀行帳號：</span> 
- 				<input type="text" id="bank_account" name="oBankAccount"  value="<%=(ownerUser == null) ? "95301246813579" : ownerUser.getoBankAccount()%>" required>
-				<br>  
-				<br>  
-                
-                
-               <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
- 			   <span>電子信箱：</span>  
- 			   <input type="text" id="oEmail" name="oEmail" style = "width:250px;"
- 				value="<%=(ownerUser == null) ? "yehshaa0106@gmail.com" : ownerUser.getoEmail()%>" required>  
- 			   <font color="#FF0000" size="-1" nowrap="">電子信箱格式範例:abc@yahoo.com.tw</font> 
-               <br>  
-				<br> 
-                
-                <span>大頭貼:</span><br>
+                <span>球館圖片:</span><br>
                 <div id="blob_holder">
-                <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
-                <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
+                <img src="<%=request.getContextPath()%>/court/DBGifReader?oUserID=${param.courtID}" width="200px">
+                </div>
+                <input type="file" id="courtPic" name="courtPic" onclick="previewImage()" multiple="multiple" />
                 <br>
+                
+                
+                
                 <input type="hidden" name="action" value="update">
-				<input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">
+				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
                 <br><br><br>
                 <br><br>
-         </FORM>      
-       </div>
+		
+		</FORM>
+       
    </main>
-<!--     </div> -->
+  </div>
 
-    
-    <!----------------------------------------------- footer 區 ------------------------------------------------------->
+  <!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
       
         <div class="container">
           <header class="d-flex flex-wrap justify-content-center py-3">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-              <img src = "<%=request.getContextPath()%>/owneruser/pic/footerlogo.svg" alt="SVG"/>     
+              <img src = "<%=request.getContextPath()%>/generaluser/pic/footerlogo.svg" alt="SVG"/>     
             </a>
           
             <ul class="nav nav-pillss">
@@ -253,8 +249,8 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 				'image/gif' : true
 		};
 		function previewImage() {
-			var oProfilePic1 = document.getElementById("oProfilePic");
-			oProfilePic1.addEventListener("change", function(event) {
+			var cProfilePic1 = document.getElementById("courtPic");
+			cProfilePic1.addEventListener("change", function(event) {
 				var files = event.target.files || event.dataTransfer.files;
 				for (var i = 0; i < files.length; i++) {
 					previewfile(files[i])
@@ -286,30 +282,6 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 			}
 		}
 	</script>
-	
-
-   
-    
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

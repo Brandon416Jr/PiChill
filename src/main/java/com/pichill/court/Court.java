@@ -3,20 +3,22 @@ package com.pichill.court;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.place.Place;
+
+
 
 
 @Entity
@@ -27,8 +29,9 @@ public class Court implements Serializable{
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "courtID", updatable = false, insertable=false) //PK鍵不用更新
-//	@OneToMany(mappedBy = "courtID")
+
 	private Integer courtID;
+	
 	
 	@Column(name = "oUserID")
 	private Integer oUserID;
@@ -72,6 +75,18 @@ public class Court implements Serializable{
 	@Column(name = "courtCloseTime")
 	private Time courtCloseTime;
 	
+//	@OneToMany(mappedBy = "courtID", cascade = CascadeType.ALL)
+//	private Set<Place> place;
+	
+	
+//	public Set<Place> getPlace() {
+//		return place;
+//	}
+//
+//	public void setPlace(Set<Place> place) {
+//		this.place = place;
+//	}
+
 	public Court() {
         super();
     }
@@ -93,14 +108,6 @@ public class Court implements Serializable{
 		this.courtCloseTime = courtCloseTime;
 	}
 
-//	@ManyToOne
-//	@JoinColumn(name = "courtID" , referencedColumnName = "courtID")
-//	private Place place;
-	
-
-//	public void setPlace(Place place) {
-//		this.place = place;
-//	}
 
 	public Integer getCourtID() {
 		return courtID;

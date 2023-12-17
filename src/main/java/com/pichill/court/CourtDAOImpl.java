@@ -1,6 +1,5 @@
 package com.pichill.court;
 
-
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.PreparedStatement;
@@ -12,12 +11,19 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
-
-public class CourtDAOImpl implements CourtDAO{
+public class CourtDAOImpl implements CourtDAO {
 	private SessionFactory factory;
+
+	public CourtDAOImpl() {
+		factory = HibernateUtil.getSessionFactory();
+	}
+
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
 //	private static final String INSERT_STMT= "INSERT INTO court(oUserID,manageID,courtOnTime,courtApplyTime,courtName,courtPic,courtTelephone,courtAddress,courtRule,loc,courtApplyStatus,courtOpenTime,courtCloseTime)VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 //	private static final String UPDATE_STMT= "UPDATE Court SET oUserID=?,manageID=?,courtOnTime=?,courtApplyTime=?,courtName=?,courtPic=?,courtTelephone=?,courtAddress=?,courtRule=?,loc=?,courtApplyStatus=?,courtOpenTime=?,courtCloseTime=? WHERE courtID = ? ";
 //	private static final String DELETE_STMT= "DELETE FROM court WHERE courtID = ?";
@@ -34,9 +40,9 @@ public class CourtDAOImpl implements CourtDAO{
 //		}
 //	}
 
-	//新增
+	// 新增
 	@Override
-		public int insert(Court court) {
+	public int add(Court court) {
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
 //			try {
@@ -64,35 +70,47 @@ public class CourtDAOImpl implements CourtDAO{
 //			} finally {
 //				Util.closeResources(con, pstmt, null);
 //			}
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			try {
-				session.beginTransaction();
-				Integer id = (Integer) session.save(court);
-				session.getTransaction().commit();
-				return id;
-			} catch (Exception e) {
-				e.printStackTrace();
-				session.getTransaction().rollback();
-			}
-			return -1;
-		}
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 
-		//更改
-		@Override
-		public int update(Court court) {
-			
-				// TODO Auto-generated method stub
-				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-				try {
-					session.beginTransaction();
-					session.update(court);
-					session.getTransaction().commit();
-					return 1;
-				} catch (Exception e) {
-					e.printStackTrace();
-					session.getTransaction().rollback();
-				}
-				return -1;
+		try {
+			session.beginTransaction();
+//			Integer id = (Integer) session.save(ownerUser);
+			session.save(court);
+			session.getTransaction().commit();
+			System.out.println("交易成功");
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("交易失敗");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return -1;
+	}
+
+	// 更改
+	@Override
+	public int update(Court court) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			session.update(court);
+			session.getTransaction().commit();
+			System.out.println("交易成功");
+			return 1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("交易失敗");
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		return -1;
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
 //
@@ -119,7 +137,7 @@ public class CourtDAOImpl implements CourtDAO{
 //			} finally {
 //				Util.closeResources(con, pstmt, null);
 //			}
-		}
+	}
 
 //		@Override
 //		public void delete(int courtID) {
@@ -142,20 +160,24 @@ public class CourtDAOImpl implements CourtDAO{
 //			}
 //		}
 
-		@Override
-		public Court getCourtByCourtID(Integer courtID) {
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			try {
-				session.beginTransaction();
-				Court court = session.get(Court.class, courtID);
-				session.getTransaction().commit();
-				return court;
-			} catch (Exception e) {
-				e.printStackTrace();
-				session.getTransaction().rollback();
+	@Override
+	public Court getCourtByCourtID(Integer courtID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Court court = session.get(Court.class, courtID);
+			session.getTransaction().commit();
+			return court;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
 			}
-			return null;
 		}
+		return null;
+	}
 //			Court court = null;
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
@@ -191,24 +213,22 @@ public class CourtDAOImpl implements CourtDAO{
 //				Util.closeResources(con, pstmt, rs);
 //			}
 //			return court;
-		
 
-		@Override
-		public List<Court> getAll() {
-			
-			
-			Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-			try {
-				session.beginTransaction();
-				List<Court> list = session.createQuery("from Court", Court.class).list();
-				session.getTransaction().commit();
-				return list;
-			} catch (Exception e) {
-				e.printStackTrace();
-				session.getTransaction().rollback();
-			}
-			return null;
+	@Override
+	public List<Court> getAll() {
+
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			List<Court> list = session.createQuery("from Court", Court.class).list();
+			session.getTransaction().commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
 		}
+		return null;
+	}
 //			List<Court> courtList = new ArrayList<Court>();
 //			Court court = null;
 //			Connection con = null;
@@ -244,13 +264,10 @@ public class CourtDAOImpl implements CourtDAO{
 //			return courtList;
 //		}
 
-		@Override
-		public void delete(int courtID) {
-			// TODO Auto-generated method stub
-			
-		}
+	@Override
+	public void delete(int courtID) {
+		// TODO Auto-generated method stub
 
-		
+	}
 
 }
-
