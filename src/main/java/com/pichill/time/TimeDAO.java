@@ -3,6 +3,6 @@ package com.pichill.time;
 import java.util.List;
 
 public interface TimeDAO {
-	Time getTimeByTimeID(Integer timeID); 
+	Time findByPK(Integer timeID); 
 	List<Time> getAll();
 }
