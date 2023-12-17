@@ -318,8 +318,8 @@ select:invalid+.custom-message {
 													<div class="form-check">
 														<div class="radio">
 															<select name="mGender">
-																<option value="0">男</option>
-																<option value="1">女</option>
+																<option value="0" ${(manage.mGender==0)? 'selected': ''}>男</option>
+																<option value="1" ${(manage.mGender==1)? 'selected': ''}>女</option>
 															</select>
 														</div>
 													</div>
@@ -424,6 +424,7 @@ select:invalid+.custom-message {
 													<label for="file-input" class="form-control-label">上傳大頭貼</label>
 												</div>
 												<div class="col-10 col-md-8">
+													<input type="hidden" name="mProfilePic" value="${manage.mProfilePic}">
 													<input type="file" id="file-input" name="mProfilePic"
 														onclick="previewImage()" multiple="multiple"
 														onchange="hideContent('upFiles.errors');"
@@ -439,9 +440,9 @@ select:invalid+.custom-message {
 													<select name="mStatus" id="selectLm"
 														class="form-control-sm form-control">
 														<option value="3">請選擇</option>
-														<option value="0">已離職</option>
-														<option value="1">在職中</option>
-														<option value="2">系統管理員</option>
+														<option value="0" ${(manage.mStatus==0)? 'selected': ''}>已離職</option>
+														<option value="1" ${(manage.mStatus==1)? 'selected': ''}>在職中</option>
+														<option value="2" ${(manage.mStatus==2)? 'selected': ''}>系統管理員</option>
 													</select>
 												</div>
 											</div>

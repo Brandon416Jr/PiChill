@@ -95,7 +95,7 @@ public class ManageDAOImpl implements ManageDAO {
 		try {
 			session.beginTransaction();
 			System.out.println("查詢前");
-			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mUserName = :mUserName")
+			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mUserName = :mUserName AND manageID != :manageID")
 					.setParameter("mUserName", mUserName).uniqueResult();
 			System.out.println("查詢後");
 
@@ -129,7 +129,7 @@ public class ManageDAOImpl implements ManageDAO {
 		try {
 			session.beginTransaction();
 			System.out.println("查詢前");
-			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mEmail = :mEmail")
+			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mEmail = :mEmail AND manageID != :manageID")
 					.setParameter("mEmail", mEmail).uniqueResult();
 			System.out.println("查詢後");
 

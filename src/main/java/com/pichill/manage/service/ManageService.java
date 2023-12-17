@@ -67,17 +67,31 @@ public class ManageService {
         
     }
 	
-	public boolean existsUserName(String mUserName) {
+	public boolean existsUserName(String mUserName, Integer manageID) {
         // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
         boolean exists = dao.isUserNameExists(mUserName);
         return exists;
     }
-	public boolean existsEmail(String mEmail) {
+	
+	public boolean existsEmail(String mEmail, Integer manageID) {
         // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
         boolean exists = dao.isEmailExists(mEmail);
         return exists;
     }
-	public boolean existsID(String mID) {
+	
+	public boolean existsUserNameByInsert(String mUserName) {
+        // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
+        boolean exists = dao.isUserNameExists(mUserName);
+        return exists;
+    }
+	
+	public boolean existsEmailByInsert(String mEmail) {
+        // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
+        boolean exists = dao.isEmailExists(mEmail);
+        return exists;
+    }
+	
+	public boolean existsIDByInsert(String mID) {
         // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
         boolean exists = dao.isIDExists(mID);
         return exists;

@@ -148,7 +148,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("管理員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 		
-		Boolean manageUN = manageService.existsUserName(mUserName);
+		Boolean manageUN = manageService.existsUserName(mUserName, manageID);
 		System.out.println(manageUN);
 		if (manageUN) {
 			errorMsgs.add("此帳號已被使用");	
@@ -235,7 +235,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的Email格式");
 		}
 		
-		Boolean manageE = manageService.existsEmail(mEmail);
+		Boolean manageE = manageService.existsEmail(mEmail, manageID);
 		System.out.println(manageE);
 		if (manageE) {
 			errorMsgs.add("此信箱已被使用");	
@@ -321,7 +321,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("管理員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 		
-		Boolean manageUN = manageService.existsUserName(mUserName);
+		Boolean manageUN = manageService.existsUserNameByInsert(mUserName);
 		System.out.println(manageUN);
 		if (manageUN) {
 			errorMsgs.add("此帳號已被使用");	
@@ -396,7 +396,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的身份證格式");
 		}
 		
-		Boolean manageI = manageService.existsID(mID);
+		Boolean manageI = manageService.existsIDByInsert(mID);
 		System.out.println(manageI);
 		if (manageI) {
 			errorMsgs.add("此人已經是管理員，不可新增重複的管理員");	
@@ -410,7 +410,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的Email格式");
 		}
 		
-		Boolean manageE = manageService.existsEmail(mEmail);
+		Boolean manageE = manageService.existsEmailByInsert(mEmail);
 		System.out.println(manageE);
 		if (manageE) {
 			errorMsgs.add("此信箱已被使用");	

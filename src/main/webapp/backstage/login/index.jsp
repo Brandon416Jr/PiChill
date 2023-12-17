@@ -122,6 +122,8 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp" onclick="return checkmStatus();">所有員工資料</a></li>
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp" onclick="return checkmStatus();">新增員工資料</a></li>
+										<li><a
+										href="<%=request.getContextPath()%>/backstage/manage/myData.jsp">我的資料</a></li>
 								</ul></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-tachometer-alt"></i>一般會員管理
