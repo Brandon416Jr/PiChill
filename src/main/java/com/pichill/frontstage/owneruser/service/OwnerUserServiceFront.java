@@ -1,7 +1,10 @@
 package com.pichill.frontstage.owneruser.service;
 
+import java.sql.Date;
+
 import com.pichill.frontstage.owneruser.model.OwnerUserDAOFront;
 import com.pichill.frontstage.owneruser.model.OwnerUserDAOImplFront;
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
 
@@ -12,8 +15,49 @@ private final OwnerUserDAOFront dao;
 		dao = new OwnerUserDAOImplFront();
 	}
 	
-	public int insertOwnerUser(OwnerUser ownerUser) {
-		return dao.insert(ownerUser);
+	public OwnerUser insertOwnerUser(String oUserName, String oPassword, String oIDNum, 
+			 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
+			 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
+			 Date oRegisterDate, Integer oPostAmount, Integer oReportCnt,
+			 Integer courtArriveCnt, Integer rsvdCnts, String oEmail) {
+		
+		OwnerUser ownerUser = new OwnerUser();
+		ownerUser.setoUserName(oUserName);
+		ownerUser.setoPassword(oPassword);
+		ownerUser.setoIDNum(oIDNum);
+		ownerUser.setcompiled(compiled);
+		ownerUser.setoName(oName);
+		ownerUser.setoGender(oGender);
+		ownerUser.setoBirth(oBirth);
+		ownerUser.setoTelephone(oTelephone);
+		ownerUser.setoAddress(oAddress);
+		ownerUser.setoBankCode(oBankCode);
+		ownerUser.setoBankAccount(oBankAccount);
+		ownerUser.setoProfilePic(oProfilePic);
+		ownerUser.setoRegisterDate(oRegisterDate);
+//		ownerUser.setoPostAmount(oPostAmount);
+//		ownerUser.setoReportCnt(oReportCnt);
+//		ownerUser.setCourtArriveCnt(courtArriveCnt);
+//		ownerUser.setRsvdCnts(rsvdCnts);
+		ownerUser.setoEmail(oEmail);
+		dao.insert(ownerUser);
+
+		return ownerUser;
+	}
+	
+	public int updateOwnerUser(OwnerUser ownerUser) {
+		return dao.update(ownerUser);
+	}
+	
+	public OwnerUser updateOwnerUsers(OwnerUser ownerUser) {
+		int updateResult = dao.update(ownerUser);
+	     
+	     if (updateResult == 1) {
+	         // 更新成功
+	         return ownerUser;
+	     } else {
+	         return null;
+	     }
 	}
 	
 	public OwnerUser getOneOwnerUser(Integer oUserID) {
@@ -49,4 +93,8 @@ private final OwnerUserDAOFront dao;
     	return dao.findByUserNamePassword(oUserName, oPassword);
         
     }
+	
+	public OwnerUser getOwnerUserByoEmail(String oEmail) {
+		return dao.findByoEmail(oEmail);
+	}
 }

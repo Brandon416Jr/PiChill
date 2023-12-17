@@ -5,7 +5,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>一般會員忘記密碼</title>
+<title>一般會員變更密碼</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css">
@@ -14,13 +14,14 @@ button.au-btn {
 	background-color: #207DCA;
 	margin-top: 10px;
 }
+
 .login-form {
 	max-height: 360px;
 	overflow-y: auto;
 }
 
 input.btn {
-/* border: 1px solid red; */
+/* border: 1px solid red;  */
 background-color: #207DCA;
 width: 100%;
 color: white;
@@ -30,9 +31,10 @@ input.btn:hover {
   background-color: orange;
 }
 
+
 div.input {
-/* border: 1px solid blue; */
-margin: 10px;
+/* 	 border: 1px solid blue;  */
+	margin-y: 10px;
 }
 </style>
 <!-- Vendor CSS-->
@@ -77,32 +79,50 @@ margin: 10px;
 							</a>
 						</div>
 						<div class="login-form">
-							<form action="<%=request.getContextPath()%>/guser/forgotpwd" method="post">
+
+							<form id="changePassword" method="post"
+								action="<%=request.getContextPath()%>/guser/forgotpwd">
 								<div class="input">
-									<label>請輸入註冊信箱</label> <input class="au-input au-input--full"
-										type="email" name="gEmail" placeholder="請輸入信箱" value="${param.gEmail}"/> <font
-										color=red>${errorMsgs.gEmail}</font> <font color=red>${errorMsgs.forgotpassword}</font><br>
+									<label class="fs-title">更改密碼</label> <input
+										class="au-input au-input--full" type="password"
+										name="gPassword" value="${param.gPassword}"
+										id="inputPassword" placeholder="請輸入新密碼"/>
+									<div class="pwd-see">
+										<input type="checkbox" id="togglePwd"> <label
+											class="pwd-see2" for="togglePwd">顯示密碼</label>
 									</div>
-									<div  class="input">
-									<input type="hidden" name="action" value="forgot"> <input class="btn"
-										type="submit" name="next" id="forgotpassword"
-										class="next-action-button" value="取得驗證碼" />
-								</div>
-							</form>
-							<form action="<%=request.getContextPath()%>/guser/forgotpwd" method="post">
-								<div class="input">
-									<input type="hidden" name="gEmail"
-										value="${param.gEmail}"> <label>請輸入驗證碼</label> <input
-										class="au-input au-input--full" type="text"
-										name="verification" placeholder="請輸入驗證碼" /> <font color=red>${errorMsgs.verification}</font><br>
+									<font id="passwordError" color=red>${errorMsgs.gPassword}</font>
+									<div class="form__field">
+										<label class="fs-title">再次輸入密碼</label> <input
+											class="au-input au-input--full" type="password"
+											name="confirmPassword" class="form__input" pattern=".{8,}"
+											required id=password2 placeholder="請再次輸入新密碼"
+											autocomplete="off" />
+										<div class="pwd-see">
+											<input type="checkbox" id="togglePwd2"> <label
+												class="pwd-see2" for="togglePwd2">顯示密碼</label>
 										</div>
-										<div  class="input">
-									<input type="hidden" name="action" value="verificationforgot">
-									<input class="btn" type="submit" name="next" class="next-action-button"
-										value="送出" />
+										<font color=red>${errorMsgs.confirmPassword}</font>
+									
+<!-- 									<div class="input"> -->
+										<input type="hidden" name="gEmail"
+											value="${param.gEmail}"> <input type="hidden"
+											name="action" value="changePassword"> <input
+											class="btn" type="submit" name="next"
+											class="next-action-button" value="送出" />
+<!-- 											</div> -->
+									</div>
 								</div>
 							</form>
-													</div>
+							<!-- 					<form> -->
+							<!--                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" action="" href="index.html"> -->
+							<!--                   獲取驗證碼 -->
+							<!--                 </button> -->
+							<!--                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit" action="" href="index.html"> -->
+							<!--                   登入 -->
+							<!--                 </button> -->
+							<!--               </form> -->
+						</div>
 					</div>
 					<div class="left-image">
 						<img
@@ -112,7 +132,28 @@ margin: 10px;
 			</div>
 		</div>
 	</div>
-		
+	<script>
+		const password = document.getElementById('inputPassword');
+		const toggle = document.getElementById('togglePwd');
+
+		toggle.addEventListener('change', function() {
+			if (this.checked) {
+				password.type = 'text';
+			} else {
+				password.type = 'password';
+			}
+		});
+		const password2 = document.getElementById('password2');
+		const toggle2 = document.getElementById('togglePwd2');
+
+		toggle2.addEventListener('change', function() {
+			if (this.checked) {
+				password2.type = 'text';
+			} else {
+				password2.type = 'password';
+			}
+		});
+	</script>
 	<!-- Jquery JS-->
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/vendor/jquery-3.2.1.min.js"></script>

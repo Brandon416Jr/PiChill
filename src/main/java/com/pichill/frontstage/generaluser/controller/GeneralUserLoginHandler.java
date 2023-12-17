@@ -100,29 +100,29 @@ public class GeneralUserLoginHandler extends HttpServlet {
 					return;// 程式中斷
 				}
 				
-				// 記住帳號
-				String remember = req.getParameter("remember");
-				boolean isRemember = "true".equals(remember);
-				
-				if (isRemember) {
-					  String token = UUID.randomUUID().toString(); 
-					  Cookie rememberCookie = new Cookie("remember", token);
-					  rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7 天
-					  res.addCookie(rememberCookie);
-					  HttpSession session = req.getSession();
-					  session.setAttribute("remember_" + gUsername, token);
-					}
-				
-				
-				
-				Cookie[] cookies = req.getCookies();
-				String token = null;
-				for (Cookie cookie : cookies) {
-				    if (cookie.getName().equals("remember")) {
-				        token = cookie.getValue();
-				        break;
-				    }
-				}
+//				// 記住帳號
+//				String remember = req.getParameter("remember");
+//				boolean isRemember = "true".equals(remember);
+//				
+//				if (isRemember) {
+//					  String token = UUID.randomUUID().toString(); 
+//					  Cookie rememberCookie = new Cookie("remember", token);
+//					  rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7 天
+//					  res.addCookie(rememberCookie);
+//					  HttpSession session = req.getSession();
+//					  session.setAttribute("remember_" + gUsername, token);
+//					}
+//				
+//				
+//				
+//				Cookie[] cookies = req.getCookies();
+//				String token = null;
+//				for (Cookie cookie : cookies) {
+//				    if (cookie.getName().equals("remember")) {
+//				        token = cookie.getValue();
+//				        break;
+//				    }
+//				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
@@ -140,9 +140,9 @@ public class GeneralUserLoginHandler extends HttpServlet {
 	       
 	            System.out.println(session.getId());//印出session確認
 
-				GeneralUser gUser = gUserSvcF.getOneGeneralUser(null);
-				session = req.getSession();
-				session.setAttribute("loginGUser", gUser);
+//				GeneralUser gUser = gUserSvcF.getOneGeneralUser(null);
+//				session = req.getSession();
+//				session.setAttribute("loginGUser", gUser);
 				res.sendRedirect(req.getContextPath() + "/homepage/main.jsp"); // *工作3: // 要改成一般會員首頁
 																						// (-->如無來源網頁:則重導至login_success.jsp)
 
