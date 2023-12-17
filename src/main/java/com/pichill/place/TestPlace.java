@@ -27,12 +27,12 @@ public class TestPlace {
 //		dao.delete(62000011);
 
 //		// 查詢單筆
-		Place place3 = dao.findByPK(62000001);
-		System.out.print(place3.getPlaceID() + ",");
-		System.out.print(place3.getCourtID() + ",");
-		System.out.print(place3.getPlaceName() + ",");
-		System.out.print(place3.getPlaceFee() + ",");
-		System.out.print(place3.getBall() + ",");
+//		Place place3 = dao.findByPK(62000001);
+//		System.out.print(place3.getPlaceID() + ",");
+//		System.out.print(place3.getCourtID() + ",");
+//		System.out.print(place3.getPlaceName() + ",");
+//		System.out.print(place3.getPlaceFee() + ",");
+//		System.out.print(place3.getBall() + ",");
 
 //		System.out.println("---------------------");
 

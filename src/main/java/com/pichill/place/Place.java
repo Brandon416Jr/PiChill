@@ -2,10 +2,16 @@ package com.pichill.place;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.pichill.court.Court;
+
 
 @Entity
 
@@ -28,6 +34,13 @@ public class Place {
 	
 	@Column(name = "ball")
 	private Integer ball;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
+//	private Court court;
+	
+	
+	
 	
 	public Place() {
 	}

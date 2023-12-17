@@ -59,10 +59,10 @@ public class OwnerUserServlet extends HttpServlet {
 			// 來自set_owneruser.jsp的請求
 			forwardPath = update(req, res);
 			break;
-//		case "insert":
-//			// 來自new_OwnerUser.jsp的請求
-//			forwardPath = insert(req, res);
-//			break;
+		case "insert":
+			// 來自new_OwnerUser.jsp的請求
+			forwardPath = insert(req, res);
+			break;
 		default:
 			forwardPath = "owneruser/select_page.jsp";
 		}

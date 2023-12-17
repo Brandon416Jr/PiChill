@@ -4,7 +4,9 @@ import java.io.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.sql.Timestamp;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.service.OwnerUserService;
+import com.pichill.place.Place;
 
 import java.sql.Timestamp;
 
@@ -46,13 +49,13 @@ public class CourtServlet extends HttpServlet{
 		String action = req.getParameter("action");
 		String forwardPath = "";
 		switch (action) {
-//		case "getOne_For_Display":
-//			// // 來自index.jsp的請求
-//			forwardPath = getOneDisplay(req, res);
-//			break;
+		case "getOne_For_Display":
+			 // 來自select_page.jsp的請求
+			forwardPath = getOneDisplay(req, res);
+			break;
 		case "getOne_For_Update":
 			// 來自all_court.jsp的請求
-			forwardPath = getOneUpdate(req, res);
+			forwardPath = getOne_For_Update(req, res);
 			break;
 		case "update":
 			// 來自set_court.jsp的請求
@@ -63,7 +66,7 @@ public class CourtServlet extends HttpServlet{
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/owneruser/court/all_court.jsp";
+			forwardPath = "/court/select_page.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -76,56 +79,62 @@ public class CourtServlet extends HttpServlet{
 	
 	
 	
-//	private String getOneDisplay(HttpServletRequest req, HttpServletResponse res) {
-//		// 錯誤處理
-//		List<String> errorMsgs = new ArrayList<>();
-//		req.setAttribute("errorMsgs", errorMsgs);
-//
-//		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-//		String str = req.getParameter("gUserID");
-//
-//		if (str == null || (str.trim()).length() == 0) {
-//			errorMsgs.add("請輸入會員編號");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//
-//		Integer gUserID = null;
-//		try {
-//			gUserID = Integer.valueOf(str);
-//		} catch (Exception e) {
-//			errorMsgs.add("會員編號格式不正確");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//
-//		/*************************** 2.開始查詢資料 *****************************************/
-//		GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
-//
-//		if (generalUser == null) {
-//			errorMsgs.add("查無資料");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//
-//		/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-//		req.setAttribute("generalUser", generalUser); // 資料庫取出的generalUser物件,存入req
-//		return "/owneruser/court/listOnecourt.jsp";
-//	}
-//
-	private String getOneUpdate(HttpServletRequest req, HttpServletResponse res) {
+	private String getOneDisplay(HttpServletRequest req, HttpServletResponse res) {
+		// 錯誤處理
+		List<String> errorMsgs = new ArrayList<>();
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+		String str = req.getParameter("gUserID");
+
+		if (str == null || (str.trim()).length() == 0) {
+			errorMsgs.add("請輸入球館編號");
+		}
+		// Send the use back to the form, if there were errors
+		if (!errorMsgs.isEmpty()) {
+			return "/court/select_page.jsp";// 程式中斷
+		}
+
+		Integer courtID = null;
+		try {
+			courtID = Integer.valueOf(str);
+		} catch (Exception e) {
+			errorMsgs.add("球館編號格式不正確");
+		}
+		// Send the use back to the form, if there were errors
+		if (!errorMsgs.isEmpty()) {
+			return "/court/select_page.jsp";// 程式中斷
+		}
+
+		/*************************** 2.開始查詢資料 *****************************************/
+		Court court = courtService.getOneCourt(courtID);
+
+		if (court == null) {
+			errorMsgs.add("查無資料");
+		}
+		// Send the use back to the form, if there were errors
+		if (!errorMsgs.isEmpty()) {
+			return "/court/select_page.jsp";// 程式中斷
+		}
+
+		/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+		req.setAttribute("courtr", court); // 資料庫取出的court物件,存入req
+		return "/court/listOnecourt.jsp";
+	}
+
+	//=================修改===================
+	
+	private String getOne_For_Update(HttpServletRequest req, HttpServletResponse res) {
+		System.out.println("成功getOneUpdate");
+		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+		req.setAttribute("errorMsgs", errorMsgs);
+		
 		Integer courtID = Integer.valueOf(req.getParameter("courtID"));
 
 		Court court = courtService.getOneCourt(courtID);
 
 		req.setAttribute("court", court);
-		return "/owneruser/court/all_court.jsp";
+		return "/court/court.jsp";
 	}
 
 	
@@ -196,11 +205,11 @@ public class CourtServlet extends HttpServlet{
 		
 		Time courtCloseTime = Time.valueOf(req.getParameter("courtCloseTime"));
 		
-		String placeName = String.valueOf(req.getParameter("placeName").trim());
-		
-		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
-		
-		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
+//		String placeName = String.valueOf(req.getParameter("placeName").trim());
+//		
+//		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
+//		
+//		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
 		
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
@@ -219,12 +228,12 @@ public class CourtServlet extends HttpServlet{
 		court.setcourtApplyStatus(courtApplyStatus);
 		court.setcourtOpenTime(courtOpenTime);
 		court.setcourtCloseTime(courtCloseTime);
-//		court.setplaceName(placeName);
-//		court.setplaceFee(placeFee);
-//		court.setball(ball);
+//		court.setplaceName(Place.placeName);
+//		court.setplaceFee((Place.placeFee);
+//		court.setball((Place.ball);
 		
 		court.toString();
-		//generalUser.setgProfilePic(gProfilePic);
+		
 
 		// ========================================================================改到這===============
 
@@ -239,7 +248,7 @@ public class CourtServlet extends HttpServlet{
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("court", court); // 資料庫update成功後,正確的的empVO物件,存入req
-		return "/owneruser/court/all_Court.jsp";
+		return "/owneruser/court/all_court.jsp";
 	}
 
 	
@@ -306,11 +315,11 @@ public class CourtServlet extends HttpServlet{
 		
 		Time courtCloseTime = Time.valueOf(req.getParameter("courtCloseTime"));
 		
-		String placeName = String.valueOf(req.getParameter("placeName").trim());
-		
-		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
-		
-		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
+//		String placeName = String.valueOf(req.getParameter("placeName").trim());
+//		
+//		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
+//		
+//		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
 		
 
 
