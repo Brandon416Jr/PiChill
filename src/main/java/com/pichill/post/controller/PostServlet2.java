@@ -283,5 +283,27 @@ public class PostServlet2 extends HttpServlet {
 					out.print(json);
 					out.flush();
 				}
+	if ("update_promote".equals(action)) { // 來自update_emp_input.jsp的請求
+		
+		List<String> errorMsgs = new LinkedList<String>();
+		// Store this set in the request scope, in case we need to
+		// send the ErrorPage view.
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
+		String postTitle = req.getParameter("postTitle");
+		String postContent = req.getParameter("postContent").trim();
+		Post post = new Post();
+		post.setPostID(postID);
+		post.setPostTitle(postTitle);
+		post.setPostContent(postContent);
+		PostService postSvc = new PostServiceImpl();
+		Post updatedPost = postSvc.updatePost(post);
+		String json = new Gson().toJson(updatedPost);
+		PrintWriter out = res.getWriter();
+		out.print(json);
+		out.flush();
+	}
 	}
 }

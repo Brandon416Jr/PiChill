@@ -226,6 +226,16 @@ a.post_user {
 	right: 50px;
 }
 
+.edit_promote {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 50px;
+}
+
 .delete {
 	border: 0 white;
 	background-color: white;
@@ -317,7 +327,7 @@ button.fa-regular {
 	display: none;
 }
 
-#article3 {
+.card.mb-3.article2 {
 	margin-top: 10px;
 }
 
@@ -392,6 +402,12 @@ button.save-button_discuss {
 }
 
 button.save-button_group {
+	border: 1px solid black;
+	margin-top: 20px;
+	width: 700px;
+}
+
+button.save-button_promote {
 	border: 1px solid black;
 	margin-top: 20px;
 	width: 700px;
@@ -670,6 +686,9 @@ h1.title1 {
 	margin: 0 0 10px 0;
 }
 
+#catBALLImage {
+	display: none;
+}
 /* ===== 任務新增 ===== */
 div.task_add_block {
 	font-size: 0;
@@ -693,11 +712,25 @@ div.task_add_block input.task_name {
 	display: inline-block;
 	vertical-align: top;
 }
+div.task_add_block input.task_name2 {
+	width: calc(100% - 50px);
+	border: 1px solid lightgray;
+	border-radius: 3px 0 0 3px;
+	height: 40px;
+	font-size: 1rem;
+	padding: 5px 10px;
+	outline: none;
+	display: inline-block;
+	vertical-align: top;
+}
 
 input.task_name::placeholder {
 	color: lightgray;
 }
 
+input.task_name2::placeholder {
+	color: lightgray;
+}
 div.task_add_block button.task_add {
 	display: inline-block;
 	width: 50px;
@@ -869,10 +902,21 @@ div.middle_block input.task_name_update {
 	outline: none;
 }
 
+div.middle_block input.task_name2_update {
+	width: 100%;
+	border: 1px solid lightgray;
+	border-radius: 3px 0 0 3px;
+	height: 40px;
+	font-size: 1.3rem;
+	padding: 5px 10px;
+	outline: none;
+}
 div.middle_block input.task_name_update::placeholder {
 	color: lightgray;
 }
-
+div.middle_block input.task_name2_update::placeholder {
+	color: lightgray;
+}
 .-none {
 	display: none;
 }
@@ -1001,8 +1045,7 @@ div.star_block>span.star.-on {
 								</div>
 							</h1>
 							<h5 class="card-title">歡迎大家來運動!</h5>
-							<p class="card-text">~~~~~~~~~~~~~~~~~
-							</p>
+							<p class="card-text">~~~~~~~~~~~~~~~~~</p>
 						</div>
 					</div>
 				</div>
@@ -1011,12 +1054,12 @@ div.star_block>span.star.-on {
 
 	<main class=main>
 		<!--建立貼文-->
+		<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
+		<!-- 			data-bs-target="#exampleModal_o" id="create-post-button"> -->
+		<!-- 			在想些什麼...</button> -->
 		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal_o" id="create-post-button">
+			data-bs-target="#exampleModal" id="create-post-button">
 			在想些什麼...</button>
-<!-- 				<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
-<!-- 			data-bs-target="#exampleModal" id="create-post-button"> -->
-<!-- 			在想些什麼...</button> -->
 		<!--搜尋文章-->
 		<div class="search-box">
 			<input type="text" id="search-input" placeholder="搜尋文章...">
@@ -1128,77 +1171,50 @@ div.star_block>span.star.-on {
 											<label for="floatingTextarea3">請輸入標題</label>
 										</div>
 										<div class="content">
-											<div class="container text-center">
-												<div class="row align-items-start">
-													<div class="col-2" id="datecol">日期:</div>
-													<div class="col-3" id="datecol2">
-														<div class="btn-group">
-															<button class="btn btn-secondary btn-sm dropdown-toggle"
-																type="button" data-bs-toggle="dropdown"
-																aria-expanded="false">2023/11/20</button>
-															<ul class="dropdown-menu">...
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<br>
-											<div class="container text-center">
-												<div class="row align-items-start">
-
-													<div class="col-2" id="timecol">時間:</div>
-													<div class="col-3" id="timecol2">
-														<div class="btn-group">
-															<button class="btn btn-secondary btn-sm dropdown-toggle"
-																type="button" data-bs-toggle="dropdown"
-																aria-expanded="false">08:00~09:00</button>
-															<ul class="dropdown-menu">...
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<br>
-											<div class="container text-center">
-												<div class="row align-items-start">
-
-													<div class="col-2" id="locatecol">地點:</div>
-													<div class="col-3" id="locatecol2">
-														<div class="btn-group">
-															<button class="btn btn-secondary btn-sm dropdown-toggle"
-																type="button" data-bs-toggle="dropdown"
-																aria-expanded="false">陽明籃球館</button>
-															<ul class="dropdown-menu">...
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<br>
-											<div class="container text-center">
-												<div class="row align-items-start">
-													<div class="col-2" id="ballcol">球類:</div>
-													<div class="col-2" id="ballcol2">
-														<div class="btn-group">
-															<button class="btn btn-secondary btn-sm dropdown-toggle"
-																type="button" data-bs-toggle="dropdown"
-																aria-expanded="false">籃球</button>
-															<ul class="dropdown-menu">...
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-											<br>
-											<div class="container text-center">
-												<div class="row align-items-start">
-													<div class="col-2" id="costcol">費用:</div>
-													<div class="col-2" id="costcol2">
-														<input type="text" class="cost" placeholder="請輸入金額">
-													</div>
-												</div>
-											</div>
-										</div>
+												<div class="content">
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
+						<div class="col-3" id="datecol2">
+							<button class="btn btn-secondary btn-sm dropdown-toggle"
+								type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>選擇預約訂單</button>
+							<ul class="dropdown-menu">
+								<li><a class="dropdown-item" href="#">11/20 09:00</a></li>
+								<li><a class="dropdown-item" href="#">12/20 20:00</a></li>
+								<li><a class="dropdown-item" href="#">01/20 15:00</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="locatecol">地點 :</div>
+						<div class="col-2" id="locatecol2">
+							<input type="text" class="custom-input" readonly
+								id="locationInput">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="ballcol">球類 :</div>
+						<div class="col-2" id="ballcol2">
+							<input type="text" class="custom-input" readonly id="ballInput">
+						</div>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="costcol">費用 :</div>
+						<div class="col-2" id="costcol2">
+							<input type="text" class="custom-input" readonly id="costInput">
+						</div>
+					</div>
+				</div>
+			</div>
 										<div class="form-floating" id="comment">
 											<textarea class="form-control"
 												placeholder="Leave a comment here"
@@ -1227,8 +1243,8 @@ div.star_block>span.star.-on {
 			</div>
 			</div>
 		</form>
-	<!-- 編輯推撥 -->
-<form id="promote">
+		<!-- 編輯推撥 -->
+		<form id="promote">
 			<div class="modal fade" id="exampleModalo_edit" tabindex="-1"
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog modal-dialog-scrollable">
@@ -1251,89 +1267,172 @@ div.star_block>span.star.-on {
 										<div class="content">
 											<div class="container text-center">
 												<div class="row align-items-start">
-										<div class="form-floating" id="comment">
-											<textarea class="form-control"
-												placeholder="Leave a comment here"
-												id="floatingTextarea6_edit" style="height: 100px"></textarea>
-											<label for="floatingTextarea6">請輸入內文</label>
+													<div class="form-floating" id="comment">
+														<textarea class="form-control"
+															placeholder="Leave a comment here"
+															id="floatingTextarea6_edit" style="height: 100px"></textarea>
+														<label for="floatingTextarea6">請輸入內文</label>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="save-button_promote"
+														id="save-promote" data-post-id="${postID}">儲存</button>
+												</div>
+											</div>
 										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="save-botton_promote"
-											id="save-promote" data-post-id="${postID}">儲存</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-			</div>
 			</div>
 		</form>
 
-	<!--======== Modal查看文章(討論版)========= -->
-	<div class="modal fade" id="exampleModal5" tabindex="-1"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-scrollable modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h1 class="modal-title fs-5">
-						<img src="../image/cat.jpg" alt="大頭貼">
-						<div>
-							<a class="post_user">貓貓</a>
-							<div class="post_time">${postTime}</div>
-						</div>
-					</h1>
-					<button type="button" class="edit-m">
-						<i class="fa-regular fa-pen-to-square"></i> <span
-							class="tooltip-text2">編輯</span>
-					</button>
-					<button type="button" class="delete-m" id="deleteButton">
-						<i class="fa-regular fa-trash-can"></i> <span
-							class="tooltip-text2">刪除</span>
-					</button>
-					<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-                            <i class="fa-solid fa-triangle-exclamation"></i>
-                            <span class="tooltip-text">檢舉</span>
-                        </button> -->
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<div class="card">
-						<div class="card-body">
-							<h5 class="card-title article0"></h5>
-							<p class="card-text article1"></p>
-						</div>
-						<img src="../image/CATBALL.jpg" class="card-img-bottom" alt="...">
+		<!--======== Modal查看文章(討論版)========= -->
+		<div class="modal fade" id="exampleModal5" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5">
+							<img src="../image/cat.jpg" alt="大頭貼">
+							<div>
+								<a class="post_user">貓貓</a>
+								<div class="post_time posttime">${postTime}</div>
+							</div>
+						</h1>
+						<button type="button" class="edit-m">
+							<i class="fa-regular fa-pen-to-square"></i> <span
+								class="tooltip-text2">編輯</span>
+						</button>
+						<button type="button" class="delete-m" id="deleteButton">
+							<i class="fa-regular fa-trash-can"></i> <span
+								class="tooltip-text2">刪除</span>
+						</button>
+<!-- 						<button type="button" class="report-m" data-bs-toggle="modal" -->
+<!-- 							data-bs-target="#exampleModal2"> -->
+<!-- 							<i class="fa-solid fa-triangle-exclamation"></i> <span -->
+<!-- 								class="tooltip-text">檢舉</span> -->
+<!-- 						</button> -->
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
 					</div>
-					<div class="container text-center">
-						<div class="row align-items-start">
-							<div class="col-2" id="likecol">
-								<i class="fa-regular fa-thumbs-up"></i> 123
+					<div class="modal-body">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title article0"></h5>
+								<p class="card-text article1"></p>
 							</div>
-							<div class="col-2" id="commentcol">
-								<i class="fa-regular fa-comment"></i> 99
+							<img class="modal-image card-img-bottom">
+						</div>
+						<div class="container text-center">
+							<div class="row align-items-start do">
+							  <div class="col-2 likecol" id="likecol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> </button>
+                    </div>
+								<div class="col-2 commentcol" id="commentcol">
+									<i class="fa-regular fa-comment"></i>
+								</div>
+								<article class="task_container">
+									<div class="task_add_block">
+										<input type="text" class="task_name" placeholder="留言…">
+										<button type="button" class="task_add">送出</button>
+									</div>
+									<div class="task_list_parent">
+										<ul class="task_list">
+										</ul>
+									</div>
+								</article>
 							</div>
-							<article class="task_container">
-								<div class="task_add_block">
-									<input type="text" class="task_name" placeholder="留言…">
-									<button type="button" class="task_add">送出</button>
-								</div>
-
-								<div class="task_list_parent">
-									<ul class="task_list">
-									</ul>
-								</div>
-							</article>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+		<!--======== Modal查看文章(揪團版)========= -->
+		<div class="modal fade" id="exampleModal6" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5">
+							<img src="../image/cat.jpg" alt="大頭貼">
+							<div>
+								<a class="post_user">貓貓</a>
+								<div class="post_time posttime">${postTime}</div>
+							</div>
+						</h1>
+						<button type="button" class="edit-m">
+							<i class="fa-regular fa-pen-to-square"></i> <span
+								class="tooltip-text2">編輯</span>
+						</button>
+						<button type="button" class="delete-m" id="deleteButton">
+							<i class="fa-regular fa-trash-can"></i> <span
+								class="tooltip-text2">刪除</span>
+						</button>
+						<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <span class="tooltip-text">檢舉</span>
+                        </button> -->
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title article0"></h5>
+								<div class="container text-left">
+									<div class="row">
+										<div class="col-2 col-sm-2">日期:</div>
+										<div class="col-2 col-sm-4"></div>
+										<div class="w-100 d-none d-md-block"></div>
+
+										<div class="col-2 col-sm-2">時間:</div>
+										<div class="col-2 col-sm-4"></div>
+										<div class="w-100 d-none d-md-block"></div>
+
+										<div class="col-2 col-sm-2">地點:</div>
+										<div class="col-2 col-sm-4"></div>
+										<div class="w-100 d-none d-md-block"></div>
+
+										<div class="col-2 col-sm-2">球類:</div>
+										<div class="col-2 col-sm-4"></div>
+										<div class="w-100 d-none d-md-block"></div>
+
+										<div class="col-2 col-sm-2">費用:</div>
+										<div class="col-2 col-sm-4"></div>
+									</div>
+								</div>
+								<br>
+								<p class="card-text article1"></p>
+							</div>
+							<img class="modal-image card-img-bottom">
+						</div>
+						<div class="container text-center">
+								<div class="row align-items-start do">
+							  <div class="col-2 likecol" id="likecol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> </button>
+                    </div>
+								<div class="col-2 commentcol" id="commentcol">
+									<i class="fa-regular fa-comment"></i>
+								</div>
+								<article class="task_container">
+									<div class="task_add_block">
+										<input type="text" class="task_name2" placeholder="留言…">
+										<button type="button" class="task_add">送出</button>
+									</div>
+									<div class="task_list_parent">
+										<ul class="task_list">
+										</ul>
+									</div>
+								</article>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 		<!--==== 檢舉Modal ======-->
 		<div class="modal fade" id="exampleModal2" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -1580,39 +1679,41 @@ div.star_block>span.star.-on {
 	</div>
 	</div>
 	<!--推撥發文 -->
-<form id="promote">
-			<div class="modal fade" id="exampleModal_o" tabindex="-1"
-				aria-labelledby="exampleModalLabel" aria-hidden="true">
-				<div class="modal-dialog modal-dialog-scrollable">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"
-								aria-label="Close"></button>
-						</div>
-						<div class="modal-body">
-							<div class="container text-center">
-								<div id="promoteContent">
-									<div>
-										<div class="form-floating" id="title">
-											<textarea class="form-control"
-												placeholder="Leave a comment here"
-												id="floatingTextarea5" maxlength="15"></textarea>
-											<label for="floatingTextarea5">請輸入標題</label>
-										</div>
-										<div class="content">
-											<div class="container text-center">
-												<div class="row align-items-start">
-										<div class="form-floating" id="comment">
-											<textarea class="form-control"
-												placeholder="Leave a comment here"
-												id="floatingTextarea6" style="height: 100px"></textarea>
-											<label for="floatingTextarea6">請輸入內文</label>
-										</div>
+	<form id="promote">
+		<div class="modal fade" id="exampleModal_o" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">建立貼文</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="container text-center">
+							<div id="promoteContent">
+								<div>
+									<div class="form-floating" id="title">
+										<textarea class="form-control"
+											placeholder="Leave a comment here" id="floatingTextarea5"
+											maxlength="15"></textarea>
+										<label for="floatingTextarea5">請輸入標題</label>
 									</div>
-									<div class="modal-footer">
-										<button type="button" class="post-botton-promote"
-											id="pb-promote" data-post-id="${postID}">發布</button>
+									<div class="content">
+										<div class="container text-center">
+											<div class="row align-items-start">
+												<div class="form-floating" id="comment">
+													<textarea class="form-control"
+														placeholder="Leave a comment here" id="floatingTextarea6"
+														style="height: 100px"></textarea>
+													<label for="floatingTextarea6">請輸入內文</label>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="post-button" id="pb-promote"
+													data-post-id="${postID}">發布</button>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -1620,10 +1721,8 @@ div.star_block>span.star.-on {
 					</div>
 				</div>
 			</div>
-			</div>
-			</div>
-			</div>
-		</form>
+		</div>
+	</form>
 
 	<!--======== Modal查看文章(討論版)========= -->
 	<div class="modal fade" id="exampleModal5" tabindex="-1"
@@ -1702,7 +1801,18 @@ div.star_block>span.star.-on {
 				//$("div.task_add_block").removeClass("-on");
 			});
 		});
+		$(function() {
 
+			// ==== 待辦事項文字框的 focus 事件及 blur 事件觸發 ===== //
+			$("input.task_name2").on("focus", function() {
+				$(this).closest("div.task_add_block").addClass("-on");
+				//$("div.task_add_block").addClass("-on");
+			});
+			$("input.task_name2").on("blur", function() {
+				$(this).closest("div.task_add_block").removeClass("-on");
+				//$("div.task_add_block").removeClass("-on");
+			});
+		});
 		//=======變更搜尋框的文字======
 		updateSearchPlaceholder();
 		$("#search-options").change(function() {

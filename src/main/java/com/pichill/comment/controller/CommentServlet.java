@@ -24,8 +24,9 @@ public class CommentServlet extends HttpServlet{
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		if("list_All".equals(action)) {
+			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			CommentService commentSvc = new CommentServiceImpl();
-			 List<Comment> comments = commentSvc.getAllComments();
+			 List<Comment> comments = commentSvc.getAllComments(postID);
 			String json = new Gson().toJson(comments);
 			PrintWriter out = res.getWriter();
 			out.print(json);
@@ -47,10 +48,11 @@ public class CommentServlet extends HttpServlet{
 //		}
 		if ("insert".equals(action)) {
 			String commentContent = req.getParameter("commentContent");
+			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			Comment comment = new Comment();
 			comment.setCommentContent(commentContent);		
 			comment.setgUserID(11000001);
-			comment.setPostID(31000008);
+			comment.setPostID(postID);
 			CommentService commentSvc = new CommentServiceImpl();
 			Comment addedComment = commentSvc.addComment(comment);
 			String json = new Gson().toJson(addedComment);
