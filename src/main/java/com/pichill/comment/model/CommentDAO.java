@@ -9,5 +9,5 @@ public interface CommentDAO {
 	int update(Comment comment);
 	int delete(Integer commentID);
 	Comment getByCommentID(Integer commentID);
-	List<Comment> getAll();
+	List<Comment> getAll(Integer postID);
 }

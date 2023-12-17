@@ -9,5 +9,5 @@ public interface CommentService {
 	Comment updateComment(Comment comment);
 	void delete(Integer commentID);
 	Comment getByCommentID(Integer commentID);
-	List<Comment> getAllComments();
+	List<Comment> getAllComments(Integer postID);
 }

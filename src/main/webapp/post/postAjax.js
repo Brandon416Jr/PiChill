@@ -57,7 +57,7 @@ $(document).ready(function() {
             <div class="container text-center">
                 <div class="row align-items-start" id="card-footer">
                     <div class="col-2" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt > 0 ? likeCnt : ''}</button>
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>
                     </div>
                     <div class="col-2" id="commentcol" data-post-id="${postID}">
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${commentCnt > 0 ? commentCnt : ''}</button>
@@ -75,11 +75,6 @@ $(document).ready(function() {
 		var selectedImage = $('#p_file').prop('files')[0];
 		var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` :
 			postPic ? `<img src="${postPic}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
-		var date = $('#datecol2').text();
-		var time = $('#timecol2').text();
-		var location = $('#locatecol2').text();
-		var sport = $('#ballcol2').text();
-		var cost = $('#costcol2 input').val();
 		// 創建新的揪團文章元素
 		var newGroupPostElement = `
             	 <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
@@ -93,37 +88,40 @@ $(document).ready(function() {
                                     <div class="post_time">${postTime}</div>
                                 </div>
                             </h1>
-                     <!--                    <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                             <span class="tooltip-text">編輯</span>
-                                         </button>
-                            <button type="button" class="delete" > <i class="fa-regular fa-trash-can"></i>刪除</button> -->
+                  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                              <span class="tooltip-text">編輯</span>
+                          </button>
+                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-trash-can"></i>
+                              <span class="tooltip-text">刪除</span>
+                          </button>
 
-                            <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="reportButton" data-post-id="${postID}">
+                    <!--        <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="reportButton" data-post-id="${postID}">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                                 <span class="tooltip-text">檢舉</span>
-                            </button>
+                            </button>-->
                             <h5 class="card-title">${postTitle}</h5>
                             <div class="container text-left">
                                 <div class="row">
                                     <div class="col-2 col-sm-2">日期:</div>
-                                    <div class="col-2 col-sm-4">${date}</div>
+                                    <div class="col-2 col-sm-4"></div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">時間:</div>
-                                    <div class="col-2 col-sm-4">${time}</div>
+                                    <div class="col-2 col-sm-4"></div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">地點:</div>
-                                    <div class="col-2 col-sm-4">${location}</div>
+                                    <div class="col-2 col-sm-4"></div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">球類:</div>
-                                    <div class="col-2 col-sm-4">${sport}</div>
+                                    <div class="col-2 col-sm-4"></div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">費用:</div>
-                                    <div class="col-2 col-sm-4">${cost}</div>
+                                    <div class="col-2 col-sm-4"></div>
                                 </div>
                             </div>
                             <p class="card-text2">${postContent}</p>
@@ -135,11 +133,10 @@ $(document).ready(function() {
                     <div class="container text-center">
                         <div class="row align-items-start" id="card-footer">
                             <div class="col-2" id="likecol" data-post-id="${postID}">
-                                <button type="button" class="fa-regular fa-thumbs-up likebutton">  ${likeCnt > 0 ? likeCnt : ''}
-                            </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>                            </div>
                             <div class="col-2" id="commentcol" data-post-id="${postID}">
                                 <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal5" >  ${commentCnt > 0 ? commentCnt : ''}
+                                    data-bs-target="#exampleModal6" >  ${commentCnt > 0 ? commentCnt : ''}
                                 </div>
                             <div class="col-2" id="pluscol">
                                 <button type="button" class="fa-regular fa-square-plus"> +1
@@ -152,41 +149,33 @@ $(document).ready(function() {
 		$('#post-list').prepend(newGroupPostElement);
 	}
 	function publishPromotePost(postID, postTitle, postType, postTime) {
-		var newPromotePostElement = `<div class="card mb-3" id=article3 style="width: 22rem;">
+		var newPromotePostElement = `
+				<div class="card mb-3 article2" id="article${postID}" style="width: 22rem;">
 				<div class="row g-0">
-				<div class="col-md-8">
-					<div class="card-body">
-						<h1 class="modal-title fs-5" id="exampleModalLabel">
-							<img src="../image/Capybara.jpg" alt="大頭貼">
-							<div>
-								<a class="post_owner">水豚君</a>
-								<div class="post_timer">${postTime}</div>
-							</div>
-						</h1>
-						<h5 class="card-title">${postTitle}</h5>
-						<p class="card-text">
-						<div class="container text" s>
-							<div class="row" style="width: 22rem">
-								<div class="col-2 col-sm-3">日期:</div>
-								<div class="col-2 col-sm-4">2023/11/20</div>
-								<div class="w-100 d-none d-md-block"></div>
-
-								<div class="col-2 col-sm-3">時間:</div>
-								<div class="col-2 col-sm-4">08:00~09:00</div>
-								<div class="w-100 d-none d-md-block"></div>
-
-								<div class="col-2 col-sm-3">地點:</div>
-								<div class="col-2 col-sm-4">陽明籃球館</div>
-								<div class="w-100 d-none d-md-block"></div>
-
-								<div class="col-2 col-sm-3">球類:</div>
-								<div class="col-2 col-sm-4">籃球</div>
-							</div>
+					<div class="col-md-8">
+						<div class="card-body">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">
+								<img src="../image/Capybara.jpg" alt="大頭貼">
+								<div>
+									<a class="post_owner">水豚君</a>
+									<div class="post_timer">${postTime}</div>
+								</div>
+							</h1>
+							  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                              <span class="tooltip-text">編輯</span>
+                          </button>
+                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-trash-can"></i>
+                              <span class="tooltip-text">刪除</span>
+                          </button>
+							<h5 class="card-title">${postTitle}</h5>
+	                          <p class="card-text">${postContent}</p>
+							</p>
 						</div>
-						</p>
 					</div>
 				</div>
-			</div>`;
+			</div>`
 		$('#promote-list').prepend(newPromotePostElement);
 
 	}
@@ -269,7 +258,7 @@ $(document).ready(function() {
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
-		}else if (newPostContent.trim() === "") {
+		} else if (newPostContent.trim() === "") {
 			alert("內文不得為空");
 			return; // 如果內文為空，停止表單提交
 		}
@@ -341,8 +330,7 @@ $(document).ready(function() {
 		                  <div class="container text-center">
 		                      <div class="row align-items-start" id="card-footer">
 		                          <div class="col-2" id="likecol" data-post-id="${postID}">
-		                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt}</button>
-		                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>		                          </div>
 		                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                                <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
 	                                    data-bs-target="#exampleModal5" > ${commentCnt}
@@ -378,7 +366,7 @@ $(document).ready(function() {
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
-		}else if (newPostContent.trim() === "") {
+		} else if (newPostContent.trim() === "") {
 			alert("內文不得為空");
 			return; // 如果內文為空，停止表單提交
 		}
@@ -471,11 +459,10 @@ $(document).ready(function() {
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
 	                          <div class="col-2" id="likecol">
-	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt}
-	                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>	                          </div>
 	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal5" > ${commentCnt}
+	                                  data-bs-target="#exampleModal6" > ${commentCnt}
 	                              </div>
 	                          <div class="col-2" id="pluscol">
 	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -501,11 +488,11 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		fetchAndDisplayLatestData();
 	});
-//===========新增文章(推撥)==========
+	//===========新增文章(推撥)==========
 	$("#pb-promote").on("click", function() {
 		var newPostTitle = $("#floatingTextarea5").val();
 		var newPostContent = $("#floatingTextarea6").val();
-console.log(newPostTitle);
+		console.log(newPostTitle);
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
@@ -546,8 +533,7 @@ console.log(newPostTitle);
 			url: "post.do",  // 替換成實際的後端處理檔案或API端點
 			success: function(data) {
 				var newPost = `
-	            	<div id="promote-list">
-			<div class="card mb-3" id=article3 style="width: 22rem;">
+				<div class="card mb-3 article2" id="article${postID}" style="width: 22rem;">
 				<div class="row g-0">
 					<div class="col-md-8">
 						<div class="card-body">
@@ -558,7 +544,7 @@ console.log(newPostTitle);
 									<div class="post_timer">${postTime}</div>
 								</div>
 							</h1>
-							  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+							  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
@@ -568,8 +554,6 @@ console.log(newPostTitle);
                           </button>
 							<h5 class="card-title">${newPostTitle}</h5>
 	                          <p class="card-text">${newPostContent}</p>
-	                      </div>
-							</div>
 							</p>
 						</div>
 					</div>
@@ -579,7 +563,7 @@ console.log(newPostTitle);
 
 				$('#floatingTextarea5').val('');
 				$('#floatingTextarea6').val('');
-				$('#exampleModal').modal('hide');
+				$('#exampleModal_o').modal('hide');
 			},
 			error: function(xhr, status, error) {
 				console.error("發生錯誤:", status, error);
@@ -620,7 +604,7 @@ console.log(newPostTitle);
 	});
 	//===找到原先的值(揪團)===//
 	$("#post-list").on("click", ".edit_group", function() {
-//		console.log("click");
+		//		console.log("click");
 		var postID = $(this).data("post-id");
 		var saveButton = $(".save-button_group");
 
@@ -645,6 +629,31 @@ console.log(newPostTitle);
 			}
 		});
 	});
+	// ===找到原先的值(推撥)===//
+	$("#promote-list").on("click", ".edit_promote", function() {
+		console.log("click");
+		var postID = $(this).data("post-id");
+		var saveButton = $(".save-button_promote");
+
+		$.ajax({
+			action: "getOne_For_Update",
+			type: "GET",
+			url: "post.do",
+			data: { "postID": postID },
+			dataType: "json",
+			success: function(postData) {
+				//				console.log("aa")
+				PostContent = postData.postContent.replace(/<br>/g, '\n');
+				$("#floatingTextarea5_edit").val(postData.postTitle);
+				$("#floatingTextarea6_edit").val(PostContent);
+
+				saveButton.attr("data-post-id", postData.postID);
+			},
+			error: function(xhr, status, error) {
+				console.error("Get Post Details Error:", status, error);
+			}
+		});
+	});
 	//===編輯動作(討論)===//
 	$(".save-button_discuss").on("click", function() {
 		// 	console.log("bbb");
@@ -652,10 +661,10 @@ console.log(newPostTitle);
 		var newPostTitle = $("#floatingTextarea_edit").val();
 		var newPostContent = $("#floatingTextarea2_edit").val();
 		var newPostPic = $("#p_file_edit")[0].files[0];
-	if (newPostTitle.trim() === "") {
+		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
-		}else if (newPostContent.trim() === "") {
+		} else if (newPostContent.trim() === "") {
 			alert("內文不得為空");
 			return; // 如果內文為空，停止表單提交
 		}
@@ -700,10 +709,10 @@ console.log(newPostTitle);
 		var newPostTitle = $("#floatingTextarea3_edit").val();
 		var newPostContent = $("#floatingTextarea4_edit").val();
 		var newPostPic = $("#p_file2_edit")[0].files[0];
-			if (newPostTitle.trim() === "") {
+		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
-		}else if (newPostContent.trim() === "") {
+		} else if (newPostContent.trim() === "") {
 			alert("內文不得為空");
 			return; // 如果內文為空，停止表單提交
 		}
@@ -741,6 +750,44 @@ console.log(newPostTitle);
 			}
 		});
 	})
+	//=========編輯推撥=========
+	$(".save-button_promote").on("click", function() {
+		// 	console.log("bbb");
+		var postID = $(this).attr("data-post-id");
+		var newPostTitle = $("#floatingTextarea5_edit").val();
+		var newPostContent = $("#floatingTextarea6_edit").val();
+		if (newPostTitle.trim() === "") {
+			alert("標題不得為空");
+			return; // 如果標題為空，停止表單提交
+		} else if (newPostContent.trim() === "") {
+			alert("內文不得為空");
+			return; // 如果內文為空，停止表單提交
+		}
+		var formData = new FormData();
+		formData.append("action", "update_promote");
+		formData.append("postID", postID);
+		formData.append("postTitle", newPostTitle);
+		formData.append("postContent", newPostContent);
+		$.ajax({
+			type: "POST",
+			url: "post.do",
+			data: formData,
+			dataType: "json",
+			processData: false,  // 不處理數據
+			contentType: false,  // 不設置內容類型
+			success: function(response) {
+				console.log("Update Success:", response);
+				$("#article" + postID + " .card-title").text(newPostTitle);
+				$("#article" + postID + " .card-text").text(newPostContent);
+
+				$("#exampleModalo_edit").modal("hide");
+			},
+			error: function(xhr, status, error) {
+				console.error("Update Error:", status, error);
+
+			}
+		});
+	})
 	//=============刪除文章===============//
 	$("#post-list").on("click", ".delete", function() {
 		// 	        console.log("aaa");
@@ -768,6 +815,33 @@ console.log(newPostTitle);
 			}
 		});
 	});
+	//=====刪除推撥文章========
+	$("#promote-list").on("click", ".delete", function() {
+		// 	        console.log("aaa");
+		var postID = $(this).attr("data-post-id");
+		var confirmDelete = confirm("是否確定刪除文章?");
+		if (!confirmDelete) {
+			return;
+		}
+		$.ajax({
+			type: "POST",
+			url: "post.do",
+			data: {
+				"action": "delete",
+				"postID": postID
+			},
+			dataType: "json",
+			success: function(data) {
+				$("#promote-list [data-post-id='" + postID + "']").closest('.card').fadeOut(1000, function() {
+					$(this).remove();
+				});
+				console.log("Delete Success:", data);
+			},
+			error: function(xhr, status, error) {
+				console.error("Delete Error:", status, error);
+			}
+		});
+	});
 	//=======顯示完整文章==========
 	$("#post-list").on("click", "#commentcol", function() {
 		var postID = $(this).attr("data-post-id");
@@ -781,9 +855,57 @@ console.log(newPostTitle);
 			dataType: "Json",
 			success: function(postData) {
 				// 	        	console.log("aa")
+				 var likeCol = $(`
+                <div class="col-2 likecol" id="likecol" data-post-id="${postData.postID}">
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton"></button>
+                    ${postData.likeCnt>0?postData.likeCnt:''}
+                </div>
+            `);
 				var formattedPostContent = postData.postContent.replace(/<br>/g, '\n');
 				$(".card-title.article0").text(postData.postTitle);
 				$(".card-text.article1").text(formattedPostContent);
+				$(".posttime").text(postData.postTime);
+			    $(".do").find(".likecol").replaceWith(likeCol);
+				$(".commentcol").html(`<i class="fa-regular fa-comment"></i> ${postData.commentCnt>0?postData.commentCnt:''}`);
+				$(".modal-image").attr("src", postData.postPic);
+				//             console.log(postData.postTitle);
+				//             console.log(postData.postContent);
+				// 	            var postPic = postData.postPic;
+				// 	            $("#preview_edit").html(`<img src="${postPic}" alt="預覽圖">`);
+
+			},
+			error: function(xhr, status, error) {
+				console.error("Get Post Details Error:", status, error);
+			}
+		});
+	});
+		$("#post-list").on("click", "#likecol", function() {
+		var postID = $(this).attr("data-post-id");
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:8081/PiChill/post/post.do",
+			data: {
+				"action": "get_By_postID",
+				"postID": postID
+			},
+			dataType: "Json",
+			success: function(postData) {
+				// 	        	console.log("aa")
+				console.log(postData.postID)
+				console.log(postData.likeCnt)
+				 var likeCol = $(`
+                <div class="col-2 likecol" id="likecol" data-post-id="${postData.postID}">
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton"></button>
+                    ${postData.likeCnt}
+                </div>
+            `);
+				var formattedPostContent = postData.postContent.replace(/<br>/g, '\n');
+				$(".card-title.article0").text(postData.postTitle);
+				$(".card-text.article1").text(formattedPostContent);
+				$(".posttime").text(postData.postTime);
+			    $(".do").find(".likecol").replaceWith(likeCol);
+				$(".commentcol").html(`<i class="fa-regular fa-comment"></i> ${postData.commentCnt}`);
+				$(".modal-image").attr("src", postData.postPic);
 				//             console.log(postData.postTitle);
 				//             console.log(postData.postContent);
 				// 	            var postPic = postData.postPic;
@@ -851,11 +973,10 @@ console.log(newPostTitle);
                                    <div class="container text-center">
                                        <div class="row align-items-start" id="card-footer" >
                                            <div class="col-2" id="likecol" data-post-id="${postID}">
-                                               <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
-                                           </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>                                           </div>
                                            <div class="col-2" id="commentcol" data-post-id="${postID}">
                                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal5"> ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+                                               data-bs-target="#exampleModal5"> ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
                                            </div>
                                        </div>
                                    </div>
@@ -917,11 +1038,10 @@ console.log(newPostTitle);
     	                  <div class="container text-center">
     	                      <div class="row align-items-start" id="card-footer">
     	                          <div class="col-2" id="likecol">
-    	                              <button type="button" class="fa-regular fa-thumbs-up likebutton">  ${posts[i].likeCnt>0?posts[i].likeCnt:''}
-    	                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${post[i].likeCnt > 0 ?[post[i]].likeCnt : ''}</button>    	                          </div>
     	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
     	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-    	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+    	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
     	                              </div>
     	                          <div class="col-2" id="pluscol">
     	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -999,11 +1119,11 @@ console.log(newPostTitle);
                                     <div class="container text-center">
                                         <div class="row align-items-start" id="card-footer">
                                             <div class="col-2" id="likecol" data-post-id="${postID}">
-                                                <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
                                             </div>
                                             <div class="col-2" id="commentcol" data-post-id="${postID}">
                                             <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+                                                data-bs-target="#exampleModal5" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
                                             </div>
                                         </div>
                                     </div>
@@ -1067,11 +1187,11 @@ console.log(newPostTitle);
               	                  <div class="container text-center">
               	                      <div class="row align-items-start" id="card-footer">
               	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-              	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
               	                          </div>
               	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
               	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-              	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+              	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
               	                              </div>
               	                          <div class="col-2" id="pluscol">
               	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -1144,11 +1264,11 @@ console.log(newPostTitle);
                                   <div class="container text-center">
                                       <div class="row align-items-start" id="card-footer">
                                           <div class="col-2" id="likecol" data-post-id="${postID}">
-                                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}</button>
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
                                           </div>
                                           <div class="col-2" id="commentcol" data-post-id="${postID}">
                                           <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                              data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+                                              data-bs-target="#exampleModal5" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
                                           </div>
                                       </div>
                                   </div>
@@ -1210,11 +1330,11 @@ console.log(newPostTitle);
    	                  <div class="container text-center">
    	                      <div class="row align-items-start" id="card-footer">
    	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-   	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${posts[i].likeCnt>0?posts[i].likeCnt:''}
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
    	                          </div>
    	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
    	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-   	                                  data-bs-target="#exampleModal5" > ${posts[i].commentCnt>0?posts[i].commentCnt:''}
+   	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
    	                              </div>
    	                          <div class="col-2" id="pluscol">
    	                              <button type="button" class="fa-regular fa-square-plus"> +1
@@ -1322,11 +1442,11 @@ console.log(newPostTitle);
                                <div class="container text-center">
                                    <div class="row align-items-start" id="card-footer">
                                        <div class="col-2" id="likecol" data-post-id="${postID}">
-                                           <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt>0?likeCnt:''}</button>
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
                                        </div>
                                        <div class="col-2" id="commentcol" data-post-id="${postID}">
                                        <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                           data-bs-target="#exampleModal5" > ${commentCnt>0?commentCnt:''}
+                                           data-bs-target="#exampleModal5" > ${commentCnt > 0 ? commentCnt : ''}
                                        </div>
                                    </div>
                                </div>
@@ -1389,11 +1509,11 @@ console.log(newPostTitle);
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
 	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-	                              <button type="button" class="fa-regular fa-thumbs-up likebutton"> ${likeCnt>0?likeCnt:''}
+                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
 	                          </div>
 	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal5" > ${commentCnt>0?commentCnt:''}
+	                                  data-bs-target="#exampleModal6" > ${commentCnt > 0 ? commentCnt : ''}
 	                              </div>
 	                          <div class="col-2" id="pluscol">
 	                              <button type="button" class="fa-regular fa-square-plus"> +1

@@ -60,8 +60,11 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 
 	@Override
-	public List<Comment> getAll() {
-		return getSession().createQuery("from Comment",Comment.class).list();
+	public List<Comment> getAll(Integer postID) {
+		 return getSession()
+			        .createQuery("from Comment where postID = :postId", Comment.class)
+			        .setParameter("postId", postID)
+			        .list();
 	}
 	
 	
