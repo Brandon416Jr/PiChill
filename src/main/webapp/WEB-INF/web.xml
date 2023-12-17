@@ -48,5 +48,39 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
+	
+	<!-- 	定義過濾器 -->
+	<filter>
+		<filter-name>OwnerUserLoginFilter</filter-name>
+		<filter-class>com.pichill.frontstage.owneruser.filter.OwnerUserLoginFilter</filter-class>
+	</filter>
+
+<!-- 	配置過濾器 -->
+	<filter-mapping>
+		<filter-name>OwnerUserLoginFilter</filter-name>
+		<url-pattern>/homepage/owneruserhome.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
+	
+	<!-- 	定義過濾器 -->
+	<filter>
+		<filter-name>GeneralUserLoginFilter</filter-name>
+		<filter-class>com.pichill.frontstage.generaluser.filter.GeneralUserLoginFilter</filter-class>
+	</filter>
+
+<!-- 	配置過濾器 -->
+	<filter-mapping>
+		<filter-name>GeneralUserLoginFilter</filter-name>
+		<url-pattern>/homepage/main.jsp</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+		<dispatcher>ASYNC</dispatcher>
+	</filter-mapping>
 
 </web-app>

@@ -117,18 +117,24 @@ pre {
 }
 
 div.moralf {
-	/* border: 1px solid yellow; */
-	height: 50px;
+/* 	border: 1px solid red;  */
+	height: 165px;
 	/* position: relative; */
+/* 	position: absolute; */
+
 }
 
 button.agreeterm {
-	/* border: 1px solid purple; */
+/* 	border: 1px solid purple;  */
 	background-color: #207DCA;
+	color: white;
 	margin: 0;
 	padding: 0;
-	width: 50px;
+	width: 75px;
 	border-radius: 5px;
+	
+	position: absolute;
+	right: 46.5%;
 }
 </style>
 </head>

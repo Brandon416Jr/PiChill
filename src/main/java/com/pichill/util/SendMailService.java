@@ -1,4 +1,4 @@
-package com.pichill.frontstage.generaluser.model;
+package com.pichill.util;
 
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -10,7 +10,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-public class GeneralUserSendMailService {
+public class SendMailService {
 
 	// 設定傳送郵件:至收信人的Email信箱,Email主旨,Email內容
 	public void sendMail(String to, String subject, String messageText) {
@@ -71,7 +71,7 @@ public class GeneralUserSendMailService {
 		String passRandom = "111";
 		String messageText = "Hello! " + ch_name + " 請謹記此密碼: " + passRandom + "\n" + " (已經啟用)";
 
-		GeneralUserSendMailService mailService = new GeneralUserSendMailService();
+		SendMailService mailService = new SendMailService();
 		mailService.sendMail(to, subject, messageText);
 	}
 

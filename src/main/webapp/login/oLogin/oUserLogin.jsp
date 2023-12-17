@@ -27,6 +27,11 @@ button.au-btn:hover {
 label.pwd-see2 {
 margin-left: 5px;
 }
+
+.login-form {
+	max-height: 360px;
+	overflow-y: auto;
+}
   </style>
   <!-- Vendor CSS-->
   <link href="<%=request.getContextPath()%>/backEnd-Website/vendor/animsition/animsition.min.css" rel="stylesheet" media="all" />
@@ -54,25 +59,32 @@ margin-left: 5px;
               </a>
             </div>
             <div class="login-form">
-              <form action="index.html" method="post">
+              <form action="<%=request.getContextPath()%>/ologinhandler" method="post">
                 <div class="form-group">
-                  <label>使用者信箱 (email)</label>
-                  <input class="au-input au-input--full" type="email" name="email" placeholder="Email" />
+                  <label>使用者帳號</label><font color=red>${requestScope.errorMsgs.oUserName}</font>
+                  <input class="au-input au-input--full" type="text" name="oUserName" placeholder="請輸入帳號" value="${param.oUserName}"/>
                 </div>
                 <div class="form-group">
-                  <label>密碼</label>
-                  <input class="au-input au-input--full" type="password" id="password" name="password" placeholder="Password" />
+                  <label>密碼</label><font color=red>${requestScope.errorMsgs.oPassword}</font>
+                  <input class="au-input au-input--full" type="password" id="password" name="oPassword" value="${param.oPassword}" placeholder="請輸入密碼" />
                   <div class="pwd-see">
 										<input type="checkbox" id="togglePwd"> <label class="pwd-see2"
 											for="togglePwd">顯示密碼</label>
 									</div>
                 </div>
+                <div class="form-group">
+									<label>驗證碼</label> <input class="au-input au-input--full"
+										type="text" name="checkCode" placeholder="請輸入驗證碼" /> <img
+										id="yzm_img" src="${pageContext.request.contextPath}/valistr"
+										style="cursor: pointer" onclick="changeYZM(this)" /> <span
+										id="valistr_msg"></span>
+								</div>
                 <div class="login-checkbox">
                   <label>
                     <input type="checkbox" name="remember" />記住我的帳號
                   </label>
                   <label>
-                    <a href="#">忘記密碼?</a>
+                    <a href="${pageContext.request.contextPath }/login/oLogin/oUserForgotPwd.jsp">忘記密碼?</a>
                   </label>
                 </div>
                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">
@@ -100,6 +112,73 @@ margin-left: 5px;
       </div>
     </div>
   </div>
+  <script>
+		/**
+		 * 校驗欄位是否為空
+		 */
+		function checkNull(name, msg) {
+			setMsg(name, "")
+			var v = document.getElementsByName(name)[0].value;
+			if (v == "") {
+				setMsg(name, msg)
+				return false;
+			}
+			return true;
+		}
+		/**
+		 * 為輸入項設定提示訊息
+		 */
+		function setMsg(name, msg) {
+			var span = document.getElementById(name + "_msg");
+			span.innerHTML = "<font color='red'>" + msg + "</font>";
+		}
+		/**
+		 * 點選更換驗證碼
+		 */
+		function changeYZM(imgObj) {
+			imgObj.src = "${pageContext.request.contextPath}/valistr?time="
+					+ new Date().getTime();
+		}
+	</script>
+	<script>
+		$('form').submit(function(e) {
+			e.preventDefault();
+
+			// 驗證代碼
+		})
+
+		var code = $('input[name=checkCode]').val();
+
+		$.ajax({
+			url : '/checkCode',
+			data : {
+				code : code
+			},
+			 success: function (res) {
+		            if (res.success) {
+		                // Validation passed, submit the form
+		                $('#loginForm').submit();
+		            } else {
+		                // Validation failed, show an error message
+		                alert('驗證碼錯誤!');
+		            }
+		        }
+		});
+	</script>
+	<script>
+		history.pushState(null, null, document.URL);
+		window.addEventListener('popstate', function() {
+			history.pushState(null, null, document.URL);
+		});
+
+		function ajaxLogoutCallback() {
+			// 登出操作
+			history.pushState(null, null, document.URL);
+			window.addEventListener('popstate', function() {
+				history.pushState(null, null, document.URL);
+			});
+		}
+	</script>
 	<script>
 		const password = document.getElementById('password');
 		const toggle = document.getElementById('togglePwd');

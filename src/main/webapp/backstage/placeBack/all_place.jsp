@@ -114,9 +114,9 @@ pageContext.setAttribute("list", list);
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/all_comment.jsp">所有留言</a></li>
+									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/all_report.jsp">檢舉管理</a></li>
+									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">檢舉管理</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>球館管理

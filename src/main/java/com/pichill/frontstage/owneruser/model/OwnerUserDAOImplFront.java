@@ -4,7 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
-
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
@@ -40,6 +40,22 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 					if (session != null && session.isOpen()) {
 						session.close();
 					}
+				}
+				return -1;
+	}
+	
+
+	public int update(OwnerUser ownerUser) {
+		// TODO Auto-generated method stub
+				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+				try {
+					session.beginTransaction();
+					session.update(ownerUser);
+					session.getTransaction().commit();
+					return 1;
+				} catch (Exception e) {
+					e.printStackTrace();
+					session.getTransaction().rollback();
 				}
 				return -1;
 	}
@@ -235,5 +251,27 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 		}
 		return null;
 	}
+	
+	public OwnerUser findByoEmail(String oEmail) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			OwnerUser ownerUser = (OwnerUser) session.createQuery("FROM OwnerUser WHERE oEmail = :oEmail")
+	                 .setParameter("oEmail",oEmail)
+	                 .uniqueResult();
+			session.getTransaction().commit();
+			return ownerUser;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+	        if (session != null && session.isOpen()) {
+	            session.close();
+	        }
+	    }
+		return null;
+	}
+
+
 	
 }

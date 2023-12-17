@@ -208,7 +208,7 @@ public class GeneralUserServletBack extends HttpServlet {
 		}
 
 		/*************************** 2.開始修改資料 *****************************************/
-		gUserSvcB.updateGeneralUser(generalUser);
+		generalUser =gUserSvcB.updateGeneralUser( gUserID, status);
 		req.setAttribute("manage", gUserSvcB.getOneGeneralUser(gUserID));
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/

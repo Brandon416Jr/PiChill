@@ -77,11 +77,11 @@ margin: 10px;
 							</a>
 						</div>
 						<div class="login-form">
-							<form action="index.html" method="post">
+							<form action="<%=request.getContextPath()%>/guser/forgotpwd" method="post">
 								<div class="input">
 									<label>請輸入註冊信箱</label> <input class="au-input au-input--full"
-										type="email" name="email" placeholder="Email" /> <font
-										color=red>${errorMsgs.memberemail}</font> <font color=red>${errorMsgs.forgotpassword}</font><br>
+										type="email" name="gEmail" placeholder="請輸入信箱" value="${param.gEmail}"/> <font
+										color=red>${errorMsgs.gEmail}</font> <font color=red>${errorMsgs.forgotpassword}</font><br>
 									</div>
 									<div  class="input">
 									<input type="hidden" name="action" value="forgot"> <input class="btn"
@@ -89,12 +89,12 @@ margin: 10px;
 										class="next-action-button" value="取得驗證碼" />
 								</div>
 							</form>
-							<form>
+							<form action="<%=request.getContextPath()%>/guser/forgotpwd" method="post">
 								<div class="input">
-									<input type="hidden" name="memberemail"
-										value="${param.memberemail}"> <label>請輸入驗證碼</label> <input
+									<input type="hidden" name="gEmail"
+										value="${param.gEmail}"> <label>請輸入驗證碼</label> <input
 										class="au-input au-input--full" type="text"
-										name="password" placeholder="請輸入驗證碼" /> <font color=red>${errorMsgs.verification}</font><br>
+										name="verification" placeholder="請輸入驗證碼" /> <font color=red>${errorMsgs.verification}</font><br>
 										</div>
 										<div  class="input">
 									<input type="hidden" name="action" value="verificationforgot">

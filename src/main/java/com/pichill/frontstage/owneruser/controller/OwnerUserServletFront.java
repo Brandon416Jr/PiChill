@@ -192,7 +192,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else
 			errorMsgs.put("oProfilePic", "照片: 請上傳照片");
 		
-		Date oRegistDate = new java.sql.Date(System.currentTimeMillis());
+		Date oRegisterDate = new java.sql.Date(System.currentTimeMillis());
 //		try {
 //			oRegistDate = java.sql.Date.valueOf(req.getParameter("oRegistDate").trim());
 //		} catch (IllegalArgumentException e) {
@@ -240,7 +240,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		ownerUser.setoBankCode(oBankCode);
 		ownerUser.setoBankAccount(oBankAccount);
 		ownerUser.setoProfilePic(oProfilePic);
-		ownerUser.setoRegisterDate(oRegistDate);
+		ownerUser.setoRegisterDate(oRegisterDate);
 		ownerUser.setoPostAmount(oPostAmount);
 		ownerUser.setoReportCnt(oReportCnt);
 		ownerUser.setCourtArriveCnt(courtArriveCnt);
@@ -255,7 +255,11 @@ public class OwnerUserServletFront extends HttpServlet {
 
 		/*************************** 2.開始新增資料 ***************************************/
 
-		oUserSvcF.insertOwnerUser(ownerUser);
+		oUserSvcF.insertOwnerUser( oUserName,  oPassword,  oIDNum, 
+				  compiled,  oName, oGender,  oBirth,  oTelephone,
+				  oAddress,  oBankCode,  oBankAccount,  oProfilePic,
+				  oRegisterDate,  oPostAmount,  oReportCnt,
+				  courtArriveCnt,  rsvdCnts,  oEmail);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		

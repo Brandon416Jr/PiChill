@@ -5,15 +5,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+//import javax.servlet.http.HttpSession;
 import javax.servlet.RequestDispatcher;
 import java.io.IOException;
 import java.security.SecureRandom;
-import org.hibernate.internal.build.AllowSysOut;
+//import org.hibernate.internal.build.AllowSysOut;
 import org.mindrot.jbcrypt.BCrypt;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.pichill.frontstage.generaluser.model.GeneralUserSendMailService;
+import com.pichill.util.SendMailService;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.generaluser.entity.GeneralUser;
 
@@ -42,7 +42,6 @@ public class GeneralUserForgotPwd extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 		System.out.println("action================" + action);
-		
 
 		/********************** 寄信(忘記密碼) **********************/
 		/********************** 寄信(忘記密碼) **********************/
@@ -90,7 +89,7 @@ public class GeneralUserForgotPwd extends HttpServlet {
 			String activeCode = generateRandomString(6);
 
 			String messageText = "你好, 你的驗證碼為:" + activeCode + "\n請於十分鐘內完成驗證，請勿轉發或告知他人訊息，以維護你的帳號使用安全，謝謝";
-			GeneralUserSendMailService sendMailService = new GeneralUserSendMailService();
+			SendMailService sendMailService = new SendMailService();
 			sendMailService.sendMail(gEmail, subject, messageText);
 
 			RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserForgotPwd.jsp");
@@ -111,7 +110,6 @@ public class GeneralUserForgotPwd extends HttpServlet {
 			jedis.set(email, verificationValue);
 			jedis.close();
 		}
-		
 
 		/********************** 驗證(忘記密碼) **********************/
 		/********************** 驗證(忘記密碼) **********************/
@@ -162,7 +160,7 @@ public class GeneralUserForgotPwd extends HttpServlet {
 //					req.setAttribute("isForgotStepTwoCompleted", true);
 //					req.setAttribute("isForgotStepOneCompleted", false);
 
-					RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserForgotPwd.jsp");
+					RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserChangePwd.jsp");
 					failureView.forward(req, res);
 
 				} else {
@@ -190,46 +188,52 @@ public class GeneralUserForgotPwd extends HttpServlet {
 			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 			req.setAttribute("errorMsgs", errorMsgs);
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			String gPassword = req.getParameter("memberpassword");
-			String mpasswordReg = "^(?![\\s])(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d@#$%^&+=!]{8,30}$";
-			if (memberpassword == null || memberpassword.trim().length() == 0) {
-				errorMsgs.put("memberpassword", "密碼請勿空白");
-			} else if (!memberpassword.trim().matches(mpasswordReg)) {
-				errorMsgs.put("memberpassword", "設定至少8碼以上(含字母跟數字)");
+			String gPassword = req.getParameter("gPassword");
+			String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
+			if (gPassword == null || gPassword.trim().length() == 0) {
+				errorMsgs.put("gPassword", "密碼請勿空白");
+			} else if (!gPassword.trim().matches(gPasswordReg)) {
+				errorMsgs.put("gPassword", "密碼格式錯誤: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 			}
 
 			String confirmPass = req.getParameter("confirmPassword");
 			if (confirmPass == null || confirmPass.trim().length() == 0) {
 				errorMsgs.put("confirmPassword", "確認密碼請勿空白");
-			} else if (!confirmPass.equals(memberpassword)) {
+			} else if (!confirmPass.equals(gPassword)) {
 				errorMsgs.put("confirmPassword", "密碼不一致");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				req.setAttribute("isForgotStepTwoCompleted", true);
-				req.setAttribute("isForgotStepOneCompleted", false);
-				RequestDispatcher failureView = req.getRequestDispatcher("/member/membeFotgotPassword.jsp");
+//				req.setAttribute("isForgotStepTwoCompleted", true);
+//				req.setAttribute("isForgotStepOneCompleted", false);
+				RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserChangePwd.jsp");
 				failureView.forward(req, res);
 				return;
 			}
 
 			/*************************** 2.開始修改密碼 ***************************************/
-			String memberemail = req.getParameter("memberemail");
-			String hashedPassword = BCrypt.hashpw(memberpassword, BCrypt.gensalt());
+			String gEmail = req.getParameter("gEmail");
+			String hashedPassword = BCrypt.hashpw(gPassword, BCrypt.gensalt());
 
-			System.out.println("email=" + memberemail);
-			System.out.println(memberpassword);
+			System.out.println("email=" + gEmail);
+			System.out.println(gPassword);
 
-			MemberService mbrSvc = new MemberService();
-			MemberVO memberVO = mbrSvc.getMemberByMemberemail(memberemail);
+			GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
+			GeneralUser generalUser = gUserSvcF.getGeneralUserBygEmail(gEmail);
 
-			memberVO.setMemberpassword(hashedPassword);
-			mbrSvc.updateMembers(memberVO);
+			generalUser.setgPassword(gPassword);
+			gUserSvcF.updateGeneralUsers(generalUser);
 
-			req.setAttribute("memberVO", memberVO); // 資料庫update成功後,正確的的memberVO物件,存入req
-			String url = "/member/memberLogin.jsp";
+			req.setAttribute("generalUser", generalUser); // 資料庫update成功後,正確的的memberVO物件,存入req
+			String url = "/login/gLogin/gUserLogin.jsp";
 
-			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交memberLogin.jsp
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 修改成功後,轉交gUserLogin.jsp
+
+			// 禁用快取
+			res.setHeader("Cache-Control", "no-cache");
+			res.setHeader("Cache-Control", "no-store");
+			res.setDateHeader("Expires", 0);
+
 			successView.forward(req, res);
 
 		}

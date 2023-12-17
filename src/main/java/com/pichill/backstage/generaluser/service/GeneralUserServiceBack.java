@@ -1,5 +1,6 @@
 package com.pichill.backstage.generaluser.service;
 
+import java.sql.Date;
 import java.util.List;
 
 import com.pichill.backstage.generaluser.model.GeneralUserDAOImplBack;
@@ -13,8 +14,18 @@ private final GeneralUserDAO dao;
 		dao = new GeneralUserDAOImplBack();
 	}
 
-	public void updateGeneralUser(GeneralUser generalUser) {
-		dao.update(generalUser);
+	public GeneralUser updateGeneralUser(Integer gUserID, Integer status) {
+		
+		GeneralUser generalUser = dao.findByPK(gUserID); // 先獲取現有的 MemberVO 物件
+		if (generalUser != null) {
+			
+			generalUser.setStatus(status);
+			
+			dao.update(generalUser);
+		}
+		
+		
+		return generalUser;
 	}
 
 	public GeneralUser getOneGeneralUser(Integer gUserID) {

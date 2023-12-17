@@ -259,7 +259,10 @@ public class GeneralUserServletFront extends HttpServlet {
 
 		/*************************** 2.開始新增資料 ***************************************/
 
-		gUserSvcF.insertGeneralUser(generalUser);
+		gUserSvcF.insertGeneralUser(gName,  gTelephone,  gEmail,  gAddress,  status,
+				 gGender,  gUsername,  gPassword,  gIDNum,  nicknameID,  gPostAmount,
+				 commentAmount,  gReportCnt,  gRegistDate,  gBirth,  yoyakuCnt,
+				 gProfilePic);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 

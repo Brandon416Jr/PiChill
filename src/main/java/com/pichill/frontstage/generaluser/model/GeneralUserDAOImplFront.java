@@ -45,6 +45,22 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 		return -1;
 
 	}
+	
+	@Override
+	public int update(GeneralUser generalUser) {
+		// TODO Auto-generated method stub
+				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+				try {
+					session.beginTransaction();
+					session.update(generalUser);
+					session.getTransaction().commit();
+					return 1;
+				} catch (Exception e) {
+					e.printStackTrace();
+					session.getTransaction().rollback();
+				}
+				return -1;
+	}
 
 	@Override
 	public GeneralUser findByPK(Integer gUserID) {

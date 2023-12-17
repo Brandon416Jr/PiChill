@@ -147,6 +147,12 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.add("管理員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
+		
+		Boolean manageUN = manageService.existsUserName(mUserName);
+		System.out.println(manageUN);
+		if (manageUN) {
+			errorMsgs.add("此帳號已被使用");	
+		} 
 
 		String mPassword = req.getParameter("mPassword");
 		String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
@@ -228,6 +234,12 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mEmail.trim().matches(mEmailReg)) {
 			errorMsgs.add("請輸入正確的Email格式");
 		}
+		
+		Boolean manageE = manageService.existsEmail(mEmail);
+		System.out.println(manageE);
+		if (manageE) {
+			errorMsgs.add("此信箱已被使用");	
+		} 
 
 		// 取得圖片
 //		Byte[] mProfilePic = null;
@@ -272,7 +284,9 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 2.開始修改資料 *****************************************/
 		System.out.println("manage:"+manage.toString());
-		manageService.updateManage(manage);
+		manageService.updateManage( manageID,  mName,  mUserName,  mPassword, 
+				 mTelephone,  mEmgContact, mEmgPhone,  mAddress,  
+				   mEmail,  mProfilePic,  mStatus);
 		req.setAttribute("manage", manageService.getOneManage(manageID));
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
@@ -306,6 +320,13 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mUserName.trim().matches(mUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.add("管理員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
+		
+		Boolean manageUN = manageService.existsUserName(mUserName);
+		System.out.println(manageUN);
+		if (manageUN) {
+			errorMsgs.add("此帳號已被使用");	
+		} 
+
 
 		String mPassword = req.getParameter("mPassword");
 		String mPasswordReg = "^[a-zA-Z0-9]{8,12}$";
@@ -374,6 +395,12 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mID.trim().matches(idnoRegex)) {
 			errorMsgs.add("請輸入正確的身份證格式");
 		}
+		
+		Boolean manageI = manageService.existsID(mID);
+		System.out.println(manageI);
+		if (manageI) {
+			errorMsgs.add("此人已經是管理員，不可新增重複的管理員");	
+		} 
 
 		String mEmail = req.getParameter("mEmail");
 		String mEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
@@ -382,6 +409,12 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mEmail.trim().matches(mEmailReg)) {
 			errorMsgs.add("請輸入正確的Email格式");
 		}
+		
+		Boolean manageE = manageService.existsEmail(mEmail);
+		System.out.println(manageE);
+		if (manageE) {
+			errorMsgs.add("此信箱已被使用");	
+		} 
 
 		// 圖片，need to ask question!
 		InputStream in = req.getPart("mProfilePic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
@@ -422,7 +455,9 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 2.開始新增資料 ***************************************/
 
-		manageService.insertManage(manage);
+		manageService.insertManage( mName,  mUserName,  mPassword,  mBirth,  mGender,
+				 mTelephone,  mEmgContact,  mEmgPhone,  mAddress,  mHiredate,
+				 mID,  mEmail,  mProfilePic,  mStatus);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		

@@ -81,17 +81,17 @@ div.input {
 						<div class="login-form">
 
 							<form id="changePassword" method="post"
-								action="<%=request.getContextPath()%>/member/sendemail">
+								action="<%=request.getContextPath()%>/ouser/forgotpwd">
 								<div class="input">
 									<label class="fs-title">更改密碼</label> <input
 										class="au-input au-input--full" type="password"
-										name="memberpassword" value="${param.memberpassword}"
-										id="inputPassword" placeholder="請輸入新密碼" autocomplete="off" />
+										name="oPassword" value="${param.oPassword}"
+										id="inputPassword" placeholder="請輸入新密碼"/>
 									<div class="pwd-see">
 										<input type="checkbox" id="togglePwd"> <label
 											class="pwd-see2" for="togglePwd">顯示密碼</label>
 									</div>
-									<font id="passwordError" color=red>${errorMsgs.memberpassword}</font>
+									<font id="passwordError" color=red>${errorMsgs.oPassword}</font>
 									<div class="form__field">
 										<label class="fs-title">再次輸入密碼</label> <input
 											class="au-input au-input--full" type="password"
@@ -105,8 +105,8 @@ div.input {
 										<font color=red>${errorMsgs.confirmPassword}</font>
 									
 <!-- 									<div class="input"> -->
-										<input type="hidden" name="memberemail"
-											value="${param.memberemail}"> <input type="hidden"
+										<input type="hidden" name="oEmail"
+											value="${param.oEmail}"> <input type="hidden"
 											name="action" value="changePassword"> <input
 											class="btn" type="submit" name="next"
 											class="next-action-button" value="送出" />

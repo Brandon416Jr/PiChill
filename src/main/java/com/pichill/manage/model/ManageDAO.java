@@ -12,6 +12,9 @@ public interface ManageDAO {
 	Manage getManageBymUserName(String mUserName); 
 	List<Manage> getAll();
 	Manage findByUserNamePassword(String mUserName,String mPassword);
+	boolean isUserNameExists(String mUserName);
+	boolean isEmailExists(String mEmail);
+	boolean isIDExists(String mID);
 //	int delete(Integer manageID); // 刪除需要篩選條件
 	
 //	Manage getManageBymName(String mName); 

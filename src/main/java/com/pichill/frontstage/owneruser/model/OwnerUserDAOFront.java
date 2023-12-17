@@ -1,6 +1,7 @@
 package com.pichill.frontstage.owneruser.model;
 
 
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 
 public interface OwnerUserDAOFront {
@@ -12,5 +13,6 @@ public interface OwnerUserDAOFront {
 	boolean isCompiledExists(String compiled);
 	OwnerUser getOwnerUserByoUserName(String oUserName); 
 	OwnerUser findByUserNamePassword(String oUserName,String oPassword);
-
+	int update(OwnerUser OwnerUser);
+	OwnerUser findByoEmail(String gEmail);
 }

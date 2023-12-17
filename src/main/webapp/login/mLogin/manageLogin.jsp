@@ -57,6 +57,12 @@ button.au-btn {
 	/* margin: 5px; */
 }
 
+
+.login-form {
+	max-height: 360px;
+	overflow-y: auto;
+}
+
 button.au-btn:hover {
 	/* border: 2px solid red; */
 	background-color: orange;
