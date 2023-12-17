@@ -3,13 +3,22 @@ package com.pichill.reserveorder.model;
 import java.util.List;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.util.HibernateUtil;
 
 
 public class ReserveOrderDAOImpl implements ReserveOrderDAO {
+private SessionFactory factory;
+	
+	public ReserveOrderDAOImpl() {
+		factory = HibernateUtil.getSessionFactory();
+	}
+	
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
 	@Override
 	public int add(ReserveOrder reserveOrder) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

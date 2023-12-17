@@ -1,15 +1,29 @@
 package com.pichill.time;
 
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-public class Time  implements Serializable  {
+@Entity
+@Table(name="time")
+public class Time {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="timeID", updatable = false)
 	private Integer timeID;
+	
+	@Column(name="reserveTime", updatable = false)
 	private String reserveTime;
+	
+	@Column(name="courtID", updatable = false)
 	private Integer courtID;
 	
 	public Time() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public Time(Integer timeID, String reserveTime, Integer courtID) {

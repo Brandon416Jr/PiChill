@@ -24,11 +24,6 @@ public class ReserveOrder {
 	@Column(name="reserveOrderID", updatable = false)
 	private Integer reserveOrderID;
 	
-	// fetch 預設為 EAGER
-//	@ManyToOne
-//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)//(name=自己(FK), referencedColumnName = 對應到的PK)
-//	private GeneralUser generalUser;
-	
 	@Column(name="gUserID", updatable = false)
 	private Integer gUserID;
 	
@@ -156,6 +151,34 @@ public class ReserveOrder {
 		this.totalCost = totalCost;
 	}
 
+	// for join gName from gUserID
+//    public com.pichill.generaluser.entity.GeneralUser getGeneralUser() {
+//	    com.pichill.generaluser.service.GeneralUserService generaluserSvc = new com.pichill.generaluser.service.GeneralUserService();
+//	    com.pichill.generaluser.entity.GeneralUser generalUser = generaluserSvc.getOneGeneralUser(gUserID);
+//	    return generalUser;
+//    }
+    
+    // for join rsvdCnts from oUserID
+//    public com.pichill.owneruser.entity.OwnerUser getOwnerUser() {
+//    	com.pichill.owneruser.service.OwnerUserService owneruserSvc = new com.pichill.owneruser.service.OwnerUserService();
+//    	com.pichill.owneruser.entity.OwnerUser ownerUser = owneruserSvc.getOneOwnerUser(oUserID);
+//	    return ownerUser;
+//    }
+    
+    // for join reserveTime from timeID
+//    public com.pichill.time.Time getTime() {
+//	    com.pichill.time.TimeService timeSvc = new com.pichill.time.TimeService();
+//	    com.pichill.time.Time time = timeSvc.getOneTime(timeID);
+//	    return time;
+//    }
+    
+    // for join placeName from placeID
+//    public com.pichill.place.Place getPlace() {
+//    	com.pichill.place.PlaceService placeSvc = new com.pichill.place.PlaceService();
+//    	com.pichill.place.Place place = placeSvc.getOnePlace(placeID);
+//    	return place;
+//    }
+    
 	@Override
 	public String toString() {
 		return "ReserveOrder [reserveOrderID=" + reserveOrderID + ", gUserID=" + gUserID + ", oUserID=" + oUserID
