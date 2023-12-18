@@ -17,9 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.generaluser.entity.GeneralUser;
-import com.pichill.manage.entity.Manage;
-import com.pichill.owneruser.service.OwnerUserService;
+
 import com.pichill.place.Place;
 
 import java.sql.Timestamp;

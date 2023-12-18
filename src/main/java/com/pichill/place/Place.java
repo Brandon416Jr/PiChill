@@ -14,7 +14,6 @@ import com.pichill.court.Court;
 
 
 @Entity
-
 @Table(name = "place")
 public class Place {
 	
@@ -38,8 +37,7 @@ public class Place {
 //	@ManyToOne(fetch = FetchType.LAZY)
 //	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
 //	private Court court;
-	
-	
+
 	
 	
 	public Place() {

@@ -87,12 +87,13 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 								data-bs-target="#forms-collapse" aria-controls="forms-collapse">球館管理</button>
 
 						</li>
-						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">登出</button>
-						</li>
+						<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+							<li class="my-2">
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</li>
+						</form>
+						
 					</ul>
 				</nav>
 			</div>
@@ -115,70 +116,70 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
 
 <span>企業會員編號:</span>
-                <input type="text" id="ouserID" name="ouserID" value="<%=ownerUser.getoUserID()%>" disabled/>
+                <input type="text" id="ouserID" name="ouserID" value="${ownerUser.oUserID}" disabled/>
                 <br><br>                            
       
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>帳號:</span>
-                <input type="text" id="oUserName" name="oUserName" value="<%= (ownerUser == null) ? "yehshaa0106" : ownerUser.getoUserName()%>"/>
+                <input type="text" id="oUserName" name="oUserName" value="${ownerUser.oUserName}" disabled>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>密碼:</span>
-                <input type="text" id="oPassword" name="oPassword" value="<%= (ownerUser == null) ? "LtaS845r" : ownerUser.getoPassword()%>"/>
+                <input type="text" id="oPassword" name="oPassword" value="${ownerUser.oPassword}"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>統編:</span>
-                <input type="text" id="compiled" style="position: relative; left: 17px;" name="compiled" value="<%= (ownerUser == null) ? "09071688" : ownerUser.getcompiled()%> " required/>
+                <input type="text" id="compiled" style="position: relative; left: 17px;" name="compiled" value="${ownerUser.compiled}" required/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>場館負責人姓名:</span>
-                <input type="text" id="oName" name="oName" value="<%= (ownerUser==null)? "葉夢華" : ownerUser.getoName()%>"/>
+                <input type="text" id="oName" name="oName" value="${ownerUser.oName}"/>
                 <br><br>
                 
     		    <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>性別:</span>
-<%--            <input type="text" id="oGender" name="oGender" value="<%= (ownerUser==null)? 1 : ownerUser.getoGender()%>"/> --%>
-                <% int gender = ownerUser.getoGender(); %>
-				<select name="oGender" disabled="disabled">
-				<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option>
-				<option value="1" <%=gender == 1 ? "selected" : ""%>>女</option>
-				</select>
+           		<input type="text" id="oGender" name="oGender" value="${ownerUser.oGender == 0 ? '男':'女'}" disabled>
+<%--                 <% int gender = ownerUser.getoGender(); %> --%>
+<!-- 				<select name="oGender" disabled="disabled"> -->
+<%-- 				<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option> --%>
+<%-- 				<option value="1" <%=gender == 1 ? "selected" : ""%>>女</option> --%>
+<!-- 				</select> -->
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>場館負責人身分證字號:</span>
-                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser == null) ? "H212810987" : ownerUser.getoIDNum()%>"/>
+                <input type="text" id="oIDNum" name=oIDNum"  value="${ownerUser.oIDNum}"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">                  
                 <span>出生年月日:</span>
-                <input type="text" id="oBirth" name="oBirth" value="<%= (ownerUser==null)? "1990-01-06" : ownerUser.getoBirth()%>"/>
+                <input type="text" id="oBirth" name="oBirth" value="${ownerUser.oBirth}" disabled>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">   
                 <span>連絡電話:</span>
-                <input type="text" id="oTelephone" name="oTelephone" value="<%= (ownerUser == null) ? "0934862754" : ownerUser.getoTelephone()%>"/>
+                <input type="text" id="oTelephone" name="oTelephone" value="${ownerUser.oTelephone}"/>
                 <font color="#FF0000" size="-1" nowrap="">如:0912345678。</font> 
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
                 <span>聯絡地址:</span>
                  <input type="text" id="oAddress" style = "width:250px;" name="oAddress" placeholder="請輸入聯絡地址" 
-                value="<%= (ownerUser == null) ? "新北市新店區民權路98號6樓" : ownerUser.getoAddress()%>"/>
+                value="${ownerUser.oAddress}"/>
                <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
                 <span>銀行代號：</span> 
- 				<input type="text" id="oBankCode" name="oBankCode" value="<%=(ownerUser == null) ? "808" : ownerUser.getoBankCode()%>"  placeholder="如:012" required> 
+ 				<input type="text" id="oBankCode" name="oBankCode" value="${ownerUser.oBankCode}"  placeholder="如:012" required> 
  				<br> 
  				<br>
  				
  				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
 				<span>銀行帳號：</span> 
- 				<input type="text" id="bank_account" name="oBankAccount"  value="<%=(ownerUser == null) ? "95301246813579" : ownerUser.getoBankAccount()%>" required>
+ 				<input type="text" id="bank_account" name="oBankAccount"  value="${ownerUser.getoBankAccount}" required>
 				<br>  
 				<br>  
                 
@@ -186,15 +187,14 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
  			   <span>電子信箱：</span>  
  			   <input type="text" id="oEmail" name="oEmail" style = "width:250px;"
- 				value="<%=(ownerUser == null) ? "yehshaa0106@gmail.com" : ownerUser.getoEmail()%>" required>  
+ 				value="${ownerUser.oEmail}" required>  
  			   <font color="#FF0000" size="-1" nowrap="">電子信箱格式範例:abc@yahoo.com.tw</font> 
                <br>  
 				<br> 
                 
                 <span>大頭貼:</span><br>
-                <div id="blob_holder">
-                <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
-                <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
+                <input type="file" id="oProfilePic" name="oProfilePic" previewImage() multiple="multiple" hidden/>
+                <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" width="100px">
                 <br>
  	 			<br>
 

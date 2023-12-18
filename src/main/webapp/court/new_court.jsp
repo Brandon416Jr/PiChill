@@ -17,9 +17,9 @@ Place place = (Place) request.getAttribute("place");
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pichill企業會員-申請上架球館</title>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css" media="all" />
 	
 	<!----------------匯入jquery ------------------------>
     <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -190,7 +190,7 @@ Place place = (Place) request.getAttribute("place");
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
-                <input type="tel" id="phone" name="phone" value="<%=(court==null)? "" :court.getcourtTelephone()%>"  required>
+                <input type="text" id="text" name="courtTelephone" value="<%=(court==null)? "" :court.getcourtTelephone()%>"  required>
                 <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px;">包含區域碼 如:0212345678。</font>
                 <br><br>
 

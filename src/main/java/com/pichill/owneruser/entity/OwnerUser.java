@@ -2,11 +2,16 @@ package com.pichill.owneruser.entity;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 
@@ -76,6 +81,58 @@ public class OwnerUser implements Serializable{
 	
 	@Column(name = "oEmail")
 	private String oEmail;
+	
+	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+//	@OrderBy("courtID asc") 
+//	private Set<Court> Court; // Set不重複
+	
+	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+//	@OrderBy("formID asc") 
+//	public Set<Court> getCourt() {
+//		return Court;
+//	}
+
+//	public void setCourt(Set<Court> court) {
+//		Court = court;
+//	}
+//
+//	public Set<ContactUs> getContactUs() {
+//		return contactUs;
+//	}
+//
+//	public void setContactUs(Set<ContactUs> contactUs) {
+//		this.contactUs = contactUs;
+//	}
+//
+//	public Set<reserveOrder> getReserveOrder() {
+//		return reserveOrder;
+//	}
+//
+//	public void setReserveOrder(Set<reserveOrder> reserveOrder) {
+//		this.reserveOrder = reserveOrder;
+//	}
+//
+//	public Set<Post> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(Set<Post> post) {
+//		this.post = post;
+//	}
+//	private Set<ContactUs> contactUs; // Set不重複
+//	
+//	 fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+//	@OrderBy("reserveOrderID asc") 
+//	private Set<reserveOrder> reserveOrder; // Set不重複
+//	
+//	 fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+//	@OrderBy("postID asc") 
+//	private Set<Post> post; // Set不重複
+
 	
 	
 	public OwnerUser() {

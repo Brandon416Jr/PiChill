@@ -87,6 +87,20 @@ public class Court implements Serializable{
 //		this.place = place;
 //	}
 
+//	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+//	@OrderBy("timeID asc") 
+//	private Set<Times> time; // Set不重複
+//	
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "manageID", referencedColumnName = "manageID")
+//	private Manage manage;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID")
+//	private OwnerUser ownerUser;
+	
 	public Court() {
         super();
     }
