@@ -123,6 +123,39 @@ public class ManageDAOImpl implements ManageDAO {
 		return false; // 如果發生異常或没有找到會員，也返回false
 	}
 	
+	public boolean isUserNameExistsByInsert(String mUserName) {
+		Session session = getSession();
+		try {
+			session.beginTransaction();
+			System.out.println("查詢前");
+			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mUserName = :mUserName")
+					.setParameter("mUserName", mUserName).uniqueResult();
+			System.out.println("查詢後");
+
+			session.getTransaction().commit();
+			System.out.println("交易後");
+			if (manage != null) {
+				System.out.println("有找到相同管理員帳號");
+				System.out.println(manage);
+				return true;
+			} else {
+				System.out.println("沒有找到相同管理員帳號");
+				return false;
+			}
+
+		} catch (Exception e) {
+			System.out.println("例外處理");
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		System.out.println("最後跑到這");
+		return false; // 如果發生異常或没有找到會員，也返回false
+	}
+	
 	@Override
 	public boolean isEmailExists(String mEmail) {
 		Session session = getSession();
@@ -130,6 +163,39 @@ public class ManageDAOImpl implements ManageDAO {
 			session.beginTransaction();
 			System.out.println("查詢前");
 			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mEmail = :mEmail AND manageID != :manageID")
+					.setParameter("mEmail", mEmail).uniqueResult();
+			System.out.println("查詢後");
+
+			session.getTransaction().commit();
+			System.out.println("交易後");
+			if (manage != null) {
+				System.out.println("有找到相同管理員信箱");
+				System.out.println(manage);
+				return true;
+			} else {
+				System.out.println("沒有找到相同管理員信箱");
+				return false;
+			}
+
+		} catch (Exception e) {
+			System.out.println("例外處理");
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		} finally {
+			if (session != null && session.isOpen()) {
+				session.close();
+			}
+		}
+		System.out.println("最後跑到這");
+		return false; // 如果發生異常或没有找到會員，也返回false
+	}
+	
+	public boolean isEmailExistsByInsert(String mEmail) {
+		Session session = getSession();
+		try {
+			session.beginTransaction();
+			System.out.println("查詢前");
+			Manage manage = (Manage) session.createQuery("FROM Manage WHERE mEmail = :mEmail")
 					.setParameter("mEmail", mEmail).uniqueResult();
 			System.out.println("查詢後");
 
@@ -235,7 +301,12 @@ public class ManageDAOImpl implements ManageDAO {
 
 		try {
 			session.beginTransaction();
-			Manage manage = session.get(Manage.class, mUserName);
+//			Manage manage = session.get(Manage.class, mUserName);
+			Query<Manage> query = getSession().createQuery("from Manage where mUserName = :mUserName",
+					Manage.class);
+			query.setParameter("mUserName", mUserName);
+			Manage manage = (Manage) query.uniqueResult();
+//			System.out.println(manage);
 			session.getTransaction().commit();
 			return manage;
 		} catch (Exception e) {

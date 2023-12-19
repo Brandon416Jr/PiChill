@@ -12,9 +12,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.comment.service.CommentServiceBack;
+import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
+import com.pichill.backstage.post.service.PostServiceBack;
+import com.pichill.comment.entity.Comment;
+import com.pichill.post.entity.Post;
 
 @WebServlet(name = "CommentBServlet", value="/comment/commentb.do")
 public class CommentServletBack extends HttpServlet {
+	private CommentServiceBack commentSvcB;
+	
+	@Override
+	public void init() throws ServletException {
+		// TODO Auto-generated method stub
+		commentSvcB = new CommentServiceBack();
+	}
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		doPost(req, res);
 	}
@@ -23,6 +35,18 @@ public class CommentServletBack extends HttpServlet {
 
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		
+		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
+
+			Integer commentID = Integer.valueOf(req.getParameter("commentID"));
+			
+			Comment comment = commentSvcB.getOneComment(commentID);
+
+			req.setAttribute("comment", comment); // 資料庫取出的empVO物件,存入req
+			String url = "/backstage/commentBack/set_comment.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+		}
 
 			if ("delete".equals(action)) { // 來自listAllEmp.jsp
 

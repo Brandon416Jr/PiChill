@@ -9,10 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @WebServlet("/valistr")
 public class ValiImgServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		
+		Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+		req.setAttribute("errorMsgs", errorMsgs);
         //禁止瀏覽器快取驗證碼
         res.setDateHeader("Expires",-1);
         res.setHeader("Cache-Control","no-cache");
@@ -27,6 +32,7 @@ public class ValiImgServlet extends HttpServlet {
         session.setAttribute("valistr",valistr);
         //列印到控制檯
         System.out.println(valistr);
+        
     }
 
     protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

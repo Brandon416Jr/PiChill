@@ -23,7 +23,10 @@ import java.io.IOException;
 //@WebServlet(name = "ManageLoginServlet", value = "/manage/manage.do")
 public class ManageLoginHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	private static int loginAttempts = 0;  // 登入嘗試次數
+	private static long lockoutTime = 0;   // 鎖定時間
+	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
+	private static final long LOCKOUT_DURATION = 5 * 60 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 	// 【實際上應至資料庫搜尋比對】
 	protected boolean allowAdmin(String mUserName, String mPassword) {
@@ -75,13 +78,40 @@ public class ManageLoginHandler extends HttpServlet {
 			failureView.forward(req, res);
 			return;
 		}
-
+		
+		
 		// 【檢查該帳號 , 密碼是否有效】
+
 		if (!allowAdmin(mUserName, mPassword)) { // 【帳號 , 密碼無效時】
+
 			System.out.println("有進帳號密碼無效");
 			errorMsgs.put("mUserName", "查無資料");
 			errorMsgs.put("mPassword", "密碼錯誤");
+			
+			 // 增加登入嘗試次數
+		    loginAttempts++;
+		    
+		    // 檢查是否達到最大嘗試次數
+		    if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+		        System.out.println("密碼輸入錯誤次數過多，請稍候再試");
+
+		        // 設定鎖定時間
+		        lockoutTime = System.currentTimeMillis() + LOCKOUT_DURATION;
+		    	req.setAttribute("lockoutTime", lockoutTime);
+				if (System.currentTimeMillis() < lockoutTime) {
+				    System.out.println("帳號已被鎖定，請稍候再試");
+				    res.sendRedirect("/login/failToLogin.jsp");
+				    return;
+				} else {
+					res.sendRedirect("/login/mLogin/manageLogin.jsp");
+					return;
+				}
+		    }
+		    
 		}
+	
+
+	
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
@@ -94,9 +124,9 @@ public class ManageLoginHandler extends HttpServlet {
 		if (allowAdmin(mUserName, mPassword)) { // 帳號密碼有效
 			// 從資料庫獲取 adminStat 的值
 			ManageService manageSvc = new ManageService();
-			Manage manage = manageSvc.userAuth(mUserName, mPassword);
-			if (manage != null) {
-				Integer mStatus = manage.getmStatus();
+			Manage manageStatus = manageSvc.userAuth(mUserName, mPassword);
+			if (manageStatus != null) {
+				Integer mStatus = manageStatus.getmStatus();
 				// 設置mStatus 属性的值到 HttpSession
 				HttpSession session = req.getSession();
 				session.setAttribute("mStatus", mStatus);
@@ -146,25 +176,26 @@ public class ManageLoginHandler extends HttpServlet {
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 			HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 
-			session.setAttribute("admin", mUserName); // *工作1: 才在session內做已經登入過的標識
+//			session.setAttribute("mUserName", mUserName); // *工作1: 才在session內做已經登入過的標識
+			
+			// 測試
+			Manage manage = manageSvc.getOneManage(mUserName);
+			session.setAttribute("manage", manage);
+//			Integer manageID =  manage.getManageID();
+//			session.setAttribute("manageID", manageID);
+			
 			System.out.println(session.getId());
 			try {
 				String location = (String) session.getAttribute("location");
 				if (location != null) {
+					System.out.println("無來源網頁");
 					session.removeAttribute("location"); // *工作2: 看看有無來源網頁 (-->如有來源網頁:則重導至來源網頁)
 					res.sendRedirect(location);
 					return;
 				}
 			} catch (Exception ignored) {
 			}
-//			Manage manage2 = manageSvc.getOneManage(mUserName);
-//			session = req.getSession();
-//			session.setAttribute("mUserName",manage); // 處理登入的身分
-
-//			Manage manager = (Manage)session.getAttribute("loginManager");
-//			String manageID = manager.getmID(); //獲取管理員ID
-//			String url = "/PiChill/manage/DBGifReader?manageID=" + URLEncoder.encode(manageID, "UTF-8");
-//			session.setAttribute("loginManage", manage2);
+			
 			res.sendRedirect(req.getContextPath() + "/backstage/login/index.jsp"); // *工作3:
 																					// (-->如無來源網頁:則重導至login_success.jsp)
 

@@ -77,7 +77,7 @@ public class CourtDAOImplBack implements CourtDAO{
 	
 	
 	@Override
-	public int insert(Court court) {
+	public int add(Court court) {
 		// TODO Auto-generated method stub
 		return 0;
 		

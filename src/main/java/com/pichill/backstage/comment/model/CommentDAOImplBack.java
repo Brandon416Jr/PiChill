@@ -6,9 +6,10 @@ import org.hibernate.Session;
 
 import com.pichill.comment.entity.Comment;
 import com.pichill.comment.model.CommentDAO;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
-public class CommentDAOImplBack implements CommentDAO {
+public class CommentDAOImplBack implements CommentDAOBack {
 
 	@Override
 	public int delete(Integer commentID) {
@@ -45,7 +46,18 @@ public class CommentDAOImplBack implements CommentDAO {
 
 	@Override
 	public Comment getByCommentID(Integer commentID) {
-		// TODO Auto-generated method stub
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Comment comment = session.get(Comment.class, commentID);
+			System.out.println("交易打開了");
+			session.getTransaction().commit();
+			System.out.println("交易關閉了");
+			return comment;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
 		return null;
 	}
 

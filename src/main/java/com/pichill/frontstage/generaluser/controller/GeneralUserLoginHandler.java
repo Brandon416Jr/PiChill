@@ -89,7 +89,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 			if (allowgUser(gUsername, gPassword)) { // 帳號密碼有效
 				// 從資料庫獲取 adminStat 的值
 				GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
-				GeneralUser generalUser = gUserSvcF.userAuth(gUsername, gPassword);
+//				GeneralUser generalUser = gUserSvcF.userAuth(gUsername, gPassword);
 				
 
 				// Send the use back to the form, if there were errors
@@ -126,6 +126,9 @@ public class GeneralUserLoginHandler extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
+				GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
+				session.setAttribute("generalUser", generalUser);
+
 				session.setAttribute("gUsername", gUsername); // *工作1: 才在session內做已經登入過的標識
 				try {
 					String location = (String) session.getAttribute("location");

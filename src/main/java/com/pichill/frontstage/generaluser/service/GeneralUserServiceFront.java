@@ -88,7 +88,7 @@ public class GeneralUserServiceFront {
 		return dao.findByPK(gUserID);
 	}
 	
-	public List<GeneralUser> getGeneralUserBygUsername(String gUsername) {
+	public GeneralUser getGeneralUserBygUsername(String gUsername) {
 		return dao.findByGeneralUsergUsername(gUsername);
 	}
 	

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
+<%@ page import="com.pichill.report.entity.Report"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
@@ -10,19 +10,16 @@ Manage manage = (Manage) session.getAttribute("manage");
 // Manage manage = manageSvc.getOneManage(manageID);
 // pageContext.setAttribute("manage",manage);
 %>
-
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Announcement announcement = (Announcement) request.getAttribute("announcement");
+Report report = (Report) request.getAttribute("report");
 %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>查看公告</title>
+<title>查看會員資料 (一般)</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css"></style>
@@ -51,10 +48,10 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 <!-- Main CSS-->
 <link href="<%=request.getContextPath()%>/backEnd-Website/css/main.css"
 	rel="stylesheet" media="all" />
+	
 <link rel="stylesheet"
-	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css"
-	media="all" />
-<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css" />
+	<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set_form.css"
 	media="all" />
 	<link rel="stylesheet"
@@ -87,8 +84,8 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 								<li><a
 										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
 										onclick="return checkmStatus();">新增員工資料</a></li>
-								<li><a
-										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>	
+									<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -237,14 +234,16 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 				<div class="container-fluid2">
 					<div class="card">
 						<div class="card-header">
-							<strong>修改 ${announcement.announceID} 公告</strong>
+							<strong>修改${report.reportID}檢舉單號</strong>
 							<h4>
 								<a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp"><img
-									src="<%=request.getContextPath()%>/image/smallLogo.png" width="20" height="20" border="0">回所有公告</a>
+									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp"><img
+									src="<%=request.getContextPath()%>/image/smallLogo.png"
+									width="20" height="20" border="0">回所有檢舉</a>
 							</h4>
 						</div>
-						
+
+						<%-- 錯誤表列 --%>
 						<c:if test="${not empty errorMsgs}">
 							<font style="color: red">請修正以下錯誤:</font>
 							<ul style="list-style-type: none">
@@ -253,76 +252,51 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 								</c:forEach>
 							</ul>
 						</c:if>
-						<form action="${pageContext.request.contextPath }/announcement/announcementb.do" method="post" enctype="multipart/form-data" class="form-horizontal">
-						<div class="card-body">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="card-body card-block">
+						<form action="${pageContext.request.contextPath }/report/reportb.do" method="post"
+							class="form-horizontal">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-lg-12">
 										
-											
+
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">公告編號</label>
+													<label for="disabled-input" class="form-control-label">檢舉編號</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" disabled="disabled"
-														name="announceID" value="<%=announcement.getAnnounceID()%>"
+													<input type="text" id="disabled-input" name="reportID"
+														value="<%=report.getReportID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">管理員編號</label>
+													<label for="disabled-input" class="form-control-label">管理員編號</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" 
-														name="manageID"  value="<%=announcement.getManageID()%>"
+													<input type="text" id="disabled-input" name="manageID"
+														value="<%=report.getManageID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">表單編號</label>
+													<label for="disabled-input" class="form-control-label">貼文編號</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" disabled="disabled"
-														name="formID"  value="<%=announcement.getFormID()%>"
+													<input type="text" id="disabled-input" name="postID"
+														value="<%=report.getPostID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">標題</label>
+													<label for="disabled-input" class="form-control-label">留言編號</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" 
-														name="annoTitle"  value="<%=announcement.getAnnoTitle()%>"
+													<input type="text" id="disabled-input" name="commentID"
+														value="<%=report.getCommentID()%>" disabled="disabled"
 														class="form-control" />
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">內文</label>
-												</div>
-												<div class="textbox col-10 col-md-8">
-													<textarea name="annoContent" id="textarea-input"
-														 rows="9"class="form-control"><%=announcement.getAnnoContent()%></textarea>
-													<!-- <input type="text" id="text-input" disabled="" name="text-input" placeholder="rfrfrfr" class="form-control"> -->
-												</div>
-											</div>
-											<div class="row form-group">
-												<div class="col col-md-3">
-													<label for="file-input" class="form-control-label">圖片</label>
-												</div>
-												<div class="col-10 col-md-8">
-													<input type="file" id="file-input" name="annoPic" value="${announcement.annoPic }"
-														multiple="multiple" onclick="previewImage()" onchange="preview()"
-														class="form-control-file" /> 
-																										<div id="blob_holder">
-																											<img
-																												src="<%=request.getContextPath()%>/announcement/DBJPGReader?announceID=${announcement.announceID}"
-																												width="400px">
-																										</div>
 												</div>
 											</div>
 											<div class="row form-group">
@@ -331,64 +305,68 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="annoTime" <%=announcement.getAnnoTime()%>
+														name="reportTime" <%=report.getReportTime()%>
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="selectLg" class="form-control-label">公告狀態</label>
+													<label for="selectLg" class="form-control-label">檢舉狀態</label>
 												</div>
 												<div class="col-10 col-md-8">
-												<%
-													int status = announcement.getAnnoStatus();
+													<%
+													int status = report.getReportStatus();
 													%>
-													<select name="annoStatus" id="selectLm"
+													<select name="status" id="selectLm"
 														class="form-control-sm form-control">
-														<option value="0"<%=status == 0 ? "selected" : ""%>>未公告</option>
-														<option value="1"<%=status == 1 ? "selected" : ""%>>已公告</option>
+
+														<option value="0" <%=status == 0 ? "selected" : ""%>>待審核</option>
+														<option value="1" <%=status == 1 ? "selected" : ""%>>已審核</option>
 													</select>
 												</div>
-												
 											</div>
-										<div class="row form-group">
-											<div class="col-12 col-md-8">
-												<input type="hidden" name="action" value="update"> <input
-													type="hidden" name="announceID"
-													value="<%=announcement.getAnnounceID()%>"> <input
-													type="submit" class="btn btn-primary btn-sm" value="送出修改">
-												<i class="fa fa-dot-circle-o"></i>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label class="form-control-label">檢舉類別</label>
+												</div>
+												<div class="col col-md-8">
+													<div class="form-check">
+														<div class="radio">
+															<%
+															int type = report.getReportType();
+															%>
+															<select name="reportType" disabled="disabled">
+																<option value="0" <%=type == 0 ? "selected" : ""%>>違反版規</option>
+																<option value="1" <%=type == 1 ? "selected" : ""%>>內容不實</option>
+																<option value="2" <%=type == 2 ? "selected" : ""%>>內容不實</option>
+																<option value="3" <%=type == 3 ? "selected" : ""%>>仇恨言論</option>
+																<option value="4" <%=type == 4 ? "selected" : ""%>>商業宣傳內容</option>
+																<option value="5" <%=type == 5 ? "selected" : ""%>>其他</option>
+															</select>
+														</div>
+													</div>
+												</div>
 											</div>
-										</div>
+											<div class="row form-group">
+												<div class="col-12 col-md-8">
+													<input type="hidden" name="action" value="update">
+													<input type="hidden" name="reportID"
+														value="<%=report.getReportID()%>"> <input
+														type="submit" class="btn btn-primary btn-sm" value="送出修改">
+													<i class="fa fa-dot-circle-o"></i>
+												</div>
+											</div>
+										
 									</div>
 								</div>
 							</div>
-						</div>
 						</form>
 					</div>
 				</div>
 			</div>
 		</div>
-			<script>
-		function preview() {
-
-			var fileInput = document.getElementById('uploadImg');
-			var file = fileInput.files[0];
-
-			var reader = new FileReader();
-
-			reader.onload = function() {
-				document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="400px"/>';
-			};
-
-			if (file) {
-				reader.readAsDataURL(file);
-			}
-
-		}
-	</script>
-<script>
+	<script>
 		function checkmStatus() {
 			let mStatus =
 	<%=session.getAttribute("mStatus")%>
@@ -407,13 +385,7 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 			return true;
 		}
 	</script>
-	<!-- <script>
-      const textbox = document.querySelector('.textbox .form-control');
-        textbox.addEventListener('input', (e) => {
-        e.target.style.height = 'auto';
-        e.target.style.height = e.target.scrollHeight + 'px';
-      });
-    </script> -->
+
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/js/pic_uplaod.js"></script>
 	<!-- Jquery JS-->
@@ -424,6 +396,7 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/popper.min.js"></script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.js"></script>
+
 	<!-- Vendor JS       -->
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/vendor/slick/slick.min.js"></script>

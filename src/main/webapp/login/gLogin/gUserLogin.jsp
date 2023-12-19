@@ -97,6 +97,9 @@ margin-left: 5px;
                   你尚未有帳號?
                   <a href="${pageContext.request.contextPath }/frontstage/generalUserFront/gUserRegist.jsp">我要註冊</a>
                 </p>
+                <p>
+                不想登入，以<a href="${pageContext.request.contextPath }/homepage/main.jsp">訪客</a>身分進入網站
+                </p>
               </div>
             </div>
           </div>

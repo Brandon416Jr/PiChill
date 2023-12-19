@@ -31,7 +31,7 @@ Manage manage = (Manage) session.getAttribute("manage");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>後臺管理員首頁</title>
+<title>跳轉失敗</title>
 
 <!-- jquery連結 (一定要在datatable前面!) -->
 <script
@@ -102,6 +102,14 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 	margin-left: auto;
 	width: 100%;
 	box-sizing: border-box;
+}
+
+div.box {
+border: 2px solid red;
+top: 50%;
+z-index: 5;
+height: 50%;
+width: 50%;
 }
 </style>
 </head>
@@ -271,21 +279,28 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 			<!-- END HEADER DESKTOP-->
 		</div>
 	</div>
-	
-<c:if test="${not empty requestScope.noAuth}">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    Swal.fire({
-      icon: 'error',
-      title: '權限不足',
-      text: '請聯繫系統管理員',
-      timer: 5000,
-     
-      
-    });
-    alert('權限不足,請聯系系統管理員!');
-  </script>
-</c:if>
+	<div class="box">
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script>
+		function checkmStatus() {
+			let mStatus =
+	<%=session.getAttribute("mStatus")%>
+		;
+		console.log(mStatus);
+			if (mStatus === 1) {
+				Swal.fire({
+					icon : 'error',
+					title : '權限不足!!',
+					text : '請聯繫系統管理員',
+					showConfirmButton : false,
+					timer : 50000000
+				})
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<script>
 		// 		history.pushState(null, null, document.URL);
 		// 		window.addEventListener('popstate', function() {

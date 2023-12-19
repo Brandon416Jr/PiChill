@@ -45,7 +45,7 @@ public class PostServletBack extends HttpServlet {
 //				failureView.forward(req, res);
 //				return;// 程式中斷
 //			}
-
+//
 //				Integer empno = null;
 //				try {
 //					empno = Integer.valueOf(str);
@@ -59,9 +59,9 @@ public class PostServletBack extends HttpServlet {
 //					failureView.forward(req, res);
 //					return;//程式中斷
 //				}
-
+//
 //			/*************************** 2.開始查詢資料 *****************************************/
-//			PostService postSvc = new PostServiceImpl();
+//			PostServiceBack postSvc = new PostServiceBack();
 //			List<Post> post = postSvc.getPostByPostTitle(str);
 //			if (post == null) {
 //				errorMsgs.add("查無資料");
@@ -81,27 +81,27 @@ public class PostServletBack extends HttpServlet {
 //			System.out.println(post);
 //		}
 
-//		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
-//
+		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
+
 //			List<String> errorMsgs = new LinkedList<String>();
 //			// Store this set in the request scope, in case we need to
 //			// send the ErrorPage view.
 //			req.setAttribute("errorMsgs", errorMsgs);
-//
-//			/*************************** 1.接收請求參數 ****************************************/
-//			Integer postID = Integer.valueOf(req.getParameter("postID"));
-//
-//			/*************************** 2.開始查詢資料 ****************************************/
-//			PostService postSvc = new PostServiceImpl();
-//		    Post post = postSvc.getByPostID(postID);
-//
-//			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
-//			req.setAttribute("post", post); // 資料庫取出的empVO物件,存入req
-//			String url = "/post/update_post_input.jsp";
-//			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
-//			successView.forward(req, res);
-//		}
-//
+
+			/*************************** 1.接收請求參數 ****************************************/
+			Integer postID = Integer.valueOf(req.getParameter("postID"));
+
+			/*************************** 2.開始查詢資料 ****************************************/
+			PostServiceBack postSvcB = new PostServiceBack();
+		    Post post = postSvcB.getOnePost(postID);
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
+			req.setAttribute("post", post); // 資料庫取出的empVO物件,存入req
+			String url = "/backstage/postBack/set_post.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url);// 成功轉交 update_emp_input.jsp
+			successView.forward(req, res);
+		}
+
 //		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 //
 //			List<String> errorMsgs = new LinkedList<String>();

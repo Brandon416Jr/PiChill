@@ -12,7 +12,14 @@ import com.pichill.util.HibernateUtil;
 
 public class ReportDAOImplBack implements ReportDAO {
 	private SessionFactory factory;
+	
+	public ReportDAOImplBack() {
+		factory = com.pichill.util.HibernateUtil.getSessionFactory();
+	}
 
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
 	@Override
 	public int delete(int reportID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -70,6 +77,15 @@ public class ReportDAOImplBack implements ReportDAO {
 	@Override
 	public int update(Report report) {
 		// TODO Auto-generated method stub
-		return 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			getSession().update(report);
+			session.getTransaction().commit();
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
+		
 	}
 }

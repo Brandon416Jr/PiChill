@@ -33,10 +33,10 @@ public class GeneralUserLoginFilter extends HttpFilter implements Filter {
 		HttpSession session = req.getSession();
 		System.out.println("經過過濾器了");
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("gUsername");
+		Object account = session.getAttribute("generalUser");
 		if (account == null) {
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login/glogin/gUserLogin.jsp");
+			res.sendRedirect(req.getContextPath() + "/login/gLogin/gUserLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

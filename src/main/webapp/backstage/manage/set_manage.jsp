@@ -4,9 +4,16 @@
 
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Manage manage = (Manage) request.getAttribute("manage");
+Manage updateManage = (Manage) request.getAttribute("updateManage");
 %>
-
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
+%>
 
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -44,7 +51,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 	rel="stylesheet" media="all" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css" />
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css" />
 <style>
 /* 錯誤提示框樣式 */
@@ -63,6 +70,7 @@ select:invalid+.custom-message {
 	font-weight: bold;
 	margin-top: 5px;
 }
+
 .account-dropdown__footer {
 	display: flex;
 	justify-content: flex-end;
@@ -91,7 +99,10 @@ select:invalid+.custom-message {
 									<li><a class="active"
 										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
 									<li><a
-										href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+										onclick="return checkmStatus();">新增員工資料</a></li>
+										<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
 								</ul></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-tachometer-alt"></i>一般會員管理
@@ -99,7 +110,7 @@ select:invalid+.custom-message {
 								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-									
+
 								</ul></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-tachometer-alt"></i>企業會員管理
@@ -107,7 +118,7 @@ select:invalid+.custom-message {
 								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-									
+
 								</ul></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-tachometer-alt"></i>最新消息管理
@@ -140,10 +151,10 @@ select:invalid+.custom-message {
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
 								</ul></li>
-							<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>預約管理
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>預約管理
 							</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
 								</ul></li>
@@ -162,55 +173,61 @@ select:invalid+.custom-message {
 					<div class="container-fluid">
 						<div class="header-wrap">
 							<div class="header-logo">
-								<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
+								<a
+									href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
 									class="img-logo"
 									src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
 								<!-- 							<a href="index.html"><img class="img-logo"  -->
 								<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 							</div>
-							
+
 							<div class="welcome">
 								<div class="flex">
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 									<p class="welcome">π Chill後臺管理系統</p>
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 								</div>
 							</div>
-							
+
 							<div class="header-button">
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
-											<!-- 										<img -->
-											<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-											<!-- 											alt="使用者頭像" />  -->
-											<img src="<%=request.getContextPath()%>/image/Group 115.png"
+											<img
+												src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
 												alt="使用者頭像" />
+											<%-- 											<img src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+											<!-- 												alt="使用者頭像" /> -->
 										</div>
 										<div class="content">
-											<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-											<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
+											<!-- 											<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+											<a class="js-acc-btn" href="#">管理員<%=manage.getmName()%>，您好
+											</a>
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <!-- 												<img --> <%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-														<!-- 											alt="使用者頭像" />  --> <img
-														src="<%=request.getContextPath()%>/image/Group 115.png"
-														alt="John Doe" />
+													<a href="#"> <img
+														src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+														alt="使用者頭像" /> <!-- 														<img --> <%-- 														src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+														<!-- 														alt="John Doe" /> -->
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-														<a href="#">羅裕鵬</a>
+														<a href="#">${manage.manageID}</a>
 														<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 													</h5>
-													<span class="email">brandon416jr@gmail.com</span>
-													<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+													<!-- 													<span class="email">brandon416jr@gmail.com</span> -->
+													<span class="email"><%=manage.getmEmail()%></span>
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
@@ -236,7 +253,7 @@ select:invalid+.custom-message {
 				<div class="container-fluid2">
 					<div class="card">
 						<div class="card-header">
-							<strong>修改${manage.mName}員工資料</strong>
+							<strong>修改${updateManage.mName}員工資料</strong>
 							<h4>
 								<a
 									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp"><img
@@ -255,8 +272,9 @@ select:invalid+.custom-message {
 							</ul>
 						</c:if>
 
-						<FORM ACTION="${pageContext.request.contextPath }/manage/manage.do" METHOD="post"
-							enctype="multipart/form-data">
+						<FORM
+							ACTION="${pageContext.request.contextPath }/manage/manage.do"
+							METHOD="post" enctype="multipart/form-data">
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
@@ -267,8 +285,8 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="manageID"
-														value="<%=manage.getManageID()%>" disabled="disabled"
-														class="form-control" />
+														value="<%=updateManage.getManageID()%>"
+														disabled="disabled" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
@@ -278,7 +296,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mName"
-														value="<%=(manage == null) ? "陳金鋒" : manage.getmName()%>"
+														value="<%=(updateManage == null) ? "陳金鋒" : updateManage.getmName()%>"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -290,7 +308,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mUserName"
 														placeholder="請輸入帳號"
-														value="<%=(manage == null) ? "Chen5252" : manage.getmUserName()%>"
+														value="<%=(updateManage == null) ? "Chen5252" : updateManage.getmUserName()%>"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -301,7 +319,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mPassword"
-														value="<%=(manage == null) ? "52552252" : manage.getmPassword()%>"
+														value="<%=(updateManage == null) ? "52552252" : updateManage.getmPassword()%>"
 														placeholder="請輸入密碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -313,7 +331,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="date" id="disabled-input" name="mBirth"
 														disabled="disabled"
-														value="<%=(manage == null) ? "1982-06-01" : manage.getmBirth()%>"
+														value="<%=(updateManage == null) ? "1982-06-01" : updateManage.getmBirth()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
 											</div>
@@ -325,7 +343,7 @@ select:invalid+.custom-message {
 													<div class="form-check">
 														<div class="radio">
 															<%
-															int gender = manage.getmGender();
+															int gender = updateManage.getmGender();
 															%>
 															<select name="mGender" disabled="disabled">
 																<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option>
@@ -341,7 +359,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mTelephone"
-														value="<%=(manage == null) ? "0918324387" : manage.getmTelephone()%>"
+														value="<%=(updateManage == null) ? "0918324387" : updateManage.getmTelephone()%>"
 														placeholder="請輸入手機號碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -352,7 +370,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmgContact"
-														value="<%=(manage == null) ? "陳連宏" : manage.getmEmgContact()%>"
+														value="<%=(updateManage == null) ? "陳連宏" : updateManage.getmEmgContact()%>"
 														placeholder="請輸入姓名" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -363,7 +381,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmgPhone"
-														value="<%=(manage == null) ? "0914562187" : manage.getmEmgPhone()%>"
+														value="<%=(updateManage == null) ? "0914562187" : updateManage.getmEmgPhone()%>"
 														placeholder="請輸入手機號碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -394,7 +412,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mAddress"
-														value="<%=(manage == null) ? "環河西路587號22樓" : manage.getmAddress()%>"
+														value="<%=(updateManage == null) ? "環河西路587號22樓" : updateManage.getmAddress()%>"
 														placeholder="請輸入聯絡地址" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -406,7 +424,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="date" id="disabled-input" name="mHiredate"
 														disabled="disabled"
-														value="<%=(manage == null) ? "2022-01-01" : manage.getmHiredate()%>"
+														value="<%=(updateManage == null) ? "2022-01-01" : updateManage.getmHiredate()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
 											</div>
@@ -417,7 +435,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="mID"
 														disabled="disabled" placeholder="請輸入身份證字號"
-														value="<%=(manage == null) ? "A123456678" : manage.getmID()%>"
+														value="<%=(updateManage == null) ? "A123456678" : updateManage.getmID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -427,7 +445,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmail"
-														value="<%=(manage == null) ? "brandon416jr@gmail.com" : manage.getmEmail()%>"
+														value="<%=(updateManage == null) ? "brandon416jr@gmail.com" : updateManage.getmEmail()%>"
 														placeholder="請輸入電子信箱" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -442,8 +460,8 @@ select:invalid+.custom-message {
 														onclick="previewImage()" class="form-control-file" /> <img
 														id="preview" src="#" alt="Preview" width="100px" />
 													<div id="blob_holder">
-														<img
-															src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=${manage.manageID}"
+														<img id="picture"
+															src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=${updateManage.manageID}"
 															width="100px">
 													</div>
 												</div>
@@ -455,7 +473,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<%
-													int status = manage.getmStatus();
+													int status = updateManage.getmStatus();
 													%>
 													<select name="mStatus" id="selectLm"
 														class="form-control-sm form-control">
@@ -472,9 +490,9 @@ select:invalid+.custom-message {
 											<div class="col-12 col-md-8">
 												<input type="hidden" name="action" value="update"> <input
 													type="hidden" name="manageID"
-													value="<%=manage.getManageID()%>"> 
-												<input type="submit" class="btn btn-primary btn-sm"
-													value="送出修改"> <i class="fa fa-dot-circle-o"></i>
+													value="<%=updateManage.getManageID()%>"> <input
+													type="submit" class="btn btn-primary btn-sm" value="送出修改">
+												<i class="fa fa-dot-circle-o"></i>
 											</div>
 										</div>
 									</div>
@@ -487,7 +505,25 @@ select:invalid+.custom-message {
 			</div>
 		</div>
 	</div>
-
+	<script>
+		function checkmStatus() {
+			let mStatus =
+	<%=session.getAttribute("mStatus")%>
+		;
+		console.log(mStatus);
+			if (mStatus === 1) {
+				Swal.fire({
+					icon : 'error',
+					title : '權限不足!!',
+					text : '請聯繫系統管理員',
+					showConfirmButton : false,
+					timer : 50000000
+				})
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
@@ -591,6 +627,22 @@ select:invalid+.custom-message {
 											})
 
 						});
+	</script>
+	<script>
+	function preview() {
+
+		  var fileInput = $('#picture');
+		  var file = fileInput[0].files[0];
+
+		  if(file) { 
+		    $("#preview").attr('src', window.URL.createObjectURL(file));
+		    $("#blob_holder").hide(); // 隱藏原圖
+		  } else {
+		    $("#preview").attr('src', "#");  
+		    $("#blob_holder").show(); // 顯示原圖
+		  }
+
+		}
 	</script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/js/pic_uplaod.js"></script>

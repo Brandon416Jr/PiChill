@@ -5,7 +5,14 @@
 <%@ page import="com.pichill.manage.model.*"%>
 <%@ page import="com.pichill.manage.service.ManageService"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
-
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
+%>
 
 <%
 ManageService manageService = new ManageService();
@@ -108,7 +115,10 @@ pageContext.setAttribute("list", list);
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a class="active" href="#">所有員工資料</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+										onclick="return checkmStatus();">新增員工資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -202,36 +212,36 @@ pageContext.setAttribute("list", list);
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-<!-- 										<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
-											<img
-											src="<%=request.getContextPath()%>/image/Group 115.png"
-											alt="使用者頭像" />
+										<img
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+											alt="使用者頭像" /> 
+<!-- 											<img -->
+<%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 											alt="使用者頭像" /> -->
 									</div>
 									<div class="content">
-										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
+<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
 												<a href="#"> 
-<!-- 												<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
 												<img
-													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="John Doe" />
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+											alt="使用者頭像" /> 
+<!-- 												<img -->
+<%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 													alt="John Doe" /> -->
 												</a>
 											</div>
 											<div class="content">
 												<h5 class="name">
-													<a href="#">羅裕鵬</a>
+													<a href="#"><%=manage.getmName() %></a>
 <%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 												</h5>
-												<span class="email">brandon416jr@gmail.com</span>
-<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
+												<span class="email"><%=manage.getmEmail() %></span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
@@ -576,6 +586,20 @@ pageContext.setAttribute("list", list);
 			scrollX : true,
 		});
 	</script>
+	<c:if test="${not empty requestScope.noAuth}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: '權限不足',
+      text: '請聯繫系統管理員',
+      timer: 5000,
+     
+      
+    });
+//     alert('權限不足,請聯系系統管理員!');
+  </script>
+  </c:if>
 	<!-- <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
     <script src="./database/datatables.min.js"></script> -->
 	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

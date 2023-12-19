@@ -24,10 +24,11 @@ public class ManageLoginFilter extends HttpFilter implements Filter {
 		HttpSession session = req.getSession();
 		System.out.println("經過過濾器了");
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("mUserName");
+		Object account = session.getAttribute("manage");
 		if (account == null) {
+			System.out.println("找不到admin");
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login/mlogin/manageLogin.jsp");
+			res.sendRedirect(req.getContextPath() + "/login/mLogin/manageLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);

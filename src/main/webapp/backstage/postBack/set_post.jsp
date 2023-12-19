@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
-<%@ page import="com.pichill.manage.entity.Manage"%>
+<%@ page import="com.pichill.post.entity.Post"%>
+ <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
 // 寫死
@@ -9,20 +9,18 @@ Manage manage = (Manage) session.getAttribute("manage");
 // ManageService manageSvc = new ManageService();
 // Manage manage = manageSvc.getOneManage(manageID);
 // pageContext.setAttribute("manage",manage);
-%>
-
-<%
+%>  
+    <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Announcement announcement = (Announcement) request.getAttribute("announcement");
+Post post = (Post) request.getAttribute("post");
 %>
-
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>查看公告</title>
+<title>查看貼文</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css"></style>
@@ -237,23 +235,23 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 				<div class="container-fluid2">
 					<div class="card">
 						<div class="card-header">
-							<strong>修改 ${announcement.announceID} 公告</strong>
+							<strong>查看 ${post.postID} 公告</strong>
 							<h4>
 								<a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp"><img
-									src="<%=request.getContextPath()%>/image/smallLogo.png" width="20" height="20" border="0">回所有公告</a>
+									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp"><img
+									src="<%=request.getContextPath()%>/image/smallLogo.png" width="20" height="20" border="0">回所有貼文</a>
 							</h4>
 						</div>
 						
-						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">請修正以下錯誤:</font>
-							<ul style="list-style-type: none">
-								<c:forEach var="message" items="${errorMsgs}">
-									<li style="color: red">${message}</li>
-								</c:forEach>
-							</ul>
-						</c:if>
-						<form action="${pageContext.request.contextPath }/announcement/announcementb.do" method="post" enctype="multipart/form-data" class="form-horizontal">
+<%-- 						<c:if test="${not empty errorMsgs}"> --%>
+<!-- 							<font style="color: red">請修正以下錯誤:</font> -->
+<!-- 							<ul style="list-style-type: none"> -->
+<%-- 								<c:forEach var="message" items="${errorMsgs}"> --%>
+<%-- 									<li style="color: red">${message}</li> --%>
+<%-- 								</c:forEach> --%>
+<!-- 							</ul> -->
+<%-- 						</c:if> --%>
+<%-- 						<form action="${pageContext.request.contextPath }/announcement/announcementb.do" method="post" enctype="multipart/form-data" class="form-horizontal"> --%>
 						<div class="card-body">
 							<div class="row">
 								<div class="col-lg-12">
@@ -262,31 +260,41 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 											
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">公告編號</label>
+													<label for="text-input" class="form-control-label">貼文編號</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="announceID" value="<%=announcement.getAnnounceID()%>"
+														name="postID" value="<%=post.getPostID()%>"
 														class="form-control" />
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">管理員編號</label>
+													<label for="text-input" class="form-control-label">一般會員編號</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" 
-														name="manageID"  value="<%=announcement.getManageID()%>"
+													<input type="text" id="text-input" disabled="disabled"
+														name="gUserID"  value="<%=post.getgUserID()%>"
 														class="form-control" />
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">表單編號</label>
+													<label for="text-input" class="form-control-label">企業會員編號</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="formID"  value="<%=announcement.getFormID()%>"
+														name="oUserID"  value="<%=post.getoUserID()%>"
+														class="form-control" />
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">場地編號</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" disabled="disabled"
+														name="placeID"  value="<%=post.getPlaceID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -295,8 +303,8 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 													<label for="text-input" class="form-control-label">標題</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" 
-														name="annoTitle"  value="<%=announcement.getAnnoTitle()%>"
+													<input type="text" id="text-input" disabled="disabled"
+														name="postTitle"  value="<%=post.getPostTitle()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -305,22 +313,22 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 													<label for="text-input" class="form-control-label">內文</label>
 												</div>
 												<div class="textbox col-10 col-md-8">
-													<textarea name="annoContent" id="textarea-input"
-														 rows="9"class="form-control"><%=announcement.getAnnoContent()%></textarea>
+													<textarea name="postContent" id="textarea-input"disabled="disabled"
+														 rows="9"class="form-control"><%=post.getPostContent()%></textarea>
 													<!-- <input type="text" id="text-input" disabled="" name="text-input" placeholder="rfrfrfr" class="form-control"> -->
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="file-input" class="form-control-label">圖片</label>
+													<label for="file-input" class="form-control-label">貼文圖片</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="file" id="file-input" name="annoPic" value="${announcement.annoPic }"
+													<input type="file" id="file-input" name="postPic" value="${post.postPic }"
 														multiple="multiple" onclick="previewImage()" onchange="preview()"
 														class="form-control-file" /> 
 																										<div id="blob_holder">
 																											<img
-																												src="<%=request.getContextPath()%>/announcement/DBJPGReader?announceID=${announcement.announceID}"
+																												src="<%=request.getContextPath()%>/post/DBJPGReader?postID=${post.postID}"
 																												width="400px">
 																										</div>
 												</div>
@@ -331,41 +339,63 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="annoTime" <%=announcement.getAnnoTime()%>
+														name="postTime" <%=post.getPostTime()%>
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="selectLg" class="form-control-label">公告狀態</label>
+													<label for="text-input" class="form-control-label">按讚數</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" disabled="disabled"
+														name="likeCnt"  value="<%=post.getLikeCnt()%>"
+														class="form-control" />
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="text-input" class="form-control-label">留言數</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="text-input" disabled="disabled"
+														name="commentCnt"  value="<%=post.getCommentCnt()%>"
+														class="form-control" />
+												</div>
+											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="selectLg" class="form-control-label">貼文類別</label>
 												</div>
 												<div class="col-10 col-md-8">
 												<%
-													int status = announcement.getAnnoStatus();
+													int type = post.getPostType();
 													%>
-													<select name="annoStatus" id="selectLm"
+													<select name="postType" id="selectLm" disabled="disabled"
 														class="form-control-sm form-control">
-														<option value="0"<%=status == 0 ? "selected" : ""%>>未公告</option>
-														<option value="1"<%=status == 1 ? "selected" : ""%>>已公告</option>
+														<option value="0"<%=type == 0 ? "selected" : ""%>>揪團</option>
+														<option value="1"<%=type == 1 ? "selected" : ""%>>討論</option>
+														<option value="2"<%=type == 2 ? "selected" : ""%>>推播</option>
 													</select>
 												</div>
 												
 											</div>
 										<div class="row form-group">
 											<div class="col-12 col-md-8">
-												<input type="hidden" name="action" value="update"> <input
-													type="hidden" name="announceID"
-													value="<%=announcement.getAnnounceID()%>"> <input
-													type="submit" class="btn btn-primary btn-sm" value="送出修改">
+											<a href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">
+											<input
+													type="button" class="btn btn-primary btn-sm" value="返回">
 												<i class="fa fa-dot-circle-o"></i>
+											</a>
+												 
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-						</form>
+<!-- 						</form> -->
 					</div>
 				</div>
 			</div>
