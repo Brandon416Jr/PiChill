@@ -29,6 +29,12 @@
 			<artifactId>hibernate-core</artifactId>
 			<version>5.6.15.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.70</version>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
 		<dependency>

@@ -280,9 +280,12 @@ select:invalid+.custom-message {
 						</div>
 
 
-						<FORM
-							ACTION="${pageContext.request.contextPath }/manage/manage.do"
-							METHOD="post" enctype="multipart/form-data">
+<%-- 						<form action="${pageContext.request.contextPath }/manage/manage.do?action=insert" --%>
+						<form action="${pageContext.request.contextPath }/manage/manage.do"
+							method="post" enctype="multipart/form-data">
+							
+							
+							
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
@@ -422,7 +425,12 @@ select:invalid+.custom-message {
 													<label for="disabled-input" class="form-control-label">入職日期</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="date" id="disabled-input" name="mHiredate"
+												<%
+													Date today1 = new Date();
+													SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+													String todayStr1 = sdf1.format(today);
+													%>
+													<input type="date" id="disabled-input" name="mHiredate" max="<%=todayStr1%>"
 														value="<%=(newManage == null) ? "" : newManage.getmHiredate()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
@@ -455,7 +463,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="file" value="${newManage.mProfilePic }"
-														id="uploadImg" name="mProfilePic" onchange="preview()"
+														id="uploadImg" name="mProfilePic" onchange="preview()" multiple="multiple"
 														class="form-control-file" />
 													<div id="blob_holder">
 														<img src="#" width="100px">
@@ -472,7 +480,7 @@ select:invalid+.custom-message {
 														class="form-control-sm form-control">
 														<option value="3">請選擇</option>
 														<option value="0"
-															${(newManage.mStatus==0)? "selected": ''}>已離職</option>
+														 ${(newManage.mStatus==0)? "selected": ''}>已離職</option>
 														<option value="1"
 															${(newManage.mStatus==1)? "selected": ''}>在職中</option>
 														<option value="2"
@@ -483,15 +491,15 @@ select:invalid+.custom-message {
 										</div>
 										<div class="row form-group">
 											<div class="col-1 col-md-8">
-												<input type="hidden" name="action" value="insert"> <input
-													type="submit" class="btn btn-primary btn-sm" value="送出新增">
+											<input type="hidden" name="action" value="insert">
+												<input type="submit" class="btn btn-primary btn-sm" value="送出新增">
 												<i class="fa fa-dot-circle-o"></i>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</FORM>
+						</form>
 					</div>
 				</div>
 			</div>

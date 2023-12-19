@@ -340,6 +340,7 @@ pageContext.setAttribute("list", list);
 							$("#myTable")
 									.DataTable(
 											{
+												detroy: true,
 												// paging: true, 
 												// searching: true, 
 

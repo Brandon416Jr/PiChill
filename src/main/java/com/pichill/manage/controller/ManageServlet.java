@@ -8,6 +8,7 @@ import java.util.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
+import com.alibaba.fastjson.JSON;
 import com.pichill.manage.entity.Manage;
 
 import javax.servlet.ServletException;
@@ -39,12 +40,16 @@ public class ManageServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		System.out.println(action);
+//		System.out.println(req.getParameterMap().toString());	
 		String forwardPath = "";
 		if(action != null){
 			  action.hashCode(); 
 			} else {
 				System.out.println("action為空值");
+				action = "default";
 			}
+		
 		switch (action) {
 		case "getOne_For_Update":
 			// 來自all_manage.jsp的請求
@@ -138,39 +143,7 @@ public class ManageServlet extends HttpServlet {
 		return "/backstage/manage/set_manage.jsp";
 	}
 
-	private String getOne_For_insert(HttpServletRequest req, HttpServletResponse res)  {
-		System.out.println("成功getOne_For_insert");
-		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
-		req.setAttribute("errorMsgs", errorMsgs);
-		HttpSession session = req.getSession();
-		try {
-			if(session != null) {
-				  // get session attributes
-				}
-		} catch (NullPointerException ne ) {
-			ne.printStackTrace();
-		}
-		Manage manage = (Manage) session.getAttribute("manage");
-		System.out.println("manage: " + manage);
-		Enumeration<String> attrs = session.getAttributeNames();
-
-		while (attrs.hasMoreElements()) {
-		  String name = attrs.nextElement();
-		  
-		  Object value = session.getAttribute(name);
-		  System.out.println(name + ": " + value);
-		}
-//		Manage manage = manageService.getOneManage(manageID);
-		Integer mStatus = manage.getmStatus();
-		if (mStatus != 2) {	
-
-			  req.setAttribute("noAuth", true);
-				return "/backstage/manage/all_manage.jsp";
-			}
-
-//		req.setAttribute("manage", manage);
-		return "/backstage/manage/new_manage.jsp";
-	}
+	
 	
 	private String update(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("成功update");
@@ -544,11 +517,46 @@ public class ManageServlet extends HttpServlet {
 //		req.setAttribute("manage", manage); // 資料庫update成功後,正確的的manage物件,存入req
 		return "/backstage/manage/all_manage.jsp";
 	}
+	
+	private String getOne_For_insert(HttpServletRequest req, HttpServletResponse res)  {
+		System.out.println("成功getOne_For_insert");
+		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+		req.setAttribute("errorMsgs", errorMsgs);
+		HttpSession session = req.getSession();
+		try {
+			if(session != null) {
+				  // get session attributes
+				}
+		} catch (NullPointerException ne ) {
+			ne.printStackTrace();
+		}
+		Manage manage = (Manage) session.getAttribute("manage");
+		System.out.println("manage: " + manage);
+		Enumeration<String> attrs = session.getAttributeNames();
+
+		while (attrs.hasMoreElements()) {
+		  String name = attrs.nextElement();
+		  
+		  Object value = session.getAttribute(name);
+		  System.out.println(name + ": " + value);
+		}
+//		Manage manage = manageService.getOneManage(manageID);
+		Integer mStatus = manage.getmStatus();
+		if (mStatus != 2) {	
+
+			  req.setAttribute("noAuth", true);
+				return "/backstage/manage/all_manage.jsp";
+			}
+
+//		req.setAttribute("manage", manage);
+		return "/backstage/manage/new_manage.jsp";
+	}
 
 	private String insert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("成功insert");
 		// 錯誤處理
-//		Map<String, String[]> parameterMap = req.getParameterMap();
+		Map<String, String[]> parameterMap = req.getParameterMap();
+		System.out.println("paramMap:"+JSON.toJSONString(parameterMap));
 //		Manage manage = testUtil.paramMappingFunction(parameterMap, new Manage());
 //		
 //		System.out.println("manage:"+manage);
@@ -589,7 +597,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 
-		Date mBirth = null;
+		Date mBirth;
 		try {
 			mBirth = java.sql.Date.valueOf(req.getParameter("mBirth").trim());
 		} catch (IllegalArgumentException e) {
@@ -677,8 +685,10 @@ public class ManageServlet extends HttpServlet {
 			in.read(mProfilePic);
 			in.close();
 		}  else errorMsgs.add("員工照片: 請上傳照片");
+		System.out.println(in);
 
 		Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
+		System.out.println("mStatus:"+mStatus);
 		if (mStatus == 3) {
 			errorMsgs.add("請選擇員工狀態");
 		} else if (mStatus == null) {
@@ -686,7 +696,8 @@ public class ManageServlet extends HttpServlet {
 		}
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-
+//		Manage newManage = new Manage();
+		
 		newManage.setmName(mName);
 		newManage.setmUserName(mUserName);
 		newManage.setmPassword(mPassword);

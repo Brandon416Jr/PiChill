@@ -62,7 +62,7 @@ public class Manage implements Serializable {
 	@Column(name="mProfilePic", columnDefinition="longblob") // 資料庫blob型別要用columnDefinition標示!
 	private byte[] mProfilePic;
 	
-	@Column(name="mStatus" ,insertable = false, nullable = true)
+	@Column(name="mStatus", nullable = false)
 	private Integer mStatus;
 	
 	public Manage() {

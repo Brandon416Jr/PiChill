@@ -13,8 +13,9 @@ Manage manage = (Manage) session.getAttribute("manage");
 // Integer manageID = 13000003;
 // ManageService manageSvc = new ManageService();
 // Manage manage = manageSvc.getOneManage(manageID);
-// pageContext.setAttribute("manage",manage);
+pageContext.setAttribute("manage",manage);
 %>
+
 <%
 GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
 List<GeneralUser> list = gUserSvcB.getAll();

@@ -450,11 +450,10 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 												<div class="col-10 col-md-8">
 													<input type="file" id="file-input" name="gProfilePic" disabled="disabled"
 														multiple="multiple" onclick="previewImage()"
-														class="form-control-file" /> <img id="imagePreview"
-														src="#" alt="Preview" width="100px" />
+														class="form-control-file" /> 
 																										<div id="blob_holder">
 																											<img
-																												src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generaluser.gUserID}"
+																												src="<%=request.getContextPath()%>/generaluser/DBJPGReader?gUserID=${generalUser.gUserID}"
 																												width="100px">
 																										</div>
 												</div>

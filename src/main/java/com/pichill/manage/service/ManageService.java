@@ -35,6 +35,7 @@ public class ManageService {
 		manage.setmEmail(mEmail);
 		manage.setmProfilePic(mProfilePic);
 		manage.setmStatus(mStatus);
+		System.out.println("insertManage:"+manage);
 		dao.insert(manage);
 		return manage;
 	}

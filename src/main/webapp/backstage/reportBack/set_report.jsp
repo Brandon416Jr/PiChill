@@ -318,7 +318,7 @@ Report report = (Report) request.getAttribute("report");
 													<%
 													int status = report.getReportStatus();
 													%>
-													<select name="status" id="selectLm"
+													<select name="reportStatus" id="selectLm"
 														class="form-control-sm form-control">
 
 														<option value="0" <%=status == 0 ? "selected" : ""%>>«Ý¼f®Ö</option>

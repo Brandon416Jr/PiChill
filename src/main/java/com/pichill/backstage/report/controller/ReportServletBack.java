@@ -95,85 +95,11 @@ public class ReportServletBack extends HttpServlet {
 
 		Integer reportStatus = Integer.valueOf(req.getParameter("reportStatus"));
 
-//		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
 
-//		String gUsername = req.getParameter("gUsername");
-//		String gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
-//		if (gUsername == null || gUsername.trim().length() == 0) {
-//			errorMsgs.add("會員帳號: 請勿空白");
-//		} else if (!gUsername.trim().matches(gUsernameReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
-//		}
-//		
-//		String gPassword = req.getParameter("gPassword");
-//		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
-//		if (gPassword == null || gPassword.trim().length() == 0) {
-//			errorMsgs.add("密碼: 請勿空白");
-//		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
-//		}
-
-//		String gIDNum = req.getParameter("gIDNum");
-//		String idnoRegex = "^[A-Z][12][0-9]{8}$";
-//		if (gIDNum == null || gIDNum.trim().isEmpty()) {
-//			errorMsgs.add("身份證: 請勿空白");
-//		} else if (!gIDNum.trim().matches(idnoRegex)) {
-//			errorMsgs.add("請輸入正確的身份證格式");
-//		}
-		
-		// 再問問格式驗證!
-//				String nicknameID = req.getParameter("nicknameID");
-//				String nickReg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\\w\\s]).{10}$";
-//				if (nicknameID == null || nicknameID.trim().isEmpty()) {
-//					nicknameID = null;
-//				} else if (!nicknameID.trim().matches(nickReg)) {
-//					errorMsgs.add("請輸入正確的匿名ID格式");
-//				}
-
-//		Integer gPostAmount = Integer.valueOf(req.getParameter("gPostAmount"));
-//
-//		Integer commentAmount = Integer.valueOf(req.getParameter("commentAmount"));
-//
-//		Integer gReportCnt = Integer.valueOf(req.getParameter("gReportCnt"));
-
-//		Date gRegistDate = null;
-//		try {
-//			gRegistDate = java.sql.Date.valueOf(req.getParameter("gRegistDate").trim());
-//		} catch (IllegalArgumentException e) {
-//			gRegistDate = new java.sql.Date(System.currentTimeMillis());
-//			errorMsgs.add("請輸入日期!");
-//		}
-//		
-//		Date gBirth = null;
-//		try {
-//			gBirth = java.sql.Date.valueOf(req.getParameter("gBirth").trim());
-//		} catch (IllegalArgumentException e) {
-//			errorMsgs.add("請輸入生日!");
-//		}
-//
-//		Integer yoyakuCnt = Integer.valueOf(req.getParameter("yoyakuCnt"));
-//
-//		byte[] gProfilePic = null;
-
-//		GeneralUser generalUser = new GeneralUser();
 		report.setReportID(reportID);
-//		generalUser.setgName(gName);
-//		generalUser.setgTelephone(gTelephone);
-//		generalUser.setgEmail(gEmail);
-//		generalUser.setgAddress(gAddress);
+
 		report.setReportStatus(reportStatus);
-//		generalUser.setgGender(gGender);
-//		generalUser.setgUsername(gUsername);
-//		generalUser.setgPassword(gPassword);
-//		generalUser.setgIDNum(gIDNum);
-//		generalUser.setNicknameID(nicknameID);
-//		generalUser.setgPostAmount(gPostAmount);
-//		generalUser.setCommentAmount(commentAmount);
-//		generalUser.setgReportCnt(gReportCnt);
-//		generalUser.setgRegistDate(gRegistDate);
-//		generalUser.setgBirth(gBirth);
-//		generalUser.setYoyakuCnt(yoyakuCnt);
-//		generalUser.setgProfilePic(gProfilePic);
+
 		
 		
 		// Send the use back to the form, if there were errors

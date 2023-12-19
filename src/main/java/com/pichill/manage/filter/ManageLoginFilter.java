@@ -22,6 +22,7 @@ public class ManageLoginFilter extends HttpFilter implements Filter {
 		HttpServletResponse res = (HttpServletResponse) response;
 		// 【取得 session】
 		HttpSession session = req.getSession();
+		System.out.println(req.getParameter("action"));
 		System.out.println("經過過濾器了");
 		// 【從 session 判斷此user是否登入過】
 		Object account = session.getAttribute("manage");
