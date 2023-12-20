@@ -15,6 +15,8 @@ import com.google.gson.JsonObject;
 import com.pichill.comment.entity.Comment;
 import com.pichill.comment.service.CommentService;
 import com.pichill.comment.service.CommentServiceImpl;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.generaluser.service.GeneralUserService;
 
 @WebServlet("/comment/comment.do")
 public class CommentServlet extends HttpServlet {
@@ -50,9 +52,11 @@ public class CommentServlet extends HttpServlet {
 		if ("insert".equals(action)) {
 			String commentContent = req.getParameter("commentContent");
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
+			GeneralUserService generalUserService = new GeneralUserService();
+			GeneralUser generalUser = generalUserService.getOneGeneralUser(11000001);
 			Comment comment = new Comment();
 			comment.setCommentContent(commentContent);
-			comment.setgUserID(11000001);
+			comment.setGeneralUser(generalUser);
 			comment.setPostID(postID);
 			CommentService commentSvc = new CommentServiceImpl();
 			Comment addedComment = commentSvc.addComment(comment);
