@@ -26,11 +26,10 @@ import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
 import com.pichill.reserveorder.entity.ReserveOrder;
+import com.pichill.time.TimeRef;
+
 
 @Entity
-
-
-
 @Table(name = "Court")
 public class Court implements Serializable{
 	
@@ -102,7 +101,7 @@ public class Court implements Serializable{
 	// fetch 預設為 LAZY
 	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
 	@OrderBy("timeID asc") 
-	private Set<Time> time; // Set不重複
+	private Set<TimeRef> timeref; // Set不重複
 	
 	
 	
@@ -281,12 +280,12 @@ public class Court implements Serializable{
 	}
 	
 	//時段
-	public Set<Time> getTime() {
-		return time;
+	public Set<TimeRef> getTimeRef() {
+		return timeRef;
 	}
 
-	public void setTime(Set<Time> time) {
-		this.time = time;
+	public void setTimeRef(Set<TimeRef> timeRef) {
+		this.timeRef = timeRef;
 	}
 	
 	
