@@ -1,5 +1,8 @@
 package com.pichill.court;
 
+//測試
+
+
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -25,6 +28,8 @@ import com.pichill.place.Place;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
+
+
 
 @Table(name = "Court")
 public class Court implements Serializable{
