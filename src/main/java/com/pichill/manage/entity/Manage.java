@@ -4,13 +4,21 @@ import java.io.Serializable;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Arrays;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import com.pichill.announcementgetone.entity.AnnouncementGetOne;
+import com.pichill.court.Court;
+
 
 @Entity
 @Table(name = "manage")
@@ -51,6 +59,13 @@ public class Manage implements Serializable {
 	@Column(name="mHiredate", updatable = false)
 	private Date mHiredate;
 	
+	@OneToMany(mappedBy = "manage", cascade = CascadeType.ALL)
+	@OrderBy("courtID asc") 
+    private Set<Court> court;
+	
+	@OneToMany(mappedBy = "manage", cascade = CascadeType.ALL)
+	@OrderBy("announceID asc") 
+    private Set<AnnouncementGetOne> announcement;
 	
 	
 	@Column(name="mID", columnDefinition="char", updatable = false) // 資料庫char型別要用columnDefinition標示!
@@ -214,6 +229,24 @@ public class Manage implements Serializable {
 		this.mStatus = mStatus;
 	}
 
+	public Set<Court> getCourt() {
+        return court;
+    }
+
+	  public void setCourt(Set<Court> court) {
+	        this.court = court;
+	    }
+	  
+	  public Set<AnnouncementGetOne> getAnnouncementGetOne() {
+	        return announcement;
+	    }
+
+		  public void setAnnouncementGetOne(Set<AnnouncementGetOne> announcement) {
+		        this.announcement = announcement;
+		    }
+		
+	
+	
 	@Override
 	public String toString() {
 		return "Manage [manageID=" + manageID + ", mName=" + mName + ", mUserName=" + mUserName + ", mPassword="
