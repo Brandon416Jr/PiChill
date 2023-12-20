@@ -71,10 +71,10 @@ public class Place {
 	
 	//貼文
 	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	// (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
-	@OrderBy("postID asc") 
-	private Set<Post> post; // Set不重
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	// (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
+//	@OrderBy("postID asc") 
+//	private Set<Post> post; // Set不重
 	
 	
 	
@@ -134,11 +134,11 @@ public class Place {
 	}
 	
 	//貼文
-	public Set<Post> getPost() {
-		return post;
-	}
-
-	public void setPost(Set<Post> post) {
-		this.post = post;
-	}
+//	public Set<Post> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(Set<Post> post) {
+//		this.post = post;
+//	}
 }
