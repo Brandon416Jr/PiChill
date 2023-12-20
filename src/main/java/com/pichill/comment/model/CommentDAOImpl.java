@@ -66,6 +66,13 @@ public class CommentDAOImpl implements CommentDAO {
 			        .setParameter("postId", postID)
 			        .list();
 	}
+	@Override
+	public long getCommentCnt(Integer postID) {
+		return getSession().createQuery("select count(*) from Comment WHERE postID = :postID", Long.class)
+				.setParameter("postID",postID)
+				.uniqueResult();
+	
+	}
 	
 	
 }

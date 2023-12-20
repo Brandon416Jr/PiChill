@@ -80,7 +80,7 @@
                 var reader = new FileReader(); // 用來讀取檔案
                 reader.readAsDataURL(file); // 讀取檔案
                 reader.addEventListener("load", function () {
-                    console.log(reader.result);
+//                    console.log(reader.result);
                     /*
                     let img_node = document.createElement("img"); // <img>
                     img_node.setAttribute("src", reader.result); // <img src="base64">
@@ -138,7 +138,7 @@
         
         window.addEventListener("load", function (e) {
             var preview_el = document.getElementById("preview2_edit");
-            var p_file_el = document.getElementById("p_file_edit");
+            var p_file_el = document.getElementById("p_file2_edit");
             var preview_img = function (file) {
 
                 var reader = new FileReader(); // 用來讀取檔案

@@ -1,28 +1,24 @@
 package com.pichill.post.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.sql.Time;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
-import com.pichill.manage.service.ManageService;
+import com.google.gson.Gson;
 import com.pichill.post.entity.Post;
 import com.pichill.post.service.PostService;
 import com.pichill.post.service.PostServiceImpl;
-
-import com.google.gson.Gson;
-import com.google.protobuf.Timestamp;
 
 @WebServlet("/post/post.do")
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
@@ -81,12 +77,22 @@ public class PostServlet2 extends HttpServlet {
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("discussType"));
-			InputStream in = req.getPart("postPic").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
+			Part part = req.getPart("postPic");
 			byte[] postPic = null;
-			if (in.available() != 0) {
-				postPic = new byte[in.available()];
-				in.read(postPic);
-				in.close();
+			if (part != null && part.getSize() > 0) {
+			    try (InputStream in = part.getInputStream()) {
+			        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			        int nRead;
+			        byte[] data = new byte[1024];
+
+			        while ((nRead = in.read(data, 0, data.length)) != -1) {
+			            buffer.write(data, 0, nRead);
+			        }
+
+			        postPic = buffer.toByteArray();
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			    }
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
@@ -110,12 +116,22 @@ public class PostServlet2 extends HttpServlet {
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("groupType"));
-			InputStream in = req.getPart("postPic").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
+			Part part = req.getPart("postPic");
 			byte[] postPic = null;
-			if (in.available() != 0) {
-				postPic = new byte[in.available()];
-				in.read(postPic);
-				in.close();
+			if (part != null && part.getSize() > 0) {
+			    try (InputStream in = part.getInputStream()) {
+			        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+			        int nRead;
+			        byte[] data = new byte[1024];
+
+			        while ((nRead = in.read(data, 0, data.length)) != -1) {
+			            buffer.write(data, 0, nRead);
+			        }
+
+			        postPic = buffer.toByteArray();
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			    }
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
@@ -220,11 +236,6 @@ public class PostServlet2 extends HttpServlet {
 		
 		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
 
-			List<String> errorMsgs = new LinkedList<String>();
-			// Store this set in the request scope, in case we need to
-			// send the ErrorPage view.
-			req.setAttribute("errorMsgs", errorMsgs);
-
 			/*************************** 1.接收請求參數 ****************************************/
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 
@@ -234,42 +245,33 @@ public class PostServlet2 extends HttpServlet {
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			String json = new Gson().toJson(post);
-
 			PrintWriter out = res.getWriter();
 			out.print(json);
+			System.out.println("post======"+json);
 			out.flush();
 		}
 		
-	if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
-		
-					List<String> errorMsgs = new LinkedList<String>();
-					// Store this set in the request scope, in case we need to
-					// send the ErrorPage view.
-					req.setAttribute("errorMsgs", errorMsgs);
-		
+	if ("update".equals(action)) { // 來自update_emp_input.jsp的請求		
 					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-					Integer postID = Integer.valueOf(req.getParameter("postID").trim());
-					
-					String postTitle = req.getParameter("postTitle");
-					String enameReg = "^[(\u4e00-\u9fa5)(a-zA-Z0-9_)]{1,10}$";
-					if (postTitle == null || postTitle.trim().length() == 0) {
-						errorMsgs.add("標題: 請勿空白");
-					} else if (!postTitle.trim().matches(enameReg)) { // 以下練習正則(規)表示式(regular-expression)
-						errorMsgs.add("標題: 只能是中、英文字母、數字和_ , 且長度必需在10個字以內");
-					}
+					Integer postID = Integer.valueOf(req.getParameter("postID").trim());				
+					String postTitle = req.getParameter("postTitle");		
 					String postContent = req.getParameter("postContent").trim();
-					if (postContent == null || postContent.trim().length() == 0) {
-						errorMsgs.add("內文請勿空白");
-					}	
-					InputStream in = req.getPart("postPic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+					Part part = req.getPart("postPic");
 					byte[] postPic = null;
-					if(in.available()!=0){
-						postPic  = new byte[in.available()];
-						in.read(postPic );
-						in.close();
-					}  else {
-						PostService postSvc = new PostServiceImpl();
-						postPic = postSvc.getByPostID(postID).getPostPic();
+					if (part != null && part.getSize() > 0) {
+					    try (InputStream in = part.getInputStream()) {
+					        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					        int nRead;
+					        byte[] data = new byte[1024];
+
+					        while ((nRead = in.read(data, 0, data.length)) != -1) {
+					            buffer.write(data, 0, nRead);
+					        }
+
+					        postPic = buffer.toByteArray();
+					    } catch (IOException e) {
+					        e.printStackTrace();
+					    }
 					}
 					Post post = new Post();
 					post.setPostID(postID);
@@ -301,6 +303,34 @@ public class PostServlet2 extends HttpServlet {
 		PostService postSvc = new PostServiceImpl();
 		Post updatedPost = postSvc.updatePost(post);
 		String json = new Gson().toJson(updatedPost);
+		PrintWriter out = res.getWriter();
+		out.print(json);
+		out.flush();
+	}
+	if("update_likeCnt".equals(action)) {
+		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
+		Integer likeCnt = Integer.valueOf(req.getParameter("likeCnt").trim());	
+		Post post = new Post();
+		post.setPostID(postID);
+		post.setLikeCnt(likeCnt);
+		PostService postSvc = new PostServiceImpl();
+		 int updatedLike = postSvc.updateLike(postID,likeCnt);
+		System.out.println("=========++++++++"+updatedLike);
+		String json = new Gson().toJson(updatedLike);
+		PrintWriter out = res.getWriter();
+		out.print(json);
+		out.flush();
+	}
+	if("update_commentCnt".equals(action)) {
+		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
+		Integer commentCnt = Integer.valueOf(req.getParameter("commentCnt").trim());	
+		Post post = new Post();
+		post.setPostID(postID);
+		post.setCommentCnt(commentCnt);
+		PostService postSvc = new PostServiceImpl();
+		 int updatedComment = postSvc.updateComment(postID,commentCnt);
+//		System.out.println("=========++++++++"+updatedComment);
+		String json = new Gson().toJson(updatedComment);
 		PrintWriter out = res.getWriter();
 		out.print(json);
 		out.flush();

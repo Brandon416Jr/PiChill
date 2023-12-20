@@ -19,53 +19,66 @@ import com.pichill.post.entity.Post;
 import com.pichill.util.HibernateUtil;
 
 public class ForumLikeDAOImpl implements ForumLikeDAO {
-private SessionFactory factory;
-	
+	private SessionFactory factory;
+
 	public ForumLikeDAOImpl() {
 		factory = com.pichill.util.HibernateUtil.getSessionFactory();
 	}
+
 	private Session getSession() {
 		return factory.getCurrentSession();
 	}
+
 	@Override
 	public int add(ForumLike like) {
-		return (Integer)getSession().save(like);
+		return (Integer) getSession().save(like);
 	}
+
 	@Override
 	public int update(ForumLike like) {
 		try {
 			getSession().update(like);
 			return 1;
-		}catch(Exception e){
+		} catch (Exception e) {
 			return -1;
 		}
 	}
+
 	@Override
 	public int delete(int likeID) {
-		ForumLike like = getSession().get(ForumLike.class,likeID);
-		if(like!=null) {
+		ForumLike like = getSession().get(ForumLike.class, likeID);
+		if (like != null) {
 			getSession().delete(like);
 			return 1;
-		}else {
+		} else {
 			return -1;
 		}
 	}
+
 	@Override
 	public ForumLike getByLikeID(Integer likeID) {
 		getSession().clear();
-		return getSession().get(ForumLike.class,likeID);
+		return getSession().get(ForumLike.class, likeID);
 	}
+
 	@Override
 	public List<ForumLike> getAll() {
-		return getSession().createQuery("from ForumLike",ForumLike.class).list();
+		return getSession().createQuery("from ForumLike", ForumLike.class).list();
 
 	}
+
 	@Override
 	public ForumLike getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
 		return getSession().createQuery("from ForumLike WHERE postID = :postID AND gUserID = :gUserID", ForumLike.class)
-		.setParameter("postID", postID)
-	    .setParameter("gUserID", gUserID)
-	    .uniqueResult();
+				.setParameter("postID", postID).setParameter("gUserID", gUserID).uniqueResult();
+	}
+
+	@Override
+	public long getLikeCnt(Integer postID) {
+		Long like =  getSession().createQuery("select count(*) from ForumLike WHERE postID = :postID AND likeStatus = 1", Long.class)
+				.setParameter("postID", postID)
+				.uniqueResult();
+		return like;
 	}
 }
 //	private static final String INSERT_STMT = "INSERT INTO `like`(gUserID,postID)VALUES(?,?)";
@@ -211,4 +224,3 @@ private SessionFactory factory;
 //		return likeList;
 //	}
 //}
-

@@ -26,9 +26,9 @@ public class ReportServlet extends HttpServlet {
 		res.setContentType("application/json; charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		if ("insert".equals(action)) {
+		if ("insert_post".equals(action)) {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
-			System.out.println(postID);
+//			System.out.println(postID);
 			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
 			Report report = new Report();
 			report.setPostID(postID);
@@ -41,5 +41,21 @@ public class ReportServlet extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
+		if ("insert_comment".equals(action)) {
+			Integer commentID = Integer.valueOf(req.getParameter("commentID"));
+//			System.out.println(postID);
+			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
+			Report report = new Report();
+			report.setCommentID(commentID);
+			report.setReportType(reportType);
+			report.setReportStatus(0);
+			ReportService reportSvc = new ReportServiceImpl();
+			Report addedReport = reportSvc.add(report);
+			String json = new Gson().toJson(addedReport);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+
 	}
 }

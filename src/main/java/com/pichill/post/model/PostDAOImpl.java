@@ -20,7 +20,7 @@ import org.hibernate.Transaction;
 import com.pichill.post.entity.Post;
 import com.pichill.util.HibernateUtil;
 
-public class PostDAOImpl implements PostDAO{
+public class PostDAOImpl implements PostDAO {
 
 	private static final int PAGE_MAX_RESULT = 4;
 	private SessionFactory factory;
@@ -28,7 +28,7 @@ public class PostDAOImpl implements PostDAO{
 	public PostDAOImpl() {
 		factory = com.pichill.util.HibernateUtil.getSessionFactory();
 	}
-	
+
 	// Session 為 not thread-safe，所以此方法在各個增刪改查方法裡呼叫
 	// 以避免請求執行緒共用了同個 Session
 	private Session getSession() {
@@ -45,7 +45,7 @@ public class PostDAOImpl implements PostDAO{
 //		session.save(entity);
 //		tx.commit();
 //		return 1;
-		return(Integer)getSession().save(entity);
+		return (Integer) getSession().save(entity);
 	}
 
 	@Override
@@ -74,51 +74,47 @@ public class PostDAOImpl implements PostDAO{
 			return -1;
 		}
 	}
-	
+
 	@Override
 	public Post getByPostID(Integer postID) {
-		 try {
-		        getSession().clear();
-		        return getSession().get(Post.class, postID);
-		    } catch (Exception e) {
-		        e.printStackTrace(); // 或使用日誌庫記錄異常
-		        return null;
-		    }
+		try {
+			getSession().clear();
+			return getSession().get(Post.class, postID);
+		} catch (Exception e) {
+			e.printStackTrace(); // 或使用日誌庫記錄異常
+			return null;
+		}
 	}
-	
+
 	@Override
 	public List<Post> getByTitle(String postTitle) {
 		return getSession().createQuery("from Post WHERE postTitle like :postTitle", Post.class)
-	            .setParameter("postTitle", "%"+postTitle+"%")
-	            .list();
+				.setParameter("postTitle", "%" + postTitle + "%").list();
 	}
-	
+
 	@Override
 	public List<Post> getByType(Integer postType) {
-	    return getSession().createQuery("from Post WHERE postType = :postType", Post.class)
-	            .setParameter("postType", postType)
-	            .list();
+		return getSession().createQuery("from Post WHERE postType = :postType", Post.class)
+				.setParameter("postType", postType).list();
 	}
-	
+
 	@Override
 	public List<Post> getBygUserID(Integer gUserID) {
 		return getSession().createQuery("from Post WHERE gUserID = :gUserID", Post.class)
-	            .setParameter("gUserID", gUserID)
-	            .list();
+				.setParameter("gUserID", gUserID).list();
 	}
-	
+
 	@Override
 	public List<Post> getByoUserID(Integer oUserID) {
 		return getSession().createQuery("from Post WHERE oUserID = :oUserID", Post.class)
-	            .setParameter("oUserID", oUserID)
-	            .list();
+				.setParameter("oUserID", oUserID).list();
 	}
-	
+
 	@Override
 	public List<Post> getByCommentCnt() {
-		return getSession().createQuery("from Post Order by commentCnt desc",Post.class)
-				.list();
+		return getSession().createQuery("from Post Order by commentCnt desc", Post.class).list();
 	}
+
 //	@Override
 //	public List<Post> getByCommentCnt() {
 //	Date currentDate = new Date();
@@ -134,31 +130,46 @@ public class PostDAOImpl implements PostDAO{
 	public List<Post> getAll() {
 		return getSession().createQuery("from Post", Post.class).list();
 	}
-	
+
 	@Override
 	public List<Post> getAll(int currentPage) {
-	    int first = (currentPage - 1) * PAGE_MAX_RESULT;
-	    List<Post> posts;
+		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+		List<Post> posts;
 
-	    if (currentPage == 1 || currentPage == 2) {
-	        posts = getSession().createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
-	                .setFirstResult(first)
-	                .setMaxResults(PAGE_MAX_RESULT)
-	                .list();
-	    } else {
-	        posts = getSession().createQuery("from Post where postType = 2 order by postID desc", Post.class)
-	                .list();
-	    }
+		if (currentPage == 1 || currentPage == 2) {
+			posts = getSession().createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
+					.setFirstResult(first).setMaxResults(PAGE_MAX_RESULT).list();
+		} else {
+			posts = getSession().createQuery("from Post where postType = 2 order by postID desc", Post.class).list();
+		}
 
-	    return posts;
+		return posts;
 	}
+
 	@Override
 	public long getTotal() {
 		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
 	}
+
+	@Override
+	public int updateLike(Integer postID, Integer likeCnt) {
+		  return getSession()
+		            .createQuery("UPDATE Post SET likeCnt = :likeCnt WHERE postID = :postID")
+		            .setParameter("likeCnt", likeCnt)
+		            .setParameter("postID", postID)
+		            .executeUpdate();
+	}
+
+	@Override
+	public int updateComment(Integer postID, Integer commentCnt) {
+		  return getSession()
+		            .createQuery("UPDATE Post SET commentCnt = :commentCnt WHERE postID = :postID")
+		            .setParameter("commentCnt",commentCnt)
+		            .setParameter("postID", postID)
+		            .executeUpdate();
+	}
 }
 
-	
 //	@Override
 //	public List<Post> getByCompositeQuery(Map<String, String> map) {
 //		if (map.size() == 0)

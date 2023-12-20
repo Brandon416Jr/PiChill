@@ -10,4 +10,5 @@ public interface CommentDAO {
 	int delete(Integer commentID);
 	Comment getByCommentID(Integer commentID);
 	List<Comment> getAll(Integer postID);
+	long getCommentCnt(Integer postID);
 }

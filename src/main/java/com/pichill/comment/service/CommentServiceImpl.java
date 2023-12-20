@@ -44,5 +44,10 @@ public class CommentServiceImpl implements CommentService{
 	public List<Comment> getAllComments(Integer postID) {
 		return dao.getAll(postID);
 	}
+
+	@Override
+	public long getCommentCnt(Integer postID) {
+	return dao.getCommentCnt(postID);
+	}
 			
 }

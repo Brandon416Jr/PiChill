@@ -20,6 +20,7 @@ import javax.persistence.criteria.CriteriaBuilder.In;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.forumpic.entity.ForumPic;
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.report.entity.Report;
 
@@ -31,12 +32,12 @@ public class Post {
 	@Column(name = "postID", updatable = false, insertable = false)
 	private Integer postID;
 
-//	@ManyToOne
-//	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false, insertable = false)
-//    private GUser gUser;
+	@ManyToOne
+	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false, insertable = false)
+    private GeneralUser generalUser;
 
-	@Column(name = "gUserID", updatable = false, insertable = false)
-	private Integer gUserID;
+//	@Column(name = "gUserID", updatable = false, insertable = false)
+//	private Integer gUserID;
 
 //	@ManyToOne
 //	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
@@ -79,8 +80,8 @@ public class Post {
 //	private Set<Report> reports;
 
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("likeID asc")
-//	private Set<Like> likes;
+//	@OrderBy("forumlikeID asc")
+//	private Set<ForumLike> forumlikes;
 	
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("forumPicID asc")
@@ -94,16 +95,24 @@ public class Post {
 		this.postID = postID;
 	}
 
-	public Integer getgUserID() {
-		return gUserID;
-	}
-
-	public void setgUserID(Integer gUserID) {
-		this.gUserID = gUserID;
-	}
+//	public Integer getgUserID() {
+//		return gUserID;
+//	}
+//
+//	public void setgUserID(Integer gUserID) {
+//		this.gUserID = gUserID;
+//	}
 
 	public Integer getoUserID() {
 		return oUserID;
+	}
+
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
 	}
 
 	public void setoUserID(Integer oUserID) {
@@ -174,20 +183,28 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
-//	public Set<Like>getLikes(){
-//		return likes;
-//	}
-//	
-//	public void setLikes(Set<Like>likes) {
-//		this.likes = likes;
-//	}
 	@Override
 	public String toString() {
-		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", placeID=" + placeID
-				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType + ", postTime="
-				+ postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt + ", commentCnt="
-				+ commentCnt + "]";
+		return "Post [postID=" + postID + ", generalUser=" + generalUser + ", oUserID=" + oUserID + ", placeID="
+				+ placeID + ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType
+				+ ", postTime=" + postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt
+				+ ", commentCnt=" + commentCnt + "]";
 	}
+
+//	public Set<ForumLike>getForumLikes(){
+//		return forumlikes;
+//	}
+//	
+//	public void setForumLikes(Set<ForumLike>forumlikes) {
+//		this.forumlikes = forumlikes;
+//	}
+//	@Override
+//	public String toString() {
+//		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", placeID=" + placeID
+//				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType + ", postTime="
+//				+ postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt + ", commentCnt="
+//				+ commentCnt + "]";
+//	}
 
 
 	

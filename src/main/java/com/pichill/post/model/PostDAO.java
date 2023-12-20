@@ -31,4 +31,8 @@ public interface PostDAO {
 	List<Post> getAll(int currentPage);
 
 	long getTotal();
+	
+	 int updateLike(Integer postID, Integer likeCnt);
+	 
+	 int updateComment(Integer postID, Integer commentCnt);
 }

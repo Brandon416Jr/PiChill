@@ -986,6 +986,7 @@ div.star_block>span.star.-on {
 	crossorigin="anonymous"></script>
 <script src="index.js"></script>
 <script src="postAjax.js"></script>
+<script src="postsearch.js"></script>
 <script src="otherAjax.js"></script>
 
 </head>
@@ -1292,7 +1293,7 @@ div.star_block>span.star.-on {
 		<!--======== Modal查看文章(討論版)========= -->
 		<div class="modal fade" id="exampleModal5" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-dialog-scrollable modal-lg">
+			<div class="modal-dialog modal-dialog-scrollable modal-lg ">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5">
@@ -1329,11 +1330,13 @@ div.star_block>span.star.-on {
 						<div class="container text-center">
 							<div class="row align-items-start do">
 							  <div class="col-2 likecol" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> </button>
+                    <button type="button" class="fa-regular fa-thumbs-up likebutton_click"> </button>
                     </div>
 								<div class="col-2 commentcol" id="commentcol">
 									<i class="fa-regular fa-comment"></i>
 								</div>
+								<input type="hidden" class="postType" name="postType"
+											value="0">
 								<article class="task_container">
 									<div class="task_add_block">
 										<input type="text" class="task_name" placeholder="留言…">
@@ -1417,6 +1420,8 @@ div.star_block>span.star.-on {
 								<div class="col-2 commentcol" id="commentcol">
 									<i class="fa-regular fa-comment"></i>
 								</div>
+								<input type="hidden" class="postType" name="postType"
+											value="0">
 								<article class="task_container">
 									<div class="task_add_block">
 										<input type="text" class="task_name2" placeholder="留言…">
@@ -1433,7 +1438,7 @@ div.star_block>span.star.-on {
 				</div>
 			</div>
 		</div>
-		<!--==== 檢舉Modal ======-->
+		<!--==== 檢舉Modal (完整文章討論版的)======-->
 		<div class="modal fade" id="exampleModal2" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm modal-dialog-centered ">
@@ -1480,7 +1485,114 @@ div.star_block>span.star.-on {
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-primary" id="send_report">送出</button>
+					 <button class="btn btn-primary" data-bs-target="#exampleModal5" data-bs-toggle="modal"  id="send_report">送出</button>
+<!-- 						<button type="button" class="btn btn-primary" id="send_report">送出</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+			<!--==== 檢舉Modal (完整文章揪團版的)======-->
+		<div class="modal fade" id="exampleModal11" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm modal-dialog-centered ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">檢舉</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1"> <label
+								class="form-check-label" for="flexRadioDefault1"> 違反版規 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								內容不實 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1"> <label
+								class="form-check-label" for="flexRadioDefault1"> 惡意洗版 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								仇恨言論 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								商業宣傳內容 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								其他 </label>
+						</div>
+					</div>
+					<div class="modal-footer">
+					 <button class="btn btn-primary" data-bs-target="#exampleModal6" data-bs-toggle="modal"  id="send_report3">送出</button>
+<!-- 						<button type="button" class="btn btn-primary" id="send_report3">送出</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+			<!--==== 檢舉Modal(文章列表的) ======-->
+		<div class="modal fade" id="exampleModal10" tabindex="-1"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-sm modal-dialog-centered ">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h1 class="modal-title fs-5" id="exampleModalLabel">檢舉</h1>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"
+							aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1"> <label
+								class="form-check-label" for="flexRadioDefault1"> 違反版規 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								內容不實 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault1"> <label
+								class="form-check-label" for="flexRadioDefault1"> 惡意洗版 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								仇恨言論 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								商業宣傳內容 </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"
+								name="flexRadioDefault" id="flexRadioDefault2" checked>
+							<label class="form-check-label" for="flexRadioDefault2">
+								其他 </label>
+						</div>
+					</div>
+					<div class="modal-footer">
+<!-- 					 <button class="btn btn-primary" data-bs-target="#exampleModal5" data-bs-toggle="modal"  id="send_report2">送出</button> -->
+						<button type="button" class="btn btn-primary" id="send_report2">送出</button>
 					</div>
 				</div>
 			</div>
@@ -1768,6 +1880,8 @@ div.star_block>span.star.-on {
 							<div class="col-2" id="commentcol">
 								<i class="fa-regular fa-comment"></i> 99
 							</div>
+							<input type="hidden" class="postType" name="postType"
+											value="0">
 							<article class="task_container">
 								<div class="task_add_block">
 									<input type="text" class="task_name" placeholder="留言…">
