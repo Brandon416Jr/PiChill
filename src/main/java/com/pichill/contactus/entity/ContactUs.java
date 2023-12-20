@@ -28,7 +28,7 @@ public class ContactUs {
 
 	@ManyToOne
 	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
-	@Column(name = "oUserID", updatable = false)
+	@Column(name = "gUserID", updatable = false)
     private GeneralUser generalUser;
 
 	@ManyToOne
