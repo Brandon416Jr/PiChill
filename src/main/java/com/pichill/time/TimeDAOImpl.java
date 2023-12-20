@@ -5,7 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
-import com.pichill.time.Time;
+import com.pichill.time.TimeRef;
 import com.pichill.util.HibernateUtil;
 
 public class TimeDAOImpl implements TimeDAO {
@@ -19,14 +19,14 @@ private SessionFactory factory;
 		return factory.getCurrentSession();
 	}
 	@Override
-	public Time findByPK(Integer timeID) {
+	public TimeRef findByPK(Integer timeID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Time time = session.get(Time.class, timeID);
+			TimeRef timeRef = session.get(TimeRef.class, timeID);
 			session.getTransaction().commit();
 			System.out.println("查單筆成功!");
-			return time;
+			return timeRef;
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("查單筆失敗QQ");
@@ -36,11 +36,11 @@ private SessionFactory factory;
 	}
 
 	@Override
-	public List<Time> getAll() {
+	public List<TimeRef> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<Time> list = session.createQuery("from Time", Time.class).list();
+			List<TimeRef> list = session.createQuery("from Time", TimeRef.class).list();
 			session.getTransaction().commit();
 			System.out.println("查全部成功!");
 			return list;

@@ -19,8 +19,8 @@ import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
-@Table(name="time")
-public class Time {
+@Table(name="timeref")
+public class TimeRef {
 	
 	@Id
 //	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,17 +40,17 @@ public class Time {
 	
 	//預約訂單
 	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "time", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "TimeRef", cascade = CascadeType.ALL)
 	// (mappedBy = "time")的time指的是新增的Time "time"部門物件的屬性
 	@OrderBy("reserveOrderID asc") 
 	private Set<ReserveOrder> reserveOrder; // Set不重複
 		
-	public Time() {
+	public TimeRef() {
 		super();
 	}
 
 
-	public Time(Integer timeID, String reserveTime, Court court, Set<ReserveOrder> reserveOrder) {
+	public TimeRef(Integer timeID, String reserveTime, Court court, Set<ReserveOrder> reserveOrder) {
 		super();
 		this.timeID = timeID;
 		this.reserveTime = reserveTime;
@@ -107,7 +107,7 @@ public class Time {
 				+ reserveOrder + "]";
 	}
 
-	public static Time parseInt(String parameter) {
+	public static TimeRef parseInt(String parameter) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -14,8 +14,8 @@ public class TimeTest {
 //		System.out.println();
 		
 		// 查多筆
-		List<Time> list = dao.getAll();
-		for (Time time2 : list) {
+		List<TimeRef> list = dao.getAll();
+		for (TimeRef time2 : list) {
 			System.out.print(time2.getTimeID() + ",");
 			System.out.print(time2.getReserveTime() + ",");
 			System.out.print(time2.getCourtID());
