@@ -32,17 +32,17 @@ public class Report {
 	@Column(name = "manageID",updatable = false)
 	private Integer manageID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
-//	private Post post;
-	@Column(name = "postID",updatable = false)
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
+	private Post post;
+//	@Column(name = "postID",updatable = false)
+//	private Integer postID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
-//	private Comment comment;
-	@Column(name = "commentID",updatable = false)
-	private Integer commentID;
+	@ManyToOne
+	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
+	private Comment comment;
+//	@Column(name = "commentID",updatable = false)
+//	private Integer commentID;
 	
 	@Column(name = "reportTime", updatable = false)
 	@CreationTimestamp
@@ -64,8 +64,8 @@ public class Report {
 		super();
 		this.reportID = reportID;
 		this.manageID = manageID;
-		this.postID = postID;
-		this.commentID = commentID;
+//		this.postID = postID;
+//		this.commentID = commentID;
 		this.reportTime = reportTime;
 		this.reportStatus = reportStatus;
 		this.reportType = reportType;
@@ -87,20 +87,20 @@ public class Report {
 		this.manageID = manageID;
 	}
 
-	public Integer getPostID() {
-		return postID;
+	public Post getPost() {
+		return post;
 	}
 
-	public void setPostID(Integer postID) {
-		this.postID = postID;
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
-	public Integer getCommentID() {
-		return commentID;
+	public Comment getComment() {
+		return comment;
 	}
 
-	public void setCommentID(Integer commentID) {
-		this.commentID = commentID;
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 
 	public Timestamp getReportTime() {
@@ -127,4 +127,5 @@ public class Report {
 		this.reportType = reportType;
 	}
 
+	
 }

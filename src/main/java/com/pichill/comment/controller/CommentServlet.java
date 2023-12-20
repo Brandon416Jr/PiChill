@@ -17,6 +17,9 @@ import com.pichill.comment.service.CommentService;
 import com.pichill.comment.service.CommentServiceImpl;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
+import com.pichill.post.entity.Post;
+import com.pichill.post.service.PostService;
+import com.pichill.post.service.PostServiceImpl;
 
 @WebServlet("/comment/comment.do")
 public class CommentServlet extends HttpServlet {
@@ -54,10 +57,12 @@ public class CommentServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			GeneralUserService generalUserService = new GeneralUserService();
 			GeneralUser generalUser = generalUserService.getOneGeneralUser(11000001);
+			PostService postService = new PostServiceImpl();
+			Post post = postService.getByPostID(postID);
 			Comment comment = new Comment();
 			comment.setCommentContent(commentContent);
 			comment.setGeneralUser(generalUser);
-			comment.setPostID(postID);
+			comment.setPost(post);
 			CommentService commentSvc = new CommentServiceImpl();
 			Comment addedComment = commentSvc.addComment(comment);
 			long commentCnt = commentSvc.getCommentCnt(postID);

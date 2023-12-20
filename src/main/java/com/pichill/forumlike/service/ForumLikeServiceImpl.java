@@ -5,6 +5,9 @@ import com.pichill.forumlike.model.ForumLikeDAO;
 import com.pichill.forumlike.model.ForumLikeDAOImpl;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
+import com.pichill.post.entity.Post;
+import com.pichill.post.service.PostService;
+import com.pichill.post.service.PostServiceImpl;
 
 public class ForumLikeServiceImpl implements ForumLikeService {
 
@@ -47,8 +50,10 @@ public class ForumLikeServiceImpl implements ForumLikeService {
 			GeneralUserService generalUserService = new GeneralUserService();
 			GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
 			
+			PostService postService = new PostServiceImpl();
+			Post post = postService.getByPostID(postID);
 			ForumLike likepost = new ForumLike();
-			likepost.setPostID(postID);
+			likepost.setPost(post);
 			likepost.setGeneralUser(generalUser);
 			likepost.setLikeStatus(true);
 			dao.add(likepost);

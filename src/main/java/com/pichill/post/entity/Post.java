@@ -21,6 +21,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.forumpic.entity.ForumPic;
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.report.entity.Report;
 
@@ -39,12 +40,12 @@ public class Post {
 //	@Column(name = "gUserID", updatable = false, insertable = false)
 //	private Integer gUserID;
 
-//	@ManyToOne
-//	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
-//    private OUser oUser;
+	@ManyToOne
+	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
+    private OwnerUser ownerUser;
 
-	@Column(name = "oUserID", updatable = false, insertable = false)
-	private Integer oUserID;
+//	@Column(name = "oUserID", updatable = false, insertable = false)
+//	private Integer oUserID;
 
 //@ManyToOne
 //@JoinColumn(name= "placeID",referencedColumnName = "placeID")
@@ -74,37 +75,26 @@ public class Post {
 	
 	@Column(name = "commentCnt", updatable = false)
 	private Integer commentCnt;
-	
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("reportID asc")
-//	private Set<Report> reports;
 
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("forumlikeID asc")
-//	private Set<ForumLike> forumlikes;
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("reportID asc")
+	private Set<Report> reports;
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("forumlikeID asc")
+	private Set<ForumLike> forumlikes;
+
 	
 //	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 //	@OrderBy("forumPicID asc")
 //	private Set<ForumPic> forumPics;
-
+	
 	public Integer getPostID() {
 		return postID;
 	}
 
 	public void setPostID(Integer postID) {
 		this.postID = postID;
-	}
-
-//	public Integer getgUserID() {
-//		return gUserID;
-//	}
-//
-//	public void setgUserID(Integer gUserID) {
-//		this.gUserID = gUserID;
-//	}
-
-	public Integer getoUserID() {
-		return oUserID;
 	}
 
 	public GeneralUser getGeneralUser() {
@@ -115,17 +105,13 @@ public class Post {
 		this.generalUser = generalUser;
 	}
 
-	public void setoUserID(Integer oUserID) {
-		this.oUserID = oUserID;
+	public OwnerUser getOwnerUser() {
+		return ownerUser;
 	}
 
-//	public Integer getPlaceID() {
-//		return placeID;
-//	}
-//
-//	public void setPlaceID(Integer placeID) {
-//		this.placeID = placeID;
-//	}
+	public void setOwnerUser(OwnerUser ownerUser) {
+		this.ownerUser = ownerUser;
+	}
 
 	public String getPostTitle() {
 		return postTitle;
@@ -183,29 +169,20 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Post [postID=" + postID + ", generalUser=" + generalUser + ", oUserID=" + oUserID + ", placeID="
-//				+ placeID + ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType
-//				+ ", postTime=" + postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt
-//				+ ", commentCnt=" + commentCnt + "]";
-//	}
+	public Set<Report> getReports() {
+		return reports;
+	}
 
-//	public Set<ForumLike>getForumLikes(){
-//		return forumlikes;
-//	}
-//	
-//	public void setForumLikes(Set<ForumLike>forumlikes) {
-//		this.forumlikes = forumlikes;
-//	}
-//	@Override
-//	public String toString() {
-//		return "Post [postID=" + postID + ", gUserID=" + gUserID + ", oUserID=" + oUserID + ", placeID=" + placeID
-//				+ ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType + ", postTime="
-//				+ postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt + ", commentCnt="
-//				+ commentCnt + "]";
-//	}
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
+	}
 
+	public Set<ForumLike> getForumlikes() {
+		return forumlikes;
+	}
 
+	public void setForumlikes(Set<ForumLike> forumlikes) {
+		this.forumlikes = forumlikes;
+	}
 	
 }

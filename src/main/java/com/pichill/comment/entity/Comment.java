@@ -35,11 +35,11 @@ public class Comment {
 //	@Column(name = "gUserID", updatable = false)
 //	private Integer gUserID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
-//	private Post post;
-	@Column(name = "postID", updatable = false)
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
+	private Post post;
+//	@Column(name = "postID", updatable = false)
+//	private Integer postID;
 	
 	@Column(name = "commentContent", columnDefinition = "text")
 	private String commentContent;
@@ -48,58 +48,55 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp commentTime;
 	
-//	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
-//	@OrderBy("reportID asc")
-//	private Set<Report> reports;
-	public Comment() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Comment(Integer commentID, Integer gUserID, Integer postID, String commentContent, Timestamp commentTime) {
-		super();
-		this.commentID = commentID;
-//		this.gUserID = gUserID;
-		this.postID = postID;
-		this.commentContent = commentContent;
-		this.commentTime = commentTime;
-	}
+	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
+	@OrderBy("reportID asc")
+	private Set<Report> reports;
+
 	public Integer getCommentID() {
 		return commentID;
 	}
+
 	public void setCommentID(Integer commentID) {
 		this.commentID = commentID;
 	}
-//	public Integer getgUserID() {
-//		return gUserID;
-//	}
-//	public void setgUserID(Integer gUserID) {
-//		this.gUserID = gUserID;
-//	}
-	
-	
-	public Integer getPostID() {
-		return postID;
-	}
+
 	public GeneralUser getGeneralUser() {
 		return generalUser;
 	}
+
 	public void setGeneralUser(GeneralUser generalUser) {
 		this.generalUser = generalUser;
 	}
-	public void setPostID(Integer postID) {
-		this.postID = postID;
+
+	public Post getPost() {
+		return post;
 	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
 	public String getCommentContent() {
 		return commentContent;
 	}
+
 	public void setCommentContent(String commentContent) {
 		this.commentContent = commentContent;
 	}
+
 	public Timestamp getCommentTime() {
 		return commentTime;
 	}
+
 	public void setCommentTime(Timestamp commentTime) {
 		this.commentTime = commentTime;
 	}
-	
+
+	public Set<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
+	}
 }
