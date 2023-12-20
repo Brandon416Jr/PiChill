@@ -14,6 +14,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.pichill.contactus.entity.ContactUs;
+import com.pichill.court.Court;
+import com.pichill.post.entity.Post;
+import com.pichill.reserveorder.entity.ReserveOrder;
+
 
 
 @Entity
@@ -82,57 +87,31 @@ public class OwnerUser implements Serializable{
 	@Column(name = "oEmail")
 	private String oEmail;
 	
-	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
-//	@OrderBy("courtID asc") 
-//	private Set<Court> Court; // Set不重複
-	
-	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
-//	@OrderBy("formID asc") 
-//	public Set<Court> getCourt() {
-//		return Court;
-//	}
 
-//	public void setCourt(Set<Court> court) {
-//		Court = court;
-//	}
-//
-//	public Set<ContactUs> getContactUs() {
-//		return contactUs;
-//	}
-//
-//	public void setContactUs(Set<ContactUs> contactUs) {
-//		this.contactUs = contactUs;
-//	}
-//
-//	public Set<reserveOrder> getReserveOrder() {
-//		return reserveOrder;
-//	}
-//
-//	public void setReserveOrder(Set<reserveOrder> reserveOrder) {
-//		this.reserveOrder = reserveOrder;
-//	}
-//
-//	public Set<Post> getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(Set<Post> post) {
-//		this.post = post;
-//	}
+
 //	private Set<ContactUs> contactUs; // Set不重複
-//	
-//	 fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
-//	@OrderBy("reserveOrderID asc") 
-//	private Set<reserveOrder> reserveOrder; // Set不重複
-//	
-//	 fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
-//	@OrderBy("postID asc") 
-//	private Set<Post> post; // Set不重複
+	
+	//預約訂單
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+	// (mappedBy = "ownerUser")的ownerUser指的是新增的OwnerUser "ownerUser"部門物件的屬性
+	@OrderBy("reserveOrderID asc") 
+	private Set<ReserveOrder> reserveOrder; // Set不重複
+	
+	//貼文
+	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+	@OrderBy("postID asc") 
+	private Set<Post> post; // Set不重複
 
+	//球館
+	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+	@OrderBy("courtID asc") 
+	private Set<Court> court; // Set不重複
+	
+	//聯絡我們
+	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
+	@OrderBy("formID asc") 
+	private Set<ContactUs> contactUs; // Set不重複
 	
 	
 	public OwnerUser() {
@@ -280,4 +259,43 @@ public class OwnerUser implements Serializable{
 	public void setoEmail(String oEmail) {
 		this.oEmail = oEmail;
 	}
+	
+	
+	
+	//預約訂單
+	public Set<ReserveOrder> getReserveOrder() {
+		return reserveOrder;
+	}
+
+	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
+	
+	//貼文
+	public Set<Post> getPost() {
+		return post;
+	}
+
+	public void setPost(Set<Post> post) {
+		this.post = post;
+	}
+	
+	//球館
+	public Set<Court> getCourt() {
+		return court;
+	}
+
+	public void setCourt(Set<Court> court) {
+		this.court = court;
+	}
+		
+	//聯絡我們
+	public Set<ContactUs> getContactUs() {
+		return contactUs;
+	}
+
+	public void setContactUs(Set<ContactUs> contactUs) {
+		this.contactUs = contactUs;
+	}	
+	
 }

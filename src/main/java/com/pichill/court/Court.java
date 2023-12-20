@@ -11,12 +11,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.pichill.manage.entity.Manage;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
+import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
 
@@ -72,31 +78,47 @@ public class Court implements Serializable{
 	@Column(name = "courtCloseTime")
 	private Time courtCloseTime;
 	
-	@OneToMany(mappedBy = "courtID", cascade = CascadeType.ALL)
-	private Set<Place> place;
+	
+	//預約訂單
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+	@OrderBy("reserveOrderID asc") 
+	private Set<ReserveOrder> reserveOrder; // Set不重複
 	
 	
-	public Set<Place> getPlace() {
-		return 	this.place;
-	}
+	//場地
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+	@OrderBy("placeID asc") 
+	private Set<Place> place; // Set不重複
+	
 
-	public void setPlace(Set<Place> place) {
-		this.place = place;
-	}
+	//時段
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+	@OrderBy("timeID asc") 
+	private Set<Time> time; // Set不重複
+	
+	
+	
+     //管理員
+	 //fetch 預設為 EAGER
+	 @ManyToOne
+	 @JoinColumn(name = "manageID", referencedColumnName = "manageID", updatable = false)
+	 private Manage manage;
+	  
+	// @Column(name="courtID", updatable = false)
+	// private Integer courtID;
+	
+	
+     //企業會員
+	 //fetch 預設為 EAGER
+	 @ManyToOne
+	 @JoinColumn(name = "oUserID", referencedColumnName = "oUserID", updatable = false)
+	 private OwnerUser ownerUser;
+	
+	
 
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
-//	@OrderBy("timeID asc") 
-//	private Set<Times> time; // Set不重複
-//	
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "manageID", referencedColumnName = "manageID")
-//	private Manage manage;
-	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID")
-//	private OwnerUser ownerUser;
 	
 	public Court() {
         super();
@@ -231,6 +253,60 @@ public class Court implements Serializable{
 	public void setcourtCloseTime(Time courtCloseTime) {
 		this.courtCloseTime = courtCloseTime;
 	}
+	
+	
+	
+	//預約訂單
+	public Set<ReserveOrder> getReserveOrder() {
+		return reserveOrder;
+	}
+
+	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
+	
+	
+	//場地
+	public Set<Place> getPlace() {
+		return place;
+	}
+
+	public void setPlace(Set<Place> place) {
+		this.place = place;
+	}
+	
+	//時段
+	public Set<Time> getTime() {
+		return time;
+	}
+
+	public void setTime(Set<Time> time) {
+		this.time = time;
+	}
+	
+	
+	
+	
+	//管理員
+	public Manage getManage() {
+	return manage;
+	}
+
+	public void setManage(Manage manage) {
+	this.manage = manage;
+	}
+	
+	//企業會員
+	public OwnerUser getOwnerUser() {
+	return ownerUser;
+	}
+
+	public void setOwnerUser(OwnerUser ownerUser) {
+	this.ownerUser = ownerUser;
+	}
+	
+	
+	
 
 	// for join placeID from place
 //    public com.pichill.place.Place getPlace() {
