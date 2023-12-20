@@ -18,7 +18,7 @@ import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
-import com.pichill.timeref.TimeRef;
+import com.pichill.time.TimeRef;
 
 @Entity
 @Table(name="reserveorder")
@@ -105,23 +105,26 @@ public class ReserveOrder {
 //		this.totalCost = totalCost;
 //	}
 
+
+	public Integer getReserveOrderID() {
+		return reserveOrderID;
+	}
+
 	public ReserveOrder(Integer reserveOrderID, GeneralUser generalUser, OwnerUser ownerUser, Date reserveDate,
-			Time time, Place place, Timestamp orderTime, Integer orderNum, Integer orderStatus, Integer totalCost) {
+			TimeRef timeRef, Place place, Court court, Timestamp orderTime, Integer orderNum, Integer orderStatus,
+			Integer totalCost) {
 		super();
 		this.reserveOrderID = reserveOrderID;
 		this.generalUser = generalUser;
 		this.ownerUser = ownerUser;
 		this.reserveDate = reserveDate;
-		this.time = time;
+		this.timeRef = timeRef;
 		this.place = place;
+		this.court = court;
 		this.orderTime = orderTime;
 		this.orderNum = orderNum;
 		this.orderStatus = orderStatus;
 		this.totalCost = totalCost;
-	}
-
-	public Integer getReserveOrderID() {
-		return reserveOrderID;
 	}
 
 	public void setReserveOrderID(Integer reserveOrderID) {
@@ -225,12 +228,13 @@ public class ReserveOrder {
 		this.ownerUser = ownerUser;
 	}
 
-	public Time getTime() {
-		return time;
+
+	public TimeRef getTimeRef() {
+		return timeRef;
 	}
 
-	public void setTime(Time time) {
-		this.time = time;
+	public void setTimeRef(TimeRef timeRef) {
+		this.timeRef = timeRef;
 	}
 
 	public Place getPlace() {
@@ -253,10 +257,11 @@ public class ReserveOrder {
 	@Override
 	public String toString() {
 		return "ReserveOrder [reserveOrderID=" + reserveOrderID + ", generalUser=" + generalUser + ", ownerUser="
-				+ ownerUser + ", reserveDate=" + reserveDate + ", time=" + time + ", place=" + place + ", court="
+				+ ownerUser + ", reserveDate=" + reserveDate + ", timeRef=" + timeRef + ", place=" + place + ", court="
 				+ court + ", orderTime=" + orderTime + ", orderNum=" + orderNum + ", orderStatus=" + orderStatus
 				+ ", totalCost=" + totalCost + "]";
 	}
+
 
 
 
