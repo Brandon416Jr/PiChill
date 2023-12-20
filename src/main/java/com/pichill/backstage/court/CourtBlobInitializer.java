@@ -33,7 +33,7 @@ public class CourtBlobInitializer {
 			Court court = session.get(Court.class, i +61000001);
 			
 			 if (court != null) {
-				 court.setcourtPic(courtPic);
+				 court.setCourtPic(courtPic);
 			    } else {
 			        System.out.println("Court object with ID " + (i + 1) + " not found in the database.");
 			    }

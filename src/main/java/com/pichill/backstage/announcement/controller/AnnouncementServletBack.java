@@ -14,9 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.announcementgetone.entity.AnnouncementGetOne;
+import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.backstage.announcement.service.AnnouncementServiceBack;
-
+import com.pichill.manage.entity.Manage;
+import com.pichill.manage.service.ManageService;
 
 
 
@@ -84,7 +85,7 @@ public class AnnouncementServletBack extends HttpServlet {
 //		req.setAttribute("errorMsgs", errorMsgs);
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
 
-		AnnouncementGetOne announcement = annoSvcB.getOneAnnouncement(announceID);
+		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
 
 		req.setAttribute("announcement", announcement);
 		return "/backstage/announcementBack/set_announcement.jsp";
@@ -97,15 +98,16 @@ public class AnnouncementServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
-		AnnouncementGetOne announcement = annoSvcB.getOneAnnouncement(announceID);
-
+		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
+		
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 		if (manageID != null) {
 			manageID = Integer.valueOf(req.getParameter("manageID"));
 		} else {
 			errorMsgs.add("manageID cannot null!");
 		}
-		
+		ManageService manageSvc = new ManageService();
+		Manage manageAnno = manageSvc.getOneManage(manageID);
 //		Integer formID = Integer.valueOf(req.getParameter("formID"));
 //		if (formID != null) {
 //			formID = Integer.valueOf(req.getParameter("formID"));
@@ -153,10 +155,10 @@ public class AnnouncementServletBack extends HttpServlet {
 		} else {
 			
 		}
-		
+
 //		Announcement announcement = new Announcement();
 		announcement.setAnnounceID(announceID);
-		announcement.setManageID(manageID);
+		announcement.setManage(manageAnno);
 //		announcement.setFormID(formID);
 		announcement.setAnnoTitle(annoTitle);
 		announcement.setAnnoContent(annoContent);
@@ -191,6 +193,9 @@ public class AnnouncementServletBack extends HttpServlet {
 			errorMsgs.add("manageID not null!");
 		}
 		
+		ManageService manageSvc = new ManageService();
+		Manage manageAnno = manageSvc.getOneManage(manageID);
+//		req.setAttribute("manageAnno", manageAnno);
 		Integer formID = Integer.valueOf(req.getParameter("formID"));
 		if (formID != null) {
 			formID = Integer.valueOf(req.getParameter("formID"));
@@ -233,9 +238,9 @@ public class AnnouncementServletBack extends HttpServlet {
 		if (annoStatus == null) {
 			errorMsgs.add("表單狀態: 請選擇");
 		}
-		
-		AnnouncementGetOne announcement = new AnnouncementGetOne();
-		announcement.setManageID(manageID);
+
+		Announcement announcement = new Announcement();
+		announcement.setManage(manageAnno);
 		announcement.setFormID(formID);
 		announcement.setAnnoTitle(annoTitle);
 		announcement.setAnnoContent(annoContent);

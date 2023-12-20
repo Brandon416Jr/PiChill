@@ -284,20 +284,20 @@ Post post = (Post) request.getAttribute("post");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="oUserID"  value="<%=post.getoUserID()%>"
+														name="oUserID"  value="<%=post.getOwnerUser()%>"
 														class="form-control" />
 												</div>
 											</div>
-											<div class="row form-group">
-												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">場地編號</label>
-												</div>
-												<div class="col-10 col-md-8">
-													<input type="text" id="text-input" disabled="disabled"
-														name="placeID"  value="<%=post.getPlaceID()%>"
-														class="form-control" />
-												</div>
-											</div>
+<!-- 											<div class="row form-group"> -->
+<!-- 												<div class="col col-md-3"> -->
+<!-- 													<label for="text-input" class="form-control-label">場地編號</label> -->
+<!-- 												</div> -->
+<!-- 												<div class="col-10 col-md-8"> -->
+<!-- 													<input type="text" id="text-input" disabled="disabled" -->
+<%-- 														name="placeID"  value="<%=post.getPlace()%>" --%>
+<!-- 														class="form-control" /> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
 											<div class="row form-group">
 												<div class="col col-md-3">
 													<label for="text-input" class="form-control-label">標題</label>
