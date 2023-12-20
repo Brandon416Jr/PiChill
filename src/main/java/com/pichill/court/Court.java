@@ -281,11 +281,11 @@ public class Court implements Serializable{
 	
 	//時段
 	public Set<TimeRef> getTimeRef() {
-		return timeRef;
+		return timeref;
 	}
 
-	public void setTimeRef(Set<TimeRef> timeRef) {
-		this.timeRef = timeRef;
+	public void setTimeRef(Set<TimeRef> timeref) {
+		this.timeref = timeref;
 	}
 	
 	
