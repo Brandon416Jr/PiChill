@@ -1,11 +1,21 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.generaluser.service.*"%>
+<%@ page import="com.pichill.reserveorder.entity.*"%>
+<%@ page import="com.pichill.reserveorder.service.*"%>
 
-<%
+<% 
 //從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-%>
+%> 
+
+<%-- <%
+ Integer gUserID = 11000001;
+ GeneralUserService generalUserSvc = new GeneralUserService();
+ GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
+ pageContext.setAttribute("generaluser",generalUser);
+%>--%>
 
 <!DOCTYPE html>
 <html>
@@ -32,7 +42,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <li class="nav-item"><a href="main.jsp" class="nav-link" id="head">首頁</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">公告</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder2.jsp" class="nav-link" id="head">我要預約</a></li>
+                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link" id="head">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/select_page.jsp" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
@@ -55,7 +65,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="<%=request.getContextPath()%>/reserveorder/allOrder.jsp">球館預約紀錄</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/reserveorder/listOneOrder.jsp">球館預約紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">

@@ -1,11 +1,14 @@
 package com.pichill.generaluser.model;
 
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.util.HibernateUtil;
 
 public class GeneralUserDAOImpl implements GeneralUserDAO{
@@ -87,4 +90,23 @@ private SessionFactory factory;
 		}
 		return null;
 	}
+	
+//	@Override
+//	public Set<ReserveOrder> getReserveBygUserID(Integer gUserID) {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+//			Set<ReserveOrder> set = session.LinkedHashSet<ReserveOrder>();
+////			List<GeneralUser> list = session.createQuery("from GeneralUser", GeneralUser.class).list();
+//			session.getTransaction().commit();
+//			System.out.println("查全部成功!");
+//			return set;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("查全部失敗QQ");
+//			session.getTransaction().rollback();
+//		}
+//		return set;
+//	}
+	
 }
