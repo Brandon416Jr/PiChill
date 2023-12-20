@@ -3,7 +3,7 @@
 <%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
     
 <%
-//從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
+//從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
 OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 %>  
     
@@ -55,7 +55,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"> 
-					<img src="<%=request.getContextPath()%>/owneruser/pic/face.svg" alt="企業會員頭像" />企業會員中心</a></li>
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
 			</header>
 		</div>
@@ -195,8 +195,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 				<br> 
                 
                 <span>大頭貼:</span><br>
-                <div id="blob_holder">
-                <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
+                <div id="blob_holder"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
                 <input type="hidden" name="action" value="update">

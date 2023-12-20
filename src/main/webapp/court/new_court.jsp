@@ -17,9 +17,9 @@ Place place = (Place) request.getAttribute("place");
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Pichill企業會員-申請上架球館</title>
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css" media="all" />
 	
 	<!----------------匯入jquery ------------------------>
     <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -190,7 +190,7 @@ Place place = (Place) request.getAttribute("place");
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
-                <input type="tel" id="phone" name="phone" value="<%=(court==null)? "" :court.getcourtTelephone()%>"  required>
+                <input type="text" id="text" name="courtTelephone" value="<%=(court==null)? "" :court.getcourtTelephone()%>"  required>
                 <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px;">包含區域碼 如:0212345678。</font>
                 <br><br>
 
@@ -213,29 +213,29 @@ Place place = (Place) request.getAttribute("place");
 
 
 
-<!--             <label for="placeFee" style="position: relative;left: 23px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br> -->
-<!--             <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;"> -->
-<!--                 <label for="courtType">場地類型：</label> -->
-<!--                 <select id="ball" name="ball"> -->
-<!--                     <option value="0">籃球場</option> -->
-<!--                     <option value="1">排球場</option> -->
-<!--                     <option value="2">羽球場</option> -->
-                    
-<!--                 </select> -->
+                <label for="placeFee" style="position: relative;left: 2px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
+		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
+		                <label for="ball">場地類型：</label>
+		                <select id="ball" name="ball">
+		                    <option value="0">籃球場</option>
+		                    <option value="1">排球場</option>
+		                    <option value="2">羽球場</option>
+		                    
+		                </select>
+		
+		                <label for="itemName">名稱:</label>
+		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" >
+		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
+		
+		                <label for="price" style="position: relative;left: 20px;">價格:</label>
+		                <input type="text" id="placeFee" name="placeFee"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
+		                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
+		
+		                <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button>
+		            </form>
+            <br>
 
-<!--                 <label for="itemName">名稱:</label> -->
-<%--                 <input type="text" id="itemName" value="<%=(place==null)? "022562622" :court.getplaceName()%>" name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" > --%>
-<!--                 <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font> -->
-
-<!--                 <label for="price" style="position: relative;left: 20px;">價格:</label> -->
-<!--                 <input type="text" id="placeFee" name="placeFee"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格"> -->
-<!--                 <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font> -->
-
-<!--                 <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button> -->
-<!--             </form> -->
-<!--             <br> -->
-
-<!--             <label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br> -->
+            	<label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br>
 
             <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
                 <table id="itemTable">
@@ -250,36 +250,6 @@ Place place = (Place) request.getAttribute("place");
                     <tbody></tbody>
                 </table>
             </div>
-
-            <script>
-                $(document).ready(function () {
-                    $("#addButton").click(function () {
-                        var courtType = $("#courtType").val();
-                        var itemName = $("#itemName").val();
-                        var price = $("#price").val();
-
-                        if (courtType && itemName && placeFee) {
-                            var newRow = "<tr>" +
-                                "<td>" + courtType + "</td>" +
-                                "<td>" + itemName + "</td>" +
-                                "<td>" + placeFee + "</td>" +
-                                "<td><button class='deleteButton'>刪除</button></td>" +
-                                "</tr>";
-
-                            $("#itemTable tbody").append(newRow);
-
-                            // 清空輸入欄位
-                            $("#itemName, #price").val("");
-                        } else {
-                            alert("請填寫完整資訊");
-                        }
-                    });
-                    // 刪除按鈕的點擊事件處理
-                    $(document).on("click", ".deleteButton", function () {
-                        $(this).closest("tr").remove();
-                    });
-                });
-            </script>
 
 
 
@@ -316,6 +286,37 @@ Place place = (Place) request.getAttribute("place");
 
     </script>
 
+<!--======================================= 新增場地 / 編輯 / 預覽 =======================================-->
+
+            <script>
+                $(document).ready(function () {
+                    $("#addButton").click(function () {
+                        var courtType = $("#ball").val();
+                        var itemName = $("#placeName").val();
+                        var price = $("#price").val();
+
+                        if (ball && itemName && placeFee) {
+                            var newRow = "<tr>" +
+                                "<td>" + ball + "</td>" +
+                                "<td>" + placeName + "</td>" +
+                                "<td>" + placeFee + "</td>" +
+                                "<td><button class='deleteButton'>刪除</button></td>" +
+                                "</tr>";
+
+                            $("#ball tbody").append(newRow);
+
+                            // 清空輸入欄位
+                            $("#placeName, #placeFee").val("");
+                        } else {
+                            alert("請填寫完整資訊");
+                        }
+                    });
+                    // 刪除按鈕的點擊事件處理
+                    $(document).on("click", ".deleteButton", function () {
+                        $(this).closest("tr").remove();
+                    });
+                });
+            </script>
 
 
     <!----------------------------------------------- footer 區 ------------------------------------------------------->

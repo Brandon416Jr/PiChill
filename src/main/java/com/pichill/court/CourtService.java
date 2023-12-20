@@ -1,10 +1,10 @@
 package com.pichill.court;
 
 import java.util.List;
+import java.util.Set;
 
 import com.pichill.court.Court;
 import com.pichill.court.CourtDAO;
-import com.pichill.court.CourtDAOImpl;
 import com.pichill.place.Place;
 import com.pichill.place.PlaceDAO;
 import com.pichill.place.PlaceDAOImpl;
@@ -36,8 +36,7 @@ public class CourtService {
 		return dao.getAll();
 	}
 	
-	public void insertPlace(List<Place> list) {
-		
-		placeDao.addList(list);
+	public Set<Place> getPlaceByPlaceID(Integer placeID) {
+		return getOneCourt(placeID).getPlace();
 	}
 }

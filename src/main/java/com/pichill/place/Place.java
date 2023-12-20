@@ -8,22 +8,23 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.pichill.court.Court;
 
 
 @Entity
-
 @Table(name = "place")
 public class Place {
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "placeID", updatable = false) //PK鍵不用更新
 	private Integer placeID;
 	
-	@Column(name = "courtID" , updatable = false)
+	@Column(name = "courtID" , updatable = false ,insertable = false )
 	private Integer courtID;
 	
 	@Column(name = "placeName", columnDefinition = "varchar")
@@ -35,12 +36,27 @@ public class Place {
 	@Column(name = "ball")
 	private Integer ball;
 	
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
-//	private Court court;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
+	private Court court;
+	private Court getCourt() {
+	return this.court;
+	}
+	
+	public void setCourt(Court court) {
+		this.court = court;
+	}
+
+//	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+//	@OrderBy("reserveOrderID asc") 
+//	private Set<ReserveOrder> reserveOrder; // Set不重複
 	
 	
-	
+//	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+//	@OrderBy("postID asc") 
+//	private Set<Post> post; // Set不重複
 	
 	public Place() {
 	}

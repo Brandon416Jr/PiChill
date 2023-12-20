@@ -18,9 +18,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.place.Place;
 
-
-
-
 @Entity
 
 @Table(name = "Court")
@@ -75,18 +72,32 @@ public class Court implements Serializable{
 	@Column(name = "courtCloseTime")
 	private Time courtCloseTime;
 	
-//	@OneToMany(mappedBy = "courtID", cascade = CascadeType.ALL)
-//	private Set<Place> place;
+	@OneToMany(mappedBy = "courtID", cascade = CascadeType.ALL)
+	private Set<Place> place;
 	
 	
-//	public Set<Place> getPlace() {
-//		return place;
-//	}
-//
-//	public void setPlace(Set<Place> place) {
-//		this.place = place;
-//	}
+	public Set<Place> getPlace() {
+		return 	this.place;
+	}
 
+	public void setPlace(Set<Place> place) {
+		this.place = place;
+	}
+
+//	// fetch 預設為 LAZY
+//	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+//	@OrderBy("timeID asc") 
+//	private Set<Times> time; // Set不重複
+//	
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "manageID", referencedColumnName = "manageID")
+//	private Manage manage;
+	
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID")
+//	private OwnerUser ownerUser;
+	
 	public Court() {
         super();
     }
