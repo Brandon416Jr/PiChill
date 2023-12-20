@@ -31,8 +31,8 @@ public class Place {
 	@Column(name = "placeID", updatable = false) //PK鍵不用更新
 	private Integer placeID;
 	
-	@Column(name = "courtID" , updatable = false ,insertable = false )
-	private Integer courtID;
+//	@Column(name = "courtID" , updatable = false ,insertable = false )
+//	private Integer courtID;
 	
 	@Column(name = "placeName", columnDefinition = "varchar")
 	private String placeName;
@@ -81,50 +81,50 @@ public class Place {
 	
 	public Place() {
 	}
-	
-	public Place(Integer placeID, Integer courtID, String placeName, Integer placeFee, Integer ball) {
+
+	public Place(Integer placeID, String placeName, Integer placeFee, Integer ball, Court court,
+			Set<ReserveOrder> reserveOrder) {
 		super();
 		this.placeID = placeID;
-		this.courtID = courtID;
 		this.placeName = placeName;
 		this.placeFee = placeFee;
 		this.ball = ball;
+		this.court = court;
+		this.reserveOrder = reserveOrder;
 	}
-	
-	
+
 	public Integer getPlaceID() {
 		return placeID;
 	}
+
 	public void setPlaceID(Integer placeID) {
 		this.placeID = placeID;
 	}
-	public Integer getCourtID() {
-		return courtID;
-	}
-	public void setCourtID(int courtID) {
-		this.courtID = courtID;
-	}
+
 	public String getPlaceName() {
 		return placeName;
 	}
+
 	public void setPlaceName(String placeName) {
 		this.placeName = placeName;
 	}
+
 	public Integer getPlaceFee() {
 		return placeFee;
 	}
+
 	public void setPlaceFee(Integer placeFee) {
 		this.placeFee = placeFee;
 	}
+
 	public Integer getBall() {
 		return ball;
 	}
+
 	public void setBall(Integer ball) {
 		this.ball = ball;
 	}
-	
-	
-	//預約訂單
+
 	public Set<ReserveOrder> getReserveOrder() {
 		return reserveOrder;
 	}
@@ -132,13 +132,11 @@ public class Place {
 	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
 		this.reserveOrder = reserveOrder;
 	}
+
+	@Override
+	public String toString() {
+		return "Place [placeID=" + placeID + ", placeName=" + placeName + ", placeFee=" + placeFee + ", ball=" + ball
+				+ ", court=" + court + ", reserveOrder=" + reserveOrder + "]";
+	}
 	
-	//貼文
-//	public Set<Post> getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(Set<Post> post) {
-//		this.post = post;
-//	}
 }

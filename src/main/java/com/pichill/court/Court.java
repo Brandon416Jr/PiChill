@@ -6,6 +6,7 @@ package com.pichill.court;
 import java.io.Serializable;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,11 +41,11 @@ public class Court implements Serializable{
 	private Integer courtID;
 	
 	
-	@Column(name = "oUserID")
-	private Integer oUserID;
+//	@Column(name = "oUserID")
+//	private Integer oUserID;
 	
-	@Column(name = "manageID")
-	private Integer manageID;
+//	@Column(name = "manageID")
+//	private Integer manageID;
 	
 	@Column(name = "courtOnTime" , updatable = false)
 	private Timestamp courtOnTime;
@@ -53,6 +54,244 @@ public class Court implements Serializable{
 	@CreationTimestamp
 	private Timestamp courtApplyTime;
 	
+	public Integer getCourtID() {
+		return courtID;
+	}
+
+
+
+
+	public void setCourtID(Integer courtID) {
+		this.courtID = courtID;
+	}
+
+
+
+
+	public Timestamp getCourtOnTime() {
+		return courtOnTime;
+	}
+
+
+
+
+	public void setCourtOnTime(Timestamp courtOnTime) {
+		this.courtOnTime = courtOnTime;
+	}
+
+
+
+
+	public Timestamp getCourtApplyTime() {
+		return courtApplyTime;
+	}
+
+
+
+
+	public void setCourtApplyTime(Timestamp courtApplyTime) {
+		this.courtApplyTime = courtApplyTime;
+	}
+
+
+
+
+	public String getCourtName() {
+		return courtName;
+	}
+
+
+
+
+	public void setCourtName(String courtName) {
+		this.courtName = courtName;
+	}
+
+
+
+
+	public byte[] getCourtPic() {
+		return courtPic;
+	}
+
+
+
+
+	public void setCourtPic(byte[] courtPic) {
+		this.courtPic = courtPic;
+	}
+
+
+
+
+	public String getCourtTelephone() {
+		return courtTelephone;
+	}
+
+
+
+
+	public void setCourtTelephone(String courtTelephone) {
+		this.courtTelephone = courtTelephone;
+	}
+
+
+
+
+	public String getCourtAddress() {
+		return courtAddress;
+	}
+
+
+
+
+	public void setCourtAddress(String courtAddress) {
+		this.courtAddress = courtAddress;
+	}
+
+
+
+
+	public String getCourtRule() {
+		return courtRule;
+	}
+
+
+
+
+	public void setCourtRule(String courtRule) {
+		this.courtRule = courtRule;
+	}
+
+
+
+
+	public String getLoc() {
+		return loc;
+	}
+
+
+
+
+	public void setLoc(String loc) {
+		this.loc = loc;
+	}
+
+
+
+
+	public Integer getCourtApplyStatus() {
+		return courtApplyStatus;
+	}
+
+
+
+
+	public void setCourtApplyStatus(Integer courtApplyStatus) {
+		this.courtApplyStatus = courtApplyStatus;
+	}
+
+
+
+
+	public Time getCourtOpenTime() {
+		return courtOpenTime;
+	}
+
+
+
+
+	public void setCourtOpenTime(Time courtOpenTime) {
+		this.courtOpenTime = courtOpenTime;
+	}
+
+
+
+
+	public Time getCourtCloseTime() {
+		return courtCloseTime;
+	}
+
+
+
+
+	public void setCourtCloseTime(Time courtCloseTime) {
+		this.courtCloseTime = courtCloseTime;
+	}
+
+
+
+
+	public Set<ReserveOrder> getReserveOrder() {
+		return reserveOrder;
+	}
+
+
+
+
+	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
+
+
+
+
+	public Set<Place> getPlace() {
+		return place;
+	}
+
+
+
+
+	public void setPlace(Set<Place> place) {
+		this.place = place;
+	}
+
+
+
+
+	public Set<TimeRef> getTimeref() {
+		return timeref;
+	}
+
+
+
+
+	public void setTimeref(Set<TimeRef> timeref) {
+		this.timeref = timeref;
+	}
+
+
+
+
+	public Manage getManage() {
+		return manage;
+	}
+
+
+
+
+	public void setManage(Manage manage) {
+		this.manage = manage;
+	}
+
+
+
+
+	public OwnerUser getOwnerUser() {
+		return ownerUser;
+	}
+
+
+
+
+	public void setOwnerUser(OwnerUser ownerUser) {
+		this.ownerUser = ownerUser;
+	}
+
+
+
+
 	@Column(name = "courtName")
 	private String courtName;
 	
@@ -108,7 +347,7 @@ public class Court implements Serializable{
      //管理員
 	 //fetch 預設為 EAGER
 	 @ManyToOne
-	 @JoinColumn(name = "manageID", referencedColumnName = "manageID", updatable = false)
+	 @JoinColumn(name = "manageID", referencedColumnName = "manageID", updatable = false )
 	 private Manage manage;
 	  
 	// @Column(name="courtID", updatable = false)
@@ -124,200 +363,49 @@ public class Court implements Serializable{
 	
 
 	
+	public Court(Integer courtID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName, byte[] courtPic,
+			String courtTelephone, String courtAddress, String courtRule, String loc, Integer courtApplyStatus,
+			Time courtOpenTime, Time courtCloseTime, Set<ReserveOrder> reserveOrder, Set<Place> place,
+			Set<TimeRef> timeref, Manage manage, OwnerUser ownerUser) {
+		super();
+		this.courtID = courtID;
+		this.courtOnTime = courtOnTime;
+		this.courtApplyTime = courtApplyTime;
+		this.courtName = courtName;
+		this.courtPic = courtPic;
+		this.courtTelephone = courtTelephone;
+		this.courtAddress = courtAddress;
+		this.courtRule = courtRule;
+		this.loc = loc;
+		this.courtApplyStatus = courtApplyStatus;
+		this.courtOpenTime = courtOpenTime;
+		this.courtCloseTime = courtCloseTime;
+		this.reserveOrder = reserveOrder;
+		this.place = place;
+		this.timeref = timeref;
+		this.manage = manage;
+		this.ownerUser = ownerUser;
+	}
+
+
+
+
 	public Court() {
         super();
     }
-	
-	public Court(Integer courtID, Integer oUserID, Integer manageID, Timestamp courtOnTime, Timestamp courtApplyTime, String courtName,byte[] courtPic, String courtTelephone, String courtAddress, String courtRule, String loc, Integer courtApplyStatus, Time courtOpenTime, Time courtCloseTime) {
-		this.courtID = courtID;
-		this.oUserID = oUserID;
-		this.manageID = manageID;
-		this.courtOnTime = courtOnTime;
-		this.courtApplyTime = courtApplyTime;
-		this.courtName = courtName;
-		this.courtPic = courtPic;
-		this.courtTelephone = courtTelephone;
-		this.courtAddress = courtAddress;
-		this.courtRule = courtRule;
-		this.loc = loc;
-		this.courtApplyStatus = courtApplyStatus;
-		this.courtOpenTime = courtOpenTime;
-		this.courtCloseTime = courtCloseTime;
-	}
 
 
-	public Integer getCourtID() {
-		return courtID;
-	}
 
-	public void setCourtID(Integer courtID) {
-		this.courtID = courtID;
-	}
 
-	public Integer getoUserID() {
-		return oUserID;
-	}
-
-	public void setoUserID(Integer oUserID) {
-		this.oUserID = oUserID;
-	}
-
-	public Integer getmanageID() {
-		return manageID;
-	}
-
-	public void setmanageID(Integer manageID) {
-		this.manageID = manageID;
-	}
-
-	public Timestamp getcourtOnTime() {
-		return courtOnTime;
-	}
-
-	public void setcourtOnTime(Timestamp courtOnTime) {
-		this.courtOnTime = courtOnTime;
-	}
-
-	public Timestamp getcourtApplyTime() {
-		return courtApplyTime;
-	}
-
-	public void setcourtApplyTime(Timestamp courtApplyTime) {
-		this.courtApplyTime = courtApplyTime;
-	}
-
-	public String getcourtName() {
-		return courtName;
-	}
-
-	public void setcourtName(String courtName) {
-		this.courtName = courtName;
-	}
-
-	public byte[] getcourtPic() {
-		return courtPic;
-	}
-
-	public void setcourtPic(byte[] courtPic) {
-		this.courtPic = courtPic;
-	}
-
-	public String getcourtTelephone() {
-		return courtTelephone;
-	}
-
-	public void setcourtTelephone(String courtTelephone) {
-		this.courtTelephone = courtTelephone;
-	}
-
-	public String getcourtAddress() {
-		return courtAddress;
-	}
-
-	public void setcourtAddress(String courtAddress) {
-		this.courtAddress = courtAddress;
-	}
-
-	public String getcourtRule() {
-		return courtRule;
-	}
-
-	public void setcourtRule(String courtRule) {
-		this.courtRule = courtRule;
-	}
-
-	public String getloc() {
-		return loc;
-	}
-
-	public void setloc(String loc) {
-		this.loc = loc;
-	}
-
-	public Integer getcourtApplyStatus() {
-		return courtApplyStatus;
-	}
-
-	public void setcourtApplyStatus(Integer courtApplyStatus) {
-		this.courtApplyStatus = courtApplyStatus;
-	}
-	public Time getcourtOpenTime() {
-		return courtOpenTime;
-	}
-
-	
-	public void setcourtOpenTime(Time courtOpenTime) {
-		this.courtOpenTime = courtOpenTime;
-	}
-
-	public Time getcourtCloseTime() {
-		return courtCloseTime;
-	}
-
-	public void setcourtCloseTime(Time courtCloseTime) {
-		this.courtCloseTime = courtCloseTime;
+	@Override
+	public String toString() {
+		return "Court [courtID=" + courtID + ", courtOnTime=" + courtOnTime + ", courtApplyTime=" + courtApplyTime
+				+ ", courtName=" + courtName + ", courtPic=" + Arrays.toString(courtPic) + ", courtTelephone="
+				+ courtTelephone + ", courtAddress=" + courtAddress + ", courtRule=" + courtRule + ", loc=" + loc
+				+ ", courtApplyStatus=" + courtApplyStatus + ", courtOpenTime=" + courtOpenTime + ", courtCloseTime="
+				+ courtCloseTime + ", reserveOrder=" + reserveOrder + ", place=" + place + ", timeref=" + timeref
+				+ ", manage=" + manage + ", ownerUser=" + ownerUser + "]";
 	}
 	
-	
-	
-	//預約訂單
-	public Set<ReserveOrder> getReserveOrder() {
-		return reserveOrder;
-	}
 
-	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
-		this.reserveOrder = reserveOrder;
-	}
-	
-	
-	//場地
-	public Set<Place> getPlace() {
-		return place;
-	}
-
-	public void setPlace(Set<Place> place) {
-		this.place = place;
-	}
-	
-	//時段
-	public Set<TimeRef> getTimeRef() {
-		return timeref;
-	}
-
-	public void setTimeRef(Set<TimeRef> timeref) {
-		this.timeref = timeref;
-	}
-	
-	
-	
-	
-	//管理員
-	public Manage getManage() {
-	return manage;
-	}
-
-	public void setManage(Manage manage) {
-	this.manage = manage;
-	}
-	
-	//企業會員
-	public OwnerUser getOwnerUser() {
-	return ownerUser;
-	}
-
-	public void setOwnerUser(OwnerUser ownerUser) {
-	this.ownerUser = ownerUser;
-	}
-	
-	
-	
-
-	// for join placeID from place
-//    public com.pichill.place.Place getPlace() {
-//        com.pichill.place.PlaceService placeSvc = new com.pichill.place.PlaceService();
-//        com.pichill.place.Place place = placeSvc.getOnePlace(placeName);
-//        com.pichill.place.Place place1 = placeSvc.getOnePlace(placeFee);
-//        com.pichill.place.Place place2 = placeSvc.getOnePlace(ball);
-//	    return place;
-//    }
 }
