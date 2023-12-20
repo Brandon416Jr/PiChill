@@ -1,4 +1,4 @@
-package com.pichill.backstage.comment.controller;
+package com.pichill.backstage.commentb.controller;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.backstage.comment.service.CommentServiceBack;
+import com.pichill.backstage.commentb.service.CommentServiceBack;
 import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
-import com.pichill.backstage.post.service.PostServiceBack;
+import com.pichill.backstage.postb.service.PostServiceBack;
 import com.pichill.comment.entity.Comment;
 import com.pichill.post.entity.Post;
 

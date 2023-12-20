@@ -109,7 +109,8 @@ label.pwd-see2 {
 									</div>
 								</div>
 								<div class="form-group">
-									<label>驗證碼</label> <input class="au-input au-input--full"
+									<label>驗證碼</label><font color=red>${requestScope.errorMsgs.checkCode}</font>
+									 <input class="au-input au-input--full"
 										type="text" name="checkCode" placeholder="請輸入驗證碼" /> <img
 										id="yzm_img" src="${pageContext.request.contextPath}/valistr"
 										style="cursor: pointer" onclick="changeYZM(this)" /> <span

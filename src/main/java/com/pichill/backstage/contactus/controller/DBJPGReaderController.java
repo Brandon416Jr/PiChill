@@ -24,9 +24,9 @@ public class DBJPGReaderController extends HttpServlet {
 		try {
 			Integer formID = Integer.valueOf(req.getParameter("formID"));
 			ContactUsServiceBack contactUsSvcB = new ContactUsServiceBack();
-			out.write(contactUsSvcB.getOneForm(formID).getFormPic());
+			out.write(contactUsSvcB.getOneForm(formID).getformPic());
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 

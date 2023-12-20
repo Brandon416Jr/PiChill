@@ -2,9 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.report.entity.Report"%>
-<%@ page import="com.pichill.report.model.ReportDAO"%>
-<%@ page import="com.pichill.backstage.report.model.ReportDAOImplBack"%>
-<%@ page import="com.pichill.backstage.report.service.ReportServiceBack"%>
+<%@ page import="com.pichill.backstage.reportb.model.*"%>
+<%@ page import="com.pichill.backstage.reportb.service.ReportServiceBack"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%

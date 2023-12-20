@@ -1,4 +1,4 @@
-package com.pichill.backstage.report.model;
+package com.pichill.backstage.reportb.model;
 
 
 import java.util.List;
@@ -10,7 +10,7 @@ import com.pichill.report.entity.Report;
 import com.pichill.report.model.ReportDAO;
 import com.pichill.util.HibernateUtil;
 
-public class ReportDAOImplBack implements ReportDAO {
+public class ReportDAOImplBack implements ReportDAOBack {
 	private SessionFactory factory;
 	
 	public ReportDAOImplBack() {

@@ -29,7 +29,7 @@ public class DBJPGReaderController extends HttpServlet {
 			req.setAttribute("ownerUser", ownerUser);
 			out.write(oUserSvcB.getOneOwnerUser(oUserID).getoProfilePic());
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 

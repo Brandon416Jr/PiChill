@@ -1,4 +1,4 @@
-package com.pichill.backstage.comment.model;
+package com.pichill.backstage.commentb.model;
 
 import java.util.List;
 

@@ -3,10 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.comment.entity.Comment"%>
-<%@ page import="com.pichill.comment.model.*"%>
-<%@ page import="com.pichill.backstage.comment.model.*"%>
+<%@ page import="com.pichill.backstage.commentb.model.*"%>
 <%@ page
-	import="com.pichill.backstage.comment.service.CommentServiceBack"%>
+	import="com.pichill.backstage.commentb.service.CommentServiceBack"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");

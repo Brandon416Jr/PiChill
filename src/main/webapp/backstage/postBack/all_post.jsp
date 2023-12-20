@@ -3,9 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.post.entity.Post"%>
-<%@ page import="com.pichill.post.model.*"%>
-<%@ page import="com.pichill.backstage.post.model.*"%>
-<%@ page import="com.pichill.backstage.post.service.PostServiceBack"%>
+<%@ page import="com.pichill.backstage.postb.model.*"%>
+<%@ page import="com.pichill.backstage.postb.service.PostServiceBack"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%

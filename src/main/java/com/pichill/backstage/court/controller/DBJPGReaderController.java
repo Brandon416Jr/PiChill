@@ -25,7 +25,7 @@ public class DBJPGReaderController extends HttpServlet {
 			CourtServiceBack courtSvcB = new CourtServiceBack();
 			out.write(courtSvcB.getOneCourt(courtID).getcourtPic());
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 

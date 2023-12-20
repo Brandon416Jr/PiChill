@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.backstage.contactus.entity.ContactUs"%>
+<%@ page import="com.pichill.contactus.entity.ContactUs"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
@@ -285,7 +285,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													value="<%=contactUs.getFormID()%>" name="formID"
+													value="<%=contactUs.getformID()%>" name="formID"
 													class="form-control" />
 											</div>
 										</div>
@@ -315,7 +315,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="formPurpose" value="<%=contactUs.getFormPurpose()%>"
+													name="formPurpose" value="<%=contactUs.getformPurpose()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>
@@ -326,7 +326,7 @@ input.btn {
 											</div>
 											<div class="textbox col-10 col-md-8">
 												<textarea name="formContent" id="textarea-input"
-													disabled="disabled" rows="9" class="form-control"><%=contactUs.getFormContent()%>
+													disabled="disabled" rows="9" class="form-control"><%=contactUs.getformContent()%>
                             						</textarea>
 												<!-- <input type="text" id="text-input" disabled="" name="text-input" placeholder="rfrfrfr" class="form-control"> -->
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
@@ -354,7 +354,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="formTime" value="<%=contactUs.getFormTime()%>"
+													name="formTime" value="<%=contactUs.getformTime()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>
@@ -365,7 +365,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<%
-												int status = contactUs.getFormStatus();
+												int status = contactUs.getformStatus();
 												%>
 												<select name="formStatus" id="selectLm"
 													class="form-control-sm form-control">
@@ -389,7 +389,7 @@ input.btn {
 												<div class="col-12 col-md-8">
 													<input type="hidden" name="action" value="update">
 													<input type="hidden" name="formID"
-														value="<%=contactUs.getFormID()%>"> <input
+														value="<%=contactUs.getformID()%>"> <input
 														type="submit" class="btn btn-primary btn-sm" value="°e¥X­×§ï">
 													<i class="fa fa-dot-circle-o"></i>
 												</div>

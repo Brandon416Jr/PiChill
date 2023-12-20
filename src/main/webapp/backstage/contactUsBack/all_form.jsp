@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.pichill.backstage.contactus.entity.ContactUs"%>
+<%@ page import="com.pichill.contactus.entity.ContactUs"%>
 <%@ page import="com.pichill.backstage.contactus.model.ContactUsDAOBack"%>
 <%@ page
 	import="com.pichill.backstage.contactus.model.ContactUsDAOImplBack"%>

@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.pichill.backstage.contactus.entity.ContactUs;
+import com.pichill.contactus.entity.ContactUs;
 import com.pichill.backstage.contactus.model.ContactUsDAOBack;
 import com.pichill.util.HibernateUtil;
 

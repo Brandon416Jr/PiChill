@@ -1,4 +1,4 @@
-package com.pichill.backstage.post.controller;
+package com.pichill.backstage.postb.controller;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.pichill.backstage.postb.service.PostServiceBack;
 import com.pichill.post.entity.Post;
-import com.pichill.backstage.post.service.PostServiceBack;
 
 
 @WebServlet(name = "PostBServlet", value="/post/postb.do")

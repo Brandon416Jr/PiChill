@@ -324,7 +324,7 @@ Post post = (Post) request.getAttribute("post");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="file" id="file-input" name="postPic" value="${post.postPic }"
-														multiple="multiple" onclick="previewImage()" onchange="preview()"
+														multiple="multiple" onclick="previewImage()" onchange="preview()" disabled="disabled"
 														class="form-control-file" /> 
 																										<div id="blob_holder">
 																											<img

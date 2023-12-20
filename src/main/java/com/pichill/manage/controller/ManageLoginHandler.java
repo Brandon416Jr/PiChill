@@ -26,7 +26,7 @@ public class ManageLoginHandler extends HttpServlet {
 	private static int loginAttempts = 0;  // 登入嘗試次數
 	private static long lockoutTime = 0;   // 鎖定時間
 	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
-	private static final long LOCKOUT_DURATION = 5 * 60 * 1000;
+	private static final long LOCKOUT_DURATION = 1 * 60 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 	// 【實際上應至資料庫搜尋比對】
 	protected boolean allowAdmin(String mUserName, String mPassword) {
@@ -44,6 +44,8 @@ public class ManageLoginHandler extends HttpServlet {
 //	    else
 //	      return false;
 	}
+	
+	
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -100,10 +102,10 @@ public class ManageLoginHandler extends HttpServlet {
 		    	req.setAttribute("lockoutTime", lockoutTime);
 				if (System.currentTimeMillis() < lockoutTime) {
 				    System.out.println("帳號已被鎖定，請稍候再試");
-				    res.sendRedirect("/login/failToLogin.jsp");
+				    res.sendRedirect(req.getContextPath() +"/login/failToLogin.jsp");
 				    return;
 				} else {
-					res.sendRedirect("/login/mLogin/manageLogin.jsp");
+					res.sendRedirect(req.getContextPath() +"/login/mLogin/manageLogin.jsp");
 					return;
 				}
 		    }
@@ -143,7 +145,8 @@ public class ManageLoginHandler extends HttpServlet {
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
-
+			
+//			res.setContentType("image/jpeg");
 //			// 禁止瀏覽器快取驗證碼
 //			res.setDateHeader("Expires", -1);
 //			res.setHeader("Cache-Control", "no-cache");
@@ -158,23 +161,24 @@ public class ManageLoginHandler extends HttpServlet {
 //			sessionCode.setAttribute("valistr", valistr);
 //			// 列印到控制檯
 //			System.out.println(valistr);
-//
-//			String inputCode = req.getParameter("checkCode");
-//
-//			if (!valistr.equalsIgnoreCase(inputCode)) {
-//				errorMsgs.put("checkCode", "輸入的驗證碼錯誤!");
-//			}
-//
-//			// Send the use back to the form, if there were errors
-//			if (!errorMsgs.isEmpty()) {
-//				System.out.println("有進第三個error提示區域");
-//				RequestDispatcher failureView = req.getRequestDispatcher("/login/mLogin/manageLogin.jsp");
-//				failureView.forward(req, res);
-//				return;// 程式中斷
-//			}
+//	
+			HttpSession session = req.getSession();
+			String inputCode = req.getParameter("checkCode");
+			String valistr = (String) session.getAttribute("valistr");
+			if (!valistr.equalsIgnoreCase(inputCode)) {
+				errorMsgs.put("checkCode", "輸入的驗證碼錯誤!");
+			}
+
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				System.out.println("有進第三個error提示區域");
+				RequestDispatcher failureView = req.getRequestDispatcher("/login/mLogin/manageLogin.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-			HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
+			 session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 
 //			session.setAttribute("mUserName", mUserName); // *工作1: 才在session內做已經登入過的標識
 			

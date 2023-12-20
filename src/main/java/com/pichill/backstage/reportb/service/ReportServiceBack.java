@@ -1,14 +1,13 @@
-package com.pichill.backstage.report.service;
+package com.pichill.backstage.reportb.service;
 
 import java.util.List;
 
-import com.pichill.backstage.report.model.ReportDAOImplBack;
-import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.backstage.reportb.model.ReportDAOImplBack;
 import com.pichill.report.entity.Report;
-import com.pichill.report.model.ReportDAO;
+import com.pichill.backstage.reportb.model.ReportDAOBack;
 
 public class ReportServiceBack {
-	private final ReportDAO dao;
+	private final ReportDAOBack dao;
 
 	public ReportServiceBack() {
 		dao = new ReportDAOImplBack();
