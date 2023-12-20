@@ -50,8 +50,8 @@ public class Post {
 //@JoinColumn(name= "placeID",referencedColumnName = "placeID")
 //private Place place;
 
-	@Column(name = "placeID")
-	private Integer placeID;
+//	@Column(name = "placeID")
+//	private Integer placeID;
 
 	@Column(name = "postTitle")
 	private String postTitle;
@@ -119,13 +119,13 @@ public class Post {
 		this.oUserID = oUserID;
 	}
 
-	public Integer getPlaceID() {
-		return placeID;
-	}
-
-	public void setPlaceID(Integer placeID) {
-		this.placeID = placeID;
-	}
+//	public Integer getPlaceID() {
+//		return placeID;
+//	}
+//
+//	public void setPlaceID(Integer placeID) {
+//		this.placeID = placeID;
+//	}
 
 	public String getPostTitle() {
 		return postTitle;
@@ -183,13 +183,13 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
-	@Override
-	public String toString() {
-		return "Post [postID=" + postID + ", generalUser=" + generalUser + ", oUserID=" + oUserID + ", placeID="
-				+ placeID + ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType
-				+ ", postTime=" + postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt
-				+ ", commentCnt=" + commentCnt + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Post [postID=" + postID + ", generalUser=" + generalUser + ", oUserID=" + oUserID + ", placeID="
+//				+ placeID + ", postTitle=" + postTitle + ", postContent=" + postContent + ", postType=" + postType
+//				+ ", postTime=" + postTime + ", postPic=" + Arrays.toString(postPic) + ", likeCnt=" + likeCnt
+//				+ ", commentCnt=" + commentCnt + "]";
+//	}
 
 //	public Set<ForumLike>getForumLikes(){
 //		return forumlikes;
