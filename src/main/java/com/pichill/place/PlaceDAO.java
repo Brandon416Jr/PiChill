@@ -11,6 +11,5 @@ public interface PlaceDAO {
 	void delete(int placeID);
 	public Place getPlaceByPlaceID(Integer placeID);
 	List<Place> getAll();
-//	void addList(List<Place> list);
 	List<Place> getByCompositeQuery(Map<String, String> map);
 }

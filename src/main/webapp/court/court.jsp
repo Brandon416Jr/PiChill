@@ -123,9 +123,9 @@ Court court = (Court) request.getAttribute("court");
 			</c:if>
 
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/court/court.do" enctype="multipart/form-data" class="bararea">
-			<span>球館編號:</span>
-				<input type="text" id="courtID" name="courtID" value="<%=court.getCourtID()%>" disabled/>
-				<br><br>
+<!-- 			<span>球館編號:</span> -->
+<%-- 				<input type="text" id="courtID" name="courtID" value="<%=court.getCourtID()%>" disabled/> --%>
+<!-- 				<br><br> -->
 <!-- 			<span>企業會員編號:</span> -->
 <%-- 				<input type="text" id="ouserID" name="ouserID" value="<%=court.getoUserID()%>" disabled/> --%>
 <!-- 				<br><br> -->
@@ -192,7 +192,47 @@ Court court = (Court) request.getAttribute("court");
                 </div>
                 <input type="file" id="courtPic" name="courtPic" onclick="previewImage()" multiple="multiple" />
                 <br>
+                <br>
                 
+                <label for="placeFee" style="position: relative;left: 2px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
+		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
+		                <label for="ball">場地類型：</label>
+		                <select id="ball" name="ball">
+		                    <option value="0">籃球場</option>
+		                    <option value="1">排球場</option>
+		                    <option value="2">羽球場</option>
+		                    
+		                </select>
+		
+		                <label for="itemName">名稱:</label>
+		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" >
+		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
+		
+		                <label for="price" style="position: relative;left: 20px;">價格:</label>
+		                <input type="text" id="placeFee" name="placeFee"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
+		                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
+		
+		                <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button>
+		            </form>
+            <br>
+
+            	<label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br>
+
+            <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
+                <table id="itemTable">
+                    <thead>
+                        <tr>
+                            <th>場地類型</th>
+                            <th>名稱</th>
+                            <th>價格</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+
                 
                 
                 <input type="hidden" name="action" value="update">
@@ -284,8 +324,37 @@ Court court = (Court) request.getAttribute("court");
 	</script>
 
 
+<!--======================================= 新增場地 / 編輯 / 預覽 =======================================-->
 
+            <script>
+                $(document).ready(function () {
+                    $("#addButton").click(function () {
+                        var courtType = $("#ball").val();
+                        var itemName = $("#placeName").val();
+                        var price = $("#price").val();
 
+                        if (ball && itemName && placeFee) {
+                            var newRow = "<tr>" +
+                                "<td>" + ball + "</td>" +
+                                "<td>" + placeName + "</td>" +
+                                "<td>" + placeFee + "</td>" +
+                                "<td><button class='deleteButton'>刪除</button></td>" +
+                                "</tr>";
+
+                            $("#ball tbody").append(newRow);
+
+                            // 清空輸入欄位
+                            $("#placeName, #placeFee").val("");
+                        } else {
+                            alert("請填寫完整資訊");
+                        }
+                    });
+                    // 刪除按鈕的點擊事件處理
+                    $(document).on("click", ".deleteButton", function () {
+                        $(this).closest("tr").remove();
+                    });
+                });
+            </script>
 
 
 
