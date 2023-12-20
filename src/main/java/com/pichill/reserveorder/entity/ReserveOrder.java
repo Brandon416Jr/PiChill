@@ -18,7 +18,7 @@ import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
-import com.pichill.time.Time;
+import com.pichill.timeref.TimeRef;
 
 @Entity
 @Table(name="reserveorder")
@@ -51,7 +51,7 @@ public class ReserveOrder {
 	// fetch 預設為 EAGER
 	@ManyToOne
 	@JoinColumn(name = "timeID", referencedColumnName = "timeID", updatable = false)
-	private Time time;
+	private TimeRef timeRef;
 		
 //	@Column(name="timeID", updatable = false)
 //	private Integer timeID;
