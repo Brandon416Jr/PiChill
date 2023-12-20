@@ -1,15 +1,20 @@
 package com.pichill.contactus.entity;
 
 import java.sql.Timestamp;
+import java.util.Arrays;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.pichill.generaluser.entity.GeneralUser;
 
 
 @Entity
@@ -21,17 +26,12 @@ public class ContactUs {
 	@Column(name = "formID", updatable = false, insertable = false)
 	private Integer formID;
 
-//	@ManyToOne
-//	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
-//    private GUser gUser;
+	@ManyToOne
+	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
+    private GeneralUser generalUser;
 
-	@Column(name = "gUserID", updatable = false)
-	private Integer gUserID;
-
-//	@ManyToOne
-//	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
-//    private OUser oUser;
-
+	@ManyToOne
+	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
 	@Column(name = "oUserID", updatable = false)
 	private Integer oUserID;
 
@@ -61,12 +61,12 @@ public class ContactUs {
 	}
 	
 	
-	@Override
-	public String toString() {
-		return "ContactUs [formID=" + formID + ", oUserID=" + oUserID + ", gUserID=" + gUserID + ", formPurpose="
-				+ formPurpose + ", formContent=" + formContent + ",formPic=" + formPic + ",formTime=" + formTime
-				+ ",formStatus=" + formStatus + ",formType=" + formType + "]";
-	}	
+//	@Override
+//	public String toString() {
+//		return "ContactUs [formID=" + formID + ", oUserID=" + oUserID + ", gUserID=" + gUserID + ", formPurpose="
+//				+ formPurpose + ", formContent=" + formContent + ",formPic=" + formPic + ",formTime=" + formTime
+//				+ ",formStatus=" + formStatus + ",formType=" + formType + "]";
+//	}	
 	
 	
 //public class ContactUs implements Serializable {
@@ -98,9 +98,28 @@ public class ContactUs {
 //
 //	}
 
+	@Override
+	public String toString() {
+		return "ContactUs [formID=" + formID + ", generalUser=" + generalUser + ", oUserID=" + oUserID
+				+ ", formPurpose=" + formPurpose + ", formContent=" + formContent + ", formPic="
+				+ Arrays.toString(formPic) + ", formTime=" + formTime + ", formStatus=" + formStatus + ", formType="
+				+ formType + "]";
+	}
+
+
 	public Integer getformID() {
 		return formID;
 	}
+
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+
+
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
+	}
+
 
 	public void setformID(Integer formID) {
 		this.formID = formID;
@@ -114,13 +133,13 @@ public class ContactUs {
 		this.oUserID = oUserID;
 	}
 
-	public Integer getgUserID() {
-		return gUserID;
-	}
-
-	public void setgUserID(Integer gUserID) {
-		this.gUserID = gUserID;
-	}
+//	public Integer getgUserID() {
+//		return gUserID;
+//	}
+//
+//	public void setgUserID(Integer gUserID) {
+//		this.gUserID = gUserID;
+//	}
 
 	public String getformPurpose() {
 		return formPurpose;

@@ -148,8 +148,9 @@
 
 			<li>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/announcement/announcement_single.jsp">
-					<b>請輸入要查詢之公告:</b> <select size="1" name="announceID">
-						<c:forEach var="form" items="${announcementGetOneService.getAll}">
+					<b>請輸入要查詢之公告:</b> <input type="text" name="announceID">
+					<!-- <select size="1" name="announceID"> -->
+						<c:forEach var="announcement" items="${announcementGetOneService.getAll}">
 							<option value="${announcementGetOne.annoTitle}">${announcementGetOne.annoTitle}
 						</c:forEach>
 					</select> <input type="hidden" name="action" value="getOneForDisplay">

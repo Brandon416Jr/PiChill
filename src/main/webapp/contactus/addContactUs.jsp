@@ -78,7 +78,7 @@
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="formType">
-         <c:forEach var="post" items="${contactUsService.getAll}">  
+         <c:forEach var="contactus" items="${list}">  
          <option value="${contactus.formType}">${contactus.formType} 
                     <option value = "0">一般</option>
                     <option value = "1">公告</option>
