@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.owneruser.entity.OwnerUser;
 
 
 @Entity
@@ -28,13 +29,11 @@ public class ContactUs {
 
 	@ManyToOne
 	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
-	@Column(name = "gUserID", updatable = false)
     private GeneralUser generalUser;
 
 	@ManyToOne
 	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
-	@Column(name = "oUserID", updatable = false)
-	private Integer oUserID;
+	private OwnerUser ownerUser;
 
 	@Column(name = "formPurpose" , columnDefinition = "varchar", updatable = false)
 	private String formPurpose;
@@ -101,7 +100,7 @@ public class ContactUs {
 
 	@Override
 	public String toString() {
-		return "ContactUs [formID=" + formID + ", generalUser=" + generalUser + ", oUserID=" + oUserID
+		return "ContactUs [formID=" + formID + ", generalUser=" + generalUser + ", ownerUser=" + ownerUser
 				+ ", formPurpose=" + formPurpose + ", formContent=" + formContent + ", formPic="
 				+ Arrays.toString(formPic) + ", formTime=" + formTime + ", formStatus=" + formStatus + ", formType="
 				+ formType + "]";
@@ -126,12 +125,12 @@ public class ContactUs {
 		this.formID = formID;
 	}
 
-	public Integer getoUserID() {
-		return oUserID;
+	public OwnerUser getOwnerUser() {
+		return ownerUser;
 	}
 
-	public void setoUserID(Integer oUserID) {
-		this.oUserID = oUserID;
+	public void setoUserID(OwnerUser oUserID) {
+		this.ownerUser = oUserID;
 	}
 
 //	public Integer getgUserID() {
