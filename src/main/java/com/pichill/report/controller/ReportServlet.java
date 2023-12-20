@@ -2,8 +2,6 @@ package com.pichill.report.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.pichill.comment.entity.Comment;
+import com.pichill.comment.service.CommentService;
+import com.pichill.comment.service.CommentServiceImpl;
+import com.pichill.post.entity.Post;
+import com.pichill.post.service.PostService;
+import com.pichill.post.service.PostServiceImpl;
 import com.pichill.report.entity.Report;
 import com.pichill.report.service.ReportService;
 import com.pichill.report.service.ReportServiceImpl;
@@ -30,8 +34,10 @@ public class ReportServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 //			System.out.println(postID);
 			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
+			PostService postService = new PostServiceImpl();
+			Post post = postService.getByPostID(postID);
 			Report report = new Report();
-			report.setPostID(postID);
+			report.setPost(post);
 			report.setReportType(reportType);
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();
@@ -45,8 +51,10 @@ public class ReportServlet extends HttpServlet {
 			Integer commentID = Integer.valueOf(req.getParameter("commentID"));
 //			System.out.println(postID);
 			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
+			CommentService commentService = new CommentServiceImpl();
+			Comment comment = commentService.getByCommentID(commentID);
 			Report report = new Report();
-			report.setCommentID(commentID);
+			report.setComment(comment);
 			report.setReportType(reportType);
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();
