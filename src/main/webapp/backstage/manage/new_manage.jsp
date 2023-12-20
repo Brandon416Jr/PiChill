@@ -1,10 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+
+
 
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Manage manage = (Manage) request.getAttribute("manage");
+Manage newManage = (Manage) request.getAttribute("newManage");
+%>
+
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
 %>
 
 <!DOCTYPE html>
@@ -43,7 +56,7 @@ Manage manage = (Manage) request.getAttribute("manage");
 	rel="stylesheet" media="all" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/set.css" />
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
 	media="all" />
 <style>
@@ -64,6 +77,7 @@ select:invalid+.custom-message {
 	font-weight: bold;
 	margin-top: 5px;
 }
+
 .account-dropdown__footer {
 	display: flex;
 	justify-content: flex-end;
@@ -78,151 +92,156 @@ select:invalid+.custom-message {
 </head>
 
 <body class="animsition">
-<div class="page-wrapper">
+	<div class="page-wrapper">
 		<!-- MENU SIDEBAR-->
-	<div class="sidebar">
-		<aside class="menu-sidebar d-none d-lg-block">
-			<div class="menu-sidebar__content js-scrollbar1">
-				<nav class="navbar-sidebar">
-					<ul class="list-unstyled navbar__list expanded">
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>員工管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
-								<li><a
-									href="#">新增員工資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>一般會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>企業會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>最新消息管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>論壇管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">檢舉管理</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>球館管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>預約管理
+		<div class="sidebar">
+			<aside class="menu-sidebar d-none d-lg-block">
+				<div class="menu-sidebar__content js-scrollbar1">
+					<nav class="navbar-sidebar">
+						<ul class="list-unstyled navbar__list expanded">
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>員工管理
 							</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a class="active"
+										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
+									<li><a href="#">新增員工資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>一般會員管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
+
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>企業會員管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
+
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>最新消息管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>論壇管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">檢舉管理</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>球館管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>預約管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
 								</ul></li>
-					</ul>
-				</nav>
-			</div>
-		</aside>
-		<!-- END MENU SIDEBAR-->
-	</div>
+						</ul>
+					</nav>
+				</div>
+			</aside>
+			<!-- END MENU SIDEBAR-->
+		</div>
 
-	<!-- PAGE CONTAINER-->
-	<div class="page-container">
-		<!-- HEADER DESKTOP-->
-		<header class="header-desktop">
-			<div class="section__content section__content--p30">
-				<div class="container-fluid">
-					<div class="header-wrap">
-						<div class="header-logo">
-							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
-								class="img-logo"
-								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
-<!-- 							<a href="index.html"><img class="img-logo"  -->
-<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
-						</div>
-						
-						<div class="welcome">
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="header-wrap">
+							<div class="header-logo">
+								<a
+									href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
+									class="img-logo"
+									src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
+								<!-- 							<a href="index.html"><img class="img-logo"  -->
+								<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
+							</div>
+
+							<div class="welcome">
 								<div class="flex">
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 									<p class="welcome">π Chill後臺管理系統</p>
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 								</div>
 							</div>
-						
-						<div class="header-button">
-							<div class="account-wrap">
-								<div class="account-item clearfix js-item-menu">
-									<div class="image">
-<!-- 										<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
+
+							<div class="header-button">
+								<div class="account-wrap">
+									<div class="account-item clearfix js-item-menu">
+										<div class="image">
 											<img
-											src="<%=request.getContextPath()%>/image/Group 115.png"
+												src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+												alt="使用者頭像" />
+											<%-- 											<img src="<%=request.getContextPath()%>/image/Group 115.png" --%>
 											alt="使用者頭像" />
-									</div>
-									<div class="content">
-										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
-									</div>
-									<div class="account-dropdown js-dropdown">
-										<div class="info clearfix">
-											<div class="image">
-												<a href="#"> 
-<!-- 												<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
-												<img
-													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="" />
-												</a>
-											</div>
-											<div class="content">
-												<h5 class="name">
-													<a href="#">羅裕鵬</a>
-<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
-												</h5>
-												<span class="email">brandon416jr@gmail.com</span>
-<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
-											</div>
 										</div>
-										<div class="account-dropdown__footer">
-											<form method="POST"
+										<div class="content">
+											<!-- 											<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+											<a class="js-acc-btn" href="#">管理員<%=manage.getmName()%>，您好
+											</a>
+										</div>
+										<div class="account-dropdown js-dropdown">
+											<div class="info clearfix">
+												<div class="image">
+													<a href="#"> <img
+														src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+														alt="使用者頭像" /> <!-- 																								<img --> <%-- 														src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+														<!-- 														alt="" /> -->
+													</a>
+												</div>
+												<div class="content">
+													<h5 class="name">
+														<a href="#"><%=manage.getmName()%></a>
+														<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
+													</h5>
+													<!-- 													<span class="email">brandon416jr@gmail.com</span> -->
+													<span class="email"><%=manage.getmEmail()%></span>
+												</div>
+											</div>
+											<div class="account-dropdown__footer">
+												<form method="POST"
 													action="<%=request.getContextPath()%>/manage/manage.do">
 													<button class="btn btn-danger">登出</button>
 													<input type="hidden" name="action" value="logout">
 												</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -230,10 +249,9 @@ select:invalid+.custom-message {
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		<!-- END HEADER DESKTOP-->
-	</div>
+			</header>
+			<!-- END HEADER DESKTOP-->
+		</div>
 
 		<div class="main-content">
 			<div class="section__content2 section__content--p30">
@@ -242,7 +260,9 @@ select:invalid+.custom-message {
 						<div class="card-header">
 							<strong>新增員工資料</strong>
 							<h4>
-								<a href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp"><img src="<%=request.getContextPath()%>/image/smallLogo.png"
+								<a
+									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp"><img
+									src="<%=request.getContextPath()%>/image/smallLogo.png"
 									width="20" height="20" border="0">回所有員工</a>
 							</h4>
 						</div>
@@ -260,8 +280,12 @@ select:invalid+.custom-message {
 						</div>
 
 
-						<FORM ACTION="${pageContext.request.contextPath }/manage/manage.do" METHOD="post"
-							enctype="multipart/form-data">
+<%-- 						<form action="${pageContext.request.contextPath }/manage/manage.do?action=insert" --%>
+						<form action="${pageContext.request.contextPath }/manage/manage.do"
+							method="post" enctype="multipart/form-data">
+							
+							
+							
 							<div class="card-body">
 								<div class="row">
 									<div class="col-lg-6">
@@ -272,7 +296,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mName"
-														value="<%=(manage == null) ? "陳金鋒" : manage.getmName()%>"
+														value="<%=(newManage == null) ? "緯育" : newManage.getmName()%>"
 														placeholder="請輸入姓名" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -284,7 +308,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mUserName"
 														placeholder="請輸入帳號"
-														value="<%=(manage == null) ? "Chen5252" : manage.getmUserName()%>"
+														value="<%=(newManage == null) ? "TibameTHA104" : newManage.getmUserName()%>"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -295,7 +319,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mPassword"
-														value="<%=(manage == null) ? "52552252" : manage.getmPassword()%>"
+														value="<%=(newManage == null) ? "32802154ya" : newManage.getmPassword()%>"
 														placeholder="請輸入密碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -305,8 +329,15 @@ select:invalid+.custom-message {
 													<label for="disabled-input" class="form-control-label">生日</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="date" id="disabled-input" name="mBirth"
-														value="<%=(manage == null) ? "1982-06-01" : manage.getmBirth()%>"
+												
+													<%
+													Date today = new Date();
+													SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+													String todayStr = sdf.format(today);
+													%>
+													<input type="date" id="f_date1" name="mBirth"
+														max="<%=todayStr%>"
+														value="<%=(newManage == null) ? "1982-06-01" : newManage.getmBirth()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
 											</div>
@@ -318,8 +349,10 @@ select:invalid+.custom-message {
 													<div class="form-check">
 														<div class="radio">
 															<select name="mGender">
-																<option value="0" ${(manage.mGender==0)? 'selected': ''}>男</option>
-																<option value="1" ${(manage.mGender==1)? 'selected': ''}>女</option>
+																<option value="0"
+																	${(newManage.mGender==0)? 'selected': ''}>男</option>
+																<option value="1"
+																	${(newManage.mGender==1)? 'selected': ''}>女</option>
 															</select>
 														</div>
 													</div>
@@ -331,7 +364,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mTelephone"
-														value="<%=(manage == null) ? "0918324387" : manage.getmTelephone()%>"
+														value="<%=(newManage == null) ? "0918111387" : newManage.getmTelephone()%>"
 														placeholder="請輸入手機號碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -342,7 +375,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmgContact"
-														value="<%=(manage == null) ? "陳連宏" : manage.getmEmgContact()%>"
+														value="<%=(newManage == null) ? "陳連宏" : newManage.getmEmgContact()%>"
 														placeholder="請輸入姓名" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -353,7 +386,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmgPhone"
-														value="<%=(manage == null) ? "0914562187" : manage.getmEmgPhone()%>"
+														value="<%=(newManage == null) ? "0914562187" : newManage.getmEmgPhone()%>"
 														placeholder="請輸入手機號碼" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -362,7 +395,7 @@ select:invalid+.custom-message {
 									</div>
 									<div class="col-lg-6">
 										<div class="right-card-body card-block">
-											
+
 											<div class="row form-group">
 												<div class="col col-md-3">
 													<label for="text-input" class="form-control-label">聯絡地址</label>
@@ -382,7 +415,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mAddress"
-														value="<%=(manage == null) ? "環河西路587號22樓" : manage.getmAddress()%>"
+														value="<%=(newManage == null) ? "環河西路587號22樓" : newManage.getmAddress()%>"
 														placeholder="請輸入聯絡地址" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -392,8 +425,13 @@ select:invalid+.custom-message {
 													<label for="disabled-input" class="form-control-label">入職日期</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="date" id="disabled-input" name="mHiredate"
-														value="<%=(manage == null) ? "" : manage.getmHiredate()%>"
+												<%
+													Date today1 = new Date();
+													SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+													String todayStr1 = sdf1.format(today);
+													%>
+													<input type="date" id="disabled-input" name="mHiredate" max="<%=todayStr1%>"
+														value="<%=(newManage == null) ? "" : newManage.getmHiredate()%>"
 														placeholder="請輸入生日" class="form-control" />
 												</div>
 											</div>
@@ -404,7 +442,7 @@ select:invalid+.custom-message {
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="mID"
 														placeholder="請輸入身份證字號"
-														value="<%=(manage == null) ? "A123456678" : manage.getmID()%>"
+														value="<%=(newManage == null) ? "G109374920" : newManage.getmID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -414,7 +452,7 @@ select:invalid+.custom-message {
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="mEmail"
-														value="<%=(manage == null) ? "brandon416jr@gmail.com" : manage.getmEmail()%>"
+														value="<%=(newManage == null) ? "brandonsssjr@gmail.com" : newManage.getmEmail()%>"
 														placeholder="請輸入電子信箱" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -424,12 +462,12 @@ select:invalid+.custom-message {
 													<label for="file-input" class="form-control-label">上傳大頭貼</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="hidden" name="mProfilePic" value="${manage.mProfilePic}">
-													<input type="file" id="file-input" name="mProfilePic"
-														onclick="previewImage()" multiple="multiple"
-														onchange="hideContent('upFiles.errors');"
-														class="form-control-file" /> <img id="imagePreview"
-														src="#" alt="Preview" />
+													<input type="file" value="${newManage.mProfilePic }"
+														id="uploadImg" name="mProfilePic" onchange="preview()" multiple="multiple"
+														class="form-control-file" />
+													<div id="blob_holder">
+														<img src="#" width="100px">
+													</div>
 												</div>
 											</div>
 											<div class="row form-group">
@@ -437,32 +475,50 @@ select:invalid+.custom-message {
 													<label for="selectLg" class="form-control-label">狀態</label>
 												</div>
 												<div class="col-10 col-md-8">
+
 													<select name="mStatus" id="selectLm"
 														class="form-control-sm form-control">
 														<option value="3">請選擇</option>
-														<option value="0" ${(manage.mStatus==0)? 'selected': ''}>已離職</option>
-														<option value="1" ${(manage.mStatus==1)? 'selected': ''}>在職中</option>
-														<option value="2" ${(manage.mStatus==2)? 'selected': ''}>系統管理員</option>
+														<option value="0"
+														 ${(newManage.mStatus==0)? "selected": ''}>已離職</option>
+														<option value="1"
+															${(newManage.mStatus==1)? "selected": ''}>在職中</option>
+														<option value="2"
+															${(newManage.mStatus==2)? "selected": ''}>系統管理員</option>
 													</select>
 												</div>
 											</div>
 										</div>
 										<div class="row form-group">
 											<div class="col-1 col-md-8">
-												<input type="hidden" name="action" value="insert"> <input
-													type="submit" class="btn btn-primary btn-sm" value="送出新增">
+											<input type="hidden" name="action" value="insert">
+												<input type="submit" class="btn btn-primary btn-sm" value="送出新增">
 												<i class="fa fa-dot-circle-o"></i>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</FORM>
+						</form>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		$.datetimepicker.setLocale('zh'); // kr ko ja en
+		$('#f_date1').datetimepicker({
+			theme : '', //theme: 'dark',
+			timepicker : true, //timepicker: false,
+			step : 1, //step: 60 (這是timepicker的預設間隔60分鐘)
+			format : 'Y-m-d',
+			value : new Date(),
+			//disabledDates:    ['2022/06/08','2022/06/09','2022/06/10'], // 去除特定不含
+			//startDate:	        '2022/07/10',  // 起始日
+			//minDate:           '-1970-01-01', // 去除今日(不含)之前
+			maxDate : '+1970-01-01' // 去除今日(不含)之後
+		});
+	</script>
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
@@ -566,6 +622,25 @@ select:invalid+.custom-message {
 											})
 
 						});
+	</script>
+
+	<script>
+		function preview() {
+
+			var fileInput = document.getElementById('uploadImg');
+			var file = fileInput.files[0];
+
+			var reader = new FileReader();
+
+			reader.onload = function() {
+				document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="100px"/>';
+			};
+
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+
+		}
 	</script>
 	<script
 		src="<%=request.getContextPath()%>/backEnd-Website/js/pic_uplaod.js"></script>

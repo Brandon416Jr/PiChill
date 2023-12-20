@@ -2,11 +2,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.report.entity.Report"%>
-<%@ page import="com.pichill.report.model.ReportDAO"%>
-<%@ page import="com.pichill.backstage.report.model.ReportDAOImplBack"%>
-<%@ page import="com.pichill.backstage.report.service.ReportServiceBack"%>
+<%@ page import="com.pichill.backstage.reportb.model.*"%>
+<%@ page import="com.pichill.backstage.reportb.service.ReportServiceBack"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
-
+<%@ page import="com.pichill.manage.entity.Manage"%>
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
+%>
 <%
 ReportServiceBack reportSvcB = new ReportServiceBack();
 List<Report> list = reportSvcB.getAll();
@@ -66,7 +73,7 @@ pageContext.setAttribute("list", list);
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/all.css"
 	media="all" />
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
 	media="all" />
 <style>
@@ -79,7 +86,8 @@ pageContext.setAttribute("list", list);
 	margin-left: auto;
 	width: 100%;
 	box-sizing: border-box;
-}</style>
+}
+</style>
 </head>
 <body class="animsition all-employees-page">
 	<!-- MENU SIDEBAR-->
@@ -92,9 +100,13 @@ pageContext.setAttribute("list", list);
 								class="fas fa-tachometer-alt"></i>員工管理
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
+								<li><a class="active"
+									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+									href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+									onclick="return checkmStatus();">新增員工資料</a></li>
+								<li><a
+									href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -102,7 +114,7 @@ pageContext.setAttribute("list", list);
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								
+
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>企業會員管理
@@ -110,7 +122,7 @@ pageContext.setAttribute("list", list);
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								
+
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>最新消息管理
@@ -131,8 +143,7 @@ pageContext.setAttribute("list", list);
 									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
-								<li><a
-									href="#">檢舉管理</a></li>
+								<li><a href="#">檢舉管理</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>球館管理
@@ -143,13 +154,13 @@ pageContext.setAttribute("list", list);
 								<li><a
 									href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
 							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>預約管理
-							</a>
+						<li class="has-sub"><a class="js-arrow" href="#"> <i
+								class="fas fa-tachometer-alt"></i>預約管理
+						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-									<li><a
-										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
-								</ul></li>
+								<li><a
+									href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
+							</ul></li>
 					</ul>
 				</nav>
 			</div>
@@ -168,64 +179,66 @@ pageContext.setAttribute("list", list);
 							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
 								class="img-logo"
 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
-<!-- 							<a href="index.html"><img class="img-logo"  -->
-<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
+							<!-- 							<a href="index.html"><img class="img-logo"  -->
+							<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
 						</div>
-						
+
 						<div class="welcome">
-								<div class="flex">
-									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
-									</div>
-									<p class="welcome">π Chill後臺管理系統</p>
-									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
-									</div>
+							<div class="flex">
+								<div class="s-logo">
+									<img
+										src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+										alt="">
+								</div>
+								<p class="welcome">π Chill後臺管理系統</p>
+								<div class="s-logo">
+									<img
+										src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+										alt="">
 								</div>
 							</div>
-						
+						</div>
+
 						<div class="header-button">
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-<!-- 										<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
-											<img
-											src="<%=request.getContextPath()%>/image/Group 115.png"
+										<img
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
 											alt="使用者頭像" />
+										<!-- 											<img -->
+										<%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+										<!-- 											alt="使用者頭像" /> -->
 									</div>
 									<div class="content">
-										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
+										<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好
+										</a>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> 
-<!-- 												<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
-												<img
-													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="John Doe" />
+												<a href="#"> <img
+													src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+													alt="使用者頭像" /> <!-- 												<img --> <%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+													<!-- 													alt="John Doe" /> -->
 												</a>
 											</div>
 											<div class="content">
 												<h5 class="name">
-													<a href="#">羅裕鵬</a>
-<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
+													<a href="#"><%=manage.getmName() %></a>
+													<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 												</h5>
-												<span class="email">brandon416jr@gmail.com</span>
-<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+												<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
+												<span class="email"><%=manage.getmEmail() %></span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
 											<form method="POST"
-													action="<%=request.getContextPath()%>/manage/manage.do">
-													<button class="btn btn-danger">登出</button>
-													<input type="hidden" name="action" value="logout">
-												</form>
+												action="<%=request.getContextPath()%>/manage/manage.do">
+												<button class="btn btn-danger">登出</button>
+												<input type="hidden" name="action" value="logout">
+											</form>
 										</div>
 									</div>
 								</div>
@@ -241,7 +254,7 @@ pageContext.setAttribute("list", list);
 	<div class="page-container2">
 		<div class="table-responsive m-b-40">
 			<table id="myTable3" class="table table-borderless table-data3"
-				style="overflow-x: auto" hover>
+				style="overflow-x: auto">
 				<thead>
 					<tr>
 						<th>檢舉編號</th>
@@ -249,6 +262,7 @@ pageContext.setAttribute("list", list);
 						<th>貼文編號</th>
 						<th>留言編號</th>
 						<th>檢舉時間</th>
+						<th>檢舉狀態</th>
 						<th>檢舉分類</th>
 						<th>查看</th>
 						<th>處理</th>
@@ -262,7 +276,9 @@ pageContext.setAttribute("list", list);
 							<td>${report.postID}</td>
 							<td>${report.commentID}</td>
 							<td>${report.reportTime}</td>
-							<td>${report.reportType}</td>
+							<td>${report.reportStatus == 0 ? '待審核' : '已審核'}</td>
+							<td>${report.reportType == 0 ? '違反版規' : (report.reportType == 1 ? '內容不實' : (report.reportType == 2 ? '惡意洗版' : (report.reportType == 3 ? '仇恨言論' : (report.reportType == 4 ? ' 商業宣傳內容
+' : '其他'))))}</td>
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/report/reportb.do"
@@ -279,9 +295,8 @@ pageContext.setAttribute("list", list);
 									style="margin-bottom: 0px;">
 									<input class="modify-button" type="submit" value="刪除"
 										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
-									<input type="hidden" name="reportID"
-										value="${report.reportID}"> <input type="hidden"
-										name="action" value="delete">
+									<input type="hidden" name="reportID" value="${report.reportID}">
+									<input type="hidden" name="action" value="delete">
 								</FORM></td>
 						</tr>
 					</c:forEach>
@@ -289,7 +304,25 @@ pageContext.setAttribute("list", list);
 			</table>
 		</div>
 	</div>
-
+	<script>
+		function checkmStatus() {
+			let mStatus =
+	<%=session.getAttribute("mStatus")%>
+		;
+		console.log(mStatus);
+			if (mStatus === 1) {
+				Swal.fire({
+					icon : 'error',
+					title : '權限不足!!',
+					text : '請聯繫系統管理員',
+					showConfirmButton : false,
+					timer : 50000000
+				})
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<script>
     var script = document.createElement("script");
 

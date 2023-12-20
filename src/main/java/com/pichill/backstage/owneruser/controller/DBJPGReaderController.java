@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
+import com.pichill.owneruser.entity.OwnerUser;
 @WebServlet("/owneruser/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -22,11 +23,14 @@ public class DBJPGReaderController extends HttpServlet {
 
 		try {
 			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+			
 			OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
+			OwnerUser ownerUser = oUserSvcB.getOneOwnerUser(oUserID);
+			req.setAttribute("ownerUser", ownerUser);
 			out.write(oUserSvcB.getOneOwnerUser(oUserID).getoProfilePic());
 		} catch (Exception e) {
-			e.printStackTrace();
-			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
+//			e.printStackTrace();
+			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 
 			  }

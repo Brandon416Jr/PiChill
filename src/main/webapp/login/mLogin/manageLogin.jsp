@@ -3,12 +3,7 @@
 <%@ page import="com.pichill.manage.model.*"%>
 
 
-<%
-Object account = session.getAttribute("mUserName");
-if (account == null) {
-	System.out.println("確認清除");
-}
-%>
+
 
 <%
 response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
@@ -114,7 +109,8 @@ label.pwd-see2 {
 									</div>
 								</div>
 								<div class="form-group">
-									<label>驗證碼</label> <input class="au-input au-input--full"
+									<label>驗證碼</label><font color=red>${requestScope.errorMsgs.checkCode}</font>
+									 <input class="au-input au-input--full"
 										type="text" name="checkCode" placeholder="請輸入驗證碼" /> <img
 										id="yzm_img" src="${pageContext.request.contextPath}/valistr"
 										style="cursor: pointer" onclick="changeYZM(this)" /> <span
@@ -123,6 +119,7 @@ label.pwd-see2 {
 								<button class="au-btn au-btn--block au-btn--green m-b-20"
 									type="submit">登入</button>
 								<div  class="error-message" style="color: red;">${requestScope.errorMsgs.mStatus}</div>
+								<div  class="error-message" style="color: red;">${requestScope.errorMsgs.failTooMoreTime}</div>
 							</form>
 						</div>
 					</div>

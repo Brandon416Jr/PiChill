@@ -1,10 +1,10 @@
 package com.pichill.forumlike.service;
 
-import java.util.List;
-
 import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.forumlike.model.ForumLikeDAO;
 import com.pichill.forumlike.model.ForumLikeDAOImpl;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.generaluser.service.GeneralUserService;
 
 public class ForumLikeServiceImpl implements ForumLikeService {
 
@@ -42,29 +42,40 @@ public class ForumLikeServiceImpl implements ForumLikeService {
 
 	@Override
 	public Integer getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
-//		System.out.println("進來了~~~~~~~~~~");
-//		System.out.println(postID);
-//		System.out.println("+++++++++"+gUserID);
 		ForumLike like = dao.getLikeByPostIDAndUserID(postID, gUserID);
-//		System.out.println(like);
-		if(like == null) {
-//			System.out.println("========"+like);
+		if (like == null) {
+			GeneralUserService generalUserService = new GeneralUserService();
+			GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
+			
 			ForumLike likepost = new ForumLike();
 			likepost.setPostID(postID);
-			likepost.setgUserID(gUserID);
+			likepost.setGeneralUser(generalUser);
 			likepost.setLikeStatus(true);
-			System.out.println(postID);
 			dao.add(likepost);
 			return 1;
-		}else if(like.isLikeStatus()) {
+		} else if (like.isLikeStatus()) {
 			like.setLikeStatus(false);
 			dao.update(like);
 			return 0;
-		}else {
+		} else {
 			like.setLikeStatus(true);
 			dao.update(like);
 			return 1;
 		}
+	}
+
+	@Override
+	public long getLikeCnt(Integer postID) {
+		return dao.getLikeCnt(postID);
+	}
+
+	@Override // 判斷狀態來顯示顏色
+	public boolean getLikeByPostIDAndUserID2(Integer postID, Integer gUserID) {
+		ForumLike like = dao.getLikeByPostIDAndUserID(postID, gUserID);
+		if (like != null) {
+			return like.isLikeStatus();
+		}
+		return false;
 	}
 
 //	@Override

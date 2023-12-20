@@ -8,7 +8,7 @@ public interface GeneralUserDAOFront {
 	int insert(GeneralUser generalUser);
 	int update(GeneralUser generalUser);
 	GeneralUser findByPK(Integer gUserID);
-	List<GeneralUser> findByGeneralUsergUsername(String gUsername);
+	GeneralUser findByGeneralUsergUsername(String gUsername);
 	boolean isUsernameExists(String gUsername);
 	boolean isEmailExists(String gEmail);
 	boolean isIDNumExists(String gIDNum);

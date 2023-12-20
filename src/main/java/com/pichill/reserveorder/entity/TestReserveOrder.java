@@ -13,22 +13,30 @@ public class TestReserveOrder {
 		ReserveOrderDAO dao = new ReserveOrderDAOImpl();
 
 		// 新增
-		ReserveOrder res = new ReserveOrder();
-		res.setgUserID(11000001);
-		res.setoUserID(12000001);
-		res.setReserveDate(java.sql.Date.valueOf("2024-05-10"));
-		res.setTimeID(8);
-		res.setPlaceID(62000001);
-		res.setOrderNum(3);
-		res.setOrderStatus(1);
-		res.setTotalCost(1500);
-		dao.add(res);
+//		ReserveOrder res = new ReserveOrder();
+//		res.setgUserID(11000001);
+//		res.setoUserID(12000001);
+//		res.setReserveDate(java.sql.Date.valueOf("2024-05-10"));
+//		res.setTimeID(8);
+//		res.setPlaceID(62000001);
+//		res.setOrderNum(3);
+//		res.setOrderStatus(1);
+//		res.setTotalCost(1500);
+//		dao.add(res);
 
+
+		// 修改
+//		ReserveOrder res = new ReserveOrder();
+//		res.setgUserID(11000001);
+//		res.setoUserID(12000001);
+//		res.setReserveDate(java.sql.Date.valueOf("2024-05-10"));
+//		res.setTimeID(8);
+//		res.setPlaceID(62000001);
+//		res.setOrderNum(3);
+//		res.setOrderStatus(1);
+//		res.setTotalCost(1500);
+//		dao.update(res);
 		
-		// 刪除
-//		dao.delete(63000011);
-
-
 		// 查詢單筆
 //		ReserveOrder res2 = dao.findByPK(63000002);
 //		System.out.print(res2.getReserveOrderID() + ",");

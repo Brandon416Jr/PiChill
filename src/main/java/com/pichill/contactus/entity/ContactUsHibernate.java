@@ -21,7 +21,7 @@ public class ContactUsHibernate {
 		
 		//交易區間
 		ContactUs contactUs = new ContactUs();
-		contactUs.setgUserID(null);
+//		contactUs.setgUserID(null);
 		contactUs.setoUserID(12000001);
 		contactUs.setformPurpose("如何上架球館?");
 		contactUs.setformContent("如何上架球館?");

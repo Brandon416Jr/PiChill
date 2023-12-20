@@ -88,7 +88,7 @@ public class OwnerUserLoginHandler extends HttpServlet {
 			if (allowOUser(oUserName, oPassword)) { // 帳號密碼有效
 				// 從資料庫獲取 adminStat 的值
 				OwnerUserServiceFront oUserSvcF = new OwnerUserServiceFront();
-				OwnerUser ownerUser = oUserSvcF.userAuth(oUserName, oPassword);
+//				OwnerUser ownerUser = oUserSvcF.userAuth(oUserName, oPassword);
 				
 
 				// Send the use back to the form, if there were errors
@@ -101,7 +101,10 @@ public class OwnerUserLoginHandler extends HttpServlet {
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
 				HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
-				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
+//				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
+				OwnerUser ownerUser = oUserSvcF.getOneOwnerUser(oUserName);
+				session.setAttribute("ownerUser", ownerUser);
+
 				try {
 					String location = (String) session.getAttribute("location");
 					if (location != null) {

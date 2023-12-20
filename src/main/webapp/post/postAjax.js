@@ -24,9 +24,15 @@ $(document).ready(function() {
 
 	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
 		postContent = postContent.replace(/\n/g, '<br>');
-		var selectedImage = $('#p_file').prop('files')[0];
-		var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` :
-			postPic ? `<img src="${postPic}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
+		if (postPic) {
+			var imageDataArray = new Uint8Array(postPic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url = URL.createObjectURL(blob);
+		} else {
+			url = '';
+		}
 		var newPostElement = `
     <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
         <div class="row g-0">
@@ -52,15 +58,17 @@ $(document).ready(function() {
                 </div>
             </div>
             <div class="col-md-4" id="piccontainer">
-            ${imageElement}
+            <img src="${url}">
         </div>
             <div class="container text-center">
                 <div class="row align-items-start" id="card-footer">
-                    <div class="col-2" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>
-                    </div>
+                     <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
                     <div class="col-2" id="commentcol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${commentCnt > 0 ? commentCnt : ''}</button>
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                     </div>
                 </div>
             </div>
@@ -72,10 +80,16 @@ $(document).ready(function() {
 
 	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
 		postContent = postContent.replace(/\n/g, '<br>');
-		var selectedImage = $('#p_file').prop('files')[0];
-		var imageElement = selectedImage ? `<img src="${URL.createObjectURL(selectedImage)}" class="img-fluid rounded-start" alt="..." id="articlepic" />` :
-			postPic ? `<img src="${postPic}" class="img-fluid rounded-start" alt="..." id="articlepic" />` : '';
-		// 創建新的揪團文章元素
+		if (postPic) {
+			var imageDataArray = new Uint8Array(postPic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url = URL.createObjectURL(blob);
+		} else {
+			// 否则，显示空值
+			url = '';
+		}
 		var newGroupPostElement = `
             	 <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
                 <div class="row g-0">
@@ -88,19 +102,19 @@ $(document).ready(function() {
                                     <div class="post_time">${postTime}</div>
                                 </div>
                             </h1>
-                  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
+    <!--              <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
                           <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
-                          </button>
+                          </button>-->
 
-                    <!--        <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal2" id="reportButton" data-post-id="${postID}">
+                            <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
                                 <span class="tooltip-text">檢舉</span>
-                            </button>-->
+                            </button>
                             <h5 class="card-title">${postTitle}</h5>
                             <div class="container text-left">
                                 <div class="row">
@@ -128,16 +142,20 @@ $(document).ready(function() {
                         </div>
                     </div>
                     <div class="col-md-4" id="piccontainer">
-                    ${imageElement}
+                    <img src="${url}">
                 </div>
                     <div class="container text-center">
                         <div class="row align-items-start" id="card-footer">
                             <div class="col-2" id="likecol" data-post-id="${postID}">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>                            </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
                             <div class="col-2" id="commentcol" data-post-id="${postID}">
                                 <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal6" >  ${commentCnt > 0 ? commentCnt : ''}
+                                    data-bs-target="#exampleModal6" ></button>
+                                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
+                                                                   
                             <div class="col-2" id="pluscol">
                                 <button type="button" class="fa-regular fa-square-plus"> +1
                             </div>
@@ -253,7 +271,7 @@ $(document).ready(function() {
 		var newPostTitle = $("#floatingTextarea").val();
 		var newPostContent = $("#floatingTextarea2").val();
 		var discussType = $(".discussType").val();
-		var selectedFiles = $("#p_file")[0].files;
+		var newPostPic = $("#p_file")[0].files[0];
 
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
@@ -268,8 +286,10 @@ $(document).ready(function() {
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 		formData.append("discussType", discussType);
-		formData.append("postPic", selectedFiles[0]);
-
+		if (newPostPic) {
+			// 用户选择了图像文件，将其添加到 FormData 中
+			formData.append("postPic", newPostPic);
+		}
 		$.ajax({
 			type: "POST",
 			url: "post.do",
@@ -280,7 +300,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				fetchAndDisplayLatestData(response.postID, newPostTitle, newPostContent, response.postTime, selectedFiles);
+				fetchAndDisplayLatestData(response.postID, newPostTitle, newPostContent, response.postTime, newPostPic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -290,7 +310,7 @@ $(document).ready(function() {
 		});
 	});
 
-	function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, selectedFiles) {
+	function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, newPostPic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
 			type: "GET",
@@ -325,8 +345,7 @@ $(document).ready(function() {
 		                      </div>
 		                  </div>
 		                  <div class="col-md-4" id="piccontainer">
-		                  ${selectedFiles && selectedFiles.length > 0 ? `<img src="${URL.createObjectURL(selectedFiles[0])}" alt="Selected Image" >` : ''}
-		              </div>
+  ${newPostPic ? `<img src="${URL.createObjectURL(newPostPic)}" alt="Selected Image">` : ''}		              </div>
 		                  <div class="container text-center">
 		                      <div class="row align-items-start" id="card-footer">
 		                          <div class="col-2" id="likecol" data-post-id="${postID}">
@@ -361,7 +380,7 @@ $(document).ready(function() {
 		var newPostTitle = $("#floatingTextarea3").val();
 		var newPostContent = $("#floatingTextarea4").val();
 		var groupType = $(".groupType").val();
-		var selectedFiles = $("#p_file")[0].files;
+		var newPostPic = $("#p_file2")[0].files[0];
 
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
@@ -376,8 +395,10 @@ $(document).ready(function() {
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 		formData.append("groupType", groupType);
-		formData.append("postPic", selectedFiles[0]);
-
+		if (newPostPic) {
+			// 用户选择了图像文件，将其添加到 FormData 中
+			formData.append("postPic", newPostPic);
+		}
 		$.ajax({
 			type: "POST",
 			url: "post.do",
@@ -388,7 +409,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				fetchAndDisplayLatestData2(response.postID, newPostTitle, newPostContent, response.postTime, selectedFiles);
+				fetchAndDisplayLatestData2(response.postID, newPostTitle, newPostContent, response.postTime, newPostPic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -398,7 +419,7 @@ $(document).ready(function() {
 		});
 	});
 
-	function fetchAndDisplayLatestData2(postID, newPostTitle, newPostContent, postTime, selectedFiles) {
+	function fetchAndDisplayLatestData2(postID, newPostTitle, newPostContent, postTime, newPostPic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
 			type: "GET",
@@ -454,7 +475,7 @@ $(document).ready(function() {
 	                      </div>
 	                  </div>
 	                  <div class="col-md-4" id="piccontainer">
-	                  ${selectedFiles && selectedFiles.length > 0 ? `<img src="${URL.createObjectURL(selectedFiles[0])}" alt="Selected Image" >` : ''}
+  ${newPostPic ? `<img src="${URL.createObjectURL(newPostPic)}" alt="Selected Image">` : ''}		              </div>
 	              </div>
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
@@ -577,7 +598,7 @@ $(document).ready(function() {
 	// =============編輯文章===============//
 	// ===找到原先的值(討論)===//
 	$("#post-list").on("click", ".edit_discuss", function() {
-		console.log("click");
+		//		console.log("click");
 		var postID = $(this).data("post-id");
 		var saveButton = $(".save-button_discuss");
 
@@ -592,8 +613,20 @@ $(document).ready(function() {
 				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea_edit").val(postData.postTitle);
 				$("#floatingTextarea2_edit").val(PostContent);
-				var postPic = postData.postPic;
-				$("#preview_edit").html(`<img src="${postPic}" alt="預覽圖">`);
+				if (postData.postPic) {
+					var postPic = postData.postPic;
+					var imageDataArray = new Uint8Array(postPic);
+
+					// 将二进制图像数据存储在Blob对象中
+					var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+
+					// 创建一个Blob URL并将其设置为<img>标签的src属性
+					var url = URL.createObjectURL(blob);
+					$("#preview_edit").html(`<img src="${url}" alt="預覽圖">`);
+				} else {
+					// 如果没有图像数据，将src属性设置为空字符串
+					$("#preview_edit").html('<img src="" >');
+				}
 
 				saveButton.attr("data-post-id", postData.postID);
 			},
@@ -619,8 +652,20 @@ $(document).ready(function() {
 				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea3_edit").val(postData.postTitle);
 				$("#floatingTextarea4_edit").val(PostContent);
-				var postPic = postData.postPic;
-				$("#preview2_edit").html(`<img src="${postPic}" alt="預覽圖">`);
+				if (postData.postPic) {
+					var postPic = postData.postPic;
+					var imageDataArray = new Uint8Array(postPic);
+
+					// 将二进制图像数据存储在Blob对象中
+					var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+
+					// 创建一个Blob URL并将其设置为<img>标签的src属性
+					var url = URL.createObjectURL(blob);
+					$("#preview2_edit").html(`<img src="${url}" alt="預覽圖">`);
+				} else {
+					// 如果没有图像数据，将src属性设置为空字符串
+					$("#preview2_edit").html('<img src="" >');
+				}
 
 				saveButton.attr("data-post-id", postData.postID);
 			},
@@ -742,7 +787,7 @@ $(document).ready(function() {
 					// 将新的图片添加到piccontainer
 					$("#article" + postID + " #piccontainer").empty().append(newImageElement);
 				}
-				$("#exampleModal_edit").modal("hide");
+				$("#exampleModal_edit2").modal("hide");
 			},
 			error: function(xhr, status, error) {
 				console.error("Update Error:", status, error);
@@ -842,688 +887,5 @@ $(document).ready(function() {
 			}
 		});
 	});
-	//=======顯示完整文章==========
-	$("#post-list").on("click", "#commentcol", function() {
-		var postID = $(this).attr("data-post-id");
-		$.ajax({
-			type: "POST",
-			url: "http://localhost:8081/PiChill/post/post.do",
-			data: {
-				"action": "get_By_postID",
-				"postID": postID
-			},
-			dataType: "Json",
-			success: function(postData) {
-				// 	        	console.log("aa")
-				 var likeCol = $(`
-                <div class="col-2 likecol" id="likecol" data-post-id="${postData.postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton"></button>
-                    ${postData.likeCnt>0?postData.likeCnt:''}
-                </div>
-            `);
-				var formattedPostContent = postData.postContent.replace(/<br>/g, '\n');
-				$(".card-title.article0").text(postData.postTitle);
-				$(".card-text.article1").text(formattedPostContent);
-				$(".posttime").text(postData.postTime);
-			    $(".do").find(".likecol").replaceWith(likeCol);
-				$(".commentcol").html(`<i class="fa-regular fa-comment"></i> ${postData.commentCnt>0?postData.commentCnt:''}`);
-				$(".modal-image").attr("src", postData.postPic);
-				//             console.log(postData.postTitle);
-				//             console.log(postData.postContent);
-				// 	            var postPic = postData.postPic;
-				// 	            $("#preview_edit").html(`<img src="${postPic}" alt="預覽圖">`);
 
-			},
-			error: function(xhr, status, error) {
-				console.error("Get Post Details Error:", status, error);
-			}
-		});
-	});
-		$("#post-list").on("click", "#likecol", function() {
-		var postID = $(this).attr("data-post-id");
-		$.ajax({
-			type: "POST",
-			url: "http://localhost:8081/PiChill/post/post.do",
-			data: {
-				"action": "get_By_postID",
-				"postID": postID
-			},
-			dataType: "Json",
-			success: function(postData) {
-				// 	        	console.log("aa")
-				console.log(postData.postID)
-				console.log(postData.likeCnt)
-				 var likeCol = $(`
-                <div class="col-2 likecol" id="likecol" data-post-id="${postData.postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton"></button>
-                    ${postData.likeCnt}
-                </div>
-            `);
-				var formattedPostContent = postData.postContent.replace(/<br>/g, '\n');
-				$(".card-title.article0").text(postData.postTitle);
-				$(".card-text.article1").text(formattedPostContent);
-				$(".posttime").text(postData.postTime);
-			    $(".do").find(".likecol").replaceWith(likeCol);
-				$(".commentcol").html(`<i class="fa-regular fa-comment"></i> ${postData.commentCnt}`);
-				$(".modal-image").attr("src", postData.postPic);
-				//             console.log(postData.postTitle);
-				//             console.log(postData.postContent);
-				// 	            var postPic = postData.postPic;
-				// 	            $("#preview_edit").html(`<img src="${postPic}" alt="預覽圖">`);
-
-			},
-			error: function(xhr, status, error) {
-				console.error("Get Post Details Error:", status, error);
-			}
-		});
-	});
-	// 	    //====我的文章=====
-	$("#search-options").change(function() {
-		var selectedOption = $(this).val();
-
-		if (selectedOption === "my-posts") {
-			$.ajax({
-				type: "POST",
-				url: "post.do",  // 替換成實際的後端處理檔案或API端點
-				data: {
-					"action": "get_By_gUserID",
-					"gUserID": 11000001  // 根據實際情況傳遞相應的用戶ID
-				},
-				success: function(data) {
-					$("#post-list").empty();
-					// 將伺服器返回的結果顯示在搜索結果區域
-					console.log(data);
-					var posts = data;
-
-					for (var i = 0; i < posts.length; i++) {
-
-						var imageElement = posts[i].imageElement ? posts[i].imageElement : '';
-						var postType = posts[i].postType;
-						var postID = posts[i].postID;
-						var likeCnt = posts[i].likeCnt;
-						var commentCnt = posts[i].commentCnt;
-						if (postType === 0) {
-							$("#post-list").append(`
-                    		   <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-                               <div class="row g-0">
-                                   <div class="col-md-8">
-                                       <div class="card-body">
-                                           <h1 class="modal-title fs-5">
-                                               <img src="../image/cat.jpg" alt="大頭貼">
-                                               <div>
-                                                   <a class="post_user">貓貓</a>
-                                                   <div class="post_time">${posts[i].postTime}</div>
-                                               </div>
-                                           </h1>
-                                           <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" data-post-id="${postID}">
-                                           <i class="fa-regular fa-pen-to-square"></i>
-                                               <span class="tooltip-text">編輯</span>
-                                           </button>
-                                           <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                               <i class="fa-regular fa-trash-can"></i>
-                                               <span class="tooltip-text">刪除</span>
-                                           </button>
-                                           <h5 class="card-title">${posts[i].postTitle}</h5>
-                                           <p class="card-text">${posts[i].postContent}</p>
-                                       </div>
-                                   </div>
-                                   <div class="col-md-4" id="piccontainer">
-                                   ${imageElement}
-                               </div>
-                                   <div class="container text-center">
-                                       <div class="row align-items-start" id="card-footer" >
-                                           <div class="col-2" id="likecol" data-post-id="${postID}">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>                                           </div>
-                                           <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                           <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal5"> ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-                                           </div>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                           </div>
-                       `);
-						} else if (postType === 1) {
-							$("#post-list").append(`
-    	            	    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-    	              <div class="row g-0">
-    	                  <div class="col-md-8">
-    	                      <div class="card-body">
-    	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-    	                              <img src="../image/dog.jpg" alt="大頭貼">
-    	                              <div>
-    	                                  <a class="post_user">小吉</a>
-    	                                  <div class="post_time">${posts[i].postTime}</div>
-    	                              </div>
-    	                          </h1>
-    	                            <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                              <span class="tooltip-text">編輯</span>
-                                          </button>
-                              <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                  <i class="fa-regular fa-trash-can"></i>
-                                  <span class="tooltip-text">刪除</span>
-                              </button>
-
-    	                          <h5 class="card-title">${posts[i].postTitle}</h5>
-    	                          <div class="container text-left">
-    	                              <div class="row">
-    	                                  <div class="col-2 col-sm-2">日期:</div>
-    	                                  <div class="col-2 col-sm-4">12/12</div>
-    	                                  <div class="w-100 d-none d-md-block"></div>
-
-    	                                  <div class="col-2 col-sm-2">時間:</div>
-    	                                  <div class="col-2 col-sm-4">0800~0900</div>
-    	                                  <div class="w-100 d-none d-md-block"></div>
-
-    	                                  <div class="col-2 col-sm-2">地點:</div>
-    	                                  <div class="col-2 col-sm-4">我家</div>
-    	                                  <div class="w-100 d-none d-md-block"></div>
-
-    	                                  <div class="col-2 col-sm-2">球類:</div>
-    	                                  <div class="col-2 col-sm-4">保齡球</div>
-    	                                  <div class="w-100 d-none d-md-block"></div>
-
-    	                                  <div class="col-2 col-sm-2">費用:</div>
-    	                                  <div class="col-2 col-sm-4">81000</div>
-    	                              </div>
-    	                          </div>
-    	                          <p class="card-text2">${posts[i].postContent}</p>
-    	                      </div>
-    	                  </div>
-    	                  <div class="col-md-4" id="piccontainer">
-    	                  ${imageElement}
-    	              </div>
-    	                  <div class="container text-center">
-    	                      <div class="row align-items-start" id="card-footer">
-    	                          <div class="col-2" id="likecol">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${post[i].likeCnt > 0 ?[post[i]].likeCnt : ''}</button>    	                          </div>
-    	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-    	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-    	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-    	                              </div>
-    	                          <div class="col-2" id="pluscol">
-    	                              <button type="button" class="fa-regular fa-square-plus"> +1
-    	                          </div>
-    	                      </div>
-    	                  </div>
-    	              </div>
-    	          </div>`
-							);
-						}
-					}
-				}
-			});
-		}
-	});
-
-	//=======文章類型搜尋==========
-	var savedPostType;
-	var posts;
-	$("#search-options").change(function() {
-		var selectedOption = $(this).val();
-		$(".saved-post-type").val(selectedOption === "discussions" ? 0 : 1);
-		savedPostType = $(".saved-post-type").val();
-		console.log('Selected Option (Change Event):', selectedOption);
-		if (selectedOption === "discussions" || selectedOption === "events") {
-			$.ajax({
-				type: "POST",
-				url: "post.do",
-				data: {
-					"action": "get_By_Type",
-					"postType": (selectedOption === "discussions") ? 0 : 1
-				},
-				success: function(data) {
-					$(".saved-post-type").val(selectedOption === "discussions" ? 0 : 1);
-					$("#post-list").empty();
-					console.log(data);
-					posts = data;
-
-					for (var i = 0; i < posts.length; i++) {
-						var imageElement = posts[i].imageElement ? posts[i].imageElement : '';
-						var postType = posts[i].postType;
-						var postID = posts[i].postID;
-						var likeCnt = posts[i].likeCnt ? posts[i].likeCnt : '';
-						var commentCnt = posts[i].commentCnt ? posts[i].commentCnt : '';
-						if (selectedOption === "discussions") {
-							// 生成討論版文章的HTML
-							$("#post-list").append(`
-                     		   <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-                     		  <input type="hidden" class="saved-post-type" value="" />
-                                <div class="row g-0">
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h1 class="modal-title fs-5">
-                                                <img src="../image/cat.jpg" alt="大頭貼">
-                                                <div>
-                                                    <a class="post_user">貓貓</a>
-                                                    <div class="post_time">${posts[i].postTime}</div>
-                                                </div>
-                                            </h1>
-                                            <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" data-post-id="${postID}">
-                                            <i class="fa-regular fa-pen-to-square"></i>
-                                                <span class="tooltip-text">編輯</span>
-                                            </button>
-                                            <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                                <i class="fa-regular fa-trash-can"></i>
-                                                <span class="tooltip-text">刪除</span>
-                                            </button>
-                                            <h5 class="card-title">${posts[i].postTitle}</h5>
-                                            <p class="card-text">${posts[i].postContent}</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4" id="piccontainer">
-                                    ${imageElement}
-                                </div>
-                                    <div class="container text-center">
-                                        <div class="row align-items-start" id="card-footer">
-                                            <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-                                            </div>
-                                            <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal5" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        `);
-						} else if (selectedOption === "events") {
-							// 生成揪團版文章的HTML
-							$("#post-list").append(`
-                        	    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-                        	    <input type="hidden" class="saved-post-type" value="" />
-              	              <div class="row g-0">
-              	                  <div class="col-md-8">
-              	                      <div class="card-body">
-              	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-              	                              <img src="../image/dog.jpg" alt="大頭貼">
-              	                              <div>
-              	                                  <a class="post_user">小吉</a>
-              	                                  <div class="post_time">${posts[i].postTime}</div>
-              	                              </div>
-              	                          </h1>
-              	                           <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                              <span class="tooltip-text">編輯</span>
-                                          </button>
-                                        <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                            <i class="fa-regular fa-trash-can"></i>
-                                            <span class="tooltip-text">刪除</span>
-                                        </button>
-
-              	                          <h5 class="card-title">${posts[i].postTitle}</h5>
-              	                          <div class="container text-left">
-              	                              <div class="row">
-              	                                  <div class="col-2 col-sm-2">日期:</div>
-              	                                  <div class="col-2 col-sm-4">12/12</div>
-              	                                  <div class="w-100 d-none d-md-block"></div>
-
-              	                                  <div class="col-2 col-sm-2">時間:</div>
-              	                                  <div class="col-2 col-sm-4">0800~0900</div>
-              	                                  <div class="w-100 d-none d-md-block"></div>
-
-              	                                  <div class="col-2 col-sm-2">地點:</div>
-              	                                  <div class="col-2 col-sm-4">我家</div>
-              	                                  <div class="w-100 d-none d-md-block"></div>
-
-              	                                  <div class="col-2 col-sm-2">球類:</div>
-              	                                  <div class="col-2 col-sm-4">保齡球</div>
-              	                                  <div class="w-100 d-none d-md-block"></div>
-
-              	                                  <div class="col-2 col-sm-2">費用:</div>
-              	                                  <div class="col-2 col-sm-4">81000</div>
-              	                              </div>
-              	                          </div>
-              	                          <p class="card-text2">${posts[i].postContent}</p>
-              	                      </div>
-              	                  </div>
-              	                  <div class="col-md-4" id="piccontainer">
-              	                  ${imageElement}
-              	              </div>
-              	                  <div class="container text-center">
-              	                      <div class="row align-items-start" id="card-footer">
-              	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-              	                          </div>
-              	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-              	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-              	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-              	                              </div>
-              	                          <div class="col-2" id="pluscol">
-              	                              <button type="button" class="fa-regular fa-square-plus"> +1
-              	                          </div>
-              	                      </div>
-              	                  </div>
-              	              </div>
-              	          </div>
-                        `);
-						}
-					}
-				}
-			});
-		}
-	});
-	//======熱門=======
-
-	$("#search-options").change(function() {
-		var selectedOption = $(this).val();
-
-		if (selectedOption === "hot") {
-
-			$.ajax({
-				type: "POST",
-				url: "post.do",
-				data: {
-					"action": "get_By_Comment",
-				},
-				success: function(data) {
-					$("#post-list").empty();
-
-					console.log(data);
-					var posts = data;
-
-					for (var i = 0; i < posts.length; i++) {
-
-						var imageElement = posts[i].imageElement ? posts[i].imageElement : '';
-						var postType = posts[i].postType;
-						var postID = posts[i].postID;
-						var likeCnt = posts[i].likeCnt;
-						var commentCnt = posts[i].commentCnt;
-						if (postType === 0) {
-							$("#post-list").append(`
-                   		   <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-                              <div class="row g-0">
-                                  <div class="col-md-8">
-                                      <div class="card-body">
-                                          <h1 class="modal-title fs-5">
-                                              <img src="../image/cat.jpg" alt="大頭貼">
-                                              <div>
-                                                  <a class="post_user">貓貓</a>
-                                                  <div class="post_time">${posts[i].postTime}</div>
-                                              </div>
-                                          </h1>
-                                          <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                              <span class="tooltip-text">編輯</span>
-                                          </button>
-                                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                              <i class="fa-regular fa-trash-can"></i>
-                                              <span class="tooltip-text">刪除</span>
-                                          </button>
-                                          <h5 class="card-title">${posts[i].postTitle}</h5>
-                                          <p class="card-text">${posts[i].postContent}</p>
-                                      </div>
-                                  </div>
-                                  <div class="col-md-4" id="piccontainer">
-                                  ${imageElement}
-                              </div>
-                                  <div class="container text-center">
-                                      <div class="row align-items-start" id="card-footer">
-                                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-                                          </div>
-                                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                          <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                              data-bs-target="#exampleModal5" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          </div>
-                      `);
-						} else if (postType === 1) {
-							$("#post-list").append(`
-   	            	    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-   	              <div class="row g-0">
-   	                  <div class="col-md-8">
-   	                      <div class="card-body">
-   	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-   	                              <img src="../image/dog.jpg" alt="大頭貼">
-   	                              <div>
-   	                                  <a class="post_user">小吉</a>
-   	                                  <div class="post_time">${posts[i].postTime}</div>
-   	                              </div>
-   	                          </h1>
-   	                          <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                              <span class="tooltip-text">編輯</span>
-                                          </button>
-                             <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                 <i class="fa-regular fa-trash-can"></i>
-                                 <span class="tooltip-text">刪除</span>
-                             </button>
-
-   	                          <h5 class="card-title">${posts[i].postTitle}</h5>
-   	                          <div class="container text-left">
-   	                              <div class="row">
-   	                                  <div class="col-2 col-sm-2">日期:</div>
-   	                                  <div class="col-2 col-sm-4">12/12</div>
-   	                                  <div class="w-100 d-none d-md-block"></div>
-
-   	                                  <div class="col-2 col-sm-2">時間:</div>
-   	                                  <div class="col-2 col-sm-4">0800~0900</div>
-   	                                  <div class="w-100 d-none d-md-block"></div>
-
-   	                                  <div class="col-2 col-sm-2">地點:</div>
-   	                                  <div class="col-2 col-sm-4">我家</div>
-   	                                  <div class="w-100 d-none d-md-block"></div>
-
-   	                                  <div class="col-2 col-sm-2">球類:</div>
-   	                                  <div class="col-2 col-sm-4">保齡球</div>
-   	                                  <div class="w-100 d-none d-md-block"></div>
-
-   	                                  <div class="col-2 col-sm-2">費用:</div>
-   	                                  <div class="col-2 col-sm-4">81000</div>
-   	                              </div>
-   	                          </div>
-   	                          <p class="card-text2">${posts[i].postContent}</p>
-   	                      </div>
-   	                  </div>
-   	                  <div class="col-md-4" id="piccontainer">
-   	                  ${imageElement}
-   	              </div>
-   	                  <div class="container text-center">
-   	                      <div class="row align-items-start" id="card-footer">
-   	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-   	                          </div>
-   	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-   	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-   	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-   	                              </div>
-   	                          <div class="col-2" id="pluscol">
-   	                              <button type="button" class="fa-regular fa-square-plus"> +1
-   	                          </div>
-   	                      </div>
-   	                  </div>
-   	              </div>
-   	          </div>`
-							);
-						}
-					}
-				}
-			});
-		}
-	});
-
-	//=========標題搜尋==============//
-	$("#search-button").click(function() {
-		performSearch();
-	});
-
-	$("#search-input").keydown(function(event) {
-		// 检查按下的键是否是 Enter 键 (key code 13)
-		if (event.which === 13) {
-			performSearch();
-		}
-	});
-	function performSearch() {
-		var postTitle = $("#search-input").val();
-		var selectedOption = $("#search-options").val();
-		$(".saved-post-type").val(selectedOption === "discussions" ? 0 : 1);
-		savedPostType = $(".saved-post-type").val();
-		console.log('Post Title:', postTitle);
-		console.log('Selected Option:', selectedOption);
-		console.log('Saved Post Type:', $(".saved-post-type").val());
-		if (!postTitle.trim()) {
-			alert("請輸入欲搜尋的標題");
-			return; // 中止搜索操作
-		}
-		if (selectedOption === "discussions" || selectedOption === "events") {
-			var filteredPosts = posts.filter(function(post) {
-				return post.postTitle.includes(postTitle) && post.postType === (selectedOption === "discussions" ? 0 : 1);
-			});
-			displayPosts(filteredPosts);
-		} else {
-			$.ajax({
-				type: "POST",
-				url: "post.do",
-				data: {
-					"action": "get_By_Title",
-					"postTitle": postTitle,
-					"postType": savedPostType || (selectedOption === "discussions" ? 0 : 1)
-				},
-				success: function(data) {
-					$(".saved-post-type").val(selectedOption);
-					$("#post-list").empty();
-					console.log(data);
-					var filteredPosts = data;
-					displayPosts(filteredPosts);
-					var newUrl = "http://localhost:8081/PiChill/post/forum.html.html?q=" + encodeURIComponent(postTitle);
-					history.pushState({ search: postTitle }, null, newUrl);
-				}
-			});
-		}
-	}
-	function displayPosts(postsToDisplay) {
-		$("#post-list").empty();
-		for (var i = 0; i < postsToDisplay.length; i++) {
-			var post = postsToDisplay[i];
-			var imageElement = post.imageElement ? post.imageElement : '';
-			var postType = post.postType;
-			var postTime = post.postTime;
-			var postID = post.postID;
-			var likeCnt = post.likeCnt;
-			var commentCnt = post.commentCnt;
-			if (postType === 0) {
-				$("#post-list").append(`
-                		   <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-                		   <input type="hidden" class="saved-post-type" value="" />
-                           <div class="row g-0">
-                               <div class="col-md-8">
-                                   <div class="card-body">
-                                       <h1 class="modal-title fs-5">
-                                           <img src="../image/cat.jpg" alt="大頭貼">
-                                           <div>
-                                               <a class="post_user">貓貓</a>
-                                               <div class="post_time">${postTime}</div>
-                                           </div>
-                                       </h1>
-                                       <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" data-post-id="${postID}">
-                                       <i class="fa-regular fa-pen-to-square"></i>
-                                           <span class="tooltip-text">編輯</span>
-                                       </button>
-                                       <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                                           <i class="fa-regular fa-trash-can"></i>
-                                           <span class="tooltip-text">刪除</span>
-                                       </button>
-                                       <h5 class="card-title">${post.postTitle}</h5>
-                                       <p class="card-text">${post.postContent}</p>
-                                   </div>
-                               </div>
-                               <div class="col-md-4" id="piccontainer">
-                               ${imageElement}
-                           </div>
-                               <div class="container text-center">
-                                   <div class="row align-items-start" id="card-footer">
-                                       <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-                                       </div>
-                                       <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                       <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                           data-bs-target="#exampleModal5" > ${commentCnt > 0 ? commentCnt : ''}
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       </div>
-                   `);
-			} else if (postType === 1) {
-				$("#post-list").append(`
-	            	    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
-	            	    <input type="hidden" class="saved-post-type" value="" />
-	              <div class="row g-0">
-	                  <div class="col-md-8">
-	                      <div class="card-body">
-	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-	                              <img src="../image/dog.jpg" alt="大頭貼">
-	                              <div>
-	                                  <a class="post_user">小吉</a>
-	                                  <div class="post_time">${postTime}</div>
-	                              </div>
-	                          </h1>
-	                          <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" data-post-id="${postID}">
-                                          <i class="fa-regular fa-pen-to-square"></i>
-                                              <span class="tooltip-text">編輯</span>
-                                          </button>
-                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
-                              <i class="fa-regular fa-trash-can"></i>
-                              <span class="tooltip-text">刪除</span>
-                          </button>
-
-	                          <h5 class="card-title">${post.postTitle}</h5>
-	                          <div class="container text-left">
-	                              <div class="row">
-	                                  <div class="col-2 col-sm-2">日期:</div>
-	                                  <div class="col-2 col-sm-4">12/12</div>
-	                                  <div class="w-100 d-none d-md-block"></div>
-
-	                                  <div class="col-2 col-sm-2">時間:</div>
-	                                  <div class="col-2 col-sm-4">0800~0900</div>
-	                                  <div class="w-100 d-none d-md-block"></div>
-
-	                                  <div class="col-2 col-sm-2">地點:</div>
-	                                  <div class="col-2 col-sm-4">我家</div>
-	                                  <div class="w-100 d-none d-md-block"></div>
-
-	                                  <div class="col-2 col-sm-2">球類:</div>
-	                                  <div class="col-2 col-sm-4">保齡球</div>
-	                                  <div class="w-100 d-none d-md-block"></div>
-
-	                                  <div class="col-2 col-sm-2">費用:</div>
-	                                  <div class="col-2 col-sm-4">81000</div>
-	                              </div>
-	                          </div>
-	                          <p class="card-text2">${post.postContent}</p>
-	                      </div>
-	                  </div>
-	                  <div class="col-md-4" id="piccontainer">
-	                  ${imageElement}
-	              </div>
-	                  <div class="container text-center">
-	                      <div class="row align-items-start" id="card-footer">
-	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>
-	                          </div>
-	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal6" > ${commentCnt > 0 ? commentCnt : ''}
-	                              </div>
-	                          <div class="col-2" id="pluscol">
-	                              <button type="button" class="fa-regular fa-square-plus"> +1
-	                          </div>
-	                      </div>
-	                  </div>
-	              </div>
-	          </div>`
-				);
-			}
-		}
-	}
 });

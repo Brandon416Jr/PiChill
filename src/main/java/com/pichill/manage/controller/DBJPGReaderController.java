@@ -19,9 +19,14 @@ public class DBJPGReaderController extends HttpServlet {
 		try {
 			Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 			ManageService manageService = new ManageService();
-			out.write(manageService.getOneManage(manageID).getmProfilePic());
+			byte[] b = manageService.getOneManage(manageID).getmProfilePic();
+//			System.out.println(b);
+//			if(b == null) {
+//				System.out.println("ID:"+manageID);
+//			}
+			out.write(b);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 

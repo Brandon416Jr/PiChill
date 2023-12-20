@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-<title>新增聯絡我們 - addContactUs.jsp</title>
+<title>新增表單 - addContactUs.jsp</title>
 
 <style>
   table#table-1 {
@@ -49,7 +49,7 @@
 <table id="table-1">
 	<tr><td>
 		 <h3>聯絡我們 - addContactUs.jsp</h3></td><td>
-		 <h4><a href="cotactUs.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
+		 <h4><a href="cotactUs.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -65,7 +65,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
 <table>
 	<tr>
 		<td>主旨:</td>
@@ -78,12 +78,12 @@
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="formType">
-<%--          <c:forEach var="post" items="${postSvc.getall}" >  --%>
-<%--           <option value="${post.postType}">${post.postType} --%>
+         <c:forEach var="contactus" items="${list}">  
+         <option value="${contactus.formType}">${contactus.formType} 
                     <option value = "0">一般</option>
                     <option value = "1">公告</option>
                     
-<%--          </c:forEach>    --%>
+         </c:forEach>    
        </select>
 	</tr>
 

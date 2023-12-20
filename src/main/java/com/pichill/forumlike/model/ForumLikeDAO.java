@@ -11,5 +11,6 @@ public interface ForumLikeDAO {
 	ForumLike getByLikeID(Integer likeID);
 	ForumLike getLikeByPostIDAndUserID(Integer postID,Integer gUserID);
 	List<ForumLike> getAll();
+	long getLikeCnt(Integer postID);
 }
 

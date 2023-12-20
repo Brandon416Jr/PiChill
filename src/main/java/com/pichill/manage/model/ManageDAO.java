@@ -14,6 +14,8 @@ public interface ManageDAO {
 	Manage findByUserNamePassword(String mUserName,String mPassword);
 	boolean isUserNameExists(String mUserName);
 	boolean isEmailExists(String mEmail);
+	boolean isUserNameExistsByInsert(String mUserName);
+	boolean isEmailExistsByInsert(String mEmail);
 	boolean isIDExists(String mID);
 //	int delete(Integer manageID); // 刪除需要篩選條件
 	

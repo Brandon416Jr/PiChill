@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.contactus.service.ContactUsServiceBack;
-import com.pichill.backstage.contactus.entity.ContactUs;
+import com.pichill.contactus.entity.ContactUs;
 
 
 /**
@@ -184,14 +184,14 @@ public class ContactUsServletBack extends HttpServlet {
 		// 可能需要多一欄會員的信箱
 
 //		ContactUs contactUs = new ContactUs();
-		contactUs.setFormID(formID);
+		contactUs.setformID(formID);
 //		contactUs.setOUserID(oUserID);
 //		contactUs.setGUserID(gUserID);
 //		contactUs.setFormPurpose(formPurpose);
 //		contactUs.setFormContent(formContent);
 //		contactUs.setFormPic(formPic);
 //		contactUs.setFormTime(formTime);
-		contactUs.setFormStatus(formStatus);
+		contactUs.setformStatus(formStatus);
 //		contactUs.setFormType(formType);
 
 		// Send the use back to the form, if there were errors

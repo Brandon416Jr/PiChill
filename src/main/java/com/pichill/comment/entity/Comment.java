@@ -17,6 +17,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.post.entity.Post;
 import com.pichill.report.entity.Report;
 
@@ -28,11 +29,11 @@ public class Comment {
 	@Column(name = "commentID", updatable = false, insertable = false)
 	private Integer commentID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)
-//	private GUser gUser;
-	@Column(name = "gUserID", updatable = false)
-	private Integer gUserID;
+	@ManyToOne
+	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)
+	private GeneralUser generalUser;
+//	@Column(name = "gUserID", updatable = false)
+//	private Integer gUserID;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
@@ -57,7 +58,7 @@ public class Comment {
 	public Comment(Integer commentID, Integer gUserID, Integer postID, String commentContent, Timestamp commentTime) {
 		super();
 		this.commentID = commentID;
-		this.gUserID = gUserID;
+//		this.gUserID = gUserID;
 		this.postID = postID;
 		this.commentContent = commentContent;
 		this.commentTime = commentTime;
@@ -68,14 +69,22 @@ public class Comment {
 	public void setCommentID(Integer commentID) {
 		this.commentID = commentID;
 	}
-	public Integer getgUserID() {
-		return gUserID;
-	}
-	public void setgUserID(Integer gUserID) {
-		this.gUserID = gUserID;
-	}
+//	public Integer getgUserID() {
+//		return gUserID;
+//	}
+//	public void setgUserID(Integer gUserID) {
+//		this.gUserID = gUserID;
+//	}
+	
+	
 	public Integer getPostID() {
 		return postID;
+	}
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
 	}
 	public void setPostID(Integer postID) {
 		this.postID = postID;

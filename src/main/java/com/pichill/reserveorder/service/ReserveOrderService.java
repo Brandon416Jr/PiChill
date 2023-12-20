@@ -26,6 +26,10 @@ public class ReserveOrderService {
 	public ReserveOrder getOneReserveOrder(Integer reserveOrderID) {
 		return dao.findByPK(reserveOrderID);
 	}
+	
+//	public ReserveOrder getListOneOrder(Integer gUserID) {
+//		return dao.findByFK1(gUserID);
+//	}
 
 
 	public List<ReserveOrder> getAll() {

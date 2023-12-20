@@ -238,7 +238,10 @@ public class OwnerUserDAOImplFront implements OwnerUserDAOFront{
 
 		try {
 			session.beginTransaction();
-			OwnerUser ownerUser = session.get(OwnerUser.class, oUserName);
+			Query<OwnerUser> query = getSession().createQuery("from OwnerUser where oUserName = :oUserName",
+					OwnerUser.class);
+			query.setParameter("oUserName", oUserName);
+			OwnerUser ownerUser = (OwnerUser) query.uniqueResult();
 			session.getTransaction().commit();
 			return ownerUser;
 		} catch (Exception e) {

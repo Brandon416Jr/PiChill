@@ -33,10 +33,11 @@ public class OwnerUserLoginFilter extends HttpFilter implements Filter {
 		HttpSession session = req.getSession();
 		System.out.println("經過過濾器了");
 		// 【從 session 判斷此user是否登入過】
-		Object account = session.getAttribute("oUserName");
+		Object account = session.getAttribute("ownerUser");
 		if (account == null) {
+			System.out.println("找不到會員");
 			session.setAttribute("location", req.getRequestURI());
-			res.sendRedirect(req.getContextPath() + "/login/ologin/oUserLogin.jsp");
+			res.sendRedirect(req.getContextPath() + "/login/oLogin/oUserLogin.jsp");
 			return;
 		} else {
 			chain.doFilter(request, response);
