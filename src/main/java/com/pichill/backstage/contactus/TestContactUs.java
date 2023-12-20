@@ -24,19 +24,19 @@ public class TestContactUs {
 //				dao.insert(contactUs);
 				
 				// 修改
-				ContactUs contactUs2= new ContactUs();
-
-				contactUs2.setoUserID(12000001);
-				contactUs2.setgUserID(null);
-				contactUs2.setFormPurpose("關於上架球館問題");
-				contactUs2.setFormContent("一次只能上架一座球館嗎?");
-				contactUs2.setFormPic(null);
-				contactUs2.setFormTime(java.sql.Timestamp.valueOf("2023-11-13 12:05:13"));
-				contactUs2.setFormStatus(1);
-				contactUs2.setFormType(0);
-				contactUs2.setFormID(22000001);				
-				dao.update(contactUs2);
-		
+//				ContactUs contactUs2= new ContactUs();
+//
+//				contactUs2.setoUserID(12000001);
+//				contactUs2.setgUserID(null);
+//				contactUs2.setFormPurpose("關於上架球館問題");
+//				contactUs2.setFormContent("一次只能上架一座球館嗎?");
+//				contactUs2.setFormPic(null);
+//				contactUs2.setFormTime(java.sql.Timestamp.valueOf("2023-11-13 12:05:13"));
+//				contactUs2.setFormStatus(1);
+//				contactUs2.setFormType(0);
+//				contactUs2.setFormID(22000001);				
+//				dao.update(contactUs2);
+//		
 				// 刪除
 //				dao.delete(22000011);
 				// 查詢單筆

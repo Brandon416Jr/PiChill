@@ -9,9 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.manage.entity.Manage;
 
 @Entity
 @Table(name ="announcement")
@@ -23,9 +28,22 @@ public class Announcement {
 	@Column(name = "announceID", updatable = false)
 	private Integer announceID;
 	
-	@Column(name = "manageID")
-	private Integer manageID;
+	@ManyToOne
+	@JoinColumn(name = "manageID", referencedColumnName ="manageID", updatable = false )
+	private Manage manage;
 	
+	
+	
+
+
+	public Manage getManage() {
+		return manage;
+	}
+
+	public void setManage(Manage manage) {
+		this.manage = manage;
+	}
+
 	@Column(name = "formID")
 	private Integer formID;
 	
@@ -50,18 +68,7 @@ public class Announcement {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Announcement(Integer announceID, Integer manageID, Integer formID, String annoTitle, String annoContent,
-			byte[] annoPic, Timestamp annoTime, Integer annoStatus) {
-		super();
-		this.announceID = announceID;
-		this.manageID = manageID;
-		this.formID = formID;
-		this.annoTitle = annoTitle;
-		this.annoContent = annoContent;
-		this.annoPic = annoPic;
-		this.annoTime = annoTime;
-		this.annoStatus = annoStatus;
-	}
+
 
 	public Integer getAnnounceID() {
 		return announceID;
@@ -71,13 +78,15 @@ public class Announcement {
 		this.announceID = announceID;
 	}
 
-	public Integer getManageID() {
-		return manageID;
-	}
+//	public Integer getManageID() {
+//		return manageID;
+//	}
+//
+//	public void setManageID(Integer manageID) {
+//		this.manageID = manageID;
+//	}
 
-	public void setManageID(Integer manageID) {
-		this.manageID = manageID;
-	}
+
 
 	public Integer getFormID() {
 		return formID;
@@ -128,19 +137,12 @@ public class Announcement {
 	}
 
 	@Override
-	public String toString() {
-		return "Announcement [announceID=" + announceID + ", manageID=" + manageID + ", formID=" + formID
-				+ ", annoTitle=" + annoTitle + ", annoContent=" + annoContent + ", annoPic=" + Arrays.toString(annoPic)
-				+ ", annoTime=" + annoTime + ", annoStatus=" + annoStatus + "]";
-	}
-	
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.hashCode(annoPic);
 		result = prime * result
-				+ Objects.hash(annoContent, annoStatus, annoTime, annoTitle, announceID, formID, manageID);
+				+ Objects.hash(annoContent, annoStatus, annoTime, annoTitle, announceID, formID, manage);
 		return result;
 	}
 
@@ -156,7 +158,31 @@ public class Announcement {
 		return Objects.equals(annoContent, other.annoContent) && Arrays.equals(annoPic, other.annoPic)
 				&& Objects.equals(annoStatus, other.annoStatus) && Objects.equals(annoTime, other.annoTime)
 				&& Objects.equals(annoTitle, other.annoTitle) && Objects.equals(announceID, other.announceID)
-				&& Objects.equals(formID, other.formID) && Objects.equals(manageID, other.manageID);
+				&& Objects.equals(formID, other.formID) && Objects.equals(manage, other.manage);
 	}
+
+	@Override
+	public String toString() {
+		return "Announcement [announceID=" + announceID + ", manage=" + manage + ", formID=" + formID + ", annoTitle="
+				+ annoTitle + ", annoContent=" + annoContent + ", annoPic=" + Arrays.toString(annoPic) + ", annoTime="
+				+ annoTime + ", annoStatus=" + annoStatus + "]";
+	}
+
+	public Announcement(Integer announceID, Manage manage, Integer formID, String annoTitle, String annoContent,
+			byte[] annoPic, Timestamp annoTime, Integer annoStatus) {
+		super();
+		this.announceID = announceID;
+		this.manage = manage;
+		this.formID = formID;
+		this.annoTitle = annoTitle;
+		this.annoContent = annoContent;
+		this.annoPic = annoPic;
+		this.annoTime = annoTime;
+		this.annoStatus = annoStatus;
+	}
+
+	
+	
+	
 
 }

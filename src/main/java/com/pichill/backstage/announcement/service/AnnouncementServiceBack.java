@@ -2,7 +2,7 @@ package com.pichill.backstage.announcement.service;
 
 import java.util.List;
 
-import com.pichill.backstage.announcement.entity.Announcement;
+import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.backstage.announcement.model.AnnouncementDAOBack;
 import com.pichill.backstage.announcement.model.AnnouncementDAOImplBack;
 
@@ -14,19 +14,19 @@ public class AnnouncementServiceBack {
 		dao = new AnnouncementDAOImplBack();
 	}
 	
-	public void insertAnnouncement(Announcement announcement) {
+	public void insertAnnouncement(AnnouncementGetOne announcement) {
 		dao.insert(announcement);	
 	}
 
-	public void updateAnnouncement(Announcement announcement) {
+	public void updateAnnouncement(AnnouncementGetOne announcement) {
 		dao.update(announcement);
 	}
 
-	public Announcement getOneAnnouncement(Integer announceID) {
+	public AnnouncementGetOne getOneAnnouncement(Integer announceID) {
 		return dao.getAnnouncementByAnnounceID(announceID);
 	}
 
-	public List<Announcement> getAll() {
+	public List<AnnouncementGetOne> getAll() {
 		return dao.getAll();
 	}
 	

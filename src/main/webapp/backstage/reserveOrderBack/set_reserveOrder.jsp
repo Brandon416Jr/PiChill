@@ -279,7 +279,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="gUserID"
-														value="<%=reserveOrder.getgUserID()%>" disabled="disabled"
+														value="<%=reserveOrder.getGeneralUser()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -290,7 +290,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="oUserID"
-														value="<%=reserveOrder.getoUserID()%>" disabled="disabled"
+														value="<%=reserveOrder.getOwnerUser()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -311,7 +311,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="timeID"
-														value="<%=reserveOrder.getTimeID()%>" disabled="disabled"
+														value="<%=reserveOrder.getTime()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -322,7 +322,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="placeID"
-														value="<%=reserveOrder.getPlaceID()%>" disabled="disabled"
+														value="<%=reserveOrder.getPlace()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>

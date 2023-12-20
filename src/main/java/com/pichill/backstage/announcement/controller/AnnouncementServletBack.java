@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.backstage.announcement.entity.Announcement;
+import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.backstage.announcement.service.AnnouncementServiceBack;
 
 
@@ -84,7 +84,7 @@ public class AnnouncementServletBack extends HttpServlet {
 //		req.setAttribute("errorMsgs", errorMsgs);
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
 
-		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
+		AnnouncementGetOne announcement = annoSvcB.getOneAnnouncement(announceID);
 
 		req.setAttribute("announcement", announcement);
 		return "/backstage/announcementBack/set_announcement.jsp";
@@ -97,7 +97,7 @@ public class AnnouncementServletBack extends HttpServlet {
 
 		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
-		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
+		AnnouncementGetOne announcement = annoSvcB.getOneAnnouncement(announceID);
 
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 		if (manageID != null) {
@@ -234,7 +234,7 @@ public class AnnouncementServletBack extends HttpServlet {
 			errorMsgs.add("表單狀態: 請選擇");
 		}
 		
-		Announcement announcement = new Announcement();
+		AnnouncementGetOne announcement = new AnnouncementGetOne();
 		announcement.setManageID(manageID);
 		announcement.setFormID(formID);
 		announcement.setAnnoTitle(annoTitle);
