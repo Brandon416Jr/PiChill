@@ -40,7 +40,7 @@ public class TimeRef {
 	
 	//預約訂單
 	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "TimeRef", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "timeRef", cascade = CascadeType.ALL)
 	// (mappedBy = "time")的time指的是新增的Time "time"部門物件的屬性
 	@OrderBy("reserveOrderID asc") 
 	private Set<ReserveOrder> reserveOrder; // Set不重複
