@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
-import com.pichill.announcementgetone.entity.AnnouncementGetOne;
+import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.court.Court;
 
 
@@ -65,7 +65,7 @@ public class Manage implements Serializable {
 	
 	@OneToMany(mappedBy = "manage", cascade = CascadeType.ALL)
 	@OrderBy("announceID asc") 
-    private Set<AnnouncementGetOne> announcement;
+    private Set<Announcement> announcement;
 	
 	
 	@Column(name="mID", columnDefinition="char", updatable = false) // 資料庫char型別要用columnDefinition標示!
@@ -237,11 +237,11 @@ public class Manage implements Serializable {
 	        this.court = court;
 	    }
 	  
-	  public Set<AnnouncementGetOne> getAnnouncementGetOne() {
+	  public Set<Announcement> getAnnouncement() {
 	        return announcement;
 	    }
 
-		  public void setAnnouncementGetOne(Set<AnnouncementGetOne> announcement) {
+		  public void setAnnouncement(Set<Announcement> announcement) {
 		        this.announcement = announcement;
 		    }
 		

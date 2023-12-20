@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
+<%@ page import="com.pichill.generaluser.entity.GeneralUser"%>
+<%@ page import="com.pichill.backstage.generaluser.service.GeneralUserServiceBack"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
 // 寫死
@@ -15,6 +17,8 @@ Manage manage = (Manage) session.getAttribute("manage");
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 %>
+
+
 
 <!DOCTYPE html>
 <html>
@@ -305,7 +309,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="gUserID" value="<%=contactUs.getgUserID()%>"
+													name="gUserID" value="<%=contactUs.getGeneralUser()%>"
 													class="form-control" />
 											</div>
 										</div>

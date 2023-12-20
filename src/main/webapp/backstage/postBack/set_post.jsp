@@ -274,7 +274,7 @@ Post post = (Post) request.getAttribute("post");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="gUserID"  value="<%=post.getgUserID()%>"
+														name="gUserID"  value="<%=post.getGeneralUser()%>"
 														class="form-control" />
 												</div>
 											</div>

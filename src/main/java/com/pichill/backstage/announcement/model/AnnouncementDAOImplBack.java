@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.hibernate.Session;
 
-import com.pichill.backstage.announcement.entity.Announcement;
+import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.util.HibernateUtil;
 
 public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
 
 	@Override
-	public int insert(Announcement announcement) {
+	public int insert(AnnouncementGetOne announcement) {
 		// TODO Auto-generated method stub
 				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 				try {
@@ -26,7 +26,7 @@ public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
 	}
 
 	@Override
-	public int update(Announcement announcement) {
+	public int update(AnnouncementGetOne announcement) {
 		// TODO Auto-generated method stub
 				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 				try {
@@ -42,11 +42,11 @@ public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
 	}
 
 	@Override
-	public Announcement getAnnouncementByAnnounceID(Integer announceID) {
+	public AnnouncementGetOne getAnnouncementByAnnounceID(Integer announceID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Announcement announcement = session.get(Announcement.class, announceID);
+			AnnouncementGetOne announcement = session.get(AnnouncementGetOne.class, announceID);
 			session.getTransaction().commit();
 			return announcement;
 		} catch (Exception e) {
@@ -57,11 +57,11 @@ public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
 	}
 
 	@Override
-	public List<Announcement> getAll() {
+	public List<AnnouncementGetOne> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<Announcement> list = session.createQuery("from Announcement", Announcement.class).list();
+			List<AnnouncementGetOne> list = session.createQuery("from AnnouncementGetOne", AnnouncementGetOne.class).list();
 			session.getTransaction().commit();
 			return list;
 		} catch (Exception e) {

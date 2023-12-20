@@ -13,6 +13,7 @@ Manage manage = (Manage) session.getAttribute("manage");
     <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 Comment comment = (Comment) request.getAttribute("comment");
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -273,7 +274,7 @@ Comment comment = (Comment) request.getAttribute("comment");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="gUserID"  value="<%=comment.getgUserID()%>"
+														name="gUserID"  value="<%=comment.getGeneralUser()%>"
 														class="form-control" />
 												</div>
 											</div>
