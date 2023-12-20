@@ -5,22 +5,38 @@
 <%@ page import="com.pichill.reserveorder.model.*"%>
 <%@ page import="com.pichill.reserveorder.service.ReserveOrderService"%>
 <%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.generaluser.service.*"%>
+<%@ page import="com.pichill.owneruser.entity.*"%>
+<%@ page import="com.pichill.time.*"%>
+<%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 <%
-ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder"); //GeneralUserServlet.java(Concroller), 存入req的generalUser物件
-// GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-// ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-// List<ReserveOrder> list = reserveOrderSvc.getAll();
-// pageContext.setAttribute("list", list);
+ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+
+ %>
+ 
+ <%
+ Integer gUserID = 11000001;
+ GeneralUserService generalUserSvc = new GeneralUserService();
+ GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
+ pageContext.setAttribute("generaluser",generalUser);
 %>
+
+<%-- <%
+//  Integer reserveOrderID = 63000001;
+//  ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+//  ReserveOrder reserveOrder = reserveOrderSvc.getOneReserveOrder(reserveOrderID);
+//  pageContext.setAttribute("reserveOrder",reserveOrder);
+ %> --%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>reserveOrderList</title>
+<title>listOneOrder</title>
 <!-- JQuery 連結 -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -87,7 +103,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 						</li>
 						<li>&nbsp;</li>
 						<li class="my-2"><a class="asidearea"
-							href="<%=request.getContextPath()%>/reserveorder/allOrder.jsp">球館預約紀錄</a>
+							href="<%=request.getContextPath()%>/reserveorder/listOneOrder.jsp">球館預約紀錄</a>
 						</li>
 						<li>&nbsp;</li>
 						<li class="my-2"><a class="asidearea" href="">聯絡我們</a></li>
@@ -125,59 +141,51 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 					<thead>
 						<!-- 欄位名稱 -->
 						<tr>
-							<th>訂單編號</th>
-							<th>一般會員編號</th>
-							<th>企業會員編號</th>
+							<th>預約訂單編號</th>
+							<th>會員編號</th>
+							<th>姓名</th>
+							<th>球類</th>
+							<th>地區</th>
+							<th>球館</th>
+							<th>場地</th>
 							<th>預約日期</th>
-							<th>時段編號</th>
-							<th>場地編號</th>
+							<th>預約時段</th>
 							<th>下單時間</th>
 							<th>人數</th>
+							<th >總金額</th>
 							<th>訂單狀態</th>
-							<th>總金額</th>
 							<th id="th">取消</th>
-							<!-- 							<th>取消</th> -->
-							<!-- 							<th>預約訂單編號</th> -->
-							<!-- 							<th>球類</th> -->
-							<!-- 							<th>地區</th> -->
-							<!-- 							<th>球館</th> -->
-							<!-- 							<th>場地</th> -->
-							<!-- 							<th>預約日期</th> -->
-							<!-- 							<th>預約時段</th> -->
-							<!-- 							<th>人數</th> -->
-							<!-- 							<th id="th">總金額</th> -->
-							<!-- 							<th>訂單狀態</th> -->
-							<!-- 							<th>取消</th> -->
 						</tr>
 					</thead>
 
 					<tbody>
-<%-- 						<c:forEach var="reserveOrder" items="${list}"> --%>
-							<!-- 資料內容 -->
-							<tr>
-								<td>${reserveOrder.reserveOrderID}</td>
-								<td>${reserveOrder.gUserID}</td>
-								<td>${reserveOrder.oUserID}</td>
-								<td>${reserveOrder.reserveDate}</td>
-								<td>${reserveOrder.timeID}</td>
-								<td>${reserveOrder.placeID}</td>
-								<td>${reserveOrder.orderTime}</td>
-								<td>${reserveOrder.orderNum}</td>
-								<td>${reserveOrder.orderStatus == 0 ? '訂單取消' : '訂單成立'}</td>
-								<td>${reserveOrder.totalCost}</td>
-								<td>
-									<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
-										<input type="hidden" name="action" value="getOne_For_Update">
-										<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
-										<input type="submit" id="cancel" value="取消" >
-										
-									</FORM>
-								</td>
-							</tr>
-<%-- 						</c:forEach> --%>
+						<!-- 資料內容 -->
+						<tr>
+							<td>${reserveOrder.reserveOrderID}</td>
+							<td>${reserveOrder.generalUser.gUserID}</td>
+							<td>${reserveOrder.generalUser.gName}</td>
+							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
+							<td>${reserveOrder.court.loc}</td>
+							<td>${reserveOrder.court.courtName}</td>
+							<td>${reserveOrder.place.placeName}</td>
+							<td>${reserveOrder.reserveDate}</td>
+							<td>${reserveOrder.time.reserveTime}</td>
+							<td>${reserveOrder.orderTime}</td>
+							<td>${reserveOrder.orderNum}</td>
+							<td>${reserveOrder.totalCost}</td>
+							<td>${reserveOrder.orderStatus == 0 ? "訂單取消" : reserveOrder.orderStatus == 1 ? "訂單成立" : "訂單已完成"}</td>
+							<td>
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
+									<input type="hidden" name="action" value="getOne_For_Update">
+									<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
+									<input type="submit" id="cancel" value="取消" >
+								</FORM>
+							</td>
+						</tr>
 					</tbody>
 
 				</table>
+				</div>
 		</main>
 	</div>
 	<!----------------------------------------------- footer 區 ------------------------------------------------------->

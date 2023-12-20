@@ -1,6 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.reserveorder.entity.ReserveOrder"%>
+<%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.owneruser.entity.*"%>
+<%@ page import="com.pichill.time.*"%>
+<%@ page import="com.pichill.place.*"%>
+<%@ page import="com.pichill.court.*"%>
 
 <%
 	//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
@@ -75,21 +80,25 @@
             <form class="bararea" enctype="multipart/form-data">
             	<span>預約訂單編號:</span><span id="loc" name="loc" value="${reserveOrder.reserveOrderID}"></span>
                 <br><br>
-                <span>球類:</span><span id="ball" name="ball" value="${generalUser.gName}"></span>
+                <span>一般會員編號:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gUserID}"></span>
                 <br><br>
-                <span>地區:</span><span id="loc" name="loc"></span>
+                <span>一般會員姓名:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gName}"></span>
                 <br><br>
-                <span>球館:</span><span id="court" name="court"></span>
+                <span>球類:</span><span id="ball" name="ball" value="${reserveOrder.place.ball}"></span>
                 <br><br>
-                <span>場地:</span><span id="place" name="place"></span>
+                <span>地區:</span><span id="loc" name="loc" value="${reserveOrder.court.loc}"></span>
                 <br><br>
-                <span>預約日期:</span><span id="reservedate" name="reservedate"></span>
+                <span>球館:</span><span id="court" name="court" value="${reserveOrder.court.courtName}"></span>
                 <br><br>
-                <span>預約時段:</span><span id="time" name="time"></span>
+                <span>場地:</span><span id="place" name="place" value="${reserveOrder.place.placeName}"></span>
                 <br><br>
-                <span>人數:</span><span id="orderNum" name="orderNum"></span>
+                <span>預約日期:</span><span id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}"></span>
+                <br><br>
+                <span>預約時段:</span><span id="time" name="time" value="${reserveOrder.time.reserveTime}"></span>
+                <br><br>
+                <span>人數:</span><span id="orderNum" name="orderNum" value="${reserveOrder.orderNum}"></span>
                 <p id="line3"></p>
-                <span id="total">總金額:</span><span id="totalcost" name="totalcost">&nbsp;&nbsp;元</span>
+                <span id="total">總金額:</span><span id="totalCost" name="totalCost" value="${reserveOrder.totalCost == reserveOrder.place.placeFee}">&nbsp;&nbsp;元</span>
                 <br><br>
                 <div class="next1">
                 	<input type="hidden" name="action" value="getOneDisplay">

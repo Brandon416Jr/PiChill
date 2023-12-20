@@ -17,6 +17,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.pichill.comment.entity.Comment;
+import com.pichill.contactus.entity.ContactUs;
+import com.pichill.forumlike.entity.ForumLike;
+import com.pichill.post.entity.Post;
 //import com.pichill.comment.entity.Comment;
 //import com.pichill.contactus.entity.ContactUs;
 //import com.pichill.forumlike.entity.forumLike;
@@ -82,32 +86,41 @@ public class GeneralUser {
 	@Column(name="gProfilePic", columnDefinition = "longblob")
 	private byte[] gProfilePic;
 	
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
-//	@OrderBy("likeID asc") 
-//	private Set<Like> like; // Set不重複
-//	
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
-//	@OrderBy("postID asc") 
-//	private Set<Post> post; // Set不重複
-//	
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
-//	@OrderBy("commentID asc") 
-//	private Set<Comment> comment; // Set不重複
-//	
-//	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
-//	@OrderBy("formID asc") 
-//	private Set<ContactUs> contactUs; // Set不重複
-//	
+	//====================================================================================//
+	
+	//按讚
 	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
-//	// (mappedBy = "generalUser")的generalUser指的是新增的GeneralUser generalUser部門物件的屬性
-//	@OrderBy("reserveOrderID asc") 
-//	private Set<ReserveOrder> reserveOrder; // Set不重複
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	@OrderBy("likeID asc") 
+	private Set<ForumLike> like; // Set不重複
+	
+	//貼文
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	@OrderBy("postID asc") 
+	private Set<Post> post; // Set不重複
+	
+	//留言
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	@OrderBy("commentID asc") 
+	private Set<Comment> comment; // Set不重複
+	
+	//聯絡我們
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	@OrderBy("formID asc") 
+	private Set<ContactUs> contactUs; // Set不重複
+	
+	//預約訂單
+	// fetch 預設為 LAZY
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	// (mappedBy = "generalUser")的generalUser指的是新增的GeneralUser "generalUser"部門物件的屬性
+	@OrderBy("reserveOrderID asc") 
+	private Set<ReserveOrder> reserveOrder; // Set不重複
 
+	//====================================================================================//
+	
 	public GeneralUser() {
 		super();
 	}
@@ -283,65 +296,54 @@ public class GeneralUser {
 		this.gProfilePic = gProfilePic;
 	}
 
-//	public Set<Like> getLike() {
-//		return like;
-//	}
-//
-//
-//
-//	public void setLike(Set<Like> like) {
-//		this.like = like;
-//	}
+	//=============================================================//
+	
+	//按讚
+	public Set<ForumLike> getLike() {
+		return like;
+	}
+	public void setLike(Set<ForumLike> like) {
+		this.like = like;
+	}
 
 
-
-//	public Set<Post> getPost() {
-//		return post;
-//	}
-//
-//
-//
-//	public void setPost(Set<Post> post) {
-//		this.post = post;
-//	}
+	//貼文
+	public Set<Post> getPost() {
+		return post;
+	}
+	public void setPost(Set<Post> post) {
+		this.post = post;
+	}
 
 
-
-//	public Set<Comment> getComment() {
-//		return comment;
-//	}
-//
-//
-//
-//	public void setComment(Set<Comment> comment) {
-//		this.comment = comment;
-//	}
+	//留言
+	public Set<Comment> getComment() {
+		return comment;
+	}
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
 
 
-
-//	public Set<ContactUs> getContactUs() {
-//		return contactUs;
-//	}
-//
-//
-//
-//	public void setContactUs(Set<ContactUs> contactUs) {
-//		this.contactUs = contactUs;
-//	}
+	//聯絡我們
+	public Set<ContactUs> getContactUs() {
+		return contactUs;
+	}
+	public void setContactUs(Set<ContactUs> contactUs) {
+		this.contactUs = contactUs;
+	}
 
 
+	//預約訂單
+	public Set<ReserveOrder> getReserveOrder() {
+		return reserveOrder;
+	}
+	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
 
-//	public Set<ReserveOrder> getReserveOrder() {
-//		return reserveOrder;
-//	}
-//
-//
-//
-//	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
-//		this.reserveOrder = reserveOrder;
-//	}
-
-
+	//=============================================================//
+	
 	@Override
 	public String toString() {
 		return "GeneralUser [gUserID=" + gUserID + ", gName=" + gName + ", gTelephone=" + gTelephone + ", gEmail="
@@ -351,6 +353,14 @@ public class GeneralUser {
 				+ ", gRegistDate=" + gRegistDate + ", gBirth=" + gBirth + ", yoyakuCnt=" + yoyakuCnt + ", gProfilePic="
 				+ Arrays.toString(gProfilePic) + "]";
 	}
+
+
+	public static GeneralUser parseInt(String parameter) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
 
 
 }

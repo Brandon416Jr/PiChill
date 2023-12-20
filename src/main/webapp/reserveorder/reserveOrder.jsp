@@ -1,10 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.reserveorder.entity.ReserveOrder"%>
+<%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.generaluser.service.*"%>
+<%@ page import="com.pichill.owneruser.entity.*"%>
+<%@ page import="com.pichill.time.*"%>
+<%@ page import="com.pichill.place.*"%>
+<%@ page import="com.pichill.court.*"%>
 
 <%
 	//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
     ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+%>
+<%
+ Integer gUserID = 11000001;
+ GeneralUserService generalUserSvc = new GeneralUserService();
+ GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
+ pageContext.setAttribute("generaluser",generalUser);
 %>
 <!DOCTYPE html>
 <html>
@@ -78,17 +90,23 @@
 					</c:forEach>
 				</ul>
 			</c:if>
-			
+  		
       <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data" class="choice">
             <br>
+            <span>會員編號:</span>
+            <input type="text" id="guserID" name="guserID" value="${param.generalUser.gUserID}">
+            <br><br>
             <!-- 選擇球類 -->
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">選擇球類</label>
-                <select class="form-select" id="ball" name="ball" required>
-                  <option value="0">籃球</option>
-                  <option value="1">排球</option>
-                  <option value="2">羽球</option>
+                <select class="form-select" id="ball" name="ball">
+	                <c:forEach var="place" items="${placeSvc.all}">
+					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.ball == 0 ? "籃球" : place.ball == 1 ? "排球" : "羽球"}
+				    </c:forEach>
+<!--                   <option value="0">籃球</option> -->
+<!--                   <option value="1">排球</option> -->
+<!--                   <option value="2">羽球</option> -->
                 </select>
               </div>
               <br>
@@ -96,10 +114,13 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">選擇地區</label>
-                <select class="form-select" id="loc" name="loc" required>
-                  <option value="">松山區</option>
-                  <option>中正區</option>
-                  <option>中山區</option>
+                <select class="form-select" id="loc" name="loc">
+	                <c:forEach var="court" items="${courtSvc.all}">
+					  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.loc}
+				    </c:forEach>
+<!--                   <option value="">松山區</option> -->
+<!--                   <option>中正區</option> -->
+<!--                   <option>中山區</option> -->
                 </select>
               </div>
               <br>
@@ -107,9 +128,10 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">選擇球館</label>
-                <select class="form-select" id="court" name="court" required>
-                  <option value=""></option>
-                  <option>...</option>
+                <select class="form-select" id="court" name="court">
+                	<c:forEach var="court" items="${courtSvc.all}">
+				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName}
+			    	</c:forEach>
                 </select>
               </div>
               <br>
@@ -117,16 +139,17 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">選擇場地</label>
-                <select class="form-select" id="place" name="place" required>
-                  <option value=""></option>
-                  <option>...</option>
+                <select class="form-select" id="place" name="place">
+	                <c:forEach var="place" items="${placeSvc.all}">
+					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName}
+				    </c:forEach>
                 </select>
               </div>
               <br>
             <!-- 預約日期 -->
               <div class="col">
                 <p for="reservedate" id="p">預約日期</p>
-                <input type="date" id="reservedate" name="reservedate">
+                <input type="date" id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}">
               </div>
         
             <br>
@@ -134,32 +157,10 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">預約時段</label>
-                <select class="form-select" id="time" name="time" required>
-                  <option value="">請選擇時段</option>
-                  <option value="0">00:00-01:00</option>
-                  <option value="1">01:00-02:00</option>
-                  <option value="2">02:00-03:00</option>
-                  <option value="3">03:00-04:00</option>
-                  <option value="4">04:00-05:00</option>
-                  <option value="5">05:00-06:00</option>
-                  <option value="6">06:00-07:00</option>
-                  <option value="7">07:00-08:00</option>
-                  <option value="8">08:00-09:00</option>
-                  <option value="9">09:00-10:00</option>
-                  <option value="10">10:00-11:00</option>
-                  <option value="11">11:00-12:00</option>
-                  <option value="12">12:00-13:00</option>
-                  <option value="13">13:00-14:00</option>
-                  <option value="14">14:00-15:00</option>
-                  <option value="15">15:00-16:00</option>
-                  <option value="16">16:00-17:00</option>
-                  <option value="17">17:00-18:00</option>
-                  <option value="18">18:00-19:00</option>
-                  <option value="19">19:00-20:00</option>
-                  <option value="20">20:00-21:00</option>
-                  <option value="21">21:00-22:00</option>
-                  <option value="22">22:00-23:00</option>
-                  <option value="23">23:00-24:00</option>
+                <select class="form-select" id="time" name="time" placeholder="請選擇預約時段">
+	                <c:forEach var="time" items="${timeSvc.all}">
+					  <option value="${time.timeID}" ${(param.timeID==time.timeID)? 'selected':'' } >${time.reserveTime}
+				    </c:forEach>
                 </select>
               </div>
             <br>
@@ -167,7 +168,7 @@
             <div class="col">
               <div class="col" id="choose">
                 <label for="coupon" id="label">人數</label><br>
-                  <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數">
+                  <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數" value="${reserveOrder.orderNum}">
               </div>
             <br>
             <input type="hidden" name="action" value="insert">

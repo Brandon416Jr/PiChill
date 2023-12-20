@@ -40,26 +40,26 @@ main.main {
 th {
 	border-top: 1px solid #acacac;
 	border-left: 1px solid #d1d1d1;
-	font-size: 12px;
+	font-size: 10px;
 	width: auto;
 }
 
 th#th {
 	border-right: 1px solid #d1d1d1;
-	font-size: 12px;
+	font-size: 10px;
 	width: auto;
 }
 
 td {
-	font-size: 12px;
+	font-size: 10px;
 	width: auto;
 }
 
 table#table_id {
 	position: relative;
 	top: 20px;
-	/*     width: 1000px; */
-/* 	left: -10px; */
+/* 	border: 1px solid red; */
+	left: -5px;
 }
 
 div#datatable {
