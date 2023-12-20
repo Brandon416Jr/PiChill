@@ -2,7 +2,7 @@ package com.pichill.backstage.contactus.model;
 
 import java.util.List;
 
-import com.pichill.backstage.contactus.entity.ContactUs;
+import com.pichill.contactus.entity.ContactUs;
 
 public interface ContactUsDAOBack {
 

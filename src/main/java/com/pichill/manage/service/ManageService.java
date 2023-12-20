@@ -35,6 +35,7 @@ public class ManageService {
 		manage.setmEmail(mEmail);
 		manage.setmProfilePic(mProfilePic);
 		manage.setmStatus(mStatus);
+		System.out.println("insertManage:"+manage);
 		dao.insert(manage);
 		return manage;
 	}
@@ -62,6 +63,29 @@ public class ManageService {
 		return manage;
 	}
 	
+	public Manage updateMyData(int manageID, String mName, String mUserName, String mPassword,
+			String mTelephone, String mEmgContact, String mEmgPhone, String mAddress, String mEmail, byte[] mProfilePic) {
+		Manage manage = dao.getManageByManageID(manageID);
+		if (manage != null) {
+			manage.setmName(mName);
+			manage.setmUserName(mUserName);
+			manage.setmPassword(mPassword);
+//			manage.setmBirth(mBirth);
+//			manage.setmGender(mGender);
+			manage.setmTelephone(mTelephone);
+			manage.setmEmgContact(mEmgContact);
+			manage.setmEmgPhone(mEmgPhone);
+			manage.setmAddress(mAddress);
+//			manage.setmHiredate(mHiredate);
+//			manage.setmID(mID);
+			manage.setmEmail(mEmail);
+			manage.setmProfilePic(mProfilePic);
+//			manage.setmStatus(mStatus);
+			dao.update(manage);
+		}
+		return manage;
+	}
+	
 	public Manage userAuth(String mUserName, String mPassword) {
     	return dao.findByUserNamePassword(mUserName, mPassword);
         
@@ -81,13 +105,13 @@ public class ManageService {
 	
 	public boolean existsUserNameByInsert(String mUserName) {
         // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
-        boolean exists = dao.isUserNameExists(mUserName);
+        boolean exists = dao.isUserNameExistsByInsert(mUserName);
         return exists;
     }
 	
 	public boolean existsEmailByInsert(String mEmail) {
         // 這裡使用了假設的 UserRepository 方法 isUsernameExists()，您應根據實際情況修改它
-        boolean exists = dao.isEmailExists(mEmail);
+        boolean exists = dao.isEmailExistsByInsert(mEmail);
         return exists;
     }
 	

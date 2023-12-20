@@ -1,26 +1,24 @@
-package com.pichill.backstage.post.model;
+package com.pichill.backstage.commentb.model;
 
 import java.util.List;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
-import com.pichill.manage.entity.Manage;
-import com.pichill.post.entity.Post;
-import com.pichill.post.model.PostDAO;
+import com.pichill.comment.entity.Comment;
+import com.pichill.comment.model.CommentDAO;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.util.HibernateUtil;
 
-public class PostDAOImplBack implements PostDAOBack {
-	private SessionFactory factory;
+public class CommentDAOImplBack implements CommentDAOBack {
 
 	@Override
-	public int delete(Integer postID) {
+	public int delete(Integer commentID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Post post = session.get(Post.class, postID);
-			if (post != null) {
-				session.delete(post);
+			Comment comment = session.get(Comment.class, commentID);
+			if (comment != null) {
+				session.delete(comment);
 			}
 			session.getTransaction().commit();
 			return 1;
@@ -32,11 +30,11 @@ public class PostDAOImplBack implements PostDAOBack {
 	}
 
 	@Override
-	public List<Post> getAll() {
+	public List<Comment> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<Post> list = session.createQuery("from Post", Post.class).list();
+			List<Comment> list = session.createQuery("from Comment", Comment.class).list();
 			session.getTransaction().commit();
 			return list;
 		} catch (Exception e) {
@@ -46,22 +44,16 @@ public class PostDAOImplBack implements PostDAOBack {
 		return null;
 	}
 
-
-
 	@Override
-	public int update(Post entity) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public Post getByPostID(Integer postID) {
+	public Comment getByCommentID(Integer commentID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			Post post = session.get(Post.class, postID);
+			Comment comment = session.get(Comment.class, commentID);
+			System.out.println("交易打開了");
 			session.getTransaction().commit();
-			return post;
+			System.out.println("交易關閉了");
+			return comment;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
@@ -69,6 +61,16 @@ public class PostDAOImplBack implements PostDAOBack {
 		return null;
 	}
 
-	
+	@Override
+	public int add(Comment comment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int update(Comment comment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

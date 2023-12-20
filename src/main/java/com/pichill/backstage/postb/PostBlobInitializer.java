@@ -1,4 +1,4 @@
-package com.pichill.backstage.post;
+package com.pichill.backstage.postb;
 
 import java.io.File;
 import java.io.FileInputStream;

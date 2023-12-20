@@ -1,9 +1,9 @@
-package com.pichill.backstage.post.service;
+package com.pichill.backstage.postb.service;
 
 import java.util.List;
 
-import com.pichill.backstage.post.model.PostDAOBack;
-import com.pichill.backstage.post.model.PostDAOImplBack;
+import com.pichill.backstage.postb.model.PostDAOBack;
+import com.pichill.backstage.postb.model.PostDAOImplBack;
 import com.pichill.post.entity.Post;
 
 public class PostServiceBack {

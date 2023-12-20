@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.generaluser.service.GeneralUserServiceBack;
+import com.pichill.generaluser.entity.GeneralUser;
 
 @WebServlet("/generaluser/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
@@ -23,11 +24,14 @@ public class DBJPGReaderController extends HttpServlet {
 
 		try {
 			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+			
 			GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
-			out.write(gUserSvcB.getOneGeneralUser(gUserID).getgProfilePic());
+			GeneralUser generalUser = gUserSvcB.getOneGeneralUser(gUserID);
+			req.setAttribute("generalUser", generalUser);
+			out.write(generalUser.getgProfilePic());
 		} catch (Exception e) {
 			e.printStackTrace();
-			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
+			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPicture.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 
 			  }

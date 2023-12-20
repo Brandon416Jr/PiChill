@@ -1,4 +1,4 @@
-package com.pichill.backstage.post.controller;
+package com.pichill.backstage.postb.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.pichill.backstage.post.service.PostServiceBack;
+import com.pichill.backstage.postb.service.PostServiceBack;
 
 @WebServlet("/post/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
@@ -26,7 +26,7 @@ public class DBJPGReaderController extends HttpServlet {
 			PostServiceBack postSvcB = new PostServiceBack();
 			out.write(postSvcB.getOnePost(postID).getPostPic());
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");
 			if(in == null) {
 			    throw new RuntimeException("Unable to find default picture"); 

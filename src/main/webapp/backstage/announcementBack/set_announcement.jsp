@@ -1,11 +1,22 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
+<%@ page import="com.pichill.manage.entity.Manage"%>
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
+%>
 
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 Announcement announcement = (Announcement) request.getAttribute("announcement");
 %>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,7 +85,10 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+										onclick="return checkmStatus();">新增員工資料</a></li>
+								<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>	
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -168,36 +182,36 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-<!-- 										<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
-											<img
-											src="<%=request.getContextPath()%>/image/Group 115.png"
-											alt="使用者頭像" />
+										<img
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+											alt="使用者頭像" /> 
+<!-- 											<img -->
+<%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 											alt="使用者頭像" /> -->
 									</div>
 									<div class="content">
-										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
+<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
 												<a href="#"> 
-<!-- 												<img -->
-<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-<!-- 											alt="使用者頭像" />  -->
 												<img
-													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="John Doe" />
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+											alt="使用者頭像" /> 
+<!-- 												<img -->
+<%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 													alt="John Doe" /> -->
 												</a>
 											</div>
 											<div class="content">
 												<h5 class="name">
-													<a href="#">羅裕鵬</a>
+													<a href="#"><%=manage.getmName() %></a>
 <%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 												</h5>
-												<span class="email">brandon416jr@gmail.com</span>
-<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
+												<span class="email"><%=manage.getmEmail() %></span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
@@ -301,14 +315,13 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 													<label for="file-input" class="form-control-label">圖片</label>
 												</div>
 												<div class="col-10 col-md-8">
-													<input type="file" id="file-input" name="annoPic"
-														multiple="multiple" onclick="previewImage()"
-														class="form-control-file" /> <img id="imagePreview"
-														src="#" alt="Preview" width="100px" />
+													<input type="file" id="file-input" name="annoPic" value="${announcement.annoPic }"
+														multiple="multiple" onclick="previewImage()" onchange="preview()"
+														class="form-control-file" /> 
 																										<div id="blob_holder">
 																											<img
-																												src="<%=request.getContextPath()%>/announcement/DBGifReader?announceID=${announcement.announceID}"
-																												width="100px">
+																												src="<%=request.getContextPath()%>/announcement/DBJPGReader?announceID=${announcement.announceID}"
+																												width="400px">
 																										</div>
 												</div>
 											</div>
@@ -357,8 +370,43 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 				</div>
 			</div>
 		</div>
-	</div>
+			<script>
+		function preview() {
 
+			var fileInput = document.getElementById('uploadImg');
+			var file = fileInput.files[0];
+
+			var reader = new FileReader();
+
+			reader.onload = function() {
+				document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="400px"/>';
+			};
+
+			if (file) {
+				reader.readAsDataURL(file);
+			}
+
+		}
+	</script>
+<script>
+		function checkmStatus() {
+			let mStatus =
+	<%=session.getAttribute("mStatus")%>
+		;
+		console.log(mStatus);
+			if (mStatus === 1) {
+				Swal.fire({
+					icon : 'error',
+					title : '權限不足!!',
+					text : '請聯繫系統管理員',
+					showConfirmButton : false,
+					timer : 50000000
+				})
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<!-- <script>
       const textbox = document.querySelector('.textbox .form-control');
         textbox.addEventListener('input', (e) => {

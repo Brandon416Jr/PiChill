@@ -1,4 +1,4 @@
-package com.pichill.backstage.report.model;
+package com.pichill.backstage.reportb.model;
 
 
 import java.util.List;
@@ -10,9 +10,16 @@ import com.pichill.report.entity.Report;
 import com.pichill.report.model.ReportDAO;
 import com.pichill.util.HibernateUtil;
 
-public class ReportDAOImplBack implements ReportDAO {
+public class ReportDAOImplBack implements ReportDAOBack {
 	private SessionFactory factory;
+	
+	public ReportDAOImplBack() {
+		factory = com.pichill.util.HibernateUtil.getSessionFactory();
+	}
 
+	private Session getSession() {
+		return factory.getCurrentSession();
+	}
 	@Override
 	public int delete(int reportID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
@@ -70,6 +77,15 @@ public class ReportDAOImplBack implements ReportDAO {
 	@Override
 	public int update(Report report) {
 		// TODO Auto-generated method stub
-		return 0;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			getSession().update(report);
+			session.getTransaction().commit();
+			return 1;
+		} catch (Exception e) {
+			return -1;
+		}
+		
 	}
 }

@@ -252,6 +252,7 @@ public class AnnouncementServletBack extends HttpServlet {
 		/*************************** 2.開始新增資料 ***************************************/
 
 		annoSvcB.insertAnnouncement(announcement);
+		System.out.println(announcement);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		return "/backstage/announcementBack/all_announcement.jsp";

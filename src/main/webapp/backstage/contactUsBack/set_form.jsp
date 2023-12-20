@@ -1,8 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
 	pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.backstage.contactus.entity.ContactUs"%>
-
+<%@ page import="com.pichill.contactus.entity.ContactUs"%>
+<%@ page import="com.pichill.manage.entity.Manage"%>
+<%
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
+%>
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
@@ -91,7 +99,10 @@ input.btn {
 								<li><a class="active"
 									href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">所有員工資料</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp">新增員工資料</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+										onclick="return checkmStatus();">新增員工資料</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
 								class="fas fa-tachometer-alt"></i>一般會員管理
@@ -189,32 +200,33 @@ input.btn {
 							<div class="account-wrap">
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
-										<!-- 										<img -->
-										<%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-										<!-- 											alt="使用者頭像" />  -->
-										<img src="<%=request.getContextPath()%>/image/Group 115.png"
-											alt="使用者頭像" />
+																				<img
+																					src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+																					alt="使用者頭像" /> 
+<%-- 										<img src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 											alt="使用者頭像" /> -->
 									</div>
 									<div class="content">
-										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a>
-										<%-- 										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a> --%>
+<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+																				<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
 											<div class="image">
-												<a href="#"> <!-- 												<img --> <%-- 											src="<%=request.getContextPath()%>/manage/DBGifReader?manageID=<%=manage.getManageID()%>" --%>
-													<!-- 											alt="使用者頭像" />  --> <img
-													src="<%=request.getContextPath()%>/image/Group 115.png"
-													alt="John Doe" />
+												<a href="#"> 									<img 								src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+																								alt="使用者頭像" />
+<!-- 													<img -->
+<%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+<!-- 													alt="John Doe" /> -->
 												</a>
 											</div>
 											<div class="content">
 												<h5 class="name">
-													<a href="#">羅裕鵬</a>
+													<a href="#"><%=manage.getmName() %></a>
 													<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
 												</h5>
-												<span class="email">brandon416jr@gmail.com</span>
-												<%-- 												<span class="email"><%=manage.getmEmail() %></span> --%>
+<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
+																								<span class="email"><%=manage.getmEmail() %></span>
 											</div>
 										</div>
 										<div class="account-dropdown__footer">
@@ -273,7 +285,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													value="<%=contactUs.getFormID()%>" name="formID"
+													value="<%=contactUs.getformID()%>" name="formID"
 													class="form-control" />
 											</div>
 										</div>
@@ -303,7 +315,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="formPurpose" value="<%=contactUs.getFormPurpose()%>"
+													name="formPurpose" value="<%=contactUs.getformPurpose()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>
@@ -314,7 +326,7 @@ input.btn {
 											</div>
 											<div class="textbox col-10 col-md-8">
 												<textarea name="formContent" id="textarea-input"
-													disabled="disabled" rows="9" class="form-control"><%=contactUs.getFormContent()%>
+													disabled="disabled" rows="9" class="form-control"><%=contactUs.getformContent()%>
                             						</textarea>
 												<!-- <input type="text" id="text-input" disabled="" name="text-input" placeholder="rfrfrfr" class="form-control"> -->
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
@@ -331,8 +343,8 @@ input.btn {
 													id="imagePreview" src="#" alt="Preview" width="100px" />
 												<div id="blob_holder">
 													<img
-														src="<%=request.getContextPath()%>/contactus/DBGifReader?formID=${contactUs.formID}"
-														width="100px">
+														src="<%=request.getContextPath()%>/contactus/DBJPGReader?formID=${contactUs.formID}"
+														width="400px">
 												</div>
 											</div>
 										</div>
@@ -342,7 +354,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="formTime" value="<%=contactUs.getFormTime()%>"
+													name="formTime" value="<%=contactUs.getformTime()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>
@@ -353,7 +365,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<%
-												int status = contactUs.getFormStatus();
+												int status = contactUs.getformStatus();
 												%>
 												<select name="formStatus" id="selectLm"
 													class="form-control-sm form-control">
@@ -377,7 +389,7 @@ input.btn {
 												<div class="col-12 col-md-8">
 													<input type="hidden" name="action" value="update">
 													<input type="hidden" name="formID"
-														value="<%=contactUs.getFormID()%>"> <input
+														value="<%=contactUs.getformID()%>"> <input
 														type="submit" class="btn btn-primary btn-sm" value="送出修改">
 													<i class="fa fa-dot-circle-o"></i>
 												</div>
@@ -393,7 +405,25 @@ input.btn {
 			</div>
 		</div>
 	</div>
-
+	<script>
+		function checkmStatus() {
+			let mStatus =
+	<%=session.getAttribute("mStatus")%>
+		;
+		console.log(mStatus);
+			if (mStatus === 1) {
+				Swal.fire({
+					icon : 'error',
+					title : '權限不足!!',
+					text : '請聯繫系統管理員',
+					showConfirmButton : false,
+					timer : 50000000
+				})
+				return false;
+			}
+			return true;
+		}
+	</script>
 	<!-- <script>
       const textbox = document.querySelector('.textbox .form-control');
         textbox.addEventListener('input', (e) => {

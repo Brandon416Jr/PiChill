@@ -1,4 +1,4 @@
-package com.pichill.backstage.post.model;
+package com.pichill.backstage.postb.model;
 
 import java.util.List;
 

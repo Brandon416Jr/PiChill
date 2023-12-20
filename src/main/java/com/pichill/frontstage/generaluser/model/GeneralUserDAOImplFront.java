@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.manage.entity.Manage;
 import com.pichill.util.HibernateUtil;
 
 public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
@@ -78,13 +79,14 @@ public class GeneralUserDAOImplFront implements GeneralUserDAOFront {
 	}
 
 	@Override
-	public List<GeneralUser> findByGeneralUsergUsername(String gUsername) {
+	public GeneralUser findByGeneralUsergUsername(String gUsername) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<GeneralUser> generalUser = (List<GeneralUser>) session
-					.createQuery("FROM GeneralUser WHERE gUsername = :gUsername", GeneralUser.class)
-					.setParameter("gUsername", gUsername).list();
+			Query<GeneralUser> query = getSession().createQuery("from GeneralUser where gUsername = :gUsername",
+					GeneralUser.class);
+			query.setParameter("gUsername", gUsername);
+			GeneralUser generalUser = (GeneralUser) query.uniqueResult();
 
 			System.out.println(generalUser);
 			session.getTransaction().commit();

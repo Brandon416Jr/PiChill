@@ -15,12 +15,12 @@ response.setHeader("Pragma", "no-cache");
 %>
 
 <%
-    Object mUserName = session.getAttribute("mUserName");                    // 從 session內取出 (key) adminVO的值
-    if (mUserName == null) { 		// 如為 null, 代表此user未登入過 , 才做以下工作
-    	session.setAttribute("location", request.getRequestURI());       		  //*工作1 : 同時記下目前位置 , 以便於login.html登入成功後 , 能夠直接導至此網頁
-        response.sendRedirect(request.getContextPath()+"/login/mLogin/manageLogin.jsp");  //*工作2 : 請該user去登入網頁(login.html) , 進行登入
-     	return;
-    }
+Manage manage = (Manage) session.getAttribute("manage");
+// 寫死
+// Integer manageID = 13000003;
+// ManageService manageSvc = new ManageService();
+// Manage manage = manageSvc.getOneManage(manageID);
+// pageContext.setAttribute("manage",manage);
 %>
 
 
@@ -119,11 +119,15 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 							</a>
 								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a class="active"
-										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp" onclick="return checkmStatus();">所有員工資料</a></li>
+										href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp"
+										>所有員工資料</a></li>
 									<li><a
-										href="<%=request.getContextPath()%>/backstage/manage/new_manage.jsp" onclick="return checkmStatus();">新增員工資料</a></li>
-										<li><a
-										href="<%=request.getContextPath()%>/backstage/manage/myData.jsp">我的資料</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
+										onclick="return checkmStatus();">新增員工資料</a></li>
+
+									<li><a
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
+
 								</ul></li>
 							<li class="has-sub"><a class="js-arrow" href="#"> <i
 									class="fas fa-tachometer-alt"></i>一般會員管理
@@ -219,35 +223,34 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 								<div class="account-wrap">
 									<div class="account-item clearfix js-item-menu">
 										<div class="image">
+											<a href="#"> <img
+												src="${pageContext.request.contextPath }/manage/DBJPGReader?manageID=${manage.manageID}"
+												alt="使用者頭像" /></a>
 											<!-- 											<img -->
-											<%-- 												src="${pageContext.request.contextPath }/manage/DBJPGReader?manageID=${loginManager.manageID}" --%>
-											<!-- 												alt="使用者頭像" /> -->
-											<img
-												src="${pageContext.request.contextPath }/image/Group 115.png"
-												alt="John Doe" />
+											<%-- 												src="${pageContext.request.contextPath }/image/Group 115.png" --%>
+											<!-- 												alt="John Doe" /> -->
 										</div>
 										<div class="content">
-<%-- 											<a class="js-acc-btn" href="#">管理員${mUserName.mName}，您好</a> --%>
-																					<a class="js-acc-btn" href="#">管理員，您好</a>
+											<a class="js-acc-btn" href="#">管理員${manage.mName}，您好</a>
+											<!-- 																					<a class="js-acc-btn" href="#">管理員，您好</a> -->
 										</div>
 										<div class="account-dropdown js-dropdown">
 											<div class="info clearfix">
 												<div class="image">
-													<a href="#"> <!-- 													 <img --> <%-- 												src="${pageContext.request.contextPath }/manage/DBJPGReader?manageID=${loginManager.manageID}" --%>
-														<!-- 												alt="使用者頭像" />  --> <img
-														src="${pageContext.request.contextPath }/image/Group 115.png"
-														alt="John Doe" />
+													<a href="#"> <img
+														src="${pageContext.request.contextPath }/manage/DBJPGReader?manageID=${manage.manageID}"
+														alt="使用者頭像" /> <%-- 														<img src="${pageContext.request.contextPath }/image/Group 115.png" alt="John Doe" /> --%>
 													</a>
 												</div>
 												<div class="content">
 													<h5 class="name">
-<%-- 														<a href="#">${mUserName.mName}</a> --%>
-														<a href="#">管理員</a>
+														<a href="#">${manage.mName}</a>
+														<!-- 														<a href="#">管理員</a> -->
 														<!-- 														<a -->
 														<%-- 															href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName()%></a> --%>
 													</h5>
-																																							<span class="email">brandon416jr@gmail.com</span>
-<%-- 													<span class="email">${mUserName.mEmail}</span> --%>
+													<!-- 																																							<span class="email">brandon416jr@gmail.com</span> -->
+													<span class="email">${manage.mEmail}</span>
 												</div>
 											</div>
 											<div class="account-dropdown__footer">
@@ -267,25 +270,22 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 			</header>
 			<!-- END HEADER DESKTOP-->
 		</div>
-
-
 	</div>
-	<script>
-		function checkmStatus() {
-			let mStatus = <%= session.getAttribute("mStatus") %>;
-			if (mStatus === 2) {
-				Swal.fire({
-					icon: 'error',
-					title: '權限不足!!',
-					text: '請聯繫系統管理員',
-					showConfirmButton: false,
-					timer: 2500
-				})
-				return false;
-			}
-			return true;
-		}
-	</script>
+	
+<c:if test="${not empty requestScope.noAuth}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+    Swal.fire({
+      icon: 'error',
+      title: '權限不足',
+      text: '請聯繫系統管理員',
+      timer: 5000,
+     
+      
+    });
+    alert('權限不足,請聯系系統管理員!');
+  </script>
+</c:if>
 	<script>
 		// 		history.pushState(null, null, document.URL);
 		// 		window.addEventListener('popstate', function() {
