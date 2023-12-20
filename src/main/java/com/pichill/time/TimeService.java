@@ -10,12 +10,12 @@ private final TimeDAO dao;
 		dao = new TimeDAOImpl();
 	}
 
-	public Time getOneTime(Integer timeID) {
+	public TimeRef getOneTime(Integer timeID) {
 		return dao.findByPK(timeID);
 	}
 
 
-	public List<Time> getAll() {
+	public List<TimeRef> getAll() {
 		return dao.getAll();
 	}
 }
