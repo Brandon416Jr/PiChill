@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.post.entity.Post;
 
 @Entity
@@ -21,11 +22,11 @@ public class ForumLike {
 	@Column(name = "likeID",updatable = false)
 	private Integer likeID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
-//	private GUser gUser;
-	@Column(name = "gUserID")
-	private Integer gUserID;
+	@ManyToOne
+	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
+	private GeneralUser generalUser;
+//	@Column(name = "gUserID")
+//	private Integer gUserID;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "postID",referencedColumnName = "postID")
@@ -41,7 +42,7 @@ public class ForumLike {
 	public ForumLike(Integer likeID, Integer gUserID, Integer postID) {
 		super();
 		this.likeID = likeID;
-		this.gUserID = gUserID;
+//		this.gUserID = gUserID;
 //		this.postID = postID;
 	}
 	public Integer getLikeID() {
@@ -50,14 +51,21 @@ public class ForumLike {
 	public void setLikeID(Integer likeID) {
 		this.likeID = likeID;
 	}
-	public Integer getgUserID() {
-		return gUserID;
-	}
-	public void setgUserID(Integer gUserID) {
-		this.gUserID = gUserID;
-	}
+//	public Integer getgUserID() {
+//		return gUserID;
+//	}
+//	public void setgUserID(Integer gUserID) {
+//		this.gUserID = gUserID;
+//	}
+	
 	public Integer getPostID() {
 		return postID;
+	}
+	public GeneralUser getGeneralUser() {
+		return generalUser;
+	}
+	public void setGeneralUser(GeneralUser generalUser) {
+		this.generalUser = generalUser;
 	}
 	public void setPostID(Integer postID) {
 		this.postID = postID;
@@ -67,6 +75,11 @@ public class ForumLike {
 	}
 	public void setLikeStatus(boolean likeStatus) {
 		this.likeStatus = likeStatus;
+	}
+	@Override
+	public String toString() {
+		return "ForumLike [likeID=" + likeID + ", generalUser=" + generalUser + ", postID=" + postID + ", likeStatus="
+				+ likeStatus + "]";
 	}
 	
 	
@@ -78,5 +91,3 @@ public class ForumLike {
 //	}
 	
 }
-
-

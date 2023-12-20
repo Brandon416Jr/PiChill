@@ -19,6 +19,7 @@ public class PostServiceImpl implements PostService {
 	public PostServiceImpl() {
 		dao = new PostDAOImpl();
 	}
+
 //	public Post addPost(Post post) {
 //		Integer id = dao.insert(post);
 //		post = dao.getByPostID(id);
@@ -27,10 +28,10 @@ public class PostServiceImpl implements PostService {
 //	}
 	@Override
 	public Post addPost(Post post) {
-	    Integer id = dao.insert(post);
+		Integer id = dao.insert(post);
 //	    System.out.println("=================");
 //	    System.out.println(id);
-	    post = dao.getByPostID(id);
+		post = dao.getByPostID(id);
 
 //	    if (post != null) {
 //	        System.out.println("Post Time: " + post.getPostTime());
@@ -38,30 +39,30 @@ public class PostServiceImpl implements PostService {
 //	        System.out.println("Failed to retrieve post.");
 //	    }
 //
-	    return post;
+		return post;
 	}
 
 	@Override
 	public Post updatePost(Post post) {
-	    try {
-	        int result = dao.update(post);
-	        if (result == 1) {
-	            return post;
-	        } else {            
-	        	System.out.println ("Failed to update post with ID: " + post.getPostID());
-	            return null;
-	        }
-	    } catch (Exception e) {
-	    	System.out.printf("Error updating post", e);
-	        return null;
-	    }
+		try {
+			int result = dao.update(post);
+			if (result == 1) {
+				return post;
+			} else {
+				System.out.println("Failed to update post with ID: " + post.getPostID());
+				return null;
+			}
+		} catch (Exception e) {
+			System.out.printf("Error updating post", e);
+			return null;
+		}
 	}
 
 	@Override
 	public void deletePost(Integer postID) {
 		dao.delete(postID);
 	}
-	
+
 	@Override
 	public Post getByPostID(Integer postID) {
 		return dao.getByPostID(postID);
@@ -91,7 +92,7 @@ public class PostServiceImpl implements PostService {
 	public List<Post> getByCommentCnt() {
 		return dao.getByCommentCnt();
 	}
-	
+
 //	@Override
 //	public List<Post> getAllPosts() {
 //		return dao.getAll();
@@ -104,10 +105,37 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public int getPageTotal() {
-		long total =dao.getTotal();
-		int pageQty = (int)(total%PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
+		long total = dao.getTotal();
+		int pageQty = (int) (total % PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
 		return pageQty;
 	}
+
+	@Override
+	public int updateLike(Integer postID, Integer likeCnt) {
+		int result = dao.updateLike(postID, likeCnt);
+
+		if (result == 1) {
+			// 更新成功
+			return result;
+		} else {
+			// 更新失败
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateComment(Integer postID, Integer commentCnt) {
+		int result = dao.updateComment(postID, commentCnt);
+
+		if (result == 1) {
+			// 更新成功
+			return result;
+		} else {
+			// 更新失败
+			return 0;
+		}
+	}
+}
 
 //	@Override
 //	public List<Post> getPostsByCompositeQuery(Map<String, String[]> map) {
@@ -133,6 +161,3 @@ public class PostServiceImpl implements PostService {
 //		
 //		return dao.getByCompositeQuery(query);
 //	}
-
-
-}

@@ -10,6 +10,8 @@ public interface ForumLikeService {
 //	void delete(Integer likeID);
 	ForumLike getByLikeID(Integer likeID);
 	Integer getLikeByPostIDAndUserID(Integer postID,Integer gUserID);
+	boolean getLikeByPostIDAndUserID2(Integer postID,Integer gUserID);
 //	List<Like> getAll();
+	long getLikeCnt(Integer postID);
 }
 

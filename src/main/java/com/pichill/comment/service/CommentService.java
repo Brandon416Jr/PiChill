@@ -10,4 +10,5 @@ public interface CommentService {
 	void delete(Integer commentID);
 	Comment getByCommentID(Integer commentID);
 	List<Comment> getAllComments(Integer postID);
+	long getCommentCnt(Integer postID);
 }

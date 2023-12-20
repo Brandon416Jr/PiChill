@@ -42,18 +42,12 @@ public class ForumLikeServiceImpl implements ForumLikeService {
 
 	@Override
 	public Integer getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
-//		System.out.println("進來了~~~~~~~~~~");
-//		System.out.println(postID);
-//		System.out.println("+++++++++"+gUserID);
 		ForumLike like = dao.getLikeByPostIDAndUserID(postID, gUserID);
-//		System.out.println(like);
 		if(like == null) {
-//			System.out.println("========"+like);
 			ForumLike likepost = new ForumLike();
 			likepost.setPostID(postID);
 			likepost.setgUserID(gUserID);
 			likepost.setLikeStatus(true);
-			System.out.println(postID);
 			dao.add(likepost);
 			return 1;
 		}else if(like.isLikeStatus()) {
@@ -65,6 +59,20 @@ public class ForumLikeServiceImpl implements ForumLikeService {
 			dao.update(like);
 			return 1;
 		}
+	}
+
+	@Override
+	public long getLikeCnt(Integer postID) {	
+		return dao.getLikeCnt(postID);
+	}
+
+	@Override//判斷狀態來顯示顏色
+	public boolean getLikeByPostIDAndUserID2(Integer postID, Integer gUserID) {
+		 ForumLike like = dao.getLikeByPostIDAndUserID(postID, gUserID);
+		    if (like != null) {
+		        return like.isLikeStatus();
+		    }
+		    return false; 
 	}
 
 //	@Override
