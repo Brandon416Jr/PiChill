@@ -1,7 +1,6 @@
 package com.pichill.post.entity;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,14 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.criteria.CriteriaBuilder.In;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.pichill.forumpic.entity.ForumPic;
+import com.pichill.comment.entity.Comment;
+import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
-import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.report.entity.Report;
 
 @Entity
@@ -77,18 +75,41 @@ public class Post {
 	private Integer commentCnt;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("commentID asc")
+	private Set<Comment> comment;
+	
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	@OrderBy("reportID asc")
 	private Set<Report> reports;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	@OrderBy("forumlikeID asc")
-	private Set<ForumLike> forumlikes;
+	private Set<ForumLike> like;
 
-	
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("forumPicID asc")
-//	private Set<ForumPic> forumPics;
-	
+	public Post() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Post(Integer postID, GeneralUser generalUser, OwnerUser ownerUser, String postTitle, String postContent,
+			Integer postType, Timestamp postTime, byte[] postPic, Integer likeCnt, Integer commentCnt,
+			Set<Comment> comment, Set<Report> reports, Set<ForumLike> like) {
+		super();
+		this.postID = postID;
+		this.generalUser = generalUser;
+		this.ownerUser = ownerUser;
+		this.postTitle = postTitle;
+		this.postContent = postContent;
+		this.postType = postType;
+		this.postTime = postTime;
+		this.postPic = postPic;
+		this.likeCnt = likeCnt;
+		this.commentCnt = commentCnt;
+		this.comment = comment;
+		this.reports = reports;
+		this.like = like;
+	}
+
 	public Integer getPostID() {
 		return postID;
 	}
@@ -169,6 +190,14 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
 	public Set<Report> getReports() {
 		return reports;
 	}
@@ -177,12 +206,11 @@ public class Post {
 		this.reports = reports;
 	}
 
-	public Set<ForumLike> getForumlikes() {
-		return forumlikes;
+	public Set<ForumLike> getLike() {
+		return like;
 	}
 
-	public void setForumlikes(Set<ForumLike> forumlikes) {
-		this.forumlikes = forumlikes;
+	public void setLike(Set<ForumLike> like) {
+		this.like = like;
 	}
-	
 }

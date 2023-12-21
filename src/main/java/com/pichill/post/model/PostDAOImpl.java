@@ -128,24 +128,63 @@ public class PostDAOImpl implements PostDAO {
 //	}
 	@Override
 	public List<Post> getAll() {
+		SessionFactory factory2 = HibernateUtil.getSessionFactory();
+		Session session = factory2.openSession();
+		Transaction tx = session.beginTransaction();
 		return getSession().createQuery("from Post", Post.class).list();
 	}
 
+//	@Override
+//	public List<Post> getAll(int currentPage) {
+//		SessionFactory factory2 = HibernateUtil.getSessionFactory();
+//		Session session = factory2.openSession();
+//		Transaction tx = session.beginTransaction();
+//		int first = (currentPage - 1) * PAGE_MAX_RESULT;
+//		List<Post> posts;
+//
+//		if (currentPage == 1 || currentPage == 2) {
+//			posts = getSession().createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
+//					.setFirstResult(first).setMaxResults(PAGE_MAX_RESULT).list();
+//			System.out.println("post+++" + posts);
+//		} else {
+//			posts = getSession().createQuery("from Post where postType = 2 order by postID desc", Post.class).list();
+//		}
+//		tx.commit();
+//		return posts;
+//	}
+
 	@Override
 	public List<Post> getAll(int currentPage) {
-		int first = (currentPage - 1) * PAGE_MAX_RESULT;
-		List<Post> posts;
+	    SessionFactory factory = HibernateUtil.getSessionFactory();
+	    Session session = factory.openSession();
+	    Transaction tx = null;
+	    List<Post> posts = null;
 
-		if (currentPage == 1 || currentPage == 2) {
-			posts = getSession().createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
-					.setFirstResult(first).setMaxResults(PAGE_MAX_RESULT).list();
-		} else {
-			posts = getSession().createQuery("from Post where postType = 2 order by postID desc", Post.class).list();
-		}
+	    try {
+	        tx = session.beginTransaction();
+	        int first = (currentPage - 1) * PAGE_MAX_RESULT;
 
-		return posts;
+	        if (currentPage == 1 || currentPage == 2) {
+	            posts = session.createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
+	                    .setFirstResult(first)
+	                    .setMaxResults(PAGE_MAX_RESULT)
+	                    .list();
+	            System.out.println("post+++" + posts);
+	        } else {
+	            posts = session.createQuery("from Post where postType = 2 order by postID desc", Post.class)
+	                    .list();
+	        }
+	        tx.commit();
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+	    return posts;
 	}
-
 	@Override
 	public long getTotal() {
 		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
@@ -153,20 +192,14 @@ public class PostDAOImpl implements PostDAO {
 
 	@Override
 	public int updateLike(Integer postID, Integer likeCnt) {
-		  return getSession()
-		            .createQuery("UPDATE Post SET likeCnt = :likeCnt WHERE postID = :postID")
-		            .setParameter("likeCnt", likeCnt)
-		            .setParameter("postID", postID)
-		            .executeUpdate();
+		return getSession().createQuery("UPDATE Post SET likeCnt = :likeCnt WHERE postID = :postID")
+				.setParameter("likeCnt", likeCnt).setParameter("postID", postID).executeUpdate();
 	}
 
 	@Override
 	public int updateComment(Integer postID, Integer commentCnt) {
-		  return getSession()
-		            .createQuery("UPDATE Post SET commentCnt = :commentCnt WHERE postID = :postID")
-		            .setParameter("commentCnt",commentCnt)
-		            .setParameter("postID", postID)
-		            .executeUpdate();
+		return getSession().createQuery("UPDATE Post SET commentCnt = :commentCnt WHERE postID = :postID")
+				.setParameter("commentCnt", commentCnt).setParameter("postID", postID).executeUpdate();
 	}
 }
 
