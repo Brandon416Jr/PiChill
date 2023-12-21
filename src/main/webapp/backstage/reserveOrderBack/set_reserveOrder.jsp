@@ -311,7 +311,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="timeID"
-														value="<%=reserveOrder.getTime()%>" disabled="disabled"
+														value="<%=reserveOrder.getTimeRef()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>

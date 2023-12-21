@@ -299,7 +299,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="oUserID" value="<%=contactUs.getoUserID()%>"
+													name="oUserID" value="<%=contactUs.getOwnerUser()%>"
 													class="form-control" />
 											</div>
 										</div>

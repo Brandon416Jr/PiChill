@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
+<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
@@ -12,7 +12,7 @@ Manage manage = (Manage) session.getAttribute("manage");
 %>
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-AnnouncementGetOne announcement = (AnnouncementGetOne) request.getAttribute("announcement");
+Announcement announcement = (Announcement) request.getAttribute("announcement");
 %>
 <!DOCTYPE html>
 <html>
@@ -273,7 +273,7 @@ AnnouncementGetOne announcement = (AnnouncementGetOne) request.getAttribute("ann
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" name="manageID"
 													placeholder="請輸入管理員編號"
-													value="<%=(announcement == null) ? "13000001" : announcement.getManageID()%>"
+													value="<%=(announcement == null) ? "13000001" : announcement.getManage()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>

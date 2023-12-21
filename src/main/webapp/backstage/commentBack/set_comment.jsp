@@ -284,7 +284,7 @@ Comment comment = (Comment) request.getAttribute("comment");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="postID"  value="<%=comment.getPostID()%>"
+														name="postID"  value="<%=comment.getPost()%>"
 														class="form-control" />
 												</div>
 											</div>
