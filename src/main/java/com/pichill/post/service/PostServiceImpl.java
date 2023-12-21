@@ -104,6 +104,11 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
+	public List<Post> getTypeTwo() {
+		return dao.getTypeTwo();
+	}
+	
+	@Override
 	public int getPageTotal() {
 		long total = dao.getTotal();
 		int pageQty = (int) (total % PAGE_MAX_RESULT == 0 ? (total / PAGE_MAX_RESULT) : (total / PAGE_MAX_RESULT + 1));
@@ -135,6 +140,8 @@ public class PostServiceImpl implements PostService {
 			return 0;
 		}
 	}
+
+	
 }
 
 //	@Override

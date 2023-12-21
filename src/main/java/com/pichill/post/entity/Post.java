@@ -83,7 +83,7 @@ public class Post {
 	private Set<Report> reports;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	@OrderBy("forumlikeID asc")
+	@OrderBy("likeID asc")
 	private Set<ForumLike> like;
 
 	public Post() {
