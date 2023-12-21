@@ -30,7 +30,7 @@ public class PostServlet2 extends HttpServlet {
 		res.setContentType("application/json; charset=UTF-8");
 		doPost(req, res);
 		String action = req.getParameter("action");
-		
+	
 		String postIDString = req.getParameter("postID");
 		Integer postID = null;
 
@@ -73,6 +73,19 @@ public class PostServlet2 extends HttpServlet {
 		res.setContentType("application/json; charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
+		//======顯示推撥========
+		if("get_Type2".equals(action)) {
+		PostService postSvc = new PostServiceImpl();
+		List<Post> typeTwoPosts = postSvc.getTypeTwo();
+
+		Gson gson = new Gson();
+		String jsonResult = gson.toJson(typeTwoPosts);
+		PrintWriter out = res.getWriter();
+		out.print(jsonResult);
+		System.out.println("Json===="+jsonResult);
+		out.flush();
+		}
+		//====新增討論文章========
 		if ("insert".equals(action)) {
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
@@ -80,19 +93,19 @@ public class PostServlet2 extends HttpServlet {
 			Part part = req.getPart("postPic");
 			byte[] postPic = null;
 			if (part != null && part.getSize() > 0) {
-			    try (InputStream in = part.getInputStream()) {
-			        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			        int nRead;
-			        byte[] data = new byte[1024];
+				try (InputStream in = part.getInputStream()) {
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					int nRead;
+					byte[] data = new byte[1024];
 
-			        while ((nRead = in.read(data, 0, data.length)) != -1) {
-			            buffer.write(data, 0, nRead);
-			        }
+					while ((nRead = in.read(data, 0, data.length)) != -1) {
+						buffer.write(data, 0, nRead);
+					}
 
-			        postPic = buffer.toByteArray();
-			    } catch (IOException e) {
-			        e.printStackTrace();
-			    }
+					postPic = buffer.toByteArray();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
@@ -106,7 +119,7 @@ public class PostServlet2 extends HttpServlet {
 			PostService postSvc = new PostServiceImpl();
 			Post addedPost = postSvc.addPost(post);
 			String json = new Gson().toJson(addedPost);
-			
+
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -119,19 +132,19 @@ public class PostServlet2 extends HttpServlet {
 			Part part = req.getPart("postPic");
 			byte[] postPic = null;
 			if (part != null && part.getSize() > 0) {
-			    try (InputStream in = part.getInputStream()) {
-			        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-			        int nRead;
-			        byte[] data = new byte[1024];
+				try (InputStream in = part.getInputStream()) {
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					int nRead;
+					byte[] data = new byte[1024];
 
-			        while ((nRead = in.read(data, 0, data.length)) != -1) {
-			            buffer.write(data, 0, nRead);
-			        }
+					while ((nRead = in.read(data, 0, data.length)) != -1) {
+						buffer.write(data, 0, nRead);
+					}
 
-			        postPic = buffer.toByteArray();
-			    } catch (IOException e) {
-			        e.printStackTrace();
-			    }
+					postPic = buffer.toByteArray();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
@@ -180,7 +193,6 @@ public class PostServlet2 extends HttpServlet {
 			String postTitle = req.getParameter("postTitle");
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getPostByPostTitle(postTitle);
-			
 
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			String json = new Gson().toJson(posts);
@@ -210,7 +222,7 @@ public class PostServlet2 extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
-		
+
 		if ("get_By_Type".equals(action)) {
 			Integer postType = Integer.valueOf(req.getParameter("postType"));
 			PostService postSvc = new PostServiceImpl();
@@ -233,7 +245,7 @@ public class PostServlet2 extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
-		
+
 		if ("getOne_For_Update".equals(action)) { // 來自listAllPost.jsp的請求
 
 			/*************************** 1.接收請求參數 ****************************************/
@@ -241,99 +253,99 @@ public class PostServlet2 extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 ****************************************/
 			PostService postSvc = new PostServiceImpl();
-		    Post post = postSvc.getByPostID(postID);
+			Post post = postSvc.getByPostID(postID);
 
 			/*************************** 3.查詢完成,準備轉交(Send the Success view) ************/
 			String json = new Gson().toJson(post);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-			System.out.println("post======"+json);
+			System.out.println("post======" + json);
 			out.flush();
 		}
-		
-	if ("update".equals(action)) { // 來自update_emp_input.jsp的請求		
-					/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-					Integer postID = Integer.valueOf(req.getParameter("postID").trim());				
-					String postTitle = req.getParameter("postTitle");		
-					String postContent = req.getParameter("postContent").trim();
-					Part part = req.getPart("postPic");
-					byte[] postPic = null;
-					if (part != null && part.getSize() > 0) {
-					    try (InputStream in = part.getInputStream()) {
-					        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-					        int nRead;
-					        byte[] data = new byte[1024];
 
-					        while ((nRead = in.read(data, 0, data.length)) != -1) {
-					            buffer.write(data, 0, nRead);
-					        }
+		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			Integer postID = Integer.valueOf(req.getParameter("postID").trim());
+			String postTitle = req.getParameter("postTitle");
+			String postContent = req.getParameter("postContent").trim();
+			Part part = req.getPart("postPic");
+			byte[] postPic = null;
+			if (part != null && part.getSize() > 0) {
+				try (InputStream in = part.getInputStream()) {
+					ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+					int nRead;
+					byte[] data = new byte[1024];
 
-					        postPic = buffer.toByteArray();
-					    } catch (IOException e) {
-					        e.printStackTrace();
-					    }
+					while ((nRead = in.read(data, 0, data.length)) != -1) {
+						buffer.write(data, 0, nRead);
 					}
-					Post post = new Post();
-					post.setPostID(postID);
-					post.setPostTitle(postTitle);
-					post.setPostContent(postContent);
-					post.setPostPic(postPic);
-					PostService postSvc = new PostServiceImpl();
-					Post updatedPost = postSvc.updatePost(post);
-					String json = new Gson().toJson(updatedPost);
-					PrintWriter out = res.getWriter();
-					out.print(json);
-					out.flush();
-				}
-	if ("update_promote".equals(action)) { // 來自update_emp_input.jsp的請求
-		
-		List<String> errorMsgs = new LinkedList<String>();
-		// Store this set in the request scope, in case we need to
-		// send the ErrorPage view.
-		req.setAttribute("errorMsgs", errorMsgs);
 
-		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
-		String postTitle = req.getParameter("postTitle");
-		String postContent = req.getParameter("postContent").trim();
-		Post post = new Post();
-		post.setPostID(postID);
-		post.setPostTitle(postTitle);
-		post.setPostContent(postContent);
-		PostService postSvc = new PostServiceImpl();
-		Post updatedPost = postSvc.updatePost(post);
-		String json = new Gson().toJson(updatedPost);
-		PrintWriter out = res.getWriter();
-		out.print(json);
-		out.flush();
-	}
-	if("update_likeCnt".equals(action)) {
-		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
-		Integer likeCnt = Integer.valueOf(req.getParameter("likeCnt").trim());	
-		Post post = new Post();
-		post.setPostID(postID);
-		post.setLikeCnt(likeCnt);
-		PostService postSvc = new PostServiceImpl();
-		 int updatedLike = postSvc.updateLike(postID,likeCnt);
-		System.out.println("=========++++++++"+updatedLike);
-		String json = new Gson().toJson(updatedLike);
-		PrintWriter out = res.getWriter();
-		out.print(json);
-		out.flush();
-	}
-	if("update_commentCnt".equals(action)) {
-		Integer postID = Integer.valueOf(req.getParameter("postID").trim());	
-		Integer commentCnt = Integer.valueOf(req.getParameter("commentCnt").trim());	
-		Post post = new Post();
-		post.setPostID(postID);
-		post.setCommentCnt(commentCnt);
-		PostService postSvc = new PostServiceImpl();
-		 int updatedComment = postSvc.updateComment(postID,commentCnt);
+					postPic = buffer.toByteArray();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			Post post = new Post();
+			post.setPostID(postID);
+			post.setPostTitle(postTitle);
+			post.setPostContent(postContent);
+			post.setPostPic(postPic);
+			PostService postSvc = new PostServiceImpl();
+			Post updatedPost = postSvc.updatePost(post);
+			String json = new Gson().toJson(updatedPost);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		if ("update_promote".equals(action)) { // 來自update_emp_input.jsp的請求
+
+			List<String> errorMsgs = new LinkedList<String>();
+			// Store this set in the request scope, in case we need to
+			// send the ErrorPage view.
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			Integer postID = Integer.valueOf(req.getParameter("postID").trim());
+			String postTitle = req.getParameter("postTitle");
+			String postContent = req.getParameter("postContent").trim();
+			Post post = new Post();
+			post.setPostID(postID);
+			post.setPostTitle(postTitle);
+			post.setPostContent(postContent);
+			PostService postSvc = new PostServiceImpl();
+			Post updatedPost = postSvc.updatePost(post);
+			String json = new Gson().toJson(updatedPost);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		if ("update_likeCnt".equals(action)) {
+			Integer postID = Integer.valueOf(req.getParameter("postID").trim());
+			Integer likeCnt = Integer.valueOf(req.getParameter("likeCnt").trim());
+			Post post = new Post();
+			post.setPostID(postID);
+			post.setLikeCnt(likeCnt);
+			PostService postSvc = new PostServiceImpl();
+			int updatedLike = postSvc.updateLike(postID, likeCnt);
+			System.out.println("=========++++++++" + updatedLike);
+			String json = new Gson().toJson(updatedLike);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
+		if ("update_commentCnt".equals(action)) {
+			Integer postID = Integer.valueOf(req.getParameter("postID").trim());
+			Integer commentCnt = Integer.valueOf(req.getParameter("commentCnt").trim());
+			Post post = new Post();
+			post.setPostID(postID);
+			post.setCommentCnt(commentCnt);
+			PostService postSvc = new PostServiceImpl();
+			int updatedComment = postSvc.updateComment(postID, commentCnt);
 //		System.out.println("=========++++++++"+updatedComment);
-		String json = new Gson().toJson(updatedComment);
-		PrintWriter out = res.getWriter();
-		out.print(json);
-		out.flush();
-	}
+			String json = new Gson().toJson(updatedComment);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			out.flush();
+		}
 	}
 }

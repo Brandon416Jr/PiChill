@@ -26,6 +26,8 @@ public interface PostService {
 		
 	List<Post>getAllPosts(int currentPage);
 	
+	List<Post> getTypeTwo();
+	
 	int getPageTotal();
 	
 	int updateLike(Integer postID, Integer likeCnt);

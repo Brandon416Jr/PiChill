@@ -164,16 +164,10 @@ public class PostDAOImpl implements PostDAO {
 	        tx = session.beginTransaction();
 	        int first = (currentPage - 1) * PAGE_MAX_RESULT;
 
-	        if (currentPage == 1 || currentPage == 2) {
-	            posts = session.createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
-	                    .setFirstResult(first)
-	                    .setMaxResults(PAGE_MAX_RESULT)
-	                    .list();
-	            System.out.println("post+++" + posts);
-	        } else {
-	            posts = session.createQuery("from Post where postType = 2 order by postID desc", Post.class)
-	                    .list();
-	        }
+	        posts = session.createQuery("from Post where postType in (0, 1) order by postID desc", Post.class)
+	                .setFirstResult(first)
+	                .setMaxResults(PAGE_MAX_RESULT)
+	                .list();
 	        tx.commit();
 	    } catch (Exception e) {
 	        if (tx != null) {
@@ -185,9 +179,59 @@ public class PostDAOImpl implements PostDAO {
 	    }
 	    return posts;
 	}
+	
+	public List<Post> getTypeTwo() {
+	    SessionFactory factory = HibernateUtil.getSessionFactory();
+	    Session session = factory.openSession();
+	    Transaction tx = null;
+	    List<Post> posts = null;
+
+	    try {
+	        tx = session.beginTransaction();
+
+	        posts = session.createQuery("from Post where postType = 2 order by postID desc", Post.class)
+	                .list();
+	        tx.commit();
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        session.close();
+	    }
+	    return posts;
+	}
+//	@Override
+//	public long getTotal() {
+//		 SessionFactory factory = HibernateUtil.getSessionFactory();
+//		    Session session = factory.openSession();
+//		    Transaction tx = null;
+//		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
+//	}
 	@Override
 	public long getTotal() {
-		return getSession().createQuery("select count(*) from Post", Long.class).uniqueResult();
+	    SessionFactory factory = HibernateUtil.getSessionFactory();
+	    Session session = factory.openSession();
+	    Transaction tx = null;
+	    
+	    try {
+	        tx = session.beginTransaction();
+	        
+	        long total = (Long) session.createQuery("select count(*) from Post")
+	                .uniqueResult();
+	        
+	        tx.commit(); // 提交事務
+	        return total;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback(); // 回滾事務
+	        }
+	        e.printStackTrace(); // 或者處理異常
+	        throw e; // 傳播異常
+	    } finally {
+	        session.close(); // 最後關閉 Session
+	    }
 	}
 
 	@Override

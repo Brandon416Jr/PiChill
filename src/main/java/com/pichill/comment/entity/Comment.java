@@ -50,7 +50,7 @@ public class Comment {
 	
 	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
 	@OrderBy("reportID asc")
-	private Set<Report> reports;
+	private  Set<Report> reports;
 
 	public Integer getCommentID() {
 		return commentID;
@@ -92,7 +92,7 @@ public class Comment {
 		this.commentTime = commentTime;
 	}
 
-	public Set<Report> getReports() {
+	public  Set<Report> getReports() {
 		return reports;
 	}
 
