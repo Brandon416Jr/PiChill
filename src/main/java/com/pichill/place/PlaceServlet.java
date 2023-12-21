@@ -100,8 +100,8 @@ public class PlaceServlet extends HttpServlet{
 
 			// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 			Place place = new Place();
-			place.setPlaceID(placeID);
-			place.setCourtID(courtID);
+//			place.setPlaceID(placeID);
+//			place.setCourtID(courtID);
 			place.setPlaceName(placeName);
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);
@@ -143,8 +143,8 @@ public class PlaceServlet extends HttpServlet{
 
 			// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 			Place place = new Place();
-			place.setPlaceID(placeID);
-			place.setCourtID(courtID);
+//			place.setPlaceID(placeID);
+//			place.setCourtID(courtID);
 			place.setPlaceName(placeName);
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);

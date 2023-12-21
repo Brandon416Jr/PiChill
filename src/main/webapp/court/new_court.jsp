@@ -147,21 +147,21 @@ Place place = (Place) request.getAttribute("place");
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="courtName">場館名稱</label>
                 <input type="text" id="court" name="courtName" 
-                value="<%=(court==null)? "" :court.getcourtName()%>" size="45" required>
+                value="<%=(court==null)? "" :court.getCourtName()%>" size="45" required>
                 <br><br>
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label  for="time">開館時間</label>
-                <input type="time" value="<%=(court==null)? "07:00:00" :court.getcourtOpenTime()%>"  min="09:00" max="18:00">
+                <input type="time" value="<%=(court==null)? "07:00:00" :court.getCourtOpenTime()%>"  min="09:00" max="18:00">
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
                 <label style="position: relative; left: 15px;" for="time">閉館時間</label>
-                <input type="time" value="<%=(court==null)? "21:00:00" :court.getcourtCloseTime()%>" style="position: relative; left: 15px;">
+                <input type="time" value="<%=(court==null)? "21:00:00" :court.getCourtCloseTime()%>" style="position: relative; left: 15px;">
                 <br><br>
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="loc">區域</label>
-                <input type="text" value="<%=(court==null)? "" :court.getloc()%>" style="position: relative; left: 31px;">
+                <input type="text" value="<%=(court==null)? "" :court.getLoc()%>" style="position: relative; left: 31px;">
                 <font color="#FF0000" size="-1" nowrap="" style="position: relative;;left: 30px;">如:中正區</font>
                 
 <!--                 <select style="position: relative; left: 31px;"> -->
@@ -185,36 +185,32 @@ Place place = (Place) request.getAttribute("place");
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="tax_id">場館地址</label>
                 <input type="text" id="tax_id" name="courtAddress" 
-                value="<%=(court==null)? "" :court.getcourtAddress()%>" required>
-                <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px;">包含鄉鎮區、路街道及門牌號等。</font><br><br>
+                value="<%=(court==null)? "" :court.getCourtAddress()%>" style="width: 300px" required>
+                <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px; ">包含鄉鎮區、路街道及門牌號等。</font><br><br>
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
-                <input type="text" id="text" name="courtTelephone" value="<%=(court==null)? "" :court.getcourtTelephone()%>"  required>
+                <input type="text" id="text" name="courtTelephone" value="<%=(court==null)? "" :court.getCourtTelephone()%>"  required>
                 <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px;">包含區域碼 如:0212345678。</font>
                 <br><br>
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="courtRule" style="position: relative; left: 23px;">場館須知</label><br><br>
-                <input type="text" id="courtRule" name="courtRule" value="<%=(court==null)? "" :court.getcourtRule()%>" required
+                <input type="text" id="courtRule" name="courtRule" value="<%=(court==null)? "" :court.getCourtRule()%>" required
                  placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"></textarea>
                 <br><br><br>
 
                 <label for="courtPic" style="position: relative;left: 23px;">場館照片</label><br><br>
-                <form action="/somewhere/to/upload" enctype="multipart/form-data">
-	                <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" style="position: relative;left: 23px;"/>
-	                <br><br>
-	                <img id="preview_progressbarTW_img" src="#" 
-	                value="<%=court.getcourtPic()%>"
-                	style="height: 300px;position:relative;left: 23px;"/>
-                </form>
+                <div id="blob_holder"><img src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${param.gUserID}" width="100px"></div>
+                <input type="file" id="courtPic" name="courtPic" onclick="previewImage()" multiple="multiple" />
+                <br>
             </form>
             <br><br><br>
 
 
 
                 <label for="placeFee" style="position: relative;left: 2px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
-		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
+		        <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
 		                <label for="ball">場地類型：</label>
 		                <select id="ball" name="ball">
 		                    <option value="0">籃球場</option>
@@ -235,7 +231,7 @@ Place place = (Place) request.getAttribute("place");
 		            </form>
             <br>
 
-            	<label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br>
+            	<label  for="itemTable" style="position: relative;left: 23px;">場地列表</label><br><br>
 
             <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
                 <table id="itemTable">
@@ -264,36 +260,66 @@ Place place = (Place) request.getAttribute("place");
     </div>
     </div>
     
-    <script>
-        //------------場館圖片 -------------------
-        $("#progressbarTWInput").change(function () {
-            readURL(this);
-        });
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-
-                    $("#preview_progressbarTW_img").attr('src', e.target.result);
-
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-    </script>
+  <!--======================================= 照片上傳 / 預覽 =======================================-->
+    <script type="text/javascript">
+		//清除提示信息
+		function hideContent(d) {
+		     document.getElementById(d).style.display = "none";
+		}
+		
+		//照片上傳-預覽用
+		var filereader_support = typeof FileReader != 'undefined';
+		if (!filereader_support) {
+			alert("No FileReader support");
+		}
+		acceptedTypes = {
+				'image/png' : true,
+				'image/jpeg' : true,
+				'image/gif' : true
+		};
+		function previewImage() {
+			var courtPic1 = document.getElementById("courtPic");
+			courtPic1.addEventListener("change", function(event) {
+				var files = event.target.files || event.dataTransfer.files;
+				for (var i = 0; i < files.length; i++) {
+					previewfile(files[i])
+				}
+			}, false);
+		}
+		function previewfile(file) {
+			if (filereader_support === true && acceptedTypes[file.type] === true) {
+				var reader = new FileReader();
+				reader.onload = function(event) {
+					var image = new Image();
+					image.src = event.target.result;
+					image.width = 130;
+					image.height = 150;
+					image.border = 0;
+					if (blob_holder.hasChildNodes()) {
+						blob_holder.removeChild(blob_holder.childNodes[0]);
+					}
+					blob_holder.appendChild(image);
+				};
+				reader.readAsDataURL(file);
+				document.getElementById('submit').disabled = false;
+			} else {
+				blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
+						+ "<br>" + "● ContentTyp: " + file.type
+						+ "<br>" + "● size: " + file.size + "bytes"
+						+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
+				document.getElementById('submit').disabled = true;
+			}
+		}
+	</script>
 
 <!--======================================= 新增場地 / 編輯 / 預覽 =======================================-->
 
             <script>
                 $(document).ready(function () {
                     $("#addButton").click(function () {
-                        var courtType = $("#ball").val();
-                        var itemName = $("#placeName").val();
-                        var price = $("#price").val();
+                        var ball = $("#ball").val();
+                        var placeName = $("#placeName").val();
+                        var placeFee = $("#placeFee").val();
 
                         if (ball && itemName && placeFee) {
                             var newRow = "<tr>" +
@@ -303,7 +329,7 @@ Place place = (Place) request.getAttribute("place");
                                 "<td><button class='deleteButton'>刪除</button></td>" +
                                 "</tr>";
 
-                            $("#ball tbody").append(newRow);
+                            $("#itemTable tbody").append(newRow);
 
                             // 清空輸入欄位
                             $("#placeName, #placeFee").val("");

@@ -20,7 +20,7 @@ public class DBGifReaderController extends HttpServlet{
 		try {
 			Integer courtID = Integer.valueOf(req.getParameter("courtID"));
 			CourtService courtSvc = new CourtService();
-			out.write(courtSvc.getOneCourt(courtID).getcourtPic());
+			out.write(courtSvc.getOneCourt(courtID).getCourtPic());
 		} catch (Exception e) {
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
 			byte[] buf = new byte[in.available()];
