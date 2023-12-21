@@ -28,11 +28,11 @@ public class ContactUs {
 	private Integer formID;
 
 	@ManyToOne
-	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID")
+	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false)
     private GeneralUser generalUser;
 
 	@ManyToOne
-	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID")
+	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false)
 	private OwnerUser ownerUser;
 
 	@Column(name = "formPurpose" , columnDefinition = "varchar", updatable = false)
