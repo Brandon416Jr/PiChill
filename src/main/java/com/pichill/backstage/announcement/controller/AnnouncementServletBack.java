@@ -192,7 +192,7 @@ public class AnnouncementServletBack extends HttpServlet {
 		} else {
 			errorMsgs.add("manageID not null!");
 		}
-		
+//		annoSvcB.getByManageID(manageID)
 		ManageService manageSvc = new ManageService();
 		Manage manageAnno = manageSvc.getOneManage(manageID);
 //		req.setAttribute("manageAnno", manageAnno);

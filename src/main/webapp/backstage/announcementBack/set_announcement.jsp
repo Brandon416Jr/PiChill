@@ -16,7 +16,6 @@ Manage manage = (Manage) session.getAttribute("manage");
 Announcement announcement = (Announcement) request.getAttribute("announcement");
 %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,7 +275,7 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" 
-														name="manageID"  value="<%=announcement.getManage()%>"
+														name="manageID"  value="<%=announcement.getManage().getManageID()%>"
 														class="form-control" />
 												</div>
 											</div>

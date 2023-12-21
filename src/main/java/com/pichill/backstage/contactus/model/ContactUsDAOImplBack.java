@@ -29,10 +29,15 @@ public class ContactUsDAOImplBack implements ContactUsDAOBack {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			session.update(contactUs);
+			String hql = "UPDATE ContactUs c SET c.formStatus = :formStatus WHERE c.formID = :formID";
+
+			int result = session.createQuery(hql)
+			                    .setParameter("formStatus", contactUs.getformStatus())   
+			                    .setParameter("formID", contactUs.getformID())
+			                    .executeUpdate();
 			session.getTransaction().commit();
 			System.out.println("交易成功");
-			return 1;
+			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();

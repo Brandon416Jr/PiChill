@@ -91,7 +91,7 @@ pageContext.setAttribute("list", list);
 /* 	margin: 0 auto !important; */
 /* } */
 
-td:nth-child(6) {
+td:nth-child(5) {
   max-width: 250px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -279,7 +279,6 @@ td:nth-child(6) {
 						<th>貼文編號</th>
 						<th>一般會員編號</th>
 						<th>企業會員編號</th>
-						<th>場地編號</th>
 						<th>標題</th>
 						<th>內文</th>
 						<th>貼文類別</th>
@@ -295,9 +294,8 @@ td:nth-child(6) {
 					<c:forEach var="post" items="${list}">
 						<tr>
 							<td>${post.postID}</td>
-							<td>${post.gUserID}</td>
-							<td>${post.oUserID}</td>
-							<td>${post.placeID}</td>
+							<td>${post.generalUser.gUserID}</td>
+							<td>${post.ownerUser.oUserID}</td>
 							<td>${post.postTitle}</td>
 							<td>${post.postContent}</td>
 							<td>${post.postType == 0 ? '糾團' : (post.postType == 1 ? '討論' : '推播')}</td>

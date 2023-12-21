@@ -274,6 +274,7 @@ pageContext.setAttribute("list", list);
 						<th>預約日期</th>
 						<th>時段編號</th>
 						<th>場地編號</th>
+						<th>球館編號</th>
 						<th>下單時間</th>
 						<th>人數</th>
 						<th>預約訂單狀態</th>
@@ -285,11 +286,12 @@ pageContext.setAttribute("list", list);
 					<c:forEach var="reserveOrder" items="${list}">
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
-							<td>${reserveOrder.gUserID}</td>
-							<td>${reserveOrder.oUserID}</td>
+							<td>${reserveOrder.generalUser.gUserID}</td>
+							<td>${reserveOrder.ownerUser.oUserID}</td>
 							<td>${reserveOrder.reserveDate}</td>
-							<td>${reserveOrder.timeID}</td>
-							<td>${reserveOrder.placeID}</td>
+							<td>${reserveOrder.timeRef.timeID}</td>
+							<td>${reserveOrder.place.placeID}</td>
+							<td>${reserveOrder.court.courtID}</td>
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.orderStatus == 0 ? '取消' : (reserveOrder.orderStatus == 1 ? '訂單成立' : '訂單已完成')}</td>

@@ -273,8 +273,8 @@ pageContext.setAttribute("list", list);
 						<tr>
 							<td>${report.reportID}</td>
 							<td>${report.manageID}</td>
-							<td>${report.postID}</td>
-							<td>${report.commentID}</td>
+							<td>${report.post.postID}</td>
+							<td>${report.comment.commentID}</td>
 							<td>${report.reportTime}</td>
 							<td>${report.reportStatus == 0 ? '待審核' : '已審核'}</td>
 							<td>${report.reportType == 0 ? '違反版規' : (report.reportType == 1 ? '內容不實' : (report.reportType == 2 ? '惡意洗版' : (report.reportType == 3 ? '仇恨言論' : (report.reportType == 4 ? ' 商業宣傳內容

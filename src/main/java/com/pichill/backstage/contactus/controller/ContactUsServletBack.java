@@ -16,7 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.contactus.service.ContactUsServiceBack;
+import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
+import com.pichill.backstage.generaluser.service.GeneralUserServiceBack;
 import com.pichill.contactus.entity.ContactUs;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.owneruser.entity.OwnerUser;
 
 
 /**
@@ -95,6 +99,9 @@ public class ContactUsServletBack extends HttpServlet {
 //			oUserID = null;
 //		}
 //
+//		OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
+//		OwnerUser oUser = oUserSvcB.getOneOwnerUser(oUserID);
+//		
 //		Integer gUserID;
 //		if (req.getParameter("gUserID") != null) {
 //			gUserID = Integer.valueOf(req.getParameter("gUserID"));
@@ -102,6 +109,8 @@ public class ContactUsServletBack extends HttpServlet {
 //			gUserID = null;
 //		}
 //		
+//		GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
+//		GeneralUser gUser = gUserSvcB.getOneGeneralUser(gUserID);
 		
 
 //		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
@@ -185,8 +194,8 @@ public class ContactUsServletBack extends HttpServlet {
 
 //		ContactUs contactUs = new ContactUs();
 		contactUs.setformID(formID);
-//		contactUs.setOUserID(oUserID);
-//		contactUs.setGUserID(gUserID);
+//		contactUs.setOwnerUser(oUser);
+//		contactUs.setGeneralUser(gUser);
 //		contactUs.setFormPurpose(formPurpose);
 //		contactUs.setFormContent(formContent);
 //		contactUs.setFormPic(formPic);

@@ -21,10 +21,7 @@ AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
 List<Announcement> list = annoSvcB.getAll();
 pageContext.setAttribute("list", list);
 %>
-<%
-Manage manageAnno = (Manage) request.getAttribute("manageAnno");
 
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -287,7 +284,7 @@ Manage manageAnno = (Manage) request.getAttribute("manageAnno");
 					<c:forEach var="announcement" items="${list}">
 						<tr>
 							<td>${announcement.announceID}</td>
-							<td>${manageAnno.manageID}</td>
+							<td>${announcement.manage.manageID}</td>
 							<td>${announcement.formID}</td>
 							<td>${announcement.annoTitle}</td>
 							<td>${announcement.annoContent}</td>

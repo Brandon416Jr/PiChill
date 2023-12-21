@@ -299,7 +299,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="oUserID" value="<%=contactUs.getOwnerUser()%>"
+													name="oUserID" value="<%=(contactUs.getOwnerUser() == null) ? "" :  contactUs.getOwnerUser().getoUserID()%>"
 													class="form-control" />
 											</div>
 										</div>
@@ -309,7 +309,7 @@ input.btn {
 											</div>
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" disabled="disabled"
-													name="gUserID" value="<%=contactUs.getGeneralUser()%>"
+													name="gUserID" value="<%=(contactUs.getGeneralUser() == null) ? "" :  contactUs.getGeneralUser().getgUserID()%>"
 													class="form-control" />
 											</div>
 										</div>
