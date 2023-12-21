@@ -129,8 +129,8 @@ public class ContactUs {
 		return ownerUser;
 	}
 
-	public void setoUserID(OwnerUser oUserID) {
-		this.ownerUser = oUserID;
+	public void setOwnerUser(OwnerUser ownerUser) {
+		this.ownerUser = ownerUser;
 	}
 
 //	public Integer getgUserID() {
