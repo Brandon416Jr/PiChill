@@ -23,29 +23,29 @@ public class PostDAOImplBack implements PostDAOBack {
 	
 	@Override
 	public int delete(Integer postID) {
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		try {
-//			session.beginTransaction();
-//			Post post = session.get(Post.class, postID);
-//			if (post != null) {
-//				session.delete(post);
-//			}
-//			session.getTransaction().commit();
-//			return 1;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback();
-//		}
-//		return -1;
-		Post post = getSession().get(Post.class, postID);
-		if (post != null) {
-			getSession().delete(post);
-			// 回傳給 service，1代表刪除成功
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Post post = session.get(Post.class, postID);
+			if (post != null) {
+				session.delete(post);
+			}
+			session.getTransaction().commit();
 			return 1;
-		} else {
-			// 回傳給 service，-1代表刪除失敗
-			return -1;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
 		}
+		return -1;
+//		Post post = getSession().get(Post.class, postID);
+//		if (post != null) {
+//			getSession().delete(post);
+//			// 回傳給 service，1代表刪除成功
+//			return 1;
+//		} else {
+//			// 回傳給 service，-1代表刪除失敗
+//			return -1;
+//		}
 	}
 
 	@Override
@@ -76,24 +76,24 @@ public class PostDAOImplBack implements PostDAOBack {
 
 	@Override
 	public Post getByPostID(Integer postID) {
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		try {
-//			session.beginTransaction();
-//			Post post = session.get(Post.class, postID);
-//			session.getTransaction().commit();
-//			return post;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			session.getTransaction().rollback();
-//		}
-//		return null;
-		 try {
-		        getSession().clear();
-		        return getSession().get(Post.class, postID);
-		    } catch (Exception e) {
-		        e.printStackTrace(); // 或使用日誌庫記錄異常
-		        return null;
-		    }
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Post post = session.get(Post.class, postID);
+			session.getTransaction().commit();
+			return post;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
+//		 try {
+//		        getSession().clear();
+//		        return getSession().get(Post.class, postID);
+//		    } catch (Exception e) {
+//		        e.printStackTrace(); // 或使用日誌庫記錄異常
+//		        return null;
+//		    }
 	}
 
 	

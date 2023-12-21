@@ -273,7 +273,7 @@ Announcement announcement = (Announcement) request.getAttribute("announcement");
 											<div class="col-10 col-md-8">
 												<input type="text" id="text-input" name="manageID"
 													placeholder="請輸入管理員編號"
-													value="<%=(announcement == null) ? "13000001" : announcement.getManage()%>"
+													value="<%=(announcement == null) ? "13000001" : announcement.getManage().getManageID()%>"
 													class="form-control" />
 												<!-- <small class="form-text text-muted">This is a help text</small> -->
 											</div>

@@ -2,9 +2,12 @@ package com.pichill.backstage.announcement.model;
 
 import java.util.List;
 
+import javax.persistence.criteria.From;
+
 import org.hibernate.Session;
 
 import com.pichill.backstage.announcement.entity.Announcement;
+
 import com.pichill.util.HibernateUtil;
 
 public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
@@ -69,6 +72,21 @@ public class AnnouncementDAOImplBack implements AnnouncementDAOBack {
 			session.getTransaction().rollback();
 		}
 		return null;
+	}
+	
+	public Announcement getByManageID(Integer manageID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			Announcement announcement = session.get(Announcement.class, manageID);
+			session.getTransaction().commit();
+			return announcement;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+		}
+		return null;
+
 	}
 
 }

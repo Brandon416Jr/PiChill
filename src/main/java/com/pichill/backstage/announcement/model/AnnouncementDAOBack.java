@@ -11,4 +11,5 @@ public interface AnnouncementDAOBack {
 	int update(Announcement announcement);
 	Announcement getAnnouncementByAnnounceID(Integer announceID); 
 	List<Announcement> getAll();
+	Announcement getByManageID(Integer manageID);
 }

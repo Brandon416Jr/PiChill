@@ -19,7 +19,7 @@ Report report = (Report) request.getAttribute("report");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>查看會員資料 (一般)</title>
+<title>查看檢舉</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css"></style>
@@ -285,7 +285,7 @@ Report report = (Report) request.getAttribute("report");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="postID"
-														value="<%=report.getPostID()%>" disabled="disabled"
+														value="<%=(report.getPost() == null) ? "" : report.getPost().getPostID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>
@@ -295,7 +295,7 @@ Report report = (Report) request.getAttribute("report");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="commentID"
-														value="<%=report.getCommentID()%>" disabled="disabled"
+														value="<%=(report.getComment() == null) ? "" : report.getComment().getCommentID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>

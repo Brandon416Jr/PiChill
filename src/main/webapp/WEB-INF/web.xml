@@ -12,33 +12,35 @@
 		<welcome-file>index.htm</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+	<!-- <servlet> -->
+	<!-- <servlet-name>UploadServlet</servlet-name> -->
+	<!-- <servlet-class>com.example.UploadServlet</servlet-class> -->
 
-<!-- 	<servlet> -->
-<!-- 		<servlet-name>UploadServlet</servlet-name> -->
-<!-- 		<servlet-class>com.example.UploadServlet</servlet-class> -->
+	<!-- <multipart-config> -->
+	<!-- <location>/tmp</location> -->
+	<!-- <max-file-size>20848820</max-file-size> -->
+	<!-- <max-request-size>418018841</max-request-size> -->
+	<!-- <file-size-threshold>1048576</file-size-threshold> -->
+	<!-- </multipart-config> -->
 
-<!-- 		<multipart-config> -->
-<!-- 			<location>/tmp</location> -->
-<!-- 			<max-file-size>20848820</max-file-size> -->
-<!-- 			<max-request-size>418018841</max-request-size> -->
-<!-- 			<file-size-threshold>1048576</file-size-threshold> -->
-<!-- 		</multipart-config> -->
+	<!-- </servlet> -->
 
-<!-- 	</servlet> -->
-
-<!-- 	<servlet-mapping> -->
-<!-- 		<servlet-name>UploadServlet</servlet-name> -->
-<!-- 		<url-pattern>/upload</url-pattern> -->
-<!-- 	</servlet-mapping> -->
+	<!-- <servlet-mapping> -->
+	<!-- <servlet-name>UploadServlet</servlet-name> -->
+	<!-- <url-pattern>/upload</url-pattern> -->
+	<!-- </servlet-mapping> -->
 
 
-<!-- 	定義過濾器 -->
+	<!-- 定義過濾器 -->
 	<filter>
 		<filter-name>ManageLoginFilter</filter-name>
 		<filter-class>com.pichill.manage.filter.ManageLoginFilter</filter-class>
 	</filter>
 
-<!-- 	配置過濾器 -->
+	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>ManageLoginFilter</filter-name>
 		<url-pattern>/backstage/*</url-pattern>
@@ -48,14 +50,14 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
-	
-	<!-- 	定義過濾器 -->
+
+	<!-- 定義過濾器 -->
 	<filter>
 		<filter-name>OwnerUserLoginFilter</filter-name>
 		<filter-class>com.pichill.frontstage.owneruser.filter.OwnerUserLoginFilter</filter-class>
 	</filter>
 
-<!-- 	配置過濾器 -->
+	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>OwnerUserLoginFilter</filter-name>
 		<url-pattern>/homepage/owneruserhome.jsp</url-pattern>
@@ -65,14 +67,14 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
-	
-	<!-- 	定義過濾器 -->
+
+	<!-- 定義過濾器 -->
 	<filter>
 		<filter-name>GeneralUserLoginFilter</filter-name>
 		<filter-class>com.pichill.frontstage.generaluser.filter.GeneralUserLoginFilter</filter-class>
 	</filter>
 
-<!-- 	配置過濾器 -->
+	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>GeneralUserLoginFilter</filter-name>
 		<url-pattern>/homepage/main.jsp</url-pattern>

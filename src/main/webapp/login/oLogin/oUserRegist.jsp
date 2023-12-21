@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
-
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
@@ -219,8 +220,14 @@ button.agreeterm {
 									</select>
 								</div>
 								<div class="form-group">
-									<label>生日</label><font color=red>${errorMsgs.oBirth}</font> <input
-										class="au-input au-input--full" placeholder="請輸入生日"
+									<label>生日</label><font color=red>${errorMsgs.oBirth}</font>
+									<%
+													Date today = new Date();
+													SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+													String todayStr = sdf.format(today);
+													%>
+									<input
+										class="au-input au-input--full" placeholder="請輸入生日" max="<%=todayStr%>"
 										type="date" name="oBirth"
 										value="<%=(ownerUser == null) ? "" : ownerUser.getoBirth()%>">
 

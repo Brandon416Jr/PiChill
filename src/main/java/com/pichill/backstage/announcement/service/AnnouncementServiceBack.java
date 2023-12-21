@@ -2,6 +2,8 @@ package com.pichill.backstage.announcement.service;
 
 import java.util.List;
 
+import org.hibernate.type.IntegerType;
+
 import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.backstage.announcement.model.AnnouncementDAOBack;
 import com.pichill.backstage.announcement.model.AnnouncementDAOImplBack;
@@ -28,6 +30,10 @@ public class AnnouncementServiceBack {
 
 	public List<Announcement> getAll() {
 		return dao.getAll();
+	}
+	
+	public Announcement getByManageID(Integer manageID) {
+		return dao.getByManageID(manageID);
 	}
 	
 	
