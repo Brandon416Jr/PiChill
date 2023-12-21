@@ -21,7 +21,10 @@ import com.pichill.generaluser.entity.GeneralUser;
 @WebServlet("/gloginhandler")
 public class GeneralUserLoginHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private static int loginAttempts = 0;  // 登入嘗試次數
+	private static long lockoutTime = 0;   // 鎖定時間
+	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
+	private static final long LOCKOUT_DURATION = 1 * 60 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 		// 【實際上應至資料庫搜尋比對】
 		protected boolean allowgUser(String gUsername, String gPassword) {
@@ -66,7 +69,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				RequestDispatcher failureView = req.getRequestDispatcher("/login/mLogin/manageLogin.jsp");
+				RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserLogin.jsp");
 				failureView.forward(req, res);
 				return;
 			}
@@ -76,6 +79,26 @@ public class GeneralUserLoginHandler extends HttpServlet {
 				System.out.println("有進帳號密碼無效");
 				errorMsgs.put("gUsername", "查無資料");
 				errorMsgs.put("gPassword", "密碼錯誤");
+				
+				 // 增加登入嘗試次數
+			    loginAttempts++;
+			    
+			    // 檢查是否達到最大嘗試次數
+			    if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+			        System.out.println("密碼輸入錯誤次數過多，請稍候再試");
+
+			        // 設定鎖定時間
+			        lockoutTime = System.currentTimeMillis() + LOCKOUT_DURATION;
+			    	req.setAttribute("lockoutTime", lockoutTime);
+					if (System.currentTimeMillis() < lockoutTime) {
+					    System.out.println("帳號已被鎖定，請稍候再試");
+					    res.sendRedirect(req.getContextPath() +"/login/gUserFailToLogin.jsp");
+					    return;
+					} else {
+						res.sendRedirect(req.getContextPath() +"/login/gLogin/gUserLogin.jsp");
+						return;
+					}
+			    }
 			}
 
 			// Send the use back to the form, if there were errors
@@ -89,8 +112,17 @@ public class GeneralUserLoginHandler extends HttpServlet {
 			if (allowgUser(gUsername, gPassword)) { // 帳號密碼有效
 				// 從資料庫獲取 adminStat 的值
 				GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
-//				GeneralUser generalUser = gUserSvcF.userAuth(gUsername, gPassword);
-				
+				GeneralUser gStatus = gUserSvcF.userAuth(gUsername, gPassword);
+				if (gStatus != null) {
+					Integer status = gStatus.getStatus();
+					// 設置mStatus 属性的值到 HttpSession
+					HttpSession session = req.getSession();
+					session.setAttribute("status", status);
+					// mStatus 為2（停權）的情況
+					if (status == 0) {
+						errorMsgs.put("status", "此帳號尚未被激活!");
+					}
+				}
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -100,32 +132,23 @@ public class GeneralUserLoginHandler extends HttpServlet {
 					return;// 程式中斷
 				}
 				
-//				// 記住帳號
-//				String remember = req.getParameter("remember");
-//				boolean isRemember = "true".equals(remember);
-//				
-//				if (isRemember) {
-//					  String token = UUID.randomUUID().toString(); 
-//					  Cookie rememberCookie = new Cookie("remember", token);
-//					  rememberCookie.setMaxAge(7 * 24 * 60 * 60); // 7 天
-//					  res.addCookie(rememberCookie);
-//					  HttpSession session = req.getSession();
-//					  session.setAttribute("remember_" + gUsername, token);
-//					}
-//				
-//				
-//				
-//				Cookie[] cookies = req.getCookies();
-//				String token = null;
-//				for (Cookie cookie : cookies) {
-//				    if (cookie.getName().equals("remember")) {
-//				        token = cookie.getValue();
-//				        break;
-//				    }
-//				}
+				HttpSession session = req.getSession();
+				String inputCode = req.getParameter("checkCode");
+				String valistr = (String) session.getAttribute("valistr");
+				if (!valistr.equalsIgnoreCase(inputCode)) {
+					errorMsgs.put("checkCode", "輸入的驗證碼錯誤!");
+				}
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("有進第三個error提示區域");
+					RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserLogin.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
+				session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 				GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
 				session.setAttribute("generalUser", generalUser);
 

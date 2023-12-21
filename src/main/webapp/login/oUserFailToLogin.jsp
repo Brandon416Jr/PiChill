@@ -1,11 +1,10 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
-<%@ page import="java.util.*"%>
-
+<%@ page language="java" contentType="text/html; charset=BIG5"
+    pageEncoding="BIG5"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="BIG5">
-<title>管理員帳號鎖定</title>
+<title>企業會員帳號鎖定</title>
 </head>
 <body>
 
@@ -17,7 +16,7 @@ var lockoutTime = <%= request.getAttribute("lockoutTime") %>;
 setInterval(function() {
     if (new Date().getTime() >  lockoutTime) {
         // 鎖定時間已經結束，重新導向到登入頁面
-        window.location.href = "<%=request.getContextPath()%>/login/mLogin/manageLogin.jsp";
+        window.location.href = "<%=request.getContextPath()%>/login/oLogin/oUserLogin.jsp";
     }
 }, 10000); // 每秒檢查一次
 </script>
