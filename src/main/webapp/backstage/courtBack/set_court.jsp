@@ -286,7 +286,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="manageID"
-														value="<%=court.getmanageID()%>" disabled="disabled" class="form-control" />
+														value="<%=court.getManage().getManageID()%>" disabled="disabled" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
@@ -296,7 +296,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="courtOnTime" disabled="disabled"
-														value="<%=court.getcourtOnTime()%>" class="form-control" />
+														value="<%=court.getCourtOnTime()%>" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
@@ -306,7 +306,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input"
-														name="courtApplyTime" value="<%=court.getcourtApplyTime()%>"
+														name="courtApplyTime" value="<%=court.getCourtApplyTime()%>"
 														disabled="disabled" class="form-control" />
 												</div>
 											</div>
@@ -316,7 +316,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" disabled="disabled"
-														name="courtName" value="<%=court.getcourtName()%>"
+														name="courtName" value="<%=court.getCourtName()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -348,7 +348,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="courtTelephone" disabled="disabled"
-														value="<%=court.getcourtTelephone()%>" class="form-control" />
+														value="<%=court.getCourtTelephone()%>" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
@@ -358,7 +358,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="text-input" disabled="disabled"
-														value="<%=court.getcourtAddress()%>"  class="form-control" />
+														value="<%=court.getCourtAddress()%>"  class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>
@@ -369,7 +369,7 @@ Court court = (Court) request.getAttribute("court");
 												<div class="col-10 col-md-8">
 													<textarea name="courtRule" id="textarea-input"
 														disabled="disabled" rows="9"
-														class="form-control"><%=court.getcourtRule()%></textarea>
+														class="form-control"><%=court.getCourtRule()%></textarea>
 												</div>
 											</div>
 											<div class="row form-group">
@@ -378,7 +378,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" disabled="disabled"
-														name="loc" value="<%=court.getloc()%>"
+														name="loc" value="<%=court.getLoc()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -388,7 +388,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 												<%
-													int status = court.getcourtApplyStatus();
+													int status = court.getCourtApplyStatus();
 													%>
 													<select name="courtApplyStatus" id="selectLm"
 														class="form-control-sm form-control">

@@ -280,6 +280,7 @@ pageContext.setAttribute("list", list);
 						<th>上架球館次數</th>
 						<th>被預約次數</th>
 						<th>電子信箱</th>
+						<th>會員狀態</th>
 						<th>查看</th>
 					</tr>
 				</thead>
@@ -308,6 +309,7 @@ pageContext.setAttribute("list", list);
 							<td>${ownerUser.courtArriveCnt}</td>
 							<td>${ownerUser.rsvdCnts}</td>
 							<td>${ownerUser.oEmail}</td>
+							<td>${ownerUser.oStatus == 0? '未激活' : '正常'}</td>
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/owneruser/owneruserb.do"

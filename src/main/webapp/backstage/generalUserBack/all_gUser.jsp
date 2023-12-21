@@ -268,7 +268,7 @@ pageContext.setAttribute("list", list);
             <td>${generalUser.gTelephone}</td>
             <td>${generalUser.gEmail}</td>
             <td>${generalUser.gAddress}</td>
-            <td>${generalUser.status== 0 ? '正常' : '討論版停權'}</td>
+            <td>${generalUser.status== 0 ? '未激活' :  (generalUser.status== 1 ? '正常' : '討論版停權')}</td>
             <td>${generalUser.gGender== 0 ? '男' : '女'}</td>
             <td>${generalUser.gUsername}</td>
             <td>${generalUser.gPassword}</td>
