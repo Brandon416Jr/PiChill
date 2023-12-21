@@ -256,6 +256,10 @@ public class OwnerUserServlet extends HttpServlet {
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer courtArriveCnt = 0;
 		
+//		頁面不顯示，所以直接給0，之後用程式碼去計算
+		Integer oStatus = 0;	
+		
+		
 		
 		String oEmail = req.getParameter("oEmail");
 		String oEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
@@ -287,7 +291,9 @@ public class OwnerUserServlet extends HttpServlet {
 		ownerUser.setCourtArriveCnt(courtArriveCnt);
 		ownerUser.setRsvdCnts(rsvdCnts);
 		ownerUser.setoEmail(oEmail);
+		ownerUser.setoStatus(oStatus);	
 		ownerUser.toString();
+
 
 		
 

@@ -22,8 +22,8 @@ public class PlaceHibernate {
 		
 		//交易區間
 		Place place = new Place();
-		place.setPlaceID(62000011);
-		place.setCourtID(61000010);
+//		place.setPlaceID(62000011);
+//		place.setCourtID(61000010);
 		place.setPlaceName("A");
 		place.setPlaceFee(400);
 		place.setBall(2);

@@ -174,7 +174,7 @@ public class CourtServlet extends HttpServlet{
 			in.close();
 		} else {
 			CourtService courtService = new CourtService();
-			courtPic = courtService.getOneCourt(courtID).getcourtPic();
+			courtPic = courtService.getOneCourt(courtID).getCourtPic();
 		}
 
 		String courtTelephone = req.getParameter("courtTelephone");
@@ -213,19 +213,19 @@ public class CourtServlet extends HttpServlet{
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
 		court.setCourtID(courtID);
-		court.setoUserID(oUserID);
-		court.setmanageID(manageID);
-		court.setcourtOnTime(courtOnTime);
-		court.setcourtApplyTime(courtApplyTime);
-		court.setcourtName(courtName);
-		court.setcourtPic(courtPic);
-		court.setcourtTelephone(courtTelephone);
-		court.setcourtAddress(courtAddress);
-		court.setcourtRule(courtRule);
-		court.setloc(loc);
-		court.setcourtApplyStatus(courtApplyStatus);
-		court.setcourtOpenTime(courtOpenTime);
-		court.setcourtCloseTime(courtCloseTime);
+//		court.setoUserID(oUserID);
+//		court.setmanageID(manageID);
+		court.setCourtOnTime(courtOnTime);
+		court.setCourtApplyTime(courtApplyTime);
+		court.setCourtName(courtName);
+		court.setCourtPic(courtPic);
+		court.setCourtTelephone(courtTelephone);
+		court.setCourtAddress(courtAddress);
+		court.setCourtRule(courtRule);
+		court.setLoc(loc);
+		court.setCourtApplyStatus(courtApplyStatus);
+		court.setCourtOpenTime(courtOpenTime);
+		court.setCourtCloseTime(courtCloseTime);
 //		court.setplaceName(Place.placeName);
 //		court.setplaceFee((Place.placeFee);
 //		court.setball((Place.ball);
@@ -284,7 +284,7 @@ public class CourtServlet extends HttpServlet{
 			in.close();
 		} else {
 			CourtService courtService = new CourtService();
-			courtPic = courtService.getOneCourt(courtID).getcourtPic();
+			courtPic = courtService.getOneCourt(courtID).getCourtPic();
 		}
 
 		String courtTelephone = req.getParameter("courtTelephone");
@@ -324,22 +324,22 @@ public class CourtServlet extends HttpServlet{
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
 		court.setCourtID(courtID);
-		court.setoUserID(oUserID);
-		court.setmanageID(manageID);
-		court.setcourtOnTime(courtOnTime);
-		court.setcourtApplyTime(courtApplyTime);
-		court.setcourtName(courtName);
-		court.setcourtPic(courtPic);
-		court.setcourtTelephone(courtTelephone);
-		court.setcourtAddress(courtAddress);
-		court.setcourtRule(courtRule);
-		court.setloc(loc);
-		court.setcourtApplyStatus(courtApplyStatus);
-		court.setcourtOpenTime(courtOpenTime);
-		court.setcourtCloseTime(courtCloseTime);
-//		court.setplaceName(placeName);
-//		court.setplaceFee(placeFee);
-//		court.setball(ball);
+//		court.setoUserID(oUserID);
+//		court.setmanageID(manageID);
+		court.setCourtOnTime(courtOnTime);
+		court.setCourtApplyTime(courtApplyTime);
+		court.setCourtName(courtName);
+		court.setCourtPic(courtPic);
+		court.setCourtTelephone(courtTelephone);
+		court.setCourtAddress(courtAddress);
+		court.setCourtRule(courtRule);
+		court.setLoc(loc);
+		court.setCourtApplyStatus(courtApplyStatus);
+		court.setCourtOpenTime(courtOpenTime);
+		court.setCourtCloseTime(courtCloseTime);
+//		court.setplaceName(Place.placeName);
+//		court.setplaceFee((Place.placeFee);
+//		court.setball((Place.ball);
 
 		court.toString();
 		// Send the use back to the form, if there were errors
