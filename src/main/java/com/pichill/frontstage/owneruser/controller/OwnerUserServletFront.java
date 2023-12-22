@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,29 +17,35 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
+import com.pichill.util.SendMailService;
+
+import redis.clients.jedis.Jedis;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "OwnerUserFServlet", value = "/owneruser/owneruserf.do")
 public class OwnerUserServletFront extends HttpServlet {
 	private OwnerUserServiceFront oUserSvcF;
-	
+
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
 		oUserSvcF = new OwnerUserServiceFront();
 	}
-	
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doPost(req, res);
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -54,6 +62,10 @@ public class OwnerUserServletFront extends HttpServlet {
 			// 來自set_manage.jsp的請求
 			forwardPath = insert(req, res);
 			break;
+		case "sendMailAgain":
+			// 來自new_manage.jsp的請求
+			forwardPath = sendMailAgain(req, res);
+			break;
 		default:
 			forwardPath = "/login/oLogin/oUserLogin.jsp";
 		}
@@ -62,7 +74,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		RequestDispatcher dispatcher = req.getRequestDispatcher(forwardPath);
 		dispatcher.forward(req, res);
 	}
-	
+
 	private String insert(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("成功insert");
 		// 錯誤處理
@@ -70,8 +82,8 @@ public class OwnerUserServletFront extends HttpServlet {
 //		Manage manage = testUtil.paramMappingFunction(parameterMap, new Manage());
 //		
 //		System.out.println("manage:"+manage);
-		
-		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
+
+		Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 		String oUserName = req.getParameter("oUserName");
@@ -81,13 +93,13 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oUserName.trim().matches(oUserNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("oUserName", "會員帳號: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
-		
+
 		Boolean oUserUN = oUserSvcF.existsUsername(oUserName);
 		System.out.println(oUserUN);
 		if (oUserUN) {
-			errorMsgs.put("oUserName", "此帳號已存在");	
-		} 
-		
+			errorMsgs.put("oUserName", "此帳號已存在");
+		}
+
 		String oPassword = req.getParameter("oPassword");
 		String oPasswordReg = "^[a-zA-Z0-9]{8,12}$";
 		if (oPassword == null || oPassword.trim().length() == 0) {
@@ -95,14 +107,14 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oPassword.trim().matches(oPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("oPassword", "會員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
-		
+
 		String oPassword2 = req.getParameter("oPassword2");
 		if (!oPassword2.equals(oPassword)) {
 			errorMsgs.put("oPassword2", "請輸入相同的密碼");
 		} else if (oPassword2 == null || oPassword2.trim().length() == 0) {
 			errorMsgs.put("oPassword", "請勿空白");
 		}
-		
+
 		String oIDNum = req.getParameter("oIDNum");
 		String oIDReg = "^[A-Z][12][0-9]{8}$";
 		if (oIDNum == null || oIDNum.trim().isEmpty()) {
@@ -110,13 +122,13 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oIDNum.trim().matches(oIDReg)) {
 			errorMsgs.put("oIDNum", "請輸入正確的身份證格式");
 		}
-		
+
 		Boolean oUserI = oUserSvcF.existsIDNum(oIDNum);
 		System.out.println(oUserI);
 		if (oUserI) {
-			errorMsgs.put("oIDNum", "一個人只能註冊一次!");	
-		} 
-		
+			errorMsgs.put("oIDNum", "一個人只能註冊一次!");
+		}
+
 		String compiled = req.getParameter("compiled");
 		String compiledReg = "^[0-9]{8}$";
 		if (compiled == null || oIDNum.trim().isEmpty()) {
@@ -124,13 +136,13 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!compiled.trim().matches(compiledReg)) {
 			errorMsgs.put("compiled", "請輸入正確的統編格式");
 		}
-		
+
 		Boolean oUserC = oUserSvcF.existsCompiled(compiled);
 		System.out.println(oUserC);
 		if (oUserC) {
-			errorMsgs.put("compiled", "此統編已被註冊過");	
-		} 
-		
+			errorMsgs.put("compiled", "此統編已被註冊過");
+		}
+
 		String oName = req.getParameter("oName");
 		String oNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
 		if (oName == null || oName.trim().length() == 0) {
@@ -138,7 +150,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oName.trim().matches(oNameReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("oName", "會員姓名: 只能是中文, 且長度必需大於2個字");
 		}
-		
+
 		Integer oGender = Integer.valueOf(req.getParameter("oGender"));
 
 		Date oBirth = null;
@@ -147,7 +159,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} catch (IllegalArgumentException e) {
 			errorMsgs.put("oBirth", "請輸入生日!");
 		}
-		
+
 		String oTelephone = req.getParameter("oTelephone");
 		String oTelephoneReg = "^09[0-9]{8}$";
 		if (oTelephone == null || oTelephone.trim().isEmpty()) {
@@ -155,7 +167,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oTelephone.trim().matches(oTelephoneReg)) {
 			errorMsgs.put("oTelephone", "請輸入正確的手機格式");
 		}
-		
+
 		String address = req.getParameter("oAddress");
 		if (address == null || address.trim().isEmpty())
 			errorMsgs.put("oAddress", "請輸入地址");
@@ -165,7 +177,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		String area = req.getParameter("area");
 
 		String oAddress = city + area + address;
-		
+
 		String oBankCode = req.getParameter("oBankCode");
 		String oBankCodeReg = "^\\d{3}$";
 		if (oBankCode == null || oIDNum.trim().isEmpty()) {
@@ -173,7 +185,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oBankCode.trim().matches(oBankCodeReg)) {
 			errorMsgs.put("oBankCode", "請輸入正確的銀行代碼格式");
 		}
-		
+
 		String oBankAccount = req.getParameter("oBankAccount");
 		String oBankAccountReg = "^[1-9](\\d{9,13})$";
 		if (oBankAccount == null || oIDNum.trim().isEmpty()) {
@@ -181,7 +193,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oBankAccount.trim().matches(oBankAccountReg)) {
 			errorMsgs.put("oBankAccount", "請輸入正確的銀行帳號格式");
 		}
-		
+
 //		 取得圖片
 		InputStream in = req.getPart("oProfilePic").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
 		byte[] oProfilePic = null;
@@ -191,7 +203,7 @@ public class OwnerUserServletFront extends HttpServlet {
 			in.close();
 		} else
 			errorMsgs.put("oProfilePic", "照片: 請上傳照片");
-		
+
 		Date oRegisterDate = new java.sql.Date(System.currentTimeMillis());
 //		try {
 //			oRegistDate = java.sql.Date.valueOf(req.getParameter("oRegistDate").trim());
@@ -199,7 +211,7 @@ public class OwnerUserServletFront extends HttpServlet {
 //			oRegistDate = new java.sql.Date(System.currentTimeMillis());
 //			errorMsgs.add("請輸入日期!");
 //		}
-		
+
 		Integer oPostAmount = 0;
 
 		Integer oReportCnt = 0;
@@ -215,18 +227,20 @@ public class OwnerUserServletFront extends HttpServlet {
 		} else if (!oEmail.trim().matches(oEmailReg)) {
 			errorMsgs.put("oEmail", "請輸入正確的Email格式");
 		}
-		
+
 		Boolean oUserE = oUserSvcF.existsEmail(oEmail);
 		System.out.println(oUserE);
 		if (oUserE) {
-			errorMsgs.put("oEmail", "此信箱已被註冊過");	
-		} 
+			errorMsgs.put("oEmail", "此信箱已被註冊過");
+		}
+		
+		Integer oStatus = 0;
 		
 		String agree = req.getParameter("agree");
-		 if (agree == null) {
-			 errorMsgs.put("agree", "請勾選同意使用者條款!");
-		 }
-		
+		if (agree == null) {
+			errorMsgs.put("agree", "請勾選同意使用者條款!");
+		}
+
 		OwnerUser ownerUser = new OwnerUser();
 		ownerUser.setoUserName(oUserName);
 		ownerUser.setoPassword(oPassword);
@@ -246,6 +260,7 @@ public class OwnerUserServletFront extends HttpServlet {
 		ownerUser.setCourtArriveCnt(courtArriveCnt);
 		ownerUser.setRsvdCnts(rsvdCnts);
 		ownerUser.setoEmail(oEmail);
+		ownerUser.setoStatus(oStatus);
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
@@ -255,14 +270,55 @@ public class OwnerUserServletFront extends HttpServlet {
 
 		/*************************** 2.開始新增資料 ***************************************/
 
-		oUserSvcF.insertOwnerUser( oUserName,  oPassword,  oIDNum, 
-				  compiled,  oName, oGender,  oBirth,  oTelephone,
-				  oAddress,  oBankCode,  oBankAccount,  oProfilePic,
-				  oRegisterDate,  oPostAmount,  oReportCnt,
-				  courtArriveCnt,  rsvdCnts,  oEmail);
+		oUserSvcF.insertOwnerUser(oUserName, oPassword, oIDNum, compiled, oName, oGender, oBirth, oTelephone, oAddress,
+				oBankCode, oBankAccount, oProfilePic, oRegisterDate, oPostAmount, oReportCnt, courtArriveCnt, rsvdCnts,
+				oEmail, oStatus);
+		
+		sendVerificationEmail(ownerUser);
+		HttpSession session = req.getSession();
+		session.setAttribute("ownerUser", ownerUser);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-		
-		return "/login/oLogin/oUserLogin.jsp";
+
+		return "/login/oLogin/oUserActivePage.jsp";
 	}
+	
+	private String sendMailAgain(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		System.out.println("成功insert");
+		HttpSession session = req.getSession();
+		OwnerUser ownerUser = (OwnerUser)session.getAttribute("ownerUser");
+		sendVerificationEmail(ownerUser);
+		return "/login/oLogin/oUserActivePage.jsp";
+	}
+	
+	private void sendVerificationEmail(OwnerUser ownerUser) {
+		String verificationCode = generateVerificationCode();
+		System.out.println("我存進去的驗證碼為" + verificationCode);
+		// 將驗證碼存進redis
+		Map<String, String> verification = new HashMap<>();
+		verification.put("verificationCode", verificationCode);
+		
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.select(5);
+		Gson gson = new Gson();
+		String verificationValue = gson.toJson(verification);
+		String email = ownerUser.getoEmail();
+		System.out.println("我存進的信箱為" + email);
+		
+		jedis.expire(email, 600);// 設定生命週期(以秒為單位)
+
+		jedis.set(email, verificationValue);
+		jedis.close();
+		// 組驗證連結
+		String verifyUrl = "http://localhost:8081/PiChill/verifyouser?verificationCode=" + verificationCode;
+
+		// 寄信邏輯
+		SendMailService mailService = new SendMailService();
+		mailService.sendMail(ownerUser.getoEmail(), "會員註冊驗證", "請點擊連結完成驗證:" + verifyUrl);
+
+	}
+	
+	public String generateVerificationCode() {
+		  return UUID.randomUUID().toString().substring(0,6); 
+		}
 }

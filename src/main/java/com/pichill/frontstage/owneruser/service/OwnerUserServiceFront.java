@@ -19,7 +19,7 @@ private final OwnerUserDAOFront dao;
 			 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
 			 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
 			 Date oRegisterDate, Integer oPostAmount, Integer oReportCnt,
-			 Integer courtArriveCnt, Integer rsvdCnts, String oEmail) {
+			 Integer courtArriveCnt, Integer rsvdCnts, String oEmail, Integer oStatus) {
 		
 		OwnerUser ownerUser = new OwnerUser();
 		ownerUser.setoUserName(oUserName);
@@ -40,6 +40,7 @@ private final OwnerUserDAOFront dao;
 //		ownerUser.setCourtArriveCnt(courtArriveCnt);
 //		ownerUser.setRsvdCnts(rsvdCnts);
 		ownerUser.setoEmail(oEmail);
+		ownerUser.setoStatus(oStatus);
 		dao.insert(ownerUser);
 
 		return ownerUser;

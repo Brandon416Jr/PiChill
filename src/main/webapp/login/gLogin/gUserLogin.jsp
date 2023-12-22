@@ -117,7 +117,7 @@ label.pwd-see2 {
 							<div class="register-link">
 								<p>
 									你尚未有帳號? <a
-										href="${pageContext.request.contextPath }/frontstage/generalUserFront/gUserRegist.jsp">我要註冊</a>
+										href="${pageContext.request.contextPath }/login/gLogin/gUserRegist.jsp">我要註冊</a>
 								</p>
 								<p>
 									不想登入，以<a

@@ -34,22 +34,22 @@ public class TestGeneralUser {
 		// 修改
 		GeneralUser gen1 = new GeneralUser();
 		gen1.setgUserID(11000012);
-		gen1.setgName("老天鵝");
-		gen1.setgTelephone("0921000456");
+//		gen1.setgName("老天鵝");
+//		gen1.setgTelephone("0921000456");
 		gen1.setgEmail("abc456@gmail.com");
-		gen1.setgAddress("新北市南港區八德路215號");
-		gen1.setStatus(0);
-		gen1.setgGender(1);
-		gen1.setgUsername("abcdefg");
-		gen1.setgPassword("qaz12345");
-		gen1.setgIDNum("A222142123");
-		gen1.setNicknameID(null);
-		gen1.setgPostAmount(null);
-		gen1.setCommentAmount(4);
-		gen1.setgReportCnt(0);
-		gen1.setgBirth(java.sql.Date.valueOf("1990-05-13"));
-		gen1.setYoyakuCnt(3);
-		gen1.setgProfilePic(null);
+//		gen1.setgAddress("新北市南港區八德路215號");
+//		gen1.setStatus(0);
+//		gen1.setgGender(1);
+//		gen1.setgUsername("abcdefg");
+//		gen1.setgPassword("qaz12345");
+//		gen1.setgIDNum("A222142123");
+//		gen1.setNicknameID(null);
+//		gen1.setgPostAmount(null);
+//		gen1.setCommentAmount(4);
+//		gen1.setgReportCnt(0);
+//		gen1.setgBirth(java.sql.Date.valueOf("1990-05-13"));
+//		gen1.setYoyakuCnt(3);
+//		gen1.setgProfilePic(null);
 		dao.update(gen1);
 
 		// 查詢單筆

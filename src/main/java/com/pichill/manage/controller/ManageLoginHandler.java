@@ -102,7 +102,7 @@ public class ManageLoginHandler extends HttpServlet {
 		    	req.setAttribute("lockoutTime", lockoutTime);
 				if (System.currentTimeMillis() < lockoutTime) {
 				    System.out.println("帳號已被鎖定，請稍候再試");
-				    res.sendRedirect(req.getContextPath() +"/login/failToLogin.jsp");
+				    res.sendRedirect(req.getContextPath() +"/login/mLogin/manageFailToLogin.jsp");
 				    return;
 				} else {
 					res.sendRedirect(req.getContextPath() +"/login/mLogin/manageLogin.jsp");

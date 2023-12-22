@@ -286,8 +286,8 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 					<c:forEach var="court" items="${list}">
 						<tr>
 							<td>${court.courtID}</td>
-							<td>${court.oUserID}</td>
-							<td>${court.manageID}</td>
+							<td>${court.ownerUser.oUserID}</td>
+							<td>${court.manage.manageID}</td>
 							<td>${court.courtOnTime}</td>
 							<td>${court.courtApplyTime}</td>
 							<td>${court.courtName}</td>
