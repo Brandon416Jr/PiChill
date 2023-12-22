@@ -35,13 +35,13 @@ public class Place {
 //	private Integer courtID;
 	
 	@Column(name = "placeName", columnDefinition = "varchar")
-	private String placeName;
+	public static String placeName;
 	
 	@Column(name = "placeFee")
-	private Integer placeFee;
+	public static Integer placeFee;
 	
 	@Column(name = "ball")
-	private Integer ball;
+	public static Integer ball;
 	
 	
 	

@@ -133,52 +133,52 @@ Court court = (Court) request.getAttribute("court");
 <%-- 				<input type="text" id="manageID" name="manageID" value="<%=court.getmanageID()%>" disabled/> --%>
 <!-- 				<br><br> -->
 		    <span>上架時間:</span>
-                <input type="text" id="oPassword" name="courtOnTime" value="<%=court.getcourtOnTime()%>" disabled/>
+                <input type="text" id="oPassword" name="courtOnTime" value="<%=court.getCourtOnTime()%>" disabled/>
                 <br><br>
 		 	<span>申請上架時間:</span>
-                <input type="text" id="courtApplyTime" name="courtApplyTime" value="<%=court.getcourtApplyTime()%>" disabled/>
+                <input type="text" id="courtApplyTime" name="courtApplyTime" value="<%=court.getCourtApplyTime()%>" disabled/>
                 <br><br>
 		
 		 	<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>球館名稱:</span>
-                <input type="text" id="courtName" style="position: relative; left: 17px;" name="courtName" value="<%= (court == null) ? "飛龍運動館" : court.getcourtName()%> " required/>
+                <input type="text" id="courtName" style="position: relative; left: 17px;" name="courtName" value="<%= (court == null) ? "飛龍運動館" : court.getCourtName()%> " required/>
                 <br><br>
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>球館電話:</span>
-                <input type="text" id="courtTelephone" style="position: relative; left: 17px;" name="courtTelephone" value="<%= (court == null) ? "022562622" : court.getcourtTelephone()%> " required/>
+                <input type="text" id="courtTelephone" style="position: relative; left: 17px;" name="courtTelephone" value="<%= (court == null) ? "022562622" : court.getCourtTelephone()%> " required/>
                 <br><br>
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>球館地址:</span>
-                <input type="text" id="courtAddress" style="position: relative; left: 17px;" name="courtAddress" value="<%= (court == null) ? "臺北市大安區通化街11巷95號1樓" : court.getcourtAddress()%> " required/>
+                <input type="text" id="courtAddress" style="position: relative; left: 17px;" name="courtAddress" value="<%= (court == null) ? "臺北市大安區通化街11巷95號1樓" : court.getCourtAddress()%> " required/>
                 <br><br>		
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>球館須知:</span>
                 <input type="text" id="courtRule" style="width:400px ; height:300px ;position: relative; left: 17px;" name="courtRule" 
                 value="<%= (court == null) ? "本場館禁止吸菸、飲食、喝酒，不可私下教學。 <br>禁止燃放鞭炮、酗酒、鬥毆、夜宿及任何妨礙公共安全秩序、違反公序良俗或妨害風化之行為。 個人貴重物品、財物請自行妥善保管，若遺失本館恕不負責。 禁止攜帶雨具及寵物進入中心，輔助盲人同胞的導盲犬不在此限。 患有高血壓、糖尿病、心臟病、傳染病、飯後一小時內、血壓過低、酒後、嚴重睡眠不足時或其他任何身體不適者，禁止使用本設備。 若因使用不當造成設備/器材毀損，本中心有權要求損壞賠償。 未經同意禁止使用館內插座，如因活動或租借場地，需先付費後方能使用。 本須知如有未盡事宜，得另行增列、修訂之，並以現場公告或服務人員說明為準。" 
-                		: court.getcourtRule()%> " required/>
+                		: court.getCourtRule()%> " required/>
                 <br><br>
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>地區:</span>
-                <input type="text" id="loc" style="position: relative; left: 50px;" name="loc" value="<%= (court == null) ? "大安區" : court.getloc()%> " required/>
+                <input type="text" id="loc" style="position: relative; left: 50px;" name="loc" value="<%= (court == null) ? "大安區" : court.getLoc()%> " required/>
                 <br><br>		
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>開館時間:</span>
-                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtOpenTime" value="<%= (court == null) ? "07:00:00" : court.getcourtOpenTime()%> " required/>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtOpenTime" value="<%= (court == null) ? "07:00:00" : court.getCourtOpenTime()%> " required/>
                 <br><br>	
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>開館時間:</span>
-                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtCloseTime" value="<%= (court == null) ? "21:00:00" : court.getcourtCloseTime()%> " required/>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtCloseTime" value="<%= (court == null) ? "21:00:00" : court.getCourtCloseTime()%> " required/>
                 <br><br>	
 		
 		
 		        <span>申請狀態:</span>
-                <% int courtAS = court.getcourtApplyStatus(); %>
+                <% int courtAS = court.getCourtApplyStatus(); %>
 				<select name="courtApplyStatus 申" disabled="disabled">
 					<option value="0" <%=courtAS == 0 ? "selected" : ""%>>審核中</option>
 					<option value="1" <%=courtAS == 1 ? "selected" : ""%>>審核通過</option>
@@ -194,7 +194,7 @@ Court court = (Court) request.getAttribute("court");
                 <br>
                 <br>
                 
-                <label for="placeFee" style="position: relative;left: 2px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
+                <label for="price" style="position: relative;left: 1px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
 		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
 		                <label for="ball">場地類型：</label>
 		                <select id="ball" name="ball">
@@ -204,11 +204,11 @@ Court court = (Court) request.getAttribute("court");
 		                    
 		                </select>
 		
-		                <label for="itemName">名稱:</label>
+		                <label for="placeName">名稱:</label>
 		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" >
 		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
 		
-		                <label for="price" style="position: relative;left: 20px;">價格:</label>
+		                <label for="priceFee" style="position: relative;left: 20px;">價格:</label>
 		                <input type="text" id="placeFee" name="placeFee"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
 		                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
 		
@@ -216,9 +216,9 @@ Court court = (Court) request.getAttribute("court");
 		            </form>
             <br>
 
-            	<label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br>
+            	<label  for="price" style="position: relative;left: 7px;">場地列表</label><br><br>
 
-            <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
+            <div class="itemTable" style="width: 480px;position: relative;left: 7px; background-color: #DAE4F4;">
                 <table id="itemTable">
                     <thead>
                         <tr>
@@ -234,7 +234,7 @@ Court court = (Court) request.getAttribute("court");
 
 
                 
-                
+                <br><br><br>
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
@@ -326,14 +326,14 @@ Court court = (Court) request.getAttribute("court");
 
 <!--======================================= 新增場地 / 編輯 / 預覽 =======================================-->
 
-            <script>
+           <script>
                 $(document).ready(function () {
                     $("#addButton").click(function () {
-                        var courtType = $("#ball").val();
+                        var ball = $("#ball").val();
                         var itemName = $("#placeName").val();
-                        var price = $("#price").val();
+                        var placeFee = $("#placeFee").val();
 
-                        if (ball && itemName && placeFee) {
+                        if (ball && itemName && price) {
                             var newRow = "<tr>" +
                                 "<td>" + ball + "</td>" +
                                 "<td>" + placeName + "</td>" +
@@ -341,10 +341,10 @@ Court court = (Court) request.getAttribute("court");
                                 "<td><button class='deleteButton'>刪除</button></td>" +
                                 "</tr>";
 
-                            $("#ball tbody").append(newRow);
+                            $("#itemTable tbody").append(newRow);
 
                             // 清空輸入欄位
-                            $("#placeName, #placeFee").val("");
+                            $("#itemName, #placeFee").val("");
                         } else {
                             alert("請填寫完整資訊");
                         }

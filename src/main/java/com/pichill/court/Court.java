@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -238,6 +239,7 @@ public class Court implements Serializable{
 
 	public Set<Place> getPlace() {
 		return place;
+		
 	}
 
 
@@ -331,7 +333,7 @@ public class Court implements Serializable{
 	
 	//場地
 	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
 	@OrderBy("placeID asc") 
 	private Set<Place> place; // Set不重複
 	
@@ -405,6 +407,30 @@ public class Court implements Serializable{
 				+ ", courtApplyStatus=" + courtApplyStatus + ", courtOpenTime=" + courtOpenTime + ", courtCloseTime="
 				+ courtCloseTime + ", reserveOrder=" + reserveOrder + ", place=" + place + ", timeref=" + timeref
 				+ ", manage=" + manage + ", ownerUser=" + ownerUser + "]";
+	}
+
+
+
+
+	public void setplaceName(String placeName) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public void setplaceFee(Integer placeFee) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public void setball(Integer ball) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 
