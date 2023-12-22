@@ -484,7 +484,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 													<select name="oStatus" id="selectLm"disabled="disabled"
 														class="form-control-sm form-control">
 
-														<option value="0" <%=status == 0 ? "selected" : ""%>>未激活</option>
+														<option value="0" <%=status == 0 ? "selected" : ""%>>未驗證</option>
 														<option value="1" <%=status == 1 ? "selected" : ""%>>正常</option>
 													</select>
 												</div>

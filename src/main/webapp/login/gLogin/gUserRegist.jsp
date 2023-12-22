@@ -276,7 +276,7 @@ button.agreeterm: hover {
 								<div class="form-group">
 									<label for="file-input">上傳大頭貼</label><font color=red>${errorMsgs.gProfilePic}</font>
 									<input type="file" name="gProfilePic" onclick="previewImage()"
-										multiple="multiple" onchange="hideContent('upFiles.errors');"
+										multiple="multiple" onchange="hideContent('upFiles.errors');" value="${generalUser.gProfilePic }"
 										class="form-control-file"><img id="imagePreview"
 										src="#" alt="Preview" />
 								</div>
@@ -644,6 +644,24 @@ function agreeTerms() {
 				password2.type = 'password';
 			}
 		});
+	</script>
+	<script>
+	function preview() {
+
+		var fileInput = document.getElementById('uploadImg');
+		var file = fileInput.files[0];
+
+		var reader = new FileReader();
+
+		reader.onload = function() {
+			document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="100px"/>';
+		};
+
+		if (file) {
+			reader.readAsDataURL(file);
+		}
+
+	}
 	</script>
 	<!-- Jquery JS-->
 	<script

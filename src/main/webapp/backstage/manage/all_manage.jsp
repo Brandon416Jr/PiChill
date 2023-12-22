@@ -75,7 +75,7 @@ pageContext.setAttribute("list", list);
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/all.css"
 	media="all" />
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/css/header.css"
 	media="all" />
 <style>
@@ -86,7 +86,6 @@ pageContext.setAttribute("list", list);
 /* div.dataTables_scrollHeadInner>table.table-data3 { */
 /* 	margin: 0 auto !important; */
 /* } */
-
 .account-dropdown__footer {
 	display: flex;
 	justify-content: flex-end;
@@ -97,159 +96,167 @@ pageContext.setAttribute("list", list);
 	width: 100%;
 	box-sizing: border-box;
 }
+
+div.excel {
+border: 1px solid red;
+}
 </style>
 
 </head>
 
 <body class="animsition all-employees-page">
-<div class="page-wrapper">
-	<!-- MENU SIDEBAR-->
-	<div class="sidebar">
-		<aside class="menu-sidebar d-none d-lg-block">
-			<div class="menu-sidebar__content js-scrollbar1">
-				<nav class="navbar-sidebar">
-					<ul class="list-unstyled navbar__list expanded">
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>員工管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="#">所有員工資料</a></li>
-								<li><a
+	<div class="page-wrapper">
+		<!-- MENU SIDEBAR-->
+		<div class="sidebar">
+			<aside class="menu-sidebar d-none d-lg-block">
+				<div class="menu-sidebar__content js-scrollbar1">
+					<nav class="navbar-sidebar">
+						<ul class="list-unstyled navbar__list expanded">
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>員工管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a class="active" href="#">所有員工資料</a></li>
+									<li><a
 										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
 										onclick="return checkmStatus();">新增員工資料</a></li>
 									<li><a
 										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">我的資料</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>一般會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
-								
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>企業會員管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
-								
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>最新消息管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>論壇管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">檢舉管理</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>球館管理
-						</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
-								<li><a
-									href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
-							</ul></li>
-						<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>預約管理
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>一般會員管理
 							</a>
-							<ul class="list-unstyled navbar__sub-list js-sub-list">
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">所有會員資料</a></li>
+
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>企業會員管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">所有會員資料</a></li>
+
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>最新消息管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">表單管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">公告管理</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">新增公告</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>論壇管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">所有文章</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">所有留言</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">檢舉管理</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>球館管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">所有球館</a></li>
+									<li><a
+										href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">所有場地</a></li>
+								</ul></li>
+							<li class="has-sub"><a class="js-arrow" href="#"> <i
+									class="fas fa-tachometer-alt"></i>預約管理
+							</a>
+								<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
 										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">所有預約訂單</a></li>
 								</ul></li>
-					</ul>
-				</nav>
-			</div>
-		</aside>
-		<!-- END MENU SIDEBAR-->
-	</div>
+						</ul>
+					</nav>
+				</div>
+			</aside>
+			<!-- END MENU SIDEBAR-->
+		</div>
 
-	<!-- PAGE CONTAINER-->
-	<div class="page-container">
-		<!-- HEADER DESKTOP-->
-		<header class="header-desktop">
-			<div class="section__content section__content--p30">
-				<div class="container-fluid">
-					<div class="header-wrap">
-						<div class="header-logo">
-							<a href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
-								class="img-logo"
-								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
-<!-- 							<a href="index.html"><img class="img-logo"  -->
-<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
-						</div>
-						
-						<div class="welcome">
+		<!-- PAGE CONTAINER-->
+		<div class="page-container">
+			<!-- HEADER DESKTOP-->
+			<header class="header-desktop">
+				<div class="section__content section__content--p30">
+					<div class="container-fluid">
+						<div class="header-wrap">
+							<div class="header-logo">
+								<a
+									href="<%=request.getContextPath()%>/backstage/login/index.jsp"><img
+									class="img-logo"
+									src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a>
+								<!-- 							<a href="index.html"><img class="img-logo"  -->
+								<%-- 								src="<%=request.getContextPath()%>/image/bigLogo.png" alt="" /></a> --%>
+							</div>
+
+							<div class="welcome">
 								<div class="flex">
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 									<p class="welcome">π Chill後臺管理系統</p>
 									<div class="s-logo">
-										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
+										<img
+											src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png"
+											alt="">
 									</div>
 								</div>
 							</div>
-						
-						<div class="header-button">
-							<div class="account-wrap">
-								<div class="account-item clearfix js-item-menu">
-									<div class="image">
-										<img
-											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
-											alt="使用者頭像" /> 
-<!-- 											<img -->
-<%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
-<!-- 											alt="使用者頭像" /> -->
-									</div>
-									<div class="content">
-<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
-										<a class="js-acc-btn" href="#">管理員<%=manage.getmName() %>，您好</a>
-									</div>
-									<div class="account-dropdown js-dropdown">
-										<div class="info clearfix">
-											<div class="image">
-												<a href="#"> 
-												<img
-											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
-											alt="使用者頭像" /> 
-<!-- 												<img -->
-<%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
-<!-- 													alt="John Doe" /> -->
-												</a>
-											</div>
-											<div class="content">
-												<h5 class="name">
-													<a href="#"><%=manage.getmName() %></a>
-<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
-												</h5>
-<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
-												<span class="email"><%=manage.getmEmail() %></span>
-											</div>
+
+							<div class="header-button">
+								<div class="account-wrap">
+									<div class="account-item clearfix js-item-menu">
+										<div class="image">
+											<img
+												src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+												alt="使用者頭像" />
+											<!-- 											<img -->
+											<%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+											<!-- 											alt="使用者頭像" /> -->
 										</div>
-										<div class="account-dropdown__footer">
-											<form method="POST"
+										<div class="content">
+											<!-- 										<a class="js-acc-btn" href="#">管理員羅裕鵬，您好</a> -->
+											<a class="js-acc-btn" href="#">管理員<%=manage.getmName()%>，您好
+											</a>
+										</div>
+										<div class="account-dropdown js-dropdown">
+											<div class="info clearfix">
+												<div class="image">
+													<a href="#"> <img
+														src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
+														alt="使用者頭像" /> <!-- 												<img --> <%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
+														<!-- 													alt="John Doe" /> -->
+													</a>
+												</div>
+												<div class="content">
+													<h5 class="name">
+														<a href="#"><%=manage.getmName()%></a>
+														<%-- 													<a href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_Update&manageID=<%=manage.getManageID()%>"><%=manage.getmName() %></a> --%>
+													</h5>
+													<!-- 												<span class="email">brandon416jr@gmail.com</span> -->
+													<span class="email"><%=manage.getmEmail()%></span>
+												</div>
+											</div>
+											<div class="account-dropdown__footer">
+												<form method="POST"
 													action="<%=request.getContextPath()%>/logout.do">
 													<button class="btn btn-danger">登出</button>
 													<input type="hidden" name="action" value="logout">
 												</form>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -257,73 +264,80 @@ pageContext.setAttribute("list", list);
 						</div>
 					</div>
 				</div>
-			</div>
-		</header>
-		<!-- END HEADER DESKTOP-->
-	</div>
+			</header>
+			<!-- END HEADER DESKTOP-->
+		</div>
 
-	<div class="page-container2">
-		<div class="table-responsive m-b-40">
-			<table id="myTable" class="table table-borderless table-data3"
-				style="overflow-x: auto">
-				<thead>
-					<tr>
-						<th>管理員編號</th>
-						<th>員工姓名</th>
-						<th>帳號</th>
-						<th>密碼</th>
-						<th>生日</th>
-						<th>性別</th>
-						<th>手機</th>
-						<th>緊急聯絡人</th>
-						<th>緊急連絡人電話</th>
-						<th>聯絡地址</th>
-						<th>入職日期</th>
-						<th>身分證</th>
-						<th>電子信箱</th>
-						<th>大頭貼</th>
-						<th>狀態</th>
-						<th>查看</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="manage" items="${list}">
+
+		<div class="page-container2">
+			<div class="table-responsive m-b-40">
+				<div class="excel">
+					<form action="<%=request.getContextPath()%>/exportexcel"
+						method="post">
+						<button>下載</button>
+					</form>
+				</div>
+				<table id="myTable" class="table table-borderless table-data3"
+					style="overflow-x: auto">
+					<thead>
 						<tr>
-							<td>${manage.manageID}</td>
-							<td>${manage.mName}</td>
-							<td>${manage.mUserName}</td>
-							<td>${manage.mPassword}</td>
-							<td>${manage.mBirth}</td>
-							<td>${manage.mGender == 0 ? '男' : '女'}</td>
-							<td>${manage.mTelephone}</td>
-							<td>${manage.mEmgContact}</td>
-							<td>${manage.mEmgPhone}</td>
-							<td>${manage.mAddress}</td>
-							<td>${manage.mHiredate}</td>
-							<td>${manage.mID}</td>
-							<td>${manage.mEmail}</td>
-							<td><img
-								src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=${manage.manageID}"
-								width="100px"></td>
-							<%-- 							<td>${manage.mProfilePic}</td> --%>
-							<td>${manage.mStatus == 0 ? '已離職' : (manage.mStatus == 1 ? '在職中' : '系統管理員')}</td>
-							<td>
-								<FORM METHOD="post"
-									ACTION="<%=request.getContextPath()%>/manage/manage.do"
-									style="margin-bottom: 0px;">
-									<input class="modify-button" type="submit" value="修改"
-										style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
-									<input type="hidden" name="manageID" value="${manage.manageID}">
-									<input type="hidden" name="action" value="getOne_For_Update">
-								</FORM>
-							</td>
+							<th>管理員編號</th>
+							<th>員工姓名</th>
+							<th>帳號</th>
+							<th>密碼</th>
+							<th>生日</th>
+							<th>性別</th>
+							<th>手機</th>
+							<th>緊急聯絡人</th>
+							<th>緊急連絡人電話</th>
+							<th>聯絡地址</th>
+							<th>入職日期</th>
+							<th>身分證</th>
+							<th>電子信箱</th>
+							<th>大頭貼</th>
+							<th>狀態</th>
+							<th>查看</th>
 						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+					</thead>
+					<tbody>
+						<c:forEach var="manage" items="${list}">
+							<tr>
+								<td>${manage.manageID}</td>
+								<td>${manage.mName}</td>
+								<td>${manage.mUserName}</td>
+								<td>${manage.mPassword}</td>
+								<td>${manage.mBirth}</td>
+								<td>${manage.mGender == 0 ? '男' : '女'}</td>
+								<td>${manage.mTelephone}</td>
+								<td>${manage.mEmgContact}</td>
+								<td>${manage.mEmgPhone}</td>
+								<td>${manage.mAddress}</td>
+								<td>${manage.mHiredate}</td>
+								<td>${manage.mID}</td>
+								<td>${manage.mEmail}</td>
+								<td><img
+									src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=${manage.manageID}"
+									width="100px"></td>
+								<%-- 							<td>${manage.mProfilePic}</td> --%>
+								<td>${manage.mStatus == 0 ? '已離職' : (manage.mStatus == 1 ? '在職中' : '系統管理員')}</td>
+								<td>
+									<FORM METHOD="post"
+										ACTION="<%=request.getContextPath()%>/manage/manage.do"
+										style="margin-bottom: 0px;">
+										<input class="modify-button" type="submit" value="修改"
+											style="background-color: #207DCA; color: white; width: 50px; border-radius: 10px;">
+										<input type="hidden" name="manageID"
+											value="${manage.manageID}"> <input type="hidden"
+											name="action" value="getOne_For_Update">
+									</FORM>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-</div>
 	<script>
 		var script = document.createElement("script");
 
@@ -340,7 +354,7 @@ pageContext.setAttribute("list", list);
 							$("#myTable")
 									.DataTable(
 											{
-												detroy: true,
+												detroy : true,
 												// paging: true, 
 												// searching: true, 
 
@@ -588,19 +602,18 @@ pageContext.setAttribute("list", list);
 		});
 	</script>
 	<c:if test="${not empty requestScope.noAuth}">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script>
-    Swal.fire({
-      icon: 'error',
-      title: '權限不足',
-      text: '請聯繫系統管理員',
-      timer: 5000,
-     
-      
-    });
-//     alert('權限不足,請聯系系統管理員!');
-  </script>
-  </c:if>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+		<script>
+			Swal.fire({
+				icon : 'error',
+				title : '權限不足',
+				text : '請聯繫系統管理員',
+				timer : 5000,
+
+			});
+			//     alert('權限不足,請聯系系統管理員!');
+		</script>
+	</c:if>
 	<!-- <script src="./vendor/jquery/jquery-3.7.1.min.js"></script>
     <script src="./database/datatables.min.js"></script> -->
 	<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>

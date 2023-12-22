@@ -293,7 +293,7 @@ pageContext.setAttribute("list", list);
 							<td>${ownerUser.oIDNum}</td>
 							<td>${ownerUser.compiled}</td>
 							<td>${ownerUser.oName}</td>
-							<td>${ownerUser.oGender}</td>
+							<td>${ownerUser.oGender== 0 ? '男' : '女'}</td>
 							<td>${ownerUser.oBirth}</td>
 							<td>${ownerUser.oTelephone}</td>
 							<td>${ownerUser.oAddress}</td>
@@ -309,7 +309,7 @@ pageContext.setAttribute("list", list);
 							<td>${ownerUser.courtArriveCnt}</td>
 							<td>${ownerUser.rsvdCnts}</td>
 							<td>${ownerUser.oEmail}</td>
-							<td>${ownerUser.oStatus == 0? '未激活' : '正常'}</td>
+							<td>${ownerUser.oStatus == 0? '未驗證' : '正常'}</td>
 							<td>
 								<FORM METHOD="post"
 									ACTION="<%=request.getContextPath()%>/owneruser/owneruserb.do"

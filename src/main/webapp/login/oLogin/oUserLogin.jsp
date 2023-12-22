@@ -102,7 +102,7 @@ margin-left: 5px;
               <div class="register-link">
                 <p>
                   你尚未有帳號?
-                  <a href="${pageContext.request.contextPath }/frontstage/ownerUserFront/oUserRegist.jsp">我要註冊</a>
+                  <a href="${pageContext.request.contextPath }/login/oLogin/oUserRegist.jsp">我要註冊</a>
                 </p>
               </div>
             </div>

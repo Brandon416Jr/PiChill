@@ -309,7 +309,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 													<select name="status" id="selectLm"
 														class="form-control-sm form-control">
 
-														<option value="0" <%=status == 0 ? "selected" : ""%>>未激活</option>
+														<option value="0" <%=status == 0 ? "selected" : ""%>>未驗證</option>
 														<option value="1" <%=status == 1 ? "selected" : ""%>>正常</option>
 														<option value="2" <%=status == 1 ? "selected" : ""%>>討論版停權</option>
 													</select>
