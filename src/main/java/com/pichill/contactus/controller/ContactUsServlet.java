@@ -200,7 +200,7 @@ public class ContactUsServlet extends HttpServlet {
 	 //假如輸入格式錯誤的，備份選原使用者輸入過的資料
 	ContactUs contactUs = new ContactUs();
 	contactUs.setformID(formID);
-	contactUs.setoUserID(oUserID);
+	contactUs.setUserID(oUserID);
 	contactUs.setgUserID(gUserID);
 	contactUs.setformPurpose(formPurpose);
 	contactUs.setformContent(formContent);

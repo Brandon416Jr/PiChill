@@ -119,16 +119,16 @@ Court court = (Court) request.getAttribute("court");
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="courtName">場館名稱</label>
                 <input type="courtName" id="court" name="courtName" 
-                value="<%=court.getcourtName()%>" size="45" required>
+                value="<%=court.getCourtName()%>" size="45" required>
                 <br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label  for="time">開館時間</label>
-                <input type="time" value=value="<%=court.getcourtOpenTime()%>"  min="09:00" max="18:00">
+                <input type="time" value=value="<%=court.getCourtOpenTime()%>"  min="09:00" max="18:00">
 
                 <img src="pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
                 <label style="position: relative; left: 15px;" for="time">閉館時間</label>
-                <input type="time" value="<%=court.getcourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
+                <input type="time" value="<%=court.getCourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="loc">區域</label>
@@ -153,17 +153,17 @@ Court court = (Court) request.getAttribute("court");
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="tax_id">場館地址</label>
                 <input type="courtAddress" id="tax_id" name="tax_id" 
-                value="<%=court.getcourtAddress()%>" required>
+                value="<%=court.getCourtAddress()%>" required>
                 <font color="#FF0000" size="-1" nowrap="" style="position: relative;;left: 20px;">包含鄉鎮區、路街道及門牌號等。</font><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
                 <input type="tel" id="phone" name="phone" 
-                value="<%=court.getcourtTelephone()%>"  required>
+                value="<%=court.getCourtTelephone()%>"  required>
                 <font color="#FF0000" size="-1" nowrap="">包含區域碼 如:02-12345678。</font><br><br>
 
                 <label for="courtRule" style="position: relative; left: 23px;">場館須知</label><br><br>
-                <textarea id="subject" name="subject" value="<%=court.getcourtRule()%>"  placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"></textarea>
+                <textarea id="subject" name="subject" value="<%=court.getCourtRule()%>"  placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"></textarea>
                 <br><br><br>
 
                 <label for="courtPic" style="position: relative;left: 23px;">場館照片</label><br><br>
@@ -171,7 +171,7 @@ Court court = (Court) request.getAttribute("court");
                 <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" style="position: relative;left: 23px;"/>
                 <br><br>
                 <img id="preview_progressbarTW_img" src="#" 
-                value="<%=court.getcourtPic()%>"
+                value="<%=court.getCourtPic()%>"
                 style="height: 300px;position:relative;left: 23px;"/>
                 </form>
             </form>

@@ -50,7 +50,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
@@ -198,7 +198,8 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 <div id="blob_holder"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
-                <input type="hidden" name="action" value="update">
+                
+                <input type="hidden" name="action" value="update_myData">
 				<input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
                 <br><br><br>

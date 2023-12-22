@@ -4,7 +4,16 @@
 <%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page import="com.pichill.owneruser.model.*"%>
 <%@ page import="com.pichill.owneruser.service.OwnerUserService"%>
-    
+ 
+ <%
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+// 寫死
+// Integer oUserID = 12000001;
+// OwnerUserService ownerUserSvc = new OwnerUserService();
+// OwnerUser ownerUser = ownerUserSvc.getOneOwnerUser(oUserID);
+// pageContext.setAttribute("ownerUser",ownerUser);
+%>
+ 
  <%
  OwnerUserService ownerUserSvc = new OwnerUserService();
     List<OwnerUser> list = ownerUserSvc.getAll();

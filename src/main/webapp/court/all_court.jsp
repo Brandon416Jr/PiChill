@@ -175,6 +175,9 @@ pageContext.setAttribute("list", list);
 			<th>申請上架時間</th>
 			<th>上架時間</th>
 			<th>申請狀態</th>
+			<th>場地名稱</th>
+			<th>場地費用</th>
+			<th>球類</th>
 			<th>修改</th>
 		</tr>
 	
@@ -195,6 +198,15 @@ pageContext.setAttribute("list", list);
 				<td style="width:100px">${court.courtApplyTime}</td>				
 				<td style="width:100px">${court.courtOnTime}</td>
 				<td style="width:60px">${court.courtApplyStatus}</td>
+				<c:forEach var="place" items="${court.place}">
+	       			<td>${place.placeName}</td>
+	       			<td>${place.placeFee}</td>
+	       			<td>${place.ball}</td>
+	    		</c:forEach>
+			
+
+
+
 
 				<td>
 				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/court/court.do" style="margin-bottom: 0px;">
