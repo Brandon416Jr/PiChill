@@ -322,7 +322,8 @@ Report report = (Report) request.getAttribute("report");
 														class="form-control-sm form-control">
 
 														<option value="0" <%=status == 0 ? "selected" : ""%>>待審核</option>
-														<option value="1" <%=status == 1 ? "selected" : ""%>>已審核</option>
+														<option value="1" <%=status == 1 ? "selected" : ""%>>審核未通過</option>
+														<option value="2" <%=status == 2 ? "selected" : ""%>>審核通過</option>
 													</select>
 												</div>
 											</div>
