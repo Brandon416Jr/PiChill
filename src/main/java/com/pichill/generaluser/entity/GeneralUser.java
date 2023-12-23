@@ -1,22 +1,21 @@
 package com.pichill.generaluser.entity;
 
 import java.sql.Date;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.comment.entity.Comment;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.forumlike.entity.ForumLike;
@@ -33,6 +32,7 @@ public class GeneralUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="gUserID", updatable = false)
+	@Expose
 	private Integer gUserID;
 	
 	@Column(name="gName", updatable = false)
@@ -63,12 +63,15 @@ public class GeneralUser {
 	private String gIDNum;
 	
 	@Column(name="nicknameID")
+	@Expose
 	private String nicknameID;
 	
 	@Column(name="gPostAmount",insertable = false)
+	@Expose
 	private Integer gPostAmount;
 	
 	@Column(name="commentAmount",insertable = false)
+	@Expose
 	private Integer commentAmount;
 	
 	@Column(name="gReportCnt",insertable = false)
@@ -84,13 +87,14 @@ public class GeneralUser {
 	private Integer yoyakuCnt;
 	
 	@Column(name="gProfilePic", columnDefinition = "longblob")
+	@Expose
 	private byte[] gProfilePic;
 	
 	//====================================================================================//
 	
 	//按讚
 	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "generalUser", cascade = CascadeType.ALL, fetch= FetchType.EAGER)
 	@OrderBy("likeID asc") 
 	private Set<ForumLike> like; // Set不重複
 	

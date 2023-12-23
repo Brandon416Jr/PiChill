@@ -5,6 +5,8 @@ import java.util.List;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.model.GeneralUserDAO;
 import com.pichill.generaluser.model.GeneralUserDAOImpl;
+import com.pichill.reserveorder.entity.ReserveOrder;
+import com.pichill.reserveorder.service.ReserveOrderService;
 
 public class GeneralUserService {
 	private final GeneralUserDAO dao;
@@ -24,6 +26,17 @@ public class GeneralUserService {
 	public GeneralUser getOneGeneralUser(Integer gUserID) {
 		return dao.findByPK(gUserID);
 	}
+	public List<GeneralUser> getOrderBygUserID(Integer gUserID) {
+		return dao.findBygUserID(gUserID);
+	}
+	
+	//用一般會員ID查預約訂單
+//	public GeneralUser getOrderBygUserID(Integer reserveOrderID) {
+//		GeneralUser generalUser = dao.findBygUserID(reserveOrderID);
+//		ReserveOrderService reserveOrderService = new ReserveOrderService();
+//		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
+//		return generalUser;
+//	}
 
 
 	public List<GeneralUser> getAll() {

@@ -24,7 +24,6 @@ public class TestReserveOrder {
 //		res.setTotalCost(1500);
 //		dao.add(res);
 
-
 		// 修改
 //		ReserveOrder res = new ReserveOrder();
 //		res.setgUserID(11000001);
@@ -50,6 +49,7 @@ public class TestReserveOrder {
 //		System.out.print(res2.getOrderStatus() + ",");
 //		System.out.print(res2.getTotalCost());
 //		System.out.println();
+		
 
 		// 查詢多筆
 //		List<ReserveOrder> list = dao.getAll();

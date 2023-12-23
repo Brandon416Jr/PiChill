@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
@@ -13,6 +14,7 @@ import com.pichill.util.HibernateUtil;
 
 public class ReserveOrderDAOImpl implements ReserveOrderDAO {
 private SessionFactory factory;
+private ReserveOrder generalUser;
 	
 	public ReserveOrderDAOImpl() {
 		factory = HibernateUtil.getSessionFactory();
@@ -69,23 +71,6 @@ private SessionFactory factory;
 		}
 		return null;
 	}
-//	@Override
-//	public ReserveOrder findByFK1(Integer gUserID) {
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		try {
-//			session.beginTransaction();
-//			ReserveOrder generalUser = session.get(ReserveOrder.class, gUserID);
-//			session.getTransaction().commit();
-//			System.out.println("用會員查單筆成功!");
-//			return generalUser;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("用會員查單筆失敗QQ");
-//			session.getTransaction().rollback();
-//		}
-//		return null;
-//	}
-
 	@Override
 	public List<ReserveOrder> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

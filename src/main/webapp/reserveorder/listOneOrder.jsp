@@ -5,6 +5,7 @@
 <%@ page import="com.pichill.reserveorder.model.*"%>
 <%@ page import="com.pichill.reserveorder.service.ReserveOrderService"%>
 <%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.generaluser.model.*"%>
 <%@ page import="com.pichill.generaluser.service.*"%>
 <%@ page import="com.pichill.owneruser.entity.*"%>
 <%@ page import="com.pichill.time.*"%>
@@ -15,13 +16,17 @@
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 
  %>
+<%
+GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
+
+ %>
  
- <%
+ <%--<%
  Integer gUserID = 11000001;
  GeneralUserService generalUserSvc = new GeneralUserService();
  GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
  pageContext.setAttribute("generaluser",generalUser);
-%>
+%>--%>
 
 <%-- <%
 //  Integer reserveOrderID = 63000001;
@@ -169,11 +174,11 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 							<td>${reserveOrder.court.courtName}</td>
 							<td>${reserveOrder.place.placeName}</td>
 							<td>${reserveOrder.reserveDate}</td>
-							<td>${reserveOrder.time.reserveTime}</td>
+							<td>${reserveOrder.timeRef.reserveTime}</td>
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.totalCost}</td>
-							<td>${reserveOrder.orderStatus == 0 ? "訂單取消" : reserveOrder.orderStatus == 1 ? "訂單成立" : "訂單已完成"}</td>
+							<td>${reserveOrder.orderStatus == 1 ? "訂單成立" : reserveOrder.orderStatus == 2 ? "訂單完成" : "訂單已取消"}</td>
 							<td>
 								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
 									<input type="hidden" name="action" value="getOne_For_Update">
