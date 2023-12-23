@@ -28,9 +28,9 @@ public interface PostDAO {
 
 //	List<Post> getByCompositeQuery(Map<String, String> map);
 
-	List<Post> getAll(int currentPage);
+//	List<Post> getAll(int currentPage);
 	
-	List<Post> getTypeTwo();
+//	List<Post> getTypeTwo();
 
 	long getTotal();
 	

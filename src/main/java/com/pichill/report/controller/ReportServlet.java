@@ -34,10 +34,8 @@ public class ReportServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 //			System.out.println(postID);
 			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
-			PostService postService = new PostServiceImpl();
-			Post post = postService.getByPostID(postID);
 			Report report = new Report();
-			report.setPost(post);
+			report.setPostID(postID);
 			report.setReportType(reportType);
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();
@@ -51,10 +49,8 @@ public class ReportServlet extends HttpServlet {
 			Integer commentID = Integer.valueOf(req.getParameter("commentID"));
 //			System.out.println(postID);
 			Integer reportType = Integer.valueOf(req.getParameter("reportType"));
-			CommentService commentService = new CommentServiceImpl();
-			Comment comment = commentService.getByCommentID(commentID);
 			Report report = new Report();
-			report.setComment(comment);
+			report.setCommentID(commentID);
 			report.setReportType(reportType);
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();

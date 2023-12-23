@@ -32,13 +32,6 @@ public class PostServiceImpl implements PostService {
 //	    System.out.println("=================");
 //	    System.out.println(id);
 		post = dao.getByPostID(id);
-
-//	    if (post != null) {
-//	        System.out.println("Post Time: " + post.getPostTime());
-//	    } else {
-//	        System.out.println("Failed to retrieve post.");
-//	    }
-//
 		return post;
 	}
 
@@ -98,15 +91,15 @@ public class PostServiceImpl implements PostService {
 //		return dao.getAll();
 //	}
 
-	@Override
-	public List<Post> getAllPosts(int currentPage) {
-		return dao.getAll(currentPage);
-	}
-
-	@Override
-	public List<Post> getTypeTwo() {
-		return dao.getTypeTwo();
-	}
+//	@Override
+//	public List<Post> getAllPosts(int currentPage) {
+//		return dao.getAll(currentPage);
+//	}
+//
+//	@Override
+//	public List<Post> getTypeTwo() {
+//		return dao.getTypeTwo();
+//	}
 	
 	@Override
 	public int getPageTotal() {
@@ -139,6 +132,11 @@ public class PostServiceImpl implements PostService {
 			// 更新失败
 			return 0;
 		}
+	}
+
+	@Override
+	public List<Post> getAll() {
+		return dao.getAll();
 	}
 
 	

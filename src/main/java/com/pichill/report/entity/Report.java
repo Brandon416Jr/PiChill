@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.comment.entity.Comment;
 import com.pichill.manage.entity.Manage;
 import com.pichill.post.entity.Post;
@@ -24,28 +25,33 @@ public class Report {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reportID",updatable = false)
+	@Expose
 	private Integer reportID;
 	
 //	@ManyToOne
 //	@JoinColumn(name = "manageID",referencedColumnName = "manageID",updatable = false)
 //	private Manage manage;
 	@Column(name = "manageID",updatable = false)
+	@Expose
 	private Integer manageID;
 	
-	@ManyToOne
-	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
-	private Post post;
-//	@Column(name = "postID",updatable = false)
-//	private Integer postID;
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
+//	private Post post;
+	@Column(name = "postID",updatable = false)
+	@Expose
+	private Integer postID;
 	
-	@ManyToOne
-	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
-	private Comment comment;
-//	@Column(name = "commentID",updatable = false)
-//	private Integer commentID;
+//	@ManyToOne
+//	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
+//	private Comment comment;
+	@Column(name = "commentID",updatable = false)
+	@Expose
+	private Integer commentID;
 	
 	@Column(name = "reportTime", updatable = false)
 	@CreationTimestamp
+	@Expose
 	private Timestamp reportTime;
 	
 	@Column(name = "reportStatus")
@@ -87,20 +93,28 @@ public class Report {
 		this.manageID = manageID;
 	}
 
-	public Post getPost() {
-		return post;
+//	public Post getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(Post post) {
+//		this.post = post;
+//	}
+
+	public Integer getCommentID() {
+		return commentID;
 	}
 
-	public void setPost(Post post) {
-		this.post = post;
+	public Integer getPostID() {
+		return postID;
 	}
 
-	public Comment getComment() {
-		return comment;
+	public void setPostID(Integer postID) {
+		this.postID = postID;
 	}
 
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setCommentID(Integer commentID) {
+		this.commentID = commentID;
 	}
 
 	public Timestamp getReportTime() {
@@ -126,6 +140,8 @@ public class Report {
 	public void setReportType(Integer reportType) {
 		this.reportType = reportType;
 	}
+
+
 
 	
 }
