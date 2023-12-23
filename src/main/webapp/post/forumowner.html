@@ -125,6 +125,17 @@ main.main {
 	width: 65%;
 }
 
+#create-post-button2 {
+	background-color: #F7F7F7;
+	color: #333;
+	border: 1px solid #ccc;
+	margin-top: 10px;
+	margin-left: 100px;
+	text-align: center;
+	padding: 5px 10px 5px 5px;
+	width: 65%;
+}
+
 /* 新增的搜索框样式 */
 .search-box {
 	margin-top: 10px;
@@ -1056,12 +1067,12 @@ div.star_block>span.star.-on {
 
 	<main class=main>
 		<!--建立貼文-->
-		<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
-		<!-- 			data-bs-target="#exampleModal_o" id="create-post-button"> -->
-		<!-- 			在想些什麼...</button> -->
-		<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-			data-bs-target="#exampleModal" id="create-post-button">
-			在想些什麼...</button>
+				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+					data-bs-target="#exampleModal_o" id="create-post-button2">
+					在想些什麼...</button>
+<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
+<!-- 			data-bs-target="#exampleModal" id="create-post-button"> -->
+<!-- 			在想些什麼...</button> -->
 		<!--搜尋文章-->
 		<div class="search-box">
 			<input type="text" id="search-input" placeholder="搜尋文章...">
@@ -1069,7 +1080,6 @@ div.star_block>span.star.-on {
 			<select id="search-options">
 				<option value="newest">最新</option>
 				<option value="hot">熱門</option>
-				<option value="my-posts">我的文章</option>
 				<option value="discussions">討論版</option>
 				<option value="events">揪團版</option>
 			</select>

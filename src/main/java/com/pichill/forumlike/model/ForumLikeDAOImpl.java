@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -31,54 +32,173 @@ public class ForumLikeDAOImpl implements ForumLikeDAO {
 
 	@Override
 	public int add(ForumLike like) {
-		return (Integer) getSession().save(like);
+		  Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        Integer id = (Integer) session.save(like);
+
+		        tx.commit();
+		        return id;
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public int update(ForumLike like) {
-		try {
-			getSession().update(like);
-			return 1;
-		} catch (Exception e) {
-			return -1;
-		}
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        session.update(like);
+
+	        tx.commit();
+	        return 1;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); // 记录异常或使用日志库
+	        return -1;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public int delete(int likeID) {
-		ForumLike like = getSession().get(ForumLike.class, likeID);
-		if (like != null) {
-			getSession().delete(like);
-			return 1;
-		} else {
-			return -1;
-		}
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        ForumLike like = session.get(ForumLike.class, likeID);
+		        if (like != null) {
+		            session.delete(like);
+
+		            tx.commit();
+		            return 1;
+		        } else {
+		            tx.rollback(); // 回滚事务，因为未找到点赞信息
+		            return -1;
+		        }
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public ForumLike getByLikeID(Integer likeID) {
-		getSession().clear();
-		return getSession().get(ForumLike.class, likeID);
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        ForumLike like = session.get(ForumLike.class, likeID);
+
+	        tx.commit();
+	        return like;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); // 记录异常或使用日志库
+	        return null;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public List<ForumLike> getAll() {
-		return getSession().createQuery("from ForumLike", ForumLike.class).list();
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
 
+		        List<ForumLike> likes = session.createQuery("from ForumLike", ForumLike.class).list();
+
+		        tx.commit();
+		        return likes;
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return Collections.emptyList();
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public ForumLike getLikeByPostIDAndUserID(Integer postID, Integer gUserID) {
-		return getSession().createQuery("from ForumLike WHERE postID = :postID AND gUserID = :gUserID", ForumLike.class)
-				.setParameter("postID", postID).setParameter("gUserID", gUserID).uniqueResult();
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        ForumLike like = session.createQuery(
+		            "from ForumLike WHERE postID = :postID AND gUserID = :gUserID",
+		            ForumLike.class
+		        )
+		        .setParameter("postID", postID)
+		        .setParameter("gUserID", gUserID)
+		        .uniqueResult();
+
+		        tx.commit();
+		        return like;
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return null;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public long getLikeCnt(Integer postID) {
-		Long like =  getSession().createQuery("select count(*) from ForumLike WHERE postID = :postID AND likeStatus = 1", Long.class)
-				.setParameter("postID", postID)
-				.uniqueResult();
-		return like;
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        Long like = session.createQuery(
+	            "select count(*) from ForumLike WHERE postID = :postID AND likeStatus = 1",
+	            Long.class
+	        )
+	        .setParameter("postID", postID)
+	        .uniqueResult();
+
+	        tx.commit();
+	        return like != null ? like : 0; // 处理结果为 null 的情况，返回 0
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); // 记录异常或使用日志库
+	        return 0; // 处理异常情况，返回 0
+	    } finally {
+	        getSession().close();
+	    }
 	}
 }
 //	private static final String INSERT_STMT = "INSERT INTO `like`(gUserID,postID)VALUES(?,?)";
