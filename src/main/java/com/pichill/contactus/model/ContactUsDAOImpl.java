@@ -114,7 +114,7 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 	
 		
 	
-	//以下是JDBS寫法
+	//以下是JDBC寫法
 //	private static final String INSERT_STMT= "INSERT INTO contactUs(oUserID,gUserID,formPurpose,formContent,formPic,formTime,formStatus,formType)VALUES(?,?,?,?,?,?,?,?)";
 //    private static final String UPDATE_STMT= "UPDATE contactUs SET oUserID=?,gUserID=?,formPurpose=?,formContent=?,formPic=?,formTime=?,formStatus=?,formType=? WHERE formID = ? ";
 //    private static final String DELETE_STMT= "DELETE FROM contactUs WHERE formID = ?";

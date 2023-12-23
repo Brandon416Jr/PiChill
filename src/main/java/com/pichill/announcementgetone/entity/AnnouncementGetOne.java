@@ -8,9 +8,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+
+import com.pichill.manage.entity.Manage;
 
 @Entity
 @Table(name ="announcement")
@@ -21,8 +25,9 @@ public class AnnouncementGetOne {
 		@Column(name = "announceID", updatable = false)
 		private Integer announceID;
 		
-		@Column(name = "manageID")
-		private Integer manageID;
+		@JoinColumn(name = "manageID")
+		@ManyToOne
+		private Manage manage;
 		
 		@Column(name = "formID")
 		private Integer formID;
@@ -52,7 +57,7 @@ public class AnnouncementGetOne {
 				byte[] annoPic, Timestamp annoTime, Integer annoStatus) {
 			super();
 			this.announceID = announceID;
-			this.manageID = manageID;
+			this.manage = manage;
 			this.formID = formID;
 			this.annoTitle = annoTitle;
 			this.annoContent = annoContent;
@@ -69,12 +74,12 @@ public class AnnouncementGetOne {
 			this.announceID = announceID;
 		}
 
-		public Integer getManageID() {
-			return manageID;
+		public Manage getManage() {
+			return manage;
 		}
 
 		public void setManageID(Integer manageID) {
-			this.manageID = manageID;
+			this.manage = manage;
 		}
 
 		public Integer getFormID() {
@@ -127,7 +132,7 @@ public class AnnouncementGetOne {
 
 		@Override
 		public String toString() {
-			return "Announcement [announceID=" + announceID + ", manageID=" + manageID + ", formID=" + formID
+			return "Announcement [announceID=" + announceID + ", manageID=" + manage + ", formID=" + formID
 					+ ", annoTitle=" + annoTitle + ", annoContent=" + annoContent + ", annoPic=" + Arrays.toString(annoPic)
 					+ ", annoTime=" + annoTime + ", annoStatus=" + annoStatus + "]";
 		}

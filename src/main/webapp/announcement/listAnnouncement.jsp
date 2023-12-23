@@ -141,7 +141,7 @@ pageContext.setAttribute("list", list);
 						<table>
 							<tr>
 								<th>公告編號</th>
-								<th>管理員編號</th>
+								<th>管理員姓名</th>
 								<th>表單編號</th>
 								<th>標題</th>
 								<th>內文</th>
@@ -152,7 +152,7 @@ pageContext.setAttribute("list", list);
 								<!-- 暫稱list之後再改 -->
 								<tr>
 									<td>${announcementGetOne.announceID}</td>
-									<td>${announcementGetOne.manageID}</td>
+									<td>${announcementGetOne.manage.mName}</td>
 									<td>${announcementGetOne.formID}</td>
 									<td>${announcementGetOne.annoTitle}</td>
 									<td>${announcementGetOne.annoContent}</td>
@@ -160,7 +160,7 @@ pageContext.setAttribute("list", list);
 									<td>${announcementGetOne.annoTime}</td>
 									<td>
 										<FORM METHOD="post"
-											ACTION="<%=request.getContextPath()%>/announcementGetOne/announcementGetOne.do"
+											ACTION="<%=request.getContextPath()%>/announcement/announcement_single.jsp"
 											style="margin-bottom: 0px;">
 											<input type="submit" value="查看詳情"> <input
 												type="hidden" name="formID" value="${announceGetOne.formID}">
