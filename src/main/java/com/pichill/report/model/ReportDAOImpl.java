@@ -1,9 +1,11 @@
 package com.pichill.report.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.pichill.comment.entity.Comment;
 import com.pichill.report.entity.Report;
@@ -21,41 +23,105 @@ public class ReportDAOImpl implements ReportDAO {
 
 	@Override
 	public int add(Report report) {
-		return (Integer) getSession().save(report);
+		try {
+	        Session session = getSession();
+	        Transaction tx = session.beginTransaction();
 
+	        Integer id = (Integer) session.save(report);
+
+	        tx.commit();
+	        return id;
+	    } catch (Exception e) {
+	        e.printStackTrace(); // 记录异常或使用日志库
+	        return -1;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public int update(Report report) {
-		try {
-			getSession().update(report);
-			return 1;
-		} catch (Exception e) {
-			return -1;
-		}
+		  try {
+		        Session session = getSession();
+		        Transaction tx = session.beginTransaction();
+
+		        session.update(report);
+
+		        tx.commit();
+		        return 1;
+		    } catch (Exception e) {
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public int delete(int reportID) {
-		Report report = getSession().get(Report.class,reportID);
-		if(report!=null) {
-			getSession().delete(report);
-			return 1;
-		}else {
-			return -1;
-		}
+		 Transaction tx = getSession().beginTransaction(); // 创建事务并初始化
+
+		    try {
+		        Report report = getSession().get(Report.class, reportID);
+		        if (report != null) {
+		            getSession().delete(report);
+		            tx.commit();
+		            return 1;
+		        } else {
+		            tx.rollback(); // 回滚事务，因为未找到报告
+		            return -1;
+		        }
+		    } catch (Exception e) {
+		        tx.rollback(); // 在发生异常时回滚事务
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public Report getByReportID(Integer reportID) {
-		getSession().clear();
-		return getSession().get(Report.class,reportID);
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        Report report = session.get(Report.class, reportID);
+
+	        tx.commit();
+	        return report;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); // 记录异常或使用日志库
+	        return null;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public List<Report> getAll() {
-		return getSession().createQuery("from Comment",Report.class).list();
+		  Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
 
+		        List<Report> reports = session.createQuery("from Report", Report.class).list();
+
+		        tx.commit();
+		        return reports;
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); // 记录异常或使用日志库
+		        return Collections.emptyList();
+		    } finally {
+		        getSession().close();
+		    }
 	}
 }
 //	private static final String INSERT_STMT = "INSERT INTO report(manageID,postID,commentID,reportTime,reportStatus,reportType)VALUES(?,?,?,?,?,?)";

@@ -1,13 +1,15 @@
-
 //==============所有文章=============//
 $(document).ready(function() {
 	$.ajax({
+		"action": "list_All",
 		type: "GET",
 		url: "post.do",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
-		success: function(data) {
-			data.forEach(function(post) {
+		success: function(responseData) {
+			var posts = responseData.posts;
+			var gUsers = responseData.gUsers;
+			posts.forEach(function(post) {
 				if (post.postType === 0) {
 					publishPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.postPic, post.likeCnt, post.commentCnt);
 				} else if (post.postType === 1) {
@@ -16,13 +18,18 @@ $(document).ready(function() {
 					publishPromotePost(post.postID, post.postTitle, post.postType, post.postTime);
 				}
 			});
+			gUsers.forEach(function(user) {
+				// 这里处理每个用户对象
+				console.log(user);
+			});
 		},
 		error: function(xhr, status, error) {
 			console.error("Error fetching posts:", status, error);
 		}
 	});
 
-	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
+	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt,nicknameID, gProfilePic) {
+		console.log(gProfilePic);
 		postContent = postContent.replace(/\n/g, '<br>');
 		if (postPic) {
 			var imageDataArray = new Uint8Array(postPic);
@@ -39,9 +46,9 @@ $(document).ready(function() {
             <div class="col-md-8">
                 <div class="card-body">
                     <h1 class="modal-title fs-5">
-                        <img src="../image/cat.jpg" alt="大頭貼">
+                        <img src="${gProfilePic}" alt="大頭貼">
                         <div>
-                            <a class="post_user">貓貓</a>
+                            <a class="post_user">${nicknameID}</a>
                             <div class="post_time">${postTime}</div>
                         </div>
                     </h1>
@@ -188,7 +195,7 @@ $(document).ready(function() {
                               <span class="tooltip-text">刪除</span>
                           </button>
 							<h5 class="card-title">${postTitle}</h5>
-	                          <p class="card-text">${postContent}</p>
+	                          <p class="card-text"></p>
 							</p>
 						</div>
 					</div>
@@ -197,74 +204,74 @@ $(document).ready(function() {
 		$('#promote-list').prepend(newPromotePostElement);
 
 	}
-	//========頁數顯示========
-	// 在document上使用事件委派
-	$(document).on('click', '.page-link', function() {
-		// 獲取 data-page 屬性的值
-		var page = $(this).data('page');
-		loadPage(page);
-	});
-
-	function loadPage(page) {
-		$.ajax({
-			url: "post.do",
-			type: "GET",
-			data: { "page": page },
-			dataType: "json",
-			success: function(data) {
-				$('#post-list').empty();
-				var currentPage = data.currentPage;
-				var postPageQty = data.postPageQty;
-				data.sort(function(a, b) {
-					// 按 postID 降序排序
-					return b.postID - a.postID;
-				});
-				listAll(data);
-				updatePagination(page, data.postPageQty);
-			},
-			error: function(xhr, status, error) {
-				console.error("AJAX request failed:", status, error);
-			}
-		});
-	}
-
-	function listAll(data) {
-		data.forEach(function(post) {
-			if (post.postType === 0) {
-				publishPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.likeCnt);
-			} else if (post.postType === 1) {
-				publishGroupPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.likeCnt);
-			} else if (post.postType === 2) {
-				publishPromotePost(post.postID, post.postTitle, post.postType, post.postTime);
-			}
-		});
-	}
-
-	function updatePagination(currentPage, postPageQty) {
-		var pageElement = $("#page");
-
-		pageElement.empty();
-
-		// Previous Page Button
-		pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + (currentPage - 1) + '"> <span aria-hidden="true">&laquo;</span></a></li>');
-
-		// Page Buttons
-		for (let i = 1; i <= postPageQty; i++) {
-			pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>');
-		}
-
-		// Next Page Button
-		pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + (currentPage + 1) + '" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>');
-
-		// Unbind Previous Click Event
-		pageElement.find("a.page-link").off('click');
-
-		// Rebind Click Event
-		pageElement.find("a.page-link").on('click', function() {
-			var page = $(this).data('page');
-			loadPage(page);
-		});
-	}
+	//	//========頁數顯示========
+	//	// 在document上使用事件委派
+	//	$(document).on('click', '.page-link', function() {
+	//		// 獲取 data-page 屬性的值
+	//		var page = $(this).data('page');
+	//		loadPage(page);
+	//	});
+	//
+	//	function loadPage(page) {
+	//		$.ajax({
+	//			url: "post.do",
+	//			type: "GET",
+	//			data: { "page": page },
+	//			dataType: "json",
+	//			success: function(data) {
+	//				$('#post-list').empty();
+	//				var currentPage = data.currentPage;
+	//				var postPageQty = data.postPageQty;
+	//				data.sort(function(a, b) {
+	//					// 按 postID 降序排序
+	//					return b.postID - a.postID;
+	//				});
+	//				listAll(data);
+	//				updatePagination(page, data.postPageQty);
+	//			},
+	//			error: function(xhr, status, error) {
+	//				console.error("AJAX request failed:", status, error);
+	//			}
+	//		});
+	//	}
+	//
+	//	function listAll(data) {
+	//		data.forEach(function(post) {
+	//			if (post.postType === 0) {
+	//				publishPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.likeCnt);
+	//			} else if (post.postType === 1) {
+	//				publishGroupPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.likeCnt);
+	//			} else if (post.postType === 2) {
+	//				publishPromotePost(post.postID, post.postTitle, post.postType, post.postTime);
+	//			}
+	//		});
+	//	}
+	//
+	//	function updatePagination(currentPage, postPageQty) {
+	//		var pageElement = $("#page");
+	//
+	//		pageElement.empty();
+	//
+	//		// Previous Page Button
+	//		pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + (currentPage - 1) + '"> <span aria-hidden="true">&laquo;</span></a></li>');
+	//
+	//		// Page Buttons
+	//		for (let i = 1; i <= postPageQty; i++) {
+	//			pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + i + '">' + i + '</a></li>');
+	//		}
+	//
+	//		// Next Page Button
+	//		pageElement.append('<li class="page-item"><a class="page-link" href="#" data-page="' + (currentPage + 1) + '" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>');
+	//
+	//		// Unbind Previous Click Event
+	//		pageElement.find("a.page-link").off('click');
+	//
+	//		// Rebind Click Event
+	//		pageElement.find("a.page-link").on('click', function() {
+	//			var page = $(this).data('page');
+	//			loadPage(page);
+	//		});
+	//	}
 
 	//=============新增文章(討論)===============//
 	$("#pb-discuss").on("click", function() {
@@ -287,7 +294,6 @@ $(document).ready(function() {
 		formData.append("postContent", newPostContent);
 		formData.append("discussType", discussType);
 		if (newPostPic) {
-			// 用户选择了图像文件，将其添加到 FormData 中
 			formData.append("postPic", newPostPic);
 		}
 		$.ajax({
@@ -418,7 +424,6 @@ $(document).ready(function() {
 			}
 		});
 	});
-
 	function fetchAndDisplayLatestData2(postID, newPostTitle, newPostContent, postTime, newPostPic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
@@ -610,6 +615,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(postData) {
 				//				console.log("aa")
+				console.log(postData.postContent);
 				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea_edit").val(postData.postTitle);
 				$("#floatingTextarea2_edit").val(PostContent);
@@ -676,7 +682,7 @@ $(document).ready(function() {
 	});
 	// ===找到原先的值(推撥)===//
 	$("#promote-list").on("click", ".edit_promote", function() {
-		console.log("click");
+		//		console.log("click");
 		var postID = $(this).data("post-id");
 		var saveButton = $(".save-button_promote");
 
@@ -886,6 +892,7 @@ $(document).ready(function() {
 				console.error("Delete Error:", status, error);
 			}
 		});
+
 	});
 
 });

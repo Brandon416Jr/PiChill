@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.pichill.comment.entity.Comment;
 import com.pichill.comment.service.CommentService;
@@ -32,7 +33,8 @@ public class CommentServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			CommentService commentSvc = new CommentServiceImpl();
 			List<Comment> comments = commentSvc.getAllComments(postID);
-			String json = new Gson().toJson(comments);
+			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		        String json = gson.toJson(comments);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -57,16 +59,15 @@ public class CommentServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			GeneralUserService generalUserService = new GeneralUserService();
 			GeneralUser generalUser = generalUserService.getOneGeneralUser(11000001);
-			PostService postService = new PostServiceImpl();
-			Post post = postService.getByPostID(postID);
 			Comment comment = new Comment();
 			comment.setCommentContent(commentContent);
 			comment.setGeneralUser(generalUser);
-			comment.setPost(post);
+			comment.setPostID(postID);
 			CommentService commentSvc = new CommentServiceImpl();
 			Comment addedComment = commentSvc.addComment(comment);
 			long commentCnt = commentSvc.getCommentCnt(postID);
-			 String jsonResponse = "{\"addedComment\":" + new Gson().toJson(addedComment) + ",\"commentCnt\":" + commentCnt + "}";
+			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			 String jsonResponse = "{\"addedComment\":" + gson.toJson(addedComment) + ",\"commentCnt\":" + commentCnt + "}";
 			PrintWriter out = res.getWriter();
 			out.print(jsonResponse);
 //			out.print(commentCntJson);

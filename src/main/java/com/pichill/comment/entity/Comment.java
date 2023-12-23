@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,6 +18,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.post.entity.Post;
 import com.pichill.report.entity.Report;
@@ -27,6 +29,7 @@ public class Comment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "commentID", updatable = false, insertable = false)
+	@Expose
 	private Integer commentID;
 	
 	@ManyToOne
@@ -35,22 +38,33 @@ public class Comment {
 //	@Column(name = "gUserID", updatable = false)
 //	private Integer gUserID;
 	
-	@ManyToOne
-	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
-	private Post post;
-//	@Column(name = "postID", updatable = false)
-//	private Integer postID;
+//	@ManyToOne
+//	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
+//	private Post post;
+	@Column(name = "postID", updatable = false)
+	@Expose
+	private Integer postID;
 	
+	public Integer getPostID() {
+		return postID;
+	}
+
+	public void setPostID(Integer postID) {
+		this.postID = postID;
+	}
+
 	@Column(name = "commentContent", columnDefinition = "text")
+	@Expose
 	private String commentContent;
 	
 	@Column(name = "commentTime", updatable = false)
+	@Expose
 	@CreationTimestamp
 	private Timestamp commentTime;
 	
-	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL)
-	@OrderBy("reportID asc")
-	private Set<Report> reports;
+//	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//	@OrderBy("reportID asc")
+//	private Set<Report> reports;
 
 	public Integer getCommentID() {
 		return commentID;
@@ -68,13 +82,13 @@ public class Comment {
 		this.generalUser = generalUser;
 	}
 
-	public Post getPost() {
-		return post;
-	}
-
-	public void setPost(Post post) {
-		this.post = post;
-	}
+//	public Post getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(Post post) {
+//		this.post = post;
+//	}
 
 	public String getCommentContent() {
 		return commentContent;
@@ -92,11 +106,11 @@ public class Comment {
 		this.commentTime = commentTime;
 	}
 
-	public Set<Report> getReports() {
-		return reports;
-	}
-
-	public void setReports(Set<Report> reports) {
-		this.reports = reports;
-	}
+//	public  Set<Report> getReports() {
+//		return reports;
+//	}
+//
+//	public void setReports(Set<Report> reports) {
+//		this.reports = reports;
+//	}
 }

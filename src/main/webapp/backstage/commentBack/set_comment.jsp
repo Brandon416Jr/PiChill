@@ -274,7 +274,7 @@ Comment comment = (Comment) request.getAttribute("comment");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="gUserID"  value="<%=comment.getGeneralUser()%>"
+														name="gUserID"  value="<%=comment.getGeneralUser().getgUserID()%>"
 														class="form-control" />
 												</div>
 											</div>
@@ -284,7 +284,7 @@ Comment comment = (Comment) request.getAttribute("comment");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" disabled="disabled"
-														name="postID"  value="<%=comment.getPostID()%>"
+														name="postID"  value="<%=comment.getPost().getPostID()%>"
 														class="form-control" />
 												</div>
 											</div>

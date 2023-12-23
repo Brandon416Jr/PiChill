@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.pichill.comment.Util;
 import com.pichill.comment.entity.Comment;
@@ -29,49 +31,149 @@ public class CommentDAOImpl implements CommentDAO {
 	}
 	@Override
 	public int add(Comment comment) {
-		return (Integer)getSession().save(comment);
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        Integer id = (Integer) session.save(comment);
+System.out.println("?????????????"+id);
+		        tx.commit();
+		        return id;
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); 
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public int update(Comment comment) {
-		try {
-			getSession().update(comment);
-			return 1;
-		}catch(Exception e){
-			return -1;
-		}
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        session.update(comment);
+
+	        tx.commit();
+	        return 1;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); 
+	        return -1;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public int delete(Integer commentID) {
-		Comment comment = getSession().get(Comment.class,commentID);
-		if(comment!=null) {
-			getSession().delete(comment);
-			return 1;
-		}else {
-			return -1;
-		}
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        Comment comment = session.get(Comment.class, commentID);
+		        if (comment != null) {
+		            session.delete(comment);
+
+		            tx.commit();
+		            return 1;
+		        } else {
+		            tx.rollback(); // 回滚事务，因为未找到评论
+		            return -1;
+		        }
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); 
+		        return -1;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 
 	@Override
 	public Comment getByCommentID(Integer commentID) {
-		getSession().clear();
-		return getSession().get(Comment.class,commentID);
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        Comment comment = session.get(Comment.class, commentID);
+
+	        tx.commit();
+	        return comment;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); 
+	        return null;
+	    } finally {
+	        getSession().close();
+	    }
 	}
 
 	@Override
 	public List<Comment> getAll(Integer postID) {
-		 return getSession()
-			        .createQuery("from Comment where postID = :postId", Comment.class)
-			        .setParameter("postId", postID)
-			        .list();
+		Transaction tx = null;
+	    try {
+	        Session session = getSession();
+	        tx = session.beginTransaction();
+
+	        List<Comment> comments = session.createQuery(
+	            "from Comment where postID = :postID",
+	            Comment.class
+	        )
+	        .setParameter("postID", postID)
+	        .list();
+
+	        tx.commit();
+	        return comments;
+	    } catch (Exception e) {
+	        if (tx != null) {
+	            tx.rollback();
+	        }
+	        e.printStackTrace(); 
+	        return Collections.emptyList();
+	    } finally {
+	        getSession().close();
+	    }
 	}
 	@Override
 	public long getCommentCnt(Integer postID) {
-		return getSession().createQuery("select count(*) from Comment WHERE postID = :postID", Long.class)
-				.setParameter("postID",postID)
-				.uniqueResult();
-	
+		 Transaction tx = null;
+		    try {
+		        Session session = getSession();
+		        tx = session.beginTransaction();
+
+		        Long commentCount = session.createQuery(
+		            "select count(*) from Comment WHERE postID = :postID",
+		            Long.class
+		        )
+		        .setParameter("postID", postID)
+		        .uniqueResult();
+
+		        tx.commit();
+		        return commentCount != null ? commentCount : 0; 
+		    } catch (Exception e) {
+		        if (tx != null) {
+		            tx.rollback();
+		        }
+		        e.printStackTrace(); 
+		        return 0;
+		    } finally {
+		        getSession().close();
+		    }
 	}
 	
 	

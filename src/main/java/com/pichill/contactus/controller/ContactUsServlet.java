@@ -2,10 +2,7 @@ package com.pichill.contactus.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.contactus.service.ContactUsService;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.owneruser.entity.OwnerUser;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "ContactUsServlet", value = "/contactus/contactus.do")
@@ -163,8 +162,8 @@ public class ContactUsServlet extends HttpServlet {
 
 	/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
 	Integer formID = Integer.valueOf(req.getParameter("formID"));
-	Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
-	Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+//	Integer oUserID = OwnerUser.valueOf(req.getParameter("oUserID"));
+//	Integer gUserID = GeneralUser.valueOf(req.getParameter("gUserID"));
 
 
 	String formPurpose = req.getParameter("formPurpose");
@@ -200,8 +199,8 @@ public class ContactUsServlet extends HttpServlet {
 	 //假如輸入格式錯誤的，備份選原使用者輸入過的資料
 	ContactUs contactUs = new ContactUs();
 	contactUs.setformID(formID);
-	contactUs.setoUserID(oUserID);
-	contactUs.setgUserID(gUserID);
+//	contactUs.setOwnerUser(oUserID);
+//	contactUs.setGeneralUser(gUserID);
 	contactUs.setformPurpose(formPurpose);
 	contactUs.setformContent(formContent);
 	contactUs.setformPic(formPic);

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
+<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
@@ -13,9 +13,8 @@ Manage manage = (Manage) session.getAttribute("manage");
 
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-AnnouncementGetOne announcement = (AnnouncementGetOne) request.getAttribute("announcement");
+Announcement announcement = (Announcement) request.getAttribute("announcement");
 %>
-
 
 <!DOCTYPE html>
 <html>
@@ -276,7 +275,7 @@ AnnouncementGetOne announcement = (AnnouncementGetOne) request.getAttribute("ann
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" 
-														name="manageID"  value="<%=announcement.getManageID()%>"
+														name="manageID"  value="<%=announcement.getManage().getManageID()%>"
 														class="form-control" />
 												</div>
 											</div>

@@ -4,20 +4,27 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
+import com.pichill.util.SendMailService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.SessionCookieConfig;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import redis.clients.jedis.Jedis;
+
+import com.google.gson.Gson;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.generaluser.entity.GeneralUser;
+import java.util.UUID;
 
 @MultipartConfig(fileSizeThreshold = 1 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024
 		* 1024)
@@ -52,6 +59,10 @@ public class GeneralUserServletFront extends HttpServlet {
 		case "insert":
 			// 來自new_manage.jsp的請求
 			forwardPath = insert(req, res);
+			break;
+		case "sendMailAgain":
+			// 來自new_manage.jsp的請求
+			forwardPath = sendMailAgain(req, res);
 			break;
 //		case "checkAccount":
 //			// 來自new_manage.jsp的請求
@@ -100,12 +111,12 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gEmail.trim().matches(gEmailReg)) {
 			errorMsgs.put("gEmail", "請輸入正確的Email格式");
 		}
-		
+
 		Boolean gUserE = gUserSvcF.existsEmail(gEmail);
 		System.out.println(gUserE);
 		if (gUserE) {
-			errorMsgs.put("gEmail", "此信箱已被註冊過");	
-		} 
+			errorMsgs.put("gEmail", "此信箱已被註冊過");
+		}
 
 		String address = req.getParameter("gAddress");
 		if (address == null || address.trim().isEmpty())
@@ -135,9 +146,8 @@ public class GeneralUserServletFront extends HttpServlet {
 		Boolean gUserUN = gUserSvcF.existsUsername(gUsername);
 		System.out.println(gUserUN);
 		if (gUserUN) {
-			errorMsgs.put("gUsername", "此帳號已存在");	
-		} 
-		
+			errorMsgs.put("gUsername", "此帳號已存在");
+		}
 
 		String gPassword = req.getParameter("gPassword");
 		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
@@ -161,12 +171,12 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gIDNum.trim().matches(idnoRegex)) {
 			errorMsgs.put("gIDNum", "請輸入正確的身份證格式");
 		}
-		
+
 		Boolean gUserI = gUserSvcF.existsIDNum(gIDNum);
 		System.out.println(gUserI);
 		if (gUserI) {
-			errorMsgs.put("gIDNum", "一個人只能註冊一個帳號!");	
-		} 
+			errorMsgs.put("gIDNum", "一個人只能註冊一個帳號!");
+		}
 
 		String nicknameID = req.getParameter("nicknameID");
 		String nickReg = "^[a-zA-Z0-9_@$%^]{10}$";
@@ -175,13 +185,12 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!nicknameID.trim().matches(nickReg)) {
 			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式:字數10個，可以有符號、大小寫英文及數字，請勿填寫中文");
 		}
-		
+
 		Boolean gUserNN = gUserSvcF.existsNicknameID(nicknameID);
 		System.out.println(gUserNN);
 		if (gUserNN) {
-			errorMsgs.put("nicknameID", "此暱稱ID已存在!");	
-		} 
-
+			errorMsgs.put("nicknameID", "此暱稱ID已存在!");
+		}
 
 		Integer gPostAmount = 0;
 
@@ -244,7 +253,7 @@ public class GeneralUserServletFront extends HttpServlet {
 			req.setAttribute("generalUser", generalUser); // 含有輸入格式錯誤的empVO物件,也存入req
 			return "/login/gLogin/gUserRegist.jsp";
 		}
-		
+
 //		Boolean gUser = gUserSvcF.existsUsername(generalUser.getgUsername());
 //		if (gUser) {
 //			errorMsgs.put("gUsername", "此帳號已存在");
@@ -256,57 +265,56 @@ public class GeneralUserServletFront extends HttpServlet {
 //			return "/frontstage/generalUserFront/gUserRegist.jsp";
 //		} 
 
-
 		/*************************** 2.開始新增資料 ***************************************/
 
-		gUserSvcF.insertGeneralUser(gName,  gTelephone,  gEmail,  gAddress,  status,
-				 gGender,  gUsername,  gPassword,  gIDNum,  nicknameID,  gPostAmount,
-				 commentAmount,  gReportCnt,  gRegistDate,  gBirth,  yoyakuCnt,
-				 gProfilePic);
+		gUserSvcF.insertGeneralUser(gName, gTelephone, gEmail, gAddress, status, gGender, gUsername, gPassword, gIDNum,
+				nicknameID, gPostAmount, commentAmount, gReportCnt, gRegistDate, gBirth, yoyakuCnt, gProfilePic);
+		
+		sendVerificationEmail(generalUser);
+		HttpSession session = req.getSession();
+		session.setAttribute("generalUser", generalUser);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 
-		return "/login/gLogin/gUserLogin.jsp";
+		return "/login/gLogin/gUserActivePage.jsp";
+	}
+	
+	private String sendMailAgain(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		System.out.println("成功insert");
+		HttpSession session = req.getSession();
+		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
+		sendVerificationEmail(generalUser);
+		return "/login/gLogin/gUserActivePage.jsp";
 	}
 
-//	private String checkAccount(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-//		String gUsername = req.getParameter("gUsername");
-//		System.out.println("進來比對了");
-//		boolean isAccountExists = checkAccountInDatabase(gUsername);
-//		
-//
-//	    res.setContentType("application/json");
-//	    res.setCharacterEncoding("UTF-8");
-//	    res.getWriter().write("{\"exists\":" + isAccountExists + "}");
-////		if(isAccountExists) {
-////			  req.setAttribute("errorMsgs", "帳號已被註冊");
-////			  return "/frontstage/generalUserFront/gUserRegist.jsp"; 
-////			}
-////		req.setAttribute("exists", isAccountExists); 
-//		return "/frontstage/generalUserFront/gUserRegist.jsp";
-//	}
+	private void sendVerificationEmail(GeneralUser generalUser) {
+		String verificationCode = generateVerificationCode();
+		System.out.println("我存進去的驗證碼為" + verificationCode);
+		// 將驗證碼存進redis
+		Map<String, String> verification = new HashMap<>();
+		verification.put("verificationCode", verificationCode);
+		
+		Jedis jedis = new Jedis("localhost", 6379);
+		jedis.select(4);
+		Gson gson = new Gson();
+		String verificationValue = gson.toJson(verification);
+		String email = generalUser.getgEmail();
+		System.out.println("我存進的信箱為" + email);
+		
+		jedis.expire(email, 600);// 設定生命週期(以秒為單位)
 
-//	private boolean checkAccountInDatabase(String gUsername) {
-//		GeneralUserServiceFront gUserSvcF = new GeneralUserServiceFront();
-//		GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
-//		System.out.println("Checking account in database: " + gUsername);
-//
-//		if (generalUser != null) {
-//			System.out.println("Retrieved member email from database: " + generalUser.getgUsername());
-//			return true;
-//		} else {
-//			return false;
-//		}
-////		if(generalUser.size() > 0) {
-////			  // 用戶名存在
-////			  return true;
-////			} else {
-////			  // 未找到用戶名
-////				for(GeneralUser generalUsers : generalUser) {
-////					  System.out.println(generalUsers.getgUsername()); 
-////					}
-////			  return false; 
-////			}
-//		
-//	}
+		jedis.set(email, verificationValue);
+		jedis.close();
+		// 組驗證連結
+		String verifyUrl = "http://localhost:8081/PiChill/verifyguser?verificationCode=" + verificationCode;
+
+		// 寄信邏輯
+		SendMailService mailService = new SendMailService();
+		mailService.sendMail(generalUser.getgEmail(), "會員註冊驗證", "請點擊連結完成驗證:" + verifyUrl);
+
+	}
+	
+	public String generateVerificationCode() {
+		  return UUID.randomUUID().toString().substring(0,6); 
+		}
 }

@@ -1,12 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
-<%@ page import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
+<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
 <%@ page import="com.pichill.backstage.announcement.model.*"%>
 <%@ page
 	import="com.pichill.backstage.announcement.service.AnnouncementServiceBack"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
+<%@ page import="com.pichill.manage.service.ManageService"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
 // 寫死
@@ -17,7 +18,7 @@ Manage manage = (Manage) session.getAttribute("manage");
 %>
 <%
 AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
-List<AnnouncementGetOne> list = annoSvcB.getAll();
+List<Announcement> list = annoSvcB.getAll();
 pageContext.setAttribute("list", list);
 %>
 
@@ -283,7 +284,7 @@ pageContext.setAttribute("list", list);
 					<c:forEach var="announcement" items="${list}">
 						<tr>
 							<td>${announcement.announceID}</td>
-							<td>${announcement.manageID}</td>
+							<td>${announcement.manage.manageID}</td>
 							<td>${announcement.formID}</td>
 							<td>${announcement.annoTitle}</td>
 							<td>${announcement.annoContent}</td>

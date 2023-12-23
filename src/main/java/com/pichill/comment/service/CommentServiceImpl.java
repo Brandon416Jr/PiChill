@@ -17,6 +17,8 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public Comment addComment(Comment comment) {
 		Integer id = dao.add(comment);
+	    System.out.println("=================");
+	    System.out.println(id);
 		comment = dao.getByCommentID(id);
 		return comment;
 	}

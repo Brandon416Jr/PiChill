@@ -285,8 +285,8 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 					<c:forEach var="contactUs" items="${list}">
 						<tr>
 							<td>${contactUs.formID}</td>
-							<td>${contactUs.oUserID}</td>
-							<td>${contactUs.gUserID}</td>
+							<td>${contactUs.ownerUser.oUserID}</td>
+							<td>${contactUs.generalUser.gUserID}</td>
 							<td>${contactUs.formPurpose}</td>
 							<td>${contactUs.formContent}</td>
 							<%-- 							<td>${contactUs.formPic}</td> --%>

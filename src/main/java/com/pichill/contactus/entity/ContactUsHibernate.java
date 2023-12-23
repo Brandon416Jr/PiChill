@@ -7,6 +7,8 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
+import com.pichill.owneruser.entity.OwnerUser;
+
 
 public class ContactUsHibernate {
 	public static void main(String[] args) {
@@ -21,8 +23,8 @@ public class ContactUsHibernate {
 		
 		//交易區間
 		ContactUs contactUs = new ContactUs();
-//		contactUs.setgUserID(null);
-		contactUs.setoUserID(12000001);
+		contactUs.setGeneralUser(null);
+		contactUs.setOwnerUser(null);
 		contactUs.setformPurpose("如何上架球館?");
 		contactUs.setformContent("如何上架球館?");
 		contactUs.setformPic(null);

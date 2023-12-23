@@ -5,8 +5,6 @@ import java.util.List;
 import org.hibernate.Session;
 
 import com.pichill.announcementgetone.entity.AnnouncementGetOne;
-import com.pichill.announcementgetone.service.AnnouncementGetOneService;
-import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.util.HibernateUtil;
 
 public class AnnouncementGetOneDAOImpl implements AnnouncementGetOneDAO {
@@ -30,7 +28,7 @@ public class AnnouncementGetOneDAOImpl implements AnnouncementGetOneDAO {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<AnnouncementGetOne> list = session.createQuery("from Announcement", AnnouncementGetOne.class).list();
+			List<AnnouncementGetOne> list = session.createQuery("from AnnouncementGetOne", AnnouncementGetOne.class).list();
 			session.getTransaction().commit();
 			return list;
 		} catch (Exception e) {

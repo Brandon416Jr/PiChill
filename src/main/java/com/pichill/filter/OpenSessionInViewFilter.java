@@ -14,7 +14,7 @@ import org.hibernate.SessionFactory;
 import com.pichill.util.HibernateUtil;
 
 //@WebFilter(urlPatterns = { "/*" })
-@WebFilter(urlPatterns = { "/post/*","/comment/*","/forumlike/*","/report/*" })
+@WebFilter(urlPatterns = { "/post/model/*","/comment/model/*","/forumlike/model/*","/report/model/*" })
 public class OpenSessionInViewFilter implements Filter {
 
 	@Override

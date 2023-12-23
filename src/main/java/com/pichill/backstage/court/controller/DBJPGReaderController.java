@@ -23,7 +23,7 @@ public class DBJPGReaderController extends HttpServlet {
 		try {
 			Integer courtID = Integer.valueOf(req.getParameter("courtID"));
 			CourtServiceBack courtSvcB = new CourtServiceBack();
-			out.write(courtSvcB.getOneCourt(courtID).getcourtPic());
+			out.write(courtSvcB.getOneCourt(courtID).getCourtPic());
 		} catch (Exception e) {
 //			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/noPic.jpg");

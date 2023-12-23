@@ -474,6 +474,22 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 											</div>
 										</div>
 										<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="selectLg" class="form-control-label">帳號狀態</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<%
+													int status = ownerUser.getoStatus();
+													%>
+													<select name="oStatus" id="selectLm"disabled="disabled"
+														class="form-control-sm form-control">
+
+														<option value="0" <%=status == 0 ? "selected" : ""%>>未驗證</option>
+														<option value="1" <%=status == 1 ? "selected" : ""%>>正常</option>
+													</select>
+												</div>
+											</div>
+										<div class="row form-group">
 											<div class="col-12 col-md-8">
 												<input type="hidden" name="action" value="update"> <input
 													type="hidden" name="oUserID"

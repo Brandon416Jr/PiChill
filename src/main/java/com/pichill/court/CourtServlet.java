@@ -174,7 +174,7 @@ public class CourtServlet extends HttpServlet{
 			in.close();
 		} else {
 			CourtService courtService = new CourtService();
-			courtPic = courtService.getOneCourt(courtID).getcourtPic();
+			courtPic = courtService.getOneCourt(courtID).getCourtPic();
 		}
 
 		String courtTelephone = req.getParameter("courtTelephone");
@@ -203,32 +203,32 @@ public class CourtServlet extends HttpServlet{
 		
 		Time courtCloseTime = Time.valueOf(req.getParameter("courtCloseTime"));
 		
-//		String placeName = String.valueOf(req.getParameter("placeName").trim());
-//		
-//		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
-//		
-//		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
+		String placeName = String.valueOf(req.getParameter("placeName").trim());
+		
+		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
+		
+		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
 		
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
 		court.setCourtID(courtID);
-		court.setoUserID(oUserID);
-		court.setmanageID(manageID);
-		court.setcourtOnTime(courtOnTime);
-		court.setcourtApplyTime(courtApplyTime);
-		court.setcourtName(courtName);
-		court.setcourtPic(courtPic);
-		court.setcourtTelephone(courtTelephone);
-		court.setcourtAddress(courtAddress);
-		court.setcourtRule(courtRule);
-		court.setloc(loc);
-		court.setcourtApplyStatus(courtApplyStatus);
-		court.setcourtOpenTime(courtOpenTime);
-		court.setcourtCloseTime(courtCloseTime);
-//		court.setplaceName(Place.placeName);
-//		court.setplaceFee((Place.placeFee);
-//		court.setball((Place.ball);
+//		court.setoUserID(oUserID);
+//		court.setmanageID(manageID);
+		court.setCourtOnTime(courtOnTime);
+		court.setCourtApplyTime(courtApplyTime);
+		court.setCourtName(courtName);
+		court.setCourtPic(courtPic);
+		court.setCourtTelephone(courtTelephone);
+		court.setCourtAddress(courtAddress);
+		court.setCourtRule(courtRule);
+		court.setLoc(loc);
+		court.setCourtApplyStatus(courtApplyStatus);
+		court.setCourtOpenTime(courtOpenTime);
+		court.setCourtCloseTime(courtCloseTime);
+		court.setplaceName(placeName);
+		court.setplaceFee(placeFee);
+		court.setball(ball);
 		
 		court.toString();
 		
@@ -257,8 +257,9 @@ public class CourtServlet extends HttpServlet{
 		req.setAttribute("errorMsgs", errorMsgs);
 
 		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-		Integer courtID = Integer.valueOf(req.getParameter("courtID"));
-		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+		Integer courtID = Integer.parseInt(req.getParameter("courtID"));
+		Integer oUserID = Integer.parseInt(req.getParameter("oUserID"));
+
 		
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer  manageID = 0;
@@ -284,7 +285,7 @@ public class CourtServlet extends HttpServlet{
 			in.close();
 		} else {
 			CourtService courtService = new CourtService();
-			courtPic = courtService.getOneCourt(courtID).getcourtPic();
+			courtPic = courtService.getOneCourt(courtID).getCourtPic();
 		}
 
 		String courtTelephone = req.getParameter("courtTelephone");
@@ -313,33 +314,33 @@ public class CourtServlet extends HttpServlet{
 		
 		Time courtCloseTime = Time.valueOf(req.getParameter("courtCloseTime"));
 		
-//		String placeName = String.valueOf(req.getParameter("placeName").trim());
-//		
-//		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
-//		
-//		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
+		String placeName = String.valueOf(req.getParameter("placeName").trim());
+		
+		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
+		
+		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
 		
 
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
 		court.setCourtID(courtID);
-		court.setoUserID(oUserID);
-		court.setmanageID(manageID);
-		court.setcourtOnTime(courtOnTime);
-		court.setcourtApplyTime(courtApplyTime);
-		court.setcourtName(courtName);
-		court.setcourtPic(courtPic);
-		court.setcourtTelephone(courtTelephone);
-		court.setcourtAddress(courtAddress);
-		court.setcourtRule(courtRule);
-		court.setloc(loc);
-		court.setcourtApplyStatus(courtApplyStatus);
-		court.setcourtOpenTime(courtOpenTime);
-		court.setcourtCloseTime(courtCloseTime);
-//		court.setplaceName(placeName);
-//		court.setplaceFee(placeFee);
-//		court.setball(ball);
+//		court.setoUserID(oUserID);
+//		court.setmanageID(manageID);
+		court.setCourtOnTime(courtOnTime);
+		court.setCourtApplyTime(courtApplyTime);
+		court.setCourtName(courtName);
+		court.setCourtPic(courtPic);
+		court.setCourtTelephone(courtTelephone);
+		court.setCourtAddress(courtAddress);
+		court.setCourtRule(courtRule);
+		court.setLoc(loc);
+		court.setCourtApplyStatus(courtApplyStatus);
+		court.setCourtOpenTime(courtOpenTime);
+		court.setCourtCloseTime(courtCloseTime);
+		court.setplaceName(placeName);
+		court.setplaceFee(placeFee);
+		court.setball(ball);
 
 		court.toString();
 		// Send the use back to the form, if there were errors

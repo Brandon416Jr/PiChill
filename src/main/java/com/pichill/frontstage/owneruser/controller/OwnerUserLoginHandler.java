@@ -21,7 +21,10 @@ import com.pichill.owneruser.entity.OwnerUser;
 @WebServlet("/ologinhandler")
 public class OwnerUserLoginHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+	private static int loginAttempts = 0;  // 登入嘗試次數
+	private static long lockoutTime = 0;   // 鎖定時間
+	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
+	private static final long LOCKOUT_DURATION = 1 * 60 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 		// 【實際上應至資料庫搜尋比對】
 		protected boolean allowOUser(String oUserName, String oPassword) {
@@ -76,6 +79,26 @@ public class OwnerUserLoginHandler extends HttpServlet {
 				errorMsgs.put("oUserName", "查無資料");
 				errorMsgs.put("oPassword", "密碼錯誤");
 			}
+			
+			 // 增加登入嘗試次數
+		    loginAttempts++;
+		    
+		    // 檢查是否達到最大嘗試次數
+		    if (loginAttempts >= MAX_LOGIN_ATTEMPTS) {
+		        System.out.println("密碼輸入錯誤次數過多，請稍候再試");
+
+		        // 設定鎖定時間
+		        lockoutTime = System.currentTimeMillis() + LOCKOUT_DURATION;
+		    	req.setAttribute("lockoutTime", lockoutTime);
+				if (System.currentTimeMillis() < lockoutTime) {
+				    System.out.println("帳號已被鎖定，請稍候再試");
+				    res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserFailToLogin.jsp");
+				    return;
+				} else {
+					res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserLogin.jsp");
+					return;
+				}
+		    }
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -88,8 +111,17 @@ public class OwnerUserLoginHandler extends HttpServlet {
 			if (allowOUser(oUserName, oPassword)) { // 帳號密碼有效
 				// 從資料庫獲取 adminStat 的值
 				OwnerUserServiceFront oUserSvcF = new OwnerUserServiceFront();
-//				OwnerUser ownerUser = oUserSvcF.userAuth(oUserName, oPassword);
-				
+				OwnerUser ownerUserStatus = oUserSvcF.userAuth(oUserName, oPassword);
+				if (ownerUserStatus != null) {
+					Integer oStatus = ownerUserStatus.getoStatus();
+					// 設置mStatus 属性的值到 HttpSession
+					HttpSession session = req.getSession();
+					session.setAttribute("oStatus", oStatus);
+					// mStatus 為2（停權）的情況
+					if (oStatus == 0) {
+						errorMsgs.put("oStatus", "此帳號尚未被激活");
+					}
+				}
 
 				// Send the use back to the form, if there were errors
 				if (!errorMsgs.isEmpty()) {
@@ -98,9 +130,24 @@ public class OwnerUserLoginHandler extends HttpServlet {
 					failureView.forward(req, res);
 					return;// 程式中斷
 				}
+				
+				HttpSession session = req.getSession();
+				String inputCode = req.getParameter("checkCode");
+				String valistr = (String) session.getAttribute("valistr");
+				if (!valistr.equalsIgnoreCase(inputCode)) {
+					errorMsgs.put("checkCode", "輸入的驗證碼錯誤!");
+				}
+
+				// Send the use back to the form, if there were errors
+				if (!errorMsgs.isEmpty()) {
+					System.out.println("有進第三個error提示區域");
+					RequestDispatcher failureView = req.getRequestDispatcher("/login/oLogin/oUserLogin.jsp");
+					failureView.forward(req, res);
+					return;// 程式中斷
+				}
 
 				/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-				HttpSession session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
+				session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 //				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
 				OwnerUser ownerUser = oUserSvcF.getOneOwnerUser(oUserName);
 				session.setAttribute("ownerUser", ownerUser);

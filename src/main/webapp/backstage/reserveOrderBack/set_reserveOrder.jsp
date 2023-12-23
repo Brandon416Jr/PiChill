@@ -279,7 +279,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="gUserID"
-														value="<%=reserveOrder.getGeneralUser()%>" disabled="disabled"
+														value="<%=reserveOrder.getGeneralUser().getgUserID()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -290,7 +290,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="oUserID"
-														value="<%=reserveOrder.getOwnerUser()%>" disabled="disabled"
+														value="<%=reserveOrder.getOwnerUser().getoUserID()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -311,7 +311,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="timeID"
-														value="<%=reserveOrder.getTime()%>" disabled="disabled"
+														value="<%=reserveOrder.getTimeRef().getTimeID()%>" disabled="disabled"
 														class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
@@ -322,12 +322,24 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" name="placeID"
-														value="<%=reserveOrder.getPlace()%>" disabled="disabled"
+														value="<%=reserveOrder.getPlace().getPlaceID()%>" disabled="disabled"
 														class="form-control" />
 												</div>
 											</div>
+											<div class="row form-group">
+												<div class="col col-md-3">
+													<label for="2" class="form-control-label">≤y¿]Ωs∏π</label>
+												</div>
+												<div class="col-10 col-md-8">
+													<input type="text" id="disabled-input" name="courtID"
+														value="<%=reserveOrder.getCourt().getCourtID()%>" disabled="disabled"
+														class="form-control" />
+												</div>
+											</div>
+										
 										</div>
 									</div>
+									
 									<div class="col-lg-6">
 										<div class="right-card-body card-block">
 											<div class="row form-group">

@@ -281,8 +281,8 @@ pageContext.setAttribute("list", list);
 					<c:forEach var="comment" items="${list}">
 						<tr>
 							<td>${comment.commentID}</td>
-							<td>${comment.gUserID}</td>
-							<td>${comment.postID}</td>
+							<td>${comment.generalUser.gUserID}</td>
+							<td>${comment.post.postID}</td>
 							<td>${comment.commentContent}</td>
 							<td>${comment.commentTime}</td>
 							<td>

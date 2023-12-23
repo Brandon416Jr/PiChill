@@ -73,7 +73,8 @@ margin-left: 5px;
 									</div>
                 </div>
                 <div class="form-group">
-									<label>驗證碼</label> <input class="au-input au-input--full"
+									<label>驗證碼</label><font color=red>${requestScope.errorMsgs.checkCode}</font>
+									<input class="au-input au-input--full"
 										type="text" name="checkCode" placeholder="請輸入驗證碼" /> <img
 										id="yzm_img" src="${pageContext.request.contextPath}/valistr"
 										style="cursor: pointer" onclick="changeYZM(this)" /> <span
@@ -90,6 +91,7 @@ margin-left: 5px;
                 <button class="au-btn au-btn--block au-btn--green m-b-20" type="submit">
                   登入
                 </button>
+                <div  class="error-message" style="color: red;">${requestScope.errorMsgs.oStatus}</div>
                 <!-- <div class="social-login-content">
                                         <div class="social-button">
                                             <button class="au-btn au-btn--block au-btn--blue m-b-20">sign in with facebook</button>
@@ -100,7 +102,7 @@ margin-left: 5px;
               <div class="register-link">
                 <p>
                   你尚未有帳號?
-                  <a href="${pageContext.request.contextPath }/frontstage/ownerUserFront/oUserRegist.jsp">我要註冊</a>
+                  <a href="${pageContext.request.contextPath }/login/oLogin/oUserRegist.jsp">我要註冊</a>
                 </p>
               </div>
             </div>

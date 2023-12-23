@@ -15,9 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.contactus.service.ContactUsServiceBack;
 import com.pichill.backstage.court.service.CourtServiceBack;
+import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.court.Court;
 import com.pichill.manage.entity.Manage;
+import com.pichill.owneruser.entity.OwnerUser;
 
 /**
  * Servlet implementation class CourtServletBack
@@ -174,7 +176,16 @@ public class CourtServletBack extends HttpServlet {
 		} else {
 			CourtServiceBack service = new CourtServiceBack();
 			Court court2 = service.getOneCourt(courtID);
-			courtApplyStatus = court2.getcourtApplyStatus();
+			courtApplyStatus = court2.getCourtApplyStatus();
+		}
+		if (courtApplyStatus == 1) {
+			Integer courtArriveCnt = court.getOwnerUser().getCourtArriveCnt();
+			courtArriveCnt += 1;
+			OwnerUser ownerUser = new OwnerUser();
+			Integer oUserID = court.getOwnerUser().getoUserID();
+			ownerUser.setCourtArriveCnt(courtArriveCnt);
+			OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
+			ownerUser = oUserSvcB.updateOwnerUserByCourtArrive(oUserID, courtArriveCnt);
 		}
 		
 //		Court court = new Court();
@@ -189,7 +200,8 @@ public class CourtServletBack extends HttpServlet {
 //		court.setCourtAddress(courtAddress);
 //		court.setCourtRule(courtRule);
 //		court.setLoc(loc);
-		court.setcourtApplyStatus (courtApplyStatus );
+		court.setCourtApplyStatus (courtApplyStatus );
+		
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {

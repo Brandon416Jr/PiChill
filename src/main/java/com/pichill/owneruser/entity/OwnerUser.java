@@ -88,9 +88,21 @@ public class OwnerUser implements Serializable{
 	private String oEmail;
 	
 
+	@Column(name="oStatus")
+	private Integer oStatus;
+	
+	
 
 //	private Set<ContactUs> contactUs; // Set不重複
 	
+	public Integer getoStatus() {
+		return oStatus;
+	}
+
+	public void setoStatus(Integer oStatus) {
+		this.oStatus = oStatus;
+	}
+
 	//預約訂單
 	// fetch 預設為 LAZY
 	@OneToMany(mappedBy = "ownerUser", cascade = CascadeType.ALL)
@@ -121,7 +133,7 @@ public class OwnerUser implements Serializable{
 					 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
 					 String oAddress, String oBankCode, String oBankAccount, byte[] oProfilePic,
 					 Date oRegisterDate, Integer oPostAmount, Integer oReportCnt,
-					 Integer courtArriveCnt, Integer rsvdCnts, String oEmail) {
+					 Integer courtArriveCnt, Integer rsvdCnts, String oEmail,Integer oStatus) {
 		super();
 		this.oUserID = oUserID;
 		this.oUserName = oUserName;
@@ -142,6 +154,7 @@ public class OwnerUser implements Serializable{
 		this.courtArriveCnt = courtArriveCnt;
 		this.rsvdCnts = rsvdCnts;
 		this.oEmail = oEmail;
+		this.oStatus = oStatus;
 	}
 	
 	public Integer getoUserID() {

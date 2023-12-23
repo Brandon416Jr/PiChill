@@ -1,27 +1,26 @@
 package com.pichill.contactus.entity;
 
 import java.sql.Timestamp;
-import java.util.List;
-
 
 import com.pichill.contactus.model.ContactUsDAO;
 import com.pichill.contactus.model.ContactUsDAOImpl;
+import com.pichill.owneruser.entity.OwnerUser;
 
 public class TestContactUs {
 	public static void main(String[] args) {
 		ContactUsDAO dao = new ContactUsDAOImpl();
 		
 				// 新增
-//				ContactUs contactUs= new ContactUs();
-//				contactUs.setOUserID(12000011);
-//				contactUs.setGUserID(null);
-//				contactUs.setFormPurpose("如何使用商城購買的優惠券?");
-//				contactUs.setFormContent("如何使用商城購買的優惠券?");
-//				contactUs.setFormPic(null);
-//				contactUs.setFormTime(new Timestamp(System.currentTimeMillis()));
-//				contactUs.setFormStatus(0);
-//				contactUs.setFormType(0);
-//				dao.add(contactUs);
+				ContactUs contactUsAdd= new ContactUs();
+//				contactUsAdd.setOwnerUser(OwnerUser.getoUserID());
+				contactUsAdd.setGeneralUser(null);
+				contactUsAdd.setformPurpose("如何使用商城購買的優惠券?");
+				contactUsAdd.setformContent("如何使用商城購買的優惠券?");
+				contactUsAdd.setformPic(null);
+				contactUsAdd.setformTime(new Timestamp(System.currentTimeMillis()));
+				contactUsAdd.setformStatus(0);
+				contactUsAdd.setformType(0);
+				dao.add(contactUsAdd);
 				
 				// 修改
 //				ContactUs contactUs2= new ContactUs();
