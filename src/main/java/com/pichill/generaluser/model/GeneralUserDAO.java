@@ -12,7 +12,6 @@ public interface GeneralUserDAO {
 	int add(GeneralUser generalUser);
 	int update(GeneralUser generalUser);
 	GeneralUser findByPK(Integer gUserID);
+	List<GeneralUser> findBygUserID(Integer reserveOrderID);
 	List<GeneralUser> getAll();
-	//查詢某部門的員工(一對多)(回傳 Set)
-//    public Set<ReserveOrder> getReserveBygUserID(Integer gUserID);
 }

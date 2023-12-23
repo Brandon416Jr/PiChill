@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.NativeQuery;
 
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
@@ -73,6 +74,26 @@ private SessionFactory factory;
 		}
 		return null;
 	}
+	//用會員ID查預約紀錄
+	@Override
+	public List<GeneralUser> findBygUserID(Integer gUserID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+//			GeneralUser generalUser = session.get(GeneralUser.class, gUserID);
+			NativeQuery<GeneralUser> query = session.createNativeQuery(
+					"SELECT * FROM reserveOrder", GeneralUser.class);
+			List<GeneralUser> list = query.list();
+			session.getTransaction().commit();
+			System.out.println("用會員ID查單筆成功!");
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("用會員ID查單筆失敗QQ");
+			session.getTransaction().rollback();
+		}
+		return null;
+	}
 
 	@Override
 	public List<GeneralUser> getAll() {
@@ -91,22 +112,5 @@ private SessionFactory factory;
 		return null;
 	}
 	
-//	@Override
-//	public Set<ReserveOrder> getReserveBygUserID(Integer gUserID) {
-//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-//		try {
-//			session.beginTransaction();
-//			Set<ReserveOrder> set = session.LinkedHashSet<ReserveOrder>();
-////			List<GeneralUser> list = session.createQuery("from GeneralUser", GeneralUser.class).list();
-//			session.getTransaction().commit();
-//			System.out.println("查全部成功!");
-//			return set;
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			System.out.println("查全部失敗QQ");
-//			session.getTransaction().rollback();
-//		}
-//		return set;
-//	}
-	
+
 }

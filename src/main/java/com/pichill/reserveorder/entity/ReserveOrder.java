@@ -33,17 +33,10 @@ public class ReserveOrder {
 	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)//(name=自己(FK), referencedColumnName = 對應到的PK)
 	private GeneralUser generalUser;
 	
-//	@Column(name="gUserID", updatable = false)
-//	private Integer gUserID;
-//	
-	
 	// fetch 預設為 EAGER
 	@ManyToOne
 	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID", updatable = false)
 	private OwnerUser ownerUser;
-		
-//	@Column(name="oUserID", updatable = false)
-//	private Integer oUserID;
 	
 	@Column(name="reserveDate", updatable = false)
 	private Date reserveDate;
@@ -52,26 +45,16 @@ public class ReserveOrder {
 	@ManyToOne
 	@JoinColumn(name = "timeID", referencedColumnName = "timeID", updatable = false)
 	private TimeRef timeRef;
-		
-//	@Column(name="timeID", updatable = false)
-//	private Integer timeID;
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
 	@JoinColumn(name = "placeID", referencedColumnName = "placeID", updatable = false)
 	private Place place;
-		
-//	@Column(name="placeID", updatable = false)
-//	private Integer placeID;
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
 	@JoinColumn(name = "courtID", referencedColumnName = "courtID", updatable = false)
 	private Court court;
-		
-//	@Column(name="courtID", updatable = false)
-//	private Integer courtID;
-	
 	
 	@Column(name="orderTime", updatable = false)
 	@CreationTimestamp
@@ -89,22 +72,6 @@ public class ReserveOrder {
 	public ReserveOrder() {
 		super();
 	}
-
-//	public ReserveOrder(Integer reserveOrderID, Integer gUserID, Integer oUserID, Date reserveDate, Integer timeID,
-//			Integer placeID, Timestamp orderTime, Integer orderNum, Integer orderStatus, Integer totalCost) {
-//		super();
-//		this.reserveOrderID = reserveOrderID;
-//		this.gUserID = gUserID;
-//		this.oUserID = oUserID;
-//		this.reserveDate = reserveDate;
-//		this.timeID = timeID;
-//		this.placeID = placeID;
-//		this.orderTime = orderTime;
-//		this.orderNum = orderNum;
-//		this.orderStatus = orderStatus;
-//		this.totalCost = totalCost;
-//	}
-
 
 	public Integer getReserveOrderID() {
 		return reserveOrderID;
@@ -131,22 +98,6 @@ public class ReserveOrder {
 		this.reserveOrderID = reserveOrderID;
 	}
 
-//	public Integer getgUserID() {
-//		return gUserID;
-//	}
-//
-//	public void setgUserID(Integer gUserID) {
-//		this.gUserID = gUserID;
-//	}
-
-//	public Integer getoUserID() {
-//		return oUserID;
-//	}
-//
-//	public void setoUserID(Integer oUserID) {
-//		this.oUserID = oUserID;
-//	}
-
 	public Date getReserveDate() {
 		return reserveDate;
 	}
@@ -155,29 +106,6 @@ public class ReserveOrder {
 		this.reserveDate = reserveDate;
 	}
 
-//	public Integer getTimeID() {
-//		return timeID;
-//	}
-//
-//	public void setTimeID(Integer timeID) {
-//		this.timeID = timeID;
-//	}
-//
-//	public Integer getPlaceID() {
-//		return placeID;
-//	}
-//
-//	public void setPlaceID(Integer placeID) {
-//		this.placeID = placeID;
-//	}
-
-//	public Integer getCourtID() {
-//		return courtID;
-//	}
-//
-//	public void setCourtID(Integer courtID) {
-//		this.courtID = courtID;
-//	}
 	public Timestamp getOrderTime() {
 		return orderTime;
 	}
@@ -210,7 +138,6 @@ public class ReserveOrder {
 		this.totalCost = totalCost;
 	}
 	
-	
 	//=====================================================================//
 	public GeneralUser getGeneralUser() {
 		return generalUser;
@@ -228,7 +155,6 @@ public class ReserveOrder {
 		this.ownerUser = ownerUser;
 	}
 
-
 	public TimeRef getTimeRef() {
 		return timeRef;
 	}
@@ -245,7 +171,6 @@ public class ReserveOrder {
 		this.place = place;
 	}
 
-	
 	public Court getCourt() {
 		return court;
 	}
@@ -261,50 +186,4 @@ public class ReserveOrder {
 				+ court + ", orderTime=" + orderTime + ", orderNum=" + orderNum + ", orderStatus=" + orderStatus
 				+ ", totalCost=" + totalCost + "]";
 	}
-
-
-
-
-//	@Override
-//	public String toString() {
-//		return "ReserveOrder [reserveOrderID=" + reserveOrderID + ", generalUser=" + generalUser + ", ownerUser="
-//				+ ownerUser + ", reserveDate=" + reserveDate + ", time=" + time + ", place=" + place + ", orderTime="
-//				+ orderTime + ", orderNum=" + orderNum + ", orderStatus=" + orderStatus + ", totalCost=" + totalCost
-//				+ "]";
-//	}
-
-	
-	
-//	 for join gName from gUserID
-//    public com.pichill.generaluser.entity.GeneralUser getGeneralUser() {
-//	    com.pichill.generaluser.service.GeneralUserService generaluserSvc = new com.pichill.generaluser.service.GeneralUserService();
-//	    com.pichill.generaluser.entity.GeneralUser generalUser = generaluserSvc.getOneGeneralUser(gUserID);
-//	    return generalUser;
-//    }
-//    
-//     for join rsvdCnts from oUserID
-//    public com.pichill.owneruser.entity.OwnerUser getOwnerUser() {
-//    	com.pichill.owneruser.service.OwnerUserService owneruserSvc = new com.pichill.owneruser.service.OwnerUserService();
-//    	com.pichill.owneruser.entity.OwnerUser ownerUser = owneruserSvc.getOneOwnerUser(oUserID);
-//	    return ownerUser;
-//    }
-//    
-//     for join reserveTime from timeID
-//    public com.pichill.time.Time getTime() {
-//	    com.pichill.time.TimeService timeSvc = new com.pichill.time.TimeService();
-//	    com.pichill.time.Time time = timeSvc.getOneTime(timeID);
-//	    return time;
-//    }
-//    
-//     for join placeName from placeID
-//    public com.pichill.place.Place getPlace() {
-//    	com.pichill.place.PlaceService placeSvc = new com.pichill.place.PlaceService();
-//    	com.pichill.place.Place place = placeSvc.getOnePlace(placeID);
-//    	return place;
-//    }
-    
-	
-
-	
-
 }
