@@ -98,7 +98,32 @@ pageContext.setAttribute("list", list);
 }
 
 div.excel {
-border: 1px solid red;
+/* border: 1px solid red; */
+height: 30px;
+margin-bottom: 10px;
+padding: 0;
+}
+
+button.excel {
+/* border: 1px solid blue; */
+background-color: #207DCA;
+color: white;
+height: 100%;
+margin: 0;
+padding: 0;
+width: 60px;
+border-radius: 10px;
+}
+
+button.excel:hover {
+/* border: 1px solid blue; */
+background-color: orange;
+color: black;
+height: 100%;
+margin: 0;
+padding: 0;
+width: 60px;
+border-radius: 10px;
 }
 </style>
 
@@ -274,7 +299,7 @@ border: 1px solid red;
 				<div class="excel">
 					<form action="<%=request.getContextPath()%>/exportexcel"
 						method="post">
-						<button>¤U¸ü</button>
+						<button class="excel">¤U¸ü</button>
 					</form>
 				</div>
 				<table id="myTable" class="table table-borderless table-data3"
