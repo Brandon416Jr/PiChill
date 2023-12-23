@@ -15,16 +15,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.owneruser.entity.OwnerUser;
+import com.pichill.owneruser.service.OwnerUserService;
 import com.pichill.place.Place;
+import com.pichill.place.PlaceService;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.reserveorder.service.ReserveOrderService;
+import com.pichill.time.TimeRef;
+import com.pichill.time.TimeService;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024 * 1024)
 @WebServlet(name = "ReserveOrderServlet", value = "/reserveorder/reserveorder.do")
 public class ReserveOrderServlet extends HttpServlet {
 	
 	private ReserveOrderService reserveOrderService;
+	private Integer gUserID;
+	private Integer oUserID;
+	private Integer timeID;
+	private Integer placeID;
 	
 	@Override
 	public void init() throws ServletException {
@@ -267,7 +276,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
 		
 		req.setAttribute("reserveOrder", reserveOrder);
-		return "/reserveorder/allOrder.jsp";
+		return "/reserveorder/updateOrderStatus.jsp";
 	}
 
 	private String update(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -279,8 +288,12 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 		Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
 		
+		GeneralUserService generalUserService = new GeneralUserService();
+		GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
 		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 
+		OwnerUserService ownerUserService = new OwnerUserService();
+		OwnerUser ownerUser = ownerUserService.getOneOwnerUser(oUserID);
 		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
 		
 		//預約日期
@@ -293,10 +306,14 @@ public class ReserveOrderServlet extends HttpServlet {
 //			errorMsgs.add("請選擇預約日期!");
 //		}
 		//時段編號: 根據開館閉館時間判斷
+		TimeService timeService = new TimeService();
+		TimeRef timeRef = timeService.getOneTime(timeID);
 		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
 		
 		
 		//場地編號
+		PlaceService placeService = new PlaceService();
+		Place place = placeService.getOnePlace(placeID);
 		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
 		
 		//下單時間Timestamp自動產生
@@ -313,7 +330,7 @@ public class ReserveOrderServlet extends HttpServlet {
 //			errorMsgs.add("請輸入正確的Email格式");
 //		}
 
-		//訂單狀態: 0→訂單取消 1→訂單成立 2→訂單已完成
+		//訂單狀態: 1→訂單成立 2→訂單完成 3→訂單已取消
 		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus"));
 //		String inputParameter = req.getParameter("orderStatus");
 //		Integer orderStatus = 0;

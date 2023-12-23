@@ -140,6 +140,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 			<!-- 			<div></div> -->
 			<!-- 			<div></div> -->
 			<!-- 			<div></div> -->
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
 			<div class="container" id="datatable">
 				<table id="table_id"
 					class="display hover cell-border stripe responsive nowrap">
@@ -167,7 +168,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
-							<td>${reserveOrder.generalUser.gUserID = 11000001}</td>
+							<td>${reserveOrder.generalUser.gUserID}</td>
 							<td>${reserveOrder.generalUser.gName}</td>
 							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
 							<td>${reserveOrder.court.loc}</td>
@@ -178,13 +179,13 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.totalCost}</td>
-							<td>${reserveOrder.orderStatus == 1 ? "訂單成立" : reserveOrder.orderStatus == 2 ? "訂單完成" : "訂單已取消"}</td>
+							<td>${reserveOrder.orderStatus == 3 ? "訂單已取消"}</td>
 							<td>
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
-									<input type="hidden" name="action" value="getOne_For_Update">
+								
+									<input type="hidden" name="action" value="update">
 									<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
-									<input type="submit" id="cancel" value="取消" >
-								</FORM>
+									<input type="submit" id="cancel" value="送出取消請求" >
+								
 							</td>
 						</tr>
 					</tbody>
@@ -193,6 +194,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 				</div>
 		</main>
 	</div>
+	</FORM>
 	<!----------------------------------------------- footer 區 ------------------------------------------------------->
 	<footer class="footer">
 
