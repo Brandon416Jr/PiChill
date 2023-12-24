@@ -35,19 +35,19 @@ public class Report {
 	@Expose
 	private Integer manageID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
-//	private Post post;
-	@Column(name = "postID",updatable = false)
-	@Expose
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID",updatable = false)
+	private Post post;
+//	@Column(name = "postID",updatable = false)
+//	@Expose
+//	private Integer postID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
-//	private Comment comment;
-	@Column(name = "commentID",updatable = false)
-	@Expose
-	private Integer commentID;
+	@ManyToOne
+	@JoinColumn(name = "commentID",referencedColumnName = "commentID",updatable = false)
+	private Comment comment;
+//	@Column(name = "commentID",updatable = false)
+//	@Expose
+//	private Integer commentID;
 	
 	@Column(name = "reportTime", updatable = false)
 	@CreationTimestamp
@@ -93,29 +93,37 @@ public class Report {
 		this.manageID = manageID;
 	}
 
-//	public Post getPost() {
-//		return post;
+	public Comment getComment() {
+		return comment;
+	}
+
+	public void setComment(Comment comment) {
+		this.comment = comment;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+//	public Integer getCommentID() {
+//		return commentID;
 //	}
 //
-//	public void setPost(Post post) {
-//		this.post = post;
+//	public Integer getPostID() {
+//		return postID;
 //	}
-
-	public Integer getCommentID() {
-		return commentID;
-	}
-
-	public Integer getPostID() {
-		return postID;
-	}
-
-	public void setPostID(Integer postID) {
-		this.postID = postID;
-	}
-
-	public void setCommentID(Integer commentID) {
-		this.commentID = commentID;
-	}
+//
+//	public void setPostID(Integer postID) {
+//		this.postID = postID;
+//	}
+//
+//	public void setCommentID(Integer commentID) {
+//		this.commentID = commentID;
+//	}
 
 	public Timestamp getReportTime() {
 		return reportTime;

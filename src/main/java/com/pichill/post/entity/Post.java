@@ -84,17 +84,17 @@ public class Post {
 	@Expose
 	private Integer commentCnt;
 
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("commentID asc")
-//	private transient Set<Comment> comment;
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("commentID asc")
+	private Set<Comment> comment;
 	
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("reportID asc")
-//	private Set<Report> reports;
-//
-//	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-//	@OrderBy("likeID asc")
-//	private Set<ForumLike> like;
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("reportID asc")
+	private Set<Report> reports;
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	@OrderBy("likeID asc")
+	private Set<ForumLike> like;
 
 	public Post() {
 		super();
@@ -200,27 +200,27 @@ public class Post {
 		this.commentCnt = commentCnt;
 	}
 
-//	public Set<Comment> getComment() {
-//		return comment;
-//	}
-//
-//	public void setComment(Set<Comment> comment) {
-//		this.comment = comment;
-//	}
+	public Set<Comment> getComment() {
+		return comment;
+	}
 
-//	public Set<Report> getReports() {
-//		return reports;
-//	}
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
+	public Set<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
+	}
 //
-//	public void setReports(Set<Report> reports) {
-//		this.reports = reports;
-//	}
-//
-//	public Set<ForumLike> getLike() {
-//		return like;
-//	}
-//
-//	public void setLike(Set<ForumLike> like) {
-//		this.like = like;
-//	}
+	public Set<ForumLike> getLike() {
+		return like;
+	}
+
+	public void setLike(Set<ForumLike> like) {
+		this.like = like;
+	}
 }

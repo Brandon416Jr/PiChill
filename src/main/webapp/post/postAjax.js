@@ -381,6 +381,26 @@ $(document).ready(function() {
 	$(document).ready(function() {
 		fetchAndDisplayLatestData();
 	});
+	//=============新增揪團(預約編號)=============//
+	$("#group").on("click", function() {
+console.log("aa");
+    $.ajax({
+        url: "post.do", // 替换成实际的API端点
+        type: "POST",
+        data: { action: "get_order" }, // 传递的参数
+        dataType: "json",
+        success: function(data2) {
+            // 处理Ajax响应数据，可以根据需要进行操作
+            console.log("揪团数据：", data2);
+
+            // 这里你可以更新页面或执行其他操作，根据responseData的内容
+        },
+        error: function(xhr, status, error) {
+            console.error("发生错误：", status, error);
+            // 处理错误情况
+        }
+    });
+});
 	//=============新增文章(揪團))===============//
 	$("#pb-group").on("click", function() {
 		var newPostTitle = $("#floatingTextarea3").val();
