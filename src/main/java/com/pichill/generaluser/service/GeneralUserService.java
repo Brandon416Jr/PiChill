@@ -26,20 +26,11 @@ public class GeneralUserService {
 	public GeneralUser getOneGeneralUser(Integer gUserID) {
 		return dao.findByPK(gUserID);
 	}
-	public List<GeneralUser> getOrderBygUserID(Integer gUserID) {
-		return dao.findBygUserID(gUserID);
-	}
-	
-	//用一般會員ID查預約訂單
-//	public GeneralUser getOrderBygUserID(Integer reserveOrderID) {
-//		GeneralUser generalUser = dao.findBygUserID(reserveOrderID);
-//		ReserveOrderService reserveOrderService = new ReserveOrderService();
-//		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
-//		return generalUser;
-//	}
-
 
 	public List<GeneralUser> getAll() {
 		return dao.getAll();
 	}
+//	public List<ReserveOrder> getAllList(Integer gUserID) {
+//		return dao.getAllList();
+//	}
 }

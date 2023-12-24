@@ -12,6 +12,6 @@ public interface GeneralUserDAO {
 	int add(GeneralUser generalUser);
 	int update(GeneralUser generalUser);
 	GeneralUser findByPK(Integer gUserID);
-	List<GeneralUser> findBygUserID(Integer reserveOrderID);
 	List<GeneralUser> getAll();
+//	List<ReserveOrder> getAllList();
 }

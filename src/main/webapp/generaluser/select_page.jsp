@@ -75,9 +75,21 @@
        <input type="submit" value="送出">
     </FORM>
   </li>
+<!--   <li> -->
+<%--      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" > --%>
+<!--        <b>選擇會員編號:</b> -->
+<!--        <select size="1" name="gUserID"> -->
+<%--          <c:forEach var="generalUser" items="${generalUserSvc.all}" >  --%>
+<%--           <option value="${generalUser.gUserID}">${generalUser.gUserID} --%>
+<%--          </c:forEach>    --%>
+<!--        </select> -->
+<!--        <input type="hidden" name="action" value="getOneList_Display"> -->
+<!--        <input type="submit" value="送出"> -->
+<!--     </FORM> -->
+<!--   </li> -->
   
   <li>
-     <FORM METHOD="post" ACTION="generaluser.do" >
+     <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" >
        <b>選擇會員姓名:</b>
        <select size="1" name="gUserID">
          <c:forEach var="generalUser" items="${generalUserSvc.all}" > 

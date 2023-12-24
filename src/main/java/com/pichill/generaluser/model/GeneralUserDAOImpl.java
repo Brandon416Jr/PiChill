@@ -74,26 +74,6 @@ private SessionFactory factory;
 		}
 		return null;
 	}
-	//用會員ID查預約紀錄
-	@Override
-	public List<GeneralUser> findBygUserID(Integer gUserID) {
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		try {
-			session.beginTransaction();
-//			GeneralUser generalUser = session.get(GeneralUser.class, gUserID);
-			NativeQuery<GeneralUser> query = session.createNativeQuery(
-					"SELECT * FROM reserveOrder", GeneralUser.class);
-			List<GeneralUser> list = query.list();
-			session.getTransaction().commit();
-			System.out.println("用會員ID查單筆成功!");
-			return list;
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println("用會員ID查單筆失敗QQ");
-			session.getTransaction().rollback();
-		}
-		return null;
-	}
 
 	@Override
 	public List<GeneralUser> getAll() {
@@ -111,6 +91,26 @@ private SessionFactory factory;
 		}
 		return null;
 	}
-	
+//	@Override
+//	public List<ReserveOrder> getAllList() {
+//		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//		try {
+//			session.beginTransaction();
+////			NativeQuery<ReserveOrder> query = session.createNativeQuery(
+////					"SELECT r.reserveOrderID, g.gUserID, g.gName,  p.ball, c.loc, c.courtName, p.placeName, r.reserveDate, t.reserveTimer.orderTime, r.orderNum, r.totalCost, r.orderStatus"+
+////			        "FROM reserveOrder r JOIN generalUser g ON r.gUserID = g.gUserID JOIN time t ON r.timeID = t.timeID JOIN place p ON r.placeID = p.placeID JOIN court c ON p.courtID = c.courtID WHERE g.gUserID = 11000001", ReserveOrder.class);
+////			List<ReserveOrder> list = query.list();
+//
+//			List<ReserveOrder> list = session.createQuery("from ReserveOrder where gUserID = 11000001 order by reserveOrderID", ReserveOrder.class).list();
+//			session.getTransaction().commit();
+//			System.out.println("查全部成功!");
+//			return list;
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//			System.out.println("查全部失敗QQ");
+//			session.getTransaction().rollback();
+//		}
+//		return null;
+//	}
 
 }

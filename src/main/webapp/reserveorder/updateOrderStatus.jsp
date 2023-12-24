@@ -12,22 +12,21 @@
 <%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<%--<%
+<%
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 
- %>--%>
-<%--<%
+ %>
+<%
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 
- %>--%>
-<%
+ %>
+ 
+ <%--<%
  Integer gUserID = 11000001;
- ReserveOrderService reserveOrderService = new ReserveOrderService();
- List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
- pageContext.setAttribute("list",list);
- pageContext.setAttribute("gUserID",gUserID);
-
-%>
+ GeneralUserService generalUserSvc = new GeneralUserService();
+ GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
+ pageContext.setAttribute("generaluser",generalUser);
+%>--%>
 
 <%-- <%
 //  Integer reserveOrderID = 63000001;
@@ -141,6 +140,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 			<!-- 			<div></div> -->
 			<!-- 			<div></div> -->
 			<!-- 			<div></div> -->
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
 			<div class="container" id="datatable">
 				<table id="table_id"
 					class="display hover cell-border stripe responsive nowrap">
@@ -148,7 +148,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<!-- 欄位名稱 -->
 						<tr>
 							<th>預約訂單編號</th>
-<!-- 							<th>會員編號</th> -->
+							<th>會員編號</th>
 							<th>姓名</th>
 							<th>球類</th>
 							<th>地區</th>
@@ -165,11 +165,10 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 					</thead>
 
 					<tbody>
-					<c:forEach var="reserveOrder" items="${list}" >
 						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
-<%-- 							<td>${reserveOrder.generalUser.getgUserID}</td> --%>
+							<td>${reserveOrder.generalUser.gUserID}</td>
 							<td>${reserveOrder.generalUser.gName}</td>
 							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
 							<td>${reserveOrder.court.loc}</td>
@@ -180,22 +179,22 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.totalCost}</td>
-							<td>${reserveOrder.orderStatus == 1 ? "訂單成立" : reserveOrder.orderStatus == 2 ? "訂單完成" : "訂單已取消"}</td>
+							<td>${reserveOrder.orderStatus == 3 ? "訂單已取消"}</td>
 							<td>
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
-									<input type="hidden" name="action" value="getOne_For_Update">
+								
+									<input type="hidden" name="action" value="update">
 									<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
-									<input type="submit" id="cancel" value="取消" >
-								</FORM>
+									<input type="submit" id="cancel" value="送出取消請求" >
+								
 							</td>
 						</tr>
-						</c:forEach>
 					</tbody>
 
 				</table>
 				</div>
 		</main>
 	</div>
+	</FORM>
 	<!----------------------------------------------- footer 區 ------------------------------------------------------->
 	<footer class="footer">
 
@@ -221,6 +220,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 			</header>
 		</div>
 	</footer>
+
 	<script>
 		$(document)
 				.ready(
