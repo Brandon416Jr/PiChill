@@ -12,21 +12,22 @@
 <%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<%
+<%--<%
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 
- %>
-<%
+ %>--%>
+<%--<%
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 
- %>
- 
- <%--<%
+ %>--%>
+<%
  Integer gUserID = 11000001;
- GeneralUserService generalUserSvc = new GeneralUserService();
- GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
- pageContext.setAttribute("generaluser",generalUser);
-%>--%>
+ ReserveOrderService reserveOrderService = new ReserveOrderService();
+ List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
+ pageContext.setAttribute("list",list);
+ pageContext.setAttribute("gUserID",gUserID);
+
+%>
 
 <%-- <%
 //  Integer reserveOrderID = 63000001;
@@ -147,7 +148,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<!-- 欄位名稱 -->
 						<tr>
 							<th>預約訂單編號</th>
-							<th>會員編號</th>
+<!-- 							<th>會員編號</th> -->
 							<th>姓名</th>
 							<th>球類</th>
 							<th>地區</th>
@@ -164,10 +165,11 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 					</thead>
 
 					<tbody>
+					<c:forEach var="reserveOrder" items="${list}" >
 						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
-							<td>${reserveOrder.generalUser.gUserID = 11000001}</td>
+<%-- 							<td>${reserveOrder.generalUser.getgUserID}</td> --%>
 							<td>${reserveOrder.generalUser.gName}</td>
 							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
 							<td>${reserveOrder.court.loc}</td>
@@ -187,6 +189,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 								</FORM>
 							</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 
 				</table>
@@ -218,7 +221,6 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 			</header>
 		</div>
 	</footer>
-
 	<script>
 		$(document)
 				.ready(

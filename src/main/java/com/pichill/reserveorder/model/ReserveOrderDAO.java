@@ -10,7 +10,7 @@ public interface ReserveOrderDAO {
 	int update(ReserveOrder reserveOrder);
 	ReserveOrder findByPK(Integer reserveOrderID);
 	List<ReserveOrder> getAll();
-//	List<ReserveOrder> getgUserOrderList();
+	List<ReserveOrder> findBygUserID(Integer gUserID);
 	
 }
 

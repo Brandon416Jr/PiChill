@@ -1,5 +1,6 @@
 package com.pichill.reserveorder.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.post.entity.Post;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.util.HibernateUtil;
 
@@ -77,13 +79,8 @@ private ReserveOrder generalUser;
 		try {
 			session.beginTransaction();
 //			NativeQuery<ReserveOrder> query = session.createNativeQuery(
-//					"SELECT r.reserveOrderID, g.gUserID, g.gName, o.oUserID, r.reserveDate, t.timeID, t.reserveTime, c.courtName, "
-//					+ "c.loc, p.placeID, p.placeName, p.ball, r.orderTime, r.orderNum, r.orderStatus, r.totalCost"+
-//			        "FROM reserveOrder r JOIN generalUser g ON r.gUserID = g.gUserID"+
-//							            "JOIN ownerUser o ON r.oUserID = o.oUserID"+
-//			                            "JOIN time t ON r.timeID = t.timeID"+
-//							            "JOIN place p ON r.placeID = p.placeID"+
-//			                            "JOIN court c ON p.courtID = c.courtID", ReserveOrder.class);
+//					"SELECT r.reserveOrderID, g.gUserID, g.gName,  p.ball, c.loc, c.courtName, p.placeName, r.reserveDate, t.reserveTimer.orderTime, r.orderNum, r.totalCost, r.orderStatus"+
+//			        "FROM reserveOrder r JOIN generalUser g ON r.gUserID = g.gUserID JOIN time t ON r.timeID = t.timeID JOIN place p ON r.placeID = p.placeID JOIN court c ON p.courtID = c.courtID WHERE g.gUserID = 11000001", ReserveOrder.class);
 //			List<ReserveOrder> list = query.list();
 
 			List<ReserveOrder> list = session.createQuery("from ReserveOrder", ReserveOrder.class).list();
@@ -97,5 +94,22 @@ private ReserveOrder generalUser;
 		}
 		return null;
 	}
-	
+	public List<ReserveOrder> findBygUserID(Integer gUserID) {
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			session.beginTransaction();
+			List<ReserveOrder> list = session.createQuery("select r from ReserveOrder r where r.generalUser.gUserID = :gUserID"
+					, ReserveOrder.class)
+			.setParameter("gUserID", gUserID)
+            .list();
+			session.getTransaction().commit();
+			System.out.println("查會員預約紀錄成功!");
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("查會員預約紀錄失敗QQ");
+			session.getTransaction().rollback();
+		}
+		return null;
+	}
 }

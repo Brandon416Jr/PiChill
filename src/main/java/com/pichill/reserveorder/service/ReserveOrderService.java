@@ -32,9 +32,9 @@ public class ReserveOrderService {
 		return dao.getAll();
 	}
 	
-//	public List<ReserveOrder> getgUserOrderList() {
-//		return dao.getgUserOrderList();
-//	}
+	public List<ReserveOrder> getgUserID(Integer gUserID) {
+		return dao.findBygUserID(gUserID);
+	}
 
 	
 	
