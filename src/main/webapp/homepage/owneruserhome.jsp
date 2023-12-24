@@ -55,11 +55,11 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ownerusernotify.jsp" class="nav-link">通知</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
               </ul>
                 </ul>
 

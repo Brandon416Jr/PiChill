@@ -1,15 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
-<%@ page import="com.pichill.court.Court"%>
-<%@ page import="com.pichill.place.Place"%>
+<%@ page import="com.pichill.court.*"%>
+<%@ page import="com.pichill.place.*"%>
+<%@ page import="java.util.Date" %>
+    
+ <%
+//見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
+Court newCourt = (Court) request.getAttribute("newCourt");
+%>   
     
 <%
-//見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Court court = (Court) request.getAttribute("court");
 Place place = (Place) request.getAttribute("place");
 %>
     
-    
+<%
+Court court = (Court) session.getAttribute("court");
+// 寫死
+// Integer courtID = 61000001;
+// CourtService courtSvc = new CourtService();
+// Court court = courtSvc.getOneCourt(courtID);
+// pageContext.setAttribute("court",court);
+%>    
     
 <!DOCTYPE html>
 <html lang="zh-Hant">
@@ -72,13 +83,12 @@ Place place = (Place) request.getAttribute("place");
 
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">首頁</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="./pic/face.svg" alt="SVG" />企業會員中心</a>
-                    </li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
                 </ul>
 
             </header>
@@ -195,32 +205,39 @@ Place place = (Place) request.getAttribute("place");
                 <br><br>
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="courtRule" style="position: relative; left: 23px;">場館須知</label><br><br>
+                <label for="courtRule" style="position: relative; ">場館須知</label><br><br>
                 <input type="text" id="courtRule" name="courtRule" value="<%=(court==null)? "" :court.getCourtRule()%>" required
                  placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"></textarea>
                 <br><br><br>
 
                 <label for="courtPic" style="position: relative;left: 23px;">場館照片</label><br><br>
-                <div id="blob_holder"><img src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${param.gUserID}" width="100px"></div>
-                <input type="file" id="courtPic" name="courtPic" onclick="previewImage()" multiple="multiple" />
+                	<input type="file" value="${newCourt.courtPic}"
+					id="uploadImg" name="courtPic" onchange="preview()" multiple="multiple"
+					class="form-control-file" />
+					<div id="blob_holder">
+					  <img src="#" width="300px" >
+					</div>						
                 <br>
             </form>
             <br><br><br>
 
 
 
-                <label for="placeFee" style="position: relative;left: 2px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
+                <label for="placeFee" style="position: relative;left: 23px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
 		        <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
 		                <label for="ball">場地類型：</label>
 		                <select id="ball" name="ball">
-		                    <option value="0">籃球場</option>
-		                    <option value="1">排球場</option>
-		                    <option value="2">羽球場</option>
+		                 <c:forEach var="place" items="${placeSvc.all}">
+					  		<option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.ball == 0 ? "籃球" : place.ball == 1 ? "排球" : "羽球"}
+				    	 </c:forEach>
+<!-- 		                    <option value="0">籃球場</option> -->
+<!-- 		                    <option value="1">排球場</option> -->
+<!-- 		                    <option value="2">羽球場</option> -->
 		                    
 		                </select>
 		
 		                <label for="itemName">名稱:</label>
-		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" >
+		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" value="${place.placeName            }" placeholder="如A、B、甲、乙" >
 		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
 		
 		                <label for="price" style="position: relative;left: 20px;">價格:</label>
@@ -233,83 +250,51 @@ Place place = (Place) request.getAttribute("place");
 
             	<label  for="itemTable" style="position: relative;left: 23px;">場地列表</label><br><br>
 
-            <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
-                <table id="itemTable">
-                    <thead>
-                        <tr>
-                            <th>場地類型</th>
-                            <th>名稱</th>
-                            <th>價格</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
+	            <div class="itemTable" style="width: 380px;position: relative;left: 24px; background-color: #DAE4F4;">
+	                <table id="itemTable">
+	                    <thead>
+	                        <tr>
+	                            <th>場地類型</th>
+	                            <th>名稱</th>
+	                            <th>價格</th>
+	                            <th>操作</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody></tbody>
+	                </table>
+	            </div>
 
 
 
             <br><br><br><br><br>
 
             <!-------- 送出按鈕  ------->
-            <input type="hidden" name="action" value="update">
-			<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
-			<input type="button" value="確認修改" name="按鈕名稱" style="width: 150px; height: 44px;"> 
+            <input type="hidden" name="action" value="insert">
+			<input type="submit" class="btn btn-primary btn-sm" value="送出新增" style="width: 150px; height: 44px;">
+
         </FORM>
         </main>
     </div>
     </div>
     
   <!--======================================= 照片上傳 / 預覽 =======================================-->
-    <script type="text/javascript">
-		//清除提示信息
-		function hideContent(d) {
-		     document.getElementById(d).style.display = "none";
-		}
-		
-		//照片上傳-預覽用
-		var filereader_support = typeof FileReader != 'undefined';
-		if (!filereader_support) {
-			alert("No FileReader support");
-		}
-		acceptedTypes = {
-				'image/png' : true,
-				'image/jpeg' : true,
-				'image/gif' : true
+    <script>
+    function preview() {
+
+		var fileInput = document.getElementById('uploadImg');
+		var file = fileInput.files[0];
+
+		var reader = new FileReader();
+
+		reader.onload = function() {
+			document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="300px"/>';
 		};
-		function previewImage() {
-			var courtPic1 = document.getElementById("courtPic");
-			courtPic1.addEventListener("change", function(event) {
-				var files = event.target.files || event.dataTransfer.files;
-				for (var i = 0; i < files.length; i++) {
-					previewfile(files[i])
-				}
-			}, false);
+
+		if (file) {
+			reader.readAsDataURL(file);
 		}
-		function previewfile(file) {
-			if (filereader_support === true && acceptedTypes[file.type] === true) {
-				var reader = new FileReader();
-				reader.onload = function(event) {
-					var image = new Image();
-					image.src = event.target.result;
-					image.width = 130;
-					image.height = 150;
-					image.border = 0;
-					if (blob_holder.hasChildNodes()) {
-						blob_holder.removeChild(blob_holder.childNodes[0]);
-					}
-					blob_holder.appendChild(image);
-				};
-				reader.readAsDataURL(file);
-				document.getElementById('submit').disabled = false;
-			} else {
-				blob_holder.innerHTML = "<div  style='text-align: left;'>" + "● filename: " + file.name
-						+ "<br>" + "● ContentTyp: " + file.type
-						+ "<br>" + "● size: " + file.size + "bytes"
-						+ "<br>" + "● 上傳ContentType限制: <b> <font color=red>image/png、image/jpeg、image/gif </font></b></div>";
-				document.getElementById('submit').disabled = true;
-			}
-		}
+
+	}
 	</script>
 
 <!--======================================= 新增場地 / 編輯 / 預覽 =======================================-->

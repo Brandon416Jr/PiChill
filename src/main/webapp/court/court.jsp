@@ -1,11 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.court.Court"%>
+<%@ page import="com.pichill.owneruser.entity.*"%>
+<%@ page import="com.pichill.court.*"%>
+<%@ page import="com.pichill.place.*"%>
     
 <%
 //從資料庫取出的court, 也可以是輸入格式有錯誤時的court物件
 Court court = (Court) request.getAttribute("court");
+
 %>  
+    
+    
+    
+    
+    
     
 <!DOCTYPE html>
 <html>
@@ -61,8 +69,7 @@ Court court = (Court) request.getAttribute("court");
 					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-					<li class="nav-item"><a href="#" class="nav-link"> 
-					<img src="<%=request.getContextPath()%>/owneruser/pic/face.svg" alt="企業會員頭像" />企業會員中心</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
 				</ul>
 			</header>
 		</div>
@@ -152,6 +159,16 @@ Court court = (Court) request.getAttribute("court");
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>球館地址:</span>
                 <input type="text" id="courtAddress" style="position: relative; left: 17px;" name="courtAddress" value="<%= (court == null) ? "臺北市大安區通化街11巷95號1樓" : court.getCourtAddress()%> " required/>
+                <br><br>
+                
+            <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>開館時間:</span>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtOpenTime" value="<%= (court == null) ? "07:00:00" : court.getCourtOpenTime()%> " required/>
+                <br><br>	
+		
+			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
+                <span>開館時間:</span>
+                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtCloseTime" value="<%= (court == null) ? "21:00:00" : court.getCourtCloseTime()%> " required/>
                 <br><br>		
 		
 			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
@@ -166,20 +183,12 @@ Court court = (Court) request.getAttribute("court");
                 <input type="text" id="loc" style="position: relative; left: 50px;" name="loc" value="<%= (court == null) ? "大安區" : court.getLoc()%> " required/>
                 <br><br>		
 		
-			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>開館時間:</span>
-                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtOpenTime" value="<%= (court == null) ? "07:00:00" : court.getCourtOpenTime()%> " required/>
-                <br><br>	
-		
-			<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>開館時間:</span>
-                <input type="text" id="courtOpenTime" style="position: relative; left: 17px;" name="courtCloseTime" value="<%= (court == null) ? "21:00:00" : court.getCourtCloseTime()%> " required/>
-                <br><br>	
+				
 		
 		
 		        <span>申請狀態:</span>
                 <% int courtAS = court.getCourtApplyStatus(); %>
-				<select name="courtApplyStatus 申" disabled="disabled">
+				<select name="courtApplyStatus" disabled="disabled">
 					<option value="0" <%=courtAS == 0 ? "selected" : ""%>>審核中</option>
 					<option value="1" <%=courtAS == 1 ? "selected" : ""%>>審核通過</option>
 					<option value="1" <%=courtAS == 1 ? "selected" : ""%>>審核未通過</option>
@@ -194,7 +203,7 @@ Court court = (Court) request.getAttribute("court");
                 <br>
                 <br>
                 
-                <label for="price" style="position: relative;left: 1px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
+                <label for="price" style="position: relative;left: 1px;" >請輸入各時段之費用(每時段以一小時計)</label><br><br>
 		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
 		                <label for="ball">場地類型：</label>
 		                <select id="ball" name="ball">
@@ -205,7 +214,12 @@ Court court = (Court) request.getAttribute("court");
 		                </select>
 		
 		                <label for="placeName">名稱:</label>
-		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" placeholder="如A、B、甲、乙" >
+		                
+		                <c:forEach var="place" items="${placeSvc.all}">
+		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" 
+		                value="${place.placeName}"  placeholder="如A、B、甲、乙" >
+					  	
+				    	</c:forEach>
 		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
 		
 		                <label for="priceFee" style="position: relative;left: 20px;">價格:</label>
@@ -231,9 +245,16 @@ Court court = (Court) request.getAttribute("court");
                     <tbody></tbody>
                 </table>
             </div>
-
-
-                
+			<c:forEach var="court" items="${list}" >
+<thead>
+                        <tr>
+                            <th>場地類型</th>
+                            <th>名稱</th>
+                            <th>價格</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+            </c:forEach>   
                 <br><br><br>
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">

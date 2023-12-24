@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
@@ -40,6 +41,7 @@ public class OwnerUserServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 
 		String action = req.getParameter("action");
+		System.out.println(action);
 		String forwardPath = "";
 		if(action != null){
 			  action.hashCode(); 
@@ -63,6 +65,9 @@ public class OwnerUserServlet extends HttpServlet {
 			//來自owneruser.jsp
 			forwardPath = update_myData(req, res);
 			break;
+		case "logout":
+			forwardPath = logout(req, res);
+			break;			
 //		case "insert":
 //			// 來自new_OwnerUser.jsp的請求
 //			forwardPath = insert(req, res);
@@ -488,14 +493,30 @@ public class OwnerUserServlet extends HttpServlet {
 
 		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
 		req.setAttribute("ownerUser", ownerUser); // 資料庫update成功後,正確的的empVO物件,存入req
-		return "/owneruser/all_owneruser.jsp";
+		return "/owneruser/owneruser.jsp";
 		
 		
 	}
 	
 	
 	
+	//========================================================//
+	//                          登出                           //
+	//========================================================//
 	
+	private String logout(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 登出，终止session
+            System.out.println("成功登出");
+        }
+
+        res.setHeader("Cache-Control","no-cache"); 
+        res.setHeader("Pragma","no-cache");
+        res.setDateHeader ("Expires", 0);
+        
+        return "/login/oLogin/oUserLogin.jsp";
+	}	
 	
 	
 	
@@ -505,7 +526,7 @@ public class OwnerUserServlet extends HttpServlet {
 	
 	
 
-		//=========== insert 資料
+		//=========== insert 資料==============//
 //		private String insert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 //		System.out.println("成功insert");
 //		// 錯誤處理

@@ -334,6 +334,7 @@ public class Court implements Serializable{
 	//場地
 	// fetch 預設為 LAZY
 	@OneToMany(mappedBy = "court", cascade = CascadeType.ALL ,fetch = FetchType.EAGER)
+//	@JoinColumn(name = "courtID")
 	@OrderBy("placeID asc") 
 	private Set<Place> place; // Set不重複
 	

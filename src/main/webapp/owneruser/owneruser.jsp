@@ -53,7 +53,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
@@ -87,7 +87,8 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
 								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">球館管理</button>
+								data-bs-target="#forms-collapse" aria-controls="forms-collapse"
+								href="<%=request.getContextPath()%>/court/court.jsp">球館管理</button>
 
 						</li>
 						<li class="my-2">
