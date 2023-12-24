@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +26,8 @@ import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.post.entity.Post;
 import com.pichill.post.service.PostService;
 import com.pichill.post.service.PostServiceImpl;
+import com.pichill.reserveorder.entity.ReserveOrder;
+import com.pichill.reserveorder.service.ReserveOrderService;
 
 @WebServlet("/post/post.do")
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
@@ -53,15 +57,15 @@ public class PostServlet2 extends HttpServlet {
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getAll();
 			GeneralUserService generalSvc = new GeneralUserService();
-			List<GeneralUser> gUsers =generalSvc. getAll();
+			List<GeneralUser> gUsers = generalSvc.getAll();
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			 Map<String, Object> responseData = new HashMap<>();
-		        responseData.put("posts", posts);
-		        responseData.put("gUsers", gUsers);
+			Map<String, Object> responseData = new HashMap<>();
+			responseData.put("posts", posts);
+			responseData.put("gUsers", gUsers);
 			String json = gson.toJson(responseData);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-			System.out.println(json);
+//			System.out.println(json);
 			out.flush();
 		}
 	}
@@ -111,6 +115,38 @@ public class PostServlet2 extends HttpServlet {
 			out.print(json);
 			out.flush();
 		}
+		// ====得到預約編號bygUser=========
+		if ("get_order".equals(action)) {
+			ReserveOrderService reserveOrderSVC = new ReserveOrderService();
+//			Hibernate.initialize(court.getReserveOrder());
+			List<ReserveOrder> reserveOrderList = reserveOrderSVC.getOrderByID(11000001);
+			System.out.println("RRRRRRR" + reserveOrderList);
+		    List<Map<String, Object>> resultList = new ArrayList<>();
+
+			for (ReserveOrder reserveOrder : reserveOrderList) {
+				String courtName = reserveOrder.getCourt().getCourtName();
+				Integer ball = reserveOrder.getPlace().getBall();
+				Integer fee = reserveOrder.getPlace().getPlaceFee();
+				String time = reserveOrder.getTimeRef().getReserveTime();
+				 Date reserveDate = reserveOrder.getReserveDate();
+				System.out.println("場地名稱: " + courtName);
+				
+				 Map<String, Object> orderMap = new HashMap<>();
+			        orderMap.put("courtName", courtName);
+			        orderMap.put("ball", ball);
+			        orderMap.put("fee", fee);
+			        orderMap.put("time",time);
+			        orderMap.put("reserveDate", reserveDate);
+
+			        resultList.add(orderMap);
+			}
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String json = gson.toJson(resultList);
+			PrintWriter out = res.getWriter();
+			out.print(json);
+			System.out.println("json===" + json);
+			out.flush();
+		}
 		if ("insert_group".equals(action)) {
 
 			String postTitle = req.getParameter("postTitle");
@@ -144,7 +180,7 @@ public class PostServlet2 extends HttpServlet {
 			post.setCommentCnt(commentCnt);
 			PostService postSvc = new PostServiceImpl();
 			Post addedPost = postSvc.addPost(post);
-			
+
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			String json = gson.toJson(addedPost);
 

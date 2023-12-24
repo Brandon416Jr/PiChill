@@ -30,12 +30,12 @@ public class ForumLike {
 //	@Column(name = "gUserID")
 //	private Integer gUserID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID")
-//	private Post post;
-	@Column(name = "postID")
-	@Expose
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID")
+	private Post post;
+//	@Column(name = "postID")
+//	@Expose
+//	private Integer postID;
 	
 	@Column(name = "likeStatus")
 	@Expose
@@ -57,16 +57,24 @@ public class ForumLike {
 		this.generalUser = generalUser;
 	}
 
-	public Integer getPostID() {
-		return postID;
-	}
-
-	public void setPostID(Integer postID) {
-		this.postID = postID;
-	}
+//	public Integer getPostID() {
+//		return postID;
+//	}
+//
+//	public void setPostID(Integer postID) {
+//		this.postID = postID;
+//	}
 
 	public boolean isLikeStatus() {
 		return likeStatus;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	public void setLikeStatus(boolean likeStatus) {

@@ -38,20 +38,20 @@ public class Comment {
 //	@Column(name = "gUserID", updatable = false)
 //	private Integer gUserID;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
-//	private Post post;
-	@Column(name = "postID", updatable = false)
-	@Expose
-	private Integer postID;
+	@ManyToOne
+	@JoinColumn(name = "postID",referencedColumnName = "postID", updatable = false)
+	private Post post;
+//	@Column(name = "postID", updatable = false)
+//	@Expose
+//	private Integer postID;
 	
-	public Integer getPostID() {
-		return postID;
-	}
-
-	public void setPostID(Integer postID) {
-		this.postID = postID;
-	}
+//	public Integer getPostID() {
+//		return postID;
+//	}
+//
+//	public void setPostID(Integer postID) {
+//		this.postID = postID;
+//	}
 
 	@Column(name = "commentContent", columnDefinition = "text")
 	@Expose
@@ -62,9 +62,9 @@ public class Comment {
 	@CreationTimestamp
 	private Timestamp commentTime;
 	
-//	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//	@OrderBy("reportID asc")
-//	private Set<Report> reports;
+	@OneToMany(mappedBy = "comment",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OrderBy("reportID asc")
+	private Set<Report> reports;
 
 	public Integer getCommentID() {
 		return commentID;
@@ -82,13 +82,13 @@ public class Comment {
 		this.generalUser = generalUser;
 	}
 
-//	public Post getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(Post post) {
-//		this.post = post;
-//	}
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
 
 	public String getCommentContent() {
 		return commentContent;
@@ -106,11 +106,11 @@ public class Comment {
 		this.commentTime = commentTime;
 	}
 
-//	public  Set<Report> getReports() {
-//		return reports;
-//	}
-//
-//	public void setReports(Set<Report> reports) {
-//		this.reports = reports;
-//	}
+	public  Set<Report> getReports() {
+		return reports;
+	}
+
+	public void setReports(Set<Report> reports) {
+		this.reports = reports;
+	}
 }

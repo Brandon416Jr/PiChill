@@ -49,8 +49,10 @@ public class ForumLikeServiceImpl implements ForumLikeService {
 		if (like == null) {
 			GeneralUserService generalUserService = new GeneralUserService();
 			GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
+			PostService postSVC = new PostServiceImpl();
+			Post post = postSVC.getByPostID(postID);
 			ForumLike likepost = new ForumLike();
-			likepost.setPostID(postID);
+			likepost.setPost(post);
 			likepost.setGeneralUser(generalUser);
 			likepost.setLikeStatus(true);
 			dao.add(likepost);
