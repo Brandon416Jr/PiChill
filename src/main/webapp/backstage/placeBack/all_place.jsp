@@ -71,6 +71,35 @@ pageContext.setAttribute("list", list);
 	width: 100%;
 	box-sizing: border-box;
 }
+
+div.excel {
+/* border: 1px solid red; */
+height: 30px;
+margin-bottom: 10px;
+padding: 0;
+}
+
+button.excel {
+/* border: 1px solid blue; */
+background-color: #207DCA;
+color: white;
+height: 100%;
+margin: 0;
+padding: 0;
+width: 60px;
+border-radius: 10px;
+}
+
+button.excel:hover {
+/* border: 1px solid blue; */
+background-color: orange;
+color: black;
+height: 100%;
+margin: 0;
+padding: 0;
+width: 60px;
+border-radius: 10px;
+}
   </style>
 </head>
 <body class="animsition all-employees-page">
@@ -235,6 +264,12 @@ pageContext.setAttribute("list", list);
 
   <div class="page-container2">
     <div class="table-responsive m-b-40">
+    <div class="excel">
+					<form action="<%=request.getContextPath()%>/exportexcelplace"
+						method="post">
+						<button class="excel">¤U¸ü</button>
+					</form>
+				</div>
       <table id="myTable3" class="table table-borderless table-data3" style="overflow-x: auto">
         <thead>
           <tr>
