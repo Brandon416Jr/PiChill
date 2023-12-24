@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.manage.service.ManageService;
+import com.pichill.reserveorder.entity.ReserveOrder;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024 * 1024)
 @WebServlet(name = "GeneralUserServlet", value = "/generaluser/generaluser.do")
 public class GeneralUserServlet extends HttpServlet {
 	private GeneralUserService generalUserService;
+	private Object reserveOrder;
 
 	@Override
 	public void init() throws ServletException {
@@ -45,10 +47,10 @@ public class GeneralUserServlet extends HttpServlet {
 			// 來自select_page.jsp的請求
 			forwardPath = getOneDisplay(req, res);
 			break;
-		case "getOneList_Display":
-			// 來自select_page.jsp的請求
-			forwardPath = getOneList(req, res);
-			break;
+//		case "getOneList_Display":
+//			// 來自select_page.jsp的請求
+//			forwardPath = getOneList(req, res);
+//			break;
 		case "getOne_For_Update":
 			// 來自listAllGeneralUser.jsp的請求
 			forwardPath = getOneUpdate(req, res);
@@ -115,58 +117,55 @@ public class GeneralUserServlet extends HttpServlet {
 		req.setAttribute("generalUser", generalUser); // 資料庫取出的generalUser物件,存入req
 		return "/generaluser/guserListOne.jsp";
 	}
-	
-	
 	/*===================================================================================================*/
 	/*                                                查詢預約紀錄                                                */
 	/*===================================================================================================*/
 	
-	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
-		// 錯誤處理
-		List<String> errorMsgs = new ArrayList<>();
-		req.setAttribute("errorMsgs", errorMsgs);
-		
-		/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
-		
-		String str = req.getParameter("gUserID");
-		
-		if (str == null || (str.trim()).length() == 0) {
-			errorMsgs.add("請輸入會員編號");
-		}
-		// Send the use back to the form, if there were errors
-		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
-		}
-		
-		Integer gUserID = null;
-		try {
-			gUserID = Integer.valueOf(str);
-		} catch (Exception e) {
-			errorMsgs.add("會員編號格式不正確");
-		}
-		// Send the use back to the form, if there were errors
-		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
-		}
-		
-		/*=========================================== 2.開始查詢資料 ===========================================*/
-		
-		List<GeneralUser> generalUser = generalUserService.getOrderBygUserID(gUserID);
-		
-		if (generalUser == null) {
-			errorMsgs.add("查無資料");
-		}
-		// Send the use back to the form, if there were errors
-		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
-		}
-		
-		/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
-		
-		req.setAttribute("generalUser", generalUser); // 資料庫取出的generalUser物件,存入req
-		return "/generaluser/guserListOne.jsp";
-	}
-	
+//	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
+//		// 錯誤處理
+//		List<String> errorMsgs = new ArrayList<>();
+//		req.setAttribute("errorMsgs", errorMsgs);
+//		
+//		/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
+//		
+//		String str = req.getParameter("gUserID");
+//		
+//		if (str == null || (str.trim()).length() == 0) {
+//			errorMsgs.add("請輸入會員編號");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/generaluser/select_page.jsp";// 程式中斷
+//		}
+//		
+//		Integer gUserID = null;
+//		try {
+//			gUserID = Integer.valueOf(str);
+//		} catch (Exception e) {
+//			errorMsgs.add("會員編號格式不正確");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/generaluser/select_page.jsp";// 程式中斷
+//		}
+//		
+//		/*=========================================== 2.開始查詢資料 ===========================================*/
+//		
+//		List<ReserveOrder> generalUser = generalUserService.getAllList(gUserID);
+//		
+//		if (generalUser == null) {
+//			errorMsgs.add("查無資料");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/generaluser/select_page.jsp";// 程式中斷
+//		}
+//		
+//		/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
+//		
+//		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的generalUser物件,存入req
+//		return "/reserveorder/listOneOrder.jsp";
+//	}
 
 	/*===================================================================================================*/
 	/*                                                修改                                                */
