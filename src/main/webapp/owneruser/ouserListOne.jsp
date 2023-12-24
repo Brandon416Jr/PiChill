@@ -51,8 +51,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-					<li class="nav-item"><a href="#" class="nav-link"> 
-					<img src="<%=request.getContextPath()%>/owneruser/pic/face.svg" alt="企業會員頭像" />企業會員中心</a></li>
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
 			</header>
 		</div>

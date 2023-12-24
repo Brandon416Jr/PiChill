@@ -5,11 +5,25 @@
 <%@ page import="com.pichill.court.CourtDAO"%>
 <%@ page import="com.pichill.court.CourtDAOImpl"%>
 <%@ page import="com.pichill.court.CourtService"%>
+<%@ page import="com.pichill.place.Place"%>
+<%@ page import="com.pichill.owneruser.*"%>
+<%@ page import="java.util.*" %>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
+
+
+ <%
+// OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+// // 寫死
+// Integer oUserID = 12000001;
+// OwnerUserService ownerUserSvc = new OwnerUserService();
+// OwnerUser ownerUser = ownerUserSvc.getOneOwnerUser(oUserID);
+// pageContext.setAttribute("ownerUser",ownerUser);
+%>
+
 
 <%
 CourtService courtService = new CourtService();
-List<Court> list = courtService.getAll();
+List<Map> list = courtService.getAll();
 pageContext.setAttribute("list", list);
 %>
 
@@ -100,7 +114,7 @@ pageContext.setAttribute("list", list);
                     <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/owneruser/pic/face.svg" alt="企業會員頭像"/>企業會員中心</a>
+                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
                     </li>
                 </ul>
 
@@ -151,7 +165,7 @@ pageContext.setAttribute("list", list);
        <!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
         <!--     <h4>此頁練習採用 EL 的寫法取值:</h4> -->
-	   	<h3 >所有球館資料 - listAllCourt.jsp</h3>
+	   	<h3 >球館管理</h3>
 	<!--    <table id="table-1"> -->
 	<!-- 	<tr><td> -->
 			 
@@ -162,14 +176,14 @@ pageContext.setAttribute("list", list);
 	  <table>
 		<tr>
 			<th>球館編號</th>
-<!-- 			<th>企業會員編號</th> -->
+			<th>企業會員編號</th>
 <!-- 			<th>管理員編號</th> -->
 			<th>球館名稱</th>
 			<th>球館電話</th>
 			<th>地區</th>
 			<th>球館地址</th>
-			<th>球館須知</th>
-			<th>球館圖片</th>
+<!-- 			<th>球館須知</th> -->
+<!-- 			<th>球館圖片</th> -->
 			<th>開館時間</th>
 			<th>閉館時間</th>
 			<th>申請上架時間</th>
@@ -182,32 +196,26 @@ pageContext.setAttribute("list", list);
 		</tr>
 	
 		<c:forEach var="court" items="${list}" >
-			
+		
 			<tr>
 				<td>${court.courtID}</td>
-<%-- 			<td>${court.oUserID}</td> --%>
+				<td>${court.oUserID}</td>
 <%-- 			<td>${court.manageID}</td> --%>
 				<td style="width:100px">${court.courtName}</td>
 				<td>${court.courtTelephone}</td>				
 				<td style="width:80px">${court.loc}</td>
 				<td style="width:180px">${court.courtAddress}</td>
-				<td style="width:480px">${court.courtRule}</td>
-				<td>${court.courtPic}</td>
+<%-- 				<td style="width:480px">${court.courtRule}</td> --%>
+<%-- 				<td>${court.courtPic}</td> --%>
 				<td>${court.courtOpenTime}</td>
 				<td>${court.courtCloseTime}</td>
 				<td style="width:100px">${court.courtApplyTime}</td>				
 				<td style="width:100px">${court.courtOnTime}</td>
 				<td style="width:60px">${court.courtApplyStatus}</td>
-				<c:forEach var="place" items="${court.place}">
-	       			<td>${place.placeName}</td>
-	       			<td>${place.placeFee}</td>
-	       			<td>${place.ball}</td>
-	    		</c:forEach>
+       			<td>${court.placeName}</td>
+       			<td>${court.placeFee}</td>
+       			<td>${court.ball}</td>
 			
-
-
-
-
 				<td>
 				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/court/court.do" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">

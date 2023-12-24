@@ -4,6 +4,7 @@ import java.io.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,8 +17,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
+import com.pichill.manage.entity.Manage;
 import com.pichill.place.Place;
 
 import java.sql.Timestamp;
@@ -49,7 +51,7 @@ public class CourtServlet extends HttpServlet{
 		switch (action) {
 		case "getOne_For_Display":
 			 // 來自select_page.jsp的請求
-			forwardPath = getOneDisplay(req, res);
+			forwardPath = getOne_For_Display(req, res);
 			break;
 		case "getOne_For_Update":
 			// 來自all_court.jsp的請求
@@ -77,7 +79,7 @@ public class CourtServlet extends HttpServlet{
 	
 	
 	
-	private String getOneDisplay(HttpServletRequest req, HttpServletResponse res) {
+	private String getOne_For_Display(HttpServletRequest req, HttpServletResponse res) {
 		// 錯誤處理
 		List<String> errorMsgs = new ArrayList<>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -116,7 +118,7 @@ public class CourtServlet extends HttpServlet{
 		}
 
 		/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
-		req.setAttribute("courtr", court); // 資料庫取出的court物件,存入req
+		req.setAttribute("court", court); // 資料庫取出的court物件,存入req
 		return "/court/listOnecourt.jsp";
 	}
 
@@ -126,11 +128,38 @@ public class CourtServlet extends HttpServlet{
 		System.out.println("成功getOneUpdate");
 		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 		req.setAttribute("errorMsgs", errorMsgs);
+
 		
 		Integer courtID = Integer.valueOf(req.getParameter("courtID"));
 
-		Court court = courtService.getOneCourt(courtID);
+		Court updateCourt = courtService.getOneCourt(courtID);
 
+		HttpSession session = req.getSession();
+		try {
+			if(session != null) {
+				  // get session attributes
+				}
+		} catch (NullPointerException ne ) {
+			ne.printStackTrace();
+		}
+		Court court = (Court) session.getAttribute("court");
+		System.out.println("court: " + court);
+		Enumeration<String> attrs = session.getAttributeNames();
+
+		while (attrs.hasMoreElements()) {
+		  String name = attrs.nextElement();
+		  
+		  Object value = session.getAttribute(name);
+		  System.out.println(name + ": " + value);
+		}
+		Integer courtApplyStatus = court.getCourtApplyStatus();
+		if (courtApplyStatus != 2 && Integer.valueOf(updateCourt.getCourtID()) != Integer.valueOf(court.getCourtID())) {	
+
+			  req.setAttribute("noAuth", true);
+				return "/court/all_court.jsp";
+			}
+		
+		
 		req.setAttribute("court", court);
 		return "/court/court.jsp";
 	}

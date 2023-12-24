@@ -16,8 +16,6 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import com.pichill.court.Court;
-import com.pichill.owneruser.entity.OwnerUser;
-import com.pichill.post.entity.Post;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 
@@ -46,7 +44,7 @@ public class Place {
 	
 	
 	//球館
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
 	private Court court;
 	

@@ -24,11 +24,11 @@ public class DBGifReaderController extends HttpServlet{
 			OwnerUserService owneruserSvc = new OwnerUserService();
 			out.write(owneruserSvc.getOneOwnerUser(oUserID).getoProfilePic());
 		} catch (Exception e) {
-			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
-			byte[] buf = new byte[in.available()];
-			in.read(buf);
-			out.write(buf);
-			in.close();
+//			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");
+//			byte[] buf = new byte[in.available()];
+//			in.read(buf);
+//			out.write(buf);
+//			in.close();
 
 		}
 	}
