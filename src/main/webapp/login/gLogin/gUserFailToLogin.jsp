@@ -46,7 +46,7 @@ setInterval(function() {
         window.location.href = "<%=request.getContextPath()%>
 		/login/gLogin/gUserLogin.jsp";
 					}
-				}, 10000); // 每秒檢查一次
+				}, 1000); // 每秒檢查一次
 	</script>
 </body>
 </html>
