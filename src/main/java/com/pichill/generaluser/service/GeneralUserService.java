@@ -30,6 +30,32 @@ public class GeneralUserService {
 	public List<GeneralUser> getAll() {
 		return dao.getAll();
 	}
+	
+	public GeneralUser updateByPostAmount(Integer gUserID, Integer gPostAmount) {
+
+		GeneralUser generalUser = dao.findByPK(gUserID); // 先獲取現有的 MemberVO 物件
+		if (generalUser != null) {
+
+			generalUser.setgPostAmount(gPostAmount);
+
+			dao.update(generalUser);
+		}
+
+		return generalUser;
+	}
+	
+	public GeneralUser updateByCommentAmount(Integer gUserID, Integer CommentAmount) {
+
+		GeneralUser generalUser = dao.findByPK(gUserID); // 先獲取現有的 MemberVO 物件
+		if (generalUser != null) {
+
+			generalUser.setCommentAmount(CommentAmount);
+
+			dao.update(generalUser);
+		}
+
+		return generalUser;
+	}
 //	public List<ReserveOrder> getAllList(Integer gUserID) {
 //		return dao.getAllList();
 //	}

@@ -75,6 +75,11 @@ public class CommentServlet extends HttpServlet {
 //			out.print(commentCntJson);
 			System.out.println(jsonResponse);
 			out.flush();
+			
+			Integer CommentAmount = comment.getGeneralUser().getCommentAmount();
+			CommentAmount += 1;
+			generalUser.setCommentAmount(CommentAmount);
+			generalUser = generalUserService.updateByCommentAmount(11000001, CommentAmount);
 		}
 		if ("delete".equals(action)) {
 //			System.out.println("=================");
