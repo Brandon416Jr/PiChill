@@ -11,30 +11,26 @@
 <%@ page import="com.pichill.time.*"%>
 <%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
-
-<%--<%
-ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
-
- %>--%>
-<%--<%
-GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-
- %>--%>
 <%
- Integer gUserID = 11000009;
- ReserveOrderService reserveOrderService = new ReserveOrderService();
- List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
- pageContext.setAttribute("list",list);
- pageContext.setAttribute("gUserID",gUserID);
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+ //Integer gUserID = 11000009;
+//ReserveOrderService reserveOrderService = new ReserveOrderService();
+//List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
+ //pageContext.setAttribute("list",list);
+// pageContext.setAttribute("gUserID",gUserID);
 
 %>
+<%
+ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+%>
+<%
+ReserveOrder order = (ReserveOrder) session.getAttribute("reserveOrder");
+%>
 
-<%-- <%
-//  Integer reserveOrderID = 63000001;
-//  ReserveOrderService reserveOrderSvc = new ReserveOrderService();
-//  ReserveOrder reserveOrder = reserveOrderSvc.getOneReserveOrder(reserveOrderID);
-//  pageContext.setAttribute("reserveOrder",reserveOrder);
- %> --%>
+<%
+GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
+%>
+
 
 <!DOCTYPE html>
 <html>
@@ -90,7 +86,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 					<li class="nav-item"><a
 						href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp"
 						class="nav-link"><img
-<%-- 							src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" --%>
+							src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}"
 							alt="SVG" class="rounded-circle" /> 會員中心</a></li>
 				</ul>
 

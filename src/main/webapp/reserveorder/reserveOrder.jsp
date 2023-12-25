@@ -9,15 +9,18 @@
 <%@ page import="com.pichill.court.*"%>
 
 <%
-	//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
-    ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
+ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 %>
 <%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+%>
+<%--<%
  Integer gUserID = 11000001;
  GeneralUserService generalUserSvc = new GeneralUserService();
  GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
  pageContext.setAttribute("generaluser",generalUser);
-%>
+%>--%>
 <!DOCTYPE html>
 <html>
 <head>

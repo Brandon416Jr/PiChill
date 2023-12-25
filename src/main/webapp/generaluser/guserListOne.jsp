@@ -5,11 +5,14 @@
 <%@ page import="com.pichill.reserveorder.entity.*"%>
 <%@ page import="com.pichill.reserveorder.service.*"%>
 
-<% 
+<%--<% 
 //從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-%> 
+%> --%>
 
+<%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+%>
 <%-- <%
  Integer gUserID = 11000001;
  GeneralUserService generalUserSvc = new GeneralUserService();
