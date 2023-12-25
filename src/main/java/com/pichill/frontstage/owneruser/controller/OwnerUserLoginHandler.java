@@ -92,9 +92,11 @@ public class OwnerUserLoginHandler extends HttpServlet {
 		    	req.setAttribute("lockoutTime", lockoutTime);
 				if (System.currentTimeMillis() < lockoutTime) {
 				    System.out.println("帳號已被鎖定，請稍候再試");
+				    loginAttempts = 0;
 				    res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserFailToLogin.jsp");
 				    return;
 				} else {
+					 loginAttempts = 0;
 					res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserLogin.jsp");
 					return;
 				}

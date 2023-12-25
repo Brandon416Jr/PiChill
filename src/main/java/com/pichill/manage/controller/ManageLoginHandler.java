@@ -26,7 +26,7 @@ public class ManageLoginHandler extends HttpServlet {
 	private static int loginAttempts = 0;  // 登入嘗試次數
 	private static long lockoutTime = 0;   // 鎖定時間
 	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
-	private static final long LOCKOUT_DURATION = 1 * 60 * 1000;
+	private static final long LOCKOUT_DURATION = 1 * 10 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 	// 【實際上應至資料庫搜尋比對】
 	protected boolean allowAdmin(String mUserName, String mPassword) {
@@ -102,11 +102,15 @@ public class ManageLoginHandler extends HttpServlet {
 		    	req.setAttribute("lockoutTime", lockoutTime);
 				if (System.currentTimeMillis() < lockoutTime) {
 				    System.out.println("帳號已被鎖定，請稍候再試");
-				    res.sendRedirect(req.getContextPath() +"/login/mLogin/manageFailToLogin.jsp");
+				    loginAttempts = 0;
+				    req.getRequestDispatcher("/login/mLogin/manageFailToLogin.jsp").forward(req, res);
 				    return;
-				} else {
-					res.sendRedirect(req.getContextPath() +"/login/mLogin/manageLogin.jsp");
+				} else if (System.currentTimeMillis() >= lockoutTime) {
+					 loginAttempts = 0;
+					 req.getRequestDispatcher("/login/mLogin/manageLogin.jsp").forward(req, res);
 					return;
+				} else {
+					System.out.println("怎麼會有這裏的print呢??!");
 				}
 		    }
 		    
