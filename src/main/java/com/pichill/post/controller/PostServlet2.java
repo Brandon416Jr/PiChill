@@ -21,8 +21,11 @@ import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
+import com.pichill.owneruser.entity.OwnerUser;
+import com.pichill.owneruser.service.OwnerUserService;
 import com.pichill.post.entity.Post;
 import com.pichill.post.service.PostService;
 import com.pichill.post.service.PostServiceImpl;
@@ -39,7 +42,7 @@ public class PostServlet2 extends HttpServlet {
 		res.setContentType("application/json; charset=UTF-8");
 		String action = req.getParameter("action");
 		if ("getOne_For_Update".equals(action)) {
-			// 处理获取单个文章详情的逻辑
+
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			System.out.println(postID);
 
@@ -77,6 +80,7 @@ public class PostServlet2 extends HttpServlet {
 
 		// ====新增討論文章========
 		if ("insert".equals(action)) {
+//			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("discussType"));
@@ -99,7 +103,10 @@ public class PostServlet2 extends HttpServlet {
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
+			GeneralUserService gUserSVC = new GeneralUserService();
+			GeneralUser generalUser = gUserSVC.getOneGeneralUser(11000001);
 			Post post = new Post();
+			post.setGeneralUser(generalUser);
 			post.setPostTitle(postTitle);
 			post.setPostContent(postContent);
 			post.setPostType(postType);
@@ -114,12 +121,17 @@ public class PostServlet2 extends HttpServlet {
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
+			
+			Integer gPostAmount = post.getGeneralUser().getgPostAmount();
+			gPostAmount += 1;
+			generalUser.setgPostAmount(gPostAmount);
+			generalUser = gUserSVC.updateByPostAmount(11000001, gPostAmount);
 		}
 		// ====得到預約編號bygUser=========
 		if ("get_order".equals(action)) {
 			ReserveOrderService reserveOrderSVC = new ReserveOrderService();
 //			Hibernate.initialize(court.getReserveOrder());
-			List<ReserveOrder> reserveOrderList = reserveOrderSVC.getOrderByID(11000001);
+			List<ReserveOrder> reserveOrderList = reserveOrderSVC.getgUserID(11000001);
 			System.out.println("RRRRRRR" + reserveOrderList);
 		    List<Map<String, Object>> resultList = new ArrayList<>();
 
@@ -148,7 +160,7 @@ public class PostServlet2 extends HttpServlet {
 			out.flush();
 		}
 		if ("insert_group".equals(action)) {
-
+//			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("groupType"));
@@ -171,7 +183,10 @@ public class PostServlet2 extends HttpServlet {
 			}
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
+			GeneralUserService gUserSVC = new GeneralUserService();
+			GeneralUser generalUser = gUserSVC.getOneGeneralUser(11000001);
 			Post post = new Post();
+			post.setGeneralUser(generalUser);
 			post.setPostTitle(postTitle);
 			post.setPostContent(postContent);
 			post.setPostType(postType);
@@ -187,13 +202,22 @@ public class PostServlet2 extends HttpServlet {
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
+			
+			Integer gPostAmount = post.getGeneralUser().getgPostAmount();
+			gPostAmount += 1;
+			generalUser.setgPostAmount(gPostAmount);
+			generalUser = gUserSVC.updateByPostAmount(11000001, gPostAmount);
 		}
 		if ("insert_promote".equals(action)) {
-
+//			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = 2;
+			OwnerUserService oUserSVC = new OwnerUserService();
+			OwnerUser ownerUser = oUserSVC.getOneOwnerUser(12000001);
+
 			Post post = new Post();
+			post.setOwnerUser(ownerUser);
 			post.setPostTitle(postTitle);
 			post.setPostContent(postContent);
 			post.setPostType(postType);
@@ -205,7 +229,13 @@ public class PostServlet2 extends HttpServlet {
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
+			
+			Integer oPostAmount = post.getOwnerUser().getoPostAmount();
+			oPostAmount += 1;
+			ownerUser.setoPostAmount(oPostAmount);
+			ownerUser = oUserSVC.updateByoPostAmount(12000001, oPostAmount);
 		}
+
 		if ("delete".equals(action)) {
 			PostService postSvc = new PostServiceImpl();
 			Integer postID = Integer.valueOf(req.getParameter("postID"));

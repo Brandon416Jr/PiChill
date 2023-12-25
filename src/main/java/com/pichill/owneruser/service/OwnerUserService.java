@@ -2,6 +2,7 @@ package com.pichill.owneruser.service;
 
 import java.util.List;
 
+import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.owneruser.model.OwnerUserDAO;
 import com.pichill.owneruser.model.OwnerUserDAOImpl;
@@ -28,5 +29,18 @@ public class OwnerUserService {
 
 	public List<OwnerUser> getAll() {
 		return dao.getAll();
+	}
+	
+	public OwnerUser updateByoPostAmount(Integer oUserID, Integer oPostAmount) {
+
+		OwnerUser ownerUser = dao.getOwnerUserByOUserID(oUserID); // 先獲取現有的 MemberVO 物件
+		if (ownerUser != null) {
+
+			ownerUser.setoPostAmount(oPostAmount);
+
+			dao.update(ownerUser);
+		}
+
+		return ownerUser;
 	}
 }
