@@ -1,6 +1,7 @@
 package com.pichill.backstage.reportb.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.report.entity.Report;
+import com.pichill.util.SendMailService;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "ReportBServlet", value = "/report/reportb.do")
@@ -118,6 +120,18 @@ public class ReportServletBack extends HttpServlet {
 						generalUser.setStatus(status);
 						GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
 						generalUser = gUserSvcB.updateGeneralUserByReport(gUserID, status, gReportCnt);
+						
+						// 寄信通知被檢舉停權
+						String gEmail = report.getPost().getGeneralUser().getgEmail();
+						String gName = report.getPost().getGeneralUser().getgName();
+						String postTitle = report.getPost().getPostTitle();
+						Timestamp postTime = report.getPost().getPostTime();
+						Integer reportType = report.getReportType();
+						String subject = "PiChill_討論版停權通知";
+						String messageText = gName + "您好，您於" + postTime + "所發布的「" + postTitle +"」貼文，由於" + reportType + "多次被檢舉，因此將您討論版停權三天! 於期間可以觀看貼文，無法留言以及發文。";
+						SendMailService sendMailService = new SendMailService();
+						sendMailService.sendMail(gEmail, subject, messageText);
+						
 					} else {
 						GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
 						generalUser = gUserSvcB.updateGeneralUserByReportFail(gUserID, gReportCnt);
@@ -146,6 +160,19 @@ public class ReportServletBack extends HttpServlet {
 					status = 2;
 					GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
 					generalUser = gUserSvcB.updateGeneralUserByReport(gUserID, status, gReportCnt);
+					
+					// 寄信通知被檢舉停權
+					String gEmail = report.getPost().getGeneralUser().getgEmail();
+					String gName = report.getPost().getGeneralUser().getgName();
+					String postTitle = report.getPost().getPostTitle();
+					Timestamp commentTime = report.getComment().getCommentTime();
+					String commentContent = report.getComment().getCommentContent();
+					Integer reportType = report.getReportType();
+					String subject = "PiChill_討論版停權通知";
+					String messageText = gName + "您好，您於「" + postTitle +"」貼文，於" +commentTime + "所留言「" + commentContent + "」由於違反" + reportType + "多次被檢舉，因此將您討論版停權三天! 於期間可以觀看貼文，無法留言以及發文。";
+					SendMailService sendMailService = new SendMailService();
+					sendMailService.sendMail(gEmail, subject, messageText);
+					
 				} else {
 					GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
 					generalUser = gUserSvcB.updateGeneralUserByReportFail(gUserID, gReportCnt);

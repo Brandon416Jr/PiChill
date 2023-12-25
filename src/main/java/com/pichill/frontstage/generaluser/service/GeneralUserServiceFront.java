@@ -6,6 +6,7 @@ import java.util.List;
 import com.pichill.frontstage.generaluser.model.GeneralUserDAOFront;
 import com.pichill.frontstage.generaluser.model.GeneralUserDAOImplFront;
 import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.reserveorder.entity.ReserveOrder;
 
 public class GeneralUserServiceFront {
 	private final GeneralUserDAOFront dao;
@@ -39,6 +40,19 @@ public class GeneralUserServiceFront {
 		generalUser.setgProfilePic(gProfilePic);
 		dao.insert(generalUser);
 		
+		return generalUser;
+	}
+	
+	public GeneralUser updateGeneralUserByYoyakuCnt(Integer gUserID, Integer yoyakuCnt) {
+
+		GeneralUser generalUser = dao.findByPK(gUserID); // 先獲取現有的 MemberVO 物件
+		if (generalUser != null) {
+
+			generalUser.setYoyakuCnt(yoyakuCnt);
+
+			dao.update(generalUser);
+		}
+
 		return generalUser;
 	}
 	

@@ -46,6 +46,19 @@ private final OwnerUserDAOFront dao;
 		return ownerUser;
 	}
 	
+	public OwnerUser updateOwnerUserByRsvdCnts(Integer oUserID, Integer rsvdCnts) {
+
+		OwnerUser ownerUser = dao.findByPK(oUserID); // 先獲取現有的 MemberVO 物件
+		if (ownerUser != null) {
+
+			ownerUser.setRsvdCnts(rsvdCnts);
+
+			dao.update(ownerUser);
+		}
+
+		return ownerUser;
+	}
+	
 	public int updateOwnerUser(OwnerUser ownerUser) {
 		return dao.update(ownerUser);
 	}

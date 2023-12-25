@@ -1,6 +1,7 @@
 package com.pichill.backstage.court.controller;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ import com.pichill.contactus.entity.ContactUs;
 import com.pichill.court.Court;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
+import com.pichill.util.SendMailService;
 
 /**
  * Servlet implementation class CourtServletBack
@@ -186,6 +188,17 @@ public class CourtServletBack extends HttpServlet {
 			ownerUser.setCourtArriveCnt(courtArriveCnt);
 			OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
 			ownerUser = oUserSvcB.updateOwnerUserByCourtArrive(oUserID, courtArriveCnt);
+			
+			// 寄上架成功信件
+			String oEmail = court.getOwnerUser().getoEmail();
+			String oName = court.getOwnerUser().getoName();
+			Timestamp courtApplyTime = court.getCourtApplyTime();
+			String courtName = court.getCourtName();
+			Timestamp courtOnTime = court.getCourtOnTime();
+			String subject = " PiChill_球館上架成功通知";
+			String messageText = oName + "您好,您於" + courtApplyTime + "申請上架" + courtName + "，已於" + courtOnTime  + "審核通過!";
+			SendMailService sendMailService = new SendMailService();
+			sendMailService.sendMail(oEmail, subject, messageText);
 		}
 		
 //		Court court = new Court();

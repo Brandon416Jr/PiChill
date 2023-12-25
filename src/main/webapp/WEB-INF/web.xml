@@ -61,6 +61,15 @@
 	<filter-mapping>
 		<filter-name>OwnerUserLoginFilter</filter-name>
 		<url-pattern>/homepage/owneruserhome.jsp</url-pattern>
+		<url-pattern>/ownerusernotify/notify.jsp</url-pattern>
+		<url-pattern>/owneruser/listOneOwnerUser.jsp</url-pattern>
+		<url-pattern>/owneruser/ouserListOne.jsp</url-pattern>
+		<url-pattern>/owneruser/owneruser.jsp</url-pattern>
+		<url-pattern>/owneruser/set_owneruser.jsp</url-pattern>
+		<url-pattern>/court/court.jsp</url-pattern>
+		<url-pattern>/court/listOneCourt.jsp</url-pattern>
+		<url-pattern>/court/new_court.jsp</url-pattern>
+		<url-pattern>/court/set_court.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
@@ -78,6 +87,12 @@
 	<filter-mapping>
 		<filter-name>GeneralUserLoginFilter</filter-name>
 		<url-pattern>/homepage/main.jsp</url-pattern>
+		<url-pattern>/generaluser/generaluser.jsp</url-pattern>
+		<url-pattern>/generaluser/guserListOne.jsp</url-pattern>
+		<url-pattern>/reserveorder/listOneOrder.jsp</url-pattern>
+		<url-pattern>/reserveorder/updateStatus.jsp</url-pattern>
+		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
+		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

@@ -1,6 +1,8 @@
 package com.pichill.frontstage.reserveorder.controller;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,9 +19,10 @@ import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
 import com.pichill.frontstage.reserveorder.service.ReserveOrderServiceFront;
 import com.pichill.generaluser.entity.GeneralUser;
-import com.pichill.generaluser.service.GeneralUserService;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
-import com.pichill.reserveorder.service.ReserveOrderService;
+import com.pichill.time.TimeRef;
+import com.pichill.util.SendMailService;
 
 @WebServlet("/ecpayreturn.do")
 public class EcpayReturnController extends HttpServlet {
@@ -51,7 +54,7 @@ public class EcpayReturnController extends HttpServlet {
 		
 		CourtService courtSvc = new CourtService();
 		Court court = courtSvc.getOneCourt(courtID);
-		GeneralUserService gUserSvc = new GeneralUserService();
+		GeneralUserServiceFront gUserSvc = new GeneralUserServiceFront();
 		GeneralUser generalUser = gUserSvc.getOneGeneralUser(gUserID);
 
 		System.out.println(merchantTradeNo + " " + RtnMsg + " RtnCode=" + rtnCode 
@@ -79,13 +82,37 @@ public class EcpayReturnController extends HttpServlet {
 						reserveOrder = rsvdSvc.updateReserveOrderByOrderStatus(reserveOrderID, orderStatus);
 						
 						// 更新一般會員預約次數
-						
+						Integer yoyakuCnt = generalUser.getYoyakuCnt();
+						yoyakuCnt += 1;
+						generalUser.setYoyakuCnt(yoyakuCnt);
+						generalUser = gUserSvc.updateGeneralUserByYoyakuCnt(gUserID, yoyakuCnt);
 						
 						// 更新企業會員被預約次數
+						OwnerUser ownerUser = new OwnerUser();
+						Integer rsvdCnts = ownerUser.getRsvdCnts();
+						rsvdCnts += 1;
+						ownerUser.setRsvdCnts(rsvdCnts);
 						
+						// 寄預約成功信件 (一般會員)
+						String gEmail = generalUser.getgEmail();
+						Date reserveDate = reserveOrder.getReserveDate();
+						String reserveTime = reserveOrder.getTimeRef().getReserveTime();
+						String gName = reserveOrder.getGeneralUser().getgName();
+						Timestamp orderTime = reserveOrder.getOrderTime();
+						String courtName = reserveOrder.getCourt().getCourtName();
+						Integer orderNum = reserveOrder.getOrderNum();
+						String subject = " PiChill_預約成功通知";
+						String messageText = gName + "您好,您已於" + orderTime + "預約" + courtName + "預約時間為" + reserveDate + " " + reserveTime + "，預約人數為" + orderNum + "人，請於當日準時抵達，有任何疑問可以使用聯絡我們與我們聯絡，謝謝!";
+						SendMailService sendMailService = new SendMailService();
+						sendMailService.sendMail(gEmail, subject, messageText);
 						
-						// 寄預約成功信件
-						
+						// 寄預約成功信件 (企業會員)
+						String oEmail = reserveOrder.getOwnerUser().getoEmail();
+						String oName = reserveOrder.getOwnerUser().getoName();
+						String subjectO = "PiChill_場館有新的預約";
+						String messageTextO = oName + "您好," + courtName + "有一筆新的訂單，可於預約通知中查看預約明細!";
+						SendMailService sendMailServiceO = new SendMailService();
+						sendMailServiceO.sendMail(oEmail, subjectO, messageTextO);
 						
 		} else {
 			
