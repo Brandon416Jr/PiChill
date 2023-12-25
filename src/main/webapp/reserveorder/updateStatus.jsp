@@ -12,21 +12,22 @@
 <%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
-<%
+<%--<%
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 
- %>
-<%
+ %>--%>
+<%--<%
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 
- %>
- 
- <%--<%
- Integer gUserID = 11000001;
- GeneralUserService generalUserSvc = new GeneralUserService();
- GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
- pageContext.setAttribute("generaluser",generalUser);
-%>--%>
+ %>--%>
+<%
+ Integer gUserID = 11000009;
+ ReserveOrderService reserveOrderService = new ReserveOrderService();
+ List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
+ pageContext.setAttribute("list",list);
+ pageContext.setAttribute("gUserID",gUserID);
+
+%>
 
 <%-- <%
 //  Integer reserveOrderID = 63000001;
@@ -165,6 +166,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 					</thead>
 
 					<tbody>
+					<c:forEach var="reserveOrder" items="${list}" >
 						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
@@ -179,22 +181,23 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.totalCost}</td>
-							<td>${reserveOrder.orderStatus == 3 ? "訂單已取消"}</td>
+							<td>${reserveOrder.orderStatus == 1 ? "訂單成立" : reserveOrder.orderStatus == 2 ? "訂單完成" : "訂單已取消"}</td>
 							<td>
 								
-									<input type="hidden" name="action" value="update">
-									<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
-									<input type="submit" id="cancel" value="送出取消請求" >
+								<input type="hidden" name="action" value="update">
+								<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
+								<input type="submit" id="cancel" value="確認">
 								
 							</td>
 						</tr>
+						</c:forEach>
 					</tbody>
 
 				</table>
 				</div>
+				</FORM>
 		</main>
 	</div>
-	</FORM>
 	<!----------------------------------------------- footer 區 ------------------------------------------------------->
 	<footer class="footer">
 
@@ -220,7 +223,6 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 			</header>
 		</div>
 	</footer>
-
 	<script>
 		$(document)
 				.ready(

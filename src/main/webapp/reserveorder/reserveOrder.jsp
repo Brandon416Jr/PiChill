@@ -91,33 +91,31 @@
 				</ul>
 			</c:if>
   		
-      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data" class="choice">
+      <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data" class="choice" id="myForm">
             <br>
-            <span>會員編號:</span>
+            <span>會員編號</span><br>
             <input type="text" id="guserID" name="guserID" value="${param.generalUser.gUserID}">
             <br><br>
             <!-- 選擇球類 -->
             <div class="col">
               <div class="col" id="choose">
                 <label for="country" id="label">選擇球類</label>
-                <select class="form-select" id="ball" name="ball">
-	                <c:forEach var="place" items="${placeSvc.all}">
-					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.ball == 0 ? "籃球" : place.ball == 1 ? "排球" : "羽球"}
-				    </c:forEach>
-<!--                   <option value="0">籃球</option> -->
-<!--                   <option value="1">排球</option> -->
-<!--                   <option value="2">羽球</option> -->
+                <select class="form-select" id="ball" name="ball" onchange="updateRegions()">
+<%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
+<%-- 					  <option value="${reserveOrder.place.placeID}" ${(reserveOrder.param.placeID == reserveOrder.place.placeID)? 'selected':'' } >${reserveOrder.place.ball == 0 ? "籃球" : place.ball == 1 ? "排球" : "羽球"} --%>
+<%-- 				    </c:forEach> --%>
+                  <option value="0">籃球</option>
+                  <option value="1">排球</option>
+                  <option value="2">羽球</option>
                 </select>
               </div>
               <br>
             <!-- 選擇地區 -->
             <div class="col">
               <div class="col" id="choose">
-                <label for="country" id="label">選擇地區</label>
-                <select class="form-select" id="loc" name="loc">
-	                <c:forEach var="court" items="${courtSvc.all}">
-					  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.loc}
-				    </c:forEach>
+                <label for="loc" id="locLabel">選擇地區</label>
+                <select class="form-select" id="loc" name="loc" disabled onchange="updateCourts()">
+                <option value="">請先選擇球類</option>
 <!--                   <option value="">松山區</option> -->
 <!--                   <option>中正區</option> -->
 <!--                   <option>中山區</option> -->
@@ -127,22 +125,24 @@
             <!-- 選擇球館 -->
             <div class="col">
               <div class="col" id="choose">
-                <label for="country" id="label">選擇球館</label>
-                <select class="form-select" id="court" name="court">
-                	<c:forEach var="court" items="${courtSvc.all}">
-				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName}
-			    	</c:forEach>
+                <label for="court" id="courtLabel">選擇球館</label>
+                <select class="form-select" id="court" name="court" disabled onchange="updatePlaces()">
+                <option value="">請先選擇地區</option>
+<%--                 	<c:forEach var="court" items="${courtSvc.all}"> --%>
+<%-- 				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName} --%>
+<%-- 			    	</c:forEach> --%>
                 </select>
               </div>
               <br>
               <!-- 選擇場地 -->
             <div class="col">
               <div class="col" id="choose">
-                <label for="country" id="label">選擇場地</label>
-                <select class="form-select" id="place" name="place">
-	                <c:forEach var="place" items="${placeSvc.all}">
-					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName}
-				    </c:forEach>
+                <label for="place" id="placeLabel">選擇場地</label>
+                <select class="form-select" id="place" name="place" disabled>
+                <option value="">請先選擇球館</option>
+<%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
+<%-- 					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName} --%>
+<%-- 				    </c:forEach> --%>
                 </select>
               </div>
               <br>
@@ -158,9 +158,33 @@
               <div class="col" id="choose">
                 <label for="country" id="label">預約時段</label>
                 <select class="form-select" id="time" name="time" placeholder="請選擇預約時段">
-	                <c:forEach var="time" items="${timeSvc.all}">
-					  <option value="${time.timeID}" ${(param.timeID==time.timeID)? 'selected':'' } >${time.reserveTime}
-				    </c:forEach>
+                  <option value="0">00:00-01:00</option>
+                  <option value="1">01:00-02:00</option>
+                  <option value="2">02:00-03:00</option>
+                  <option value="3">03:00-04:00</option>
+                  <option value="4">04:00-05:00</option>
+                  <option value="5">05:00-06:00</option>
+                  <option value="6">06:00-07:00</option>
+                  <option value="7">07:00-08:00</option>
+                  <option value="8">08:00-09:00</option>
+                  <option value="9">09:00-10:00</option>
+                  <option value="10">10:00-11:00</option>
+                  <option value="11">11:00-12:00</option>
+                  <option value="12">12:00-13:00</option>
+                  <option value="13">13:00-14:00</option>
+                  <option value="14">14:00-15:00</option>
+                  <option value="15">15:00-16:00</option>
+                  <option value="16">16:00-17:00</option>
+                  <option value="17">17:00-18:00</option>
+                  <option value="18">18:00-19:00</option>
+                  <option value="19">19:00-20:00</option>
+                  <option value="20">20:00-21:00</option>
+                  <option value="21">21:00-22:00</option>
+                  <option value="22">22:00-23:00</option>
+                  <option value="23">23:00-24:00</option>
+<%-- 	                <c:forEach var="time" items="${timeSvc.all}"> --%>
+<%-- 					  <option value="${time.timeID}" ${(param.timeID==time.timeID)? 'selected':'' } >${time.reserveTime} --%>
+<%-- 				    </c:forEach> --%>
                 </select>
               </div>
             <br>
@@ -174,7 +198,7 @@
             <input type="hidden" name="action" value="insert">
 <%-- 			<input type="hidden" name="reserveOrderID" value="<%=reserveOrder.getReserveOrderID()%>"> --%>
             <input type="submit" id="next" value="下一步" style="width:150px; height:44px;">&nbsp;
-            <input type="reset" id="next" value="取消" style="width:150px; height:44px;">
+            <input type="reset" id="next" value="取消" style="width:150px; height:44px;" onclick="resetForm()">
             <br><br>
             <br><br>
         </form>
@@ -204,6 +228,165 @@
           </header>
         </div>
       </footer>
+<script>
+// ===用球類篩選地區===================================================================================
+function updateRegions() {
+  // 獲取球類選擇框的值
+  var selectedBall = document.getElementById("ball").value;
+
+  // 獲取地區選擇框
+  var locSelect = document.getElementById("loc");
+
+  // 清空地區選擇框的選項
+  locSelect.innerHTML = "";
+
+  // 根據球類選擇框的值動態添加地區選項
+  if (selectedBall === "0") {
+    // 如果是籃球，只有北投區和南港區可以選
+    addOption(locSelect, "北投區");
+    addOption(locSelect, "南港區");
+  } else if (selectedBall === "1") {
+    // 如果是排球，可以添加其他地區的選項
+    addOption(locSelect, "中正區");
+    addOption(locSelect, "萬華區");
+    addOption(locSelect, "中山區");
+    addOption(locSelect, "內湖區");
+  } else if (selectedBall === "2") {
+    // 如果是羽球，可以添加其他地區的選項
+    addOption(locSelect, "大安區");
+    addOption(locSelect, "大同區");
+    addOption(locSelect, "中山區");
+    addOption(locSelect, "信義區");
+  }
+
+  // 顯示地區選擇框的標籤
+  // document.getElementById("locLabel").style.display = "block";
+
+  // 啟用地區選擇框
+  locSelect.disabled = false;
+}
+
+function addOption(select, value) {
+  var option = document.createElement("option");
+  option.value = value;
+  option.text = value;
+  select.add(option);
+}
+
+// ===用球類跟地區篩選球館===================================================================================
+function updateCourts() {
+  // 獲取地區選擇框的值
+  var selectedLoc = document.getElementById("loc").value;
+
+  // 獲取球館選擇框
+  var courtSelect = document.getElementById("court");
+
+  // 清空球館選擇框的選項
+  courtSelect.innerHTML = "";
+
+  // 獲取球類選擇框的值
+  var selectedBall = document.getElementById("ball").value;
+
+  // 根據地區選擇框的值動態添加球館選項
+  if (selectedLoc === "大安區") {
+    // 如果是北投區，只有陽明籃球館可以選
+    addOption(courtSelect, "飛龍運動館");
+  } else if (selectedLoc === "中正區") {
+    addOption(courtSelect, "中正排球場");
+  }else if (selectedLoc === "北投區") {
+    addOption(courtSelect, "陽明籃球館");
+  }else if (selectedLoc === "大同區") {
+    addOption(courtSelect, "奧特菲羽球館");
+  }else if (selectedLoc === "萬華區") {
+    addOption(courtSelect, "萬華活力球館");
+  }else if (selectedLoc === "信義區") {
+    addOption(courtSelect, "TFK羽球館");
+  }else if (selectedLoc === "南港區") {
+    addOption(courtSelect, "BOS運動館");
+  }else if (selectedLoc === "內湖區") {
+    addOption(courtSelect, "艾特極運動生活館");
+  }else if (selectedLoc === "中山區" && selectedBall === "1") {
+    addOption(courtSelect, "新生排球場");
+  }else if (selectedLoc === "中山區" && selectedBall === "2") {
+    addOption(courtSelect, "紅季羽球綜合館");
+  }
+  
+
+  // 顯示球館選擇框的標籤
+  // document.getElementById("courtLabel").style.display = "block";
+
+  // 啟用球館選擇框
+  courtSelect.disabled = false;
+}
+
+function addOption(select, value) {
+  var option = document.createElement("option");
+  option.value = value;
+  option.text = value;
+  select.add(option);
+}
+
+//===用球館篩選場地===================================================================================
+
+function updatePlaces() {
+  // 獲取球館選擇框的值
+  var selectedCourt = document.getElementById("court").value;
+
+// 獲取場地選擇框
+  var placeSelect = document.getElementById("place");
+
+
+// 清空場地選擇框的選項
+  placeSelect.innerHTML = "";
+
+// 根據球館的值動態添加場地選項
+
+if (selectedCourt === "飛龍運動館") {
+    // 如果是飛龍運動館，只有A場地可選
+  addOption(placeSelect, "A場地");
+} else if(selectedCourt === "中正排球場") {
+  addOption(placeSelect, "B場地");
+}else if(selectedCourt === "奧特菲羽球館") {
+  addOption(placeSelect, "C場地");
+}else if(selectedCourt === "陽明籃球館") {
+  addOption(placeSelect, "D場地");
+}else if(selectedCourt === "萬華活力球館") {
+  addOption(placeSelect, "E場地");
+}else if(selectedCourt === "新生排球場") {
+  addOption(placeSelect, "A場地");
+}else if(selectedCourt === "紅季羽球綜合館") {
+  addOption(placeSelect, "B場地");
+}else if(selectedCourt === "TFK羽球館") {
+  addOption(placeSelect, "C場地");
+}else if(selectedCourt === "BOS運動館") {
+  addOption(placeSelect, "D場地");
+}else if(selectedCourt === "艾特極運動生活館") {
+  addOption(placeSelect, "E場地");
+}
+// 顯示場地選擇框的標籤
+
+// document.getElementById("label").style.display = "block";
+
+  // 啟用場地選擇框
+  placeSelect.disabled = false;
+
+}
+
+function addOption(select, value) {
+  var option = document.createElement("option");
+  option.value = value;
+  option.text = value;
+  select.add(option);
+}
+
+
+function resetForm() {
+    // 取得表單元素
+    var form = document.getElementById("myForm");
+    // 使用表單的 reset 方法來重置表單中的輸入資料
+    form.reset();
+  }
+</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -28,6 +28,13 @@ aside.aside a.step3{
     left: 80px;
     width: 800px;
 }
+input#guserID{
+	width: 398.67px;
+    height: 37.33px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin-top: 5px;
+}
 select#ball{
     border: 1px solid grey;
 }
@@ -45,7 +52,7 @@ select#place{
 }
 
 /* 預約日期 */
-input#reservedate{
+input#reserveDate{
     border: 1px solid grey;
     border-radius: 5px;
     width: 398.67px;
@@ -64,7 +71,7 @@ input#orderNum{
     width: 398.67px;
     height: 37.33px;
     border-radius: 5px;
-    padding: 1px 15px;
+    padding: 15px;
 }
 
 #formDisplay{

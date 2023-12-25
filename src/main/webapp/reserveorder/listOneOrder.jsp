@@ -21,7 +21,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 
  %>--%>
 <%
- Integer gUserID = 11000001;
+ Integer gUserID = 11000009;
  ReserveOrderService reserveOrderService = new ReserveOrderService();
  List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
  pageContext.setAttribute("list",list);
@@ -148,7 +148,8 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<!-- 欄位名稱 -->
 						<tr>
 							<th>預約訂單編號</th>
-<!-- 							<th>會員編號</th> -->
+							<th>會員編號</th>
+							<th hidden>企業會員編號</th>
 							<th>姓名</th>
 							<th>球類</th>
 							<th>地區</th>
@@ -169,7 +170,8 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
-<%-- 							<td>${reserveOrder.generalUser.getgUserID}</td> --%>
+							<td>${reserveOrder.generalUser.gUserID}</td>
+							<td hidden>${reserveOrder.ownerUser.oUserID}</td>
 							<td>${reserveOrder.generalUser.gName}</td>
 							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
 							<td>${reserveOrder.court.loc}</td>
