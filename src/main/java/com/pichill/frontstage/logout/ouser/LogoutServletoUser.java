@@ -45,7 +45,7 @@ public class LogoutServletoUser extends HttpServlet {
 			forwardPath = logout(req, res);
 			break;
 		default:
-			forwardPath = "/backstage/login/index.jsp"; //改成前台企業會員的首頁
+			forwardPath = "/homepage/owneruserhome.jsp"; //改成前台企業會員的首頁
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
