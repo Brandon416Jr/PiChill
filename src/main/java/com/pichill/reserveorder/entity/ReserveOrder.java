@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +14,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
@@ -40,6 +40,7 @@ public class ReserveOrder {
 	private OwnerUser ownerUser;
 	
 	@Column(name="reserveDate", updatable = false)
+	@Expose
 	private Date reserveDate;
 	
 	// fetch 預設為 EAGER
