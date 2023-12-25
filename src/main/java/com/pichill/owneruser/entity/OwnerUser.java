@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.court.Court;
 import com.pichill.post.entity.Post;
@@ -29,7 +30,7 @@ public class OwnerUser implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "oUserID")
-	
+	@Expose
 	private Integer oUserID;
 	
 	@Column(name = "oUserName")
@@ -66,6 +67,7 @@ public class OwnerUser implements Serializable{
 	private String oBankAccount;
 	
 	@Column(name = "oProfilePic" , columnDefinition = "longblob")
+	@Expose
 	private byte[] oProfilePic;
 	
 	@Column(name = "oRegisterDate ", updatable = false ,insertable = false)
