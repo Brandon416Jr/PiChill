@@ -1,3 +1,4 @@
+<%@page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
 <%@ page import="com.pichill.court.*"%>
@@ -12,14 +13,12 @@ Court newCourt = (Court) request.getAttribute("newCourt");
 <%
 Place place = (Place) request.getAttribute("place");
 %>
+<%Court court = (Court) request.getAttribute("court");
+%>
+    
     
 <%
-Court court = (Court) session.getAttribute("court");
-// 寫死
-// Integer courtID = 61000001;
-// CourtService courtSvc = new CourtService();
-// Court court = courtSvc.getOneCourt(courtID);
-// pageContext.setAttribute("court",court);
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 %>    
     
 <!DOCTYPE html>
@@ -80,22 +79,18 @@ Court court = (Court) session.getAttribute("court");
                     class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                     <img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG" />
                 </a>
-
-
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
                     <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
                 </ul>
-
             </header>
         </div>
     </header>
   <!----------------------------------------------- aside 區 ------------------------------------------------------->
-    <div class="main_content">
+       <div class="main_content">
         <aside class="aside">
             <div class="parent_container">
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
@@ -104,24 +99,33 @@ Court court = (Court) session.getAttribute("court");
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse">企業會員資料</button>
+                                aria-controls="contents-collapse"
+                                href="<%=request.getContextPath()%>/owneruser/owneruser/ouserListOne.jsp"
+                                >企業會員資料</button>
                         </li>
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架球館</button>
+                                aria-controls="forms-collapse"
+                                href="<%=request.getContextPath()%>/owneruser/court/new_court.jsp"
+                                >申請上架球館</button>
                         </li>
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">球館管理</button>
+                                aria-controls="forms-collapse" 
+                                href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
+                                >球館管理</button>
                         </li>
                         <br>
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">登出</button>
-                        </li>
+							<li class="my-2">
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+							
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
+							</li>
+						
                     </ul>
                 </nav>
             </div>

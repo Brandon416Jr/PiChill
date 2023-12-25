@@ -66,27 +66,26 @@
 <body>
 
  <!----------------------------------------------- header 區 ------------------------------------------------------->
-    <header class="header">
-        <div class="container">
-            <header class="d-flex flex-wrap justify-content-center py-1">
-              <a href="/" class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                <img src = "<%=request.getContextPath()%>/generaluser/pic/headerlogo.svg" alt="SVG"/>     
-              </a>
-              
-            
-              <ul class="nav nav-pills">
-                <li class="nav-item"><a href="main.html" class="nav-link">首頁</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">公告</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-                <li class="nav-item"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
-              </ul>
+   <header class="header">
+		<div class="container">
+			<header class="d-flex flex-wrap justify-content-center py-1">
+				<a href="/"
+					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG"/>
+				</a>
 
-              
-            </header>
-          </div>
-    </header>
+
+				<ul class="nav nav-pills">
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+					<li class="nav-item"><a href="#" class="nav-link"> 
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
+				</ul>
+			</header>
+		</div>
+	</header>
       
       
     <!----------------------------------------------- aside 區 ------------------------------------------------------->
