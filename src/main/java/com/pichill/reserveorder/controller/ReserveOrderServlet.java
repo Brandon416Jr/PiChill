@@ -115,9 +115,10 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 	/*=========================================== 2.開始查詢資料 ===========================================*/
 		HttpSession session = req.getSession();
+		gUserID = (Integer)req.getAttribute("gUserID");
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
-		Integer gUserID = generalUser.getgUserID();
-		List<ReserveOrder> reserveOrderList = new ArrayList<>();
+//		Integer gUserID = generalUser.getgUserID();
+//		List<ReserveOrder> reserveOrderList = new ArrayList<>();
 //		Integer gUserID = 11000009;
 		ReserveOrderService reserveOrderService = new ReserveOrderService();
 		List<ReserveOrder> reserveOrder = reserveOrderService.getgUserID(gUserID);

@@ -11,24 +11,14 @@
 <%@ page import="com.pichill.time.*"%>
 <%@ page import="com.pichill.place.*"%>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
+
 <%
 GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
- //Integer gUserID = 11000009;
-//ReserveOrderService reserveOrderService = new ReserveOrderService();
-//List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
- //pageContext.setAttribute("list",list);
-// pageContext.setAttribute("gUserID",gUserID);
-
-%>
-<%
-ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
-%>
-<%
-ReserveOrder order = (ReserveOrder) session.getAttribute("reserveOrder");
-%>
-
-<%
-GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
+Integer gUserID = gUser.getgUserID();
+ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+List<ReserveOrder> list = reserveOrderSvc.getgUserID(gUserID);
+pageContext.setAttribute("list",list);
+pageContext.setAttribute("gUserID",gUserID);
 %>
 
 
@@ -110,7 +100,12 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 						<li>&nbsp;</li>
 						<li class="my-2"><a class="asidearea" href="">聯絡我們</a></li>
 						<li>&nbsp;</li>
-						<li class="my-2"><a class="asidearea" href="">登出</a></li>
+						<li class="my-2">
+						  <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
+	        				<input type="hidden" name="action" value="logout">
+	        				<button class="btn btn-danger">登出</button>
+       					  </form> 
+       					</li>
 					</ul>
 				</nav>
 			</div>

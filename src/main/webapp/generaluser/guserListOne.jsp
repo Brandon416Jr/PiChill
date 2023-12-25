@@ -76,7 +76,10 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">µn¥X</a>                           
+                          <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
+	        				<button class="asidearea">µn¥X</button>
+	        				<input type="hidden" name="action" value="logout">
+       					  </form>                             
                         </li>
                     </ul>
                 </nav>
