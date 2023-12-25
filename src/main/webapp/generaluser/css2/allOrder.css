@@ -1,11 +1,11 @@
 /*======================= aside 區域 ============================*/
 aside.aside {
-	width: 250px;
+	width: 220px;
 	display: inline-block;
 	vertical-align: top;
 	font-size: 1rem;
 	margin-right: 10px;
-	border: 1px solid green;
+/* 	border: 1px solid green; */
 }
 
 @media ( max-width : 575.98px) {
@@ -15,12 +15,12 @@ aside.aside {
 }
 /*======================= main 區域 ============================*/
 main.main {
-	width: calc(100% - 250px - 10px);
-	height: auto;
+	width: calc(100% - 220px - 10px);
+	height: 600px;
 	display: inline-block;
 	vertical-align: top;
 	font-size: 1rem;
-	border: 1px solid blue;
+/* 	border: 1px solid blue; */
 	box-sizing: border-box;
 }
 

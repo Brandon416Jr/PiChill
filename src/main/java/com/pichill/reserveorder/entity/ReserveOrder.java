@@ -31,12 +31,12 @@ public class ReserveOrder {
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
-	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)//(name=自己(FK), referencedColumnName = 對應到的PK)
+	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID")//(name=自己(FK), referencedColumnName = 對應到的PK)
 	private GeneralUser generalUser;
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
-	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID", updatable = false)
+	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID")
 	private OwnerUser ownerUser;
 	
 	@Column(name="reserveDate", updatable = false)
@@ -44,17 +44,17 @@ public class ReserveOrder {
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
-	@JoinColumn(name = "timeID", referencedColumnName = "timeID", updatable = false)
+	@JoinColumn(name = "timeID", referencedColumnName = "timeID")
 	private TimeRef timeRef;
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
-	@JoinColumn(name = "placeID", referencedColumnName = "placeID", updatable = false)
+	@JoinColumn(name = "placeID", referencedColumnName = "placeID")
 	private Place place;
 	
 	// fetch 預設為 EAGER
 	@ManyToOne
-	@JoinColumn(name = "courtID", referencedColumnName = "courtID", updatable = false)
+	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
 	private Court court;
 	
 	@Column(name="orderTime", updatable = false)
