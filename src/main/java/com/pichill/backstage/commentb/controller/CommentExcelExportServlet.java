@@ -54,7 +54,7 @@ public class CommentExcelExportServlet extends HttpServlet {
             HSSFRow dataRow = sheet.createRow(i+1);
             dataRow.createCell(0).setCellValue(m.getCommentID());
             dataRow.createCell(1).setCellValue(m.getGeneralUser().getgUserID());
-            dataRow.createCell(2).setCellValue(m.getPostID());
+            dataRow.createCell(2).setCellValue(m.getPost().getPostID());
             dataRow.createCell(3).setCellValue(m.getCommentContent());
             dataRow.createCell(4).setCellValue(m.getCommentTime());
            

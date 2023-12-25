@@ -65,10 +65,10 @@ public class GeneralUserDAOImplBack implements GeneralUserDAO {
 				return 0;
 	}
 
-	@Override
-	public List<GeneralUser> findBygUserID(Integer reserveOrderID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+//	@Override
+//	public List<GeneralUser> findBygUserID(Integer reserveOrderID) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 
 }

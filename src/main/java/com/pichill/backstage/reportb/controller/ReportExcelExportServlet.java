@@ -55,8 +55,8 @@ public class ReportExcelExportServlet extends HttpServlet {
             HSSFRow dataRow = sheet.createRow(i+1);
             dataRow.createCell(0).setCellValue(m.getReportID());
             dataRow.createCell(1).setCellValue(m.getManageID());
-            dataRow.createCell(2).setCellValue(m.getPostID());
-            dataRow.createCell(3).setCellValue(m.getCommentID());
+            dataRow.createCell(2).setCellValue(m.getPost().getPostID());
+            dataRow.createCell(3).setCellValue(m.getComment().getCommentID());
             dataRow.createCell(4).setCellValue(m.getReportTime());
             dataRow.createCell(5).setCellValue(m.getReportStatus());
             dataRow.createCell(6).setCellValue(m.getReportType());
