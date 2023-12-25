@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.court.Court;
-import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
@@ -28,6 +26,7 @@ public class TimeRef {
 	private Integer timeID;
 	
 	@Column(name="reserveTime", updatable = false)
+	@Expose
 	private String reserveTime;
 	
 	// fetch 預設為 EAGER
