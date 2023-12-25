@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
@@ -113,8 +114,12 @@ public class ReserveOrderServlet extends HttpServlet {
 //		}
 		
 	/*=========================================== 2.開始查詢資料 ===========================================*/
-//		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-		Integer gUserID = 11000009;
+		HttpSession session = req.getSession();
+		gUserID = (Integer)req.getAttribute("gUserID");
+		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
+//		Integer gUserID = generalUser.getgUserID();
+//		List<ReserveOrder> reserveOrderList = new ArrayList<>();
+//		Integer gUserID = 11000009;
 		ReserveOrderService reserveOrderService = new ReserveOrderService();
 		List<ReserveOrder> reserveOrder = reserveOrderService.getgUserID(gUserID);
 

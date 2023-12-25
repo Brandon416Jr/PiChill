@@ -7,6 +7,9 @@
 	//從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
     GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
 %>
+<%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -65,7 +68,10 @@
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">登出</a>                           
+                        <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
+	        				<button class="btn btn-danger">登出</button>
+	        				<input type="hidden" name="action" value="logout">
+       					</form>                         
                         </li>
                     </ul>
                 </nav>

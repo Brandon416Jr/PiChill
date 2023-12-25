@@ -132,6 +132,18 @@ aside.aside a.asidearea{
 aside.aside a.asidearea:hover{
   color: #FF9F1B;
 }
+aside.aside button.asidearea{
+  font-size: 16px;
+  color:#207DCA;
+  margin: 0 0 0 12px;
+  text-decoration:none;
+  border: 0px;
+}
+aside.aside button.asidearea:hover{
+  color: #FF9F1B;
+}
+
+
 
 aside.aside div.parent_container{
   /* width: 350px; */
@@ -270,6 +282,11 @@ ul.pagination{
 li::marker{
   width: 0;
   height: 0;
+}
+button.logout{
+	background-color: none;
+	color: none;
+	border: 0px;
 }
 /*======================= footer 區域 ============================*/
 footer.footer{
