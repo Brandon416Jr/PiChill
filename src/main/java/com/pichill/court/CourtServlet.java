@@ -20,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pichill.manage.entity.Manage;
-import com.pichill.place.Place;
-
-import java.sql.Timestamp;
+import com.pichill.place.*;
 
 
 
@@ -30,6 +28,7 @@ import java.sql.Timestamp;
 @WebServlet(name = "CourtHServlet", value = "/court/court.do")
 public class CourtServlet extends HttpServlet{
 	private CourtService courtService;
+	private Integer placeID;
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
@@ -255,9 +254,9 @@ public class CourtServlet extends HttpServlet{
 		court.setCourtApplyStatus(courtApplyStatus);
 		court.setCourtOpenTime(courtOpenTime);
 		court.setCourtCloseTime(courtCloseTime);
-		court.setplaceName(placeName);
-		court.setplaceFee(placeFee);
-		court.setball(ball);
+		((Place) court.getPlace()).setPlaceName(placeName);
+		((Place) court.getPlace()).setPlaceFee(placeFee);
+		((Place) court.getPlace()).setBall(ball);
 		
 		court.toString();
 		
@@ -353,9 +352,11 @@ public class CourtServlet extends HttpServlet{
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
+		Place place = new Place();
+		
 		court.setCourtID(courtID);
-//		court.setoUserID(oUserID);
-//		court.setmanageID(manageID);
+		court.getOwnerUser().setoUserID(oUserID);
+		court.getManage().setManageID(manageID);
 		court.setCourtOnTime(courtOnTime);
 		court.setCourtApplyTime(courtApplyTime);
 		court.setCourtName(courtName);
@@ -367,9 +368,9 @@ public class CourtServlet extends HttpServlet{
 		court.setCourtApplyStatus(courtApplyStatus);
 		court.setCourtOpenTime(courtOpenTime);
 		court.setCourtCloseTime(courtCloseTime);
-		court.setplaceName(placeName);
-		court.setplaceFee(placeFee);
-		court.setball(ball);
+		((Place) court.getPlace()).setPlaceName(placeName);
+		((Place) court.getPlace()).setPlaceFee(placeFee);
+		((Place) court.getPlace()).setBall(ball);
 
 		court.toString();
 		// Send the use back to the form, if there were errors
@@ -380,7 +381,7 @@ public class CourtServlet extends HttpServlet{
 // ========================================================================改到這===============
 
 		/*************************** 2.開始新增資料 ***************************************/
-		courtService.insertCourt(court);
+		courtService.insertCourt(court, place);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		return "owneruser/court/all_court.jsp";

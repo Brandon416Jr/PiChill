@@ -15,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.court.Court;
 import com.pichill.reserveorder.entity.ReserveOrder;
 
@@ -36,9 +37,11 @@ public class Place {
  public String placeName;
  
  @Column(name = "placeFee")
+ @Expose
  public Integer placeFee;
  
  @Column(name = "ball")
+ @Expose
  public Integer ball;
  
  

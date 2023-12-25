@@ -144,17 +144,13 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 
     		    <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>性別:</span>
-<%--            <input type="text" id="oGender" name="oGender" value="<%= (ownerUser==null)? 1 : ownerUser.getoGender()%>"/> --%>
-                <% int gender = ownerUser.getoGender(); %>
-				<select name="oGender" disabled="disabled">
-				<option value="0" <%=gender == 0 ? "selected" : ""%>>男</option>
-				<option value="1" <%=gender == 1 ? "selected" : ""%>>女</option>
-				</select>
+                <input type="text" id="oGender" name="oGender" value="<%= (ownerUser==null)? 0 : ownerUser.getoGender()%>"/>
+
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>場館負責人身分證字號:</span>
-                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser == null) ? "H212810987" : ownerUser.getoIDNum()%>"/>
+                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser==null)? "H212810987" : ownerUser.getoIDNum()%>"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">                  
@@ -200,7 +196,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
                 
-                <input type="hidden" name="action" value="update_myData">
+                <input type="hidden" name="action" value="update">
 				<input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
                 <br><br><br>

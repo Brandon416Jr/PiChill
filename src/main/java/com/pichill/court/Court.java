@@ -24,6 +24,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.google.gson.annotations.Expose;
 import com.pichill.manage.entity.Manage;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
@@ -57,6 +58,7 @@ public class Court implements Serializable{
  
 
  @Column(name = "courtName")
+ @Expose
  private String courtName;
  
  @Column(name = "courtPic" , columnDefinition = "longblob")

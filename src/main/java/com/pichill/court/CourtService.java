@@ -35,7 +35,7 @@ public class CourtService {
 //	}
 
 	
-	public void insertCourt(Court court) {
+	public void insertCourt(Court court , Place place) {
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -45,9 +45,11 @@ public class CourtService {
 			Class.forName(driver);
 			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pichill?serverTimezone=Asia/Taipei", "root", "Hn88567369");
 			pstmt = con.prepareStatement("SELECT *  FROM court LEFT JOIN place on court.courtID;"
-					+ "INSERT ");
+					                   + "INSERT INTO court (courtID,oUserID,courtName,courtPic,ourtTelephone,courtAddress,courtRule,loc,courtOpenTime,courtCloseTime)");
 
 			pstmt.setInt(1, court.getCourtID());
+			
+			pstmt.setInt(2, court.getOwnerUser().getoUserID());
 			pstmt.setString(2, court.getCourtName());
 			pstmt.setBytes(3, court.getCourtPic());
 			pstmt.setString(4, court.getCourtTelephone());
@@ -56,7 +58,10 @@ public class CourtService {
 			pstmt.setString(7, court.getLoc());
 			pstmt.setTime(8, court.getCourtOpenTime());
 			pstmt.setTime(9, court.getCourtCloseTime());
-			
+			pstmt.setInt(10, place.getPlaceID());
+			pstmt.setString(11, place.getPlaceName());
+			pstmt.setInt(12, place.getPlaceFee());
+			pstmt.setInt(13, place.getBall());
 			pstmt.executeUpdate();
 
 			// Handle any driver errors
@@ -111,15 +116,15 @@ public class CourtService {
     	    stmt = conn.createStatement();
     	    rs = stmt.executeQuery("SELECT *  FROM court LEFT JOIN place on court.courtID ");
             while (rs.next()) {
-            	Map<String, String> resultMap = new HashMap<String, String>();
+            	Map<String, Object> resultMap = new HashMap<String, Object>();
             	resultMap.put("courtID", rs.getString("courtID"));
             	resultMap.put("oUserID", rs.getString("oUserID"));
             	resultMap.put("courtName", rs.getString("courtName"));
             	resultMap.put("courtTelephone", rs.getString("courtTelephone"));
             	resultMap.put("loc", rs.getString("loc"));
             	resultMap.put("courtAddress", rs.getString("courtAddress"));
-            //	resultMap.put("courtRule", rs.getString("courtRule"));
-            // 	resultMap.put("courtPic", rs.getBytes("courtPic"));
+            	resultMap.put("courtRule", rs.getString("courtRule"));
+             	resultMap.put("courtPic", rs.getBytes("courtPic"));
             	resultMap.put("courtOpenTime", rs.getString("courtOpenTime"));
             	resultMap.put("courtCloseTime", rs.getString("courtCloseTime"));
             	resultMap.put("courtApplyTime", rs.getString("courtApplyTime"));

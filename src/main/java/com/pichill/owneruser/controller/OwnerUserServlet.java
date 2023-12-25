@@ -58,7 +58,7 @@ public class OwnerUserServlet extends HttpServlet {
 			forwardPath = getOne_For_Update(req, res);
 			break;
 		case "update":
-			// 來自set_owneruser.jsp的請求
+			// 來自owneruser.jsp的請求
 			forwardPath = update(req, res);
 			break;
 		case "update_myData":
@@ -228,7 +228,7 @@ public class OwnerUserServlet extends HttpServlet {
 		}
 		
 		String oBankAccount = req.getParameter("oBankAccount");
-		String oBkARegex = "^[0-9]{3}$";
+		String oBkARegex = "^[1-9]{13}$";
 		if (oBankAccount == null || oBkARegex.trim().isEmpty()) {
 			errorMsgs.add("銀行帳號: 請勿空白");
 		} else if (!oBankAccount.trim().matches(oBkARegex)) {
@@ -251,7 +251,7 @@ public class OwnerUserServlet extends HttpServlet {
 		}
 
 		// 頁面不顯示直接先給空值
-		Date oRegisterDate = Date.valueOf(req.getParameter("oRegisterDate"));
+//		Date oRegisterDate = Date.valueOf(req.getParameter("oRegisterDate"));
 		
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer oPostAmount = 0;
@@ -280,7 +280,7 @@ public class OwnerUserServlet extends HttpServlet {
 
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-//		OwnerUser ownerUser = new OwnerUser();
+		OwnerUser owneruser = new OwnerUser();
 		ownerUser.setoUserID(oUserID);
 		ownerUser.setoUserName(oUserName);
 		ownerUser.setoPassword(oPassword);
@@ -294,7 +294,7 @@ public class OwnerUserServlet extends HttpServlet {
 		ownerUser.setoBankCode(oBankCode);
 		ownerUser.setoBankAccount(oBankAccount);
 		ownerUser.setoProfilePic(oProfilePic);
-		ownerUser.setoRegisterDate(oRegisterDate);
+//		ownerUser.setoRegisterDate(oRegisterDate);
 		ownerUser.setoPostAmount(oPostAmount);
 		ownerUser.setoReportCnt(oReportCnt);
 		ownerUser.setCourtArriveCnt(courtArriveCnt);

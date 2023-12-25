@@ -183,7 +183,7 @@ pageContext.setAttribute("list", list);
 			<th>地區</th>
 			<th>球館地址</th>
 <!-- 			<th>球館須知</th> -->
-<!-- 			<th>球館圖片</th> -->
+			<th>球館圖片</th>
 			<th>開館時間</th>
 			<th>閉館時間</th>
 			<th>申請上架時間</th>
@@ -206,7 +206,7 @@ pageContext.setAttribute("list", list);
 				<td style="width:80px">${court.loc}</td>
 				<td style="width:180px">${court.courtAddress}</td>
 <%-- 				<td style="width:480px">${court.courtRule}</td> --%>
-<%-- 				<td>${court.courtPic}</td> --%>
+				<td>${court.courtPic}</td>
 				<td>${court.courtOpenTime}</td>
 				<td>${court.courtCloseTime}</td>
 				<td style="width:100px">${court.courtApplyTime}</td>				

@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.owneruser.entity.*"%>
-
+<%@ page import="com.pichill.reserveorder.entity.*"%>
+<%@ page import="com.pichill.reserveorder.service.*"%>
 <%
 //從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
 OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
