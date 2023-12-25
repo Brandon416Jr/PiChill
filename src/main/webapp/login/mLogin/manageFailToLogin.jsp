@@ -47,7 +47,7 @@ setInterval(function() {
         window.location.href = "<%=request.getContextPath()%>
 		/login/mLogin/manageLogin.jsp";
 					}
-				}, 10000); // 每秒檢查一次
+				}, 1000); // 每秒檢查一次
 	</script>
 
 </body>

@@ -93,6 +93,8 @@
 		<url-pattern>/reserveorder/updateStatus.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
+		<url-pattern>/contactus/addContactUs.jsp</url-pattern>
+		<url-pattern>/contactusForGUser/addContactUs.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>
