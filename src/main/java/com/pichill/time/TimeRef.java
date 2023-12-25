@@ -44,9 +44,11 @@ public class TimeRef {
 	// (mappedBy = "time")的time指的是新增的Time "time"部門物件的屬性
 	@OrderBy("reserveOrderID asc") 
 	private Set<ReserveOrder> reserveOrder; // Set不重複
-		
+
+
 	public TimeRef() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
 
 
@@ -63,56 +65,46 @@ public class TimeRef {
 		return timeID;
 	}
 
+
 	public void setTimeID(Integer timeID) {
 		this.timeID = timeID;
 	}
+
 
 	public String getReserveTime() {
 		return reserveTime;
 	}
 
+
 	public void setReserveTime(String reserveTime) {
 		this.reserveTime = reserveTime;
 	}
 
-//	public Integer getCourtID() {
-//		return courtID;
-//	}
-//
-//	public void setCourtID(Integer courtID) {
-//		this.courtID = courtID;
-//	}
-
-	
-	public Set<ReserveOrder> getReserveOrder() {
-		return reserveOrder;
-	}
-
-	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
-		this.reserveOrder = reserveOrder;
-	}
 
 	public Court getCourt() {
 		return court;
 	}
+
 
 	public void setCourt(Court court) {
 		this.court = court;
 	}
 
 
+	public Set<ReserveOrder> getReserveOrder() {
+		return reserveOrder;
+	}
+
+
+	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Time [timeID=" + timeID + ", reserveTime=" + reserveTime + ", court=" + court + ", reserveOrder="
+		return "TimeRef [timeID=" + timeID + ", reserveTime=" + reserveTime + ", court=" + court + ", reserveOrder="
 				+ reserveOrder + "]";
 	}
-
-	public static TimeRef parseInt(String parameter) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-	
 
 }

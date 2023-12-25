@@ -22,119 +22,120 @@ import com.pichill.reserveorder.entity.ReserveOrder;
 @Entity
 @Table(name = "place")
 public class Place {
-	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "placeID", updatable = false) //PK鍵不用更新
-	private Integer placeID;
-	
-//	@Column(name = "courtID" , updatable = false ,insertable = false )
-//	private Integer courtID;
-	
-	@Column(name = "placeName", columnDefinition = "varchar")
-	public static String placeName;
-	
-	@Column(name = "placeFee")
-	public static Integer placeFee;
-	
-	@Column(name = "ball")
-	public static Integer ball;
-	
-	
-	
-	//球館
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
-	private Court court;
-	
+ 
+ 
+ @Id
+ @GeneratedValue(strategy = GenerationType.IDENTITY)
+ @Column(name = "placeID", updatable = false) //PK鍵不用更新
+ private Integer placeID;
+ 
+// @Column(name = "courtID" , updatable = false ,insertable = false )
+// private Integer courtID;
+ 
+ @Column(name = "placeName", columnDefinition = "varchar")
+ public String placeName;
+ 
+ @Column(name = "placeFee")
+ public Integer placeFee;
+ 
+ @Column(name = "ball")
+ public Integer ball;
+ 
+ 
+ 
+ //球館
+ @ManyToOne(fetch = FetchType.EAGER)
+ @JoinColumn(name = "courtID", referencedColumnName = "courtID")
+ private Court court;
+ 
 
-	public Court getCourt() {
-	return court;
-	}
+ public Court getCourt() {
+ return court;
+ }
 
-	public void setCourt(Court court) {
-	this.court = court;
-	}
-	
+ public void setCourt(Court court) {
+ this.court = court;
+ }
+ 
 
-	
-	//預約訂單
-	// fetch 預設為 LAZY
-	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-	// (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
-	@OrderBy("reserveOrderID asc") 
-	private Set<ReserveOrder> reserveOrder; // Set不重複
-		
-	
-	//貼文
-	// fetch 預設為 LAZY
-//	@OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
-//	// (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
-//	@OrderBy("postID asc") 
-//	private Set<Post> post; // Set不重
-	
-	
-	
-	
-	public Place() {
-	}
+ 
+ //預約訂單
+ // fetch 預設為 LAZY
+ @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+ // (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
+ @OrderBy("reserveOrderID asc") 
+ private Set<ReserveOrder> reserveOrder; // Set不重複
 
-	public Place(Integer placeID, String placeName, Integer placeFee, Integer ball, Court court,
-			Set<ReserveOrder> reserveOrder) {
-		super();
-		this.placeID = placeID;
-		this.placeName = placeName;
-		this.placeFee = placeFee;
-		this.ball = ball;
-		this.court = court;
-		this.reserveOrder = reserveOrder;
-	}
 
-	public Integer getPlaceID() {
-		return placeID;
-	}
+ public Place() {
+  super();
+  // TODO Auto-generated constructor stub
+ }
 
-	public void setPlaceID(Integer placeID) {
-		this.placeID = placeID;
-	}
+ public Place(Integer placeID, String placeName, Integer placeFee, Integer ball, Court court,
+   Set<ReserveOrder> reserveOrder) {
+  super();
+  this.placeID = placeID;
+  this.placeName = placeName;
+  this.placeFee = placeFee;
+  this.ball = ball;
+  this.court = court;
+  this.reserveOrder = reserveOrder;
+ }
 
-	public String getPlaceName() {
-		return placeName;
-	}
+ public Integer getPlaceID() {
+  return placeID;
+ }
 
-	public void setPlaceName(String placeName) {
-		this.placeName = placeName;
-	}
+ public void setPlaceID(Integer placeID) {
+  this.placeID = placeID;
+ }
 
-	public Integer getPlaceFee() {
-		return placeFee;
-	}
+ public String getPlaceName() {
+  return placeName;
+ }
 
-	public void setPlaceFee(Integer placeFee) {
-		this.placeFee = placeFee;
-	}
+ public void setPlaceName(String placeName) {
+  this.placeName = placeName;
+ }
 
-	public Integer getBall() {
-		return ball;
-	}
+ public Integer getPlaceFee() {
+  return placeFee;
+ }
 
-	public void setBall(Integer ball) {
-		this.ball = ball;
-	}
+ public void setPlaceFee(Integer placeFee) {
+  this.placeFee = placeFee;
+ }
 
-	public Set<ReserveOrder> getReserveOrder() {
-		return reserveOrder;
-	}
+ public Integer getBall() {
+  return ball;
+ }
 
-	public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
-		this.reserveOrder = reserveOrder;
-	}
+ public void setBall(Integer ball) {
+  this.ball = ball;
+ }
 
-	@Override
-	public String toString() {
-		return "Place [placeID=" + placeID + ", placeName=" + placeName + ", placeFee=" + placeFee + ", ball=" + ball
-				+ ", court=" + court + ", reserveOrder=" + reserveOrder + "]";
-	}
-	
+ public Set<ReserveOrder> getReserveOrder() {
+  return reserveOrder;
+ }
+
+ public void setReserveOrder(Set<ReserveOrder> reserveOrder) {
+  this.reserveOrder = reserveOrder;
+ }
+
+ @Override
+ public String toString() {
+  return "Place [placeID=" + placeID + ", placeName=" + placeName + ", placeFee=" + placeFee + ", ball=" + ball
+    + ", court=" + court + ", reserveOrder=" + reserveOrder + "]";
+ }
+  
+ 
+ //貼文
+ // fetch 預設為 LAZY
+// @OneToMany(mappedBy = "place", cascade = CascadeType.ALL)
+// // (mappedBy = "place")的generalUser指的是新增的Place "place"部門物件的屬性
+// @OrderBy("postID asc") 
+// private Set<Post> post; // Set不重
+ 
+ 
 }
