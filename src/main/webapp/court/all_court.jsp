@@ -6,19 +6,15 @@
 <%@ page import="com.pichill.court.CourtDAOImpl"%>
 <%@ page import="com.pichill.court.CourtService"%>
 <%@ page import="com.pichill.place.Place"%>
-<%@ page import="com.pichill.owneruser.*"%>
+<%@page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page import="java.util.*" %>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 
- <%
-// OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
-// // 寫死
-// Integer oUserID = 12000001;
-// OwnerUserService ownerUserSvc = new OwnerUserService();
-// OwnerUser ownerUser = ownerUserSvc.getOneOwnerUser(oUserID);
-// pageContext.setAttribute("ownerUser",ownerUser);
-%>
+<%
+//從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+%> 
 
 
 <%

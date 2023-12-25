@@ -4,7 +4,7 @@
     
 <%
 //從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
-OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 %>  
     
     
@@ -51,8 +51,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
@@ -72,16 +71,16 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
 								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#contents-collapse"
+								data-bs-target="#contents-collapse" href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp"
 								aria-controls="contents-collapse">企業會員資料</button>
 						</li>
 
 						<li class="my-2">
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
+								data-bs-toggle="collapse" aria-expanded="false" href="<%=request.getContextPath()%>/court/new_court.jsp"
 								data-bs-target="#forms-collapse" aria-controls="forms-collapse"
-								href="<%=request.getContextPath()%>/court/new_court.jsp">申請上架球館</button>
+								>申請上架球館</button>
 						</li>
 						<li class="my-2">
 							<button
@@ -91,12 +90,14 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 								href="<%=request.getContextPath()%>/court/court.jsp">球館管理</button>
 
 						</li>
+						
 						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">登出</button>
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
 						</li>
+						
 					</ul>
 				</nav>
 			</div>

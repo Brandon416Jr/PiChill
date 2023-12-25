@@ -48,9 +48,8 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
@@ -87,12 +86,13 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 								data-bs-target="#forms-collapse" aria-controls="forms-collapse">球館管理</button>
 
 						</li>
-						<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
 							<li class="my-2">
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
 								<button class="btn btn-danger">登出</button>
 								<input type="hidden" name="action" value="logout">
+							</form>
 							</li>
-						</form>
+						
 						
 					</ul>
 				</nav>
