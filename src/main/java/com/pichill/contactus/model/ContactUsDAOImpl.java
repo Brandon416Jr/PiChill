@@ -1,31 +1,25 @@
 package com.pichill.contactus.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
-import com.pichill.contactus.Util;
+import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.post.entity.Post;
+import com.pichill.util.HibernateUtil;
 
+public class ContactUsDAOImpl implements ContactUsDAO {
 
-public class ContactUsDAOImpl implements ContactUsDAO{
-	
-	
 	private static final int PAGE_MAX_RESULT = 3;
 	private SessionFactory factory;
 
 	public ContactUsDAOImpl() {
 		factory = com.pichill.util.HibernateUtil.getSessionFactory();
 	}
-	
+
 	// Session 為 not thread-safe，所以此方法在各個增刪改查方法裡呼叫
 	// 以避免請求執行緒共用了同個 Session
 	private Session getSession() {
@@ -34,25 +28,32 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 
 	@Override
 	public int add(ContactUs entity) {
-//		SessionFactory factory2 = HibernateUtil.getSessionFactory();
-//		Session session = factory2.openSession();
-//		Transaction tx = session.beginTransaction();
-		// 回傳給 service 剛新增成功的自增主鍵值
-//		entity.setPostTime(new java.sql.Timestamp(System.currentTimeMillis()));
-//		session.save(entity);
-//		tx.commit();
-//		return 1;
-		return(Integer)getSession().save(entity);
+		try {
+			SessionFactory factory = HibernateUtil.getSessionFactory();
+			Session session = factory.openSession();
+			// //回傳給 service 剛新增成功的自增主鍵值
+			Transaction tx = session.beginTransaction();
+			entity.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
+			session.save(entity);
+			tx.commit();
+			// contactUs.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
+			// session.save(contactUs);
+			return (Integer) getSession().save(entity);
+			// return(Integer)getSession().save(contactUs);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	@Override
 	public int update(ContactUs entity) {
 		try {
-//			SessionFactory factory2 = HibernateUtil.getSessionFactory();
-//			Session session = factory2.openSession();
-//			Transaction tx = session.beginTransaction();
-			getSession().update(entity);
-//			tx.commit();
+			SessionFactory factory2 = HibernateUtil.getSessionFactory();
+			Session session = factory2.openSession();
+			Transaction tx = session.beginTransaction();
+//			getSession().update(entity);
+			tx.commit();
 			return 1;
 		} catch (Exception e) {
 			return -1;
@@ -71,12 +72,22 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 			return -1;
 		}
 	}
+
 	@Override
 	public ContactUs getContactUsByFormID(Integer formID) {
-		getSession().clear();
-		return getSession().get(ContactUs.class,formID);
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			session.beginTransaction();
+			ContactUs contactUs = session.get(ContactUs.class, formID);
+			session.getTransaction().commit();
+			return contactUs;
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.getTransaction().rollback();
+			return null;
+		}
 	}
-	
+
 //	@Override
 //	public List<ContactUs> getByPurpose(String formPurpose) {
 //		return getSession().createQuery("from ContactUs WHERE formPurpose like :formPurpose", ContactUs.class)
@@ -107,14 +118,26 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 
 	@Override
 	public List<ContactUs> getAll() {
-		return getSession().createQuery("from ContactUs", ContactUs.class).list();
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		try {
+			System.out.println("Begin transaction");
+			session.beginTransaction();
+			List<ContactUs> list = session.createQuery("from ContactUs", ContactUs.class).list();//敘述的部份名稱大小寫要跟class的名稱一樣！重要！
+			session.getTransaction().commit();
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+			}
 	}
 
-	
-	
-		
-	
-	//以下是JDBC寫法
+//	@Override
+//	public ContactUs getContactUsByFormPurpose(String formPurpose) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	// 以下是JDBC寫法
 //	private static final String INSERT_STMT= "INSERT INTO contactUs(oUserID,gUserID,formPurpose,formContent,formPic,formTime,formStatus,formType)VALUES(?,?,?,?,?,?,?,?)";
 //    private static final String UPDATE_STMT= "UPDATE contactUs SET oUserID=?,gUserID=?,formPurpose=?,formContent=?,formPic=?,formTime=?,formStatus=?,formType=? WHERE formID = ? ";
 //    private static final String DELETE_STMT= "DELETE FROM contactUs WHERE formID = ?";
@@ -306,4 +329,3 @@ public class ContactUsDAOImpl implements ContactUsDAO{
 //		}
 //	}
 }
-    

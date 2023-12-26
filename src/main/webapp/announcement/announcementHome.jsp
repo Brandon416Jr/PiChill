@@ -21,7 +21,7 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/generaluser/css2/css.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/generaluser/css2/main.css">
-<title>搜尋公告結果</title>
+<title>最新消息</title>
 </head>
 <body>
 <body>
@@ -125,7 +125,7 @@ pageContext.setAttribute("list", list);
 			<table id="table-1">
 				<tr>
 					<td>
-						<h3>公告搜尋結果</h3>
+						<h3>最新消息與公告</h3>
 						<h4>
 							<a
 								href="<%=request.getContextPath()%>/announcement/announcement_select.jsp">回首頁</a>
