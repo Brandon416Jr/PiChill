@@ -6,15 +6,19 @@
 <%@ page import="com.pichill.court.CourtDAOImpl"%>
 <%@ page import="com.pichill.court.CourtService"%>
 <%@ page import="com.pichill.place.Place"%>
-<%@page import="com.pichill.owneruser.entity.OwnerUser"%>
+<%@ page import="com.pichill.owneruser.*"%>
 <%@ page import="java.util.*" %>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 
-<%
-//從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
-OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
-%> 
+ <%
+// OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+// // 寫死
+// Integer oUserID = 12000001;
+// OwnerUserService ownerUserSvc = new OwnerUserService();
+// OwnerUser ownerUser = ownerUserSvc.getOneOwnerUser(oUserID);
+// pageContext.setAttribute("ownerUser",ownerUser);
+%>
 
 
 <%
@@ -103,17 +107,14 @@ pageContext.setAttribute("list", list);
                     <img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG" />
                 </a>
 
-
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
-                    </li>
-                </ul>
-
+            	<ul class="nav nav-pills">
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/contactUs.jsp" class="nav-link">聯絡我們</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"> 
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
+				</ul>
             </header>
         </div>
     </header>
@@ -128,7 +129,7 @@ pageContext.setAttribute("list", list);
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
                                 aria-controls="contents-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/owneruser/set_owneruser.jsp"
+                                href="<%=request.getContextPath()%>/owneruser/owneruser/ouserListOne.jsp"
                                 >企業會員資料</button>
                         </li>
                         <li class="my-2">
