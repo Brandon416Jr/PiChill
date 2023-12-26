@@ -1,94 +1,45 @@
 //==============所有文章=============//
 $(document).ready(function() {
 	$.ajax({
-		"action": "getUser",
-		type: "POST",
-		dataType: "json",
-		url: "post.do?action=getUser",
-		success: function(data) {
-			//			console.log(data);
-			if (data == null) {
-				$('#userID').val("null");
-			} else {
-				$('#userID').val(data.gUserID);
-			}
+		"action":"getoUser",
+		type:"POST",
+		dataType:"json",
+		url:"post.do?action=getoUser",
+		success:function(data){
+			console.log(data);
+ $('#userID').val(data.oUserID);
 		}
 	})
 	$.ajax({
+		"action": "list_All",
 		type: "GET",
 		url: "post.do",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
-		  success: function(responseData) {
-        // 在这里处理从后端接收到的 JSON 数据
-        // responseData 包含了您后端生成的 JSON 数据
-        
-        // 示例：遍历 responseData
-        for (var i = 0; i < responseData.length; i++) {
-            var post = responseData[i].post;
-            var generalUser = responseData[i].generalUser;
-            var nicknameID = generalUser.nicknameID;
-            var profilePic = generalUser.profilePic;
-            var gUserID = generalUser.gUserID;
-            
-            // 在这里进行进一步的操作，例如渲染数据到页面
-            console.log('Post:', post);
-            console.log('nicknameID:', nicknameID);
-            console.log('profilePic:', profilePic);
-            console.log('gUserID:', gUserID);
-            
-            // 调用相应的函数，并将需要的属性作为参数传递
-            if (post.postType === 0) {
-                publishPost(
-                    post.postID,
-                    post.postTitle,
-                    post.postContent,
-                    post.postType,
-                    post.postTime,
-                    post.postPic,
-                    post.likeCnt,
-                    post.commentCnt,
-                    post.gUsers,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            } else if (post.postType === 1) {
-                publishGroupPost(
-                    post.postID,
-                    post.postTitle,
-                    post.postContent,
-                    post.postType,
-                    post.postTime,
-                    post.postPic,
-                    post.likeCnt,
-                    post.commentCnt,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            } else if (post.postType === 2) {
-                publishPromotePost(
-                    post.postID,
-                    post.postTitle,
-                    post.postType,
-                    post.postTime,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            }
-        }
-    },
-    error: function(error) {
-        // 处理错误
-        console.error('Error:', error);
-    }
+		success: function(responseData) {
+			var posts = responseData.posts;
+			var gUsers = responseData.gUsers;
+			posts.forEach(function(post) {
+				if (post.postType === 0) {
+					publishPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.postPic, post.likeCnt, post.commentCnt);
+				} else if (post.postType === 1) {
+					publishGroupPost(post.postID, post.postTitle, post.postContent, post.postType, post.postTime, post.postPic, post.likeCnt, post.commentCnt);
+				} else if (post.postType === 2) {
+					publishPromotePost(post.postID, post.postTitle, post.postType, post.postTime);
+				}
+			});
+			gUsers.forEach(function(user) {
+				// 这里处理每个用户对象
+				console.log(user);
+			});
+		},
+		error: function(xhr, status, error) {
+			console.error("Error fetching posts:", status, error);
+		}
 	});
 
-	function publishPost( postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, gUser) {
-		//		console.log(gProfilePic);
-		var currentUserId = $('#userID').val();
+	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt,nicknameID, gProfilePic) {
+		console.log(gProfilePic);
 		postContent = postContent.replace(/\n/g, '<br>');
 		if (postPic) {
 			var imageDataArray = new Uint8Array(postPic);
@@ -103,12 +54,11 @@ $(document).ready(function() {
     <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
         <div class="row g-0">
             <div class="col-md-8">
-              <input type="hidden" id=${gUser}   >
                 <div class="card-body">
                     <h1 class="modal-title fs-5">
-                        <img src=alt="大頭貼">
+                        <img src="${gProfilePic}" alt="大頭貼">
                         <div>
-                            <a class="post_user"></a>
+                            <a class="post_user">${nicknameID}</a>
                             <div class="post_time">${postTime}</div>
                         </div>
                     </h1>
@@ -120,9 +70,9 @@ $(document).ready(function() {
                         <i class="fa-regular fa-trash-can"></i>
                         <span class="tooltip-text">刪除</span>
                     </button>
-                    <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
+                    <!--    <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span class="tooltip-text">檢舉</span>    
+                                <span class="tooltip-text">檢舉</span>     -->
                             </button>
                     <h5 class="card-title">${postTitle}</h5>
                     <p class="card-text">${postContent}</p>
@@ -145,12 +95,7 @@ $(document).ready(function() {
             </div>
         </div>
     </div>`;
-//	if (currentUserId == gUserID) {
-//			$('#reportButton[data-post-id="' + postID + '"]').hide();
-//		}else {
-//        $('#editButton[data-post-id="' + postID + '"]').hide();
-//        $('#deleteButton[data-post-id="' + postID + '"]').hide();
-//    }
+
 		$('#post-list').prepend(newPostElement);
 	}
 
@@ -360,7 +305,7 @@ $(document).ready(function() {
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert");
-		formData.append("gUserID", userID);
+		formData.append("gUserID",userID);
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 		formData.append("discussType", discussType);
@@ -454,24 +399,24 @@ $(document).ready(function() {
 	});
 	//=============新增揪團(預約編號)=============//
 	$("#group").on("click", function() {
-		console.log("aa");
-		$.ajax({
-			url: "post.do", // 替换成实际的API端点
-			type: "POST",
-			data: { action: "get_order" }, // 传递的参数
-			dataType: "json",
-			success: function(data2) {
-				// 处理Ajax响应数据，可以根据需要进行操作
-				console.log("揪团数据：", data2);
+console.log("aa");
+    $.ajax({
+        url: "post.do", // 替换成实际的API端点
+        type: "POST",
+        data: { action: "get_order" }, // 传递的参数
+        dataType: "json",
+        success: function(data2) {
+            // 处理Ajax响应数据，可以根据需要进行操作
+            console.log("揪团数据：", data2);
 
-				// 这里你可以更新页面或执行其他操作，根据responseData的内容
-			},
-			error: function(xhr, status, error) {
-				console.error("发生错误：", status, error);
-				// 处理错误情况
-			}
-		});
-	});
+            // 这里你可以更新页面或执行其他操作，根据responseData的内容
+        },
+        error: function(xhr, status, error) {
+            console.error("发生错误：", status, error);
+            // 处理错误情况
+        }
+    });
+});
 	//=============新增文章(揪團))===============//
 	$("#pb-group").on("click", function() {
 		var userID = $("#userID").val();
@@ -490,7 +435,7 @@ $(document).ready(function() {
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert_group");
-		formData.append("gUserID", userID);
+		formData.append("oUserID",userID);
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 		formData.append("groupType", groupType);
@@ -708,7 +653,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(postData) {
 				//				console.log("aa")
-				//				console.log(postData.postContent);
+//				console.log(postData.postContent);
 				PostContent = postData.postContent.replace(/<br>/g, '\n');
 				$("#floatingTextarea_edit").val(postData.postTitle);
 				$("#floatingTextarea2_edit").val(PostContent);

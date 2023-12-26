@@ -17,11 +17,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.owneruser.entity.OwnerUser;
@@ -48,27 +48,33 @@ public class PostServlet2 extends HttpServlet {
 
 			PostService postSvc = new PostServiceImpl();
 			Post post = postSvc.getByPostID(postID);
-			System.out.println("++++" + postID);
-
-			String json = new Gson().toJson(post);
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String json = gson.toJson(post);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-			System.out.println("post======" + json);
 			out.flush();
 		} else {
-			// 处理其他GET请求的逻辑，例如列出所有文章
+
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getAll();
 			GeneralUserService generalSvc = new GeneralUserService();
-			List<GeneralUser> gUsers = generalSvc.getAll();
+			List<GeneralUser>gUsers = new ArrayList();
+			for (Post post:posts) {
+				gUsers.add(post.getGeneralUser());
+			}
+			
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			Map<String, Object> responseData = new HashMap<>();
-			responseData.put("posts", posts);
-			responseData.put("gUsers", gUsers);
-			String json = gson.toJson(responseData);
+			List<Object> combinedList = new ArrayList<>();
+			for (Post post : posts) {
+			    Map<String, Object> postData = new HashMap<>();
+			    postData.put("post", post);
+			    postData.put("generalUser", post.getGeneralUser());
+			    combinedList.add(postData);
+			}
+			String json = gson.toJson(combinedList);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-//			System.out.println(json);
+			System.out.println(json);
 			out.flush();
 		}
 	}
@@ -77,10 +83,30 @@ public class PostServlet2 extends HttpServlet {
 		res.setContentType("application/json; charset=UTF-8");
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-
+		//======放session值(guser)======
+		if("getUser".equals(action)){
+		HttpSession session = req.getSession();
+		GeneralUser generalUser2 = (GeneralUser)session.getAttribute("generalUser");
+		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		String json = gson.toJson(generalUser2);
+		PrintWriter out = res.getWriter();
+		out.print(json);
+		out.flush();
+		}
+		//======放session值(ouser)======
+				if("getoUser".equals(action)){
+				HttpSession session = req.getSession();
+				OwnerUser ownerUser2 = (OwnerUser)session.getAttribute("OwnerUser");
+//				System.out.println("GGGGGGG=="+generalUs2);
+				Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+				String json = gson.toJson(ownerUser2);
+				PrintWriter out = res.getWriter();
+				out.print(json);
+				out.flush();
+				}
 		// ====新增討論文章========
 		if ("insert".equals(action)) {
-//			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("discussType"));
@@ -104,7 +130,7 @@ public class PostServlet2 extends HttpServlet {
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
 			GeneralUserService gUserSVC = new GeneralUserService();
-			GeneralUser generalUser = gUserSVC.getOneGeneralUser(11000001);
+			GeneralUser generalUser = gUserSVC.getOneGeneralUser(gUserID);
 			Post post = new Post();
 			post.setGeneralUser(generalUser);
 			post.setPostTitle(postTitle);
@@ -125,7 +151,7 @@ public class PostServlet2 extends HttpServlet {
 			Integer gPostAmount = post.getGeneralUser().getgPostAmount();
 			gPostAmount += 1;
 			generalUser.setgPostAmount(gPostAmount);
-			generalUser = gUserSVC.updateByPostAmount(11000001, gPostAmount);
+			generalUser = gUserSVC.updateByPostAmount(gUserID, gPostAmount);
 		}
 		// ====得到預約編號bygUser=========
 		if ("get_order".equals(action)) {
@@ -160,7 +186,7 @@ public class PostServlet2 extends HttpServlet {
 			out.flush();
 		}
 		if ("insert_group".equals(action)) {
-//			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = Integer.parseInt(req.getParameter("groupType"));
@@ -184,7 +210,7 @@ public class PostServlet2 extends HttpServlet {
 			Integer likeCnt = 0;
 			Integer commentCnt = 0;
 			GeneralUserService gUserSVC = new GeneralUserService();
-			GeneralUser generalUser = gUserSVC.getOneGeneralUser(11000001);
+			GeneralUser generalUser = gUserSVC.getOneGeneralUser(gUserID);
 			Post post = new Post();
 			post.setGeneralUser(generalUser);
 			post.setPostTitle(postTitle);
@@ -206,15 +232,15 @@ public class PostServlet2 extends HttpServlet {
 			Integer gPostAmount = post.getGeneralUser().getgPostAmount();
 			gPostAmount += 1;
 			generalUser.setgPostAmount(gPostAmount);
-			generalUser = gUserSVC.updateByPostAmount(11000001, gPostAmount);
+			generalUser = gUserSVC.updateByPostAmount(gUserID, gPostAmount);
 		}
 		if ("insert_promote".equals(action)) {
-//			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent");
 			Integer postType = 2;
 			OwnerUserService oUserSVC = new OwnerUserService();
-			OwnerUser ownerUser = oUserSVC.getOneOwnerUser(12000001);
+			OwnerUser ownerUser = oUserSVC.getOneOwnerUser(oUserID);
 
 			Post post = new Post();
 			post.setOwnerUser(ownerUser);
@@ -262,7 +288,7 @@ public class PostServlet2 extends HttpServlet {
 		if ("get_By_gUserID".equals(action)) {
 			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			PostService postSvc = new PostServiceImpl();
-			List<Post> posts = postSvc.getBygUserID(11000001);
+			List<Post> posts = postSvc.getBygUserID(gUserID);
 
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -302,7 +328,8 @@ public class PostServlet2 extends HttpServlet {
 			List<Post> posts = postSvc.getByCommentCnt();
 
 			// 將搜尋結果轉為 JSON 格式並發送到前端
-			String json = new Gson().toJson(posts);
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String json = gson.toJson(posts);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
