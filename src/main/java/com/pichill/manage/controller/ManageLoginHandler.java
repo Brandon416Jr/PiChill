@@ -105,13 +105,11 @@ public class ManageLoginHandler extends HttpServlet {
 				    loginAttempts = 0;
 				    req.getRequestDispatcher("/login/mLogin/manageFailToLogin.jsp").forward(req, res);
 				    return;
-				} else if (System.currentTimeMillis() >= lockoutTime) {
+				} else {
 					 loginAttempts = 0;
 					 req.getRequestDispatcher("/login/mLogin/manageLogin.jsp").forward(req, res);
 					return;
-				} else {
-					System.out.println("怎麼會有這裏的print呢??!");
-				}
+				} 
 		    }
 		    
 		}

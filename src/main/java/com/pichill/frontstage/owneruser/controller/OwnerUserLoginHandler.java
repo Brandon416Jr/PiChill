@@ -153,7 +153,7 @@ public class OwnerUserLoginHandler extends HttpServlet {
 //				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
 				OwnerUser ownerUser = oUserSvcF.getOneOwnerUser(oUserName);
 				session.setAttribute("ownerUser", ownerUser);
-
+				System.out.println(session.getId());//印出session確認
 				try {
 					String location = (String) session.getAttribute("location");
 					if (location != null) {
@@ -163,14 +163,9 @@ public class OwnerUserLoginHandler extends HttpServlet {
 					}
 				} catch (Exception ignored) {
 				}
-//				OwnerUser ownerUser2 = oUserSvcF.getOneOwnerUser(oUserName);
-//				session = req.getSession();
-//				session.setAttribute("oUserName",ownerUser2); // 處理登入的身分
-				System.out.println(session.getId());//印出session確認
-//				OwnerUser ownerUser3 = (OwnerUser)session.getAttribute("loginOwnerUser");
-//				String oUserID = ownerUser3.getoUserID(); //獲取管理員ID
-//				String url = "/PiChill/fronstage/owneruser/DBGifReader?oUserID=" + URLEncoder.encode(oUserID, "UTF-8");
-//				session.setAttribute("loginOwnerUser", ownerUser2);
+//				
+				
+//				
 				res.sendRedirect(req.getContextPath() + "/homepage/owneruserhome.jsp"); // *工作3: // 要換成企業會員的首頁
 																						// (-->如無來源網頁:則重導至login_success.jsp)
 
