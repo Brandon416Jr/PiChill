@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
-import com.pichill.manage.entity.Manage;
-import com.pichill.manage.service.ManageService;
 import com.pichill.owneruser.entity.OwnerUser;
 
 @WebServlet("/ologinhandler")
@@ -152,6 +150,7 @@ public class OwnerUserLoginHandler extends HttpServlet {
 				session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 //				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
 				OwnerUser ownerUser = oUserSvcF.getOneOwnerUser(oUserName);
+				System.out.println("ownerUser印出來是" + ownerUser);
 				session.setAttribute("ownerUser", ownerUser);
 				System.out.println(session.getId());//印出session確認
 				try {
