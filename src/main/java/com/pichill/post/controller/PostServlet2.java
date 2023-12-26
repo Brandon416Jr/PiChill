@@ -93,6 +93,9 @@ public class PostServlet2 extends HttpServlet {
 		out.print(json);
 		out.flush();
 		}
+		if("insert".equals(action)) {
+			
+		}
 		//======放session值(ouser)======
 				if("getoUser".equals(action)){
 				HttpSession session = req.getSession();
