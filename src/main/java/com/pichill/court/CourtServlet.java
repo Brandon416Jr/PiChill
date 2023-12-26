@@ -342,17 +342,17 @@ public class CourtServlet extends HttpServlet{
 		
 		Time courtCloseTime = Time.valueOf(req.getParameter("courtCloseTime"));
 		
-		String placeName = String.valueOf(req.getParameter("placeName").trim());
-		
-		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
-		
-		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
+//		String placeName = String.valueOf(req.getParameter("placeName").trim());
+//		
+//		Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
+//		
+//		Integer ball = Integer.valueOf(req.getParameter("ball").trim());
 		
 
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		Court court = new Court();
-		Place place = new Place();
+//		Place place = new Place();
 		
 		court.setCourtID(courtID);
 		court.getOwnerUser().setoUserID(oUserID);
@@ -368,9 +368,9 @@ public class CourtServlet extends HttpServlet{
 		court.setCourtApplyStatus(courtApplyStatus);
 		court.setCourtOpenTime(courtOpenTime);
 		court.setCourtCloseTime(courtCloseTime);
-		((Place) court.getPlace()).setPlaceName(placeName);
-		((Place) court.getPlace()).setPlaceFee(placeFee);
-		((Place) court.getPlace()).setBall(ball);
+//		((Place) court.getPlace()).setPlaceName(placeName);
+//		((Place) court.getPlace()).setPlaceFee(placeFee);
+//		((Place) court.getPlace()).setBall(ball);
 
 		court.toString();
 		// Send the use back to the form, if there were errors
@@ -381,7 +381,7 @@ public class CourtServlet extends HttpServlet{
 // ========================================================================改到這===============
 
 		/*************************** 2.開始新增資料 ***************************************/
-		courtService.insertCourt(court, place);
+		courtService.insertCourt(court);
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		return "owneruser/court/all_court.jsp";
