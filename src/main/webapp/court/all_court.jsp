@@ -142,16 +142,22 @@ pageContext.setAttribute("list", list);
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
+                                aria-controls="forms-collapse">申請上架場地</button>
+                        </li>   
+                        <li class="my-2">
+                            <button class="btn d-inline-flex align-items-center collapsed border-0"
+                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
                                 aria-controls="forms-collapse" 
                                 href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
                                 >球館管理</button>
                         </li>
                         <br>
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse" href="#">登出</button>
-                        </li>
+						<li class="my-2">
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
+						</li>
                     </ul>
                 </nav>
             </div>

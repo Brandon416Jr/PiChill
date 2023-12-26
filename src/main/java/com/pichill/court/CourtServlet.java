@@ -285,6 +285,8 @@ public class CourtServlet extends HttpServlet{
 		req.setAttribute("errorMsgs", errorMsgs);
 
 		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+		Court newCourt = new Court();
+		req.setAttribute("newCourt", newCourt);
 		Integer courtID = Integer.parseInt(req.getParameter("courtID"));
 		Integer oUserID = Integer.parseInt(req.getParameter("oUserID"));
 
@@ -381,7 +383,11 @@ public class CourtServlet extends HttpServlet{
 // ========================================================================改到這===============
 
 		/*************************** 2.開始新增資料 ***************************************/
-		courtService.insertCourt(court);
+		courtService.insertCourt(courtOnTime, courtApplyTime, courtName,  courtPic, courtTelephone
+				,courtAddress, courtRule, loc,  courtApplyStatus
+				, courtOpenTime, courtCloseTime);
+		System.out.println(newCourt);
+		req.setAttribute("newCourt", newCourt); 
 
 		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
 		return "owneruser/court/all_court.jsp";
