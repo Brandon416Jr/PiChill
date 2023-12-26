@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,7 @@ import com.pichill.court.CourtDAO;
 import com.pichill.place.Place;
 import com.pichill.place.PlaceDAO;
 import com.pichill.place.PlaceDAOImpl;
+import com.pichill.manage.entity.Manage;
 
 public class CourtService {
 	String driver = "com.mysql.cj.jdbc.Driver";
@@ -35,62 +38,85 @@ public class CourtService {
 //	}
 
 	
-	public void insertCourt(Court court , Place place) {
+	public Court insertCourt(Timestamp courtOnTime,Timestamp courtApplyTime,String courtName, byte[] courtPic,String courtTelephone
+			,String courtAddress,String courtRule,String loc, int courtApplyStatus
+			,Time courtOpenTime,Time courtCloseTime) {
 
-		Connection con = null;
-		PreparedStatement pstmt = null;
+		Court court = new Court();
+		court.setCourtOnTime(courtOnTime);
+		court.setCourtApplyTime(courtApplyTime);
+		court.setCourtName(courtName);
+		court.setCourtPic(courtPic);
+		court.setCourtTelephone(courtTelephone);
+		court.setCourtAddress(courtAddress);
+		court.setCourtRule(courtRule);
+		court.setLoc(loc);
+		court.setCourtApplyStatus(courtApplyStatus);
+		court.setCourtOpenTime(courtOpenTime);
+		court.setCourtOpenTime(courtOpenTime);
 
-		try {
-
-			Class.forName(driver);
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pichill?serverTimezone=Asia/Taipei", "root", "Hn88567369");
-			pstmt = con.prepareStatement("SELECT *  FROM court LEFT JOIN place on court.courtID;"
-					                   + "INSERT INTO court (courtID,oUserID,courtName,courtPic,ourtTelephone,courtAddress,courtRule,loc,courtOpenTime,courtCloseTime)");
-
-			pstmt.setInt(1, court.getCourtID());
-			
-			pstmt.setInt(2, court.getOwnerUser().getoUserID());
-			pstmt.setString(2, court.getCourtName());
-			pstmt.setBytes(3, court.getCourtPic());
-			pstmt.setString(4, court.getCourtTelephone());
-			pstmt.setString(5, court.getCourtAddress());
-			pstmt.setString(6, court.getCourtRule());
-			pstmt.setString(7, court.getLoc());
-			pstmt.setTime(8, court.getCourtOpenTime());
-			pstmt.setTime(9, court.getCourtCloseTime());
-			pstmt.setInt(10, place.getPlaceID());
-			pstmt.setString(11, place.getPlaceName());
-			pstmt.setInt(12, place.getPlaceFee());
-			pstmt.setInt(13, place.getBall());
-			pstmt.executeUpdate();
-
-			// Handle any driver errors
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException("Couldn't load database driver. "
-					+ e.getMessage());
-			// Handle any SQL errors
-		} catch (SQLException se) {
-			throw new RuntimeException("A database error occured. "
-					+ se.getMessage());
-			// Clean up JDBC resources
-		} finally {
-			if (pstmt != null) {
-				try {
-					pstmt.close();
-				} catch (SQLException se) {
-					se.printStackTrace(System.err);
-				}
-			}
-			if (con != null) {
-				try {
-					con.close();
-				} catch (Exception e) {
-					e.printStackTrace(System.err);
-				}
-			}
-		}
-
+		System.out.println("insertCourt:"+court);
+		dao.insert(court);
+		return court;
 	}
+		
+		
+//		Connection con = null;
+//		PreparedStatement pstmt = null;
+//
+//		try {
+//
+//			Class.forName(driver);
+//			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/pichill?serverTimezone=Asia/Taipei", "root", "Hn88567369");
+//			pstmt = con.prepareStatement("INSERT INTO court (courtID,oUserID,courtName,courtPic,ourtTelephone,courtAddress,courtRule,loc,courtOpenTime,courtCloseTime)VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+//
+//			pstmt.setInt(1, court.getCourtID());	
+//			pstmt.setInt(2, court.getOwnerUser().getoUserID());
+//			pstmt.setInt(3, court.getManage().getManageID());
+//			pstmt.setTimestamp(4, court.getCourtOnTime());
+//			pstmt.setTimestamp(5, court.getCourtApplyTime());
+//			pstmt.setString(6, court.getCourtName());
+//			pstmt.setBytes(7, court.getCourtPic());
+//			pstmt.setString(8, court.getCourtTelephone());
+//			pstmt.setString(9, court.getCourtAddress());
+//			pstmt.setString(10, court.getCourtRule());
+//			pstmt.setString(11, court.getLoc());
+//			pstmt.setInt(12, court.getCourtApplyStatus());
+//			pstmt.setTime(13, court.getCourtOpenTime());
+//			pstmt.setTime(14, court.getCourtCloseTime());
+////			pstmt.setInt(15, place.getPlaceID());
+////			pstmt.setString(16, place.getPlaceName());
+////			pstmt.setInt(17, place.getPlaceFee());
+////			pstmt.setInt(18, place.getBall());
+////			pstmt.executeUpdate();
+//
+//			// Handle any driver errors
+//		} catch (ClassNotFoundException e) {
+//			throw new RuntimeException("Couldn't load database driver. "
+//					+ e.getMessage());
+//			// Handle any SQL errors
+//		} catch (SQLException se) {
+//			throw new RuntimeException("A database error occured. "
+//					+ se.getMessage());
+//			// Clean up JDBC resources
+//		} finally {
+//			if (pstmt != null) {
+//				try {
+//					pstmt.close();
+//				} catch (SQLException se) {
+//					se.printStackTrace(System.err);
+//				}
+//			}
+//			if (con != null) {
+//				try {
+//					con.close();
+//				} catch (Exception e) {
+//					e.printStackTrace(System.err);
+//				}
+//			}
+//		}
+
+	
 
 	
 	
@@ -119,6 +145,9 @@ public class CourtService {
             	Map<String, Object> resultMap = new HashMap<String, Object>();
             	resultMap.put("courtID", rs.getString("courtID"));
             	resultMap.put("oUserID", rs.getString("oUserID"));
+            	resultMap.put("manageID", rs.getString("manageID"));
+            	resultMap.put("courtOnTime", rs.getString("courtOnTime"));
+            	resultMap.put("courtApplyTime", rs.getString("courtApplyTime"));
             	resultMap.put("courtName", rs.getString("courtName"));
             	resultMap.put("courtTelephone", rs.getString("courtTelephone"));
             	resultMap.put("loc", rs.getString("loc"));
@@ -129,11 +158,11 @@ public class CourtService {
             	resultMap.put("courtCloseTime", rs.getString("courtCloseTime"));
             	resultMap.put("courtApplyTime", rs.getString("courtApplyTime"));
             	resultMap.put("courtOnTime", rs.getString("courtOnTime"));
-            	resultMap.put("courtApplyStatus", rs.getString("courtApplyStatus"));   	
+            	resultMap.put("courtApplyStatus", rs.getString("courtApplyStatus")); 
             	resultMap.put("placeName", rs.getString("placeName"));
+            	resultMap.put("placeID", rs.getString("placeID"));
             	resultMap.put("placeFee", rs.getString("placeFee"));
             	resultMap.put("ball", rs.getString("ball"));
-            	rtnList.add(resultMap);
             }
     	} finally {
     		if(rs!= null) {
@@ -151,5 +180,12 @@ public class CourtService {
 	
 	public Set<Place> getPlaceByPlaceID(Integer placeID) {
 		return getOneCourt(placeID).getPlace();
+	}
+
+
+
+	public void insertCourt(Court court) {
+		// TODO Auto-generated method stub
+		
 	}
 }

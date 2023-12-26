@@ -24,7 +24,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 	private static int loginAttempts = 0;  // 登入嘗試次數
 	private static long lockoutTime = 0;   // 鎖定時間
 	private static final int MAX_LOGIN_ATTEMPTS = 5;  // 最大嘗試次數
-	private static final long LOCKOUT_DURATION = 1 * 60 * 1000;
+	private static final long LOCKOUT_DURATION = 1 * 10 * 1000;
 	// 【檢查使用者輸入的帳號(account) 密碼(password)是否有效】
 		// 【實際上應至資料庫搜尋比對】
 		protected boolean allowgUser(String gUsername, String gPassword) {
@@ -91,12 +91,16 @@ public class GeneralUserLoginHandler extends HttpServlet {
 			        lockoutTime = System.currentTimeMillis() + LOCKOUT_DURATION;
 			    	req.setAttribute("lockoutTime", lockoutTime);
 					if (System.currentTimeMillis() < lockoutTime) {
+						 loginAttempts = 0;
 					    System.out.println("帳號已被鎖定，請稍候再試");
 					    res.sendRedirect(req.getContextPath() +"/login/gLogin/gUserFailToLogin.jsp");
 					    return;
-					} else {
+					} else if (System.currentTimeMillis() > lockoutTime) {
+						 loginAttempts = 0;
 						res.sendRedirect(req.getContextPath() +"/login/gLogin/gUserLogin.jsp");
 						return;
+					} else {
+						
 					}
 			    }
 			}
@@ -152,7 +156,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 				GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
 				session.setAttribute("generalUser", generalUser);
 
-				session.setAttribute("gUsername", gUsername); // *工作1: 才在session內做已經登入過的標識
+//				session.setAttribute("gUsername", gUsername); // *工作1: 才在session內做已經登入過的標識
 				try {
 					String location = (String) session.getAttribute("location");
 					if (location != null) {

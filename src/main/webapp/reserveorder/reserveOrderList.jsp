@@ -7,9 +7,13 @@
 <%@ page import="com.pichill.place.*"%>
 <%@ page import="com.pichill.court.*"%>
 
+
 <%
-	//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
-    ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
+ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
+%>
+<%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 %>
 <!DOCTYPE html>
 <html>

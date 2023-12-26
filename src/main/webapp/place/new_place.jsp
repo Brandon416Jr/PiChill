@@ -8,11 +8,11 @@
     
  <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-Court newCourt = (Court) request.getAttribute("newCourt");
+Place newPlace = (Place) request.getAttribute("newPlace");
 %>   
     
 <%
-//Place place = (Place) session.getAttribute("place");
+Place place = (Place) session.getAttribute("place");
 %>
     
 <%
@@ -33,7 +33,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>企業會員-申請上架球館</title>
+<title>企業會員-申請上架場地</title>
    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css" media="all" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css" media="all" />
     <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css" media="all" />
@@ -70,10 +70,12 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 		right: 100px;
 		/* z-index: -1; */
 		}
-		input[type="courtAddress"] {
+		input[type="text"] {
 	  	cursor: pointer;
-	  	width: 450px;
+	  	width: 100px;
 		}
+
+		
     </style>
 </head>
 
@@ -121,9 +123,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
                                 aria-controls="forms-collapse">申請上架場地</button>
-                        </li>
-                        
-                        
+                        </li>                        
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
@@ -141,21 +141,14 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
             </div>
         </aside>
         
-        
-        
-      <!----------------------------------------------- main 區 ------------------------------------------------------->
+         <!----------------------------------------------- main 區 ------------------------------------------------------->
         <main class="main">
             <!-- <div class="row g-3"> -->
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">申請上架球館</h2>
                 <!-- <form action="/action_page.php"> -->
-        
-        	<div>
-                <span style="color:#FF0000;  position: relative;left: 250px;">前有
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">為必填項目</span>
-       		</div>
            		<br>
-           		
-			<div class="error">
+        
+        			<div class="error">
 				<%-- 錯誤表列 --%>
 					<c:if test="${not empty errorMsgs}">
 						<font style="color: red">請修正以下錯誤:</font>
@@ -166,126 +159,80 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 						  </ul>
 					</c:if>
 			</div>
-						
-			<br>
-			<form action="${pageContext.request.contextPath }/court/court.do"
+        			<br>
+			<form action="${pageContext.request.contextPath }/place/place.do"
 			 METHOD="post"	enctype="multipart/form-data">
-			
-            
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="courtName">場館名稱</label>
-                <input type="text" id="court" name="courtName" 
-                value="<%=(newCourt == null)? "" :newCourt.getCourtName()%>" size="45" required>
-                <br><br>
-
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label  for="time">開館時間</label>
-                <input type="time" value="<%=(newCourt==null)? "07:00:00" : newCourt.getCourtOpenTime()%>"  min="09:00" max="18:00">
-
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
-                <label style="position: relative; left: 15px;" for="time">閉館時間</label>
-                <input type="time" value="<%=(newCourt==null)? "21:00:00" :newCourt.getCourtCloseTime()%>" style="position: relative; left: 15px;">
-                <br><br>
-
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="loc">區域</label>
-                <input type="text" value="<%=(newCourt==null)? "" :newCourt.getLoc()%>" style="position: relative; left: 31px;">
-                <font color="#FF0000" size="-1" nowrap="" style="position: relative;;left: 30px;">如:中正區</font>
-                
-<!--                 <select style="position: relative; left: 31px;"> -->
-<!--                     <option>請選擇場館區域</option> -->
-<!--                     <option>中正區</option> -->
-<!--                     <option>大同區</option> -->
-<!--                     <option>中山區</option> -->
-<!--                     <option>松山區</option> -->
-<!--                     <option>大安區</option> -->
-<!--                     <option>萬華區</option> -->
-<!--                     <option>信義區</option> -->
-<!--                     <option>士林區</option> -->
-<!--                     <option>北投區</option> -->
-<!--                     <option>內湖區</option> -->
-<!--                     <option>南港區</option> -->
-<!--                     <option>文山區</option> -->
-<!--                 </select> -->
-                <br>
-                <br>
-                
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="tax_id">場館地址</label>
-                <input type="text" id="tax_id" name="courtAddress" 
-                value="<%=(newCourt == null)? "" : newCourt.getCourtAddress()%>" style="width: 300px" required>
-                <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px; ">包含鄉鎮區、路街道及門牌號等。</font><br><br>
-
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="phone">場館電話</label>
-                <input type="text" id="text" name="courtTelephone" value="<%=(newCourt == null)? "" : newCourt.getCourtTelephone()%>"  required>
-                <font color="#FF0000" size="-1" nowrap="" style="position: relative;left: 1px;">包含區域碼 如:0212345678。</font>
-                <br><br>
-
-                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
-                <label for="courtRule" style="position: relative; ">場館須知</label><br><br>
-                <input type="hidden" id="courtRule" name="courtRule" value="<%=(newCourt ==null)? "" :newCourt.getCourtRule()%>" >
-                 <textarea name="CourtRule" id="courtRule" placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;" required></textarea>
-                
-                <script type="text/javascript">
-                	function changeText(){
-                		document.getElementById().value=document.getElementById().value;
-                	}
-                </script>
-                
-                
-                <br><br><br>
-                
-
-                <label for="courtPic" style="position: relative;left: 23px;">場館照片</label><br><br>
-                	<input type="file" value="${newCourt.courtPic}"
-					id="uploadImg" name="courtPic" onchange="preview()" multiple="multiple"
-					class="form-control-file" />
-					<div id="blob_holder">
-					  <img src="#" width="300px" >
-					</div>						
-                <br>
-                
-                
-            <!-------- 送出按鈕  ------->
+        
+        		<div class="row form-group">
+				
+					<span>球類:</span>
+					<div class="ballss" style="width:100px; ">
+						<div class="form-check">
+						  <div class="radio" >
+							<select name="ball" style="position:relative;left: 20px;">
+							  <option value="0"	${(newPlace.ball==0)? 'selected': ''}>籃球</option>
+							  <option value="1" ${(newPlace.ball==1)? 'selected': ''}>排球</option>
+							  <option value="2" ${(newPlace.ball==2)? 'selected': ''}>羽球</option>
+							</select>
+						  </div>
+						</div>
+					</div>
+				<br>
+				<br>
+				
+				<span>場地名稱:</span>
+				<br><br>
+				
+				<input type="text" id="text-input" name="placeName"
+				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
+				placeholder="如A、B" class="form-control" />
+				
+				<input type="text" id="text-input" name="placeName"
+				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
+				placeholder="如A、B" class="form-control" />
+				
+				<input type="text" id="text-input" name="placeName"
+				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
+				placeholder="如A、B" class="form-control" />
+				
+				<input type="text" id="text-input" name="placeName"
+				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
+				placeholder="如A、B" class="form-control" />
+				
+				<input type="text" id="text-input" name="placeName"
+				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
+				placeholder="如A、B" class="form-control" />
+				
+				<font color="#ff0000" size="4" nowrap="">一次填寫一個名稱</font>						
+				
+        		<br><br><br><br>
+        		
+				<label class="form-control-label">場地費用</label>
+				<br><br>
+				<input type="text" id="text-input" name="placeFee"
+					value="<%=(newPlace == null) ? "" : newPlace.getPlaceFee()%>" class="form-control" />
+				<font color="#000000" size="5"  style="width: 150px;">元/時</font>
+				</div>
+        	</div>
+        
+        <br><br>
+        
+         <!-------- 送出按鈕  ------->
             <input type="hidden" name="action" value="insert">
-			<input type="submit"  value="送出新增" style="width: 150px; height: 44px;">
+			<input type="submit" value="送出新增" style="width: 150px; height: 44px;position:relative;left: 400px;">
 
                  
-                
-            </form>
+        
+         	</form>
             
             <br><br><br>
 
 
         </main>
     </div>
-
-    
-  <!--======================================= 照片上傳 / 預覽 =======================================-->
-    <script>
-    function preview() {
-
-		var fileInput = document.getElementById('uploadImg');
-		var file = fileInput.files[0];
-
-		var reader = new FileReader();
-
-		reader.onload = function() {
-			document.getElementById('blob_holder').innerHTML = '<img src="' + reader.result + '" width="300px"/>';
-		};
-
-		if (file) {
-			reader.readAsDataURL(file);
-		}
-
-	}
-	</script>
-
-
-
-
-    <!----------------------------------------------- footer 區 ------------------------------------------------------->
+        
+        
+     <!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
 
         <div class="container">

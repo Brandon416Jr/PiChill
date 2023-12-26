@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.manage.service.ManageService;
 
-@WebServlet(name = "LogoutServlet", value = "/logoutfg.do")
+@WebServlet(name = "LogoutServletgUser", value = "/logoutfg.do")
 public class LogoutServletgUser extends HttpServlet {
 	private GeneralUserServiceFront gUserSvcF;
 
@@ -45,7 +45,7 @@ public class LogoutServletgUser extends HttpServlet {
 			forwardPath = logout(req, res);
 			break;
 		default:
-			forwardPath = "/backstage/login/index.jsp"; //改成前台一般會員的首頁
+			forwardPath = "/homepage/main.jsp"; //改成前台一般會員的首頁
 		}
 
 		res.setContentType("text/html; charset=UTF-8");

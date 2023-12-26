@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
 import com.pichill.manage.service.ManageService;
 
-@WebServlet(name = "LogoutServlet", value = "/logoutfo.do")
+@WebServlet(name = "LogoutServletoUser", value = "/logoutfo.do")
 public class LogoutServletoUser extends HttpServlet {
 	private OwnerUserServiceFront oUserSvcF;
 
@@ -45,7 +45,7 @@ public class LogoutServletoUser extends HttpServlet {
 			forwardPath = logout(req, res);
 			break;
 		default:
-			forwardPath = "/backstage/login/index.jsp"; //改成前台企業會員的首頁
+			forwardPath = "/homepage/owneruserhome.jsp"; //改成前台企業會員的首頁
 		}
 
 		res.setContentType("text/html; charset=UTF-8");

@@ -20,7 +20,6 @@ import com.pichill.owneruser.entity.OwnerUser;
 
 @Entity
 @Table(name = "contactus")
-
 public class ContactUs {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -57,9 +56,7 @@ public class ContactUs {
 	
 	public ContactUs() {
 		super();
-
 	}
-	
 	
 //	@Override
 //	public String toString() {

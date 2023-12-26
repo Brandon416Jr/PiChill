@@ -199,8 +199,8 @@ public class PlaceServlet extends HttpServlet{
 
 			// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 			Place place = new Place();
-//			place.setPlaceID(placeID);
-//			place.setCourtID(courtID);
+			place.setPlaceID(placeID);
+			place.getCourt().setCourtID(courtID);
 			place.setPlaceName(placeName);
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);
@@ -212,7 +212,7 @@ public class PlaceServlet extends HttpServlet{
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
 				req.setAttribute("place", place); // 含有輸入格式錯誤的empVO物件,也存入req
-				return "owneruser/court/new_court.jsp";
+				return "owneruser/court/new_place.jsp";
 			}
 	// ========================================================================改到這===============
 

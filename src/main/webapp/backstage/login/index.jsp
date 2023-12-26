@@ -103,6 +103,25 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 	width: 100%;
 	box-sizing: border-box;
 }
+
+div.index {
+/* border: 1px solid red; */
+    width: 68vw;
+    height: 97vh;
+    z-index: 100;
+    position: absolute;
+    right: 4%;
+    /* bottom: 0; */
+    top: 0;
+}
+
+div.index2 {
+border: 1px solid blue;
+width: 68vw;
+    height: 80vh;
+      z-index: 100;
+      margin-top: 100px;
+}
 </style>
 </head>
 
@@ -269,9 +288,13 @@ div.dataTables_scrollHeadInner>table.table-data3 {
 				</div>
 			</header>
 			<!-- END HEADER DESKTOP-->
+			
 		</div>
 	</div>
-	
+	<div class="index">
+			<div class="index2">
+			</div>
+			</div>
 <c:if test="${not empty requestScope.noAuth}">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>

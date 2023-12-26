@@ -62,6 +62,7 @@
 		<filter-name>OwnerUserLoginFilter</filter-name>
 		<url-pattern>/homepage/owneruserhome.jsp</url-pattern>
 		<url-pattern>/ownerusernotify/notify.jsp</url-pattern>
+				<url-pattern>/contactus/addContactUs.jsp</url-pattern>
 		<url-pattern>/owneruser/listOneOwnerUser.jsp</url-pattern>
 		<url-pattern>/owneruser/ouserListOne.jsp</url-pattern>
 		<url-pattern>/owneruser/owneruser.jsp</url-pattern>
@@ -93,6 +94,7 @@
 		<url-pattern>/reserveorder/updateStatus.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
+		<url-pattern>/contactusForGUser/addContactUs.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

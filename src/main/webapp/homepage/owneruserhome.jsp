@@ -5,7 +5,10 @@
    
 <%
 //從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
-OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
+OwnerUser oUser = (OwnerUser) session.getAttribute("ownerUser");
+System.out.println("oUser = " + oUser);
+Integer oUserID = oUser.getoUserID();
+System.out.println("oUser is" + oUserID);
 %> 
     
     
@@ -55,13 +58,12 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ownerusernotify.jsp" class="nav-link">通知</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
                     <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
-              </ul>
-                </ul>
+              	</ul>
+                
 
             </header>
         </div>

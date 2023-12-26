@@ -4,8 +4,9 @@
     
 <%
 //從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
-OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 %>  
+
     
     
 <!DOCTYPE html>
@@ -51,8 +52,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
@@ -72,16 +72,16 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
 								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#contents-collapse"
+								data-bs-target="#contents-collapse" href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp"
 								aria-controls="contents-collapse">企業會員資料</button>
 						</li>
 
 						<li class="my-2">
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
+								data-bs-toggle="collapse" aria-expanded="false" href="<%=request.getContextPath()%>/court/new_court.jsp"
 								data-bs-target="#forms-collapse" aria-controls="forms-collapse"
-								href="<%=request.getContextPath()%>/court/new_court.jsp">申請上架球館</button>
+								>申請上架球館</button>
 						</li>
 						<li class="my-2">
 							<button
@@ -91,12 +91,14 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 								href="<%=request.getContextPath()%>/court/court.jsp">球館管理</button>
 
 						</li>
+						
 						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">登出</button>
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
 						</li>
+						
 					</ul>
 				</nav>
 			</div>
@@ -119,7 +121,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" enctype="multipart/form-data" class="bararea">
           		<span>企業會員編號:</span>
-                <input type="text" id="ouserID" name="ouserID" value="<%=ownerUser.getoUserID()%>" disabled/>
+                <input type="text" id="oUserID" name="oUserID" value="<%=ownerUser.getoUserID()%>" disabled/>
                 <br><br>                            
       
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
@@ -150,7 +152,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
                 <span>場館負責人身分證字號:</span>
-                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser==null)? "H212810987" : ownerUser.getoIDNum()%>"/>
+                <input type="text" id="oIDNum" name="oIDNum"  value="<%= (ownerUser==null)? "H212810987" : ownerUser.getoIDNum()%>"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">                  
@@ -161,7 +163,7 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20px" height="20">   
                 <span>連絡電話:</span>
                 <input type="text" id="oTelephone" name="oTelephone" value="<%= (ownerUser == null) ? "0934862754" : ownerUser.getoTelephone()%>"/>
-                <font color="#FF0000" size="-1" nowrap="">如:0912345678。</font> 
+                <font color="#FF0000" size="-1" >如:0912345678。</font> 
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
@@ -176,11 +178,11 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
  				<br> 
  				<br>
  				
- 				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
-				<span>銀行帳號：</span> 
- 				<input type="text" id="bank_account" name="oBankAccount"  value="<%=(ownerUser == null) ? "95301246813579" : ownerUser.getoBankAccount()%>" required>
-				<br>  
-				<br>  
+<%--  				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">   --%>
+<!-- 				<span>銀行帳號：</span>  -->
+<%--  				<input type="text" id="bank_account" name="oBankAccount"  value="${ownerUser.oBankAccount}" required> --%>
+<!-- 				<br>   -->
+<!-- 				<br>   -->
                 
                 
                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
@@ -202,8 +204,9 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
                 <br><br><br>
                 <br><br>
          </FORM>      
-       </div>
+       
    </main>
+   </div>
 <!--     </div> -->
 
     
@@ -283,36 +286,6 @@ OwnerUser ownerUser = (OwnerUser) request.getAttribute("ownerUser");
 			}
 		}
 	</script>
-	
-
-   
-    
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>

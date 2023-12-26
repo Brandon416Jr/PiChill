@@ -13,14 +13,14 @@ public class AnnouncementGetOneDAOImpl implements AnnouncementGetOneDAO {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			AnnouncementGetOne AnnouncementGetOne = session.get(AnnouncementGetOne.class, announceID);
+			AnnouncementGetOne announcementGetOne = session.get(AnnouncementGetOne.class, announceID);
 			session.getTransaction().commit();
-			return AnnouncementGetOne;
+			return announcementGetOne;
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.getTransaction().rollback();
+			return null;
 		}
-		return null;
 	}
 	
 	@Override

@@ -14,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
-import com.pichill.manage.entity.Manage;
-import com.pichill.manage.service.ManageService;
 import com.pichill.owneruser.entity.OwnerUser;
 
 @WebServlet("/ologinhandler")
@@ -92,9 +90,11 @@ public class OwnerUserLoginHandler extends HttpServlet {
 		    	req.setAttribute("lockoutTime", lockoutTime);
 				if (System.currentTimeMillis() < lockoutTime) {
 				    System.out.println("帳號已被鎖定，請稍候再試");
+				    loginAttempts = 0;
 				    res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserFailToLogin.jsp");
 				    return;
 				} else {
+					 loginAttempts = 0;
 					res.sendRedirect(req.getContextPath() +"/login/oLogin/oUserLogin.jsp");
 					return;
 				}
@@ -150,8 +150,9 @@ public class OwnerUserLoginHandler extends HttpServlet {
 				session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 //				session.setAttribute("oUserName", oUserName); // *工作1: 才在session內做已經登入過的標識
 				OwnerUser ownerUser = oUserSvcF.getOneOwnerUser(oUserName);
+				System.out.println("ownerUser印出來是" + ownerUser);
 				session.setAttribute("ownerUser", ownerUser);
-
+				System.out.println(session.getId());//印出session確認
 				try {
 					String location = (String) session.getAttribute("location");
 					if (location != null) {
@@ -161,14 +162,9 @@ public class OwnerUserLoginHandler extends HttpServlet {
 					}
 				} catch (Exception ignored) {
 				}
-//				OwnerUser ownerUser2 = oUserSvcF.getOneOwnerUser(oUserName);
-//				session = req.getSession();
-//				session.setAttribute("oUserName",ownerUser2); // 處理登入的身分
-				System.out.println(session.getId());//印出session確認
-//				OwnerUser ownerUser3 = (OwnerUser)session.getAttribute("loginOwnerUser");
-//				String oUserID = ownerUser3.getoUserID(); //獲取管理員ID
-//				String url = "/PiChill/fronstage/owneruser/DBGifReader?oUserID=" + URLEncoder.encode(oUserID, "UTF-8");
-//				session.setAttribute("loginOwnerUser", ownerUser2);
+//				
+				
+//				
 				res.sendRedirect(req.getContextPath() + "/homepage/owneruserhome.jsp"); // *工作3: // 要換成企業會員的首頁
 																						// (-->如無來源網頁:則重導至login_success.jsp)
 
