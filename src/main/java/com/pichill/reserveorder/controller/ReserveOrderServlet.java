@@ -16,13 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pichill.generaluser.entity.GeneralUser;
-import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.owneruser.service.OwnerUserService;
 import com.pichill.place.Place;
 import com.pichill.place.PlaceService;
-import com.pichill.post.service.PostService;
-import com.pichill.post.service.PostServiceImpl;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.reserveorder.service.ReserveOrderService;
 import com.pichill.time.TimeRef;
@@ -31,6 +28,7 @@ import com.pichill.time.TimeService;
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024 * 1024)
 @WebServlet(name = "ReserveOrderServlet", value = "/reserveorder/reserveorder.do")
 public class ReserveOrderServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	private ReserveOrderService reserveOrderService;
 	private Integer gUserID;
@@ -136,6 +134,9 @@ public class ReserveOrderServlet extends HttpServlet {
 		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的reserveOrder物件,存入req
 		return "/reserveorder/listOneOrder.jsp";
 	}
+	
+	
+	
 	/*===================================================================================================*/
 	/*                                                新增                                                */
 	/*===================================================================================================*/
@@ -147,12 +148,14 @@ public class ReserveOrderServlet extends HttpServlet {
 
 	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
 		
-		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-
-		Integer oUserID = Integer.parseInt(req.getParameter("oUserID"));
+		HttpSession session = req.getSession();
+		//頁面不顯示
+		gUserID = (Integer)req.getAttribute("gUserID");
+		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
+		//頁面不顯示
+		Integer oUserID = 0;
 		
 		//預約日期
-//		Date mHiredate = new java.sql.Date(System.currentTimeMillis());
 		Date reserveDate = null;
 		try {
 			reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
@@ -161,14 +164,14 @@ public class ReserveOrderServlet extends HttpServlet {
 			errorMsgs.add("請選擇預約日期!");
 		}
 		//時段編號: 根據開館閉館時間判斷
-		Integer timeID = Integer.parseInt(req.getParameter("timeID"));
+		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
 		
 		
 		//場地編號
-		Integer placeID = Integer.parseInt(req.getParameter("placeID"));
+		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
 		
 		//下單時間Timestamp自動產生
-//		Timestamp orderTime = Timestamp.valueOf(req.getParameter("orderTime"));
+		Timestamp orderTime = null;
 		
 		
 		//人數: 根據不同場地會有人數限制
@@ -178,38 +181,55 @@ public class ReserveOrderServlet extends HttpServlet {
 		Integer orderStatus = 1;
 		
 		
-		//訂單總金額: 根據場地費用判斷
-		Integer totalCost = Integer.valueOf(req.getParameter("totalCost"));
+		//訂單總金額: 根據場地費用判斷 (這邊頁面不顯示)
+		Integer totalCost = 0;
 		
-
-
+		System.out.println("有走到這邊");
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		ReserveOrder reserveOrder = new ReserveOrder();
 		
-		reserveOrder.getGeneralUser().setgUserID(gUserID);
+		reserveOrder.setGeneralUser(generalUser);
 		reserveOrder.getOwnerUser().setoUserID(oUserID);
 		reserveOrder.setReserveDate(reserveDate);
 		reserveOrder.getTimeRef().setTimeID(timeID);
 		reserveOrder.getPlace().setPlaceID(placeID);
-//		reserveOrder.setOrderTime(orderTime);
+		reserveOrder.getCourt().setCourtID(placeID);
+		reserveOrder.setOrderTime(orderTime);
 		reserveOrder.setOrderNum(orderNum);
 		reserveOrder.setOrderStatus(orderStatus);
 		reserveOrder.setTotalCost(totalCost);
 
+		// 處理AJAX請求
+        String ajaxParam = req.getParameter("ajaxParam");
+
+        // 執行必要的處理並準備響應
+        String jsonResponse = "{\"result\": \"" + ajaxParam + " received\"}";
+
+        // 發送JSON響應
+        res.setContentType("application/json");
+        res.setCharacterEncoding("UTF-8");
+        try {
+			res.getWriter().write(jsonResponse);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		
 		reserveOrder.toString();
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("reserveOrder", reserveOrder); // 含有輸入格式錯誤的reserveOrder物件,也存入req
-			return "/reserveorder/reserveOrder2.jsp";
+			return "/reserveorder/reserveOrder.jsp";
 		}
-
+	
 	/*=========================================== 2.開始新增資料 ===========================================*/
 		reserveOrderService.addReserveOrder(reserveOrder);
-
+		System.out.println("成功!!!");
 	/*================================= 3.新增完成,準備轉交(Send the Success view) ==========================*/
 		return "/reserveorder/reserveOrderList.jsp";
-
+		
 	}
 	
 	/*===================================================================================================*/
