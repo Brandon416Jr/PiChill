@@ -132,7 +132,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="court" id="courtLabel">選擇球館</label>
-                <select class="form-select" id="court" name="court" disabled onclick="updatePlaces()">
+                <select class="form-select" id="court" name="courtName" disabled onclick="updatePlaces()">
                 <option value="">請先選擇地區</option>
 <%--                 	<c:forEach var="court" items="${courtSvc.all}"> --%>
 <%-- 				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName} --%>
@@ -144,7 +144,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="place" id="placeLabel">選擇場地</label>
-                <select class="form-select" id="place" name="place" disabled>
+                <select class="form-select" id="place" name="placeName" disabled>
                 <option value="">請先選擇球館</option>
 <%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
 <%-- 					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName} --%>
@@ -163,7 +163,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="time" id="label">預約時段</label>
-                <select class="form-select" id="time" name="time" placeholder="請選擇預約時段">
+                <select class="form-select" id="time" name="timeID" placeholder="請選擇預約時段">
                   <option value="7">07:00-08:00</option>
                   <option value="8">08:00-09:00</option>
                   <option value="9">09:00-10:00</option>
