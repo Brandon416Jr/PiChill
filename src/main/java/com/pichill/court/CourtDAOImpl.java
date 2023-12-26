@@ -42,7 +42,8 @@ public class CourtDAOImpl implements CourtDAO {
 
 	// 新增
 	@Override
-	public int add(Court court) {
+	public int insert(Court court) {
+		
 //			Connection con = null;
 //			PreparedStatement pstmt = null;
 //			try {
@@ -269,5 +270,7 @@ public class CourtDAOImpl implements CourtDAO {
 		// TODO Auto-generated method stub
 
 	}
+
+
 
 }

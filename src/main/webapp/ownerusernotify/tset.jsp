@@ -1,25 +1,24 @@
-<%@page import="com.pichill.frontstage.reserveorder.service.ReserveOrderServiceFront"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page import="com.pichill.reserveorder.entity.ReserveOrder"%>
-<%@ page import="com.pichill.frontstage.reserveorder.model.*"%>
-<%@ page import="com.pichill.frontstage.reserveorder.service.ReserveOrderServiceFront"%>
-<%@ page import="com.pichill.time.*"%>
-<%@ page import="com.pichill.place.*"%>
-<%@ page import="com.pichill.court.Court"%>
+<%@ page import="com.pichill.reserveorder.model.*"%>
+<%@ page import="com.pichill.reserveorder.service.ReserveOrderService"%>
+<%@ page import="com.pichill.owneruser.service.OwnerUserService"%>
 
-<%
-OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
-System.out.println("ownerUser is " + ownerUser);
-Integer oUserID = ownerUser.getoUserID();
-System.out.println("oUser is " + oUserID);
-ReserveOrderServiceFront reserveOrderSvcF = new ReserveOrderServiceFront();
-List<ReserveOrder> list = reserveOrderSvcF.getoUserID(oUserID);
-pageContext.setAttribute("list",list);
-pageContext.setAttribute("oUserID",oUserID);
-%>
+
+ <%
+  ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+     List<ReserveOrder> list = reserveOrderSvc.getAll();
+     pageContext.setAttribute("list",list);
+%> 
+ <%
+//  Integer oUserID = 12000001;
+//  OwnerUserService ownerUserSvc = new OwnerUserService();
+//  OwnerUser owneruser = ownerUserSvc.getOneOwnerUser(oUserID);
+//  pageContext.setAttribute("ownerUser",ownerUser);
+%> 
 
 
 
@@ -121,16 +120,15 @@ pageContext.setAttribute("oUserID",oUserID);
             <table id="emailTable" class="display">
                 <thead>
                     <tr>
-                    
+                        <th class="text-center">訊息日期</th> 
                         <th class="text-center">訂單編號</th>
-                        <th class="text-center">企業會員編號</th>
                         <th class="text-center">預約日期</th>
                         <th class="text-center">預約時間</th>
-                        <th class="text-center">球館</th>
-                        <th class="text-center">場地</th>
+                        <th class="text-center">場次/地別</th>
                         <th class="text-center">預約人數</th>
                         <th class="text-center">預約人姓名</th>
                         <th class="text-center">預約人電話</th>
+                        <th class="text-center">查看</th>
                     </tr>
                 </thead>
                 
@@ -138,15 +136,21 @@ pageContext.setAttribute("oUserID",oUserID);
                 <tbody>
                     <!-- 表格內容 -->
                     <tr>
-                    	<td class="text-center">${reserveOrder.reserveOrderID}</td>
-                        <td class="text-center">${reserveOrder.ownerUser.oUserID}</td>
+                    	<td class="text-center">${reserveOrder.orderTime}</td>
+                        <td class="text-center">${reserveOrder.reserveOrderID}</td>
                         <td class="text-center">${reserveOrder.reserveDate}</td>
-                        <td class="text-center">${reserveOrder.timeRef.reserveTime}</td>
-                        <td class="text-center">${reserveOrder.place.placeName}</td>
-                        <td class="text-center">${reserveOrder.court.courtName}</td>
+                        <td class="text-center">${reserveOrder.timeID}</td>
+                        <td class="text-center">${reserveOrder.placeID}</td>
                         <td class="text-center">${reserveOrder.orderNum}</td>
-                        <td class="text-center">${reserveOrder.generalUser.gName}</td>
-                        <td class="text-center">${reserveOrder.generalUser.gTelephone}</td>
+                        <td class="text-center">${reserveOrder.gUserID}</td>
+                        <td class="text-center">${generalUser.gName}</td>
+                        <td class="text-center">${generalUser.gTelephone}</td>
+                        <td class="text-center">
+                            <a href="#emailContentA" data-lightbox="email1" data-title1="信件內容">
+                                <i class="fa-solid fa-magnifying-glass" data-email-id="1"></i>
+                                <!-- 使用 Font Awesome 圖示 -->
+                            </a>
+                        </td>
                     </tr>
                 
                    

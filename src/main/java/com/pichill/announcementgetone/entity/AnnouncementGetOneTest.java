@@ -23,7 +23,7 @@ public class AnnouncementGetOneTest {
 		List<AnnouncementGetOne> list = dao.getAll();
 		if (list!=null) {
 			for (AnnouncementGetOne announcementGetAll : list) {
-				System.out.print(announcementGetAll.getManage() + ",");
+				System.out.print(announcementGetAll.getManage().getmName() + ",");
 				System.out.print(announcementGetAll.getAnnoTitle() + ",");
 				System.out.print(announcementGetAll.getAnnoContent() + ",");
 				System.out.print(announcementGetAll.getAnnoPic() + ",");

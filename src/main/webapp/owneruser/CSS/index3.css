@@ -161,6 +161,10 @@ main.main {
 main.main div.col-md-5 {
   width: 400px;
 }
+main.main div.col-1 {
+  width: 100px;
+  height: 100px;
+}
 
 /*=== 送出按鈕 ===*/
 input[type="button"] {

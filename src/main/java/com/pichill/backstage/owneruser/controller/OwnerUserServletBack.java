@@ -159,7 +159,7 @@ public class OwnerUserServletBack extends HttpServlet {
 //		}
 //		
 //		String oBankAccount = req.getParameter("oBankAccount");
-//		String oBankAccountReg = "^[1-9](\\d{9,13})$";
+//		String oBankAccountReg = "^[0-9](\\d{9,13})$";
 //		if (oBankAccount == null || oIDNum.trim().isEmpty()) {
 //			errorMsgs.add("銀行帳號: 請勿空白");
 //		} else if (!oBankAccount.trim().matches(oBankAccountReg)) {
