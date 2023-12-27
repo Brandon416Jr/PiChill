@@ -81,14 +81,14 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
             <p id="line"></p>
             <p id="titles">預約明細</p>
             <p id="line2"></p>
-            <form class="bararea" enctype="multipart/form-data">
+            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" class="bararea">
             	<span>預約訂單編號:</span><span id="loc" name="loc" value="${reserveOrder.reserveOrderID}"></span>
                 <br><br>
                 <span>一般會員編號:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gUserID}"></span>
                 <br><br>
                 <span>一般會員姓名:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gName}"></span>
                 <br><br>
-                <span>球類:</span><span id="ball" name="ball" value="${reserveOrder.place.ball}"></span>
+                <span>球類:</span><span id="ball" name="ball" value="${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}"></span>
                 <br><br>
                 <span>地區:</span><span id="loc" name="loc" value="${reserveOrder.court.loc}"></span>
                 <br><br>
@@ -98,18 +98,19 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                 <br><br>
                 <span>預約日期:</span><span id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}"></span>
                 <br><br>
-                <span>預約時段:</span><span id="time" name="time" value="${reserveOrder.time.reserveTime}"></span>
+                <span>預約時段:</span><span id="time" name="time" value="${reserveOrder.timeRef.reserveTime}"></span>
                 <br><br>
                 <span>人數:</span><span id="orderNum" name="orderNum" value="${reserveOrder.orderNum}"></span>
                 <p id="line3"></p>
                 <span id="total">總金額:</span><span id="totalCost" name="totalCost" value="${reserveOrder.totalCost == reserveOrder.place.placeFee}">&nbsp;&nbsp;元</span>
                 <br><br>
                 <div class="next1">
-                	<input type="hidden" name="action" value="getOneDisplay">
+                	<input type="hidden" name="action" value="getOneList_Display">
+                	<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
                     <input type="submit" id="next" value="前往付款" style="width:150px; height:44px;">&nbsp;
                     <input type="reset" id="next" value="取消" style="width:150px; height:44px;">
                 </div>
-            </form>
+            </FORM>
             
         </div>
         <br><br><br>

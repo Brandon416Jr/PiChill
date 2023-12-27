@@ -9,14 +9,22 @@
 <%@ page import="com.pichill.place.*"%>
 <%@ page import="com.pichill.court.*"%>
 
+<%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+Integer gUserID = gUser.getgUserID();
+// ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+// List<ReserveOrder> list = reserveOrderSvc.getgUserID(gUserID);
+// pageContext.setAttribute("list",list);
+pageContext.setAttribute("gUserID",gUserID);
+%>
 <% 
 //從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
  %>
-<%
-GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
-Integer gUserID = gUser.getgUserID();
-%>
+<%--<%
+//GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+//Integer gUserID = gUser.getgUserID();
+%>--%>
 
 <%--<%
  Integer gUserID = 11000001;
@@ -132,7 +140,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="court" id="courtLabel">選擇球館</label>
-                <select class="form-select" id="court" name="courtName" disabled onclick="updatePlaces()">
+                <select class="form-select" id="courtName" name="courtName" disabled onclick="updatePlaces()">
                 <option value="">請先選擇地區</option>
 <%--                 	<c:forEach var="court" items="${courtSvc.all}"> --%>
 <%-- 				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName} --%>
@@ -144,7 +152,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="place" id="placeLabel">選擇場地</label>
-                <select class="form-select" id="place" name="placeName" disabled>
+                <select class="form-select" id="placeName" name="placeName" disabled>
                 <option value="">請先選擇球館</option>
 <%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
 <%-- 					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName} --%>
@@ -163,7 +171,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="time" id="label">預約時段</label>
-                <select class="form-select" id="time" name="timeID" placeholder="請選擇預約時段">
+                <select class="form-select" id="timeID" name="timeID" placeholder="請選擇預約時段">
                   <option value="7">07:00-08:00</option>
                   <option value="8">08:00-09:00</option>
                   <option value="9">09:00-10:00</option>
@@ -191,6 +199,15 @@ Integer gUserID = gUser.getgUserID();
                   <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數" value="${reserveOrder.orderNum}">
               </div>
             <br>
+            <!-- 總金額(這頁不顯示) -->
+            <div class="col" hidden>
+              <div class="col" id="choose">
+                <label for="totalCost" id="label">總金額</label><br>
+                  <input type="text" id="totalCost" name="totalCost" value="${reserveOrder.place.placeFee}">
+              </div>
+            </div>  
+            <br>
+            
             <input type="hidden" name="action" value="insert">
 <%-- 			<input type="hidden" name="reserveOrderID" value="<%=reserveOrder.getReserveOrderID()%>"> --%>
             <input type="submit" id="next" value="下一步" style="width:150px; height:44px;">&nbsp;
@@ -225,7 +242,7 @@ Integer gUserID = gUser.getgUserID();
         </div>
       </footer>
       
-      
+// ========================================================================================== //    
 <script>
 function updateRegions() {
   // 獲取球類選擇框的值
@@ -268,13 +285,13 @@ function addOption(select, value) {
   console.log("aaa");
 }
 
-// ==========================================================================================
+// ========================================================================================== //
 function updateCourts() {
   // 獲取地區選擇框的值
   var selectedLoc = document.getElementById("loc").value;
 
   // 獲取球館選擇框
-  var courtSelect = document.getElementById("court");
+  var courtSelect = document.getElementById("courtName");
 
   // 清空球館選擇框的選項
   courtSelect.innerHTML = "";
@@ -319,14 +336,14 @@ function addOption1(select, value) {
   console.log("bbb");
 }
 
-// ===============================================================================
+// =============================================================================== //
 
 function updatePlaces() {
   // 獲取球館選擇框的值
-  var selectedCourt = document.getElementById("court").value;
+  var selectedCourt = document.getElementById("courtName").value;
 
 // 獲取場地選擇框
-  var placeSelect = document.getElementById("place");
+  var placeSelect = document.getElementById("placeName");
 
  // 獲取地區選擇框的值
  var selectedLoc = document.getElementById("loc").value;
@@ -382,25 +399,29 @@ $(document).ready(function() {
     // 獲取所有需要的值
     var selectedBall = $("#ball").val();
     var selectedLoc = $("#loc").val();
-    var selectedCourt = $("#court").val();
-    var selectedPlace = $("#place").val();
+    var selectedCourt = $("#courtName").val();
+    var selectedPlace = $("#placeName").val();
     var reserveDate = $("#reserveDate").val();
-    var selectedTime = $("#time").val();
+    var selectedTime = $("#timeID").val();
     var orderNum = $("#orderNum").val();
+    var totalCost = $("#totalCost").val();
 
     // 使用 AJAX 發送 POST 請求
     $.ajax({
+      action: "insert",
       type: "POST",
       url: "http://localhost:8081/PiChill/reserveorder/reserveorder.do",  // 你的後端端點
       data: {
-        ball: selectedBall,
-        loc: selectedLoc,
-        court: selectedCourt,
-        place: selectedPlace,
-        reserveDate: reserveDate,
-        time: selectedTime,
-        num: orderNum
+        "ball": selectedBall,
+        "loc": selectedLoc,
+        "courtName": selectedCourt,
+        "placeName": selectedPlace,
+        "reserveDate": reserveDate,
+        "timeID": selectedTime,
+        "orderNum": orderNum,
+        "totalCost": totalCost
       },
+      dataType: "json",
       success: function(response) {
         // 處理成功回應
         console.log("訂單新增成功！");

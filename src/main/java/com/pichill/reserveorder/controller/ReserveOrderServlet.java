@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.owneruser.service.OwnerUserService;
@@ -35,6 +36,12 @@ public class ReserveOrderServlet extends HttpServlet {
 	private Integer oUserID;
 	private Integer timeID;
 	private Integer placeID;
+
+	private TimeRef timeRef;
+
+	private Place place;
+
+	private Court court;
 	
 	@Override
 	public void init() throws ServletException {
@@ -152,69 +159,76 @@ public class ReserveOrderServlet extends HttpServlet {
 		//頁面不顯示
 		gUserID = (Integer)req.getAttribute("gUserID");
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
+		System.out.print("會員id" + gUserID);
 		//頁面不顯示
 		Integer oUserID = 0;
 		
-		//預約日期
-		Date reserveDate = null;
-		try {
-			reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-		} catch (IllegalArgumentException e) {
-			reserveDate = new java.sql.Date(System.currentTimeMillis());
-			errorMsgs.add("請選擇預約日期!");
-		}
-		//時段編號: 根據開館閉館時間判斷
-		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
-		
+		//球館編號
+		Integer courtID = 0;
 		
 		//場地編號
-		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
+		Integer placeID = 0;
 		
 		//下單時間Timestamp自動產生
 		Timestamp orderTime = null;
 		
-		
-		//人數: 根據不同場地會有人數限制
-		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
 
 		//訂單狀態: 1→訂單成立 2→訂單完成 0→訂單已取消
 		Integer orderStatus = 1;
 		
 		
+		
+		
+		//球類
+		Integer ball = Integer.valueOf(req.getParameter("ball"));
+		//地區
+		String loc = req.getParameter("loc");
+		if (loc == null || loc.trim().isEmpty())
+			errorMsgs.add("地區: 請勿空白");
+		//球館名稱
+		String courtName = req.getParameter("courtName");
+		if (courtName == null || courtName.trim().isEmpty())
+			errorMsgs.add("球館: 請勿空白");
+		//場地
+		String placeName = req.getParameter("placeName");
+		if (placeName == null || placeName.trim().isEmpty())
+			errorMsgs.add("地區: 請勿空白");
+//		PlaceService placeSvc = new PlaceService();
+//		placeName = placeSvc.getOnePlace(placeID);
+		
+		//預約日期
+		Date reserveDate = null;
+			try {
+				reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
+			} catch (IllegalArgumentException e) {
+				reserveDate = new java.sql.Date(System.currentTimeMillis());
+				errorMsgs.add("請選擇預約日期!");
+			}
+		//時段編號: 根據開館閉館時間判斷
+		Integer timeID = Integer.valueOf(req.getParameter("timeID"));	
+				
+		//人數: 根據不同場地會有人數限制
+		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
+		
 		//訂單總金額: 根據場地費用判斷 (這邊頁面不顯示)
 		Integer totalCost = 0;
 		
-		System.out.println("有走到這邊");
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		ReserveOrder reserveOrder = new ReserveOrder();
 		
 		reserveOrder.setGeneralUser(generalUser);
-		reserveOrder.getOwnerUser().setoUserID(oUserID);
+//		reserveOrder.getOwnerUser().setoUserID(oUserID);
 		reserveOrder.setReserveDate(reserveDate);
-		reserveOrder.getTimeRef().setTimeID(timeID);
-		reserveOrder.getPlace().setPlaceID(placeID);
-		reserveOrder.getCourt().setCourtID(placeID);
+		reserveOrder.setTimeRef(timeRef);
+		reserveOrder.setPlace(place);
+		reserveOrder.setCourt(court);
 		reserveOrder.setOrderTime(orderTime);
 		reserveOrder.setOrderNum(orderNum);
 		reserveOrder.setOrderStatus(orderStatus);
 		reserveOrder.setTotalCost(totalCost);
 
-		// 處理AJAX請求
-        String ajaxParam = req.getParameter("ajaxParam");
-
-        // 執行必要的處理並準備響應
-        String jsonResponse = "{\"result\": \"" + ajaxParam + " received\"}";
-
-        // 發送JSON響應
-        res.setContentType("application/json");
-        res.setCharacterEncoding("UTF-8");
-        try {
-			res.getWriter().write(jsonResponse);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 
 		
 		reserveOrder.toString();

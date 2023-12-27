@@ -41,10 +41,10 @@ select#ball{
 select#loc{
     border: 1px solid grey;
 }
-select#court{
+select#courtName{
     border: 1px solid grey;
 }
-select#place{
+select#placeName{
     border: 1px solid grey;
 }
 #label{
@@ -62,7 +62,7 @@ input#reserveDate{
 #p{
     margin-bottom: 5px;
 }
-select#time{
+select#timeID{
     border: 1px solid grey;
 }
 
@@ -96,7 +96,7 @@ div.list{
     border: 0.5px solid rgb(197, 197, 197);
     background-color: #FFFFFF;
     width: 600px;
-    height: 730px;
+    height: 800px;
     color: #207DCA;
     display: inline-block;
     margin-top: 30px;
@@ -153,7 +153,7 @@ span#total{
     top: 20px;
 }
 
-span#totalcost{
+span#totalCost{
     font-weight: bold;
     position: relative;
     top: 20px;
@@ -161,7 +161,7 @@ span#totalcost{
 
 div.next1{
     position: relative;
-    top: 55px;
+    top: 25px;
     right: 20px;
 
 }
