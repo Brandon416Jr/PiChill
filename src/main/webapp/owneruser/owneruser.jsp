@@ -84,12 +84,14 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 								>申請上架球館</button>
 						</li>
 						<li class="my-2">
+							<form action="<%=request.getContextPath()%>/court/all_court.jsp">
+								
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
+								data-bs-toggle="collapse" aria-expanded="false" 
 								data-bs-target="#forms-collapse" aria-controls="forms-collapse"
-								href="<%=request.getContextPath()%>/court/court.jsp">球館管理</button>
-
+								>球館管理</button>
+								</form>
 						</li>
 						
 						<li class="my-2">

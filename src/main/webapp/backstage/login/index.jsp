@@ -291,10 +291,10 @@ width: 68vw;
 			
 		</div>
 	</div>
-	<div class="index">
-			<div class="index2">
-			</div>
-			</div>
+<!-- 	<div class="index"> -->
+<!-- 			<div class="index2"> -->
+<!-- 			</div> -->
+<!-- 			</div> -->
 <c:if test="${not empty requestScope.noAuth}">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script>

@@ -35,14 +35,14 @@ public class Post {
 	private Integer postID;
 
 	@ManyToOne
-	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false, insertable = false)
+	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false)
     private GeneralUser generalUser;
 
 //	@Column(name = "gUserID", updatable = false, insertable = false)
 //	private Integer gUserID;
 
 	@ManyToOne
-	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
+	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false)
     private OwnerUser ownerUser;
 
 //	@Column(name = "oUserID", updatable = false, insertable = false)

@@ -50,7 +50,7 @@ $(document).ready(function() {
 		var commentID = $('.btn_report').attr("data-comment-id");
 		var selectedOption = $("#exampleModal2 input[type='radio']:checked");
 		var reportType;
-		console.log(commentID);
+		//		console.log(commentID);
 		switch (selectedOption.next('label').text().trim()) {
 			case '違反版規':
 				reportType = 0;
@@ -140,6 +140,7 @@ $(document).ready(function() {
 	//======新增/取消按讚======
 	$("#exampleModal5").on("click", "#likecol", function() {
 		var postID = $(this).attr("data-post-id");
+		var userID = $("#userID").val();
 		//		console.log(postID);
 		var $likeDiv = $(this);
 		//console.log($(this).html())
@@ -160,6 +161,7 @@ $(document).ready(function() {
 							data: {
 								"action": "likepost",
 								"postID": postID,
+								"gUserID": gUserID,
 							},
 							dataType: "json",
 							success: function(data) {
@@ -169,7 +171,7 @@ $(document).ready(function() {
 								} else if (data.status == 0) {
 									$likeDiv.find(".likebutton").css('color', '');
 								}
-									var $likeCntSpan = $("#likecol[data-post-id='" + postID + "'] .fa-thumbs-up").siblings(".likecnt");
+								var $likeCntSpan = $("#likecol[data-post-id='" + postID + "'] .fa-thumbs-up").siblings(".likecnt");
 								$likeCntSpan.empty(); // 清空原本的评论数量
 								// 更新按讚數量
 								if (data.likeCnt === 0) {
@@ -212,6 +214,7 @@ $(document).ready(function() {
 	$("#exampleModal6").on("click", "#likecol", function() {
 		var postID = $(this).attr("data-post-id");
 		//		console.log(postID);
+		var userID = $("#userID").val();
 		var $likeDiv = $(this);
 		//console.log($(this).html())
 		//console.log($likeDiv)
@@ -231,6 +234,7 @@ $(document).ready(function() {
 							data: {
 								"action": "likepost",
 								"postID": postID,
+								"gUserID": gUserID,
 							},
 							dataType: "json",
 							success: function(data) {
@@ -285,7 +289,7 @@ $(document).ready(function() {
 		$(".task_list").empty();
 		var postID = $(this).data("post-id");
 		var postType = $("input.postType").val();
-//		console.log(postType);
+		//		console.log(postType);
 		$.ajax({
 			url: "http://localhost:8081/PiChill/comment/comment.do",
 			type: "GET",
@@ -297,7 +301,7 @@ $(document).ready(function() {
 			contentType: "application/json; charset=utf-8",
 			success: function(data) {
 				data.forEach(function(comment) {
-//					console.log(postType);
+					//					console.log(postType);
 					publishcomment(comment.commentID, comment.commentContent, comment.commentTime);
 				});
 			},
@@ -384,7 +388,7 @@ $(document).ready(function() {
 	function addComment() {
 		let task_text = $("input.task_name").val().trim();
 		let likecolElements = $(".likecol");
-
+		var userID = $("#userID").val();
 		// 取得第一個具有 "likecol" 類別的元素的 data-post-id 值
 		let postID = likecolElements.eq(0).data('post-id');
 		//        console.log(postID);
@@ -396,6 +400,7 @@ $(document).ready(function() {
 				data: {
 					"action": "insert",
 					"postID": postID,
+					"gUserID": gUserID,
 					"commentContent": task_text
 				},
 				success: function(response) {
@@ -480,7 +485,7 @@ $(document).ready(function() {
 	function addComment2() {
 		let task_text = $("input.task_name2").val().trim();
 		let likecolElements = $(".likecol");
-
+		var userID = $("#userID").val();
 		// 取得第一個具有 "likecol" 類別的元素的 data-post-id 值
 		let postID = likecolElements.eq(0).data('post-id');
 		//		console.log(postID);
@@ -492,6 +497,7 @@ $(document).ready(function() {
 				data: {
 					"action": "insert",
 					"postID": postID,
+					"gUserID": gUserID,
 					"commentContent": task_text
 				},
 				success: function(response) {
