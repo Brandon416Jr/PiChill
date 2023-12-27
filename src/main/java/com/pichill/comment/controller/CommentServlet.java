@@ -56,9 +56,10 @@ public class CommentServlet extends HttpServlet {
 //		}
 		if ("insert".equals(action)) {
 			String commentContent = req.getParameter("commentContent");
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			GeneralUserService generalUserService = new GeneralUserService();
-			GeneralUser generalUser = generalUserService.getOneGeneralUser(11000001);
+			GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
 			PostService postSVC = new PostServiceImpl();
 			Post post = postSVC.getByPostID(postID);
 			Comment comment = new Comment();

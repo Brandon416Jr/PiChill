@@ -2,13 +2,15 @@ $(document).ready(function() {
 	//======顯示like狀態=======
 	$("#post-list").on("click", "#commentcol", function() {
 		var postID = $(this).attr("data-post-id");
+		var userID = $("#userID").val();
 		 setTimeout(function() {
 		$.ajax({
 			type: "POST",
 			url: "http://localhost:8081/PiChill/forumlike/forumlike.do",
 			data: {
 				"action": "showlike",
-				"postID": postID
+				"postID": postID,
+				"gUserID": gUserID
 			},
 			dataType: "Json",
 			success: function(postData) {
@@ -122,8 +124,8 @@ $(document).ready(function() {
 	});
 	// 	    //====我的文章=====
 	$("#search-options").change(function() {
+		var gUserID = $("#userID").val();
 		var selectedOption = $(this).val();
-
 		if (selectedOption === "my-posts") {
 			$.ajax({
 				type: "POST",
@@ -131,7 +133,7 @@ $(document).ready(function() {
 				dataType: "json",
 				data: {
 					"action": "get_By_gUserID",
-					"gUserID": 11000001  // 根據實際情況傳遞相應的用戶ID
+					"gUserID": gUserID  // 根據實際情況傳遞相應的用戶ID
 				},
 				success: function(data) {
 					$("#post-list").empty();
@@ -276,7 +278,7 @@ $(document).ready(function() {
 		var selectedOption = $(this).val();
 		$(".saved-post-type").val(selectedOption === "discussions" ? 0 : 1);
 		savedPostType = $(".saved-post-type").val();
-		console.log('Selected Option (Change Event):', selectedOption);
+//		console.log('Selected Option (Change Event):', selectedOption);
 		if (selectedOption === "discussions" || selectedOption === "events") {
 			$.ajax({
 				type: "POST",
@@ -594,9 +596,9 @@ $(document).ready(function() {
 		var selectedOption = $("#search-options").val();
 		$(".saved-post-type").val(selectedOption === "discussions" ? 0 : 1);
 		savedPostType = $(".saved-post-type").val();
-		console.log('Post Title:', postTitle);
-		console.log('Selected Option:', selectedOption);
-		console.log('Saved Post Type:', $(".saved-post-type").val());
+//		console.log('Post Title:', postTitle);
+//		console.log('Selected Option:', selectedOption);
+//		console.log('Saved Post Type:', $(".saved-post-type").val());
 		if (!postTitle.trim()) {
 			alert("請輸入欲搜尋的標題");
 			return; // 中止搜索操作
