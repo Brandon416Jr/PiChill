@@ -72,7 +72,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 		}
 		input[type="text"] {
 	  	cursor: pointer;
-	  	width: 100px;
+	  	width: 150px;
 		}
 
 		
@@ -112,22 +112,22 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse">企業會員資料</button>
+                                aria-controls="contents-collapse" href="<%=request.getContextPath()%>/owneruser/owneruser.jsp">企業會員資料</button>
                         </li>
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架球館</button>
+                                aria-controls="forms-collapse" href="<%=request.getContextPath()%>/court/new_court.jsp">申請上架球館</button>
                         </li>
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架場地</button>
+                                aria-controls="forms-collapse" href="<%=request.getContextPath()%>/place/new_place.jsp">申請上架場地</button>
                         </li>                        
                         <li class="my-2">
                             <button class="btn d-inline-flex align-items-center collapsed border-0"
                                 data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">球館管理</button>
+                                aria-controls="forms-collapse" href="<%=request.getContextPath()%>/court/all_court.jsp">球館管理</button>
                         </li>
                         <br>
 						<li class="my-2">
@@ -161,9 +161,13 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 			</div>
         			<br>
 			<form action="${pageContext.request.contextPath }/place/place.do"
-			 METHOD="post"	enctype="multipart/form-data">
-        
-        		<div class="row form-group">
+			      METHOD="post"	enctype="multipart/form-data">
+			      
+			      <div class="row form-group">
+				
+					<span>選擇球館:</span>
+				
+				
 				
 					<span>球類:</span>
 					<div class="ballss" style="width:100px; ">
@@ -187,21 +191,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
 				placeholder="如A、B" class="form-control" />
 				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
+
 				
 				<font color="#ff0000" size="4" nowrap="">一次填寫一個名稱</font>						
 				
@@ -223,15 +213,18 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 
                  
         
-         	</form>
+         	
+			      
+			      
+			      
+			      
+           </form>
             
             <br><br><br>
 
-
         </main>
     </div>
-        
-        
+
      <!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
 

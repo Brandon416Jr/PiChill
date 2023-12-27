@@ -83,6 +83,11 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 								>申請上架球館</button>
 						</li>
 						<li class="my-2">
+                            <button class="btn d-inline-flex align-items-center collapsed border-0"
+                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
+                                aria-controls="forms-collapse">申請上架場地</button>
+                        </li>
+						<li class="my-2">
 							<button
 								class="btn d-inline-flex align-items-center collapsed border-0"
 								data-bs-toggle="collapse" aria-expanded="false"

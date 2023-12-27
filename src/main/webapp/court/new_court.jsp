@@ -106,38 +106,33 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
             <div class="parent_container">
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
                 <nav class="small" id="toc">
-                    <ul class="list-unstyled">
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse">企業會員資料</button>
-                        </li>
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架球館</button>
-                        </li>
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架場地</button>
-                        </li>
-                        
-                        
-                        <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">球館管理</button>
-                        </li>
-                        <br>
-						<li class="my-2">
+                
+                <ul class="list-unstyled">
+                 
+                    <li class="my-2">
+                       <a class="asidearea" href="<%=request.getContextPath()%>/owneruser/owneruser.jsp">企業會員資料</a>                         
+                    </li>
+                    
+                    <li class="my-2">
+                    <a class="asidearea" href="<%=request.getContextPath()%>/court/new_court.jsp">申請上架球館</a>                         
+                    <li>
+                      
+                    <li class="my-2">
+                       <a class="asidearea" href="<%=request.getContextPath()%>/place/new_place.jsp">申請上架場地</a>                         
+                    </li>
+                    <br>                       
+                    <li class="my-2">
+                        <a class="asidearea" href="<%=request.getContextPath()%>/court/all_court.jsp">球館管理</a>                         
+                    </li>                         
+                    <br><br>  
+					<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-								<button class="btn btn-danger">登出</button>
 								<input type="hidden" name="action" value="logout">
+								<button class="btn btn-danger">登出</button>
 							</form>
 						</li>
                     </ul>
-                </nav>
+               </nav>
             </div>
         </aside>
         
