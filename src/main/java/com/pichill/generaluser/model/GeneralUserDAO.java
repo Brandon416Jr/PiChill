@@ -13,5 +13,4 @@ public interface GeneralUserDAO {
 	int update(GeneralUser generalUser);
 	GeneralUser findByPK(Integer gUserID);
 	List<GeneralUser> getAll();
-//	List<ReserveOrder> getAllList();
 }

@@ -24,7 +24,6 @@ import com.pichill.reserveorder.entity.ReserveOrder;
 @WebServlet(name = "GeneralUserServlet", value = "/generaluser/generaluser.do")
 public class GeneralUserServlet extends HttpServlet {
 	private GeneralUserService generalUserService;
-	private Object reserveOrder;
 
 	@Override
 	public void init() throws ServletException {
@@ -44,19 +43,12 @@ public class GeneralUserServlet extends HttpServlet {
 		String forwardPath = "";
 		switch (action) {
 		case "getOne_For_Display":
-			// 來自select_page.jsp的請求
 			forwardPath = getOneDisplay(req, res);
 			break;
-//		case "getOneList_Display":
-//			// 來自select_page.jsp的請求
-//			forwardPath = getOneList(req, res);
-//			break;
 		case "getOne_For_Update":
-			// 來自listAllGeneralUser.jsp的請求
 			forwardPath = getOneUpdate(req, res);
 			break;
 		case "update":
-			// 來自generaluser.jsp的請求
 			forwardPath = update(req, res);
 			break;
 		default:
@@ -117,55 +109,6 @@ public class GeneralUserServlet extends HttpServlet {
 		req.setAttribute("generalUser", generalUser); // 資料庫取出的generalUser物件,存入req
 		return "/generaluser/guserListOne.jsp";
 	}
-	/*===================================================================================================*/
-	/*                                                查詢預約紀錄                                                */
-	/*===================================================================================================*/
-	
-//	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
-//		// 錯誤處理
-//		List<String> errorMsgs = new ArrayList<>();
-//		req.setAttribute("errorMsgs", errorMsgs);
-//		
-//		/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
-//		
-//		String str = req.getParameter("gUserID");
-//		
-//		if (str == null || (str.trim()).length() == 0) {
-//			errorMsgs.add("請輸入會員編號");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//		
-//		Integer gUserID = null;
-//		try {
-//			gUserID = Integer.valueOf(str);
-//		} catch (Exception e) {
-//			errorMsgs.add("會員編號格式不正確");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//		
-//		/*=========================================== 2.開始查詢資料 ===========================================*/
-//		
-//		List<ReserveOrder> generalUser = generalUserService.getAllList(gUserID);
-//		
-//		if (generalUser == null) {
-//			errorMsgs.add("查無資料");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//		
-//		/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
-//		
-//		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的generalUser物件,存入req
-//		return "/reserveorder/listOneOrder.jsp";
-//	}
 
 	/*===================================================================================================*/
 	/*                                                修改                                                */
@@ -189,7 +132,6 @@ public class GeneralUserServlet extends HttpServlet {
 		
 		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 
-//		String gName = String.valueOf(req.getParameter("gName"));
 		String gName = req.getParameter("gName");
 		String gNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
 		if (gName == null || gName.trim().length() == 0) {
@@ -198,7 +140,6 @@ public class GeneralUserServlet extends HttpServlet {
 			errorMsgs.add("會員姓名: 只能是中文, 且長度必需大於2個字");
 		}
 
-//		String gUsername = String.valueOf(req.getParameter("gUsername"));
 		String gUsername = req.getParameter("gUsername");
 		String gUsernameReg = "^[a-zA-Z0-9]{8,12}$";
 		if (gUsername == null || gUsername.trim().length() == 0) {
@@ -216,11 +157,11 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		
 		String nicknameID = req.getParameter("nicknameID");
-		String nicknameIDReg = "^[a-zA-Z0-9_@$%^]{10}$";
+		String nicknameIDReg = "/^[\\u4e00-\\u9fff]{5}$/";
 		if (nicknameID == null || nicknameID.trim().length() == 0) {
 			errorMsgs.add("暱稱: 請勿空白");
 		} else if (!nicknameID.trim().matches(nicknameIDReg)) { // 以下練習正則(規)表示式(regular-expression)
-			errorMsgs.add("請輸入正確的暱稱格式: 可以是英文大小寫、數字及_@$%^符號, 且長度必需為10個字");
+			errorMsgs.add("請輸入正確的暱稱格式: 5個中文字");
 		}
 
 		String gEmail = req.getParameter("gEmail");
@@ -231,7 +172,6 @@ public class GeneralUserServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的電子信箱格式");
 		}
 		
-//		String gIDNum = String.valueOf(req.getParameter("gIDNum"));
 		String gIDNum = req.getParameter("gIDNum");
 		String idnoRegex = "^[A-Z][12][0-9]{8}$";
 		if (gIDNum == null || idnoRegex.trim().isEmpty()) {
@@ -242,7 +182,6 @@ public class GeneralUserServlet extends HttpServlet {
 
 		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
 
-//		Date gBirth = java.sql.Date.valueOf(req.getParameter("gBirth"));
 		Date gBirth = null;
 		try {
 			gBirth = java.sql.Date.valueOf(req.getParameter("gBirth").trim());
@@ -259,9 +198,6 @@ public class GeneralUserServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的手機號碼格式");
 		}
 
-//		String gAddress = req.getParameter("gAddress");
-//		if (gAddress == null || gAddress.trim().isEmpty())
-//			errorMsgs.add("請輸入地址");
 		
 		String address = req.getParameter("gAddress");
 		if (address == null || address.trim().isEmpty())
@@ -277,7 +213,6 @@ public class GeneralUserServlet extends HttpServlet {
 		Integer status = 0;
 
 		// 取得圖片
-//		byte[] gProfilePic = null;
 		InputStream in = req.getPart("gProfilePic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
 		byte[] gProfilePic = null;
 		if(in.available()!=0){
@@ -345,117 +280,5 @@ public class GeneralUserServlet extends HttpServlet {
 		return "/generaluser/guserListOne.jsp";
 	}
 
-//	
-//	// insert 資料
-//	private String insert(HttpServletRequest req, HttpServletResponse res) {
-//		// 錯誤處理
-//		List<String> errorMsgs = new ArrayList<>();
-//		req.setAttribute("errorMsgs", errorMsgs);
-//
-//		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-//		String gName = req.getParameter("gName");
-//		String gNameReg = "^[\\u4e00-\\u9fa5]{2,}$";
-//		if (gName == null || gName.trim().length() == 0) {
-//			errorMsgs.add("會員姓名: 請勿空白11111");
-//		} else if (!gName.trim().matches(gNameReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("會員姓名: 只能是中文, 且長度必需大於等於2個字");
-//		}
-//
-//		String gEmail = req.getParameter("gEmail");
-//		String gEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-//		if (gEmail == null || gEmail.trim().length() == 0) {
-//			errorMsgs.add("會員帳號: 請勿空白");
-//		} else if (!gEmail.trim().matches(gEmailReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("請輸入正確的Email格式");
-//		}
-//
-//		String gPassword = req.getParameter("gPassword");
-//		String gPasswordReg = "^[a-zA-Z0-9]{8,12}$";
-//		if (gPassword == null || gPassword.trim().length() == 0) {
-//			errorMsgs.add("會員密碼: 請勿空白");
-//		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("會員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
-//		}
-//
-//		String gIDNum = req.getParameter("gIDNum");
-//		String idnoRegex = "^[A-Z][12][0-9]{8}$";
-//		if (gIDNum == null || gIDNum.trim().isEmpty()) {
-//			errorMsgs.add("身份證: 請勿空白");
-//		} else if (!gIDNum.trim().matches(idnoRegex)) {
-//			errorMsgs.add("請輸入正確的身份證格式");
-//		}
-//
-//		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
-//
-//		Date gBirth = null;
-//		try {
-//			gBirth = java.sql.Date.valueOf(req.getParameter("gBirth").trim());
-//		} catch (IllegalArgumentException e) {
-//			gBirth = new java.sql.Date(System.currentTimeMillis());
-//			errorMsgs.add("請輸入生日!");
-//		}
-//
-//		String gTelephone = req.getParameter("gTelephone");
-//		String gTelephoneReg = "^09[0-9]{8}$";
-//		if (gTelephone == null || gTelephone.trim().isEmpty()) {
-//			errorMsgs.add("聯絡電話: 請勿空白");
-//		} else if (!gTelephone.trim().matches(gTelephoneReg)) {
-//			errorMsgs.add("請輸入正確的手機格式");
-//		}
-//
-//		String gAddress = req.getParameter("gAddress");
-//		if (gAddress == null || gAddress.trim().isEmpty())
-//			errorMsgs.add("請輸入地址");
-//
-//		Integer status = Integer.valueOf(req.getParameter("status"));
-//
-//		String nicknameID = null;
-//
-//		Integer gPostAmount = 0;
-//
-//		Integer commentAmount = 0;
-//
-//		Integer gReportCnt = 0;
-//
-//		Integer yoyakuCnt = 0;
-//
-//		Byte[] gProfilePic = null;
-//
-//		Date gRegistDate = null;
-//
-//
-//		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-//		GeneralUser generalUser = new GeneralUser();
-//		generalUser.setgName(gName);
-//		generalUser.setgTelephone(gTelephone);
-//		generalUser.setgEmail(gEmail);
-//		generalUser.setgAddress(gAddress);
-//		generalUser.setStatus(status);
-//		generalUser.setgGender(gGender);
-//		generalUser.setgPassword(gPassword);
-//		generalUser.setgIDNum(gIDNum);
-//		generalUser.setNicknameID(nicknameID);
-//		generalUser.setgPostAmount(gPostAmount);
-//		generalUser.setCommentAmount(commentAmount);
-//		generalUser.setgReportCnt(gReportCnt);
-//		generalUser.setgRegistDate(gRegistDate);
-//		generalUser.setgBirth(gBirth);
-//		generalUser.setYoyakuCnt(yoyakuCnt);
-////		generalUser.setgProfilePic(gProfilePic);
-//
-//		generalUser.toString();
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			req.setAttribute("generalUser", generalUser); // 含有輸入格式錯誤的empVO物件,也存入req
-//			return "/generaluser/addGeneralUser.jsp";
-//		}
-//
-//		/*************************** 2.開始新增資料 ***************************************/
-//		generalUserService.addGeneralUser(generalUser);
-//
-//		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-//		return "/generaluser/listAllGeneralUser.jsp";
-//
-//	}
 
 }

@@ -96,7 +96,7 @@ div.list{
     border: 0.5px solid rgb(197, 197, 197);
     background-color: #FFFFFF;
     width: 600px;
-    height: 800px;
+    height: 710px;
     color: #207DCA;
     display: inline-block;
     margin-top: 30px;
@@ -134,26 +134,69 @@ p#line2{
     width: 500px;
 }
 /* 明細內容 */
-form.bararea{
+div.orderlist{
     position: relative;
-    top: 55px;
+    top: 35px;
     left: 53px;
+}
+td{
+    width:120px;
+}
+tr#gUserID{
+    position: relative;
+    top: 10px;
+}
+tr#gName{
+    position: relative;
+    top: 20px;
+}
+tr#ball{
+    position: relative;
+    top: 30px;
+}
+tr#loc{
+    position: relative;
+    top: 40px;
+}
+tr#courtName{
+    position: relative;
+    top: 50px;
+}
+tr#placeName{
+    position: relative;
+    top: 60px;
+}
+tr#reserveDate{
+    position: relative;
+    top: 70px;
+}
+tr#reserveTime{
+    position: relative;
+    top: 80px;
+}
+tr#orderNum{
+    position: relative;
+    top: 90px;
+}
+tr.totalcost{
+    position: relative;
+    top: 100px;
 }
 p#line3{
     position: relative;
-    top: 20px;
+    top: 385px;
     right: 15px;
     border-bottom: 2px solid #FF9F1B;
     width: 500px;
 }
 
-span#total{
+td#total{
     font-weight: bold;
     position: relative;
     top: 20px;
 }
 
-span#totalCost{
+td#totalcost{
     font-weight: bold;
     position: relative;
     top: 20px;
@@ -161,7 +204,7 @@ span#totalCost{
 
 div.next1{
     position: relative;
-    top: 25px;
-    right: 20px;
+    top: 210px;
+    left: 10px;
 
 }

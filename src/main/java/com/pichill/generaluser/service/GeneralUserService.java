@@ -56,7 +56,4 @@ public class GeneralUserService {
 
 		return generalUser;
 	}
-//	public List<ReserveOrder> getAllList(Integer gUserID) {
-//		return dao.getAllList();
-//	}
 }

@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pichill.court.Court;
+import com.pichill.court.CourtService;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.owneruser.service.OwnerUserService;
@@ -37,12 +38,8 @@ public class ReserveOrderServlet extends HttpServlet {
 	private Integer timeID;
 	private Integer placeID;
 
-	private TimeRef timeRef;
+	private Integer reserveOrderID;
 
-	private Place place;
-
-	private Court court;
-	
 	@Override
 	public void init() throws ServletException {
 		reserveOrderService = new ReserveOrderService();
@@ -60,10 +57,14 @@ public class ReserveOrderServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		String forwardPath = "";
 		switch (action) {
-		case "getOneList_Display":
+		case "getAllList_Display":
 			// 來自listOneOrder.jsp的請求
-			forwardPath = getOneList(req, res);
+			forwardPath = getAllList(req, res);
 			break;
+//		case "getOneList":
+//			// 來自listOneOrder.jsp的請求
+//			forwardPath = getOneList(req, res);
+//			break;
 		case "getOne_For_Update":
 			// 來自listAllGeneralUser.jsp的請求
 			forwardPath = getOneUpdate(req, res);
@@ -86,45 +87,19 @@ public class ReserveOrderServlet extends HttpServlet {
 	}
 	
 	/*===================================================================================================*/
-	/*                                                會員預約查詢                                                */
+	/*                                                會員預約查詢                                          */
 	/*===================================================================================================*/
 	
-	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
+	private String getAllList(HttpServletRequest req, HttpServletResponse res) {
 		// 錯誤處理
 		List<String> errorMsgs = new ArrayList<>();
 		req.setAttribute("errorMsgs", errorMsgs);
 
-	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
-		
-//		String str = req.getParameter("gUserID");
-
-//		if (gUserID == null || (gUserID == 0) ){
-//			
-//			errorMsgs.add("請輸入會員編號");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//
-//		Integer gUserID = null;
-//		try {
-//			gUserID = Integer.valueOf(gUserID);
-//		} catch (Exception e) {
-//			errorMsgs.add("會員編號不正確");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-		
-	/*=========================================== 2.開始查詢資料 ===========================================*/
+	/*=========================================== 1.開始查詢資料 ===========================================*/
 		HttpSession session = req.getSession();
 		gUserID = (Integer)req.getAttribute("gUserID");
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
-//		Integer gUserID = generalUser.getgUserID();
-//		List<ReserveOrder> reserveOrderList = new ArrayList<>();
-//		Integer gUserID = 11000009;
+		
 		ReserveOrderService reserveOrderService = new ReserveOrderService();
 		List<ReserveOrder> reserveOrder = reserveOrderService.getgUserID(gUserID);
 
@@ -136,13 +111,11 @@ public class ReserveOrderServlet extends HttpServlet {
 			return "/generaluser/select_page.jsp";// 程式中斷
 		}
 
-	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
+	/*================================= 2.查詢完成,準備轉交(Send the Success view) ==========================*/
 		
 		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的reserveOrder物件,存入req
 		return "/reserveorder/listOneOrder.jsp";
 	}
-	
-	
 	
 	/*===================================================================================================*/
 	/*                                                新增                                                */
@@ -157,68 +130,41 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 		HttpSession session = req.getSession();
 		//頁面不顯示
-		gUserID = (Integer)req.getAttribute("gUserID");
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
-		System.out.print("會員id" + gUserID);
+		gUserID = generalUser.getgUserID();
+		
+		Integer courtID = Integer.valueOf(req.getParameter("courtID")!=null ? req.getParameter("courtID") : "");
+		CourtService courtSVC = new CourtService();
+		Court court = courtSVC.getOneCourt(courtID);
+		
+		Integer placeID = Integer.valueOf(req.getParameter("placeID")!=null ? req.getParameter("placeID") : "");
+		PlaceService placeSVC = new PlaceService();
+		Place place = placeSVC.getOnePlace(placeID);
+		
+		Date reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate")!=null ? req.getParameter("reserveDate") : "");
+		Integer timeID = Integer.valueOf(req.getParameter("timeID")!=null ? req.getParameter("timeID") : "");
+		TimeService timeSVC = new TimeService();
+		TimeRef timeRef = timeSVC.getOneTime(timeID);
+		Integer orderNum = Integer.valueOf(req.getParameter("orderNum")!=null ? req.getParameter("orderNum") : "");
+		
 		//頁面不顯示
-		Integer oUserID = 0;
+		Integer oUserID = Integer.valueOf(req.getParameter("oUserID")!=null ? req.getParameter("oUserID") : "");
+		OwnerUserService ownerUserSVC = new OwnerUserService();
+		OwnerUser ownerUser = ownerUserSVC.getOneOwnerUser(oUserID);
 		
-		//球館編號
-		Integer courtID = 0;
-		
-		//場地編號
-		Integer placeID = 0;
-		
+		Integer totalCost = Integer.valueOf(req.getParameter("totalCost")!=null ? req.getParameter("totalCost") : "");
+		totalCost = totalCost * orderNum;
+		//訂單狀態: 0→訂單已取消 1→訂單成立 2→訂單完成
+		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus")!=null ? "1" : "");
+
 		//下單時間Timestamp自動產生
 		Timestamp orderTime = null;
-		
-
-		//訂單狀態: 1→訂單成立 2→訂單完成 0→訂單已取消
-		Integer orderStatus = 1;
-		
-		
-		
-		
-		//球類
-		Integer ball = Integer.valueOf(req.getParameter("ball"));
-		//地區
-		String loc = req.getParameter("loc");
-		if (loc == null || loc.trim().isEmpty())
-			errorMsgs.add("地區: 請勿空白");
-		//球館名稱
-		String courtName = req.getParameter("courtName");
-		if (courtName == null || courtName.trim().isEmpty())
-			errorMsgs.add("球館: 請勿空白");
-		//場地
-		String placeName = req.getParameter("placeName");
-		if (placeName == null || placeName.trim().isEmpty())
-			errorMsgs.add("地區: 請勿空白");
-//		PlaceService placeSvc = new PlaceService();
-//		placeName = placeSvc.getOnePlace(placeID);
-		
-		//預約日期
-		Date reserveDate = null;
-			try {
-				reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-			} catch (IllegalArgumentException e) {
-				reserveDate = new java.sql.Date(System.currentTimeMillis());
-				errorMsgs.add("請選擇預約日期!");
-			}
-		//時段編號: 根據開館閉館時間判斷
-		Integer timeID = Integer.valueOf(req.getParameter("timeID"));	
-				
-		//人數: 根據不同場地會有人數限制
-		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
-		
-		//訂單總金額: 根據場地費用判斷 (這邊頁面不顯示)
-		Integer totalCost = 0;
-		
 
 		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 		ReserveOrder reserveOrder = new ReserveOrder();
 		
 		reserveOrder.setGeneralUser(generalUser);
-//		reserveOrder.getOwnerUser().setoUserID(oUserID);
+		reserveOrder.setOwnerUser(ownerUser);
 		reserveOrder.setReserveDate(reserveDate);
 		reserveOrder.setTimeRef(timeRef);
 		reserveOrder.setPlace(place);
@@ -228,24 +174,70 @@ public class ReserveOrderServlet extends HttpServlet {
 		reserveOrder.setOrderStatus(orderStatus);
 		reserveOrder.setTotalCost(totalCost);
 
-		
-
-		
-		reserveOrder.toString();
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
 			req.setAttribute("reserveOrder", reserveOrder); // 含有輸入格式錯誤的reserveOrder物件,也存入req
 			return "/reserveorder/reserveOrder.jsp";
 		}
-	
+		
 	/*=========================================== 2.開始新增資料 ===========================================*/
 		reserveOrderService.addReserveOrder(reserveOrder);
-		System.out.println("成功!!!");
 	/*================================= 3.新增完成,準備轉交(Send the Success view) ==========================*/
+		HttpSession session1 = req.getSession();
+		session1.setAttribute("newReserveOrder", reserveOrder);
 		return "/reserveorder/reserveOrderList.jsp";
 		
 	}
-	
+//	/*===================================================================================================*/
+//	/*                                                查詢                                                */
+//	/*===================================================================================================*/
+//	
+//	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
+//		// 錯誤處理
+//		List<String> errorMsgs = new ArrayList<>();
+//		req.setAttribute("errorMsgs", errorMsgs);
+//
+//	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
+//		
+//		String str = req.getParameter("reserveOrderID");
+//
+//		if (str == null || (str.trim()).length() == 0) {
+//			errorMsgs.add("請輸入預約訂單編號");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/generaluser/select_page.jsp";// 程式中斷
+//		}
+//
+//		Integer reserveOrderID = null;
+//		try {
+//			reserveOrderID = Integer.valueOf(str);
+//		} catch (Exception e) {
+//			errorMsgs.add("預約訂單編號格式不正確");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/reserveorder/reserveOrderList.jsp";// 程式中斷
+//		}
+//		
+//	/*=========================================== 2.開始查詢資料 ===========================================*/
+//		
+//		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
+//
+//		if (reserveOrder == null) {
+//			errorMsgs.add("查無資料");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if (!errorMsgs.isEmpty()) {
+//			return "/reserveorder/listOneOrder.jsp";// 程式中斷
+//		}
+//
+//	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
+//		
+//		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的generalUser物件,存入req
+//		return "/reserveorder/listOneOrder.jsp";
+//	}
+
 	/*===================================================================================================*/
 	/*                                                修改                                                */
 	/*===================================================================================================*/
@@ -281,13 +273,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 		//預約日期
 		Date reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-//		Date reserveDate = null;
-//		try {
-//			reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-//		} catch (IllegalArgumentException e) {
-//			reserveDate = new java.sql.Date(System.currentTimeMillis());
-//			errorMsgs.add("請選擇預約日期!");
-//		}
+		
 		//時段編號: 根據開館閉館時間判斷
 		TimeService timeService = new TimeService();
 		TimeRef timeRef = timeService.getOneTime(timeID);
@@ -305,13 +291,6 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 		//人數: 根據不同場地會有人數限制
 		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
-//		Integer orderNum = req.getParameter("orderNum");
-//		String gEmailReg = "^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-//		if (gEmail == null || gEmail.trim().length() == 0) {
-//			errorMsgs.add("會員帳號: 請勿空白");
-//		} else if (!gEmail.trim().matches(gEmailReg)) { // 以下練習正則(規)表示式(regular-expression)
-//			errorMsgs.add("請輸入正確的Email格式");
-//		}
 
 		//訂單狀態: 1→訂單成立 2→訂單完成 3→訂單已取消
 		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus"));

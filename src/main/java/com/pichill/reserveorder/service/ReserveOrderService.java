@@ -35,7 +35,6 @@ public class ReserveOrderService {
 	public List<ReserveOrder> getgUserID(Integer gUserID) {
 		return dao.findBygUserID(gUserID);
 	}
-
 	
 	
 }
