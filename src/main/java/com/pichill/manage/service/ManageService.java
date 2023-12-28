@@ -86,6 +86,28 @@ public class ManageService {
 		return manage;
 	}
 	
+	public Manage updateByStatus(Integer manageID, Integer mStatus) {
+		Manage manage = dao.getManageByManageID(manageID);
+		if (manage != null) {
+//			manage.setmName(mName);
+//			manage.setmUserName(mUserName);
+//			manage.setmPassword(mPassword);
+//			manage.setmBirth(mBirth);
+//			manage.setmGender(mGender);
+//			manage.setmTelephone(mTelephone);
+//			manage.setmEmgContact(mEmgContact);
+//			manage.setmEmgPhone(mEmgPhone);
+//			manage.setmAddress(mAddress);
+//			manage.setmHiredate(mHiredate);
+//			manage.setmID(mID);
+//			manage.setmEmail(mEmail);
+//			manage.setmProfilePic(mProfilePic);
+			manage.setmStatus(mStatus);
+			dao.update(manage);
+		}
+		return manage;
+	}
+	
 	public Manage userAuth(String mUserName, String mPassword) {
     	return dao.findByUserNamePassword(mUserName, mPassword);
         

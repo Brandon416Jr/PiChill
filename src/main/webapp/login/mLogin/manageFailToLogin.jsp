@@ -39,15 +39,33 @@ p {
 	<p id="lockMessage">由於你輸入多次錯誤帳號密碼，帳號已被鎖住，請10分鐘以後再進行登入。</p>
 
 	<script>
-// 定期檢查是否可以解鎖
-<%-- var lockoutTime = <%=request.getAttribute("lockoutTime")%>; --%>
+	var basePath = "<%=request.getContextPath()%>"; 
+		// 定期檢查是否可以解鎖
+		var lockoutTime =
+	<%=request.getAttribute("lockoutTime")%>
+		;
+		console.log("鎖定時間：" + lockoutTime);
+		var delay = lockoutTime - new Date().getTime();
+		function check() {
+			if (delay > 0) {
+				// 鎖定時間還沒到，停留在當前頁面
+				delay = delay - 1000;
+				setTimeout(check, 1000);
+				console.log("延遲：" + delay);
+			} else {
+		
+			    location.href = basePath + "/login/mLogin/manageLogin.jsp";
+			  }
+		}
+		setInterval(function() {
+			location.reload();
 
-// var delay = lockoutTime - new Date().getTime();
-// setTimeout(function() {
-<%--         window.location.href = "<%=request.getContextPath()%> --%>
-// 		/login/mLogin/manageLogin.jsp";
-					
-// 				}, 1000); // 每秒檢查一次
+			lockoutTime =<%=request.getAttribute("lockoutTime")%>;
+			delay = lockoutTime - new Date().getTime();
+
+			check();
+
+		}, 10000); 
 	</script>
 
 </body>
