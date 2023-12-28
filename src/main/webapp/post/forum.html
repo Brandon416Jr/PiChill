@@ -1202,11 +1202,14 @@ div.star_block>span.star.-on {
 												<div class="content">
 				<div class="container text-center">
 					<div class="row align-items-start">
+					<input type = hidden  id=reserveOrder2>
 						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
-						<select id="dateSelectOption2"  enabled >
-        <option value="option1">預約日期</option>
-
-    </select>
+					<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-3" id="datecol">預約日期 :</div>
+						<div class="col-2" id="datecol2">
+							<input type="text" class="custom-input" readonly id="dateInput2">
+						</div>
 					</div>
 				</div>
 				<br>
@@ -1419,23 +1422,23 @@ div.star_block>span.star.-on {
 								<div class="container text-left">
 									<div class="row">
 										<div class="col-2 col-sm-2">日期:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 dateRO"  ></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">時間:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 timeRO"  ></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">地點:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 locRO" ></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">球類:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 ballRO"></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">費用:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 feeRO"></div>
 									</div>
 								</div>
 								<br>

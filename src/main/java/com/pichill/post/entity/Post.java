@@ -49,7 +49,7 @@ public class Post {
 //	@Column(name = "oUserID", updatable = false, insertable = false)
 //	private Integer oUserID;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "reserveOrderID", referencedColumnName = "reserveOrderID", updatable = false) 
 	private ReserveOrder reserveOrder;
 
