@@ -19,74 +19,84 @@ $(document).ready(function() {
 		url: "post.do",
 		dataType: "json",
 		contentType: "application/json; charset=utf-8",
-		  success: function(responseData) {
-        // 在这里处理从后端接收到的 JSON 数据
-        // responseData 包含了您后端生成的 JSON 数据
-        
-        // 示例：遍历 responseData
-        for (var i = 0; i < responseData.length; i++) {
-            var post = responseData[i].post;
-            var generalUser = responseData[i].generalUser;
-            var nicknameID = generalUser.nicknameID;
-            var profilePic = generalUser.profilePic;
-            var gUserID = generalUser.gUserID;
-            
-            // 在这里进行进一步的操作，例如渲染数据到页面
-            console.log('Post:', post);
-            console.log('nicknameID:', nicknameID);
-            console.log('profilePic:', profilePic);
-            console.log('gUserID:', gUserID);
-            
-            // 调用相应的函数，并将需要的属性作为参数传递
-            if (post.postType === 0) {
-                publishPost(
-                    post.postID,
-                    post.postTitle,
-                    post.postContent,
-                    post.postType,
-                    post.postTime,
-                    post.postPic,
-                    post.likeCnt,
-                    post.commentCnt,
-                    post.gUsers,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            } else if (post.postType === 1) {
-                publishGroupPost(
-                    post.postID,
-                    post.postTitle,
-                    post.postContent,
-                    post.postType,
-                    post.postTime,
-                    post.postPic,
-                    post.likeCnt,
-                    post.commentCnt,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            } else if (post.postType === 2) {
-                publishPromotePost(
-                    post.postID,
-                    post.postTitle,
-                    post.postType,
-                    post.postTime,
-                    nicknameID,
-                    profilePic,
-                    gUserID
-                );
-            }
-        }
-    },
-    error: function(error) {
-        // 处理错误
-        console.error('Error:', error);
-    }
+		success: function(responseData) {
+			for (var i = 0; i < responseData.length; i++) {
+				var post = responseData[i].post;
+				var generalUser = responseData[i].generalUser;
+				var ownerUser = responseData[i].ownerUser;
+
+				var nicknameID, gProfilePic, gUserID, oUserName, oProfilePic, oUserID;
+
+				if (generalUser) {
+					nicknameID = generalUser.nicknameID;
+					gProfilePic = generalUser.gProfilePic;
+					gUserID = generalUser.gUserID;
+				}
+
+				if (ownerUser) {
+					oUserName = ownerUser.oUserName;
+					oProfilePic = ownerUser.oProfilePic;
+					oUserID = ownerUser.oUserID;
+				}
+
+
+				//            console.log('Post:', post);
+				//            console.log('nicknameID:', nicknameID);
+				//            console.log('gProfilePic:', gProfilePic);
+				//            console.log('gUserID:', gUserID);
+				//            console.log('oUserName',oUserName);
+				//            console.log('oProfilePic',oProfilePic);
+				//            console.log('oUserID',oUserID);
+
+				if (post.postType === 0) {
+					publishPost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						post.postPic,
+						post.likeCnt,
+						post.commentCnt,
+						nicknameID,
+						gProfilePic,
+						gUserID
+					);
+				} else if (post.postType === 1) {
+					publishGroupPost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						post.postPic,
+						post.likeCnt,
+						post.commentCnt,
+						nicknameID,
+						gProfilePic,
+						gUserID
+					);
+				} else if (post.postType === 2) {
+					publishPromotePost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						oUserName,
+						oProfilePic,
+						oUserID
+					);
+				}
+			}
+		},
+		error: function(error) {
+			// 处理错误
+			console.error('Error:', error);
+		}
 	});
 
-	function publishPost( postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, gUser) {
+	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID) {
 		//		console.log(gProfilePic);
 		var currentUserId = $('#userID').val();
 		postContent = postContent.replace(/\n/g, '<br>');
@@ -99,16 +109,23 @@ $(document).ready(function() {
 		} else {
 			url = '';
 		}
+		if (gProfilePic) {
+			var imageDataArray2 = new Uint8Array(gProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
 		var newPostElement = `
     <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
         <div class="row g-0">
             <div class="col-md-8">
-              <input type="hidden" id=${gUser}   >
+              <input type="hidden" id="${gUserID}" >
                 <div class="card-body">
                     <h1 class="modal-title fs-5">
-                        <img src=alt="大頭貼">
+                        <img src="${url2}" alt="大頭貼">
                         <div>
-                            <a class="post_user"></a>
+                            <a class="post_user">${nicknameID}</a>
                             <div class="post_time">${postTime}</div>
                         </div>
                     </h1>
@@ -145,16 +162,20 @@ $(document).ready(function() {
             </div>
         </div>
     </div>`;
-//	if (currentUserId == gUserID) {
-//			$('#reportButton[data-post-id="' + postID + '"]').hide();
-//		}else {
-//        $('#editButton[data-post-id="' + postID + '"]').hide();
-//        $('#deleteButton[data-post-id="' + postID + '"]').hide();
-//    }
+		//    console.log(currentUserId);
+		//    console.log(gUserID);
 		$('#post-list').prepend(newPostElement);
+		if (currentUserId == gUserID) {
+			$('#reportButton[data-post-id="' + postID + '"]').hide();
+		} else {
+			//			console.log('Hiding buttons');
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton[data-post-id="' + postID + '"]').hide();
+		}
 	}
 
-	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt) {
+	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID) {
+		var currentUserId = $('#userID').val();
 		postContent = postContent.replace(/\n/g, '<br>');
 		if (postPic) {
 			var imageDataArray = new Uint8Array(postPic);
@@ -166,26 +187,34 @@ $(document).ready(function() {
 			// 否则，显示空值
 			url = '';
 		}
+		if (gProfilePic) {
+			var imageDataArray2 = new Uint8Array(gProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
 		var newGroupPostElement = `
             	 <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
                 <div class="row g-0">
                     <div class="col-md-8">
+                      <input type="hidden" id="${gUserID}" >
                         <div class="card-body">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                <img src="../image/dog.jpg" alt="大頭貼">
+                                <img src="${url2}" alt="大頭貼">
                                 <div>
-                                    <a class="post_user">小吉</a>
+                                    <a class="post_user">${nicknameID}</a>
                                     <div class="post_time">${postTime}</div>
                                 </div>
                             </h1>
-    <!--              <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
+                  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
                           <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
-                          </button>-->
+                          </button>
 
                             <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
                                 <i class="fa-solid fa-triangle-exclamation"></i>
@@ -241,37 +270,56 @@ $(document).ready(function() {
             </div>`;
 
 		$('#post-list').prepend(newGroupPostElement);
+		if (currentUserId == gUserID) {
+			$('#reportButton[data-post-id="' + postID + '"]').hide();
+		} else {
+			//			console.log('Hiding buttons');
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton[data-post-id="' + postID + '"]').hide();
+		}
 	}
-	function publishPromotePost(postID, postTitle, postType, postTime) {
+	function publishPromotePost(postID, postTitle, postContent, postType, postTime, oUserName, oProfilePic, oUserID) {
+		var currentUserId = $('#userID').val();
+		if (oProfilePic) {
+			var imageDataArray2 = new Uint8Array(oProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
 		var newPromotePostElement = `
 				<div class="card mb-3 article2" id="article${postID}" style="width: 22rem;">
 				<div class="row g-0">
 					<div class="col-md-8">
+					  <input type="hidden" id="${oUserID}" >
 						<div class="card-body">
 							<h1 class="modal-title fs-5" id="exampleModalLabel">
-								<img src="../image/Capybara.jpg" alt="大頭貼">
+								<img src="${url2}" alt="大頭貼">
 								<div>
-									<a class="post_owner">水豚君</a>
+									<a class="post_owner">${oUserName}</a>
 									<div class="post_timer">${postTime}</div>
 								</div>
 							</h1>
-							  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+	<!--						  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
-                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                          <button type="button" class="delete" id="deleteButton_o" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
-                          </button>
+                          </button>-->
 							<h5 class="card-title">${postTitle}</h5>
-	                          <p class="card-text"></p>
+	                          <p class="card-text">${postContent}</p>
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>`
 		$('#promote-list').prepend(newPromotePostElement);
-
+	if (currentUserId !==oUserID) {
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton_o[data-post-id="' + postID + '"]').hide();
+		}
 	}
 	//	//========頁數顯示========
 	//	// 在document上使用事件委派
@@ -377,7 +425,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				fetchAndDisplayLatestData(response.postID, newPostTitle, newPostContent, response.postTime, newPostPic);
+				fetchAndDisplayLatestData(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime, newPostPic, response.generalUser.nicknameID, response.generalUser.gProfilePic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -387,7 +435,7 @@ $(document).ready(function() {
 		});
 	});
 
-	function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, newPostPic) {
+	function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, newPostPic, nicknameID, gProfilePic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
 			type: "GET",
@@ -403,9 +451,9 @@ $(document).ready(function() {
 		                  <div class="col-md-8">
 		                      <div class="card-body">
 		                          <h1 class="modal-title fs-5">
-		                              <img src="../image/cat.jpg" alt="大頭貼">
+		                              <img src="${gProfilePic}" alt="大頭貼">
 		                              <div>
-		                                  <a class="post_user">貓貓</a>
+		                                  <a class="post_user">${nicknameID}</a>
 		                                  <div class="post_time">${postTime}</div>
 		                              </div>
 		                        <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" id="editButton" data-post-id="${postID}">
@@ -454,20 +502,60 @@ $(document).ready(function() {
 	});
 	//=============新增揪團(預約編號)=============//
 	$("#group").on("click", function() {
-		console.log("aa");
 		$.ajax({
 			url: "post.do", // 替换成实际的API端点
 			type: "POST",
 			data: { action: "get_order" }, // 传递的参数
 			dataType: "json",
-			success: function(data2) {
-				// 处理Ajax响应数据，可以根据需要进行操作
-				console.log("揪团数据：", data2);
+			success: function(data) {
+				
+				console.log("揪團數據：", data);
+ if (data && data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+				var reserveOrderID = data[i].reserveOrderID;
+                var courtName = data[i].courtName;
+                var ball = data[i].ball;
+                var fee = data[i].fee;
+                var time = data[i].time;
+                var reserveDate = data[i].reserveDate;
+//console.log(reserveDate)
+                var newOption = $("<option></option>").val(reserveDate).text("預約日期：" + reserveDate);
+                $('#dateSelectOption').append(newOption);
+            }
 
-				// 这里你可以更新页面或执行其他操作，根据responseData的内容
+$("#dateSelectOption").on("change", function () {
+
+    var selectedDate = $(this).val();
+
+    var selectedData = data.find(function (item) {
+        return item.reserveDate === selectedDate;
+    });
+
+    if (selectedData) {
+		$("#reserveOrder").val(selectedData.reserveOrderID);
+        $("#timeInput").val(selectedData.time);
+        $("#locationInput").val(selectedData.courtName);
+        var ballText = "";
+        if (selectedData.ball === 0) {
+            ballText = "籃球";
+        } else if (selectedData.ball === 1) {
+            ballText = "排球";
+        } else if (selectedData.ball === 2) {
+            ballText = "羽球";
+        }
+        $("#ballInput").val(ballText);
+        $("#costInput").val(selectedData.fee+"元");
+    } else {
+        $("#timeInput").val("");
+        $("#locationInput").val("");
+        $("#ballInput").val("");
+        $("#costInput").val("");
+    }
+});
+        } 
 			},
 			error: function(xhr, status, error) {
-				console.error("发生错误：", status, error);
+				console.error("發生錯誤：", status, error);
 				// 处理错误情况
 			}
 		});
@@ -475,11 +563,12 @@ $(document).ready(function() {
 	//=============新增文章(揪團))===============//
 	$("#pb-group").on("click", function() {
 		var userID = $("#userID").val();
+		var reserveOrderID = $("#reserveOrder").val();
 		var newPostTitle = $("#floatingTextarea3").val();
 		var newPostContent = $("#floatingTextarea4").val();
 		var groupType = $(".groupType").val();
 		var newPostPic = $("#p_file2")[0].files[0];
-
+console.log(reserveOrderID);
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
@@ -490,6 +579,7 @@ $(document).ready(function() {
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert_group");
+		formData.append("reserveOrderID",reserveOrderID);
 		formData.append("gUserID", userID);
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
@@ -508,7 +598,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				fetchAndDisplayLatestData2(response.postID, newPostTitle, newPostContent, response.postTime, newPostPic);
+				fetchAndDisplayLatestData2(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime, newPostPic, response.generalUser.nicknameID, response.generalUser.gProfilePic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -517,7 +607,7 @@ $(document).ready(function() {
 			}
 		});
 	});
-	function fetchAndDisplayLatestData2(postID, newPostTitle, newPostContent, postTime, newPostPic) {
+	function fetchAndDisplayLatestData2(postID, newPostTitle, newPostContent, postTime, newPostPic, nicknameID, gProfilePic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
 			type: "GET",
@@ -531,9 +621,9 @@ $(document).ready(function() {
 	                  <div class="col-md-8">
 	                      <div class="card-body">
 	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-	                              <img src="../image/dog.jpg" alt="大頭貼">
+	                              <img src=${gProfilePic} alt="大頭貼">
 	                              <div>
-	                                  <a class="post_user">小吉</a>
+	                                  <a class="post_user">${nicknameID}</a>
 	                                  <div class="post_time">${postTime}</div>
 	                              </div>
 	                          </h1>
@@ -635,7 +725,7 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				fetchAndDisplayLatestData3(response.postID, newPostTitle, newPostContent, response.postTime);
+				fetchAndDisplayLatestData3(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime, response.ownerUser.oUserName, response.ownerUser.oProfilePic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -645,7 +735,7 @@ $(document).ready(function() {
 		});
 	});
 
-	function fetchAndDisplayLatestData3(postID, newPostTitle, newPostContent, postTime) {
+	function fetchAndDisplayLatestData3(postID, newPostTitle, newPostContent, postTime, oUserName, oProfilePic) {
 		// 發送請求以獲取最新資料
 		$.ajax({
 			type: "GET",
@@ -657,9 +747,9 @@ $(document).ready(function() {
 					<div class="col-md-8">
 						<div class="card-body">
 							<h1 class="modal-title fs-5" id="exampleModalLabel">
-								<img src="../image/Capybara.jpg" alt="大頭貼">
+								<img src=${oProfilePic} alt="大頭貼">
 								<div>
-									<a class="post_owner">水豚君</a>
+									<a class="post_owner">${oUserName}</a>
 									<div class="post_timer">${postTime}</div>
 								</div>
 							</h1>
@@ -667,7 +757,7 @@ $(document).ready(function() {
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
-                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                          <button type="button" class="delete" id="deleteButton_o" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
                           </button>
@@ -987,5 +1077,317 @@ $(document).ready(function() {
 		});
 
 	});
+		$("#search-options").change(function() {
+		var gUserID = $("#userID").val();
+		var selectedOption = $(this).val();
+		if (selectedOption === "newest") {
+$.ajax({
+		type: "GET",
+		url: "post.do",
+		dataType: "json",
+		contentType: "application/json; charset=utf-8",
+		success: function(responseData) {
+			for (var i = 0; i < responseData.length; i++) {
+				var post = responseData[i].post;
+				var generalUser = responseData[i].generalUser;
+				var ownerUser = responseData[i].ownerUser;
 
+				var nicknameID, gProfilePic, gUserID, oUserName, oProfilePic, oUserID;
+
+				if (generalUser) {
+					nicknameID = generalUser.nicknameID;
+					gProfilePic = generalUser.gProfilePic;
+					gUserID = generalUser.gUserID;
+				}
+
+				if (ownerUser) {
+					oUserName = ownerUser.oUserName;
+					oProfilePic = ownerUser.oProfilePic;
+					oUserID = ownerUser.oUserID;
+				}
+
+
+				//            console.log('Post:', post);
+				//            console.log('nicknameID:', nicknameID);
+				//            console.log('gProfilePic:', gProfilePic);
+				//            console.log('gUserID:', gUserID);
+				//            console.log('oUserName',oUserName);
+				//            console.log('oProfilePic',oProfilePic);
+				//            console.log('oUserID',oUserID);
+
+				if (post.postType === 0) {
+					publishPost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						post.postPic,
+						post.likeCnt,
+						post.commentCnt,
+						nicknameID,
+						gProfilePic,
+						gUserID
+					);
+				} else if (post.postType === 1) {
+					publishGroupPost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						post.postPic,
+						post.likeCnt,
+						post.commentCnt,
+						nicknameID,
+						gProfilePic,
+						gUserID
+					);
+				} else if (post.postType === 2) {
+					publishPromotePost(
+						post.postID,
+						post.postTitle,
+						post.postContent,
+						post.postType,
+						post.postTime,
+						oUserName,
+						oProfilePic,
+						oUserID
+					);
+				}
+			}
+		},
+		error: function(error) {
+			// 处理错误
+			console.error('Error:', error);
+		}
+	});
+
+	function publishPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID) {
+		//		console.log(gProfilePic);
+		var currentUserId = $('#userID').val();
+		postContent = postContent.replace(/\n/g, '<br>');
+		if (postPic) {
+			var imageDataArray = new Uint8Array(postPic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url = URL.createObjectURL(blob);
+		} else {
+			url = '';
+		}
+		if (gProfilePic) {
+			var imageDataArray2 = new Uint8Array(gProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
+		var newPostElement = `
+    <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
+        <div class="row g-0">
+            <div class="col-md-8">
+              <input type="hidden" id="${gUserID}" >
+                <div class="card-body">
+                    <h1 class="modal-title fs-5">
+                        <img src="${url2}" alt="大頭貼">
+                        <div>
+                            <a class="post_user">${nicknameID}</a>
+                            <div class="post_time">${postTime}</div>
+                        </div>
+                    </h1>
+                    <button type="button" class="edit_discuss" data-bs-toggle="modal" data-bs-target="#exampleModal_edit" id="editButton" data-post-id="${postID}">
+                    <i class="fa-regular fa-pen-to-square"></i>
+                        <span class="tooltip-text">編輯</span>
+                    </button>
+                    <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                        <i class="fa-regular fa-trash-can"></i>
+                        <span class="tooltip-text">刪除</span>
+                    </button>
+                    <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span class="tooltip-text">檢舉</span>    
+                            </button>
+                    <h5 class="card-title">${postTitle}</h5>
+                    <p class="card-text">${postContent}</p>
+                </div>
+            </div>
+            <div class="col-md-4" id="piccontainer">
+            <img src="${url}">
+        </div>
+            <div class="container text-center">
+                <div class="row align-items-start" id="card-footer">
+                     <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+                    <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`;
+		//    console.log(currentUserId);
+		//    console.log(gUserID);
+		$('#post-list').prepend(newPostElement);
+		if (currentUserId == gUserID) {
+			$('#reportButton[data-post-id="' + postID + '"]').hide();
+		} else {
+			//			console.log('Hiding buttons');
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton[data-post-id="' + postID + '"]').hide();
+		}
+	}
+
+	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID) {
+		var currentUserId = $('#userID').val();
+		postContent = postContent.replace(/\n/g, '<br>');
+		if (postPic) {
+			var imageDataArray = new Uint8Array(postPic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob = new Blob([imageDataArray], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url = URL.createObjectURL(blob);
+		} else {
+			// 否则，显示空值
+			url = '';
+		}
+		if (gProfilePic) {
+			var imageDataArray2 = new Uint8Array(gProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
+		var newGroupPostElement = `
+            	 <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                      <input type="hidden" id="${gUserID}" >
+                        <div class="card-body">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                <img src="${url2}" alt="大頭貼">
+                                <div>
+                                    <a class="post_user">${nicknameID}</a>
+                                    <div class="post_time">${postTime}</div>
+                                </div>
+                            </h1>
+                  <button type="button" class="edit_group" data-bs-toggle="modal" data-bs-target="#exampleModal_edit2" id="editButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                              <span class="tooltip-text">編輯</span>
+                          </button>
+                          <button type="button" class="delete" id="deleteButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-trash-can"></i>
+                              <span class="tooltip-text">刪除</span>
+                          </button>
+
+                            <button type="button" class="report" data-bs-toggle="modal" data-bs-target="#exampleModal10" id="reportButton" data-post-id="${postID}">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span class="tooltip-text">檢舉</span>
+                            </button>
+                            <h5 class="card-title">${postTitle}</h5>
+                            <div class="container text-left">
+                                <div class="row">
+                                    <div class="col-2 col-sm-2">日期:</div>
+                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="w-100 d-none d-md-block"></div>
+
+                                    <div class="col-2 col-sm-2">時間:</div>
+                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="w-100 d-none d-md-block"></div>
+
+                                    <div class="col-2 col-sm-2">地點:</div>
+                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="w-100 d-none d-md-block"></div>
+
+                                    <div class="col-2 col-sm-2">球類:</div>
+                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="w-100 d-none d-md-block"></div>
+
+                                    <div class="col-2 col-sm-2">費用:</div>
+                                    <div class="col-2 col-sm-4"></div>
+                                </div>
+                            </div>
+                            <p class="card-text2">${postContent}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4" id="piccontainer">
+                    <img src="${url}">
+                </div>
+                    <div class="container text-center">
+                        <div class="row align-items-start" id="card-footer">
+                            <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+                            <div class="col-2" id="commentcol" data-post-id="${postID}">
+                                <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal6" ></button>
+                                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                                </div>
+                                                                   
+                            <div class="col-2" id="pluscol">
+                                <button type="button" class="fa-regular fa-square-plus"> +1
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+		$('#post-list').prepend(newGroupPostElement);
+		if (currentUserId == gUserID) {
+			$('#reportButton[data-post-id="' + postID + '"]').hide();
+		} else {
+			//			console.log('Hiding buttons');
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton[data-post-id="' + postID + '"]').hide();
+		}
+	}
+	function publishPromotePost(postID, postTitle, postContent, postType, postTime, oUserName, oProfilePic, oUserID) {
+		var currentUserId = $('#userID').val();
+		if (oProfilePic) {
+			var imageDataArray2 = new Uint8Array(oProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
+		var newPromotePostElement = `
+				<div class="card mb-3 article2" id="article${postID}" style="width: 22rem;">
+				<div class="row g-0">
+					<div class="col-md-8">
+					  <input type="hidden" id="${oUserID}" >
+						<div class="card-body">
+							<h1 class="modal-title fs-5" id="exampleModalLabel">
+								<img src="${url2}" alt="大頭貼">
+								<div>
+									<a class="post_owner">${oUserName}</a>
+									<div class="post_timer">${postTime}</div>
+								</div>
+							</h1>
+	<!--						  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+                              <i class="fa-regular fa-pen-to-square"></i>
+                              <span class="tooltip-text">編輯</span>
+                          </button>
+                          <button type="button" class="delete" id="deleteButton_o" data-post-id="${postID}">
+                              <i class="fa-regular fa-trash-can"></i>
+                              <span class="tooltip-text">刪除</span>
+                          </button>-->
+							<h5 class="card-title">${postTitle}</h5>
+	                          <p class="card-text">${postContent}</p>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>`
+		$('#promote-list').prepend(newPromotePostElement);
+	if (currentUserId !==oUserID) {
+			$('#editButton[data-post-id="' + postID + '"]').hide();
+			$('#deleteButton_o[data-post-id="' + postID + '"]').hide();
+		}
+	}
+	}
+	});
 });
