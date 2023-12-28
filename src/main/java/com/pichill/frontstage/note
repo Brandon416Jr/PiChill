@@ -3,3 +3,19 @@ generalUser:
 新增
 ownerUser: 
 新增
+
+預約取消:
+listOneOrder按鈕
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/cancel.do" enctype="multipart/form-data">
+		<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
+		<input type="submit" id="cancel" value="取消" >
+</FORM>
+
+新增完要改會員預約次數/被預約次數
+一般會員
+GeneralUser generalUser = new GeneralUser();
+Integer yoyakuCnt = reserveOrder.getGeneralUser().getYoyakuCnt();
+yoyakuCnt += 1;
+generalUser.setYoyakuCnt();
+GeneralUserServiceBack gUserSvcB = new GeneralUserServiceBack();
+generalUser = gUserSvcB.updateGeneralUserByReport(gUserID, status, gReportCnt);

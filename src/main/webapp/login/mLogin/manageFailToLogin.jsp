@@ -40,14 +40,14 @@ p {
 
 	<script>
 // 定期檢查是否可以解鎖
-var lockoutTime = <%=request.getAttribute("lockoutTime")%>;
-setInterval(function() {
-    if (new Date().getTime() >  lockoutTime) {
-        // 鎖定時間已經結束，重新導向到登入頁面
-        window.location.href = "<%=request.getContextPath()%>
-		/login/mLogin/manageLogin.jsp";
-					}
-				}, 1000); // 每秒檢查一次
+<%-- var lockoutTime = <%=request.getAttribute("lockoutTime")%>; --%>
+
+// var delay = lockoutTime - new Date().getTime();
+// setTimeout(function() {
+<%--         window.location.href = "<%=request.getContextPath()%> --%>
+// 		/login/mLogin/manageLogin.jsp";
+					
+// 				}, 1000); // 每秒檢查一次
 	</script>
 
 </body>

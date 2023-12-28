@@ -28,51 +28,50 @@ html {
 }
 
 /*=====header=====*/
-header.header {
-	/* border: 1px solid black; */
-	background-color: #207DCA;
-	position: sticky;
-	margin: 0 auto 10px auto;
-	top: 0;
-	z-index: 5;
+header.header{
+    /* border: 1px solid black; */
+    background-color: #207DCA;
+    position: sticky;
+    margin: 0 auto 10px auto;
+    top: 0;
+    overflow: visible;
+    z-index: 3;
 }
 
-@media all and (min-width: 576px) and (max-width: 767.98px) {
-	header.header {
-		width: 540px;
-	}
 
-	/* header.header ul.nav{
-      display: none;
-      }
-      label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+@media all and (min-width: 576px) and (max-width: 767.98px){
+    header.header{
+        width: 540px;
+    }
+}
+@media (max-width: 575.98px){
+    header.header{
+        width: 100%;
+    }
+}
+.nav-link{
+  color: white !important;
+  margin: 15px;
+  font-weight: bold !important;
 }
 
-@media ( max-width : 575.98px) {
-	header.header {
-		width: 100%;
-	}
-
-	/* header.header ul.nav{
-      display: none;
-      }
-    label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+ul.nav.nav-pills{
+  position: relative;
+  right: 30px;
 }
-
-/*=== header導覽列 ===*/
-.nav-link {
-	color: white;
-	margin: 15px;
+#head{
+  position: relative;
+  top:8px;
+}
+#heads{
+  position: relative;
+  top:5px;
+}
+/* header大頭貼剪裁成圓形 */
+img.rounded-circle{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 /*=====aside=====*/
@@ -213,7 +212,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_group {
@@ -223,7 +222,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_promote {
@@ -243,7 +242,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
 /* .edit, .delete {
@@ -281,7 +280,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
 #piccontainer {
@@ -1055,6 +1054,7 @@ div.star_block>span.star.-on {
 	</aside>
 
 	<main class=main>
+										<input type="hidden" id="userID"   >
 		<!--建立貼文-->
 		<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
 		<!-- 			data-bs-target="#exampleModal_o" id="create-post-button"> -->

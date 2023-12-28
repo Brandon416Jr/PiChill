@@ -27,11 +27,12 @@ public class ForumLikeServlet extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
 //		System.out.println(action);
-		if ("likepost".equals(action)) {
+		if ("likepost".equals(action)) {			
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 //			System.out.println(postID);
 			ForumLikeService likeSvc = new ForumLikeServiceImpl();
-			Integer status = likeSvc.getLikeByPostIDAndUserID(postID, 11000001);
+			Integer status = likeSvc.getLikeByPostIDAndUserID(postID, gUserID);
 			long likeCnt = likeSvc.getLikeCnt(postID);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", status);
@@ -43,10 +44,11 @@ public class ForumLikeServlet extends HttpServlet {
 			out.flush();
 		}
 		if ("showlike".equals(action)) {
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 //			System.out.println(postID);
 			ForumLikeService likeSvc = new ForumLikeServiceImpl();
-			Boolean status = likeSvc.getLikeByPostIDAndUserID2(postID, 11000001);
+			Boolean status = likeSvc.getLikeByPostIDAndUserID2(postID, gUserID);
 			Map<String, Object> data = new HashMap<>();
 			data.put("status", status);
 			Gson gson = new Gson();

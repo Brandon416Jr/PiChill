@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 	public interface CourtDAO{
-		int add(Court court);
+		int insert(Court court);
 		int update(Court court);
 		void delete(int courtID);
 		public Court getCourtByCourtID(Integer courtID);

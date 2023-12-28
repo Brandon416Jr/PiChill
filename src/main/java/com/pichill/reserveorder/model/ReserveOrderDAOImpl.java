@@ -98,10 +98,11 @@ private ReserveOrder generalUser;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
 			session.beginTransaction();
-			List<ReserveOrder> list = session.createQuery("select r from ReserveOrder r where r.generalUser.gUserID = :gUserID"
-					, ReserveOrder.class)
-			.setParameter("gUserID", gUserID)
-            .list();
+		    List<ReserveOrder> list = session.createQuery(
+		            "SELECT r FROM ReserveOrder r LEFT JOIN FETCH r.court c WHERE r.generalUser.gUserID = :gUserID",
+		            ReserveOrder.class)
+		            .setParameter("gUserID", gUserID)
+		            .list();
 			session.getTransaction().commit();
 			System.out.println("查會員預約紀錄成功!");
 			return list;

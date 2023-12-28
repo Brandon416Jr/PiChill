@@ -13,7 +13,7 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>100</session-timeout>
 	</session-config>
 	<!-- <servlet> -->
 	<!-- <servlet-name>UploadServlet</servlet-name> -->
@@ -62,11 +62,13 @@
 		<filter-name>OwnerUserLoginFilter</filter-name>
 		<url-pattern>/homepage/owneruserhome.jsp</url-pattern>
 		<url-pattern>/ownerusernotify/notify.jsp</url-pattern>
+				<url-pattern>/contactus/addContactUs.jsp</url-pattern>
 		<url-pattern>/owneruser/listOneOwnerUser.jsp</url-pattern>
 		<url-pattern>/owneruser/ouserListOne.jsp</url-pattern>
 		<url-pattern>/owneruser/owneruser.jsp</url-pattern>
 		<url-pattern>/owneruser/set_owneruser.jsp</url-pattern>
 		<url-pattern>/court/court.jsp</url-pattern>
+		<url-pattern>/court/all_court.jsp</url-pattern>
 		<url-pattern>/court/listOneCourt.jsp</url-pattern>
 		<url-pattern>/court/new_court.jsp</url-pattern>
 		<url-pattern>/court/set_court.jsp</url-pattern>
@@ -93,7 +95,6 @@
 		<url-pattern>/reserveorder/updateStatus.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
-		<url-pattern>/contactus/addContactUs.jsp</url-pattern>
 		<url-pattern>/contactusForGUser/addContactUs.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>

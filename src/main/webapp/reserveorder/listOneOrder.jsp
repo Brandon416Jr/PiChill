@@ -103,7 +103,7 @@ pageContext.setAttribute("gUserID",gUserID);
 						<li class="my-2">
 						  <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
 	        				<input type="hidden" name="action" value="logout">
-	        				<button class="btn btn-danger">µn¥X</button>
+	        				<button class="asidearea">µn¥X</button>
        					  </form> 
        					</li>
 					</ul>
