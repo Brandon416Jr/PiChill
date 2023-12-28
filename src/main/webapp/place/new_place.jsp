@@ -72,7 +72,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 		}
 		input[type="text"] {
 	  	cursor: pointer;
-	  	width: 100px;
+	  	width: 150px;
 		}
 
 		
@@ -94,8 +94,8 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/contactus.jsp" class="nav-link">聯絡我們</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"> 
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+										<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
 
@@ -110,24 +110,24 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
                 <nav class="small" id="toc">
                     <ul class="list-unstyled">
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse">企業會員資料</button>
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架球館</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架場地</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                            </form> 
                         </li>                        
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">球館管理</button>
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
                         </li>
                         <br>
 						<li class="my-2">
@@ -161,10 +161,20 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 			</div>
         			<br>
 			<form action="${pageContext.request.contextPath }/place/place.do"
-			 METHOD="post"	enctype="multipart/form-data">
-        
-        		<div class="row form-group">
+			      METHOD="post"	enctype="multipart/form-data">
+			      
+			      <div class="row form-group">
 				
+					<span>選擇球館:</span>
+					<div class="balles" style="width:100px; ">
+						<select name="courtID">
+							 <c:forEach var="court" items="${courtSvc.all}"> 
+ 					    		<option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'courtID' } >${place.placeName}
+ 				    		</c:forEach> 
+						</select>
+					</div>
+					<br><br>
+					
 					<span>球類:</span>
 					<div class="ballss" style="width:100px; ">
 						<div class="form-check">
@@ -177,61 +187,36 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 						  </div>
 						</div>
 					</div>
-				<br>
-				<br>
-				
-				<span>場地名稱:</span>
-				<br><br>
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<input type="text" id="text-input" name="placeName"
-				value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>"
-				placeholder="如A、B" class="form-control" />
-				
-				<font color="#ff0000" size="4" nowrap="">一次填寫一個名稱</font>						
-				
-        		<br><br><br><br>
-        		
-				<label class="form-control-label">場地費用</label>
-				<br><br>
-				<input type="text" id="text-input" name="placeFee"
+					<br><br>
+					
+					<span>場地名稱:</span>
+					<br><br>
+					<input type="text" id="text-input" name="placeName"	
+					       value="<%=(newPlace == null) ? "" : newPlace.getPlaceName()%>" 
+					       placeholder="如A、B" class="form-control"/>
+					<font color="#ff0000" size="4" nowrap="">一次填寫一個名稱</font>	
+        			<br><br><br><br>       
+        			
+					<span>場地費用</span>
+					<br><br>
+					<input type="text" id="text-input" name="placeFee"
 					value="<%=(newPlace == null) ? "" : newPlace.getPlaceFee()%>" class="form-control" />
-				<font color="#000000" size="5"  style="width: 150px;">元/時</font>
-				</div>
-        	</div>
-        
-        <br><br>
-        
-         <!-------- 送出按鈕  ------->
-            <input type="hidden" name="action" value="insert">
-			<input type="submit" value="送出新增" style="width: 150px; height: 44px;position:relative;left: 400px;">
-
-                 
-        
-         	</form>
-            
+					<font color="#000000" size="5"  style="width: 150px;">元/時</font>       
+					<br><br>
+					
+					
+					<!-------- 送出按鈕  ------->
+            		<input type="hidden" name="action" value="insert">
+					<input type="submit" value="送出新增" style="width: 150px; height: 44px;position:relative;left: 400px;">
+					       
+			      </div>
+			</form>    
+			      
             <br><br><br>
-
 
         </main>
     </div>
-        
-        
+
      <!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
 
@@ -239,7 +224,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
             <header class="d-flex flex-wrap justify-content-center py-3">
                 <a href="/"
                     class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/footerlogo.svg" alt="SVG" />
+                    <img src = "<%=request.getContextPath()%>/owneruser/pic/footerlogo.svg" alt="SVG"/>
                 </a>
 
                 <ul class="nav nav-pills">

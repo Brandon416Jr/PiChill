@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.court.Court;
 import com.pichill.court.CourtService;
+import com.pichill.manage.entity.Manage;
 import com.pichill.place.*;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
@@ -187,7 +188,9 @@ public class PlaceServlet extends HttpServlet{
 			req.setAttribute("errorMsgs", errorMsgs);
 
 			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-			Integer placeID = Integer.valueOf(req.getParameter("placeID"));
+			Place newPlace = new Place();
+			req.setAttribute("newPlace", newPlace);
+//			Integer placeID = Integer.valueOf(req.getParameter("placeID"));
 			Integer courtID = Integer.valueOf(req.getParameter("courtID"));
 			Integer placeFee = Integer.valueOf(req.getParameter("placeFee").trim());
 			
@@ -199,8 +202,8 @@ public class PlaceServlet extends HttpServlet{
 
 			// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
 			Place place = new Place();
-			place.setPlaceID(placeID);
-			place.getCourt().setCourtID(courtID);
+//			place.setPlaceID(placeID);
+//			place.getCourt().setCourtID(courtID);
 			place.setPlaceName(placeName);
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);

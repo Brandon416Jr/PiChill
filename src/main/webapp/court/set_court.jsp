@@ -16,7 +16,7 @@ System.out.println("oUser is " + oUserID);
 
 %>
 <%
-//¨£com.emp.controller.EmpServlet.java²Ä238¦æ¦s¤JreqªºempVOª«¥ó (¦¹¬°¿é¤J®æ¦¡¦³¿ù»~®ÉªºempVOª«¥ó)
+//è¦‹com.emp.controller.EmpServlet.javaç¬¬238è¡Œå­˜å…¥reqçš„empVOç‰©ä»¶ (æ­¤ç‚ºè¼¸å…¥æ ¼å¼æœ‰éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
 Court court = (Court) request.getAttribute("court");
 CourtServiceFront courtSvcF = new CourtServiceFront();
 Integer courtID = court.getCourtID();
@@ -33,12 +33,12 @@ pageContext.setAttribute("list",list);
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>³õÀ]ºŞ²z</title>
+<title>å ´é¤¨ç®¡ç†</title>
 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS1/bootstrap.min.css">
    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
-<!----------------¶×¤Jjquery ------------------------>
+<!----------------åŒ¯å…¥jquery ------------------------>
     <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous">
@@ -63,157 +63,155 @@ pageContext.setAttribute("list",list);
 </head>
 
 <body>
-  <!----------------------------------------------- header °Ï ------------------------------------------------------->
+  <!----------------------------------------------- header å€ ------------------------------------------------------->
     <header class="header">
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-1">
-                <a href="/"
-                    class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/headerlogo.svg" alt="SVG" />
-                </a>
+				<a href="/"
+					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG"/>
+				</a>
 
 
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">­º­¶</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">³qª¾</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">½×¾Â</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Ápµ¸§Ú­Ì</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/pic/face.svg" alt="SVG" />¥ø·~·|­û¤¤¤ß</a>
-                    </li>
-                </ul>
+            	<ul class="nav nav-pills">
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">é¦–é </a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">é€šçŸ¥</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">è«–å£‡</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">è¯çµ¡æˆ‘å€‘</a></li>
+										<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link">  
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>ä¼æ¥­æœƒå“¡ä¸­å¿ƒ</a></li>
+				</ul>
 
             </header>
         </div>
     </header>
-  <!----------------------------------------------- aside °Ï ------------------------------------------------------->
+  <!----------------------------------------------- aside å€ ------------------------------------------------------->
     <div class="main_content">
         <aside class="aside">
             <div class="parent_container">
-                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">¥ø·~·|­û¤¤¤ß</h2>
+                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">ä¼æ¥­æœƒå“¡ä¸­å¿ƒ</h2>
                 <nav class="small" id="toc">
-                    <ul class="list-unstyled">
+                   <ul class="list-unstyled">
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/owneruser/set_owneruser.jsp"
-                                >¥ø·~·|­û¸ê®Æ</button>
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">ä¼æ¥­æœƒå“¡è³‡æ–™</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/court/new_court.jsp"
-                                >¥Ó½Ğ¤W¬[²yÀ]</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">ç”³è«‹ä¸Šæ¶çƒé¤¨</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse" 
-                                href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
-                                >²yÀ]ºŞ²z</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">ç”³è«‹ä¸Šæ¶å ´åœ°</button>
+                            </form> 
+                        </li>                        
+                        <li class="my-2">
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">çƒé¤¨ç®¡ç†</button>
+                        	</form>
                         </li>
                         <br>
-							<li class="my-2">
+						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-							
-								<button class="btn btn-danger">µn¥X</button>
+								<button class="btn btn-danger">ç™»å‡º</button>
 								<input type="hidden" name="action" value="logout">
 							</form>
-							</li>
-						
+						</li>
                     </ul>
                 </nav>
             </div>
         </aside>
 
-<!----------------------------------------------- main °Ï ------------------------------------------------------->
+<!----------------------------------------------- main å€ ------------------------------------------------------->
         <main class="main">
             <!-- <div class="row g-3"> -->
-                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">­×§ï²yÀ]¸ê°T</h2>
+                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">ä¿®æ”¹çƒé¤¨è³‡è¨Š</h2>
                 <!-- <form action="/action_page.php"> -->
         
-                <span style="color:#FF0000;  position: relative;left: 250px;">«e¦³<img src="pic/stR01.png" width="20" height="20" alt="">¬°¥²¶ñ¶µ¥Ø</span>
+                <span style="color:#FF0000;  position: relative;left: 250px;">å‰æœ‰<img src="pic/stR01.png" width="20" height="20" alt="">ç‚ºå¿…å¡«é …ç›®</span>
 <!--             </p> -->
 
             <form action="<%=request.getContextPath()%>/courtf.do" method="post" enctype="multipart/form-data" style="width: 800px;">
                 <img src="pic/stR01.png" width="20" height="20" alt="">
-                <label for="courtName">³õÀ]¦WºÙ</label>
+                <label for="courtName">å ´é¤¨åç¨±</label>
                 <input type="text" id="court" name="courtName" 
                 value="<%=court.getCourtName()%>" size="45" required>
                 <br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
-                <label  for="time">¶}À]®É¶¡</label>
+                <label  for="time">é–‹é¤¨æ™‚é–“</label>
                 <input type="time" name="courtOpenTime" value="<%=court.getCourtOpenTime()%>"  min="09:00" max="18:00">
 
                 <img src="pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
-                <label style="position: relative; left: 15px;" for="time">³¬À]®É¶¡</label>
+                <label style="position: relative; left: 15px;" for="time">é–‰é¤¨æ™‚é–“</label>
                 <input type="time"name="courtCloseTime"  value="<%=court.getCourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
-                <label for="loc">°Ï°ì</label>
+                <label for="loc">å€åŸŸ</label>
                 <select name="loc" style="position: relative; left: 31px;">
-                    <option>½Ğ¿ï¾Ü³õÀ]°Ï°ì</option>
-                    <option>¤¤¥¿°Ï</option>
-                    <option>¤j¦P°Ï</option>
-                    <option>¤¤¤s°Ï</option>
-                    <option>ªQ¤s°Ï</option>
-                    <option>¤j¦w°Ï</option>
-                    <option>¸UµØ°Ï</option>
-                    <option>«H¸q°Ï</option>
-                    <option>¤hªL°Ï</option>
-                    <option>¥_§ë°Ï</option>
-                    <option>¤º´ò°Ï</option>
-                    <option>«n´ä°Ï</option>
-                    <option>¤å¤s°Ï</option>
+                    <option>è«‹é¸æ“‡å ´é¤¨å€åŸŸ</option>
+                    <option>ä¸­æ­£å€</option>
+                    <option>å¤§åŒå€</option>
+                    <option>ä¸­å±±å€</option>
+                    <option>æ¾å±±å€</option>
+                    <option>å¤§å®‰å€</option>
+                    <option>è¬è¯å€</option>
+                    <option>ä¿¡ç¾©å€</option>
+                    <option>å£«æ—å€</option>
+                    <option>åŒ—æŠ•å€</option>
+                    <option>å…§æ¹–å€</option>
+                    <option>å—æ¸¯å€</option>
+                    <option>æ–‡å±±å€</option>
                 </select>
                 <br>
                 <br>
                 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
-                <label for="tax_id">³õÀ]¦a§}</label>
+                <label for="tax_id">å ´é¤¨åœ°å€</label>
                 <input type="text"  id="tax_id" name="courtAddress" 
                 value="<%=court.getCourtAddress()%>" required>
-                <font color="#FF0000" size="-1"  style="position: relative;;left: 20px;">¥]§t¶mÂí°Ï¡B¸ôµó¹D¤ÎªùµP¸¹µ¥¡C</font><br><br>
+                <font color="#FF0000" size="-1"  style="position: relative;;left: 20px;">åŒ…å«é„‰é®å€ã€è·¯è¡—é“åŠé–€ç‰Œè™Ÿç­‰ã€‚</font><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
-                <label for="phone">³õÀ]¹q¸Ü</label>
+                <label for="phone">å ´é¤¨é›»è©±</label>
                 <input type="text" id="phone" name="courtTelephone" 
                 value="<%=court.getCourtTelephone()%>"  required>
-                <font color="#FF0000" size="-1" >¥]§t°Ï°ì½X ¦p:02-12345678¡C</font><br><br>
+                <font color="#FF0000" size="-1" >åŒ…å«å€åŸŸç¢¼ å¦‚:02-12345678ã€‚</font><br><br>
 
-                <label for="courtRule" style="position: relative; left: 23px;">³õÀ]¶·ª¾</label><br><br>
+                <label for="courtRule" style="position: relative; left: 23px;">å ´é¤¨é ˆçŸ¥</label><br><br>
                 <textarea id="subject" name="courtRule"   placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"><%=court.getCourtRule()%></textarea>
                 <br><br><br>
 
-                <label for="courtPic" style="position: relative;left: 23px;">³õÀ]·Ó¤ù</label><br><br>
+                <label for="courtPic" style="position: relative;left: 23px;">å ´é¤¨ç…§ç‰‡</label><br><br>
                 
                 <input type="file" name="courtPic" id="picture" onchange="preview()" accept="image/gif, image/jpeg, image/png" style="position: relative;left: 23px;" onclick="previewImage()" class="form-control-file" />
                 <br><br>
                 <img id="picture"  
                 src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${court.courtID}"
                 style="height: 300px;position:relative;left: 23px;"/>
+
             
 
 				<div>
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
-				<input type="submit" value="­×§ï" style="width: 150px; height: 44px;"> 
+				<input type="submit" value="ä¿®æ”¹" style="width: 150px; height: 44px;"> 
 				</div>
 				
             </form>
             <br>
 
-            <label  for="placeFee" style="position: relative;left: 23px;">³õ¦a¦Cªí</label><br><br>
+            <label  for="placeFee" style="position: relative;left: 23px;">å ´åœ°åˆ—è¡¨</label><br><br>
 
             <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
                 <table id="itemTable">
                     <thead>
                         <tr>
-                            <th>³õ¦aÃş«¬</th>
-                            <th>¦WºÙ</th>
-                            <th>»ù®æ</th>
+                            <th>å ´åœ°é¡å‹</th>
+                            <th>åç¨±</th>
+                            <th>åƒ¹æ ¼</th>
                             
                         </tr>
                     </thead>
@@ -234,48 +232,20 @@ pageContext.setAttribute("list",list);
                 </table>
             </div>
 
-            <script>
-                $(document).ready(function () {
-                    $("#addButton").click(function () {
-                        var courtType = $("#courtType").val();
-                        var itemName = $("#itemName").val();
-                        var price = $("#price").val();
 
-                        if (courtType && itemName && price) {
-                            var newRow = "<tr>" +
-                                "<td>" + courtType + "</td>" +
-                                "<td>" + itemName + "</td>" +
-                                "<td>" + price + "</td>" +
-                                "<td><button class='deleteButton'>§R°£</button></td>" +
-                                "</tr>";
-
-                            $("#itemTable tbody").append(newRow);
-
-                            // ²MªÅ¿é¤JÄæ¦ì
-                            $("#itemName, #price").val("");
-                        } else {
-                            alert("½Ğ¶ñ¼g§¹¾ã¸ê°T");
-                        }
-                    });
-                    // §R°£«ö¶sªºÂIÀ»¨Æ¥ó³B²z
-                    $(document).on("click", ".deleteButton", function () {
-                        $(this).closest("tr").remove();
-                    });
-                });
-            </script>
+         
 
 
 
             <br><br><br><br><br>
 
-            <!-------- °e¥X«ö¶s  ------->
             
-				
+
         </main>
     </div>
    
     <script>
-        //------------³õÀ]¹Ï¤ù -------------------
+        //------------å ´é¤¨åœ–ç‰‡ -------------------
         $("#progressbarTWInput").change(function () {
             readURL(this);
         });
@@ -298,7 +268,7 @@ pageContext.setAttribute("list",list);
 
 
 
-    <!----------------------------------------------- footer °Ï ------------------------------------------------------->
+    <!----------------------------------------------- footer å€ ------------------------------------------------------->
     <footer class="footer">
 
         <div class="container">
@@ -309,11 +279,11 @@ pageContext.setAttribute("list",list);
                 </a>
 
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">¨Ï¥ÎªÌ±ø´Ú</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">ä½¿ç”¨è€…æ¢æ¬¾</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Áô¨pÅv¬Fµ¦</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">éš±ç§æ¬Šæ”¿ç­–</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">§K³d±ø´Ú</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">å…è²¬æ¢æ¬¾</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
 
@@ -329,10 +299,10 @@ pageContext.setAttribute("list",list);
 
 		  if(file) { 
 		    $("#preview").attr('src', window.URL.createObjectURL(file));
-		    $("#blob_holder").hide(); // ÁôÂÃ­ì¹Ï
+		    $("#blob_holder").hide(); // éš±è—åŸåœ–
 		  } else {
 		    $("#preview").attr('src', "#");  
-		    $("#blob_holder").show(); // Åã¥Ü­ì¹Ï
+		    $("#blob_holder").show(); // é¡¯ç¤ºåŸåœ–
 		  }
 
 		}
