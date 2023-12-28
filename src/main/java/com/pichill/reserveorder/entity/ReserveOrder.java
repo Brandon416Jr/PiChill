@@ -2,7 +2,9 @@ package com.pichill.reserveorder.entity;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,15 +12,20 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.google.gson.annotations.Expose;
+import com.pichill.comment.entity.Comment;
 import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.place.Place;
+import com.pichill.post.entity.Post;
 import com.pichill.time.TimeRef;
 
 @Entity
@@ -70,6 +77,20 @@ public class ReserveOrder {
 	
 	@Column(name="totalCost", updatable = false)
 	private Integer totalCost;
+
+	  @OneToMany(mappedBy = "reserveOrder", cascade = CascadeType.ALL)
+	  @OrderBy("postID asc") 
+		private Set<Post> post;
+	  
+	
+
+	public Set<Post> getPost() {
+		return post;
+	}
+
+	public void setPost(Set<Post> post) {
+		this.post = post;
+	}
 
 	public ReserveOrder() {
 		super();

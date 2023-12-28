@@ -59,6 +59,7 @@ $(document).ready(function() {
 				$(".card-title.article0").text(postData.addedPost.postTitle);
 				$(".card-text.article1").text(formattedPostContent);
 				$(".posttime").text(postData.addedPost.postTime);
+				$(".dateRO").text(postData.)
 				$(".do").find(".likecol").replaceWith(likeCol);
 				$(".do").find(".commentcol").replaceWith(commentCol);
 				//				$(".commentcol").html(`<i class="fa-regular fa-comment commentcol" data-post-id="${postData.postID}"></i> `).append(commentCntSpan);
@@ -248,9 +249,9 @@ $(document).ready(function() {
     	                  <div class="col-md-8">
     	                      <div class="card-body">
     	                          <h1 class="modal-title fs-5" id="exampleModalLabel">
-    	                              <img src="../image/dog.jpg" alt="大頭貼">
+    	                              <img src="${url2}" alt="大頭貼">
     	                              <div>
-    	                                  <a class="post_user">小吉</a>
+    	                                  <a class=${nicknameID}"post_user">小吉</a>
     	                                  <div class="post_time">${posts[i].postTime}</div>
     	                              </div>
     	                          </h1>
