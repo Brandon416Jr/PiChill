@@ -2,30 +2,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.List"%>
 <%@ page import="com.pichill.court.Court"%>
-<%@ page import="com.pichill.court.CourtDAO"%>
-<%@ page import="com.pichill.court.CourtDAOImpl"%>
-<%@ page import="com.pichill.court.CourtService"%>
+<%@ page import="com.pichill.frontstage.court.model.*"%>
+<%@ page import="com.pichill.frontstage.court.service.CourtServiceFront"%>
 <%@ page import="com.pichill.place.Place"%>
-<%@ page import="com.pichill.owneruser.*"%>
+<%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page import="java.util.*" %>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 
- <%
-// OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
-// // 寫死
-// Integer oUserID = 12000001;
-// OwnerUserService ownerUserSvc = new OwnerUserService();
-// OwnerUser ownerUser = ownerUserSvc.getOneOwnerUser(oUserID);
-// pageContext.setAttribute("ownerUser",ownerUser);
-%>
-
-
 <%
-CourtService courtService = new CourtService();
-List<Map> list = courtService.getAll();
-pageContext.setAttribute("list", list);
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+System.out.println("ownerUser is " + ownerUser);
+Integer oUserID = ownerUser.getoUserID();
+System.out.println("oUser is " + oUserID);
+CourtServiceFront courtSvcF = new CourtServiceFront();
+List<Court> list = courtSvcF.getoUserID(oUserID);
+pageContext.setAttribute("list",list);
+pageContext.setAttribute("oUserID",oUserID);
 %>
+
+
+
 
 
 <!DOCTYPE html>
@@ -83,6 +80,8 @@ pageContext.setAttribute("list", list);
 		background-color: white;
 		margin-top: 5px;
 		margin-bottom: 5px;
+		overflow-x: auto;  
+		max-width: 100%;
 	  }
 	  table, th, td {
 	    border: 1px solid #207DCA;
@@ -112,7 +111,7 @@ pageContext.setAttribute("list", list);
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/contactUs.jsp" class="nav-link">聯絡我們</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"> 
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
             </header>
@@ -151,7 +150,7 @@ pageContext.setAttribute("list", list);
                                 href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
                                 >球館管理</button>
                         </li>
-                        <br>
+                        
 						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
 								<button class="btn btn-danger">登出</button>
@@ -180,21 +179,16 @@ pageContext.setAttribute("list", list);
 		<tr>
 			<th>球館編號</th>
 			<th>企業會員編號</th>
-<!-- 			<th>管理員編號</th> -->
 			<th>球館名稱</th>
 			<th>球館電話</th>
 			<th>地區</th>
 			<th>球館地址</th>
-<!-- 			<th>球館須知</th> -->
 			<th>球館圖片</th>
 			<th>開館時間</th>
 			<th>閉館時間</th>
 			<th>申請上架時間</th>
 			<th>上架時間</th>
 			<th>申請狀態</th>
-			<th>場地名稱</th>
-			<th>場地費用</th>
-			<th>球類</th>
 			<th>修改</th>
 		</tr>
 	
@@ -202,25 +196,22 @@ pageContext.setAttribute("list", list);
 		
 			<tr>
 				<td>${court.courtID}</td>
-				<td>${court.oUserID}</td>
-<%-- 			<td>${court.manageID}</td> --%>
+				<td>${court.ownerUser.oUserID}</td>
 				<td style="width:100px">${court.courtName}</td>
 				<td>${court.courtTelephone}</td>				
 				<td style="width:80px">${court.loc}</td>
 				<td style="width:180px">${court.courtAddress}</td>
-<%-- 				<td style="width:480px">${court.courtRule}</td> --%>
-				<td>${court.courtPic}</td>
+				<td><img
+									src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${court.courtID}"
+									width="200px"></td>
 				<td>${court.courtOpenTime}</td>
 				<td>${court.courtCloseTime}</td>
 				<td style="width:100px">${court.courtApplyTime}</td>				
 				<td style="width:100px">${court.courtOnTime}</td>
 				<td style="width:60px">${court.courtApplyStatus}</td>
-       			<td>${court.placeName}</td>
-       			<td>${court.placeFee}</td>
-       			<td>${court.ball}</td>
-			
+	
 				<td>
-				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/court/court.do" style="margin-bottom: 0px;">
+				  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/courtf.do" style="margin-bottom: 0px;">
 				     <input type="submit" value="修改">
 				     <input type="hidden" name="courtID"  value="${court.courtID}">
 				     <input type="hidden" name="action"	value="getOne_For_Update">
@@ -233,6 +224,8 @@ pageContext.setAttribute("list", list);
    </div>	 
     
  
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
 <%-- <%@ include file="page2.file" %> --%>
 	<script>
 		var script = document.createElement("script");
@@ -243,7 +236,43 @@ pageContext.setAttribute("list", list);
 
 // 		document.getElementsByTagName("head")[0].appendChild(script);
 	</script>
-        
+        <script>
+        $(document).ready(function () {
+            // 初始化 DataTables
+            $('#emailTable').DataTable({
+                "paging": true, // 顯示分頁
+                "pageLength": 10, // 每頁顯示10筆資料
+                "order": [], // 預設排序設定
+                "columnDefs": [{
+                    "targets": 'text-center',
+                    "className": 'text-center'
+                }] // 設定所有欄位文字置中
+            });
+
+            // 查看回覆按鈕事件
+            $('#emailTable tbody').on('click', 'i.fa-magnifying-glass', function () {
+                var emailId = $(this).data('email-id');
+                var lightboxName = 'email' + emailId;
+                $('#myModal').css('display', 'block');
+
+                // 顯示相對應的 Lightbox 內容
+                $('[data-lightbox="' + lightboxName + '"]').click();
+            });
+
+            // 關閉模態視窗
+            $('.close').click(function () {
+                $('#myModal').css('display', 'none');
+            });
+
+            // 點擊視窗外區域，關閉模態視窗
+            $(window).click(function (e) {
+                if (e.target.id === 'myModal') {
+                    $('#myModal').css('display', 'none');
+                }
+            });
+        });
+
+    </script>
         <!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
 

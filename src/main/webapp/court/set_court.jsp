@@ -1,11 +1,30 @@
+<%@page import="com.pichill.frontstage.place.service.PlaceServiceFront"%>
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.court.Court"%>    
-    
+<%@ page import="com.pichill.court.Court"%>   
+<%@ page import="java.util.List"%> 
+<%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
+<%@ page import="com.pichill.frontstage.court.service.CourtServiceFront"%>
+<%@ page import="com.pichill.place.Place"%>
+<%
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+System.out.println("ownerUser is " + ownerUser);
+Integer oUserID = ownerUser.getoUserID();
+System.out.println("oUser is " + oUserID);
+
+%>
 <%
 //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
 Court court = (Court) request.getAttribute("court");
+CourtServiceFront courtSvcF = new CourtServiceFront();
+Integer courtID = court.getCourtID();
+System.out.println("courtID = " + courtID);
+PlaceServiceFront placeSvcF = new PlaceServiceFront();
+Place place = placeSvcF.getOnePlace(courtID);
+List<Place> list = placeSvcF.getPlaceByCourt(courtID);
+pageContext.setAttribute("list",list);
 %>    
  
     
@@ -16,9 +35,9 @@ Court court = (Court) request.getAttribute("court");
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>場館管理</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/CSS1/bootstrap.min.css">
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/index3.css">
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/CSS/css.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS1/bootstrap.min.css">
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
+   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
 <!----------------匯入jquery ------------------------>
     <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -111,30 +130,30 @@ Court court = (Court) request.getAttribute("court");
 <!----------------------------------------------- main 區 ------------------------------------------------------->
         <main class="main">
             <!-- <div class="row g-3"> -->
-                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">申請上架球館</h2>
+                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">修改球館資訊</h2>
                 <!-- <form action="/action_page.php"> -->
         
                 <span style="color:#FF0000;  position: relative;left: 250px;">前有<img src="pic/stR01.png" width="20" height="20" alt="">為必填項目</span>
-            </p>
+<!--             </p> -->
 
-            <form action="/submit" method="post" enctype="multipart/form-data" style="width: 800px;">
+            <form action="<%=request.getContextPath()%>/courtf.do" method="post" enctype="multipart/form-data" style="width: 800px;">
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="courtName">場館名稱</label>
-                <input type="courtName" id="court" name="courtName" 
+                <input type="text" id="court" name="courtName" 
                 value="<%=court.getCourtName()%>" size="45" required>
                 <br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label  for="time">開館時間</label>
-                <input type="time" value=value="<%=court.getCourtOpenTime()%>"  min="09:00" max="18:00">
+                <input type="time" name="courtOpenTime" value="<%=court.getCourtOpenTime()%>"  min="09:00" max="18:00">
 
                 <img src="pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
                 <label style="position: relative; left: 15px;" for="time">閉館時間</label>
-                <input type="time" value="<%=court.getCourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
+                <input type="time"name="courtCloseTime"  value="<%=court.getCourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="loc">區域</label>
-                <select style="position: relative; left: 31px;">
+                <select name="loc" style="position: relative; left: 31px;">
                     <option>請選擇場館區域</option>
                     <option>中正區</option>
                     <option>大同區</option>
@@ -154,51 +173,35 @@ Court court = (Court) request.getAttribute("court");
                 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="tax_id">場館地址</label>
-                <input type="courtAddress" id="tax_id" name="tax_id" 
+                <input type="text"  id="tax_id" name="courtAddress" 
                 value="<%=court.getCourtAddress()%>" required>
-                <font color="#FF0000" size="-1" nowrap="" style="position: relative;;left: 20px;">包含鄉鎮區、路街道及門牌號等。</font><br><br>
+                <font color="#FF0000" size="-1"  style="position: relative;;left: 20px;">包含鄉鎮區、路街道及門牌號等。</font><br><br>
 
                 <img src="pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
-                <input type="tel" id="phone" name="phone" 
+                <input type="text" id="phone" name="courtTelephone" 
                 value="<%=court.getCourtTelephone()%>"  required>
-                <font color="#FF0000" size="-1" nowrap="">包含區域碼 如:02-12345678。</font><br><br>
+                <font color="#FF0000" size="-1" >包含區域碼 如:02-12345678。</font><br><br>
 
                 <label for="courtRule" style="position: relative; left: 23px;">場館須知</label><br><br>
-                <textarea id="subject" name="subject" value="<%=court.getCourtRule()%>"  placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"></textarea>
+                <textarea id="subject" name="courtRule"   placeholder="Write something.."style="height:300px;width:600px;position: relative;left:23px;"><%=court.getCourtRule()%></textarea>
                 <br><br><br>
 
                 <label for="courtPic" style="position: relative;left: 23px;">場館照片</label><br><br>
-                <form action="/somewhere/to/upload" enctype="multipart/form-data">
-                <input type="file" id="progressbarTWInput" accept="image/gif, image/jpeg, image/png" style="position: relative;left: 23px;"/>
+                
+                <input type="file" name="courtPic" id="picture" onchange="preview()" accept="image/gif, image/jpeg, image/png" style="position: relative;left: 23px;" onclick="previewImage()" class="form-control-file" />
                 <br><br>
-                <img id="preview_progressbarTW_img" src="#" 
-                value="<%=court.getCourtPic()%>"
+                <img id="picture"  
+                src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${court.courtID}"
                 style="height: 300px;position:relative;left: 23px;"/>
-                </form>
-            </form>
-            <br><br><br>
+            
 
-
-
-            <label for="placeFee" style="position: relative;left: 23px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
-            <form id="addItemForm" style="width: 850px;position: relative;left: 23px;">
-                <label for="courtType">場地類型：</label>
-                <select id="courtType" name="courtType">
-                    <option value="籃球場">籃球場</option>
-                    <option value="羽球場">羽球場</option>
-                    <option value="排球場">排球場</option>
-                </select>
-
-                <label for="itemName">名稱:</label>
-                <input type="text" id="itemName" name="itemName" style="width: 100px;" placeholder="如A、B、甲、乙" >
-                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
-
-                <label for="price" style="position: relative;left: 20px;">價格:</label>
-                <input type="text" id="price" name="price"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
-                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
-
-                <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button>
+				<div>
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
+				<input type="submit" value="修改" style="width: 150px; height: 44px;"> 
+				</div>
+				
             </form>
             <br>
 
@@ -211,10 +214,23 @@ Court court = (Court) request.getAttribute("court");
                             <th>場地類型</th>
                             <th>名稱</th>
                             <th>價格</th>
-                            <th>操作</th>
+                            
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody>
+                    <c:forEach var="place" items="${list}" >
+		
+			<tr>
+		
+				<td>${place.placeName}</td>
+				<td>${place.placeFee}</td>
+				<td>${place.ball}</td>
+	
+				
+			</tr>
+		</c:forEach>
+                    
+                    </tbody>
                 </table>
             </div>
 
@@ -254,12 +270,10 @@ Court court = (Court) request.getAttribute("court");
 
             <!-------- 送出按鈕  ------->
             
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="oUserID" value="<%=court.getCourtID()%>">
-				<input type="button" value="確認修改" name="按鈕名稱" style="width: 150px; height: 44px;"> 
+				
         </main>
     </div>
-    </div>
+   
     <script>
         //------------場館圖片 -------------------
         $("#progressbarTWInput").change(function () {
@@ -307,8 +321,23 @@ Court court = (Court) request.getAttribute("court");
             </header>
         </div>
     </footer>
+	<script>
+	function preview() {
 
-    <script src="<%=request.getContextPath()%>/JS/bootstrap.min.js"></script>
+		  var fileInput = $('#picture');
+		  var file = fileInput[0].files[0];
+
+		  if(file) { 
+		    $("#preview").attr('src', window.URL.createObjectURL(file));
+		    $("#blob_holder").hide(); // 隱藏原圖
+		  } else {
+		    $("#preview").attr('src', "#");  
+		    $("#blob_holder").show(); // 顯示原圖
+		  }
+
+		}
+	</script>
+    <script src="<%=request.getContextPath()%>/owneruser/JS/bootstrap.min.js"></script>
 </body>
 
 </html>

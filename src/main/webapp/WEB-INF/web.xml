@@ -13,7 +13,7 @@
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	<session-config>
-		<session-timeout>10</session-timeout>
+		<session-timeout>100</session-timeout>
 	</session-config>
 	<!-- <servlet> -->
 	<!-- <servlet-name>UploadServlet</servlet-name> -->
@@ -68,6 +68,7 @@
 		<url-pattern>/owneruser/owneruser.jsp</url-pattern>
 		<url-pattern>/owneruser/set_owneruser.jsp</url-pattern>
 		<url-pattern>/court/court.jsp</url-pattern>
+		<url-pattern>/court/all_court.jsp</url-pattern>
 		<url-pattern>/court/listOneCourt.jsp</url-pattern>
 		<url-pattern>/court/new_court.jsp</url-pattern>
 		<url-pattern>/court/set_court.jsp</url-pattern>
