@@ -60,9 +60,11 @@ public class PostServlet2 extends HttpServlet {
 			List<Post> posts = postSvc.getAll();
 			List<GeneralUser> gUsers = new ArrayList();
 			List<OwnerUser> oUsers = new ArrayList();
+			ReserveOrder ro = new ReserveOrder();
 			for (Post post : posts) {
 				gUsers.add(post.getGeneralUser());
 				oUsers.add(post.getOwnerUser());
+				ro.add(post.getReserveOrder())
 			}
 
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
