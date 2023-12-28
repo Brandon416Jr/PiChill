@@ -72,6 +72,7 @@
 		<url-pattern>/court/listOneCourt.jsp</url-pattern>
 		<url-pattern>/court/new_court.jsp</url-pattern>
 		<url-pattern>/court/set_court.jsp</url-pattern>
+		<url-pattern>/place/new_place.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 		<dispatcher>INCLUDE</dispatcher>

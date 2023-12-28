@@ -1,23 +1,25 @@
 package com.pichill.frontstage.reserveorder;
 
-import com.pichill.ecpay.payment.integration.AllInOne;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutALL;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutApplePay;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutATM;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutBARCODE;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutCVS;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutDevide;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutOneTime;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutPeriod;
-import com.pichill.ecpay.payment.integration.domain.AioCheckOutWebATM;
-import com.pichill.ecpay.payment.integration.domain.CreateServerOrderObj;
-import com.pichill.ecpay.payment.integration.domain.DoActionObj;
-import com.pichill.ecpay.payment.integration.domain.FundingReconDetailObj;
-import com.pichill.ecpay.payment.integration.domain.InvoiceObj;
-import com.pichill.ecpay.payment.integration.domain.QueryCreditCardPeriodInfoObj;
-import com.pichill.ecpay.payment.integration.domain.QueryTradeInfoObj;
-import com.pichill.ecpay.payment.integration.domain.QueryTradeObj;
-import com.pichill.ecpay.payment.integration.domain.TradeNoAioObj;
+import ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.domain.AioCheckOutALL;
+import ecpay.payment.integration.domain.AioCheckOutApplePay;
+import ecpay.payment.integration.domain.AioCheckOutATM;
+import ecpay.payment.integration.domain.AioCheckOutBARCODE;
+import ecpay.payment.integration.domain.AioCheckOutCVS;
+import ecpay.payment.integration.domain.AioCheckOutDevide;
+import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import ecpay.payment.integration.domain.AioCheckOutPeriod;
+import ecpay.payment.integration.domain.AioCheckOutWebATM;
+import ecpay.payment.integration.domain.CreateServerOrderObj;
+import ecpay.payment.integration.domain.DoActionObj;
+import ecpay.payment.integration.domain.FundingReconDetailObj;
+import ecpay.payment.integration.domain.InvoiceObj;
+import ecpay.payment.integration.domain.QueryCreditCardPeriodInfoObj;
+import ecpay.payment.integration.domain.QueryTradeInfoObj;
+import ecpay.payment.integration.domain.QueryTradeObj;
+import ecpay.payment.integration.domain.TradeNoAioObj;
+
+import java.io.File;
 import java.io.UnsupportedEncodingException;
 import java.util.Hashtable;
 import java.util.UUID;
@@ -26,6 +28,8 @@ public class ExampleAllInOne {
 	public static AllInOne all;
 	public static void main(String[] args) {
 		initial();
+		
+		
 //		System.out.println("compare CheckMacValue method testing result: " + cmprChkMacValue());
 //		System.out.println("apple pay create order: " + postCreateServerOrder());
 //		System.out.println("doAction: " + postDoAction());

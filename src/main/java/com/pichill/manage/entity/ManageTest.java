@@ -1,5 +1,6 @@
 package com.pichill.manage.entity;
 
+import java.io.File;
 import java.util.List;
 
 import com.pichill.manage.model.ManageDAO;
@@ -8,25 +9,25 @@ import com.pichill.manage.entity.Manage;
 
 public class ManageTest {
 	public static void main(String[] args) {
-		ManageDAO dao = new ManageDAOImpl();
-
-		// 新增
-		Manage manage1 = new Manage();
-		manage1.setmName("朝輝");
-		manage1.setmUserName("liugogo");
-		manage1.setmPassword("144kd4l4");
-		manage1.setmBirth(java.sql.Date.valueOf("1997-12-12"));
-		manage1.setmGender(1);
-		manage1.setmTelephone("0933773992");
-		manage1.setmEmgContact("劉致融");
-		manage1.setmEmgPhone("0933848504");
-		manage1.setmAddress("台北市中正區中正路一段117號之三19樓");
-		manage1.setmHiredate(java.sql.Date.valueOf("2016-11-30"));
-		manage1.setmID("A736125622");
-		manage1.setmEmail("fikoslfk444@gmail.com");
-		manage1.setmProfilePic(null);
-		manage1.setmStatus(null);
-		dao.insert(manage1);
+//		ManageDAO dao = new ManageDAOImpl();
+//
+//		// 新增
+//		Manage manage1 = new Manage();
+//		manage1.setmName("朝輝");
+//		manage1.setmUserName("liugogo");
+//		manage1.setmPassword("144kd4l4");
+//		manage1.setmBirth(java.sql.Date.valueOf("1997-12-12"));
+//		manage1.setmGender(1);
+//		manage1.setmTelephone("0933773992");
+//		manage1.setmEmgContact("劉致融");
+//		manage1.setmEmgPhone("0933848504");
+//		manage1.setmAddress("台北市中正區中正路一段117號之三19樓");
+//		manage1.setmHiredate(java.sql.Date.valueOf("2016-11-30"));
+//		manage1.setmID("A736125622");
+//		manage1.setmEmail("fikoslfk444@gmail.com");
+//		manage1.setmProfilePic(null);
+//		manage1.setmStatus(null);
+//		dao.insert(manage1);
 		
 		// 修改
 //		Manage manage2 = new Manage();
@@ -139,5 +140,8 @@ public class ManageTest {
 //			System.out.print(manage.getmStatus() + ",");
 //			System.out.println();
 //		}
+		File file = new File("payment_conf.xml");
+		String absolutePath = file.getAbsolutePath();
+		System.out.println(absolutePath);
 	}
 }
