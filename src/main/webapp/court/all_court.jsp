@@ -6,13 +6,13 @@
 <%@ page import="com.pichill.court.CourtDAOImpl"%>
 <%@ page import="com.pichill.court.CourtService"%>
 <%@ page import="com.pichill.place.Place"%>
-<%@ page import="com.pichill.owneruser.*"%>
+<%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
 <%@ page import="java.util.*" %>
 <%-- 此頁練習採用 EL 的寫法取值 --%>
 
 
  <%
-// OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 // // 寫死
 // Integer oUserID = 12000001;
 // OwnerUserService ownerUserSvc = new OwnerUserService();
@@ -111,8 +111,8 @@ pageContext.setAttribute("list", list);
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/contactUs.jsp" class="nav-link">聯絡我們</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"> 
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"> 
 					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
             </header>
@@ -126,30 +126,24 @@ pageContext.setAttribute("list", list);
                 <nav class="small" id="toc">
                     <ul class="list-unstyled">
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/owneruser/ouserListOne.jsp"
-                                >企業會員資料</button>
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/court/new_court.jsp"
-                                >申請上架球館</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse">申請上架場地</button>
-                        </li>   
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                            </form> 
+                        </li>                        
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse" 
-                                href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
-                                >球館管理</button>
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
                         </li>
                         <br>
 						<li class="my-2">
@@ -179,7 +173,7 @@ pageContext.setAttribute("list", list);
 	  <table>
 		<tr>
 			<th>球館編號</th>
-			<th>企業會員編號</th>
+<!-- 			<th>企業會員編號</th> -->
 <!-- 			<th>管理員編號</th> -->
 			<th>球館名稱</th>
 			<th>球館電話</th>
@@ -202,7 +196,7 @@ pageContext.setAttribute("list", list);
 		
 			<tr>
 				<td>${court.courtID}</td>
-				<td>${court.oUserID}</td>
+<%-- 				<td>${court.oUserID}</td> --%>
 <%-- 			<td>${court.manageID}</td> --%>
 				<td style="width:100px">${court.courtName}</td>
 				<td>${court.courtTelephone}</td>				

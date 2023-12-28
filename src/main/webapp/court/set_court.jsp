@@ -48,20 +48,20 @@ Court court = (Court) request.getAttribute("court");
     <header class="header">
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-1">
-                <a href="/"
-                    class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/headerlogo.svg" alt="SVG" />
-                </a>
+				<a href="/"
+					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG"/>
+				</a>
 
 
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/pic/face.svg" alt="SVG" />企業會員中心</a>
-                    </li>
-                </ul>
+            	<ul class="nav nav-pills">
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+										<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link">  
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
+				</ul>
 
             </header>
         </div>
@@ -72,37 +72,34 @@ Court court = (Court) request.getAttribute("court");
             <div class="parent_container">
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
                 <nav class="small" id="toc">
-                    <ul class="list-unstyled">
+                   <ul class="list-unstyled">
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/owneruser/set_owneruser.jsp"
-                                >企業會員資料</button>
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/court/new_court.jsp"
-                                >申請上架球館</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse" 
-                                href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
-                                >球館管理</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                            </form> 
+                        </li>                        
+                        <li class="my-2">
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
                         </li>
                         <br>
-							<li class="my-2">
+						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-							
 								<button class="btn btn-danger">登出</button>
 								<input type="hidden" name="action" value="logout">
 							</form>
-							</li>
-						
+						</li>
                     </ul>
                 </nav>
             </div>
@@ -176,87 +173,29 @@ Court court = (Court) request.getAttribute("court");
                 value="<%=court.getCourtPic()%>"
                 style="height: 300px;position:relative;left: 23px;"/>
                 </form>
+                
+                <!-------- 送出按鈕  ------->
+            
+				<input type="hidden" name="action" value="update">
+				<input type="hidden" name="oUserID" value="<%=court.getCourtID()%>">
+				<input type="button" value="確認修改" name="按鈕名稱" style="width: 150px; height: 44px;"> 
+                
+                
+                
             </form>
             <br><br><br>
 
 
 
-            <label for="placeFee" style="position: relative;left: 23px;" >請輸入各時段之費用( 每時段以一小時計)</label><br><br>
-            <form id="addItemForm" style="width: 850px;position: relative;left: 23px;">
-                <label for="courtType">場地類型：</label>
-                <select id="courtType" name="courtType">
-                    <option value="籃球場">籃球場</option>
-                    <option value="羽球場">羽球場</option>
-                    <option value="排球場">排球場</option>
-                </select>
 
-                <label for="itemName">名稱:</label>
-                <input type="text" id="itemName" name="itemName" style="width: 100px;" placeholder="如A、B、甲、乙" >
-                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
 
-                <label for="price" style="position: relative;left: 20px;">價格:</label>
-                <input type="text" id="price" name="price"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
-                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
-
-                <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button>
-            </form>
-            <br>
-
-            <label  for="placeFee" style="position: relative;left: 23px;">場地列表</label><br><br>
-
-            <div class="itemTable" style="width: 480px;position: relative;left: 24px; background-color: #DAE4F4;">
-                <table id="itemTable">
-                    <thead>
-                        <tr>
-                            <th>場地類型</th>
-                            <th>名稱</th>
-                            <th>價格</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-
-            <script>
-                $(document).ready(function () {
-                    $("#addButton").click(function () {
-                        var courtType = $("#courtType").val();
-                        var itemName = $("#itemName").val();
-                        var price = $("#price").val();
-
-                        if (courtType && itemName && price) {
-                            var newRow = "<tr>" +
-                                "<td>" + courtType + "</td>" +
-                                "<td>" + itemName + "</td>" +
-                                "<td>" + price + "</td>" +
-                                "<td><button class='deleteButton'>刪除</button></td>" +
-                                "</tr>";
-
-                            $("#itemTable tbody").append(newRow);
-
-                            // 清空輸入欄位
-                            $("#itemName, #price").val("");
-                        } else {
-                            alert("請填寫完整資訊");
-                        }
-                    });
-                    // 刪除按鈕的點擊事件處理
-                    $(document).on("click", ".deleteButton", function () {
-                        $(this).closest("tr").remove();
-                    });
-                });
-            </script>
+         
 
 
 
             <br><br><br><br><br>
 
-            <!-------- 送出按鈕  ------->
             
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="oUserID" value="<%=court.getCourtID()%>">
-				<input type="button" value="確認修改" name="按鈕名稱" style="width: 150px; height: 44px;"> 
         </main>
     </div>
     </div>

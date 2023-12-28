@@ -64,6 +64,9 @@ public class CourtServlet extends HttpServlet{
 			// 來自new_court.jsp的請求
 			forwardPath = insert(req, res);
 			break;
+		case "logout":
+			forwardPath = logout(req, res);
+			break;			
 		default:
 			forwardPath = "/court/select_page.jsp";
 		}
@@ -393,5 +396,22 @@ public class CourtServlet extends HttpServlet{
 		return "owneruser/court/all_court.jsp";
 
 	}
+	//========================================================//
+	//                          登出                           //
+	//========================================================//
+	
+	private String logout(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+        if (session != null) {
+            session.invalidate(); // 登出，终止session
+            System.out.println("成功登出");
+        }
+
+        res.setHeader("Cache-Control","no-cache"); 
+        res.setHeader("Pragma","no-cache");
+        res.setDateHeader ("Expires", 0);
+        
+        return "/login/oLogin/oUserLogin.jsp";
+	}	
 
 }
