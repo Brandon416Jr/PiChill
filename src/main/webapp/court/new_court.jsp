@@ -288,20 +288,18 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3">
-                <a href="/"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/footerlogo.svg" alt="SVG" />
-                </a>
+                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+              		<img src = "<%=request.getContextPath()%>/generaluser/pic/footerlogo.svg" alt="SVG"/>     
+            	</a>
 
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+               <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.html" class="nav-link">使用者條款</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.html" class="nav-link">隱私權政策</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.html" class="nav-link">免責條款</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-
                 </ul>
             </header>
         </div>
