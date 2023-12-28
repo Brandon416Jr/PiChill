@@ -34,7 +34,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
                 <li class="nav-item"><a href="#" class="nav-link">公告</a></li>
                 <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
+                <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forum.html"  class="nav-link">論壇</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
 

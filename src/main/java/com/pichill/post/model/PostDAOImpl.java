@@ -163,7 +163,7 @@ public class PostDAOImpl implements PostDAO {
 
 	    public List<Post> getByCommentCnt() {
 	        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-	            String hql = "FROM Post ORDER BY commentCnt DESC";
+	            String hql = "FROM Post WHERE postType != 2 ORDER BY commentCnt DESC";
 	            return session.createQuery(hql, Post.class).list();
 	        } catch (Exception e) {
 	            e.printStackTrace(); // 日誌記錄異常或使用日誌庫

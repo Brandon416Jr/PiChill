@@ -67,7 +67,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
+<FORM METHOD="post" ACTION="{getContextPath}/contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
 <table>
 	<tr>
 		<td>主旨:</td>
@@ -80,8 +80,8 @@
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="formType">
-<%--          <c:forEach var="post" items="${postSvc.getall}" >  --%>
-<%--           <option value="${post.postType}">${post.postType} --%>
+          <c:forEach var="contactUs" items="${postSvc.getall}" >  
+           <option value="${post.postType}">${post.postType}
                     <option value = "0">一般</option>
                     <option value = "1">公告</option>
                     

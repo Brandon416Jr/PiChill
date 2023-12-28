@@ -140,7 +140,7 @@ $(document).ready(function() {
 	//======新增/取消按讚======
 	$("#exampleModal5").on("click", "#likecol", function() {
 		var postID = $(this).attr("data-post-id");
-		var userID = $("#userID").val();
+		var gUserID = $("#userID").val();
 		//		console.log(postID);
 		var $likeDiv = $(this);
 		//console.log($(this).html())
@@ -190,11 +190,7 @@ $(document).ready(function() {
 									},
 									dataType: "json",
 									success: function(response) {
-										if (response.success) {
-											console.log("点赞数量更新成功");
-										} else {
-											console.error("点赞数量更新失败: " + response.message);
-										}
+										console.log("點讚成功")
 									},
 									error: function(xhr, status, error) {
 										console.error("Error:", status, error);
@@ -214,7 +210,7 @@ $(document).ready(function() {
 	$("#exampleModal6").on("click", "#likecol", function() {
 		var postID = $(this).attr("data-post-id");
 		//		console.log(postID);
-		var userID = $("#userID").val();
+		var gUserID = $("#userID").val();
 		var $likeDiv = $(this);
 		//console.log($(this).html())
 		//console.log($likeDiv)
@@ -302,7 +298,7 @@ $(document).ready(function() {
 			success: function(data) {
 				data.forEach(function(comment) {
 					//					console.log(postType);
-					publishcomment(comment.commentID, comment.commentContent, comment.commentTime);
+					publishcomment(comment.comment.commentID, comment.comment.commentContent, comment.comment.commentTime, comment.generalUser.gUserID, comment.generalUser.nicknameID, comment.generalUser.gProfilePic);
 				});
 			},
 			error: function(xhr, status, error) {
@@ -311,14 +307,23 @@ $(document).ready(function() {
 		});
 	});
 
-	function publishcomment(commentID, commentContent, commentTime) {
+	function publishcomment(commentID, commentContent, commentTime, gUserID, nicknameID, gProfilePic) {
 		// 初始化 HTML 字串
+		var currentUserId = $('#userID').val();
+		if (gProfilePic) {
+			var imageDataArray2 = new Uint8Array(gProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
 		var list_html = '<li>';
 		list_html += '<div class="item_flex">';
 		list_html += '<div class="left_block">';
-		list_html += '<div class="comment_img"> <img src="../image/cat.jpg" alt="大頭貼"></div>';
+		list_html += '<input type="hidden" id="gUserID" value="' + gUserID + '">';
+		list_html += '<div class="comment_img"> <img src=" ' + url2 + '" alt="大頭貼"></div>';
 		list_html += '<div>';
-		list_html += '<a class="comment_user">貓貓</a>';
+		list_html += '<a class="comment_user">' + nicknameID + '</a>';
 		list_html += '<div class="comment_time">' + commentTime + '</div>'
 		list_html += '</div>';
 		list_html += '</div>';
@@ -329,14 +334,14 @@ $(document).ready(function() {
 		list_html += '</div>';
 		list_html += '<div class="right_block">';
 		list_html += '<div class="btn_flex">';
-		//		list_html += '<button type="button" class="btn_update" data-comment-id=' + commentID + '>';
-		//		list_html += '<i class="fa-regular fa-pen-to-square"></i>';
-		//		list_html += '<span class="tooltip-text3">編輯</span>';
-		//		list_html += '</button>'
-		//		list_html += '<button type="button" class="btn_delete" data-comment-id=' + commentID + '>';
-		//		list_html += '<i class="fa-regular fa-trash-can"></i>'
-		//		list_html += '<span class="tooltip-text3">刪除</span>'
-		//		list_html += '</button>'
+		list_html += '<button type="button" class="btn_update" data-comment-id=' + commentID + '>';
+		list_html += '<i class="fa-regular fa-pen-to-square"></i>';
+		list_html += '<span class="tooltip-text">編輯</span>';
+		list_html += '</button>'
+		list_html += '<button type="button" class="btn_delete" data-comment-id=' + commentID + '>';
+		list_html += '<i class="fa-regular fa-trash-can"></i>'
+		list_html += '<span class="tooltip-text">刪除</span>'
+		list_html += '</button>'
 		var postType = $("input.postType").val(); // 取得 postType 的值
 
 		if (postType === "0") { // 如果 postType 為 "1"，顯示檢舉按鈕
@@ -359,6 +364,13 @@ $(document).ready(function() {
 		$('.task_list').prepend(list_html);
 		$("#exampleModal5").modal("hide");
 		// 获取檢舉按钮元素
+		if (currentUserId == gUserID) {
+			$('.btn_report[data-comment-id="' + commentID + '"]').hide();
+		} else {
+			console.log("進來了")
+			$('.btn_update[data-comment-id="' + commentID + '"]').hide();
+			$('.btn_delete[data-comment-id="' + commentID + '"]').hide();
+		}
 	};
 	//=======編輯留言==========
 	$(".task_list_parent").on("click", "ul.task_list button.btn_update", function() {
@@ -388,7 +400,7 @@ $(document).ready(function() {
 	function addComment() {
 		let task_text = $("input.task_name").val().trim();
 		let likecolElements = $(".likecol");
-		var userID = $("#userID").val();
+		var gUserID = $("#userID").val();
 		// 取得第一個具有 "likecol" 類別的元素的 data-post-id 值
 		let postID = likecolElements.eq(0).data('post-id');
 		//        console.log(postID);
@@ -406,13 +418,22 @@ $(document).ready(function() {
 				success: function(response) {
 					let commentTime = response.addedComment.commentTime;
 					let commentID = response.addedComment.commentID;
+					let nicknameID = response.generalUser.nicknameID;
+					let gProfilePic = response.generalUser.gProfilePic;
+					if (gProfilePic) {
+						var imageDataArray2 = new Uint8Array(gProfilePic);
+						// 将二进制图像数据存储在Blob对象中
+						var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+						// 创建一个Blob URL并将其设置为<img>标签的src属性
+						var url2 = URL.createObjectURL(blob2);
+					}
 					let list_html = "";
 					list_html += '<li>';
 					list_html += '<div class="item_flex">';
 					list_html += '<div class="left_block">';
-					list_html += '<div class="comment_img"> <img src="../image/cat.jpg" alt="大頭貼"></div>';
+					list_html += '<div class="comment_img"> <img src=" ' + url2 + '" alt="大頭貼"></div>';
 					list_html += '<div>';
-					list_html += '<a class="comment_user">貓貓</a>';
+					list_html += '<a class="comment_user">' + nicknameID + '</a>';
 					list_html += '<div class="comment_time">' + commentTime + '</div>'
 					list_html += '</div>';
 					list_html += '</div>';
@@ -451,11 +472,7 @@ $(document).ready(function() {
 						},
 						dataType: "json",
 						success: function(response2) {
-							if (response2.success) {
-								console.log("留言數更新成功");
-							} else {
-								console.error("留言數更新失败: " + response2.message);
-							}
+							console.log("留言成功")
 						},
 						error: function(xhr, status, error) {
 							console.error("Error:", status, error);
@@ -485,7 +502,7 @@ $(document).ready(function() {
 	function addComment2() {
 		let task_text = $("input.task_name2").val().trim();
 		let likecolElements = $(".likecol");
-		var userID = $("#userID").val();
+		var gUserID = $("#userID").val();
 		// 取得第一個具有 "likecol" 類別的元素的 data-post-id 值
 		let postID = likecolElements.eq(0).data('post-id');
 		//		console.log(postID);
@@ -503,13 +520,22 @@ $(document).ready(function() {
 				success: function(response) {
 					let commentTime = response.addedComment.commentTime;
 					let commentID = response.addedComment.commentID;
+					let nicknameID = response.generalUser.nicknameID;
+					let gProfilePic = response.generalUser.gProfilePic;
+					if (gProfilePic) {
+						var imageDataArray2 = new Uint8Array(gProfilePic);
+						// 将二进制图像数据存储在Blob对象中
+						var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+						// 创建一个Blob URL并将其设置为<img>标签的src属性
+						var url2 = URL.createObjectURL(blob2);
+					}
 					let list_html = "";
 					list_html += '<li>';
 					list_html += '<div class="item_flex">';
 					list_html += '<div class="left_block">';
-					list_html += '<div class="comment_img"> <img src="../image/cat.jpg" alt="大頭貼"></div>';
+					list_html += '<div class="comment_img"> <img src=" ' + url2 + '" alt="大頭貼"></div>';
 					list_html += '<div>';
-					list_html += '<a class="comment_user">貓貓</a>';
+					list_html += '<a class="comment_user">' + nickname + '</a>';
 					list_html += '<div class="comment_time">' + commentTime + '</div>'
 					list_html += '</div>';
 					list_html += '</div>';
@@ -548,11 +574,7 @@ $(document).ready(function() {
 						},
 						dataType: "json",
 						success: function(response2) {
-							if (response2.success) {
-								console.log("留言數更新成功");
-							} else {
-								console.error("留言數更新失败: " + response2.message);
-							}
+							console.log("success")
 						},
 						error: function(xhr, status, error) {
 							console.error("Error:", status, error);

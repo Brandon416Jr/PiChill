@@ -35,9 +35,10 @@ pageContext.setAttribute("list",list);
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>場館管理</title>
 
-<link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS1/bootstrap.min.css">
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css">
-   <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/css1/bootstrap.min.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/css.css" media="all" />
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/owneruser/CSS/index3.css" media="all" />
+   
 <!----------------匯入jquery ------------------------>
     <script src="<%=request.getContextPath()%>https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -67,20 +68,20 @@ pageContext.setAttribute("list",list);
     <header class="header">
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-1">
-                <a href="/"
-                    class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/headerlogo.svg" alt="SVG" />
-                </a>
+				<a href="/"
+					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+					<img src="<%=request.getContextPath()%>/owneruser/pic/headerlogo.svg" alt="SVG"/>
+				</a>
 
 
-                <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">首頁</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link"><img src="<%=request.getContextPath()%>/pic/face.svg" alt="SVG" />企業會員中心</a>
-                    </li>
-                </ul>
+            	<ul class="nav nav-pills">
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+										<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link">  
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
+				</ul>
 
             </header>
         </div>
@@ -91,37 +92,34 @@ pageContext.setAttribute("list",list);
             <div class="parent_container">
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
                 <nav class="small" id="toc">
-                    <ul class="list-unstyled">
+                   <ul class="list-unstyled">
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#contents-collapse"
-                                aria-controls="contents-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/owneruser/set_owneruser.jsp"
-                                >企業會員資料</button>
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse"
-                                href="<%=request.getContextPath()%>/owneruser/court/new_court.jsp"
-                                >申請上架球館</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                            <button class="btn d-inline-flex align-items-center collapsed border-0"
-                                data-bs-toggle="collapse" aria-expanded="false" data-bs-target="#forms-collapse"
-                                aria-controls="forms-collapse" 
-                                href="<%=request.getContextPath()%>/owneruser/court/all_court.jsp"
-                                >球館管理</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                            </form> 
+                        </li>                        
+                        <li class="my-2">
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
                         </li>
                         <br>
-							<li class="my-2">
+						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-							
 								<button class="btn btn-danger">登出</button>
 								<input type="hidden" name="action" value="logout">
 							</form>
-							</li>
-						
+						</li>
                     </ul>
                 </nav>
             </div>
@@ -133,25 +131,26 @@ pageContext.setAttribute("list",list);
                 <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">修改球館資訊</h2>
                 <!-- <form action="/action_page.php"> -->
         
-                <span style="color:#FF0000;  position: relative;left: 250px;">前有<img src="pic/stR01.png" width="20" height="20" alt="">為必填項目</span>
-<!--             </p> -->
+                <span style="color:#FF0000;  position: relative;left: 250px;">前有
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">為必填項目</span>
+<!--             </p> --><br><br>
 
             <form action="<%=request.getContextPath()%>/courtf.do" method="post" enctype="multipart/form-data" style="width: 800px;">
-                <img src="pic/stR01.png" width="20" height="20" alt="">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="courtName">場館名稱</label>
                 <input type="text" id="court" name="courtName" 
                 value="<%=court.getCourtName()%>" size="45" required>
                 <br><br>
 
-                <img src="pic/stR01.png" width="20" height="20" alt="">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label  for="time">開館時間</label>
                 <input type="time" name="courtOpenTime" value="<%=court.getCourtOpenTime()%>"  min="09:00" max="18:00">
 
-                <img src="pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
                 <label style="position: relative; left: 15px;" for="time">閉館時間</label>
                 <input type="time"name="courtCloseTime"  value="<%=court.getCourtCloseTime()%>" min="09:00" max="18:00" style="position: relative; left: 15px;"><br><br>
 
-                <img src="pic/stR01.png" width="20" height="20" alt="">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="loc">區域</label>
                 <select name="loc" style="position: relative; left: 31px;">
                     <option>請選擇場館區域</option>
@@ -171,13 +170,13 @@ pageContext.setAttribute("list",list);
                 <br>
                 <br>
                 
-                <img src="pic/stR01.png" width="20" height="20" alt="">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="tax_id">場館地址</label>
                 <input type="text"  id="tax_id" name="courtAddress" 
                 value="<%=court.getCourtAddress()%>" required>
-                <font color="#FF0000" size="-1"  style="position: relative;;left: 20px;">包含鄉鎮區、路街道及門牌號等。</font><br><br>
+                <font color="#FF0000" size="-1" >包含鄉鎮區、路街道及門牌號等。</font><br><br>
 
-                <img src="pic/stR01.png" width="20" height="20" alt="">
+                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label for="phone">場館電話</label>
                 <input type="text" id="phone" name="courtTelephone" 
                 value="<%=court.getCourtTelephone()%>"  required>
@@ -194,6 +193,7 @@ pageContext.setAttribute("list",list);
                 <img id="picture"  
                 src="<%=request.getContextPath()%>/court/DBGifReader?courtID=${court.courtID}"
                 style="height: 300px;position:relative;left: 23px;"/>
+
             
 
 				<div>
@@ -234,43 +234,15 @@ pageContext.setAttribute("list",list);
                 </table>
             </div>
 
-            <script>
-                $(document).ready(function () {
-                    $("#addButton").click(function () {
-                        var courtType = $("#courtType").val();
-                        var itemName = $("#itemName").val();
-                        var price = $("#price").val();
 
-                        if (courtType && itemName && price) {
-                            var newRow = "<tr>" +
-                                "<td>" + courtType + "</td>" +
-                                "<td>" + itemName + "</td>" +
-                                "<td>" + price + "</td>" +
-                                "<td><button class='deleteButton'>刪除</button></td>" +
-                                "</tr>";
-
-                            $("#itemTable tbody").append(newRow);
-
-                            // 清空輸入欄位
-                            $("#itemName, #price").val("");
-                        } else {
-                            alert("請填寫完整資訊");
-                        }
-                    });
-                    // 刪除按鈕的點擊事件處理
-                    $(document).on("click", ".deleteButton", function () {
-                        $(this).closest("tr").remove();
-                    });
-                });
-            </script>
+         
 
 
 
             <br><br><br><br><br>
 
-            <!-------- 送出按鈕  ------->
             
-				
+
         </main>
     </div>
    
@@ -303,20 +275,17 @@ pageContext.setAttribute("list",list);
 
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-3">
-                <a href="/"
-                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-                    <img src="./pic/footerlogo.svg" alt="SVG" />
-                </a>
-
+                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+              		<img src ="<%=request.getContextPath()%>/generaluser/pic/footerlogo.svg" alt="SVG"/>     
+            	</a>
                 <ul class="nav nav-pills">
-                    <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.html" class="nav-link">使用者條款</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.html" class="nav-link">隱私權政策</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.html" class="nav-link">免責條款</a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
                     <li class="nav-item"><a href="#" class="nav-link"></a></li>
-
                 </ul>
             </header>
         </div>

@@ -1,13 +1,15 @@
 package com.pichill.contactus.model;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.contactus.entity.ContactUs;
+import com.pichill.generaluser.entity.GeneralUser;
+import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.post.entity.Post;
 import com.pichill.util.HibernateUtil;
 
@@ -27,19 +29,17 @@ public class ContactUsDAOImpl implements ContactUsDAO {
 	}
 
 	@Override
-	public int add(ContactUs entity) {
+	public int add(ContactUs contactUs) {
+		Transaction transaction = null;
 		try {
-			SessionFactory factory = HibernateUtil.getSessionFactory();
 			Session session = factory.openSession();
-			// //回傳給 service 剛新增成功的自增主鍵值
-			Transaction tx = session.beginTransaction();
-			entity.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
-			session.save(entity);
-			tx.commit();
-			// contactUs.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
-			// session.save(contactUs);
-			return (Integer) getSession().save(entity);
-			// return(Integer)getSession().save(contactUs);
+			contactUs.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
+//		contactUs.getOwnerUser().getoUserID();
+//		contactUs.getGeneralUser().getgUserID();
+			transaction = session.beginTransaction();
+			session.save(contactUs);
+			transaction.commit();
+			return (Integer) getSession().save(contactUs);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -122,13 +122,39 @@ public class ContactUsDAOImpl implements ContactUsDAO {
 		try {
 			System.out.println("Begin transaction");
 			session.beginTransaction();
-			List<ContactUs> list = session.createQuery("from ContactUs", ContactUs.class).list();//敘述的部份名稱大小寫要跟class的名稱一樣！重要！
+			List<ContactUs> list = session.createQuery("from ContactUs", ContactUs.class).list();// 敘述的部份名稱大小寫要跟class的名稱一樣！重要！
 			session.getTransaction().commit();
 			return list;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
+		}
+	}
+
+	@Override
+	public List<ContactUs> getAllByUID(Integer gUserID) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession();) {
+			try {
+				String hql = "FROM ContactUs WHERE gUserID = :gUserID";
+				List<ContactUs> resultList = session.createQuery(hql, ContactUs.class).setParameter("gUserID", gUserID)
+						.list();
+				return resultList;
+			} catch (Exception e) {
+				e.printStackTrace(); // 日誌記錄異常或使用日誌庫
+				return Collections.emptyList(); // 在出現異常時返回一個空列表
 			}
+		}
+	}
+
+	@Override
+	public List<ContactUs> getAllByOID(Integer oUserID) {
+		try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+			String hql = "FROM ContactUs WHERE oUserID = :oUserID";
+			return session.createQuery(hql, ContactUs.class).setParameter("oUserID", oUserID).list();
+		} catch (Exception e) {
+			e.printStackTrace(); // 日誌記錄異常或使用日誌庫
+			return Collections.emptyList(); // 在出現異常時返回一個空列表
+		}
 	}
 
 //	@Override

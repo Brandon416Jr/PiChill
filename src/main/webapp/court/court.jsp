@@ -63,13 +63,13 @@ Court court = (Court) request.getAttribute("court");
 				</a>
 
 
-				<ul class="nav nav-pills">
+            	<ul class="nav nav-pills">
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">通知</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">預約管理系統</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">聯絡我們</a></li>
-                    <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}" alt="SVG" class="rounded-circle"/>會員中心</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/ouserListOne.jsp" class="nav-link"> 
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 				</ul>
 			</header>
 		</div>
@@ -82,35 +82,34 @@ Court court = (Court) request.getAttribute("court");
 				<h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
 				<nav class="small" id="toc">
 					<ul class="list-unstyled">
+                        <li class="my-2">
+                         	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                        	</form>
+                        </li>
+                        <li class="my-2">
+                        	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
+                        </li>
+                        <li class="my-2">
+                        	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                            </form> 
+                        </li>                        
+                        <li class="my-2">
+                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
+                        </li>
+                        <br>
 						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#contents-collapse"
-								aria-controls="contents-collapse">企業會員資料</button>
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
 						</li>
-
-						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse"
-								href="<%=request.getContextPath()%>/court/new_court.jsp">申請上架球館</button>
-						</li>
-						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">球館管理</button>
-
-						</li>
-						<li class="my-2">
-							<button
-								class="btn d-inline-flex align-items-center collapsed border-0"
-								data-bs-toggle="collapse" aria-expanded="false"
-								data-bs-target="#forms-collapse" aria-controls="forms-collapse">登出</button>
-						</li>
-					</ul>
+                    </ul>
 				</nav>
 			</div>
 		</aside>
@@ -203,58 +202,8 @@ Court court = (Court) request.getAttribute("court");
                 <br>
                 <br>
                 
-                <label for="price" style="position: relative;left: 1px;" >請輸入各時段之費用(每時段以一小時計)</label><br><br>
-		            <form id="addItemForm"  style="width: 850px;position: relative;left: 23px;">
-		                <label for="ball">場地類型：</label>
-		                <select id="ball" name="ball">
-		                    <option value="0">籃球場</option>
-		                    <option value="1">排球場</option>
-		                    <option value="2">羽球場</option>
-		                    
-		                </select>
-		
-		                <label for="placeName">名稱:</label>
-		                
-		                <c:forEach var="place" items="${placeSvc.all}">
-		                <input type="text" id="placeName"  name="placeName" style="width: 100px;" 
-		                value="${place.placeName}"  placeholder="如A、B、甲、乙" >
-					  	
-				    	</c:forEach>
-		                <font color="#000000" size="-2" nowrap="">一次填寫一個名稱</font>
-		
-		                <label for="priceFee" style="position: relative;left: 20px;">價格:</label>
-		                <input type="text" id="placeFee" name="placeFee"  style="width: 120px; position: relative;left: 20px;" placeholder="請輸入價格">
-		                <font color="#FF0000" size="-1" nowrap=""  style="position: relative;left: 20px;">小時/元</font>
-		
-		                <button type="button" id="addButton"  style="position: relative;left: 30px;">新增</button>
-		            </form>
-            <br>
 
-            	<label  for="price" style="position: relative;left: 7px;">場地列表</label><br><br>
 
-            <div class="itemTable" style="width: 480px;position: relative;left: 7px; background-color: #DAE4F4;">
-                <table id="itemTable">
-                    <thead>
-                        <tr>
-                            <th>場地類型</th>
-                            <th>名稱</th>
-                            <th>價格</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-			<c:forEach var="court" items="${list}" >
-<thead>
-                        <tr>
-                            <th>場地類型</th>
-                            <th>名稱</th>
-                            <th>價格</th>
-                            <th>操作</th>
-                        </tr>
-                    </thead>
-            </c:forEach>   
                 <br><br><br>
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="courtID" value="<%=court.getCourtID()%>">
@@ -276,16 +225,15 @@ Court court = (Court) request.getAttribute("court");
               <img src = "<%=request.getContextPath()%>/generaluser/pic/footerlogo.svg" alt="SVG"/>     
             </a>
           
-            <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
-              <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
-              <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
-              <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link"></a></li>
-             
-            </ul>
+            <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.html" class="nav-link">使用者條款</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.html" class="nav-link">隱私權政策</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.html" class="nav-link">免責條款</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                </ul>
           </header>
         </div>
       </footer>

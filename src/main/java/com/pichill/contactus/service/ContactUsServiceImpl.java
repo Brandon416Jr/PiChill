@@ -11,29 +11,29 @@ public class ContactUsServiceImpl extends ContactUsService {
 	
 	private static final long PAGE_MAX_RESULT = 3;  
 	//“max-results”參數可讓您提前指定您希望接收的結果數量。最大值為10,000。若要取得超過10,000行的結果，必須使用分頁功能多次呼叫API。
-	private ContactUsDAO dao;
+	private final ContactUsDAO cDao;
 	
 	public ContactUsServiceImpl() {
-		dao = new ContactUsDAOImpl();
+		cDao = new ContactUsDAOImpl();
 		
 	}
-//		@Override
-//		public ContactUs addContactUs(ContactUs contactUs) {
-//			Integer id = dao.add(contactUs);
-//			contactUs = dao.getContactUsByFormID(id);
+		@Override
+		public int addContactUs(ContactUs contactUs) {
+			Integer id = cDao.add(contactUs);
+			contactUs = cDao.getContactUsByFormID(id);
 //			return contactUs;
-//			return dao.add(contactUs);//返回給controller
-//		}
+			return cDao.add(contactUs);//返回給controller
+		}
 
-//		public ContactUs addContactUs(String postTitle,String postContent,Integer postType) {
-//			ContactUs post = new Post();
-//			ContactUs.setPostTitle(formPurpose);
-//			ContactUs.setPostContent(postContent);
-//			ContactUs.setPostType(postType);
-//			dao.insert(contactUs);
-//		return post;
-////			return dao.insert(contactUs);//返回給controller
-//		}
+		public ContactUs addContactUs(String formPurpose,String formContent,Integer formtype) {
+			ContactUs form = new ContactUs();
+			form.setformPurpose(formPurpose);
+			form.setformContent(formContent);
+			form.setformType(formtype);
+			cDao.add(form);
+		return form;
+//			return dao.insert(contactUs);//返回給controller
+		}
 //		@Override
 //		public ContactUs updateContactUs(ContactUs contactUs) {
 //			if (dao.update(ContactUs) == 1) {
