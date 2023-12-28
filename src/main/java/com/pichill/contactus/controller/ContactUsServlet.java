@@ -200,7 +200,7 @@ public class ContactUsServlet extends HttpServlet {
 	ContactUs contactUs = new ContactUs();
 	contactUs.setformID(formID);
 //	contactUs.setOwnerUser(oUserID);
-//	contactUs.setGeneralUser(gUserID);
+//	contactUs.setGeneralUser();
 	contactUs.setformPurpose(formPurpose);
 	contactUs.setformContent(formContent);
 	contactUs.setformPic(formPic);

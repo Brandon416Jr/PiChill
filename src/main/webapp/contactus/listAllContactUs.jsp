@@ -63,7 +63,6 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 <table>
 	<tr>
 		<th>表單編號</th>
-		<th>一般會員編號</th>
 		<th>企業會員編號</th>
 		<th>主旨</th>
 		<th>內文</th>
@@ -79,7 +78,6 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 	<c:forEach var="contactUs" items="${list}"	>
 		<tr>
 			<td>${contactUs.formID}</td>
-			<td>${contactUs.gUserID}</td>
 			<td>${contactUs.oUserID}</td>
 			<td>${contactUs.formPurpose}</td>
 			<td>${contactUs.formContent}</td>
