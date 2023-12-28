@@ -112,7 +112,6 @@ public class ContactUs {
 		return generalUser;
 	}
 
-
 	public void setGeneralUser(GeneralUser generalUser) {
 		this.generalUser = generalUser;
 	}

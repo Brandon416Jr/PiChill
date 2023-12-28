@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+}
+h1.headline{
+    text-align: center;
+}
+
+div.privacyPolicy{
+    width: 80%;
+    vertical-align: top;
+    font-size: 1rem;
+    /* border: 1px solid blue; */
+    margin-top:60px;
+    text-align: center;
+    position:relative;
+    left: 10%;
+    div.introText{
+        width: 80%;
+        position: relative;
+        left: 10%;
+    }
+    p{
+        text-align: left;
+    }
+    li.termList{
+        text-align: left;
+        list-style: none;
+            ol li{
+                text-align: left;
+            }
+    }
+    ul.sub li {
+        text-align: left;
+        counter-increment: count;
+        list-style-type: none;
+    }
+    ul.sub li::before {
+        content: counter(count) '). ';
+    }
+}
