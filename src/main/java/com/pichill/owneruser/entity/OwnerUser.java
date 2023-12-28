@@ -34,6 +34,7 @@ public class OwnerUser implements Serializable{
 	private Integer oUserID;
 	
 	@Column(name = "oUserName")
+	@Expose
 	private String oUserName;
 	
 	@Column(name = "oPassword")
