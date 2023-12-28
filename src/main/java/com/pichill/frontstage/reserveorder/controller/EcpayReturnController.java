@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Hashtable;
 import com.pichill.court.Court;
 import com.pichill.court.CourtService;
-import com.pichill.ecpay.payment.integration.AllInOne;
+import ecpay.payment.integration.AllInOne;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.frontstage.owneruser.service.OwnerUserServiceFront;
 import com.pichill.frontstage.reserveorder.service.ReserveOrderServiceFront;
