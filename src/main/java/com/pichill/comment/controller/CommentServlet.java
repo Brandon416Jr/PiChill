@@ -2,7 +2,10 @@ package com.pichill.comment.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,8 +36,19 @@ public class CommentServlet extends HttpServlet {
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			CommentService commentSvc = new CommentServiceImpl();
 			List<Comment> comments = commentSvc.getAllComments(postID);
+			List<GeneralUser> gUsers = new ArrayList();
+			for (Comment comment : comments) {
+				gUsers.add(comment.getGeneralUser());
+			}
 			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-		        String json = gson.toJson(comments);
+				List<Object> combinedList = new ArrayList<>();
+				for (Comment comment : comments) {
+					Map<String, Object> postData = new HashMap<>();
+					postData.put("comment", comment);
+					postData.put("generalUser", comment.getGeneralUser());
+					combinedList.add(postData);
+				}  
+			  String json = gson.toJson( combinedList);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -56,9 +70,12 @@ public class CommentServlet extends HttpServlet {
 //		}
 		if ("insert".equals(action)) {
 			String commentContent = req.getParameter("commentContent");
+			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			Integer postID = Integer.valueOf(req.getParameter("postID"));
 			GeneralUserService generalUserService = new GeneralUserService();
-			GeneralUser generalUser = generalUserService.getOneGeneralUser(11000001);
+			GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String jsonGeneralUser = gson.toJson(generalUser);
 			PostService postSVC = new PostServiceImpl();
 			Post post = postSVC.getByPostID(postID);
 			Comment comment = new Comment();
@@ -68,9 +85,9 @@ public class CommentServlet extends HttpServlet {
 			CommentService commentSvc = new CommentServiceImpl();
 			Comment addedComment = commentSvc.addComment(comment);
 			long commentCnt = commentSvc.getCommentCnt(postID);
-			  Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			 String jsonResponse = "{\"addedComment\":" + gson.toJson(addedComment) + ",\"commentCnt\":" + commentCnt + "}";
+			String jsonResponse = "{\"generalUser\":" + jsonGeneralUser +",\"addedComment\":" + gson.toJson(addedComment) + ",\"commentCnt\":" + commentCnt + "}";
 			PrintWriter out = res.getWriter();
+			System.out.println("sss"+jsonGeneralUser);
 			out.print(jsonResponse);
 //			out.print(commentCntJson);
 			System.out.println(jsonResponse);

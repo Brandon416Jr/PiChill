@@ -24,6 +24,7 @@ import com.pichill.forumlike.entity.ForumLike;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 import com.pichill.report.entity.Report;
+import com.pichill.reserveorder.entity.ReserveOrder;
 
 @Entity
 @Table(name = "post")
@@ -35,25 +36,30 @@ public class Post {
 	private Integer postID;
 
 	@ManyToOne
-	@JoinColumn(name = "gUserID",referencedColumnName = "gUserID", updatable = false, insertable = false)
-    private GeneralUser generalUser;
+	@JoinColumn(name = "gUserID", referencedColumnName = "gUserID", updatable = false)
+	private GeneralUser generalUser;
 
 //	@Column(name = "gUserID", updatable = false, insertable = false)
 //	private Integer gUserID;
 
 	@ManyToOne
-	@JoinColumn(name = "oUserID",referencedColumnName = "oUserID", updatable = false, insertable = false)
-    private OwnerUser ownerUser;
+	@JoinColumn(name = "oUserID", referencedColumnName = "oUserID", updatable = false)
+	private OwnerUser ownerUser;
 
 //	@Column(name = "oUserID", updatable = false, insertable = false)
 //	private Integer oUserID;
 
-//@ManyToOne
-//@JoinColumn(name= "placeID",referencedColumnName = "placeID")
-//private Place place;
+	@OneToOne
+	@JoinColumn(name = "reserveOrderID", referencedColumnName = "reserveOrderID", updatable = false) 
+	private ReserveOrder reserveOrder;
 
-//	@Column(name = "placeID")
-//	private Integer placeID;
+	public ReserveOrder getReserveOrder() {
+		return reserveOrder;
+	}
+
+	public void setReserveOrder(ReserveOrder reserveOrder) {
+		this.reserveOrder = reserveOrder;
+	}
 
 	@Column(name = "postTitle")
 	@Expose
@@ -63,7 +69,7 @@ public class Post {
 	@Expose
 	private String postContent;
 
-	@Column(name = "postType",updatable = false)
+	@Column(name = "postType", updatable = false)
 	@Expose
 	private Integer postType;
 
@@ -71,7 +77,7 @@ public class Post {
 	@CreationTimestamp
 	@Expose
 	private Timestamp postTime;
-	
+
 	@Column(name = "postPic", columnDefinition = "longblob")
 	@Expose
 	private byte[] postPic;
@@ -79,7 +85,7 @@ public class Post {
 	@Column(name = "likeCnt", updatable = false)
 	@Expose
 	private Integer likeCnt;
-	
+
 	@Column(name = "commentCnt", updatable = false)
 	@Expose
 	private Integer commentCnt;
@@ -87,7 +93,7 @@ public class Post {
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	@OrderBy("commentID asc")
 	private Set<Comment> comment;
-	
+
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	@OrderBy("reportID asc")
 	private Set<Report> reports;
@@ -215,6 +221,7 @@ public class Post {
 	public void setReports(Set<Report> reports) {
 		this.reports = reports;
 	}
+
 //
 	public Set<ForumLike> getLike() {
 		return like;

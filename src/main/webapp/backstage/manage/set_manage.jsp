@@ -272,7 +272,7 @@ select:invalid+.custom-message {
 							</ul>
 						</c:if>
 
-						<FORM
+						<FORM 
 							ACTION="${pageContext.request.contextPath }/manage/manage.do"
 							METHOD="post" enctype="multipart/form-data">
 							<div class="card-body">

@@ -58,7 +58,7 @@ public class ReserveOrder {
 	@JoinColumn(name = "courtID", referencedColumnName = "courtID")
 	private Court court;
 	
-	@Column(name="orderTime", updatable = false)
+	@Column(name="orderTime", updatable = false, insertable = false)
 	@CreationTimestamp
 	private Timestamp orderTime;
 	

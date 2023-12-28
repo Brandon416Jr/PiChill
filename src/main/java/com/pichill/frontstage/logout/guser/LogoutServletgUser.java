@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.pichill.frontstage.generaluser.service.GeneralUserServiceFront;
 import com.pichill.manage.service.ManageService;
 
-@WebServlet(name = "LogoutServlet", value = "/logoutfg.do")
+@WebServlet(name = "LogoutServletgUser", value = "/logoutfg.do")
 public class LogoutServletgUser extends HttpServlet {
 	private GeneralUserServiceFront gUserSvcF;
 

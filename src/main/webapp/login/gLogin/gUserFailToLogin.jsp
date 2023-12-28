@@ -39,7 +39,7 @@ p {
 
 	<script>
 // 定期檢查是否可以解鎖
-var lockoutTime = <%=request.getAttribute("lockoutTime")%>;
+var lockoutTime = <%=request.getAttribute("lockoutTime") != null ? request.getAttribute("lockoutTime") : 0%>;
 setInterval(function() {
     if (new Date().getTime() >  lockoutTime) {
         // 鎖定時間已經結束，重新導向到登入頁面

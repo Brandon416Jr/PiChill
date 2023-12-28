@@ -28,51 +28,50 @@ html {
 }
 
 /*=====header=====*/
-header.header {
-	/* border: 1px solid black; */
-	background-color: #207DCA;
-	position: sticky;
-	margin: 0 auto 10px auto;
-	top: 0;
-	z-index: 5;
+header.header{
+    /* border: 1px solid black; */
+    background-color: #207DCA;
+    position: sticky;
+    margin: 0 auto 10px auto;
+    top: 0;
+    overflow: visible;
+    z-index: 3;
 }
 
-@media all and (min-width: 576px) and (max-width: 767.98px) {
-	header.header {
-		width: 540px;
-	}
 
-	/* header.header ul.nav{
-      display: none;
-      }
-      label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+@media all and (min-width: 576px) and (max-width: 767.98px){
+    header.header{
+        width: 540px;
+    }
+}
+@media (max-width: 575.98px){
+    header.header{
+        width: 100%;
+    }
+}
+.nav-link{
+  color: white !important;
+  margin: 15px;
+  font-weight: bold !important;
 }
 
-@media ( max-width : 575.98px) {
-	header.header {
-		width: 100%;
-	}
-
-	/* header.header ul.nav{
-      display: none;
-      }
-    label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+ul.nav.nav-pills{
+  position: relative;
+  right: 30px;
 }
-
-/*=== header導覽列 ===*/
-.nav-link {
-	color: white;
-	margin: 15px;
+#head{
+  position: relative;
+  top:8px;
+}
+#heads{
+  position: relative;
+  top:5px;
+}
+/* header大頭貼剪裁成圓形 */
+img.rounded-circle{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 /*=====aside=====*/
@@ -115,17 +114,6 @@ main.main {
 
 /*建立貼文*/
 #create-post-button {
-	background-color: #F7F7F7;
-	color: #333;
-	border: 1px solid #ccc;
-	margin-top: 10px;
-	margin-left: 100px;
-	text-align: center;
-	padding: 5px 10px 5px 5px;
-	width: 65%;
-}
-
-#create-post-button2 {
 	background-color: #F7F7F7;
 	color: #333;
 	border: 1px solid #ccc;
@@ -224,7 +212,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_group {
@@ -234,7 +222,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_promote {
@@ -254,9 +242,18 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
+#deleteButton_o {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 25px;
+}
 /* .edit, .delete {
       position: relative;
       cursor: pointer;
@@ -292,7 +289,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
 #piccontainer {
@@ -466,7 +463,7 @@ button.save-button_promote {
 	color: lightgray;
 }
 
-#preview_edit img.preview_img {
+ #preview_edit img.preview_img {
 	width: 100%;
 }
 
@@ -610,7 +607,12 @@ input.cost {
 .card-text.article1 {
 	white-space: pre-line;
 }
-
+a.post_user2 {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.3rem;
+	font-weight: bold;
+}
 .edit-m {
 	border: 0 white;
 	background-color: white;
@@ -1066,9 +1068,10 @@ div.star_block>span.star.-on {
 	</aside>
 
 	<main class=main>
+										<input type="hidden" id="userID"   >
 		<!--建立貼文-->
 				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-					data-bs-target="#exampleModal_o" id="create-post-button2">
+					data-bs-target="#exampleModal_o" id="create-post-button">
 					在想些什麼...</button>
 <!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
 <!-- 			data-bs-target="#exampleModal" id="create-post-button"> -->
@@ -1308,20 +1311,20 @@ div.star_block>span.star.-on {
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5">
-							<img src="../image/cat.jpg" alt="大頭貼">
+							<img id="profilePic" alt="大頭貼">
 							<div>
-								<a class="post_user">貓貓</a>
+								<a class="post_user2">貓貓</a>
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-						<button type="button" class="edit-m">
-							<i class="fa-regular fa-pen-to-square"></i> <span
-								class="tooltip-text2">編輯</span>
-						</button>
-						<button type="button" class="delete-m" id="deleteButton">
-							<i class="fa-regular fa-trash-can"></i> <span
-								class="tooltip-text2">刪除</span>
-						</button>
+<!-- 						<button type="button" class="edit-m"> -->
+<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+<!-- 								class="tooltip-text2">編輯</span> -->
+<!-- 						</button> -->
+<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+<!-- 								class="tooltip-text2">刪除</span> -->
+<!-- 						</button> -->
 <!-- 						<button type="button" class="report-m" data-bs-toggle="modal" -->
 <!-- 							data-bs-target="#exampleModal2"> -->
 <!-- 							<i class="fa-solid fa-triangle-exclamation"></i> <span -->
@@ -1371,20 +1374,20 @@ div.star_block>span.star.-on {
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5">
-							<img src="../image/cat.jpg" alt="大頭貼">
+							<img id="profilePic2" alt="大頭貼">
 							<div>
-								<a class="post_user">貓貓</a>
+								<a class="post_user2">貓貓</a>
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-						<button type="button" class="edit-m">
-							<i class="fa-regular fa-pen-to-square"></i> <span
-								class="tooltip-text2">編輯</span>
-						</button>
-						<button type="button" class="delete-m" id="deleteButton">
-							<i class="fa-regular fa-trash-can"></i> <span
-								class="tooltip-text2">刪除</span>
-						</button>
+<!-- 						<button type="button" class="edit-m"> -->
+<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+<!-- 								class="tooltip-text2">編輯</span> -->
+<!-- 						</button> -->
+<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+<!-- 								class="tooltip-text2">刪除</span> -->
+<!-- 						</button> -->
 						<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                             <span class="tooltip-text">檢舉</span>
@@ -1608,22 +1611,6 @@ div.star_block>span.star.-on {
 				</div>
 			</div>
 		</div>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination" id="page">
-				<!-- Previous Page Button -->
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="1"> <span aria-hidden="true">&laquo;</span></a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="1">1</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="2">2</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="3">3</a></li>
-				<!-- Next Page Button -->
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="4" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-			</ul>
-		</nav>
 	</main>
 
 	<footer class="footer">

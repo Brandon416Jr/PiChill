@@ -28,51 +28,50 @@ html {
 }
 
 /*=====header=====*/
-header.header {
-	/* border: 1px solid black; */
-	background-color: #207DCA;
-	position: sticky;
-	margin: 0 auto 10px auto;
-	top: 0;
-	z-index: 5;
+header.header{
+    /* border: 1px solid black; */
+    background-color: #207DCA;
+    position: sticky;
+    margin: 0 auto 10px auto;
+    top: 0;
+    overflow: visible;
+    z-index: 3;
 }
 
-@media all and (min-width: 576px) and (max-width: 767.98px) {
-	header.header {
-		width: 540px;
-	}
 
-	/* header.header ul.nav{
-      display: none;
-      }
-      label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+@media all and (min-width: 576px) and (max-width: 767.98px){
+    header.header{
+        width: 540px;
+    }
+}
+@media (max-width: 575.98px){
+    header.header{
+        width: 100%;
+    }
+}
+.nav-link{
+  color: white !important;
+  margin: 15px;
+  font-weight: bold !important;
 }
 
-@media ( max-width : 575.98px) {
-	header.header {
-		width: 100%;
-	}
-
-	/* header.header ul.nav{
-      display: none;
-      }
-    label{
-      display: block;
-      }
-    #burger:checked + ul{
-      display:block;
-      } */
+ul.nav.nav-pills{
+  position: relative;
+  right: 30px;
 }
-
-/*=== header導覽列 ===*/
-.nav-link {
-	color: white;
-	margin: 15px;
+#head{
+  position: relative;
+  top:8px;
+}
+#heads{
+  position: relative;
+  top:5px;
+}
+/* header大頭貼剪裁成圓形 */
+img.rounded-circle{
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 }
 
 /*=====aside=====*/
@@ -213,7 +212,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_group {
@@ -223,7 +222,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 50px;
+	right: 285px;
 }
 
 .edit_promote {
@@ -243,9 +242,18 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
+#deleteButton_o {
+	border: 0 white;
+	background-color: white;
+	padding: 0;
+	position: absolute;
+	cursor: pointer;
+	top: 10px;
+	right: 25px;
+}
 /* .edit, .delete {
       position: relative;
       cursor: pointer;
@@ -281,7 +289,7 @@ a.post_user {
 	position: absolute;
 	cursor: pointer;
 	top: 10px;
-	right: 10px;
+	right: 250px;
 }
 
 #piccontainer {
@@ -455,7 +463,7 @@ button.save-button_promote {
 	color: lightgray;
 }
 
-#preview_edit img.preview_img {
+ #preview_edit img.preview_img {
 	width: 100%;
 }
 
@@ -519,6 +527,10 @@ input.title {
 	margin-top: 20px;
 }
 
+#dateSelectOption{
+width:260px;
+}
+
 #peoplecol {
 	padding: 3px 0 0 0;
 }
@@ -544,6 +556,10 @@ input.title {
 	background-color: #f5f5f5;
 }
 
+#timeInput{
+width: 100px;
+}
+
 #locatecol {
 	padding: 3px 0 0 0;
 }
@@ -555,6 +571,10 @@ input.title {
 	background-color: #f5f5f5;
 }
 
+#locationInput{
+width:100px;
+}
+
 #ballcol {
 	padding: 3px 0 0 0;
 }
@@ -562,11 +582,11 @@ input.title {
 #ballcol2 {
 	padding-left: 0;
 	min-height: 30px;
-	background-color: #f5f5f5;
+	background-color:white;
 }
 
 #ballInput {
-	width: 80px;
+	width: 60px;
 }
 
 #costcol {
@@ -577,11 +597,11 @@ input.title {
 #costcol2 {
 	padding-left: 0;
 	min-height: 30px;
-	background-color: #f5f5f5;
+	background-color:white;
 }
 
 #costInput {
-	width: 80px;
+	width: 60px;
 }
 
 input.cost {
@@ -599,7 +619,12 @@ input.cost {
 .card-text.article1 {
 	white-space: pre-line;
 }
-
+a.post_user2 {
+	text-decoration: none;
+	color: #333;
+	font-size: 1.3rem;
+	font-weight: bold;
+}
 .edit-m {
 	border: 0 white;
 	background-color: white;
@@ -1055,6 +1080,7 @@ div.star_block>span.star.-on {
 	</aside>
 
 	<main class=main>
+										<input type="hidden" id="userID"   >
 		<!--建立貼文-->
 		<!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
 		<!-- 			data-bs-target="#exampleModal_o" id="create-post-button"> -->
@@ -1177,14 +1203,18 @@ div.star_block>span.star.-on {
 				<div class="container text-center">
 					<div class="row align-items-start">
 						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
-						<div class="col-3" id="datecol2">
-							<button class="btn btn-secondary btn-sm dropdown-toggle"
-								type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>選擇預約訂單</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">11/20 09:00</a></li>
-								<li><a class="dropdown-item" href="#">12/20 20:00</a></li>
-								<li><a class="dropdown-item" href="#">01/20 15:00</a></li>
-							</ul>
+						<select id="dateSelectOption2"  enabled >
+        <option value="option1">預約日期</option>
+
+    </select>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="timecol">時段 :</div>
+						<div class="col-2" id="timecol2">
+							<input type="text" class="custom-input" readonly id="timeInput2">
 						</div>
 					</div>
 				</div>
@@ -1194,7 +1224,7 @@ div.star_block>span.star.-on {
 						<div class="col-2" id="locatecol">地點 :</div>
 						<div class="col-2" id="locatecol2">
 							<input type="text" class="custom-input" readonly
-								id="locationInput">
+								id="locationInput2">
 						</div>
 					</div>
 				</div>
@@ -1203,7 +1233,7 @@ div.star_block>span.star.-on {
 					<div class="row align-items-start">
 						<div class="col-2" id="ballcol">球類 :</div>
 						<div class="col-2" id="ballcol2">
-							<input type="text" class="custom-input" readonly id="ballInput">
+							<input type="text" class="custom-input" readonly id="ballInput2">
 						</div>
 					</div>
 				</div>
@@ -1212,7 +1242,7 @@ div.star_block>span.star.-on {
 					<div class="row align-items-start">
 						<div class="col-2" id="costcol">費用 :</div>
 						<div class="col-2" id="costcol2">
-							<input type="text" class="custom-input" readonly id="costInput">
+							<input type="text" class="custom-input" readonly id="costInput2">
 						</div>
 					</div>
 				</div>
@@ -1298,20 +1328,20 @@ div.star_block>span.star.-on {
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5">
-							<img src="../image/cat.jpg" alt="大頭貼">
+							<img id="profilePic" alt="大頭貼">
 							<div>
-								<a class="post_user">貓貓</a>
+								<a class="post_user2">貓貓</a>
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-						<button type="button" class="edit-m">
-							<i class="fa-regular fa-pen-to-square"></i> <span
-								class="tooltip-text2">編輯</span>
-						</button>
-						<button type="button" class="delete-m" id="deleteButton">
-							<i class="fa-regular fa-trash-can"></i> <span
-								class="tooltip-text2">刪除</span>
-						</button>
+<!-- 						<button type="button" class="edit-m"> -->
+<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+<!-- 								class="tooltip-text2">編輯</span> -->
+<!-- 						</button> -->
+<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+<!-- 								class="tooltip-text2">刪除</span> -->
+<!-- 						</button> -->
 <!-- 						<button type="button" class="report-m" data-bs-toggle="modal" -->
 <!-- 							data-bs-target="#exampleModal2"> -->
 <!-- 							<i class="fa-solid fa-triangle-exclamation"></i> <span -->
@@ -1361,20 +1391,20 @@ div.star_block>span.star.-on {
 				<div class="modal-content">
 					<div class="modal-header">
 						<h1 class="modal-title fs-5">
-							<img src="../image/cat.jpg" alt="大頭貼">
+							<img id="profilePic2" alt="大頭貼">
 							<div>
-								<a class="post_user">貓貓</a>
+								<a class="post_user2">貓貓</a>
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-						<button type="button" class="edit-m">
-							<i class="fa-regular fa-pen-to-square"></i> <span
-								class="tooltip-text2">編輯</span>
-						</button>
-						<button type="button" class="delete-m" id="deleteButton">
-							<i class="fa-regular fa-trash-can"></i> <span
-								class="tooltip-text2">刪除</span>
-						</button>
+<!-- 						<button type="button" class="edit-m"> -->
+<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+<!-- 								class="tooltip-text2">編輯</span> -->
+<!-- 						</button> -->
+<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+<!-- 								class="tooltip-text2">刪除</span> -->
+<!-- 						</button> -->
 						<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                             <span class="tooltip-text">檢舉</span>
@@ -1598,22 +1628,6 @@ div.star_block>span.star.-on {
 				</div>
 			</div>
 		</div>
-		<nav aria-label="Page navigation example">
-			<ul class="pagination" id="page">
-				<!-- Previous Page Button -->
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="1"> <span aria-hidden="true">&laquo;</span></a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="1">1</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="2">2</a></li>
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="3">3</a></li>
-				<!-- Next Page Button -->
-				<li class="page-item"><a class="page-link" href="#"
-					data-page="4" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-			</ul>
-		</nav>
 	</main>
 
 	<footer class="footer">
@@ -1727,15 +1741,20 @@ div.star_block>span.star.-on {
 			<div class="content">
 				<div class="container text-center">
 					<div class="row align-items-start">
+					<input type = hidden  id=reserveOrder>
 						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
-						<div class="col-3" id="datecol2">
-							<button class="btn btn-secondary btn-sm dropdown-toggle"
-								type="button" data-bs-toggle="dropdown" aria-expanded="false">選擇預約訂單</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">11/20 09:00</a></li>
-								<li><a class="dropdown-item" href="#">12/20 20:00</a></li>
-								<li><a class="dropdown-item" href="#">01/20 15:00</a></li>
-							</ul>
+						<select id="dateSelectOption"  >
+        <option value="option1">預約日期</option>
+
+    </select>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="timecol">時段 :</div>
+						<div class="col-2" id="timecol2">
+							<input type="text" class="custom-input" readonly id="timeInput">
 						</div>
 					</div>
 				</div>

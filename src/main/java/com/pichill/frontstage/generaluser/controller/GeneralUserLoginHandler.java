@@ -91,12 +91,16 @@ public class GeneralUserLoginHandler extends HttpServlet {
 			        lockoutTime = System.currentTimeMillis() + LOCKOUT_DURATION;
 			    	req.setAttribute("lockoutTime", lockoutTime);
 					if (System.currentTimeMillis() < lockoutTime) {
+						 loginAttempts = 0;
 					    System.out.println("帳號已被鎖定，請稍候再試");
 					    res.sendRedirect(req.getContextPath() +"/login/gLogin/gUserFailToLogin.jsp");
 					    return;
-					} else {
+					} else if (System.currentTimeMillis() > lockoutTime) {
+						 loginAttempts = 0;
 						res.sendRedirect(req.getContextPath() +"/login/gLogin/gUserLogin.jsp");
 						return;
+					} else {
+						
 					}
 			    }
 			}

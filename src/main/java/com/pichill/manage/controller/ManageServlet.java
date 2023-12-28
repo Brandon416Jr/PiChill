@@ -278,9 +278,10 @@ public class ManageServlet extends HttpServlet {
 		}
 
 		Integer mStatus = Integer.valueOf(req.getParameter("mStatus"));
+//		int originStatus = mStatus;
 		if (mStatus == 3) {
 			errorMsgs.add("請選擇員工狀態");
-		}
+		} 
 
 //		Manage manage = new Manage();
 		updateManage.setManageID(manageID);

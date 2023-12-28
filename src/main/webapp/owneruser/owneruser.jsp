@@ -3,9 +3,10 @@
 <%@ page import="com.pichill.owneruser.entity.OwnerUser"%>
     
 <%
-//±q¸ê®Æ®w¨ú¥Xªºowneruser, ¤]¥i¥H¬O¿é¤J®æ¦¡¦³¿ù»~®Éªºowneruserª«¥ó
+//å¾è³‡æ–™åº«å–å‡ºçš„owneruser, ä¹Ÿå¯ä»¥æ˜¯è¼¸å…¥æ ¼å¼æœ‰éŒ¯èª¤æ™‚çš„owneruserç‰©ä»¶
 OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 %>  
+
     
     
 <!DOCTYPE html>
@@ -38,7 +39,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 </head>
 <body>
 
-<!----------------------------------------------- header °Ï ------------------------------------------------------->
+<!----------------------------------------------- header å€ ------------------------------------------------------->
 	<header class="header">
 		<div class="container">
 			<header class="d-flex flex-wrap justify-content-center py-1">
@@ -49,48 +50,50 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 
 
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">­º­¶</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">³qª¾</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">½×¾Â</a></li>
-					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">Ápµ¸§Ú­Ì</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/owneruserhome.jsp" class="nav-link">é¦–é </a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">é€šçŸ¥</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">è«–å£‡</a></li>
+					<li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">è¯çµ¡æˆ‘å€‘</a></li>
 					<li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"> 
-					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>¥ø·~·|­û¤¤¤ß</a></li>
+					<img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>ä¼æ¥­æœƒå“¡ä¸­å¿ƒ</a></li>
 				</ul>
 			</header>
 		</div>
 	</header>
 
-<!----------------------------------------------- aside °Ï ------------------------------------------------------->
+<!----------------------------------------------- aside å€ ------------------------------------------------------->
 	<div class="main_content">
 		<aside class="aside">
 			<div class="parent_container">
-				<h2 class="h6 pt-4 pb-3 mb-4 border-bottom">¥ø·~·|­û¤¤¤ß</h2>
+				<h2 class="h6 pt-4 pb-3 mb-4 border-bottom">ä¼æ¥­æœƒå“¡ä¸­å¿ƒ</h2>
 				<nav class="small" id="toc">
 					<ul class="list-unstyled">
+
                         <li class="my-2">
                          	<form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
-                            	<button class="btn d-inline-flex align-items-center collapsed border-0">¥ø·~·|­û¸ê®Æ</button>
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">ä¼æ¥­æœƒå“¡è³‡æ–™</button>
                         	</form>
                         </li>
                         <li class="my-2">
                         	<form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
-                            	<button class="btn d-inline-flex align-items-center collapsed border-0">¥Ó½Ğ¤W¬[²yÀ]</button>
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">ç”³è«‹ä¸Šæ¶çƒé¤¨</button>
                         	</form>
                         </li>
                         <li class="my-2">
                         	<form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
-                        		<button class="btn d-inline-flex align-items-center collapsed border-0">¥Ó½Ğ¤W¬[³õ¦a</button>
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">ç”³è«‹ä¸Šæ¶å ´åœ°</button>
                             </form> 
                         </li>                        
                         <li class="my-2">
                             <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
-                            	<button class="btn d-inline-flex align-items-center collapsed border-0">²yÀ]ºŞ²z</button>
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">çƒé¤¨ç®¡ç†</button>
                         	</form>
                         </li>
                         <br>
+
 						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-								<button class="btn btn-danger">µn¥X</button>
+								<button class="btn btn-danger">ç™»å‡º</button>
 								<input type="hidden" name="action" value="logout">
 							</form>
 						</li>
@@ -99,13 +102,13 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 			</div>
 		</aside>
 
-    <!----------------------------------------------- main °Ï ------------------------------------------------------->
+    <!----------------------------------------------- main å€ ------------------------------------------------------->
     <main class="main">
-            <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">¥ø·~·|­û¸ê®Æ</h2>
+            <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">ä¼æ¥­æœƒå“¡è³‡æ–™</h2>
             
-            <%-- ¿ù»~ªí¦C --%>
+            <%-- éŒ¯èª¤è¡¨åˆ— --%>
 			<c:if test="${not empty errorMsgs}">
-				<font style="color:red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+				<font style="color:red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 				<ul>
 					<c:forEach var="message" items="${errorMsgs}">
 						<li style="color:red">${message}</li>
@@ -115,96 +118,97 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 
 
 		<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/owneruser/owneruser.do" enctype="multipart/form-data" class="bararea">
-          		<span>¥ø·~·|­û½s¸¹:</span>
-                <input type="text" id="ouserID" name="ouserID" value="<%=ownerUser.getoUserID()%>" disabled/>
+          		<span>ä¼æ¥­æœƒå“¡ç·¨è™Ÿ:</span>
+                <input type="text" id="oUserID" name="oUserID" value="<%=ownerUser.getoUserID()%>" disabled/>
                 <br><br>                            
       
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>±b¸¹:</span>
+                <span>å¸³è™Ÿ:</span>
                 <input type="text" id="oUserName" name="oUserName" style = "width:250px;" value="<%= (ownerUser == null) ? "yehshaa0106" : ownerUser.getoUserName()%>" />
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>±K½X:</span>
+                <span>å¯†ç¢¼:</span>
                 <input type="text" id="oPassword" name="oPassword" value="<%= (ownerUser == null) ? "LtaS845r" : ownerUser.getoPassword()%>"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>²Î½s:</span>
+                <span>çµ±ç·¨:</span>
                 <input type="text" id="compiled" style="position: relative; left: 17px;" name="compiled" value="<%= (ownerUser == null) ? "09071688" : ownerUser.getcompiled()%> " required/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>³õÀ]­t³d¤H©m¦W:</span>
-                <input type="text" id="oName" name="oName" value="<%= (ownerUser==null)? "¸­¹ÚµØ" : ownerUser.getoName()%>"/>
+                <span>å ´é¤¨è² è²¬äººå§“å:</span>
+                <input type="text" id="oName" name="oName" value="<%= (ownerUser==null)? "è‘‰å¤¢è¯" : ownerUser.getoName()%>"/>
                 <br><br>
                 
     		    <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>©Ê§O:</span>
+                <span>æ€§åˆ¥:</span>
                 <input type="text" id="oGender" name="oGender" value="<%= (ownerUser==null)? 0 : ownerUser.getoGender()%>"/>
 
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20"> 
-                <span>³õÀ]­t³d¤H¨­¤ÀÃÒ¦r¸¹:</span>
-                <input type="text" id="oIDNum" name=oIDNum"  value="<%= (ownerUser==null)? "H212810987" : ownerUser.getoIDNum()%>"/>
+                <span>å ´é¤¨è² è²¬äººèº«åˆ†è­‰å­—è™Ÿ:</span>
+                <input type="text" id="oIDNum" name="oIDNum"  value="<%= (ownerUser==null)? "H212810987" : ownerUser.getoIDNum()%>"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">                  
-                <span>¥X¥Í¦~¤ë¤é:</span>
+                <span>å‡ºç”Ÿå¹´æœˆæ—¥:</span>
                 <input type="text" id="oBirth" name="oBirth" value="<%= (ownerUser==null)? "1990-01-06" : ownerUser.getoBirth()%>"/>
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20px" height="20">   
-                <span>³sµ¸¹q¸Ü:</span>
+                <span>é€£çµ¡é›»è©±:</span>
                 <input type="text" id="oTelephone" name="oTelephone" value="<%= (ownerUser == null) ? "0934862754" : ownerUser.getoTelephone()%>"/>
-                <font color="#FF0000" size="-1" nowrap="">¦p:0912345678¡C</font> 
+                <font color="#FF0000" size="-1" >å¦‚:0912345678ã€‚</font> 
                 <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
-                <span>Ápµ¸¦a§}:</span>
-                 <input type="text" id="oAddress" style = "width:250px;" name="oAddress" placeholder="½Ğ¿é¤JÁpµ¸¦a§}" 
-                value="<%= (ownerUser == null) ? "·s¥_¥«·s©±°Ï¥ÁÅv¸ô98¸¹6¼Ó" : ownerUser.getoAddress()%>"/>
+                <span>è¯çµ¡åœ°å€:</span>
+                 <input type="text" id="oAddress" style = "width:250px;" name="oAddress" placeholder="è«‹è¼¸å…¥è¯çµ¡åœ°å€" 
+                value="<%= (ownerUser == null) ? "æ–°åŒ—å¸‚æ–°åº—å€æ°‘æ¬Šè·¯98è™Ÿ6æ¨“" : ownerUser.getoAddress()%>"/>
                <br><br>
                 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20">    
-                <span>»È¦æ¥N¸¹¡G</span> 
- 				<input type="text" id="oBankCode" name="oBankCode" value="<%=(ownerUser == null) ? "808" : ownerUser.getoBankCode()%>"  placeholder="¦p:012" required> 
+                <span>éŠ€è¡Œä»£è™Ÿï¼š</span> 
+ 				<input type="text" id="oBankCode" name="oBankCode" value="<%=(ownerUser == null) ? "808" : ownerUser.getoBankCode()%>"  placeholder="å¦‚:012" required> 
  				<br> 
  				<br>
  				
- 				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
-				<span>»È¦æ±b¸¹¡G</span> 
- 				<input type="text" id="bank_account" name="oBankAccount"  value="<%=(ownerUser == null) ? "95301246813579" : ownerUser.getoBankAccount()%>" required>
-				<br>  
-				<br>  
+<%--  				<img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">   --%>
+<!-- 				<span>éŠ€è¡Œå¸³è™Ÿï¼š</span>  -->
+<%--  				<input type="text" id="bank_account" name="oBankAccount"  value="${ownerUser.oBankAccount}" required> --%>
+<!-- 				<br>   -->
+<!-- 				<br>   -->
                 
                 
                <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">  
- 			   <span>¹q¤l«H½c¡G</span>  
+ 			   <span>é›»å­ä¿¡ç®±ï¼š</span>  
  			   <input type="text" id="oEmail" name="oEmail" style = "width:250px;"
  				value="<%=(ownerUser == null) ? "yehshaa0106@gmail.com" : ownerUser.getoEmail()%>" required>  
- 			   <font color="#FF0000" size="-1" nowrap="">¹q¤l«H½c®æ¦¡½d¨Ò:abc@yahoo.com.tw</font> 
+ 			   <font color="#FF0000" size="-1" nowrap="">é›»å­ä¿¡ç®±æ ¼å¼ç¯„ä¾‹:abc@yahoo.com.tw</font> 
                <br>  
 				<br> 
                 
-                <span>¤jÀY¶K:</span><br>
+                <span>å¤§é ­è²¼:</span><br>
                 <div id="blob_holder"><img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${param.oUserID}" width="300px"></div>
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
                 
                 <input type="hidden" name="action" value="update">
 				<input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">
-                <input type="submit" id="next" value="°e¥X­×§ï" style="width:150px; height:44px;">
+                <input type="submit" id="next" value="é€å‡ºä¿®æ”¹" style="width:150px; height:44px;">
                 <br><br><br>
                 <br><br>
          </FORM>      
-       </div>
+       
    </main>
+   </div>
 <!--     </div> -->
 
     
-    <!----------------------------------------------- footer °Ï ------------------------------------------------------->
+    <!----------------------------------------------- footer å€ ------------------------------------------------------->
     <footer class="footer">
       
         <div class="container">
@@ -214,11 +218,11 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
             </a>
           
             <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">¨Ï¥ÎªÌ±ø´Ú</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">ä½¿ç”¨è€…æ¢æ¬¾</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">Áô¨pÅv¬Fµ¦</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">éš±ç§æ¬Šæ”¿ç­–</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">§K³d±ø´Ú</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">å…è²¬æ¢æ¬¾</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
              
@@ -229,14 +233,14 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-<!--======================================= ·Ó¤ù¤W¶Ç / ¹wÄı =======================================-->
+<!--======================================= ç…§ç‰‡ä¸Šå‚³ / é è¦½ =======================================-->
     <script type="text/javascript">
-		//²M°£´£¥Ü«H®§
+		//æ¸…é™¤æç¤ºä¿¡æ¯
 		function hideContent(d) {
 		     document.getElementById(d).style.display = "none";
 		}
 		
-		//·Ó¤ù¤W¶Ç-¹wÄı¥Î
+		//ç…§ç‰‡ä¸Šå‚³-é è¦½ç”¨
 		var filereader_support = typeof FileReader != 'undefined';
 		if (!filereader_support) {
 			alert("No FileReader support");
@@ -272,44 +276,14 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 				reader.readAsDataURL(file);
 				document.getElementById('submit').disabled = false;
 			} else {
-				blob_holder.innerHTML = "<div  style='text-align: left;'>" + "¡´ filename: " + file.name
-						+ "<br>" + "¡´ ContentTyp: " + file.type
-						+ "<br>" + "¡´ size: " + file.size + "bytes"
-						+ "<br>" + "¡´ ¤W¶ÇContentType­­¨î: <b> <font color=red>image/png¡Bimage/jpeg¡Bimage/gif </font></b></div>";
+				blob_holder.innerHTML = "<div  style='text-align: left;'>" + "â— filename: " + file.name
+						+ "<br>" + "â— ContentTyp: " + file.type
+						+ "<br>" + "â— size: " + file.size + "bytes"
+						+ "<br>" + "â— ä¸Šå‚³ContentTypeé™åˆ¶: <b> <font color=red>image/pngã€image/jpegã€image/gif </font></b></div>";
 				document.getElementById('submit').disabled = true;
 			}
 		}
 	</script>
-	
-
-   
-    
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
