@@ -148,7 +148,7 @@ pageContext.setAttribute("oUserID",oUserID);
                             	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
                         	</form>
                         </li>
-                        
+                        <br>
 						<li class="my-2">
 							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
 								<button class="btn btn-danger">登出</button>

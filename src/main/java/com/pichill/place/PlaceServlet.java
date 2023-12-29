@@ -163,7 +163,7 @@ public class PlaceServlet extends HttpServlet{
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);
 			
-			place.toString();
+//			place.toString();
 
 			// ========================================================================改到這===============
 
@@ -208,7 +208,7 @@ public class PlaceServlet extends HttpServlet{
 			place.setPlaceFee(placeFee);
 			place.setBall(ball);
 			
-			place.toString();
+//			place.toString();
 
 		
 			place.toString();

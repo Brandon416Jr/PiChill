@@ -227,13 +227,13 @@ public class OwnerUserServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的銀行代碼格式");
 		}
 		
-//		String oBankAccount = req.getParameter("oBankAccount");
-//		String oBkARegex = "^[0-9]{9,13}$";
-//		if (oBankAccount == null || oBkARegex.trim().isEmpty()) {
-//			errorMsgs.add("銀行帳號: 請勿空白");
-//		} else if (!oBankAccount.trim().matches(oBkARegex)) {
-//			errorMsgs.add("請輸入正確的銀行帳號格式");
-//		}
+		String oBankAccount = req.getParameter("oBankAccount");
+		String oBkARegex = "^[0-9]{9,13}$";
+		if (oBankAccount == null || oBkARegex.trim().isEmpty()) {
+			errorMsgs.add("銀行帳號: 請勿空白");
+		} else if (!oBankAccount.trim().matches(oBkARegex)) {
+			errorMsgs.add("請輸入正確的銀行帳號格式");
+		}
 		
 
 		// 取得圖片
@@ -292,7 +292,7 @@ public class OwnerUserServlet extends HttpServlet {
 		ownerUser.setoTelephone(oTelephone);
 		ownerUser.setoAddress(oAddress);
 		ownerUser.setoBankCode(oBankCode);
-//		ownerUser.setoBankAccount(oBankAccount);
+		ownerUser.setoBankAccount(oBankAccount);
 		ownerUser.setoProfilePic(oProfilePic);
 //		ownerUser.setoRegisterDate(oRegisterDate);
 //		ownerUser.setoPostAmount(oPostAmount);
@@ -314,7 +314,7 @@ public class OwnerUserServlet extends HttpServlet {
 
 		ownerUserService.updateOwnerUser( oUserID, oUserName,  oPassword,  oIDNum, 
 				  compiled,  oName, oGender,  oBirth, oTelephone,
-				  oAddress, oBankCode, oProfilePic,
+				  oAddress, oBankCode, oBankAccount, oProfilePic,
 				   oEmail);
 		req.setAttribute("ownerUser", ownerUserService.getOneOwnerUser(oUserID));
 
