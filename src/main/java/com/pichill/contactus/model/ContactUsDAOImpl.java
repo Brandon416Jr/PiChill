@@ -47,32 +47,32 @@ public class ContactUsDAOImpl implements ContactUsDAO {
 		}
 	}
 
-	@Override
-	public int update(ContactUs entity) {
-		try {
-			SessionFactory factory2 = HibernateUtil.getSessionFactory();
-			Session session = factory2.openSession();
-			Transaction tx = session.beginTransaction();
-//			getSession().update(entity);
-			tx.commit();
-			return 1;
-		} catch (Exception e) {
-			return -1;
-		}
-	}
-
-	@Override
-	public int delete(Integer id) {
-		ContactUs contactUs = getSession().get(ContactUs.class, id);
-		if (contactUs != null) {
-			getSession().delete(contactUs);
-			// 回傳給 service，1代表刪除成功
-			return 1;
-		} else {
-			// 回傳給 service，-1代表刪除失敗
-			return -1;
-		}
-	}
+//	@Override
+//	public int update(ContactUs entity) {
+//		try {
+//			SessionFactory factory2 = HibernateUtil.getSessionFactory();
+//			Session session = factory2.openSession();
+//			Transaction tx = session.beginTransaction();
+////			getSession().update(entity);
+//			tx.commit();
+//			return 1;
+//		} catch (Exception e) {
+//			return -1;
+//		}
+//	}
+//
+//	@Override
+//	public int delete(Integer id) {
+//		ContactUs contactUs = getSession().get(ContactUs.class, id);
+//		if (contactUs != null) {
+//			getSession().delete(contactUs);
+//			// 回傳給 service，1代表刪除成功
+//			return 1;
+//		} else {
+//			// 回傳給 service，-1代表刪除失敗
+//			return -1;
+//		}
+//	}
 
 	@Override
 	public ContactUs getContactUsByFormID(Integer formID) {

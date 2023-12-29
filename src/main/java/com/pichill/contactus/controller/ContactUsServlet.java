@@ -2,9 +2,8 @@ package com.pichill.contactus.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,11 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.contactus.service.ContactUsService;
 import com.pichill.contactus.service.ContactUsServiceImpl;
-import com.pichill.generaluser.entity.GeneralUser;
-import com.pichill.owneruser.entity.OwnerUser;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
-@WebServlet(name = "ContactUsServlet", value = "/contactus/contactus.do")
+@WebServlet(name = "ContactUsServlet", value = "/contactUs.do")
 public class ContactUsServlet extends HttpServlet {
 	private ContactUsService contactUsService;
 	private static final long serialVersionUID = 1L;
@@ -42,189 +39,102 @@ public class ContactUsServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		String action = req.getParameter("action");
-		String forwardPath = "";
-		switch (action) {
-		case "getOne_For_Display":
-			// // 來自select_page.jsp的請求
-			forwardPath = getOneDisplay(req, res);
-			break;
-//		case "getOne_For_Update":
-//			// 來自listAllContactUs.jsp的請求
-//			forwardPath = getOneUpdate(req, res);
-//			break;
-//		case "update":
-//			// 來自setContactUs.jsp的請求
-//			forwardPath = update(req, res);
-//			break;
-		case "insert":
-			// 來自addContactUs.jsp的請求
-			forwardPath = insert(req, res);
-			break;
-		default:
-			forwardPath = "/contactusForGUser/listAllContactUsForGUser.jsp";
+		if ("getOne_For_Display".equals(action)) { // 來自select_page.jsp的請求
+
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
+			String fID = req.getParameter("formID");
+			if (fID == null || (fID.length() == 0)) {
+				errorMsgs.put("formID", "請輸入表單編號");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/addContactUs.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			Integer formID = null;
+			try {
+				formID = Integer.valueOf(fID);
+			} catch (Exception e) {
+				errorMsgs.put("formID", "表單編號格式不正確");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/addContactUs.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 2.開始查詢資料 *****************************************/
+			ContactUsService contactUsSvc = new ContactUsServiceImpl();
+			ContactUs contactUs = contactUsSvc.getOneContactUs(Integer.valueOf(formID));
+			if (contactUs == null) {
+				errorMsgs.put("formID", "查無資料");
+			}
+			// Send the use back to the form, if there were errors
+			if (!errorMsgs.isEmpty()) {
+				RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/addContactUs.jsp");
+				failureView.forward(req, res);
+				return;// 程式中斷
+			}
+
+			/*************************** 3.查詢完成,準備轉交(Send the Success view) *************/
+			req.setAttribute("ContactUs", contactUs); // 資料庫取出的empVO物件,存入req
+			req.setAttribute("getOne_For_Display", "true"); // 旗標getOne_For_Display見select_page.jsp的第155行 -->
+//				String url = "/back-end/emp/listOneEmp.jsp";    // 成功轉交 listOneEmp.jsp
+			String url = "<%=request.getContextPath()%>/addContactUs.jsp"; // 查詢完成後轉交select_page.jsp由其include
+														// file="listOneEmp-div.fragment"
+			RequestDispatcher successView = req.getRequestDispatcher(url);
+			successView.forward(req, res);
 		}
 
-		res.setContentType("text/html; charset=UTF-8");
-		RequestDispatcher dispatcher = req.getRequestDispatcher(forwardPath);
-		dispatcher.forward(req, res);
+		if ("insert".equals(action)) { // 來自addEmp.jsp的請求
+
+			Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+			req.setAttribute("errorMsgs", errorMsgs);
+
+			/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+			String formPurpose = req.getParameter("formPurpose");
+			String formContent = req.getParameter("formContent");
+
+			java.sql.Date hiredate = null;
+			try {
+				hiredate = java.sql.Date.valueOf(req.getParameter("hiredate"));
+			} catch (IllegalArgumentException e) {
+				errorMsgs.put("hiredate", "雇用日期: 請勿空白");
+			}
+
+			// 照片
+//			InputStream in = req.getPart("upFiles").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
+//			byte[] upFiles = null;
+//			if (in.available() != 0) {
+//				upFiles = new byte[in.available()];
+//				in.read(upFiles);
+//				in.close();
+//			} else
+//				errorMsgs.put("upFiles", "員工照片: 請上傳照片");
+//			}
+//			// Send the use back to the form, if there were errors
+//			if (!errorMsgs.isEmpty()) {
+//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/addEmp.jsp");
+//				failureView.forward(req, res);
+//				return;
+//			}
+
+			/*************************** 2.開始新增資料 ***************************************/
+			ContactUsServiceImpl contactUsSvc = new ContactUsServiceImpl();
+			contactUsSvc.addContactUs();
+
+			/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+			req.setAttribute("success", "- (新增成功)");
+			String url = "/contactus/successView.jsp";
+			RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+			successView.forward(req, res);
+		}
+
 	}
-
-	private String getOneDisplay(HttpServletRequest req, HttpServletResponse res) {
-		Integer formID = Integer.valueOf(req.getParameter("formID"));
-
-		ContactUs contactUs = contactUsService.getOneContactUs(formID);
-
-		req.setAttribute("contactUs", contactUs);
-		return "/contactUs/contactus.jsp";
-	}
-
-//	private String update(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-//		// 錯誤處理
-//		List<String> errorMsgs = new ArrayList<>();
-//		req.setAttribute("errorMsgs", errorMsgs);
-//
-//		/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
-//		Integer formID = Integer.valueOf(req.getParameter("formID"));
-//		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
-//		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-//
-//
-//		String formPurpose = req.getParameter("formPurpose");
-//		if (formPurpose == null || formPurpose.trim().isEmpty())
-//			errorMsgs.add("請輸入主旨");
-//		
-//		String formContent = req.getParameter("formContent");
-//		if (formContent == null || formContent.trim().isEmpty())
-//			errorMsgs.add("請輸入內容");
-//		
-//
-//		// 取得圖片
-//		byte[] formPic = null;
-//		InputStream in = req.getPart("formPic").getInputStream(); 
-//		// 從javax.servlet.http.Part物件取得上傳檔案的InputStream		
-//		if (in.available() != 0) {
-//			formPic = new byte[in.available()];
-//			in.read(formPic);
-//			in.close();
-//		} else {
-//			ContactUsService ContactUsService = new ContactUsService();
-//			formPic = contactUsService.getContactUsByFormID(formID).getformPic();
-//		}
-//
-//		// 取得當前系統時間
-//		java.sql.Timestamp formTime =new Timestamp(System.currentTimeMillis());
-//		//定義格式，不顯示毫秒
-//		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		//將當前系統時間轉換為不顯示毫秒情況，保存為String類型在dateNow中
-//		String dateNow= df.format(formTime);
-//		//控制台顯示dateNow的值
-//		System.out.print("系統時間" +dateNow);
-//				
-////		頁面不顯示，所以直接給0，之後用程式碼去計算
-//		Integer formStatus = 0;
-//
-//		Integer formType = Integer.valueOf(req.getParameter("formType"));
-//
-//
-//		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-//		ContactUs contactUs = new ContactUs();
-//		contactUs.setformID(formID);
-//		contactUs.setoUserID(oUserID);
-//		contactUs.setgUserID(gUserID);
-//		contactUs.setformPurpose(formPurpose);
-//		contactUs.setformContent(formContent);
-//		contactUs.setformPic(formPic);
-//		contactUs.setformTime(formTime);
-//		contactUs.setformStatus(formStatus);
-//		contactUs.setformType(formType);
-//
-//		contactUs.toString();
-//
-//		// ========================================================================改到這===============
-//
-//		if (!errorMsgs.isEmpty()) {
-//			req.setAttribute("contactUs", contactUs); // 含有輸入格式錯誤的ownerUser物件,也存入req
-//			return "/contactUs/set_contactus.jsp"; // 程式中斷
-//		}
-//		/*************************** 2.開始修改資料 *****************************************/
-//
-//		contactUsService.updateOwnerUser(contactUs);
-//		req.setAttribute("contactUs", contactUsService.getContactUsByFormID(formID));
-//
-//		/*************************** 3.修改完成,準備轉交(Send the Success view) *************/
-//		req.setAttribute("ownerUser", ownerUser); // 資料庫update成功後,正確的的empVO物件,存入req
-//		return "/contactUs/set_contactUs.jsp";
-//	}
-
-	// insert 資料
-	private String insert(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-	// 錯誤處理
-	List<String> errorMsgs = new ArrayList<>();
-	req.setAttribute("errorMsgs", errorMsgs);
-
-	/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
-	Integer formID = Integer.valueOf(req.getParameter("formID"));
-//	Integer oUserID = OwnerUser.valueOf(req.getParameter("oUserID"));
-//	Integer gUserID = GeneralUser.valueOf(req.getParameter("gUserID"));
-
-
-	String formPurpose = req.getParameter("formPurpose");
-	if (formPurpose == null || formPurpose.trim().isEmpty())
-		errorMsgs.add("請輸入主旨");
-	
-	String formContent = req.getParameter("formContent");
-	if (formContent == null || formContent.trim().isEmpty())
-		errorMsgs.add("請輸入內容");
-
-	// 取得圖片
-	byte[] formPic = null;
-	InputStream in = req.getPart("formPic").getInputStream(); 
-	// 從javax.servlet.http.Part物件取得上傳檔案的InputStream		
-	if (in.available() != 0) {
-		formPic = new byte[in.available()];
-		in.read(formPic);
-		in.close();
-	} else {
-		contactUsService = new ContactUsServiceImpl();
-		formPic = contactUsService.getOneContactUs(formID).getformPic();
-	}
-
-	// 取得當前系統時間
-	Timestamp formTime = Timestamp.valueOf(req.getParameter("formTime"));
-			
-//	頁面不顯示，所以直接給0，之後用程式碼去計算
-	Integer formStatus = 0;
-
-	Integer formType = Integer.valueOf(req.getParameter("formType"));
-
-
-	 //假如輸入格式錯誤的，備份選原使用者輸入過的資料
-	ContactUs contactUs = new ContactUs();
-	contactUs.setformID(formID);
-//	contactUs.setOwnerUser(oUserID);
-//	contactUs.setGeneralUser();
-	contactUs.setformPurpose(formPurpose);
-	contactUs.setformContent(formContent);
-	contactUs.setformPic(formPic);
-	contactUs.setformTime(formTime);
-	contactUs.setformStatus(formStatus);
-	contactUs.setformType(formType);
-
-	contactUs.toString();
-
-// Send the use back to the form, if there were errors
-	if (!errorMsgs.isEmpty()) {
-		req.setAttribute("contactUs", contactUs); // 含有輸入格式錯誤的empVO物件,也存入req
-		return "/contactUs/addContactUs.jsp";
-	}
-//========================================================================改到這===============
-
-	/*************************** 2.開始新增資料 ***************************************/
- 	contactUsService.addContactUs(contactUs);
-
-	/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
-	return "/contactUs/listAllContactUs.jsp";
-
-}
-
 }
