@@ -144,7 +144,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
          <!----------------------------------------------- main 區 ------------------------------------------------------->
         <main class="main">
             <!-- <div class="row g-3"> -->
-                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">申請上架球館</h2>
+                <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">申請上架場地</h2>
                 <!-- <form action="/action_page.php"> -->
            		<br>
         

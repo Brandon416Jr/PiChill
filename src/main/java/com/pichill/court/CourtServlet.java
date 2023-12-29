@@ -260,7 +260,6 @@ public class CourtServlet extends HttpServlet{
 		((Place) court.getPlace()).setPlaceName(placeName);
 		((Place) court.getPlace()).setPlaceFee(placeFee);
 		((Place) court.getPlace()).setBall(ball);
-		
 		court.toString();
 		
 

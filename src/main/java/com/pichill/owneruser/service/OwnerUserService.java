@@ -26,7 +26,7 @@ public class OwnerUserService {
 	
 	public OwnerUser updateOwnerUser(Integer oUserID, String oUserName, String oPassword, String oIDNum, 
 			 String compiled, String oName,Integer oGender, Date oBirth, String oTelephone,
-			 String oAddress, String oBankCode, byte[] oProfilePic,
+			 String oAddress, String oBankCode, String  oBankAccount,byte[] oProfilePic,
 			  String oEmail) {
 		OwnerUser ownerUser = dao.getOwnerUserByOUserID(oUserID);
 		if (ownerUser != null) {
@@ -41,7 +41,7 @@ public class OwnerUserService {
 		ownerUser.setoTelephone(oTelephone);
 		ownerUser.setoAddress(oAddress);
 		ownerUser.setoBankCode(oBankCode);
-//		ownerUser.setoBankAccount(oBankAccount);
+		ownerUser.setoBankAccount(oBankAccount);
 		ownerUser.setoProfilePic(oProfilePic);
 //		ownerUser.setoRegisterDate(oRegisterDate);
 //		ownerUser.setoPostAmount(oPostAmount);
