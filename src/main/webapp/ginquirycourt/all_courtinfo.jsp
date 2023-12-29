@@ -196,10 +196,11 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 			        	<img src="<%=request.getContextPath()%>/ginquirycourt/img/8.jpg" alt="TFK羽球館" style="width:100%;height:140px;position: relative;top: 20px;">
 			        </div>
 			        <div class="card-details">
-			        <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">TFK羽球館</font></font></h6>
-			        <a href="<%=request.getContextPath()%>/ginquirycourt/listOneCourt=61000008.jsp" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GO!</font></font></a>
-			     </div>
-			     
+				        <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">TFK羽球館</font></font></h6>
+				        <a href="<%=request.getContextPath()%>/ginquirycourt/listOneCourt=61000008.jsp" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GO!</font></font></a>
+			     	</div>
+			      </div>
+			      
 			     <br>
 	             <div class="card">
 			        <div class="card-image" id="venue1">
@@ -208,7 +209,9 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 			        <div class="card-details">
 			        <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">BOS運動館</font></font></h6>
 			        <a href="<%=request.getContextPath()%>/ginquirycourt/listOneCourt=61000009.jsp" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GO!</font></font></a>
-			     </div>            
+			     </div> 
+			     </div>  
+			              
 	             <div class="card">
 			        <div class="card-image" id="venue1">
 			        	<img src="<%=request.getContextPath()%>/ginquirycourt/img/10.jpg" alt="艾特極運動生活館" style="width:100%;height:140px;position: relative;top: 20px;">
@@ -217,11 +220,13 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 			        <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">艾特極運動生活館</font></font></h6>
 			        <a href="<%=request.getContextPath()%>/ginquirycourt/listOneCourt=61000010.jsp" class="btn btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">GO!</font></font></a>
 			     </div>            
-	            
+	            </div>
       
            </div>
 
-            <div>
+            
+        </div> 
+		<div>
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="以前的">
@@ -237,9 +242,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </a>
                     </li>
                 </ul>
-            </div>
-        </div> 
-
+          </div>
        
     </main>  
 
