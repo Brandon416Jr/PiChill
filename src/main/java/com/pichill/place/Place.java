@@ -34,6 +34,7 @@ public class Place {
 // private Integer courtID;
  
  @Column(name = "placeName", columnDefinition = "varchar")
+ @Expose
  public String placeName;
  
  @Column(name = "placeFee")

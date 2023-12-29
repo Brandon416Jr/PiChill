@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.pichill.comment.entity.Comment;
 import com.pichill.comment.service.CommentService;
 import com.pichill.comment.service.CommentServiceImpl;
@@ -42,7 +43,8 @@ public class ReportServlet extends HttpServlet {
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();
 			Report addedReport = reportSvc.add(report);
-			String json = new Gson().toJson(addedReport);
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String json = gson.toJson(addedReport);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -59,7 +61,8 @@ public class ReportServlet extends HttpServlet {
 			report.setReportStatus(0);
 			ReportService reportSvc = new ReportServiceImpl();
 			Report addedReport = reportSvc.add(report);
-			String json = new Gson().toJson(addedReport);
+			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			String json = gson.toJson(addedReport);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();

@@ -10,8 +10,8 @@
 //    $("#exampleModal6").on("click", "#likecol", Userlogin);
 //});
 //	function Userlogin() {
-//		 if ($('#userID').val("null")){
-//			var confirmation = window.confirm("您尚未登入，是否跳轉到登入頁面？");
+//		 if ($('#userID').val("null")&&$('#userStatus').val(2)){
+//			var confirmation = window.confirm("您尚未登入或帳號遭停權，是否跳轉到登入頁面？");
 //			if (confirmation) {
 //				window.location.href = "http://pichill.ddns.net/PiChill/login/beforeLogin.jsp";
 //			} else {
@@ -20,7 +20,4 @@
 //			}
 //		}
 //	}
-////		function isUserLoggedIn() {
-////		var user = sessionStorage.getItem("generalUser"); // 假設你在 session 或 localStorage 中存儲了用戶信息
-////		return user !== null;
-////	}
+
