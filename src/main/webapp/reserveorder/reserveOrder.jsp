@@ -335,71 +335,71 @@ function updateCourts() {
   }
   
 
-  // 啟用球館選擇框
-  courtSelect.disabled = false;
+   // 啟用球館選擇框
+   courtSelect.disabled = false;
 }
 
 function addOption1(select, value , text) {
-  var option = document.createElement("option");
-  option.value = value;
-  option.text = text;
-  select.add(option);
-  console.log("bbb");
+   var option = document.createElement("option");
+   option.value = value;
+   option.text = text;
+   select.add(option);
+   console.log("bbb");
 }
 
 
 // =============================================================================== //
 
 function updatePlaces() {
-  // 獲取球館選擇框的值
-  var selectedCourt = document.getElementById("courtID").value;
+    // 獲取球館選擇框的值
+    var selectedCourt = document.getElementById("courtID").value;
 
-// 獲取場地選擇框
-  var placeSelect = document.getElementById("placeID");
+    // 獲取地區選擇框的值
+    var selectedLoc = document.getElementById("loc").value;
 
- // 獲取地區選擇框的值
- var selectedLoc = document.getElementById("loc").value;
+    // 獲取球類選擇框的值
+    var selectedBall = document.getElementById("ball").value;
+ 
+    //獲取場地選擇框
+    var placeSelect = document.getElementById("placeID");
 
- // 獲取球類選擇框的值
- var selectedBall = document.getElementById("ball").value;
-
-// 清空場地選擇框的選項
-  placeSelect.innerHTML = "";
+    // 清空場地選擇框的選項
+    placeSelect.innerHTML = "";
 
 
-// 根據球館的值動態添加場地選項
-
-if (selectedCourt == 61000001) {
-    // 如果是飛龍運動館，只有A場地可選
-  addOption2(placeSelect, 62000001 , "A場地");
-  
-} else if(selectedCourt == 61000002) {
-  addOption2(placeSelect, 62000002 ,"B場地");
-  
-}else if(selectedCourt == 61000003) {
-  addOption2(placeSelect, 62000003 ,"C場地");
-  
-}else if(selectedCourt == 61000004) {
-  addOption2(placeSelect, 62000004 , "D場地");
-  
-}else if(selectedCourt == 61000005) {
-  addOption2(placeSelect, 62000005 , "E場地");
-  
-}else if(selectedCourt == 61000006) {
-  addOption2(placeSelect, 62000006 , "A場地");
-  
-}else if(selectedCourt == 61000007) {
-  addOption2(placeSelect, 62000007 , "B場地");
-  
-}else if(selectedCourt == 61000008) {
-  addOption2(placeSelect, 62000008 , "C場地");
-  
-}else if(selectedCourt == 61000009) {
-  addOption2(placeSelect, 62000009 , "D場地");
-  
-}else if(selectedCourt == 61000010) {
-  addOption2(placeSelect, 62000010 , "E場地");
-}
+	// 根據球館的值動態添加場地選項
+	
+	if (selectedCourt == 61000001) {
+	    // 如果是飛龍運動館，只有A場地可選
+	  addOption2(placeSelect, 62000001 , "A場地");
+	  
+	} else if(selectedCourt == 61000002) {
+	  addOption2(placeSelect, 62000002 ,"B場地");
+	  
+	}else if(selectedCourt == 61000003) {
+	  addOption2(placeSelect, 62000003 ,"C場地");
+	  
+	}else if(selectedCourt == 61000004) {
+	  addOption2(placeSelect, 62000004 , "D場地");
+	  
+	}else if(selectedCourt == 61000005) {
+	  addOption2(placeSelect, 62000005 , "E場地");
+	  
+	}else if(selectedCourt == 61000006) {
+	  addOption2(placeSelect, 62000006 , "A場地");
+	  
+	}else if(selectedCourt == 61000007) {
+	  addOption2(placeSelect, 62000007 , "B場地");
+	  
+	}else if(selectedCourt == 61000008) {
+	  addOption2(placeSelect, 62000008 , "C場地");
+	  
+	}else if(selectedCourt == 61000009) {
+	  addOption2(placeSelect, 62000009 , "D場地");
+	  
+	}else if(selectedCourt == 61000010) {
+	  addOption2(placeSelect, 62000010 , "E場地");
+	}
 
 
   // 啟用場地選擇框
@@ -407,71 +407,73 @@ if (selectedCourt == 61000001) {
 
 }
 
+//=============================================================================== //
+
 //獲取當前日期
 var currentDate = new Date().toISOString().split('T')[0];
-
+	
 // 設置 min 屬性
 document.getElementById("reserveDate").min = currentDate;
-
+	
 function addOption2(select, value , text) {
-  var option = document.createElement("option");
-  option.value = value;
-  option.text = text;
-  select.add(option);
-  console.log("ccc");
+	var option = document.createElement("option");
+		option.value = value;
+		option.text = text;
+		select.add(option);
+		console.log("ccc");
 }
+
 // =============================================================================== //
 
 function updateTotalCost() {
 	console.log("updateTotalCost 函數被調用");
-  // 獲取球類選擇框的值
-  var selectedBall = document.getElementById("ball").value;
+    // 獲取球類選擇框的值
+    var selectedBall = document.getElementById("ball").value;
 	 
-  //獲取地區選擇框的值
-  var selectedLoc = document.getElementById("loc").value;
+    //獲取地區選擇框的值
+    var selectedLoc = document.getElementById("loc").value;
   
-  // 獲取球館選擇框的值
-  var selectedCourt = document.getElementById("courtID").value;
+    // 獲取球館選擇框的值
+    var selectedCourt = document.getElementById("courtID").value;
 
-  // 獲取場地選擇框
-  var selectedPlace = document.getElementById("placeID").value;
+    // 獲取場地選擇框的值
+    var selectedPlace = document.getElementById("placeID").value;
 
 
-// 根據場地ID設定總金額
+    // 根據場地ID設定總金額
 
-if (selectedPlace == 62000001) {
-	document.getElementById("totalCost").value = 1000;
-  
-} else if(selectedPlace == 62000002) {
-	document.getElementById("totalCost").value = 1500;
-  
-}else if(selectedPlace == 62000003) {
-	document.getElementById("totalCost").value = 2500;
-  
-}else if(selectedPlace == 62000004) {
-	document.getElementById("totalCost").value = 2500;
-  
-}else if(selectedPlace == 62000005) {
-	document.getElementById("totalCost").value = 2000;
-  
-}else if(selectedPlace == 62000006) {
-	document.getElementById("totalCost").value = 2000;
-  
-}else if(selectedPlace == 62000007) {
-	document.getElementById("totalCost").value == 1500;
-  
-}else if(selectedPlace == 62000008) {
-	document.getElementById("totalCost").value == 1000;
-  
-}else if(selectedPlace == 62000009) {
-	document.getElementById("totalCost").value == 500;
-  
-}else if(selectedPlace == 62000010) {
-	document.getElementById("totalCost").value == 500;
-}
-// document.getElementById("orderStatus").value = 1;
-console.log("總金額已更新");
-}
+	if (selectedPlace == 62000001) {
+		document.getElementById("totalCost").value = 1000;
+	  
+	} else if(selectedPlace == 62000002) {
+		document.getElementById("totalCost").value = 1500;
+	  
+	}else if(selectedPlace == 62000003) {
+		document.getElementById("totalCost").value = 2500;
+	  
+	}else if(selectedPlace == 62000004) {
+		document.getElementById("totalCost").value = 2500;
+	  
+	}else if(selectedPlace == 62000005) {
+		document.getElementById("totalCost").value = 2000;
+	  
+	}else if(selectedPlace == 62000006) {
+		document.getElementById("totalCost").value = 2000;
+	  
+	}else if(selectedPlace == 62000007) {
+		document.getElementById("totalCost").value == 1500;
+	  
+	}else if(selectedPlace == 62000008) {
+		document.getElementById("totalCost").value == 1000;
+	  
+	}else if(selectedPlace == 62000009) {
+		document.getElementById("totalCost").value == 500;
+	  
+	}else if(selectedPlace == 62000010) {
+		document.getElementById("totalCost").value == 500;
+	}
+	console.log("總金額已更新");
+	}
 
 
 
@@ -488,22 +490,11 @@ $(document).ready(function() {
     var totalCost = $("#totalCost").val();
     var oUserID = $("#oUserID").val();
 
-//     alert(selectedBall);
-//     alert(selectedLoc);
-//     alert(selectedCourt);
-//     alert(selectedPlace);
-//     alert(reserveDate);
-//     alert(selectedTime);
-//     alert(orderNum);
-//     alert(totalCost);
-//     alert(oUserID);
-//     alert(oderStatus);
-
     // 使用 AJAX 發送 POST 請求
     $.ajax({
       action: "insert",
       type: "POST",
-      url: "http://localhost:8081/PiChill/reserveorder/reserveorder.do",  // 你的後端端點
+      url: "http://localhost:8081/PiChill/reserveorder/reserveorder.do",  // 後端端點
       data: {
         "ball": selectedBall,
         "loc": selectedLoc,

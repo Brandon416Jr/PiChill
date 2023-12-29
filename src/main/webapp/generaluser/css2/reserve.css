@@ -23,6 +23,11 @@ aside.aside a.step3{
         content: " ▶"; /* Unicode右箭頭符號 */
     }
 /*======================= main 區域 ============================*/
+input#next{
+	position: relative;
+    top: 0px;
+    left: 10px;
+}
 .choice{
     position: relative;
     left: 80px;
@@ -202,9 +207,19 @@ td#totalcost{
     top: 20px;
 }
 
-div.next1{
-    position: relative;
-    top: 210px;
-    left: 10px;
+input#next1{
+  border:0;
+  background-color:#FF9F1B;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  position: relative;
+  top: 240px;
+  left: 10px;
+}
 
+input#next1:hover{
+  color:#FF9F1B;
+  background-color:#fff;
+  border:2px #FF9F1B solid;
 }

@@ -34,9 +34,6 @@ public class ReserveOrderServlet extends HttpServlet {
 	
 	private ReserveOrderService reserveOrderService;
 	private Integer gUserID;
-	private Integer oUserID;
-	private Integer timeID;
-	private Integer placeID;
 
 	private Integer reserveOrderID;
 
@@ -58,27 +55,16 @@ public class ReserveOrderServlet extends HttpServlet {
 		String forwardPath = "";
 		switch (action) {
 		case "getAllList_Display":
-			// 來自listOneOrder.jsp的請求
 			forwardPath = getAllList(req, res);
 			break;
-//		case "getOneList":
-//			// 來自listOneOrder.jsp的請求
-//			forwardPath = getOneList(req, res);
-//			break;
 		case "getOne_For_Update":
-			// 來自listAllGeneralUser.jsp的請求
 			forwardPath = getOneUpdate(req, res);
 			break;
-		case "update":
-			// 來自generaluser.jsp的請求
-			forwardPath = update(req, res);
-			break;
 		case "insert":
-			// 來自reserveOrder.jsp的請求
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/generaluser/select_page.jsp";
+			forwardPath = "/homepage/main.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -87,7 +73,7 @@ public class ReserveOrderServlet extends HttpServlet {
 	}
 	
 	/*===================================================================================================*/
-	/*                                                會員預約查詢                                          */
+	/*                                            查詢球館預約紀錄                                           */
 	/*===================================================================================================*/
 	
 	private String getAllList(HttpServletRequest req, HttpServletResponse res) {
@@ -97,8 +83,8 @@ public class ReserveOrderServlet extends HttpServlet {
 
 	/*=========================================== 1.開始查詢資料 ===========================================*/
 		HttpSession session = req.getSession();
-		gUserID = (Integer)req.getAttribute("gUserID");
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
+		gUserID = generalUser.getgUserID();
 		
 		ReserveOrderService reserveOrderService = new ReserveOrderService();
 		List<ReserveOrder> reserveOrder = reserveOrderService.getgUserID(gUserID);
@@ -108,7 +94,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/homepage/main.jsp";// 程式中斷
 		}
 
 	/*================================= 2.查詢完成,準備轉交(Send the Success view) ==========================*/
@@ -118,7 +104,7 @@ public class ReserveOrderServlet extends HttpServlet {
 	}
 	
 	/*===================================================================================================*/
-	/*                                                新增                                                */
+	/*                                             新增預約訂單                                             */
 	/*===================================================================================================*/
 
 	private String insert(HttpServletRequest req, HttpServletResponse res) {
@@ -129,7 +115,6 @@ public class ReserveOrderServlet extends HttpServlet {
 	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
 		
 		HttpSession session = req.getSession();
-		//頁面不顯示
 		GeneralUser generalUser = (GeneralUser)session.getAttribute("generalUser");
 		gUserID = generalUser.getgUserID();
 		
@@ -154,6 +139,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		
 		Integer totalCost = Integer.valueOf(req.getParameter("totalCost")!=null ? req.getParameter("totalCost") : "");
 		totalCost = totalCost * orderNum;
+		
 		//訂單狀態: 0→訂單已取消 1→訂單成立 2→訂單完成
 		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus")!=null ? "1" : "");
 
@@ -188,145 +174,26 @@ public class ReserveOrderServlet extends HttpServlet {
 		return "/reserveorder/reserveOrderList.jsp";
 		
 	}
-//	/*===================================================================================================*/
-//	/*                                                查詢                                                */
-//	/*===================================================================================================*/
-//	
-//	private String getOneList(HttpServletRequest req, HttpServletResponse res) {
-//		// 錯誤處理
-//		List<String> errorMsgs = new ArrayList<>();
-//		req.setAttribute("errorMsgs", errorMsgs);
-//
-//	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
-//		
-//		String str = req.getParameter("reserveOrderID");
-//
-//		if (str == null || (str.trim()).length() == 0) {
-//			errorMsgs.add("請輸入預約訂單編號");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/generaluser/select_page.jsp";// 程式中斷
-//		}
-//
-//		Integer reserveOrderID = null;
-//		try {
-//			reserveOrderID = Integer.valueOf(str);
-//		} catch (Exception e) {
-//			errorMsgs.add("預約訂單編號格式不正確");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/reserveorder/reserveOrderList.jsp";// 程式中斷
-//		}
-//		
-//	/*=========================================== 2.開始查詢資料 ===========================================*/
-//		
-//		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
-//
-//		if (reserveOrder == null) {
-//			errorMsgs.add("查無資料");
-//		}
-//		// Send the use back to the form, if there were errors
-//		if (!errorMsgs.isEmpty()) {
-//			return "/reserveorder/listOneOrder.jsp";// 程式中斷
-//		}
-//
-//	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
-//		
-//		req.setAttribute("reserveOrder", reserveOrder); // 資料庫取出的generalUser物件,存入req
-//		return "/reserveorder/listOneOrder.jsp";
-//	}
 
 	/*===================================================================================================*/
-	/*                                                修改                                                */
+	/*                                          修改訂單狀態                                                */
 	/*===================================================================================================*/
 	
 	private String getOneUpdate(HttpServletRequest req, HttpServletResponse res) {
 		Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
 
-		ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
-		
-		req.setAttribute("reserveOrder", reserveOrder);
-		return "/reserveorder/updateStatus.jsp";
-	}
+        // 取得預約訂單
+        ReserveOrder reserveOrder = reserveOrderService.getOneReserveOrder(reserveOrderID);
 
-	private String update(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		// 錯誤處理
-		List<String> errorMsgs = new ArrayList<>();
-		req.setAttribute("errorMsgs", errorMsgs);
-
-	/*==================================== 1.接收請求參數 - 輸入格式的錯誤處理 ==================================*/
+        // 將訂單狀態設置為「0 → 訂單取消」
+        reserveOrder.setOrderStatus(0);
 		
-		Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
-		
-//		GeneralUserService generalUserService = new GeneralUserService();
-//		GeneralUser generalUser = generalUserService.getOneGeneralUser(gUserID);
-//		Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
-		Integer gUserID = 11000009;
-		ReserveOrderService reserveOrderService = new ReserveOrderService();
-		List<ReserveOrder> list = reserveOrderService.getgUserID(gUserID);
-
-		OwnerUserService ownerUserService = new OwnerUserService();
-		OwnerUser ownerUser = ownerUserService.getOneOwnerUser(oUserID);
-		Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
-		
-		//預約日期
-		Date reserveDate = java.sql.Date.valueOf(req.getParameter("reserveDate").trim());
-		
-		//時段編號: 根據開館閉館時間判斷
-		TimeService timeService = new TimeService();
-		TimeRef timeRef = timeService.getOneTime(timeID);
-		Integer timeID = Integer.valueOf(req.getParameter("timeID"));
-		
-		
-		//場地編號
-		PlaceService placeService = new PlaceService();
-		Place place = placeService.getOnePlace(placeID);
-		Integer placeID = Integer.valueOf(req.getParameter("placeID"));
-		
-		//下單時間Timestamp自動產生
-		Timestamp orderTime = Timestamp.valueOf(req.getParameter("orderTime"));
-		
-		
-		//人數: 根據不同場地會有人數限制
-		Integer orderNum = Integer.valueOf(req.getParameter("orderNum"));
-
-		//訂單狀態: 1→訂單成立 2→訂單完成 3→訂單已取消
-		Integer orderStatus = Integer.valueOf(req.getParameter("orderStatus"));
-//		Integer orderStatus = 3;
-	
-		//訂單總金額: 根據場地費用判斷
-		Integer totalCost = Integer.valueOf(req.getParameter("totalCost"));
-		
-
-
-
-		// 假如輸入格式錯誤的，備份選原使用者輸入過的資料
-		ReserveOrder reserveOrder = new ReserveOrder();
-		reserveOrder.setReserveOrderID(reserveOrderID);
-		reserveOrder.getGeneralUser().setgUserID(gUserID);
-		reserveOrder.getOwnerUser().setoUserID(oUserID);
-		reserveOrder.setReserveDate(reserveDate);
-		reserveOrder.getTimeRef().setTimeID(timeID);
-		reserveOrder.getPlace().setPlaceID(placeID);
-		reserveOrder.setOrderTime(orderTime);
-		reserveOrder.setOrderNum(orderNum);
-		reserveOrder.setOrderStatus(orderStatus);
-		reserveOrder.setTotalCost(totalCost);
-		reserveOrder.toString();
-		
-		// Send the use back to the form, if there were errors
-		if (!errorMsgs.isEmpty()) {
-			req.setAttribute("reserveOrder", reserveOrder); // 含有輸入格式錯誤的reserveOrder物件,也存入req
-			return "/reserveorder/updateStatus.jsp";
-		}
-		
-	/*=========================================== 2.開始修改資料 ===========================================*/
+	/*=========================================== 1.開始修改資料 ===========================================*/
+        
 		reserveOrderService.updateReserveOrder(reserveOrder);
 		req.setAttribute("reserveOrder", reserveOrderService.getOneReserveOrder(reserveOrderID));
 
-	/*================================= 3.修改完成,準備轉交(Send the Success view) ==========================*/
+	/*================================= 2.修改完成,準備轉交(Send the Success view) ==========================*/
 		
 		req.setAttribute("reserveOrder", reserveOrder); // 資料庫update成功後,正確的的generalUser物件,存入req
 		return "/reserveorder/listOneOrder.jsp";

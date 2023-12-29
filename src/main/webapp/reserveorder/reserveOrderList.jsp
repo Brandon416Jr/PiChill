@@ -134,7 +134,7 @@ System.out.println(reserveOrderID);
                     </tr>
                     <tr id="orderNum">
                       <td>人數：</td>
-                      <td>${reserveOrder.orderNum}</td>
+                      <td>${reserveOrder.orderNum}&nbsp;人</td>
                     </tr>
                     <p id="line3"></p>
                     <tr class="totalcost">
@@ -145,10 +145,10 @@ System.out.println(reserveOrderID);
             </table>
             </div> 
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do">
-                <div class="next1">
+                <div>
                 	<input type="hidden" name="action" value="">
                 	<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
-                    <input type="submit" id="next" value="前往付款" style="width:150px; height:44px;">
+                    <input type="submit" id="next1" value="前往付款" style="width:150px; height:44px;">
                 </div>
             </FORM>
             

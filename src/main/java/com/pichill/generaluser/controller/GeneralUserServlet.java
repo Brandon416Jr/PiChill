@@ -52,7 +52,7 @@ public class GeneralUserServlet extends HttpServlet {
 			forwardPath = update(req, res);
 			break;
 		default:
-			forwardPath = "/generaluser/select_page.jsp";
+			forwardPath = "/homepage/main.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -78,7 +78,7 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/homepage/main.jsp";// 程式中斷
 		}
 
 		Integer gUserID = null;
@@ -89,7 +89,7 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/homepage/main.jsp";// 程式中斷
 		}
 		
 	/*=========================================== 2.開始查詢資料 ===========================================*/
@@ -101,7 +101,7 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			return "/generaluser/select_page.jsp";// 程式中斷
+			return "/homepage/main.jsp";// 程式中斷
 		}
 
 	/*================================= 3.查詢完成,準備轉交(Send the Success view) ==========================*/
@@ -157,7 +157,7 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		
 		String nicknameID = req.getParameter("nicknameID");
-		String nicknameIDReg = "/^[\\u4e00-\\u9fff]{5}$/";
+		String nicknameIDReg = "[\\u4e00-\\u9fa5]{5}";
 		if (nicknameID == null || nicknameID.trim().length() == 0) {
 			errorMsgs.add("暱稱: 請勿空白");
 		} else if (!nicknameID.trim().matches(nicknameIDReg)) { // 以下練習正則(規)表示式(regular-expression)
