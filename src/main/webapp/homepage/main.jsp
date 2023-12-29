@@ -2,7 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.generaluser.entity.*"%>
 
-
+<%
+//從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+System.out.println("gUser = " + gUser);
+Integer gUserID = gUser.getgUserID();
+System.out.println("gUser is" + gUserID);
+%> 
 <%
 //從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
 GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
@@ -74,7 +80,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
       
     <!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
-
+<p><a href="https://www.google.com.tw">ccc</a></p>
         <!------ 幻燈片 ------>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">

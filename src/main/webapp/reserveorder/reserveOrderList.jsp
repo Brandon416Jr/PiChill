@@ -15,7 +15,6 @@
 GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 Integer gUserID = gUser.getgUserID();
 pageContext.setAttribute("gUserID",gUserID);
-System.out.println(gUserID);
 %>
 
 <%
@@ -24,7 +23,6 @@ Integer reserveOrderID = reserveOrder.getReserveOrderID();
 ReserveOrderService reserveOrderSvc = new ReserveOrderService();
 ReserveOrder reserve = reserveOrderSvc.getOneReserveOrder(reserveOrderID);
 pageContext.setAttribute("reserveOrder",reserve);
-System.out.println(reserveOrderID);
 %>
 
 <!DOCTYPE html>
@@ -144,7 +142,7 @@ System.out.println(reserveOrderID);
                 </tbody>
             </table>
             </div> 
-			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do">
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ecpay.do">
                 <div>
                 	<input type="hidden" name="action" value="">
                 	<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">

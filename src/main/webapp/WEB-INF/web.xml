@@ -66,6 +66,8 @@
 		<url-pattern>/owneruser/listOneOwnerUser.jsp</url-pattern>
 		<url-pattern>/owneruser/ouserListOne.jsp</url-pattern>
 		<url-pattern>/owneruser/owneruser.jsp</url-pattern>
+		<url-pattern>/testoUser/ouserlistOne.jsp</url-pattern>
+		<url-pattern>/testoUser/owneruser.jsp</url-pattern>
 		<url-pattern>/owneruser/set_owneruser.jsp</url-pattern>
 		<url-pattern>/court/court.jsp</url-pattern>
 		<url-pattern>/court/all_court.jsp</url-pattern>
