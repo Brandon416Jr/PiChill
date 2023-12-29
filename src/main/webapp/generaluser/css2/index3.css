@@ -1,0 +1,116 @@
+
+/*======================= main 區域 ============================*/
+main.main {
+  width: calc(100% - 350px - 10px);
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1rem;
+  position:relative;
+  bottom: 35px;
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+  /* margin-top:60px; */
+}
+
+@media (max-width: 575.98px) {
+
+  aside.aside,
+  main.main {
+    display: block;
+    width: 100%;
+  }
+
+  aside.aside {
+    margin: 0 0 10px 0;
+  }
+
+  main.main {
+    margin: 0 auto;
+  }
+}
+
+main.main div.col-md-5 {
+  width: 400px;
+}
+
+/*=== 送出按鈕 ===*/
+input[type="button"] {
+  border: 0;
+  background-color: #FF9F1B;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 130px;
+}
+
+input:hover[type="button"] {
+  color: #FF9F1B;
+  background-color: #fff;
+  border: 2px #FF9F1B solid;
+}
+
+h2#h2{
+  color:#FF9F1B;
+  font-weight:bold;
+  font-size: 30px;
+}
+label.questiontype{
+  position: relative;
+  bottom:20px;
+  font-weight: bold;
+}
+input#subject{
+  width:460px;
+}
+button.delete-image{
+  border:1px solid grey;
+  border-radius: 2px;
+}
+#problemDescription{
+  margin-top: 10px;
+}
+label.title{
+  font-weight: bold;
+}
+label.imageUpload{
+  font-weight: bold;
+}
+label#content{
+  font-weight: bold;
+}
+input#next{
+  border:0;
+  background-color:#FF9F1B;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  position: relative;
+  top: 30px;
+}
+
+input#next:hover{
+  color:#FF9F1B;
+  background-color:#fff;
+  border:2px #FF9F1B solid;
+}
+/*======================= footer 區域 ============================*/
+footer.footer {
+  /* border: 1px solid black;  */
+  background-color: #207DCA;
+  /* width: 720px; */
+  margin: 10px auto 0 auto;
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  footer.footer {
+    width: 540px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  footer.footer {
+    width: 100%;
+  }
+}

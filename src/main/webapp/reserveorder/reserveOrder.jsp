@@ -443,34 +443,34 @@ function updateTotalCost() {
     // 根據場地ID設定總金額
 
 	if (selectedPlace == 62000001) {
-		document.getElementById("totalCost").value = 1000;
+		document.getElementById("totalCost").value = 450;
 	  
 	} else if(selectedPlace == 62000002) {
-		document.getElementById("totalCost").value = 1500;
+		document.getElementById("totalCost").value = 4500;
 	  
 	}else if(selectedPlace == 62000003) {
-		document.getElementById("totalCost").value = 2500;
+		document.getElementById("totalCost").value = 350;
 	  
 	}else if(selectedPlace == 62000004) {
-		document.getElementById("totalCost").value = 2500;
+		document.getElementById("totalCost").value = 5500;
 	  
 	}else if(selectedPlace == 62000005) {
-		document.getElementById("totalCost").value = 2000;
+		document.getElementById("totalCost").value = 1800;
 	  
 	}else if(selectedPlace == 62000006) {
-		document.getElementById("totalCost").value = 2000;
+		document.getElementById("totalCost").value = 1200;
 	  
 	}else if(selectedPlace == 62000007) {
-		document.getElementById("totalCost").value == 1500;
+		document.getElementById("totalCost").value == 290;
 	  
 	}else if(selectedPlace == 62000008) {
-		document.getElementById("totalCost").value == 1000;
+		document.getElementById("totalCost").value == 300;
 	  
 	}else if(selectedPlace == 62000009) {
-		document.getElementById("totalCost").value == 500;
+		document.getElementById("totalCost").value == 3000;
 	  
 	}else if(selectedPlace == 62000010) {
-		document.getElementById("totalCost").value == 500;
+		document.getElementById("totalCost").value == 2000;
 	}
 	console.log("總金額已更新");
 	}
@@ -511,6 +511,7 @@ $(document).ready(function() {
       dataType: "json",
       success: function(response) {
         // 處理成功回應
+        
         console.log("成功！");
       },
       error: function(error) {

@@ -210,7 +210,7 @@ public class GeneralUserServlet extends HttpServlet {
 		String gAddress = city + area + address;
 		
 
-		Integer status = 0;
+		Integer status = 1;
 
 		// 取得圖片
 		InputStream in = req.getPart("gProfilePic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
@@ -225,7 +225,7 @@ public class GeneralUserServlet extends HttpServlet {
 		}
 		
 
-
+        
 //		頁面不顯示，所以直接給0，之後用程式碼去計算
 		Integer gPostAmount = 0;
 
