@@ -7,7 +7,7 @@ import com.pichill.contactus.model.ContactUsDAO;
 import com.pichill.contactus.model.ContactUsDAOImpl;
 
 
-public class ContactUsServiceImpl extends ContactUsService {
+public class ContactUsServiceImpl implements ContactUsService {
 	
 	private static final long PAGE_MAX_RESULT = 3;  
 	//“max-results”參數可讓您提前指定您希望接收的結果數量。最大值為10,000。若要取得超過10,000行的結果，必須使用分頁功能多次呼叫API。
@@ -15,25 +15,26 @@ public class ContactUsServiceImpl extends ContactUsService {
 	
 	public ContactUsServiceImpl() {
 		cDao = new ContactUsDAOImpl();
-		
 	}
 		@Override
-		public int addContactUs(ContactUs contactUs) {
+		public ContactUs addContactUs(ContactUs contactUs) {
 			Integer id = cDao.add(contactUs);
+			System.out.println(id);
 			contactUs = cDao.getContactUsByFormID(id);
-//			return contactUs;
-			return cDao.add(contactUs);//返回給controller
+			System.out.println(contactUs);
+			return contactUs;
+//			return cDao.add(id);//返回給controller
 		}
 
-		public ContactUs addContactUs(String formPurpose,String formContent,Integer formtype) {
-			ContactUs form = new ContactUs();
-			form.setformPurpose(formPurpose);
-			form.setformContent(formContent);
-			form.setformType(formtype);
-			cDao.add(form);
-		return form;
-//			return dao.insert(contactUs);//返回給controller
-		}
+//		public ContactUs addContactUs(String formPurpose,String formContent,Integer formtype) {
+//			ContactUs form = new ContactUs();
+//			form.setformPurpose(formPurpose);
+//			form.setformContent(formContent);
+//			form.setformType(formtype);
+//			cDao.add(form);
+//		return form;
+////			return dao.insert(contactUs);//返回給controller
+//		}
 //		@Override
 //		public ContactUs updateContactUs(ContactUs contactUs) {
 //			if (dao.update(ContactUs) == 1) {
@@ -41,6 +42,26 @@ public class ContactUsServiceImpl extends ContactUsService {
 //			} else
 //				return null;
 //		}
+		@Override
+		public ContactUs getOneContactUs(Integer formID) {
+			// TODO Auto-generated method stub
+			return cDao.getContactUsByFormID(formID);
+		}
+		@Override
+		public List<ContactUs> getAll() {
+			// TODO Auto-generated method stub
+			return cDao.getAll();
+		}
+		@Override
+		public List<ContactUs> getByUID(Integer generalUser) {
+			// TODO Auto-generated method stub
+			return cDao.getAllByUID(generalUser);
+		}
+		@Override
+		public List<ContactUs> getByOID(Integer ownerUser) {
+			// TODO Auto-generated method stub
+			return cDao.getAllByOID(ownerUser);
+		}
 		
 
 

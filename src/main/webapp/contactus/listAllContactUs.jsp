@@ -7,7 +7,7 @@
 
 <%
 ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
-    /* List<ContactUs> list = contactUsService.getAllPosts(); */
+     /* List<ContactUs> list = contactUsService.getAllPosts();  */
     List<ContactUs> list = contactUsService.getAll();
     pageContext.setAttribute("list",list);
 %>
@@ -70,15 +70,15 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 		<th>發文時間</th>
 		<th>表單狀態</th>
 		<th>表單類型</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>查看詳情</th>
+		
 	</tr>
 <%-- 	<%@ include file="page1.file" %>  --%>
 <%-- 	<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 	<c:forEach var="contactUs" items="${list}"	>
 		<tr>
 			<td>${contactUs.formID}</td>
-			<td>${contactUs.oUserID}</td>
+			<td>${contactUs.ownerUser.oUserID}</td>
 			<td>${contactUs.formPurpose}</td>
 			<td>${contactUs.formContent}</td>
 			<td>${contactUs.formPic}</td> 
@@ -88,7 +88,7 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs/contactUs.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="查看詳情">
 			     <input type="hidden" name="formID"  value="${contactUs.formID}">
 			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
 			</td>

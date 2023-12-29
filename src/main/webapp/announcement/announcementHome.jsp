@@ -21,6 +21,8 @@ pageContext.setAttribute("list", list);
 	href="<%=request.getContextPath()%>/generaluser/css2/css.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/generaluser/css2/main.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <title>最新消息</title>
 </head>
 <body>
@@ -42,7 +44,7 @@ pageContext.setAttribute("list", list);
 
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a
-						href="<%=request.getContextPath()%>/generaluser/main.jsp"
+						href="<%=request.getContextPath()%>/homepage/main.jsp"
 						class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">公告</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>

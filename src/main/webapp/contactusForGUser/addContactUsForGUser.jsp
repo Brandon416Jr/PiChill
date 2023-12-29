@@ -4,95 +4,76 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
-<% //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
-   ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
+<%
+//見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
+ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 %>
 <%-- --<%= empVO==null %>--${empVO.deptno}-- <!-- line 100 --> --%>
 <html>
 <head>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>新增聯絡我們 - addContactUs.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
 
 </head>
 <body bgcolor='white'>
 
-<table id="table-1">
-	<tr><td>
-		 <h3>聯絡我們 - addContactUs.jsp</h3></td><td>
-		 <h4><a href="cotactUs.jsp"><img src="images/tomcat.png" width="100" height="100" border="0">回首頁</a></h4>
-	</td></tr>
-</table>
+	<table id="table-1">
+		<tr>
+			<td>
+				<h3>聯絡我們 - addContactUs.jsp</h3>
+			</td>
+			<td>
+				<h4>
+					<a href="cotactUs.jsp"><img src="images/tomcat.png" width="100"
+						height="100" border="0">回首頁</a>
+				</h4>
+			</td>
+		</tr>
+	</table>
 
-<h3>資料新增:</h3>
+	<h3>資料新增:</h3>
 
-<%-- 錯誤表列 --%>
-<c:if test="${not empty errorMsgs}">
-	<font style="color:red">請修正以下錯誤:</font>
-	<ul>
-		<c:forEach var="message" items="${errorMsgs}">
-			<li style="color:red">${message}</li>
-		</c:forEach>
-	</ul>
-</c:if>
+	<%-- 錯誤表列 --%>
+	<c:if test="${not empty errorMsgs}">
+		<font style="color: red">請修正以下錯誤:</font>
+		<ul>
+			<c:forEach var="message" items="${errorMsgs}">
+				<li style="color: red">${message}</li>
+			</c:forEach>
+		</ul>
+	</c:if>
 
-<FORM METHOD="post" ACTION="{getContextPath}/contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
-<table>
-	<tr>
-		<td>主旨:</td>
-		<td><input type="TEXT" name="formPurpose" value="<%= (contactUs==null)? "廁所的燈壞了" : contactUs.getformPurpose()%>" size="45"/></td>
-	</tr>
-	<tr>
-		<td>內文:</td>
-		<td><input type="TEXT" name="formContent"   value="<%= (contactUs==null)?  "教室裡有人嗎？" : contactUs.getformContent()%>"  size="45"/></td>
-	</tr>
-	<tr>
-		<td>類別:<font color=red><b>*</b></font></td>
-		<td><select size="1" name="formType">
-          <c:forEach var="contactUs" items="${postSvc.getall}" >  
-           <option value="${post.postType}">${post.postType}
-                    <option value = "0">一般</option>
-                    <option value = "1">公告</option>
-                    
-<%--          </c:forEach>    --%>
-       </select>
-	</tr>
+	<FORM METHOD="post" ACTION="{getContextPath}/contactUs.do" name="form1">
+		<table>
+			<tr>
+				<td>主旨:</td>
+				<td><input type="TEXT" name="formPurpose"
+					value="<%=(contactUs == null) ? "廁所的燈壞了" : contactUs.getformPurpose()%>"
+					size="45" /></td>
+			</tr>
+			<tr>
+				<td>內文:</td>
+				<td><input type="TEXT" name="formContent"
+					value="<%=(contactUs == null) ? "教室裡有人嗎？" : contactUs.getformContent()%>"
+					size="45" /></td>
+			</tr>
+			<tr>
+				<td>類別:<font color=red><b>*</b></font></td>
+				<td><select size="1" name="formType">
+						<c:forEach var="contactUs" items="${postSvc.getall}">
+							<option value="${post.postType}">${post.postType}
+							<option value="0">一般</option>
+							<option value="1">公告</option>
 
-</table>
-<br>
-<input type="hidden" name="action" value="insert">
-<input type="submit" value="送出新增"></FORM>
+						</c:forEach>
+				</select>
+			</tr>
+
+		</table>
+		<br> <input type="hidden" name="action" value="insert"> <input
+			type="submit" value="送出新增">
+	</FORM>
 
 </body>
 
@@ -108,17 +89,20 @@
 <!-- // 	    hiredate = new java.sql.Date(System.currentTimeMillis()); -->
 <!-- //    } -->
 <%-- %> --%>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.css" />
 <script src="<%=request.getContextPath()%>/datetimepicker/jquery.js"></script>
-<script src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
+<script
+	src="<%=request.getContextPath()%>/datetimepicker/jquery.datetimepicker.full.js"></script>
 
 <style>
-  .xdsoft_datetimepicker .xdsoft_datepicker {
-           width:  300px;   /* width:  300px; */
-  }
-  .xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
-           height: 151px;   /* height:  151px; */
-  }
+.xdsoft_datetimepicker .xdsoft_datepicker {
+	width: 300px; /* width:  300px; */
+}
+
+.xdsoft_datetimepicker .xdsoft_timepicker .xdsoft_time_box {
+	height: 151px; /* height:  151px; */
+}
 </style>
 
 <script>

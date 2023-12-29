@@ -144,7 +144,8 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 
 			<!-------- 送出按鈕  ------->
 			<input type="button" value="getOne_For_Display" name="查詢"
-				style="width: 150px; height: 44px;"> <input type="submit"
+				style="width: 150px; height: 44px;"> 
+				<input type="submit"
 				value="取消" name="按鈕名稱" style="width: 150px; height: 44px;">
 
 		</main>

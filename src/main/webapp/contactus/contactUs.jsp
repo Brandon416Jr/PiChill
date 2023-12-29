@@ -1,11 +1,11 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.contactus.model.*"%>
 <%@ page import="java.util.*"%>
 <%@ page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
 <%
-//¨£com.emp.controller.EmpServlet.java²Ä238¦æ¦s¤JreqªºempVOª«¥ó (¦¹¬°¿é¤J®æ¦¡¦³¿ù»~®ÉªºempVOª«¥ó)
+//è¦‹com.emp.controller.EmpServlet.javaç¬¬238è¡Œå­˜å…¥reqçš„empVOç‰©ä»¶ (æ­¤ç‚ºè¼¸å…¥æ ¼å¼æœ‰éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
 ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 %>
 <!DOCTYPE html>
@@ -13,12 +13,13 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PiChillÁpµ¸§Ú­Ì</title>
+<title>PiChillè¯çµ¡æˆ‘å€‘</title>
 <!-- 
 <link rel="stylesheet" href="./CSS1/bootstrap.min.css">
 <link rel="stylesheet" href="./CSS/index3.css">
     <link rel="stylesheet" href="./CSS/table.css"> -->
-<link rel="stylesheet" href="../generalUser/CSS/bootstrap.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/generalUser/CSS/bootstrap.min.css">
 <!--<link rel="stylesheet" href="./CSS/index3.css">
 <link rel="stylesheet" href="./CSS/table.css"> -->
 <link rel="stylesheet" href="./style.css">
@@ -26,10 +27,11 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 <link rel="stylesheet" href="./table.css">
 <link rel="shortcut icon" href="../image/smallLogo.png">
 
-<!----------------¶×¤Jjquery ------------------------>
+<!----------------åŒ¯å…¥jquery ------------------------>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous">
+	
 </script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -67,11 +69,11 @@ h4 {
 
 	<p>This is the Home page for IBM Post: Home</p>
 
-	<h3>¸ê®Æ¬d¸ß:</h3>
+	<h3>è³‡æ–™æŸ¥è©¢:</h3>
 
-	<%-- ¿ù»~ªí¦C --%>
+	<%-- éŒ¯èª¤è¡¨åˆ— --%>
 	<c:if test="${not empty errorMsgs}">
-		<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+		<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 		<ul>
 			<c:forEach var="message" items="${errorMsgs}">
 				<li style="color: red">${message}</li>
@@ -85,10 +87,10 @@ h4 {
 
 		<li>
 			<FORM METHOD="post" ACTION="contactus.do">
-				<!-- °e¥X¦¨¥\«á¦^¨ì¦Cªí -->
-				<b>¿é¤J¥D¦®:</b> <input type="text" name="formTitle"> <input
+				<!-- é€å‡ºæˆåŠŸå¾Œå›åˆ°åˆ—è¡¨ -->
+				<b>è¼¸å…¥ä¸»æ—¨:</b> <input type="text" name="formTitle"> <input
 					type="hidden" name="action" value="getOne_For_Display"> <input
-					type="submit" value="°e¥X">
+					type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 
@@ -97,31 +99,31 @@ h4 {
 
 		<li>
 			<FORM METHOD="post" ACTION="contactus.do">
-				<b>¿ï¾Ü­n¤½§i©Î¤@¯ë¨Æ°È:</b> <select size="1" name="formType">
+				<b>é¸æ“‡è¦å…¬å‘Šæˆ–ä¸€èˆ¬äº‹å‹™:</b> <select size="1" name="formType">
 					<c:forEach var="form" items="${contactUsService.all}">
 						<option value="${contactUs.formType}">${contactUs.formType}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">
-				<input type="submit" value="°e¥X">
+				<input type="submit" value="é€å‡º">
 			</FORM>
 		</li>
 
 		<!--   <li> -->
 		<!--      <FORM METHOD="post" ACTION="emp.do" > -->
-		<!--        <b>¿ï¾Ü­û¤u©m¦W:</b> -->
+		<!--        <b>é¸æ“‡å“¡å·¥å§“å:</b> -->
 		<!--        <select size="1" name="empno"> -->
 		<%--          <c:forEach var="empVO" items="${empSvc.all}" >  --%>
 		<%--           <option value="${empVO.empno}">${empVO.ename} --%>
 		<%--          </c:forEach>    --%>
 		<!--        </select> -->
 		<!--        <input type="hidden" name="action" value="getOne_For_Display"> -->
-		<!--        <input type="submit" value="°e¥X"> -->
+		<!--        <input type="submit" value="é€å‡º"> -->
 		<!--      </FORM> -->
 		<!--   </li> -->
 	</ul>
 
 
-	<h3>¤å³¹ºŞ²z</h3>
+	<h3>æ–‡ç« ç®¡ç†</h3>
 
 	<ul>
 		<li><a href='addContactUs.jsp'>Add</a> a new form.</li>

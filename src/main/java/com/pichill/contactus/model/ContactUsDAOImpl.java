@@ -34,12 +34,13 @@ public class ContactUsDAOImpl implements ContactUsDAO {
 		try {
 			Session session = factory.openSession();
 			contactUs.setformTime(new java.sql.Timestamp(System.currentTimeMillis()));
-//		contactUs.getOwnerUser().getoUserID();
+//		contactUs.getOwnerUser().setoUserID(12000001);
 //		contactUs.getGeneralUser().getgUserID();
 			transaction = session.beginTransaction();
-			session.save(contactUs);
+			Integer id = (Integer) session.save(contactUs);
 			transaction.commit();
-			return (Integer) getSession().save(contactUs);
+			session.close();
+			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return -1;
@@ -120,7 +121,7 @@ public class ContactUsDAOImpl implements ContactUsDAO {
 	public List<ContactUs> getAll() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try {
-			System.out.println("Begin transaction");
+//			System.out.println("Begin transaction");
 			session.beginTransaction();
 			List<ContactUs> list = session.createQuery("from ContactUs", ContactUs.class).list();// 敘述的部份名稱大小寫要跟class的名稱一樣！重要！
 			session.getTransaction().commit();

@@ -23,7 +23,7 @@ import com.pichill.owneruser.entity.OwnerUser;
 public class ContactUs {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "formID", updatable = false, insertable = false)
+	@Column(name = "formID", updatable = false)
 	private Integer formID;
 
 	@ManyToOne
