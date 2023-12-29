@@ -47,6 +47,7 @@ public class GeneralUser {
 	@Column(name="gAddress")
 	private String gAddress;
 	
+	@Expose
 	@Column(name="status")
 	private Integer status;
 	
