@@ -1,47 +1,31 @@
+<%@page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
+<%@page import="com.pichill.contactus.service.ContactUsService"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
+<%@ page import="com.pichill.contactus.*"%>
+<%@ page import="com.pichill.owneruser.entity.*"%>
+<%@ page import="java.util.*"%>
+
 
 <% //見com.emp.controller.EmpServlet.java第238行存入req的empVO物件 (此為輸入格式有錯誤時的empVO物件)
    ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
+OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
+System.out.println("ownerUser is " + ownerUser);
+Integer oUserID = ownerUser.getoUserID();
+System.out.println("oUser is " + oUserID);
+ContactUsService contactUsSvc = new ContactUsServiceImpl();
+List<ContactUs> list = contactUsSvc.getByOID(ownerUser.getoUserID());
+pageContext.setAttribute("list",list);
+pageContext.setAttribute("oUserID",oUserID);
 %>
+
 <%-- --<%= empVO==null %>--${empVO.deptno}-- <!-- line 100 --> --%>
 <html>
 <head>
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
 <title>新增表單 - addContactUs.jsp</title>
 
-<style>
-  table#table-1 {
-	background-color: #CCCCFF;
-    border: 2px solid black;
-    text-align: center;
-  }
-  table#table-1 h4 {
-    color: red;
-    display: block;
-    margin-bottom: 1px;
-  }
-  h4 {
-    color: blue;
-    display: inline;
-  }
-</style>
-
-<style>
-  table {
-	width: 450px;
-	background-color: white;
-	margin-top: 1px;
-	margin-bottom: 1px;
-  }
-  table, th, td {
-    border: 0px solid #CCCCFF;
-  }
-  th, td {
-    padding: 1px;
-  }
-</style>
 
 </head>
 <body bgcolor='white'>
@@ -65,7 +49,7 @@
 	</ul>
 </c:if>
 
-<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs.do" name="form1"><!-- 暫定由contactUs.do處理，因為現在contactUs的servlet還沒看到 -->
+<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs.do" name="form1">
 <table>
 	<tr>
 		<td>主旨:</td>
@@ -78,10 +62,10 @@
 	<tr>
 		<td>類別:<font color=red><b>*</b></font></td>
 		<td><select size="1" name="formType">
-         <c:forEach var="contactus" items="${list}">  
-         <option value="${contactus.formType}">${contactus.formType} 
-                    <option value = "0">一般</option>
-                    <option value = "1">公告</option>
+         <c:forEach var="contactUs" items="${list}">  
+         <option value="${contactUs.formType}">${contactUs.formType} 
+<!--                     <option value = "0">一般</option>
+                    <option value = "1">公告</option> -->
                     
          </c:forEach>    
        </select>

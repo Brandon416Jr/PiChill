@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.contactus.service.ContactUsService;
+import com.pichill.contactus.service.ContactUsServiceImpl;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 
@@ -23,10 +24,11 @@ import com.pichill.owneruser.entity.OwnerUser;
 @WebServlet(name = "ContactUsServlet", value = "/contactus/contactus.do")
 public class ContactUsServlet extends HttpServlet {
 	private ContactUsService contactUsService;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void init() throws ServletException {
-		contactUsService = new ContactUsService();
+		contactUsService = new ContactUsServiceImpl();
 	}
 
 	/**
@@ -42,10 +44,10 @@ public class ContactUsServlet extends HttpServlet {
 		String action = req.getParameter("action");
 		String forwardPath = "";
 		switch (action) {
-//		case "getOne_For_Display":
-//			// // 來自select_page.jsp的請求
-//			forwardPath = getOneDisplay(req, res);
-//			break;
+		case "getOne_For_Display":
+			// // 來自select_page.jsp的請求
+			forwardPath = getOneDisplay(req, res);
+			break;
 //		case "getOne_For_Update":
 //			// 來自listAllContactUs.jsp的請求
 //			forwardPath = getOneUpdate(req, res);
@@ -59,7 +61,7 @@ public class ContactUsServlet extends HttpServlet {
 			forwardPath = insert(req, res);
 			break;
 		default:
-			forwardPath = "/contactus/select_page.jsp";
+			forwardPath = "/contactusForGUser/listAllContactUsForGUser.jsp";
 		}
 
 		res.setContentType("text/html; charset=UTF-8");
@@ -67,14 +69,14 @@ public class ContactUsServlet extends HttpServlet {
 		dispatcher.forward(req, res);
 	}
 
-//	private String getOneUpdate(HttpServletRequest req, HttpServletResponse res) {
-//		Integer formID = Integer.valueOf(req.getParameter("formID"));
-//
-//		ContactUs contactUs = contactUsService.getContactUsByFormID(formID);
-//
-//		req.setAttribute("contactUs", contactUs);
-//		return "/owneruser/set_owneruser.jsp";
-//	}
+	private String getOneDisplay(HttpServletRequest req, HttpServletResponse res) {
+		Integer formID = Integer.valueOf(req.getParameter("formID"));
+
+		ContactUs contactUs = contactUsService.getOneContactUs(formID);
+
+		req.setAttribute("contactUs", contactUs);
+		return "/contactUs/contactus.jsp";
+	}
 
 //	private String update(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 //		// 錯誤處理
@@ -183,7 +185,7 @@ public class ContactUsServlet extends HttpServlet {
 		in.read(formPic);
 		in.close();
 	} else {
-		ContactUsService ContactUsService = new ContactUsService();
+		contactUsService = new ContactUsServiceImpl();
 		formPic = contactUsService.getOneContactUs(formID).getformPic();
 	}
 

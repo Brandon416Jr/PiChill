@@ -64,23 +64,20 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 	<tr>
 		<th>表單編號</th>
 		<th>一般會員編號</th>
-		<th>企業會員編號</th>
 		<th>主旨</th>
 		<th>內文</th>
 		<th>內文圖片</th>
 		<th>發文時間</th>
 		<th>表單狀態</th>
 		<th>表單類型</th>
-		<th>修改</th>
-		<th>刪除</th>
+		<th>查看</th>
 	</tr>
 <%-- 	<%@ include file="page1.file" %>  --%>
 <%-- 	<c:forEach var="empVO" items="${list}" begin="<%=pageIndex%>" end="<%=pageIndex+rowsPerPage-1%>"> --%>
 	<c:forEach var="contactUs" items="${list}"	>
 		<tr>
 			<td>${contactUs.formID}</td>
-			<td>${contactUs.gUserID}</td>
-			<td>${contactUs.oUserID}</td>
+			<td>${contactUs.generalUser.gUserID}</td>
 			<td>${contactUs.formPurpose}</td>
 			<td>${contactUs.formContent}</td>
 			<td>${contactUs.formPic}</td> 
@@ -90,9 +87,9 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs/contactUs.do" style="margin-bottom: 0px;">
-			     <input type="submit" value="修改">
+			     <input type="submit" value="查看">
 			     <input type="hidden" name="formID"  value="${contactUs.formID}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="action"	value="getOne_For_Display"></FORM>
 			</td>
 			<td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactus/contact.do" style="margin-bottom: 0px;">

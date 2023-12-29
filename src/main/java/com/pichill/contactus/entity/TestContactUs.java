@@ -19,12 +19,13 @@ public class TestContactUs {
 		} else {
 		    System.out.println("OwnerUser is null");
 		}
+		contactUsAdd.setOwnerUser(new OwnerUser());
+		contactUsAdd.getOwnerUser().setoUserID(12000002);
 		if (contactUsAdd.getGeneralUser() != null) {
 			System.out.println(contactUsAdd.getGeneralUser().getgUserID());
 		} else {
 			System.out.println("generalUser is null");
 		}
-		contactUsAdd.getOwnerUser();
 		contactUsAdd.getGeneralUser();
 		contactUsAdd.setformPurpose("教室裡有人嗎?");
 		contactUsAdd.setformContent("你們還活著嗎小孩?");
@@ -33,6 +34,7 @@ public class TestContactUs {
 		contactUsAdd.setformStatus(0);
 		contactUsAdd.setformType(0);
 		dao.add(contactUsAdd);
+		System.out.println("新增完成");
 
 		// 修改
 //				ContactUs contactUs2= new ContactUs();
