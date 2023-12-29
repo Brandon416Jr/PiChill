@@ -51,29 +51,33 @@ public class PostServlet2 extends HttpServlet {
 //			System.out.println(postID);
 			PostService postSvc = new PostServiceImpl();
 			Post post = postSvc.getByPostID(postID);
-			ReserveOrder ro = post.getReserveOrder();
-			String courtName = ro.getCourt().getCourtName();
-			Integer ball = ro.getPlace().getBall();
-			Integer fee = ro.getPlace().getPlaceFee();
-			String time = ro.getTimeRef().getReserveTime();
-			Date reserveDate = ro.getReserveDate();
-
-			JsonObject jsonResult = new JsonObject();
-			jsonResult.addProperty("courtName", courtName);
-			jsonResult.addProperty("fee", fee);
-			jsonResult.addProperty("ball", ball);
-			jsonResult.addProperty("time", time);
-			jsonResult.addProperty("reserveDate", reserveDate.toString()); // Convert Date to String
-
-			// Include the post object using Gson with @Expose annotation
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			JsonElement postJsonElement = gson.toJsonTree(post);
-			jsonResult.add("post", postJsonElement);
-
-			// Send the JSON response to the client directly
-			PrintWriter out = res.getWriter();
-			gson.toJson(jsonResult, out);
-			out.flush();
+			  Integer postType = post.getPostType();
+			    JsonObject jsonResult = new JsonObject();
+			    
+			    if (postType == 1) {
+			        ReserveOrder ro = post.getReserveOrder();
+			        String courtName = ro.getCourt().getCourtName();
+			        Integer ball = ro.getPlace().getBall();
+			        Integer fee = ro.getPlace().getPlaceFee();
+			        String time = ro.getTimeRef().getReserveTime();
+			        Date reserveDate = ro.getReserveDate();
+			        
+			        jsonResult.addProperty("courtName", courtName);
+			        jsonResult.addProperty("fee", fee);
+			        jsonResult.addProperty("ball", ball);
+			        jsonResult.addProperty("time", time);
+			        jsonResult.addProperty("reserveDate", reserveDate.toString()); // Convert Date to String
+			    }
+			    
+			    // Include the post object using Gson with @Expose annotation
+			    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+			    JsonElement postJsonElement = gson.toJsonTree(post);
+			    jsonResult.add("post", postJsonElement);
+			    
+			    // Send the JSON response to the client directly
+			    PrintWriter out = res.getWriter();
+			    gson.toJson(jsonResult, out);
+			    out.flush();
 		} else {
 
 			PostService postSvc = new PostServiceImpl();
@@ -332,12 +336,13 @@ public class PostServlet2 extends HttpServlet {
 			String postTitle = req.getParameter("postTitle");
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getPostByPostTitle(postTitle);
-
+			List<ReserveOrder> ro = new ArrayList();
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			List<GeneralUser> gUsers = new ArrayList();
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			for (Post post : posts) {
 				gUsers.add(post.getGeneralUser());
+				ro.add(post.getReserveOrder());
 			}
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			List<Object> combinedList = new ArrayList<>();
@@ -345,6 +350,14 @@ public class PostServlet2 extends HttpServlet {
 				Map<String, Object> postData = new HashMap<>();
 				postData.put("post", post);
 				postData.put("generalUser", post.getGeneralUser());
+				ReserveOrder reserveOrder = post.getReserveOrder();
+				if (reserveOrder != null) {
+					postData.put("courtName", reserveOrder.getCourt().getCourtName());
+					postData.put("ball", reserveOrder.getPlace().getBall());
+					postData.put("placeFee", reserveOrder.getPlace().getPlaceFee());
+					postData.put("reserveTime", reserveOrder.getTimeRef().getReserveTime());
+					postData.put("reserveDate", reserveOrder.getReserveDate());
+				}
 				combinedList.add(postData);
 			}
 			String json = gson.toJson(combinedList);
@@ -357,11 +370,29 @@ public class PostServlet2 extends HttpServlet {
 			Integer gUserID = Integer.valueOf(req.getParameter("gUserID"));
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getBygUserID(gUserID);
+			List<ReserveOrder> ro = new ArrayList();
+			  for (Post post : posts) {
+			        ReserveOrder reserveOrder = post.getReserveOrder();
+			        if (reserveOrder != null) {
+			            ro.add(reserveOrder);
+			        }
+			    }
 			HttpSession session = req.getSession();
 			GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 			Map<String, Object> responseData = new HashMap<>();
 			responseData.put("gUser", gUser);
 			responseData.put("posts", posts);
+			 List<Map<String, Object>> roDataList = new ArrayList<>();
+			    for (ReserveOrder reserveOrder : ro) {
+			        Map<String, Object> roData = new HashMap<>();
+			        roData.put("courtName", reserveOrder.getCourt().getCourtName());
+			        roData.put("ball", reserveOrder.getPlace().getBall());
+			        roData.put("placeFee", reserveOrder.getPlace().getPlaceFee());
+			        roData.put("reserveTime", reserveOrder.getTimeRef().getReserveTime());
+			        roData.put("reserveDate", reserveOrder.getReserveDate());
+			        roDataList.add(roData);
+			    }
+			    responseData.put("ro", roDataList);
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			String json = gson.toJson(responseData);
 
@@ -375,27 +406,30 @@ public class PostServlet2 extends HttpServlet {
 			PostService postSvc = new PostServiceImpl();
 			Post post = postSvc.getByPostID(postID);
 			
-			ReserveOrder ro = post.getReserveOrder();
-			// 將搜尋結果轉為 JSON 格式並發送到前端
-			JsonObject roJson = new JsonObject();
-		    roJson.addProperty("courtName", ro.getCourt().getCourtName());
-		    roJson.addProperty("ball", ro.getPlace().getBall());
-		    roJson.addProperty("fee", ro.getPlace().getPlaceFee());
-		    roJson.addProperty("time", ro.getTimeRef().getReserveTime());
-		    roJson.addProperty("reserveDate", ro.getReserveDate().toString());
-		    
 			GeneralUser generalUser = post.getGeneralUser();
-			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			String jsonGeneralUser = gson.toJson(generalUser);
-			String jsonAddedPost = gson.toJson(post);
-			String jsonRo = gson.toJson(roJson);
-			PrintWriter out = res.getWriter();
-//			System.out.println("json = " + json);
-			JsonObject outputJson = new JsonObject();
+		    Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		    String jsonGeneralUser = gson.toJson(generalUser);
+		    String jsonAddedPost = gson.toJson(post);
+		    
+		    JsonObject outputJson = new JsonObject();
 		    outputJson.add("generalUser", new JsonParser().parse(jsonGeneralUser));
 		    outputJson.add("addedPost", new JsonParser().parse(jsonAddedPost));
-		    outputJson.add("reserveOrder", new JsonParser().parse(jsonRo));
 		    
+		    // 检查 postType 的值是否等于 1，如果不等于 1，则发送 ro 数据
+		    Integer postType = post.getPostType();
+		    if (postType == 1) {
+		        ReserveOrder ro = post.getReserveOrder();
+		        JsonObject roJson = new JsonObject();
+		        roJson.addProperty("courtName", ro.getCourt().getCourtName());
+		        roJson.addProperty("ball", ro.getPlace().getBall());
+		        roJson.addProperty("fee", ro.getPlace().getPlaceFee());
+		        roJson.addProperty("time", ro.getTimeRef().getReserveTime());
+		        roJson.addProperty("reserveDate", ro.getReserveDate().toString());
+		        String jsonRo = gson.toJson(roJson);
+		        outputJson.add("reserveOrder", new JsonParser().parse(jsonRo));
+		    }
+		    
+		    PrintWriter out = res.getWriter();
 		    out.print(outputJson.toString());
 		    out.flush();
 		}
@@ -405,9 +439,11 @@ public class PostServlet2 extends HttpServlet {
 			PostService postSvc = new PostServiceImpl();
 			List<Post> posts = postSvc.getPostByPostType(postType);
 			List<GeneralUser> gUsers = new ArrayList();
+			List<ReserveOrder> ro = new ArrayList();
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			for (Post post : posts) {
 				gUsers.add(post.getGeneralUser());
+				ro.add(post.getReserveOrder());
 			}
 
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -416,8 +452,17 @@ public class PostServlet2 extends HttpServlet {
 				Map<String, Object> postData = new HashMap<>();
 				postData.put("post", post);
 				postData.put("generalUser", post.getGeneralUser());
+				ReserveOrder reserveOrder = post.getReserveOrder();
+				if (reserveOrder != null) {
+					postData.put("courtName", reserveOrder.getCourt().getCourtName());
+					postData.put("ball", reserveOrder.getPlace().getBall());
+					postData.put("placeFee", reserveOrder.getPlace().getPlaceFee());
+					postData.put("reserveTime", reserveOrder.getTimeRef().getReserveTime());
+					postData.put("reserveDate", reserveOrder.getReserveDate());
+				}
 				combinedList.add(postData);
 			}
+//			System.out.println("CCCCCC"+combinedList);
 			String json = gson.toJson(combinedList);
 			PrintWriter out = res.getWriter();
 			out.print(json);
@@ -430,9 +475,11 @@ public class PostServlet2 extends HttpServlet {
 			List<Post> posts = postSvc.getByCommentCnt();
 
 			List<GeneralUser> gUsers = new ArrayList();
+			List<ReserveOrder> ro = new ArrayList();
 			// 將搜尋結果轉為 JSON 格式並發送到前端
 			for (Post post : posts) {
 				gUsers.add(post.getGeneralUser());
+				ro.add(post.getReserveOrder());
 			}
 
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
@@ -441,18 +488,27 @@ public class PostServlet2 extends HttpServlet {
 				Map<String, Object> postData = new HashMap<>();
 				postData.put("post", post);
 				postData.put("generalUser", post.getGeneralUser());
+				ReserveOrder reserveOrder = post.getReserveOrder();
+				if (reserveOrder != null) {
+					postData.put("courtName", reserveOrder.getCourt().getCourtName());
+					postData.put("ball", reserveOrder.getPlace().getBall());
+					postData.put("placeFee", reserveOrder.getPlace().getPlaceFee());
+					postData.put("reserveTime", reserveOrder.getTimeRef().getReserveTime());
+					postData.put("reserveDate", reserveOrder.getReserveDate());
+				}
 				combinedList.add(postData);
 			}
 			String json = gson.toJson(combinedList);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-			System.out.println("JJJJ" + json);
+//			System.out.println("JJJJ" + json);
 			out.flush();
 		}
 
 		if ("update".equals(action)) { // 來自update_emp_input.jsp的請求
 			/*************************** 1.接收請求參數 - 輸入格式的錯誤處理 **********************/
 			Integer postID = Integer.valueOf(req.getParameter("postID").trim());
+			System.out.println("進來了嗎");
 			String postTitle = req.getParameter("postTitle");
 			String postContent = req.getParameter("postContent").trim();
 			Part part = req.getPart("postPic");

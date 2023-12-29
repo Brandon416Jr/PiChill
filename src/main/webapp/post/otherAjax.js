@@ -535,7 +535,7 @@ $(document).ready(function() {
 					list_html += '<div class="left_block">';
 					list_html += '<div class="comment_img"> <img src=" ' + url2 + '" alt="大頭貼"></div>';
 					list_html += '<div>';
-					list_html += '<a class="comment_user">' + nickname + '</a>';
+					list_html += '<a class="comment_user">' + nicknameID + '</a>';
 					list_html += '<div class="comment_time">' + commentTime + '</div>'
 					list_html += '</div>';
 					list_html += '</div>';
