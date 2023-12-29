@@ -122,25 +122,14 @@ pageContext.setAttribute("gUserID",gUserID);
 					</c:forEach>
 				</ul>
 			</c:if>
-
-			<!-- 			<form class="bararea" enctype="multipart/form-data"> -->
-			<!-- 				<label for="reserveDate">預約日期:</label> <input type="date" -->
-			<!-- 					id="reserveDate" name="reserveDate"><br> <br> <label -->
-			<!-- 					for="reserveOrderID">預約訂單編號:</label> <input type="text" -->
-			<!-- 					id="reserveOrderID" name="reserveOrderID"> -->
-			<!-- 			</form> -->
-			<!-- 			<div></div> -->
-			<!-- 			<div></div> -->
-			<!-- 			<div></div> -->
+			
 			<div class="container" id="datatable">
 				<table id="table_id"
 					class="display hover cell-border stripe responsive nowrap">
 					<thead>
-						<!-- 欄位名稱 -->
 						<tr>
 							<th>預約訂單編號</th>
 							<th>會員編號</th>
-							<th hidden>企業會員編號</th>
 							<th>姓名</th>
 							<th>球類</th>
 							<th>地區</th>
@@ -158,11 +147,9 @@ pageContext.setAttribute("gUserID",gUserID);
 
 					<tbody>
 					<c:forEach var="reserveOrder" items="${list}" >
-						<!-- 資料內容 -->
 						<tr>
 							<td>${reserveOrder.reserveOrderID}</td>
 							<td>${reserveOrder.generalUser.gUserID}</td>
-							<td hidden>${reserveOrder.ownerUser.oUserID}</td>
 							<td>${reserveOrder.generalUser.gName}</td>
 							<td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
 							<td>${reserveOrder.court.loc}</td>
@@ -173,9 +160,9 @@ pageContext.setAttribute("gUserID",gUserID);
 							<td>${reserveOrder.orderTime}</td>
 							<td>${reserveOrder.orderNum}</td>
 							<td>${reserveOrder.totalCost}</td>
-							<td>${reserveOrder.orderStatus == 1 ? "訂單成立" : reserveOrder.orderStatus == 2 ? "訂單完成" : "訂單已取消"}</td>
+							<td>${reserveOrder.orderStatus == 0 ? "訂單已取消" : reserveOrder.orderStatus == 1 ? "訂單成立" : "訂單完成"}</td>
 							<td>
-								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do" enctype="multipart/form-data">
+								<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do">
 									<input type="hidden" name="action" value="getOne_For_Update">
 									<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
 									<input type="submit" id="cancel" value="取消" >
@@ -446,11 +433,6 @@ pageContext.setAttribute("gUserID",gUserID);
 													"thousands" : ","
 												},
 
-											// 												"paging" : true,
-											// 												"ordering" : false,
-											// 												"info" : false,
-											// 												"pageLength" : 5, // Set the number of records per page 
-											// 												"lengthMenu" : [ 5, 10, 20 ], // Set the available options for records per page
 											});
 						});
 	</script>

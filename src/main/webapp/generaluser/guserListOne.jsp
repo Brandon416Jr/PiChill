@@ -5,20 +5,9 @@
 <%@ page import="com.pichill.reserveorder.entity.*"%>
 <%@ page import="com.pichill.reserveorder.service.*"%>
 
-<%--<% 
-//從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
-GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
-%> --%>
-
 <%
 GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 %>
-<%-- <%
- Integer gUserID = 11000001;
- GeneralUserService generalUserSvc = new GeneralUserService();
- GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
- pageContext.setAttribute("generaluser",generalUser);
-%>--%>
 
 <!DOCTYPE html>
 <html>
@@ -39,7 +28,6 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
               <a href="/" class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <img src = "<%=request.getContextPath()%>/generaluser/pic/headerlogo.svg" alt="SVG"/>     
               </a>
-              
             
               <ul class="nav nav-pills">
                 <li class="nav-item"><a href="main.jsp" class="nav-link" id="head">首頁</a></li>
@@ -47,9 +35,8 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                 <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link" id="head">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/select_page.jsp" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="<%=request.getContextPath()%>/NoData/defaultpic.png" class="rounded-circle"/> 會員中心</a></li>
               </ul>
-
               
             </header>
           </div>
@@ -100,7 +87,6 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 				</ul>
 			</c:if>
 
-            
                 <span>會員編號:</span>
                 <input type="text" id="guserID" name="guserID" value="${generalUser.gUserID}" disabled>
                 <br><br>

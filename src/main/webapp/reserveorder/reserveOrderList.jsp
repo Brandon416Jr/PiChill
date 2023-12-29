@@ -1,20 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="BIG5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.List"%>
 <%@ page import="com.pichill.reserveorder.entity.ReserveOrder"%>
+<%@ page import="com.pichill.reserveorder.model.*"%>
+<%@ page import="com.pichill.reserveorder.service.ReserveOrderService"%>
 <%@ page import="com.pichill.generaluser.entity.*"%>
+<%@ page import="com.pichill.generaluser.model.*"%>
+<%@ page import="com.pichill.generaluser.service.*"%>
 <%@ page import="com.pichill.owneruser.entity.*"%>
 <%@ page import="com.pichill.time.*"%>
 <%@ page import="com.pichill.place.*"%>
-<%@ page import="com.pichill.court.*"%>
 
-
-<%
-//從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
-ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
-%>
 <%
 GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+Integer gUserID = gUser.getgUserID();
+pageContext.setAttribute("gUserID",gUserID);
+System.out.println(gUserID);
 %>
+
+<%
+ReserveOrder reserveOrder = (ReserveOrder)session.getAttribute("newReserveOrder");
+Integer reserveOrderID = reserveOrder.getReserveOrderID();
+ReserveOrderService reserveOrderSvc = new ReserveOrderService();
+ReserveOrder reserve = reserveOrderSvc.getOneReserveOrder(reserveOrderID);
+pageContext.setAttribute("reserveOrder",reserve);
+System.out.println(reserveOrderID);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,35 +93,64 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
             <p id="line"></p>
             <p id="titles">預約明細</p>
             <p id="line2"></p>
-            <form class="bararea" enctype="multipart/form-data">
-            	<span>預約訂單編號:</span><span id="loc" name="loc" value="${reserveOrder.reserveOrderID}"></span>
-                <br><br>
-                <span>一般會員編號:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gUserID}"></span>
-                <br><br>
-                <span>一般會員姓名:</span><span id="loc" name="loc" value="${reserveOrder.generalUser.gName}"></span>
-                <br><br>
-                <span>球類:</span><span id="ball" name="ball" value="${reserveOrder.place.ball}"></span>
-                <br><br>
-                <span>地區:</span><span id="loc" name="loc" value="${reserveOrder.court.loc}"></span>
-                <br><br>
-                <span>球館:</span><span id="court" name="court" value="${reserveOrder.court.courtName}"></span>
-                <br><br>
-                <span>場地:</span><span id="place" name="place" value="${reserveOrder.place.placeName}"></span>
-                <br><br>
-                <span>預約日期:</span><span id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}"></span>
-                <br><br>
-                <span>預約時段:</span><span id="time" name="time" value="${reserveOrder.time.reserveTime}"></span>
-                <br><br>
-                <span>人數:</span><span id="orderNum" name="orderNum" value="${reserveOrder.orderNum}"></span>
-                <p id="line3"></p>
-                <span id="total">總金額:</span><span id="totalCost" name="totalCost" value="${reserveOrder.totalCost == reserveOrder.place.placeFee}">&nbsp;&nbsp;元</span>
-                <br><br>
-                <div class="next1">
-                	<input type="hidden" name="action" value="getOneDisplay">
-                    <input type="submit" id="next" value="前往付款" style="width:150px; height:44px;">&nbsp;
-                    <input type="reset" id="next" value="取消" style="width:150px; height:44px;">
+           	<div class="orderlist"> 
+            <table>
+                <tbody>
+                    <tr id="reserveOrderID">
+                        <td>預約訂單編號：</td>
+                        <td>${reserveOrder.reserveOrderID}</td>
+                    </tr>
+                    <tr id="gUserID">
+                        <td>會員編號：</td>
+                        <td>${reserveOrder.generalUser.gUserID}</td>
+                    </tr>
+                    <tr id="gName">
+                        <td>會員姓名：</td>
+                        <td>${reserveOrder.generalUser.gName}</td>
+                    </tr>
+                    <tr id="ball">
+                        <td>球類：</td>
+                        <td>${reserveOrder.place.ball == 0 ? "籃球" : reserveOrder.place.ball == 1 ? "排球" : "羽球"}</td>
+                    </tr>
+                    <tr id="loc">
+                        <td>地區：</td>
+                        <td>${reserveOrder.court.loc}</td>
+                    </tr>
+                    <tr id="courtName">
+                        <td>球館：</td>
+                        <td>${reserveOrder.court.courtName}</td>
+                    </tr>
+                    <tr id="placeName">
+                        <td>場地：</td>
+                        <td>${reserveOrder.place.placeName}</td>
+                    </tr>
+                    <tr id="reserveDate">
+                        <td>預約日期：</td>
+                        <td>${reserveOrder.reserveDate}</td>
+                    </tr>
+                    <tr id="reserveTime">
+                        <td>預約時段：</td>
+                        <td>${reserveOrder.timeRef.reserveTime}</td>
+                    </tr>
+                    <tr id="orderNum">
+                      <td>人數：</td>
+                      <td>${reserveOrder.orderNum}&nbsp;人</td>
+                    </tr>
+                    <p id="line3"></p>
+                    <tr class="totalcost">
+                        <td id="total">總金額：</td>
+                        <td id="totalcost">${reserveOrder.totalCost}&nbsp;元</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div> 
+			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/reserveorder/reserveorder.do">
+                <div>
+                	<input type="hidden" name="action" value="">
+                	<input type="hidden" name="reserveOrderID" value="${reserveOrder.reserveOrderID}">
+                    <input type="submit" id="next1" value="前往付款" style="width:150px; height:44px;">
                 </div>
-            </form>
+            </FORM>
             
         </div>
         <br><br><br>

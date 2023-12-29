@@ -9,21 +9,17 @@
 <%@ page import="com.pichill.place.*"%>
 <%@ page import="com.pichill.court.*"%>
 
+<%
+GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
+Integer gUserID = gUser.getgUserID();
+pageContext.setAttribute("gUserID",gUserID);
+%>
+
 <% 
 //從資料庫取出的reserveorder, 也可以是輸入格式有錯誤時的reserveorder物件
 ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
  %>
-<%
-GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
-Integer gUserID = gUser.getgUserID();
-%>
-
-<%--<%
- Integer gUserID = 11000001;
- GeneralUserService generalUserSvc = new GeneralUserService();
- GeneralUser generalUser = generalUserSvc.getOneGeneralUser(gUserID);
- pageContext.setAttribute("generaluser",generalUser);
-%>--%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,10 +102,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="ball" id="ballLabel">選擇球類</label>
-                <select class="form-select" id="ball" name="ball" onclick="updateRegions()">
-<%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
-<%-- 					  <option value="${reserveOrder.place.placeID}" ${(reserveOrder.param.placeID == reserveOrder.place.placeID)? 'selected':'' } >${reserveOrder.place.ball == 0 ? "籃球" : place.ball == 1 ? "排球" : "羽球"} --%>
-<%-- 				    </c:forEach> --%>
+                <select class="form-select" id="ball" name="ball" onclick="updateRegions()" required>
                   <option value="0">籃球</option>
                   <option value="1">排球</option>
                   <option value="2">羽球</option>
@@ -120,11 +113,8 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="loc" id="locLabel">選擇地區</label>
-                <select class="form-select" id="loc" name="loc" disabled onclick="updateCourts()">
+                <select class="form-select" id="loc" name="loc" disabled onclick="updateCourts()" required>
                 <option value="">請先選擇球類</option>
-<!--                   <option value="">松山區</option> -->
-<!--                   <option>中正區</option> -->
-<!--                   <option>中山區</option> -->
                 </select>
               </div>
               <br>
@@ -132,11 +122,8 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="court" id="courtLabel">選擇球館</label>
-                <select class="form-select" id="court" name="court" disabled onclick="updatePlaces()">
+                <select class="form-select" id="courtID" name="courtID" disabled onclick="updatePlaces()" required>
                 <option value="">請先選擇地區</option>
-<%--                 	<c:forEach var="court" items="${courtSvc.all}"> --%>
-<%-- 				  	  <option value="${court.courtID}" ${(param.courtID==court.courtID)? 'selected':'' } >${court.courtName} --%>
-<%-- 			    	</c:forEach> --%>
                 </select>
               </div>
               <br>
@@ -144,18 +131,15 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="place" id="placeLabel">選擇場地</label>
-                <select class="form-select" id="place" name="place" disabled>
+                <select class="form-select" id="placeID" name="placeID" disabled onclick="updateTotalCost()" required>
                 <option value="">請先選擇球館</option>
-<%-- 	                <c:forEach var="place" items="${placeSvc.all}"> --%>
-<%-- 					  <option value="${place.placeID}" ${(param.placeID==place.placeID)? 'selected':'' } >${place.placeName} --%>
-<%-- 				    </c:forEach> --%>
                 </select>
               </div>
               <br>
             <!-- 預約日期 -->
               <div class="col">
                 <p for="reservedate" id="p">預約日期</p>
-                <input type="date" id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}">
+                <input type="date" id="reserveDate" name="reserveDate" value="${reserveOrder.reserveDate}" min="" required>
               </div>
         
             <br>
@@ -163,7 +147,7 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="time" id="label">預約時段</label>
-                <select class="form-select" id="time" name="time" placeholder="請選擇預約時段">
+                <select class="form-select" id="timeID" name="timeID" placeholder="請選擇預約時段" required>
                   <option value="7">07:00-08:00</option>
                   <option value="8">08:00-09:00</option>
                   <option value="9">09:00-10:00</option>
@@ -178,9 +162,6 @@ Integer gUserID = gUser.getgUserID();
                   <option value="18">18:00-19:00</option>
                   <option value="19">19:00-20:00</option>
                   <option value="20">20:00-21:00</option>
-<%-- 	                <c:forEach var="time" items="${timeSvc.all}"> --%>
-<%-- 					  <option value="${time.timeID}" ${(param.timeID==time.timeID)? 'selected':'' } >${time.reserveTime} --%>
-<%-- 				    </c:forEach> --%>
                 </select>
               </div>
             <br>
@@ -188,11 +169,36 @@ Integer gUserID = gUser.getgUserID();
             <div class="col">
               <div class="col" id="choose">
                 <label for="orderNum" id="label">人數</label><br>
-                  <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數" value="${reserveOrder.orderNum}">
+                  <input type="text" id="orderNum" name="orderNum" placeholder="請輸入預約人數" value="${reserveOrder.orderNum}" required>
               </div>
             <br>
+			<!-- 總金額(這頁不顯示) -->
+            <div class="col" hidden>
+              <div class="col" id="choose">
+                <label for="totalCost" id="label">總金額</label><br>
+                  <input type="text" id="totalCost" name="totalCost" value="">
+              </div>
+            </div>  
+            <br>
+			
+			<!-- 企業會員(這頁不顯示) -->
+            <div class="col" hidden>
+              <div class="col" id="choose">
+                <label for="oUserID" id="label">企業會員</label><br>
+                  <input type="text" id="oUserID" name="oUserID" value="">
+              </div>
+            </div>  
+            <br>
+            <!-- 訂單狀態(這頁不顯示) -->
+            <div class="col" hidden>
+              <div class="col" id="choose">
+                <label for="orderStatus" id="label">訂單狀態</label><br>
+                  <input type="text" id="orderStatus" name="orderStatus" value="">
+              </div>
+            </div>  
+            <br>
             <input type="hidden" name="action" value="insert">
-<%-- 			<input type="hidden" name="reserveOrderID" value="<%=reserveOrder.getReserveOrderID()%>"> --%>
+            <input type="hidden" name="action" value="getOneList">
             <input type="submit" id="next" value="下一步" style="width:150px; height:44px;">&nbsp;
             <input type="reset" id="next" value="取消" style="width:150px; height:44px;" onclick="resetForm()">
             <br><br>
@@ -225,7 +231,7 @@ Integer gUserID = gUser.getgUserID();
         </div>
       </footer>
       
-      
+
 <script>
 function updateRegions() {
   // 獲取球類選擇框的值
@@ -238,17 +244,17 @@ function updateRegions() {
   locSelect.innerHTML = "";
 
   // 根據球類選擇框的值動態添加地區選項
-  if (selectedBall === "0") {
+  if (selectedBall == "0") {
     // 如果是籃球，只有北投區和南港區可以選
     addOption(locSelect, "北投區");
     addOption(locSelect, "南港區");
-  } else if (selectedBall === "1") {
+  } else if (selectedBall == "1") {
     // 如果是排球，可以添加其他地區的選項
     addOption(locSelect, "中正區");
     addOption(locSelect, "萬華區");
     addOption(locSelect, "中山區");
     addOption(locSelect, "內湖區");
-  } else if (selectedBall === "2") {
+  } else if (selectedBall == "2") {
     // 如果是羽球，可以添加其他地區的選項
     addOption(locSelect, "大安區");
     addOption(locSelect, "大同區");
@@ -268,13 +274,13 @@ function addOption(select, value) {
   console.log("aaa");
 }
 
-// ==========================================================================================
+// ========================================================================================== //
 function updateCourts() {
   // 獲取地區選擇框的值
   var selectedLoc = document.getElementById("loc").value;
 
   // 獲取球館選擇框
-  var courtSelect = document.getElementById("court");
+  var courtSelect = document.getElementById("courtID");
 
   // 清空球館選擇框的選項
   courtSelect.innerHTML = "";
@@ -282,86 +288,118 @@ function updateCourts() {
   // 獲取球類選擇框的值
   var selectedBall = document.getElementById("ball").value;
 
+  
+  
   // 根據地區選擇框的值動態添加球館選項
-  if (selectedLoc === "大安區") {
+  if (selectedLoc == "大安區") {
     // 如果是北投區，只有陽明籃球館可以選
-    addOption1(courtSelect, "飛龍運動館");
-  } else if (selectedLoc === "中正區") {
-    addOption1(courtSelect, "中正排球場");
-  }else if (selectedLoc === "北投區") {
-    addOption1(courtSelect, "陽明籃球館");
-  }else if (selectedLoc === "大同區") {
-    addOption1(courtSelect, "奧特菲羽球館");
-  }else if (selectedLoc === "萬華區") {
-    addOption1(courtSelect, "萬華活力球館");
-  }else if (selectedLoc === "信義區") {
-    addOption1(courtSelect, "TFK羽球館");
-  }else if (selectedLoc === "南港區") {
-    addOption1(courtSelect, "BOS運動館");
-  }else if (selectedLoc === "內湖區") {
-    addOption1(courtSelect, "艾特極運動生活館");
-  }else if (selectedLoc === "中山區" && selectedBall === "1") {
-    addOption1(courtSelect, "新生排球場");
-  }else if (selectedLoc === "中山區" && selectedBall === "2") {
-    addOption1(courtSelect, "紅季羽球綜合館");
+    addOption1(courtSelect, 61000001 , "飛龍運動館");
+    document.getElementById("oUserID").value = 12000001;
+    
+  } else if (selectedLoc == "中正區") {
+    addOption1(courtSelect, 61000002 , "中正排球場");
+    document.getElementById("oUserID").value = 12000002;
+    
+  }else if (selectedLoc == "北投區") {
+    addOption1(courtSelect, 61000004 , "陽明籃球館");
+    document.getElementById("oUserID").value = 12000004;
+    
+  }else if (selectedLoc == "大同區") {
+    addOption1(courtSelect, 61000003 , "奧特菲羽球館");
+    document.getElementById("oUserID").value = 12000003;
+    
+  }else if (selectedLoc == "萬華區") {
+    addOption1(courtSelect, 61000005 , "萬華活力球館");
+    document.getElementById("oUserID").value = 12000005;
+    
+  }else if (selectedLoc == "信義區") {
+    addOption1(courtSelect, 61000008 , "TFK羽球館");
+    document.getElementById("oUserID").value = 12000008;
+    
+  }else if (selectedLoc == "南港區") {
+    addOption1(courtSelect, 61000009 , "BOS運動館");
+    document.getElementById("oUserID").value = 12000009;
+    
+  }else if (selectedLoc == "內湖區") {
+    addOption1(courtSelect, 61000010 , "艾特極運動生活館");
+    document.getElementById("oUserID").value = 12000010;
+    
+  }else if (selectedLoc == "中山區" && selectedBall == "1") {
+    addOption1(courtSelect, 61000006 , "新生排球場");
+    document.getElementById("oUserID").value = 12000006;
+    
+  }else if (selectedLoc == "中山區" && selectedBall == "2") {
+    addOption1(courtSelect, 61000007 , "紅季羽球綜合館");
+    document.getElementById("oUserID").value = 12000007;
+    
   }
   
 
-  // 啟用球館選擇框
-  courtSelect.disabled = false;
+   // 啟用球館選擇框
+   courtSelect.disabled = false;
 }
 
-function addOption1(select, value) {
-  var option = document.createElement("option");
-  option.value = value;
-  option.text = value;
-  select.add(option);
-  console.log("bbb");
+function addOption1(select, value , text) {
+   var option = document.createElement("option");
+   option.value = value;
+   option.text = text;
+   select.add(option);
+   console.log("bbb");
 }
 
-// ===============================================================================
+
+// =============================================================================== //
 
 function updatePlaces() {
-  // 獲取球館選擇框的值
-  var selectedCourt = document.getElementById("court").value;
+    // 獲取球館選擇框的值
+    var selectedCourt = document.getElementById("courtID").value;
 
-// 獲取場地選擇框
-  var placeSelect = document.getElementById("place");
+    // 獲取地區選擇框的值
+    var selectedLoc = document.getElementById("loc").value;
 
- // 獲取地區選擇框的值
- var selectedLoc = document.getElementById("loc").value;
+    // 獲取球類選擇框的值
+    var selectedBall = document.getElementById("ball").value;
+ 
+    //獲取場地選擇框
+    var placeSelect = document.getElementById("placeID");
 
- // 獲取球類選擇框的值
- var selectedBall = document.getElementById("ball").value;
-
-// 清空場地選擇框的選項
-  placeSelect.innerHTML = "";
+    // 清空場地選擇框的選項
+    placeSelect.innerHTML = "";
 
 
-// 根據球館的值動態添加場地選項
-
-if (selectedCourt === "飛龍運動館") {
-    // 如果是飛龍運動館，只有A場地可選
-  addOption2(placeSelect, "A場地");
-} else if(selectedCourt === "中正排球場") {
-  addOption2(placeSelect, "B場地");
-}else if(selectedCourt === "奧特菲羽球館") {
-  addOption2(placeSelect, "C場地");
-}else if(selectedCourt === "陽明籃球館") {
-  addOption2(placeSelect, "D場地");
-}else if(selectedCourt === "萬華活力球館") {
-  addOption2(placeSelect, "E場地");
-}else if(selectedCourt === "新生排球場") {
-  addOption2(placeSelect, "A場地");
-}else if(selectedCourt === "紅季羽球綜合館") {
-  addOption2(placeSelect, "B場地");
-}else if(selectedCourt === "TFK羽球館") {
-  addOption2(placeSelect, "C場地");
-}else if(selectedCourt === "BOS運動館") {
-  addOption2(placeSelect, "D場地");
-}else if(selectedCourt === "艾特極運動生活館") {
-  addOption2(placeSelect, "E場地");
-}
+	// 根據球館的值動態添加場地選項
+	
+	if (selectedCourt == 61000001) {
+	    // 如果是飛龍運動館，只有A場地可選
+	  addOption2(placeSelect, 62000001 , "A場地");
+	  
+	} else if(selectedCourt == 61000002) {
+	  addOption2(placeSelect, 62000002 ,"B場地");
+	  
+	}else if(selectedCourt == 61000003) {
+	  addOption2(placeSelect, 62000003 ,"C場地");
+	  
+	}else if(selectedCourt == 61000004) {
+	  addOption2(placeSelect, 62000004 , "D場地");
+	  
+	}else if(selectedCourt == 61000005) {
+	  addOption2(placeSelect, 62000005 , "E場地");
+	  
+	}else if(selectedCourt == 61000006) {
+	  addOption2(placeSelect, 62000006 , "A場地");
+	  
+	}else if(selectedCourt == 61000007) {
+	  addOption2(placeSelect, 62000007 , "B場地");
+	  
+	}else if(selectedCourt == 61000008) {
+	  addOption2(placeSelect, 62000008 , "C場地");
+	  
+	}else if(selectedCourt == 61000009) {
+	  addOption2(placeSelect, 62000009 , "D場地");
+	  
+	}else if(selectedCourt == 61000010) {
+	  addOption2(placeSelect, 62000010 , "E場地");
+	}
 
 
   // 啟用場地選擇框
@@ -369,47 +407,119 @@ if (selectedCourt === "飛龍運動館") {
 
 }
 
-function addOption2(select, value) {
-  var option = document.createElement("option");
-  option.value = value;
-  option.text = value;
-  select.add(option);
-  console.log("ccc");
+//=============================================================================== //
+
+//獲取當前日期
+var currentDate = new Date().toISOString().split('T')[0];
+	
+// 設置 min 屬性
+document.getElementById("reserveDate").min = currentDate;
+	
+function addOption2(select, value , text) {
+	var option = document.createElement("option");
+		option.value = value;
+		option.text = text;
+		select.add(option);
+		console.log("ccc");
 }
+
+// =============================================================================== //
+
+function updateTotalCost() {
+	console.log("updateTotalCost 函數被調用");
+    // 獲取球類選擇框的值
+    var selectedBall = document.getElementById("ball").value;
+	 
+    //獲取地區選擇框的值
+    var selectedLoc = document.getElementById("loc").value;
+  
+    // 獲取球館選擇框的值
+    var selectedCourt = document.getElementById("courtID").value;
+
+    // 獲取場地選擇框的值
+    var selectedPlace = document.getElementById("placeID").value;
+
+
+    // 根據場地ID設定總金額
+
+	if (selectedPlace == 62000001) {
+		document.getElementById("totalCost").value = 1000;
+	  
+	} else if(selectedPlace == 62000002) {
+		document.getElementById("totalCost").value = 1500;
+	  
+	}else if(selectedPlace == 62000003) {
+		document.getElementById("totalCost").value = 2500;
+	  
+	}else if(selectedPlace == 62000004) {
+		document.getElementById("totalCost").value = 2500;
+	  
+	}else if(selectedPlace == 62000005) {
+		document.getElementById("totalCost").value = 2000;
+	  
+	}else if(selectedPlace == 62000006) {
+		document.getElementById("totalCost").value = 2000;
+	  
+	}else if(selectedPlace == 62000007) {
+		document.getElementById("totalCost").value == 1500;
+	  
+	}else if(selectedPlace == 62000008) {
+		document.getElementById("totalCost").value == 1000;
+	  
+	}else if(selectedPlace == 62000009) {
+		document.getElementById("totalCost").value == 500;
+	  
+	}else if(selectedPlace == 62000010) {
+		document.getElementById("totalCost").value == 500;
+	}
+	console.log("總金額已更新");
+	}
+
+
 
 $(document).ready(function() {
   $("#next").on("click", function() {
     // 獲取所有需要的值
     var selectedBall = $("#ball").val();
     var selectedLoc = $("#loc").val();
-    var selectedCourt = $("#court").val();
-    var selectedPlace = $("#place").val();
+    var selectedCourt = $("#courtID").val();
+    var selectedPlace = $("#placeID").val();
     var reserveDate = $("#reserveDate").val();
-    var selectedTime = $("#time").val();
+    var selectedTime = $("#timeID").val();
     var orderNum = $("#orderNum").val();
+    var totalCost = $("#totalCost").val();
+    var oUserID = $("#oUserID").val();
 
     // 使用 AJAX 發送 POST 請求
     $.ajax({
+      action: "insert",
       type: "POST",
-      url: "http://localhost:8081/PiChill/reserveorder/reserveorder.do",  // 你的後端端點
+      url: "http://localhost:8081/PiChill/reserveorder/reserveorder.do",  // 後端端點
       data: {
-        ball: selectedBall,
-        loc: selectedLoc,
-        court: selectedCourt,
-        place: selectedPlace,
-        reserveDate: reserveDate,
-        time: selectedTime,
-        num: orderNum
+        "ball": selectedBall,
+        "loc": selectedLoc,
+        "courtID": selectedCourt,
+        "placeID": selectedPlace,
+        "reserveDate": reserveDate,
+        "timeID": selectedTime,
+        "orderNum": orderNum,
+        "totalCost": totalCost,
+        "oUserID": oUserID,
+        "oderStatus": oderStatus
+        
       },
+      dataType: "json",
       success: function(response) {
         // 處理成功回應
-        console.log("訂單新增成功！");
+        console.log("成功！");
       },
       error: function(error) {
         // 處理錯誤回應
         console.error("發生錯誤: ", error);
       }
     });
+    
+	
   });
 });
 

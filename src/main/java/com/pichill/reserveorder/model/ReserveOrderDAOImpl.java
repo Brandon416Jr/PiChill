@@ -32,9 +32,11 @@ private ReserveOrder generalUser;
 			session.beginTransaction();
 			Integer id = (Integer) session.save(reserveOrder);
 			session.getTransaction().commit();
+			System.out.println("新增成功!");
 			return id;
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println("新增交易有錯QQ");
 			session.getTransaction().rollback();
 		}
 		return -1;

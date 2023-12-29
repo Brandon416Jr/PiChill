@@ -23,6 +23,11 @@ aside.aside a.step3{
         content: " ▶"; /* Unicode右箭頭符號 */
     }
 /*======================= main 區域 ============================*/
+input#next{
+	position: relative;
+    top: 0px;
+    left: 10px;
+}
 .choice{
     position: relative;
     left: 80px;
@@ -41,10 +46,10 @@ select#ball{
 select#loc{
     border: 1px solid grey;
 }
-select#court{
+select#courtName{
     border: 1px solid grey;
 }
-select#place{
+select#placeName{
     border: 1px solid grey;
 }
 #label{
@@ -62,7 +67,7 @@ input#reserveDate{
 #p{
     margin-bottom: 5px;
 }
-select#time{
+select#timeID{
     border: 1px solid grey;
 }
 
@@ -96,7 +101,7 @@ div.list{
     border: 0.5px solid rgb(197, 197, 197);
     background-color: #FFFFFF;
     width: 600px;
-    height: 730px;
+    height: 710px;
     color: #207DCA;
     display: inline-block;
     margin-top: 30px;
@@ -134,34 +139,87 @@ p#line2{
     width: 500px;
 }
 /* 明細內容 */
-form.bararea{
+div.orderlist{
     position: relative;
-    top: 55px;
+    top: 35px;
     left: 53px;
+}
+td{
+    width:120px;
+}
+tr#gUserID{
+    position: relative;
+    top: 10px;
+}
+tr#gName{
+    position: relative;
+    top: 20px;
+}
+tr#ball{
+    position: relative;
+    top: 30px;
+}
+tr#loc{
+    position: relative;
+    top: 40px;
+}
+tr#courtName{
+    position: relative;
+    top: 50px;
+}
+tr#placeName{
+    position: relative;
+    top: 60px;
+}
+tr#reserveDate{
+    position: relative;
+    top: 70px;
+}
+tr#reserveTime{
+    position: relative;
+    top: 80px;
+}
+tr#orderNum{
+    position: relative;
+    top: 90px;
+}
+tr.totalcost{
+    position: relative;
+    top: 100px;
 }
 p#line3{
     position: relative;
-    top: 20px;
+    top: 385px;
     right: 15px;
     border-bottom: 2px solid #FF9F1B;
     width: 500px;
 }
 
-span#total{
+td#total{
     font-weight: bold;
     position: relative;
     top: 20px;
 }
 
-span#totalcost{
+td#totalcost{
     font-weight: bold;
     position: relative;
     top: 20px;
 }
 
-div.next1{
-    position: relative;
-    top: 55px;
-    right: 20px;
+input#next1{
+  border:0;
+  background-color:#FF9F1B;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  position: relative;
+  top: 240px;
+  left: 10px;
+}
 
+input#next1:hover{
+  color:#FF9F1B;
+  background-color:#fff;
+  border:2px #FF9F1B solid;
 }
