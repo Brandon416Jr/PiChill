@@ -62,6 +62,7 @@ public class PostDAOImpl implements PostDAO {
 			Session session = factory2.openSession();
 			Transaction tx = session.beginTransaction();
 //			getSession().update(entity);
+			session.update(entity);
 			tx.commit();
 			return 1;
 		} catch (Exception e) {

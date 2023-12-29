@@ -172,10 +172,10 @@ $(document).ready(function() {
 									$likeDiv.find(".likebutton").css('color', '');
 								}
 								var $likeCntSpan = $("#likecol[data-post-id='" + postID + "'] .fa-thumbs-up").siblings(".likecnt");
-								$likeCntSpan.empty(); // 清空原本的评论数量
+								$likeCntSpan.empty(); // 清空按讚數量
 								// 更新按讚數量
 								if (data.likeCnt === 0) {
-									$likeCntSpan.text(''); // 如果新的点赞数量为0，显示为空字符串
+									$likeCntSpan.text(''); // 如果新的點讚數量為0，顯示空字串
 								} else {
 									$likeCntSpan.text(' ' + data.likeCnt);
 								}
@@ -367,7 +367,7 @@ $(document).ready(function() {
 		if (currentUserId == gUserID) {
 			$('.btn_report[data-comment-id="' + commentID + '"]').hide();
 		} else {
-			console.log("進來了")
+//			console.log("進來了")
 			$('.btn_update[data-comment-id="' + commentID + '"]').hide();
 			$('.btn_delete[data-comment-id="' + commentID + '"]').hide();
 		}

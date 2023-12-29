@@ -6,15 +6,23 @@ $(document).ready(function() {
 		dataType: "json",
 		url: "post.do?action=getUser",
 		success: function(data) {
-			//			console.log(data);
+			console.log(data);
 			if (data == null) {
 				$('#userID').val("null");
+				$('#userStatus').val("null");
 			} else {
 				$('#userID').val(data.gUserID);
+				$('#userStatus').val(data.status);
+			}
+			if (data == null) {
+				$(".rounded-circle").remove();
+			} else {
+				var imageDataArray2 = new Uint8Array(data.gProfilePic);
+				var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+				var url2 = URL.createObjectURL(blob2);
+				$(".rounded-circle").attr("src", url2);
 			}
 
-			$(".profilePic.profile-image").attr("src", data.gProfilePic);
-			
 		}
 	})
 	$.ajax({
@@ -32,6 +40,7 @@ $(document).ready(function() {
 				var placeFee = responseData[i].placeFee;
 				var reserveTime = responseData[i].reserveTime;
 				var reserveDate = responseData[i].reserveDate;
+				var reserveOrderID = responseData[i].reserveOrderID;
 
 				var nicknameID, gProfilePic, gUserID, oUserName, oProfilePic, oUserID;
 
@@ -85,7 +94,8 @@ $(document).ready(function() {
 						ball,
 						placeFee,
 						reserveDate,
-						reserveTime
+						reserveTime,
+						reserveOrderID
 					);
 				} else if (post.postType === 2) {
 					publishPromotePost(
@@ -185,7 +195,7 @@ $(document).ready(function() {
 		}
 	}
 
-	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID, courtName, ball, placeFee, reserveDate, reserveTime) {
+	function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID, courtName, ball, placeFee, reserveDate, reserveTime, reserveOrderID) {
 		var currentUserId = $('#userID').val();
 		postContent = postContent.replace(/\n/g, '<br>');
 		if (postPic) {
@@ -280,8 +290,8 @@ $(document).ready(function() {
                                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
                                                                    
-                            <div class="col-2" id="pluscol">
-                                <button type="button" class="fa-regular fa-square-plus"> +1
+                            <div class="col-2" id="pluscol" data-order-id="${reserveOrderID}">
+                                <button type="button" class="fa-regular fa-square-plus" > +1
                             </div>
                         </div>
                     </div>
@@ -340,7 +350,27 @@ $(document).ready(function() {
 			$('#deleteButton_o[data-post-id="' + postID + '"]').hide();
 		}
 	}
-
+	//=======+1預約球館=======
+	$("#post-list").on("click", "#pluscol", function() {
+		var reserveOrderID = $(this).attr("data-order-id");
+		console.log(reserveOrderID)
+		$.ajax({
+			type: "POST",
+			url: "post.do",
+			data: {
+				"action": "plus1",
+				"reserveOrderID": reserveOrderID
+			},
+			dataType: "Json",
+			success: function(data) {
+				window.location.href = "/PiChill/reserveorder/reserveOrderList.jsp"
+console.log(data.gUserID)
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log("Error: " + errorThrown);
+			}
+		})
+	})
 	//=============新增文章(討論)===============//
 	$("#pb-discuss").on("click", function() {
 		var userID = $("#userID").val();
@@ -385,26 +415,26 @@ $(document).ready(function() {
 			}
 		});
 	});
-	{
-		function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, newPostPic, nicknameID, gProfilePic) {
-			// 發送請求以獲取最新資料
-			$.ajax({
-				type: "GET",
-				url: "post.do",  // 替換成實際的後端處理檔案或API端點
-				success: function(data) {
-					if (gProfilePic) {
-						var imageDataArray2 = new Uint8Array(gProfilePic);
-						// 将二进制图像数据存储在Blob对象中
-						var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
-						// 创建一个Blob URL并将其设置为<img>标签的src属性
-						var url2 = URL.createObjectURL(blob2);
-					}
-					var likeCnt = "";
-					var commentCnt = "";
-					// 		     	  var displayName = data.isAnonymous ? "匿名用戶" : "貓貓";
-					// 		              var avatarPath = data.isAnonymous ? getAnonymousAvatarPath() : getMemberAvatarPath(data.memberID);
-					var newPost =
-						`<div class="card mb-3 article"  id="article${postID}" style="max-width: 700px;">
+
+	function fetchAndDisplayLatestData(postID, newPostTitle, newPostContent, postTime, newPostPic, nicknameID, gProfilePic) {
+		// 發送請求以獲取最新資料
+		$.ajax({
+			type: "GET",
+			url: "post.do",  // 替換成實際的後端處理檔案或API端點
+			success: function(data) {
+				if (gProfilePic) {
+					var imageDataArray2 = new Uint8Array(gProfilePic);
+					// 将二进制图像数据存储在Blob对象中
+					var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+					// 创建一个Blob URL并将其设置为<img>标签的src属性
+					var url2 = URL.createObjectURL(blob2);
+				}
+				var likeCnt = "";
+				var commentCnt = "";
+				// 		     	  var displayName = data.isAnonymous ? "匿名用戶" : "貓貓";
+				// 		              var avatarPath = data.isAnonymous ? getAnonymousAvatarPath() : getMemberAvatarPath(data.memberID);
+				var newPost =
+					`<div class="card mb-3 article"  id="article${postID}" style="max-width: 700px;">
 		              <div class="row g-0">
 		                  <div class="col-md-8">
 		                      <div class="card-body">
@@ -441,29 +471,29 @@ $(document).ready(function() {
 		                  </div>
 		              </div>
 		          </div>`;
-					// 將新文章添加到文章列表
-					$('#post-list').prepend(newPost);
-					$('#floatingTextarea').val('');
-					$('#floatingTextarea2').val('');
-					$('#p_file').val('');
-					document.getElementById('preview').innerHTML = '';
-				},
-				error: function(error) {
-					console.error(error);
-					alert("發生錯誤，無法獲取最新資料。");
-				}
-			});
-		}
+				// 將新文章添加到文章列表
+				$('#post-list').prepend(newPost);
+				$('#floatingTextarea').val('');
+				$('#floatingTextarea2').val('');
+				$('#p_file').val('');
+				document.getElementById('preview').innerHTML = '';
+			},
+			error: function(error) {
+				console.error(error);
+				alert("發生錯誤，無法獲取最新資料。");
+			}
+		});
 	}
+
 	// 初始化時獲取一次最新資料
-	$(document).ready(function() {
-		fetchAndDisplayLatestData();
-	});
+	//	$(document).ready(function() {
+	//		fetchAndDisplayLatestData();
+	//	});
 	//=============新增揪團(預約編號)=============//
 	$("#group").on("click", function() {
 		var gUserID = $("#userID").val();
 		$.ajax({
-			url: "post.do", // 替换成实际的API端点
+			url: "post.do",
 			type: "POST",
 			data: {
 				action: "get_order",
@@ -472,7 +502,7 @@ $(document).ready(function() {
 			dataType: "json",
 			success: function(data) {
 
-				console.log("揪團數據：", data);
+				//				console.log("揪團數據：", data);
 				if (data && data.length > 0) {
 					for (var i = 0; i < data.length; i++) {
 						var reserveOrderID = data[i].reserveOrderID;
@@ -538,6 +568,10 @@ $(document).ready(function() {
 		} else if (newPostContent.trim() === "") {
 			alert("內文不得為空");
 			return; // 如果內文為空，停止表單提交
+		}
+		if (reserveOrderID.trim() === "") {
+			alert("請選擇預約日期或先完成預約");
+			return;
 		}
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
@@ -673,9 +707,9 @@ $(document).ready(function() {
 		});
 	}
 	// 初始化時獲取一次最新資料
-	$(document).ready(function() {
-		fetchAndDisplayLatestData();
-	});
+	//	$(document).ready(function() {
+	//		fetchAndDisplayLatestData();
+	//	});
 	//===========新增文章(推撥)==========
 	$("#pb-promote").on("click", function() {
 		var newPostTitle = $("#floatingTextarea5").val();
@@ -759,9 +793,9 @@ $(document).ready(function() {
 		});
 	}
 	// 初始化時獲取一次最新資料
-	$(document).ready(function() {
-		fetchAndDisplayLatestData3();
-	});
+	//	$(document).ready(function() {
+	//		fetchAndDisplayLatestData3();
+	//	});
 	// =============編輯文章===============//
 	// ===找到原先的值(討論)===//
 	$("#post-list").on("click", ".edit_discuss", function() {

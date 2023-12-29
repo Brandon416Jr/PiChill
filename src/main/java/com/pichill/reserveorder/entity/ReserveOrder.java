@@ -70,12 +70,14 @@ public class ReserveOrder {
 	private Timestamp orderTime;
 	
 	@Column(name="orderNum", updatable = false)
+	@Expose
 	private Integer orderNum;
 	
 	@Column(name="orderStatus")
 	private Integer orderStatus;
 	
 	@Column(name="totalCost", updatable = false)
+	@Expose
 	private Integer totalCost;
 
 	  @OneToMany(mappedBy = "reserveOrder", cascade = CascadeType.ALL)

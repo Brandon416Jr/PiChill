@@ -3,29 +3,29 @@ $(document).ready(function() {
 	$("#post-list").on("click", "#commentcol", function() {
 		var postID = $(this).attr("data-post-id");
 		var gUserID = $("#userID").val();
-  if (gUserID !== "null" && gUserID !== undefined && gUserID !== "") {
-		setTimeout(function() {
-			$.ajax({
-				type: "POST",
-				url: "http://localhost:8081/PiChill/forumlike/forumlike.do",
-				data: {
-					"action": "showlike",
-					"postID": postID,
-					"gUserID": gUserID
-				},
-				dataType: "Json",
-				success: function(postData) {
-					console.log(postData.status);
-					if (postData.status == true) {
-						var $likeDiv = $(".likecol[data-post-id='" + postID + "'] .fa-thumbs-up");
-						$likeDiv.css('color', 'blue');
+		if (gUserID !== "null" && gUserID !== undefined && gUserID !== "") {
+			setTimeout(function() {
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:8081/PiChill/forumlike/forumlike.do",
+					data: {
+						"action": "showlike",
+						"postID": postID,
+						"gUserID": gUserID
+					},
+					dataType: "Json",
+					success: function(postData) {
+						console.log(postData.status);
+						if (postData.status == true) {
+							var $likeDiv = $(".likecol[data-post-id='" + postID + "'] .fa-thumbs-up");
+							$likeDiv.css('color', 'blue');
+						}
+					},
+					error: function(xhr, status, error) {
+						console.error("Get Post Details Error:", status, error);
 					}
-				},
-				error: function(xhr, status, error) {
-					console.error("Get Post Details Error:", status, error);
-				}
-			});
-		}, 300);
+				});
+			}, 300);
 		}
 	});
 	//=======顯示完整文章==========
@@ -61,21 +61,21 @@ $(document).ready(function() {
 				$(".card-title.article0").text(postData.addedPost.postTitle);
 				$(".card-text.article1").text(formattedPostContent);
 				$(".posttime").text(postData.addedPost.postTime);
-				if(postData.addedPost.postType==1){
-				$(".dateRO").text(postData.reserveOrder.reserveDate);
-				$(".timeRO").text(postData.reserveOrder.time);
-				$(".locRO").text(postData.reserveOrder.courtName);
-				var ballText = '';
-				if (postData.reserveOrder.ball === 0) {
-					ballText = "籃球";
-				} else if (postData.reserveOrder.ball === 1) {
-					ballText = "排球";
-				} else if (postData.reserveOrder.ball === 2) {
-					ballText = "羽球";
+				if (postData.addedPost.postType == 1) {
+					$(".dateRO").text(postData.reserveOrder.reserveDate);
+					$(".timeRO").text(postData.reserveOrder.time);
+					$(".locRO").text(postData.reserveOrder.courtName);
+					var ballText = '';
+					if (postData.reserveOrder.ball === 0) {
+						ballText = "籃球";
+					} else if (postData.reserveOrder.ball === 1) {
+						ballText = "排球";
+					} else if (postData.reserveOrder.ball === 2) {
+						ballText = "羽球";
+					}
+					$(".ballRO").text(ballText);
+					$(".feeRO").text(postData.reserveOrder.fee);
 				}
-				$(".ballRO").text(ballText);
-				$(".feeRO").text(postData.reserveOrder.fee);
-}
 				$(".do").find(".likecol").replaceWith(likeCol);
 				$(".do").find(".commentcol").replaceWith(commentCol);
 				//				$(".commentcol").html(`<i class="fa-regular fa-comment commentcol" data-post-id="${postData.postID}"></i> `).append(commentCntSpan);
@@ -145,19 +145,21 @@ $(document).ready(function() {
 				$(".card-title.article0").text(postData.addedPost.postTitle);
 				$(".card-text.article1").text(formattedPostContent);
 				$(".posttime").text(postData.addedPost.postTime);
-				$(".dateRO").text(postData.reserveOrder.reserveDate);
-				$(".timeRO").text(postData.reserveOrder.time);
-				$(".locRO").text(postData.reserveOrder.courtName);
-				var ballText = '';
-				if (postData.reserveOrder.ball === 0) {
-					ballText = "籃球";
-				} else if (postData.reserveOrder.ball === 1) {
-					ballText = "排球";
-				} else if (postData.reserveOrder.ball === 2) {
-					ballText = "羽球";
+				if (postData.addedPost.postType == 1) {
+					$(".dateRO").text(postData.reserveOrder.reserveDate);
+					$(".timeRO").text(postData.reserveOrder.time);
+					$(".locRO").text(postData.reserveOrder.courtName);
+					var ballText = '';
+					if (postData.reserveOrder.ball === 0) {
+						ballText = "籃球";
+					} else if (postData.reserveOrder.ball === 1) {
+						ballText = "排球";
+					} else if (postData.reserveOrder.ball === 2) {
+						ballText = "羽球";
+					}
+					$(".ballRO").text(ballText);
+					$(".feeRO").text(postData.reserveOrder.fee);
 				}
-				$(".ballRO").text(ballText);
-				$(".feeRO").text(postData.reserveOrder.fee);
 
 				$(".do").find(".likecol").replaceWith(likeCol);
 				$(".do").find(".commentcol").replaceWith(commentCol);
@@ -223,13 +225,13 @@ $(document).ready(function() {
 						var courtName = reserveOrderData.courtName;
 						var ball = reserveOrderData.ball;
 						var ballText = '';
-				if (ball === 0) {
-					ballText = "籃球";
-				} else if (ball === 1) {
-					ballText = "排球";
-				} else if (ball === 2) {
-					ballText = "羽球";
-				}
+						if (ball === 0) {
+							ballText = "籃球";
+						} else if (ball === 1) {
+							ballText = "排球";
+						} else if (ball === 2) {
+							ballText = "羽球";
+						}
 						var placeFee = reserveOrderData.placeFee;
 						var reserveTime = reserveOrderData.reserveTime;
 						var reserveDate = reserveOrderData.reserveDate;
@@ -293,11 +295,13 @@ $(document).ready(function() {
                                    <div class="container text-center">
                                        <div class="row align-items-start" id="card-footer" >
                                            <div class="col-2" id="likecol" data-post-id="${postID}">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</button>                                           </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt">  ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</span>
+                            </div>
                                            <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                           <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                               data-bs-target="#exampleModal5"> ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-                                           </div>
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt">${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}</span>
+                    </div>
                                        </div>
                                    </div>
                                </div>
@@ -346,7 +350,7 @@ $(document).ready(function() {
     	                                  <div class="w-100 d-none d-md-block"></div>
 
     	                                  <div class="col-2 col-sm-2">費用:</div>
-    	                                  <div class="col-2 col-sm-4">${placeFee}</div>
+    	                                  <div class="col-2 col-sm-4">${placeFee}元</div>
     	                              </div>
     	                          </div>
     	                          <p class="card-text2">${posts[i].postContent}</p>
@@ -357,12 +361,14 @@ $(document).ready(function() {
     	              </div>
     	                  <div class="container text-center">
     	                      <div class="row align-items-start" id="card-footer">
-    	                          <div class="col-2" id="likecol">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${posts[i].likeCnt > 0 ? [posts[i]].likeCnt : ''}</button>    	                          </div>
-    	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-    	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-    	                                  data-bs-target="#exampleModal6" > ${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}
-    	                              </div>
+    	                      <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt">  ${posts[i].likeCnt > 0 ? posts[i].likeCnt : ''}</span>
+                            </div>
+    	                           <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt">${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}</span>
+                    </div>
     	                          <div class="col-2" id="pluscol">
     	                              <button type="button" class="fa-regular fa-square-plus"> +1
     	                          </div>
@@ -484,13 +490,14 @@ $(document).ready(function() {
                                 </div>
                                     <div class="container text-center">
                                         <div class="row align-items-start" id="card-footer">
-                                            <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>
-                                            </div>
-                                            <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                                data-bs-target="#exampleModal5" > ${commentCnt > 0 ? commentCnt : ''}
-                                            </div>
+                                           <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+                                           <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
                                       
                                         </div>
                                     </div>
@@ -558,12 +565,13 @@ $(document).ready(function() {
               	                  <div class="container text-center">
               	                      <div class="row align-items-start" id="card-footer">
               	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>
-              	                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
               	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-              	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-              	                                  data-bs-target="#exampleModal6" > ${commentCnt > 0 ? commentCnt : ''}
-              	                              </div>
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
               	                          <div class="col-2" id="pluscol">
               	                              <button type="button" class="fa-regular fa-square-plus"> +1
               	                          </div>
@@ -682,12 +690,13 @@ $(document).ready(function() {
                                   <div class="container text-center">
                                       <div class="row align-items-start" id="card-footer">
                                           <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>
-                                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
                                           <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                          <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                              data-bs-target="#exampleModal5" > ${commentCnt > 0 ? commentCnt : ''}
-                                          </div>
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
                                       </div>
                                   </div>
                               </div>
@@ -752,12 +761,13 @@ $(document).ready(function() {
    	                  <div class="container text-center">
    	                      <div class="row align-items-start" id="card-footer">
    	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>
-   	                          </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
    	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-   	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-   	                                  data-bs-target="#exampleModal6" > ${commentCnt > 0 ? commentCnt : ''}
-   	                              </div>
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
    	                          <div class="col-2" id="pluscol">
    	                              <button type="button" class="fa-regular fa-square-plus"> +1
    	                          </div>
@@ -912,12 +922,13 @@ $(document).ready(function() {
                                <div class="container text-center">
                                    <div class="row align-items-start" id="card-footer">
                                        <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>
-                                       </div>
-                                       <div class="col-2" id="commentcol" data-post-id="${postID}">
-                                       <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-                                           data-bs-target="#exampleModal5" > ${commentCnt > 0 ? commentCnt : ''}
-                                       </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+                                      <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
                                    </div>
                                </div>
                            </div>
@@ -983,12 +994,13 @@ $(document).ready(function() {
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
 	                          <div class="col-2" id="likecol" data-post-id="${postID}">
-                                            <button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" id="editButton" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>
-	                          </div>
-	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal6" > ${commentCnt > 0 ? commentCnt : ''}
-	                              </div>
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+	                         <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
 	                          <div class="col-2" id="pluscol">
 	                              <button type="button" class="fa-regular fa-square-plus"> +1
 	                          </div>
