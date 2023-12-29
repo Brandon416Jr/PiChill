@@ -12,6 +12,9 @@ $(document).ready(function() {
 			} else {
 				$('#userID').val(data.gUserID);
 			}
+
+			$(".profilePic.profile-image").attr("src", data.gProfilePic);
+			
 		}
 	})
 	$.ajax({
@@ -775,11 +778,11 @@ $(document).ready(function() {
 			success: function(postData) {
 				//				console.log("aa")
 				//				console.log(postData.postContent);
-				PostContent = postData.postContent.replace(/<br>/g, '\n');
-				$("#floatingTextarea_edit").val(postData.postTitle);
+				PostContent = postData.post.postContent.replace(/<br>/g, '\n');
+				$("#floatingTextarea_edit").val(postData.post.postTitle);
 				$("#floatingTextarea2_edit").val(PostContent);
-				if (postData.postPic) {
-					var postPic = postData.postPic;
+				if (postData.post.postPic) {
+					var postPic = postData.post.postPic;
 					var imageDataArray = new Uint8Array(postPic);
 
 					// 将二进制图像数据存储在Blob对象中
@@ -793,7 +796,7 @@ $(document).ready(function() {
 					$("#preview_edit").html('<img src="" >');
 				}
 
-				saveButton.attr("data-post-id", postData.postID);
+				saveButton.attr("data-post-id", postData.post.postID);
 			},
 			error: function(xhr, status, error) {
 				console.error("Get Post Details Error:", status, error);
@@ -848,7 +851,7 @@ $(document).ready(function() {
 					$("#preview2_edit").html('<img src="" >');
 				}
 
-				saveButton.attr("data-post-id", postData.postID);
+				saveButton.attr("data-post-id", postData.post.postID);
 			},
 			error: function(xhr, status, error) {
 				console.error("Get Post Details Error:", status, error);
@@ -931,7 +934,6 @@ $(document).ready(function() {
 	//===編輯動作(揪團)===//
 	$(".save-button_group").on("click", function() {
 		// 	console.log("bbb");
-
 		var postID = $(this).attr("data-post-id");
 		var newPostTitle = $("#floatingTextarea3_edit").val();
 		var newPostContent = $("#floatingTextarea4_edit").val();
@@ -1084,6 +1086,11 @@ $(document).ready(function() {
 						var post = responseData[i].post;
 						var generalUser = responseData[i].generalUser;
 						var ownerUser = responseData[i].ownerUser;
+						var courtName = responseData[i].courtName;
+						var ball = responseData[i].ball;
+						var placeFee = responseData[i].placeFee;
+						var reserveTime = responseData[i].reserveTime;
+						var reserveDate = responseData[i].reserveDate;
 
 						var nicknameID, gProfilePic, gUserID, oUserName, oProfilePic, oUserID;
 
@@ -1098,8 +1105,6 @@ $(document).ready(function() {
 							oProfilePic = ownerUser.oProfilePic;
 							oUserID = ownerUser.oUserID;
 						}
-
-
 						//            console.log('Post:', post);
 						//            console.log('nicknameID:', nicknameID);
 						//            console.log('gProfilePic:', gProfilePic);
@@ -1134,7 +1139,12 @@ $(document).ready(function() {
 								post.commentCnt,
 								nicknameID,
 								gProfilePic,
-								gUserID
+								gUserID,
+								courtName,
+								ball,
+								placeFee,
+								reserveDate,
+								reserveTime
 							);
 						} else if (post.postType === 2) {
 							publishPromotePost(
@@ -1234,7 +1244,7 @@ $(document).ready(function() {
 				}
 			}
 
-			function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID) {
+			function publishGroupPost(postID, postTitle, postContent, postType, postTime, postPic, likeCnt, commentCnt, nicknameID, gProfilePic, gUserID, courtName, ball, placeFee, reserveDate, reserveTime) {
 				var currentUserId = $('#userID').val();
 				postContent = postContent.replace(/\n/g, '<br>');
 				if (postPic) {
@@ -1253,6 +1263,14 @@ $(document).ready(function() {
 					var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
 					// 创建一个Blob URL并将其设置为<img>标签的src属性
 					var url2 = URL.createObjectURL(blob2);
+				}
+				var ballText = "";
+				if (ball === 0) {
+					ballText = "籃球";
+				} else if (ball === 1) {
+					ballText = "排球";
+				} else if (ball === 2) {
+					ballText = "羽球";
 				}
 				var newGroupPostElement = `
             	 <div class="card mb-3 article" id="article${postID}" style="max-width: 700px;">
@@ -1284,23 +1302,23 @@ $(document).ready(function() {
                             <div class="container text-left">
                                 <div class="row">
                                     <div class="col-2 col-sm-2">日期:</div>
-                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="col-2 col-sm-4">${reserveDate}</div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">時間:</div>
-                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="col-2 col-sm-4">${reserveTime}</div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">地點:</div>
-                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="col-2 col-sm-5">${courtName}</div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">球類:</div>
-                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="col-2 col-sm-4">${ballText}</div>
                                     <div class="w-100 d-none d-md-block"></div>
 
                                     <div class="col-2 col-sm-2">費用:</div>
-                                    <div class="col-2 col-sm-4"></div>
+                                    <div class="col-2 col-sm-4">${placeFee} 元</div>
                                 </div>
                             </div>
                             <p class="card-text2">${postContent}</p>
@@ -1384,3 +1402,4 @@ $(document).ready(function() {
 		}
 	});
 });
+
