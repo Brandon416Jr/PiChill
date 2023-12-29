@@ -38,7 +38,7 @@ public class Court implements Serializable{
  
  @Id 
  @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "courtID", updatable = false, insertable=false) //PK鍵不用更新
+ @Column(name = "courtID", updatable = false) //PK鍵不用更新
 
  private Integer courtID;
  
@@ -114,7 +114,7 @@ public class Court implements Serializable{
      //管理員
   //fetch 預設為 EAGER
   @ManyToOne
-  @JoinColumn(name = "manageID", referencedColumnName = "manageID")
+  @JoinColumn(name = "manageID", referencedColumnName = "manageID", insertable = false)
   private Manage manage;
    
  // @Column(name="courtID", updatable = false)
