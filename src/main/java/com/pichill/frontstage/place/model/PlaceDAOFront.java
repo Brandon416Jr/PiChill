@@ -9,4 +9,5 @@ public interface PlaceDAOFront {
 	public Place getPlaceByCourtID(Integer courtID);
 	List<Place> getAll();
 	List<Place> findPlaceByCourtID(Integer courtID);
+	int insert(Place place); 
 }

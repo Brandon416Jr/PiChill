@@ -71,6 +71,9 @@
 		<url-pattern>/court/all_court.jsp</url-pattern>
 		<url-pattern>/court/listOneCourt.jsp</url-pattern>
 		<url-pattern>/court/new_court.jsp</url-pattern>
+		<url-pattern>/testCourt/set_court.jsp</url-pattern>
+		<url-pattern>/testCourt/all_court.jsp</url-pattern>
+		<url-pattern>/testCourt/new_court.jsp</url-pattern>
 		<url-pattern>/court/set_court.jsp</url-pattern>
 		<url-pattern>/place/new_place.jsp</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
@@ -89,11 +92,10 @@
 	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>GeneralUserLoginFilter</filter-name>
-		<url-pattern>/homepage/main.jsp</url-pattern>
+<!-- 		<url-pattern>/homepage/main.jsp</url-pattern> -->
 		<url-pattern>/generaluser/generaluser.jsp</url-pattern>
 		<url-pattern>/generaluser/guserListOne.jsp</url-pattern>
 		<url-pattern>/reserveorder/listOneOrder.jsp</url-pattern>
-		<url-pattern>/reserveorder/updateStatus.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
 		<url-pattern>/contactusForGUser/addContactUs.jsp</url-pattern>

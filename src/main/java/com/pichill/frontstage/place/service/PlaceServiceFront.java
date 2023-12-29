@@ -15,6 +15,10 @@ public class PlaceServiceFront {
 		dao = new PlaceDAOImplFront();
 	}
 	
+	public int insertPlaceAll(Place place) {
+		return dao.insert(place);	
+	}
+	
 	public Place getOnePlace(Integer courtID) {
 		return dao.getPlaceByCourtID(courtID);
 	}

@@ -28,6 +28,14 @@ public class CourtServiceFront {
 		return dao.getCourtByCourtID(courtID);
 	}
 	
+	public int insertCourtAll(Court court) {
+		return dao.insert(court);	
+	}
+	
+	public int updateCourtAll(Court court) {
+		return dao.update(court);
+	}
+	
 	public Court updateCourt(Integer courtID, Time courtOpenTime, Time courtCloseTime, String courtName, byte[] courtPic, String courtTelephone, String courtAddress, String loc, String courtRule) {
 		Court court = dao.getCourtByCourtID(courtID);
 		if (court != null) {

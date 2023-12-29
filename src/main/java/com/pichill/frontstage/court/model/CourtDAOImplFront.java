@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
+import com.pichill.backstage.announcement.entity.Announcement;
 import com.pichill.court.Court;
 
 import com.pichill.util.HibernateUtil;
@@ -18,6 +19,23 @@ public class CourtDAOImplFront implements CourtDAOFront {
 
 	private Session getSession() {
 		return factory.getCurrentSession();
+	}
+	
+	public int insert(Court court) {
+		// TODO Auto-generated method stub
+				Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+				try {
+					session.beginTransaction();
+					System.out.println("進入新增球館");
+					Integer id = (Integer) session.save(court);
+					session.getTransaction().commit();
+					return id;
+				} catch (Exception e) {
+					e.printStackTrace();
+					System.out.println("新增球館失敗");
+					session.getTransaction().rollback();
+				}
+				return -1;
 	}
 
 	public List<Court> findCourtByoUserID(Integer oUserID) {

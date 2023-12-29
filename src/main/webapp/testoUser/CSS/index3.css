@@ -1,0 +1,333 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 10px;
+  background: #F7F7F7;
+  overflow: visible;
+}
+
+img {
+  max-width: 100%;
+}
+
+/*======================= header 區域 ============================*/
+header.header {
+  /* border: 1px solid black; */
+  background-color: #207DCA;
+  position: sticky;
+  margin: 0 auto 10px auto;
+  top: 0;
+  z-index: 3;
+}
+
+
+@media all and (min-width: 576px) and (max-width: 767.98px) {
+  header.header {
+    width: 540px;
+  }
+
+  /* header.header ul.nav{
+      display: none;
+      }
+      label{
+      display: block;
+      }
+    #burger:checked + ul{
+      display:block;
+      } */
+
+
+}
+
+@media (max-width: 575.98px) {
+  header.header {
+    width: 100%;
+  }
+
+  /* header.header ul.nav{
+      display: none;
+      }
+    label{
+      display: block;
+      }
+    #burger:checked + ul{
+      display:block;
+      } */
+}
+
+
+/*=== header導覽列 ===*/
+.nav-link {
+  color: white;
+  margin: 15px;
+}
+
+/*======================= body 區域 ============================*/
+div.main_content {
+  margin: 0 auto;
+  font-size: 0;
+  /* border: 1px solid red;   */
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  div.main_content {
+    width: 540px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  div.main_content {
+    width: 100%;
+  }
+}
+
+/*======================= aside 區域 ============================*/
+aside.aside {
+  width: 350px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1rem;
+  margin-right: 10px;
+  /* border: 1px solid green; */
+}
+
+/*=== 企業會員中心(橘字) ===*/
+.h6 {
+  color: #FF9F1B;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 0 0 70px;
+}
+
+/*=== step1 step2===*/
+.my-2 {
+  font-size: 16px;
+  color: #FF9F1B;
+  margin: 0 0 0 60px;
+}
+
+/*=== 下拉選單 ===*/
+.d-inline-flex {
+  font-size: 16px;
+  color: #207DCA;
+}
+
+aside.aside div.parent_container {
+  /* width: 350px; */
+  margin-right: 50px;
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+@media (max-width: 575.98px) {
+  div.main_content {
+    width: 100%;
+  }
+}
+
+/*======================= main 區域 ============================*/
+main.main {
+  width: calc(100% - 350px - 10px);
+  display: inline-block;
+  vertical-align: top;
+  font-size: 1rem;
+  /* border: 1px solid blue; */
+  box-sizing: border-box;
+  /* margin-top:60px; */
+}
+
+@media (max-width: 575.98px) {
+
+  aside.aside,
+  main.main {
+    display: block;
+    width: 100%;
+  }
+
+  aside.aside {
+    margin: 0 0 10px 0;
+  }
+
+  main.main {
+    margin: 0 auto;
+  }
+}
+
+main.main div.col-md-5 {
+  width: 400px;
+}
+main.main div.col-1 {
+  width: 100px;
+  height: 100px;
+}
+
+/*=== 送出按鈕 ===*/
+input[type="button"] {
+  border: 0;
+  background-color: #FF9F1B;
+  color: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 50px;
+  margin-bottom: 130px;
+}
+
+input:hover[type="button"] {
+  color: #FF9F1B;
+  background-color: #fff;
+  border: 2px #FF9F1B solid;
+}
+
+/*=== 場館名稱 ===*/
+input[type="courtAddress"] {
+  cursor: pointer;
+  width: 500px;
+}
+
+input[type="oAddress"] {
+  cursor: pointer;
+  width: 500px;
+}
+
+
+/*=== 地址 ===*/
+input[type="courtAddress"] {
+  cursor: pointer;
+  width: 500px;
+}
+
+input[type="oAddress"] {
+  cursor: pointer;
+  width: 500px;
+}
+
+/*=== oBankAccount電子信箱 ===*/
+input[type="oBankAccount"] {
+  cursor: pointer;
+  width: 300px;
+}
+
+/*=== 上傳照片 ===*/
+.img {
+  max-width: 150px;
+  max-height: 150px;
+  margin: 5px;
+}
+
+.image-preview {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.image-preview img {
+  max-width: 200px;
+  max-height: 200px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/*=== 場館列表 ===*/
+/* .itemTable {
+  border: black solid 1px;
+  width: 380px;
+} */
+
+.itemTable th,
+.itemTable td {
+  border: 1px solid #000;
+  padding: 25px;
+  text-align: center;
+  /* 文字置中 */
+}
+
+
+/*--------------查看申請紀錄按鈕------------*/
+.viewhistory{
+  width: 150px;
+  height: 44px;
+  color: black;
+  background-color: #fff;
+  border: 2px #2A5780;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  position: sticky;
+  left: 1000px;
+  top: 30px;
+}
+
+.viewhistory:hover {
+  color: white;
+  background-color: #2A5780;
+  border: 1px #2A5780 solid;
+  box-shadow: 5px 0px 10px #2A5780;
+}
+
+/*------------------申請區--------------------*/
+
+main.apply{
+      width: 300px;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: 10px auto;
+      border: 10px black solid;
+      border-radius: 8px;
+      position: absolute;
+}
+
+
+
+
+/* =============行事曆區============ */
+
+
+.cal{
+  width: 800px;
+  height: 800px;
+  background: white;
+  display: flex;
+  position: relative;
+  justify-content: center;
+  top:1px;
+  left: 40px;
+  margin: 10px;
+}
+#calendar{
+  width: 800px;
+  height: 800px;
+  display: flex;
+  position: relative;
+}
+
+
+
+
+
+/*======================= footer 區域 ============================*/
+footer.footer {
+  /* border: 1px solid black;  */
+  background-color: #207DCA;
+  /* width: 720px; */
+  margin: 10px auto 0 auto;
+
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  footer.footer {
+    width: 540px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  footer.footer {
+    width: 100%;
+  }
+}

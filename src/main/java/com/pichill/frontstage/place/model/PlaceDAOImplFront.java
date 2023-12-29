@@ -22,6 +22,23 @@ public class PlaceDAOImplFront  implements PlaceDAOFront  {
 			return factory.getCurrentSession();
 		}
 		
+		public int insert(Place place) {
+			// TODO Auto-generated method stub
+					Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+					try {
+						session.beginTransaction();
+						System.out.println("進入新增場地");
+						Integer id = (Integer) session.save(place);
+						session.getTransaction().commit();
+						return id;
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.out.println("新增場地失敗");
+						session.getTransaction().rollback();
+					}
+					return -1;
+		}
+		
 		@Override
 		public Place getPlaceByCourtID(Integer courtID) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
