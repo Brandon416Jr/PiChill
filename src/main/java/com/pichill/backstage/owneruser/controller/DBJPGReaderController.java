@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.backstage.owneruser.service.OwnerUserServiceBack;
+import com.pichill.manage.service.ManageService;
 import com.pichill.owneruser.entity.OwnerUser;
 @WebServlet("/owneruser/DBJPGReader")
 public class DBJPGReaderController extends HttpServlet {
@@ -22,12 +23,16 @@ public class DBJPGReaderController extends HttpServlet {
 		ServletOutputStream out = res.getOutputStream();
 
 		try {
+//			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+//			
+//			OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
+//			OwnerUser ownerUser = oUserSvcB.getOneOwnerUser(oUserID);
+//			req.setAttribute("ownerUser", ownerUser);
+//			out.write(oUserSvcB.getOneOwnerUser(oUserID).getoProfilePic());
 			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
-			
 			OwnerUserServiceBack oUserSvcB = new OwnerUserServiceBack();
-			OwnerUser ownerUser = oUserSvcB.getOneOwnerUser(oUserID);
-			req.setAttribute("ownerUser", ownerUser);
-			out.write(oUserSvcB.getOneOwnerUser(oUserID).getoProfilePic());
+			byte[] b = oUserSvcB.getOneOwnerUser(oUserID).getoProfilePic();
+			out.write(b);
 		} catch (Exception e) {
 //			e.printStackTrace();
 			InputStream in = getServletContext().getResourceAsStream("/resources/NoData/nopic.jpg");

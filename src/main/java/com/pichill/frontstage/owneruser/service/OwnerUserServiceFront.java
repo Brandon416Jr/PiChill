@@ -46,6 +46,26 @@ private final OwnerUserDAOFront dao;
 		return ownerUser;
 	}
 	
+	public OwnerUser updateOwnerUserByAll(Integer oUserID, String oUserName, String oName, String oPassword,
+			String oTelephone, String oAddress, String oEmail, byte[] oProfilePic, String compiled, String oBankCode, String oBankAccount) {
+		OwnerUser ownerUser = dao.findByPK(oUserID);
+		if (ownerUser != null) {
+			ownerUser.setoName(oName);
+			ownerUser.setoAddress(oAddress);
+			ownerUser.setoBankAccount(oBankAccount);
+			ownerUser.setoBankCode(oBankCode);
+			ownerUser.setoEmail(oEmail);
+			ownerUser.setoPassword(oPassword);
+			ownerUser.setoUserName(oUserName);
+			ownerUser.setoProfilePic(oProfilePic);
+			ownerUser.setcompiled(compiled);
+			ownerUser.setoTelephone(oTelephone);
+
+			dao.update(ownerUser);
+		}
+		return ownerUser;
+	}
+	
 	public OwnerUser updateOwnerUserByRsvdCnts(Integer oUserID, Integer rsvdCnts) {
 
 		OwnerUser ownerUser = dao.findByPK(oUserID); // 先獲取現有的 MemberVO 物件
