@@ -55,8 +55,7 @@ th, td {
 			<td>
 				<h3>文章搜尋結果 - listForm.jsp</h3>
 				<h4>
-					<a href="contactUs.jsp"><img src="images/back1.gif" width="100"
-						height="32" border="0">回首頁</a>
+					<a href="contactUs.jsp">回首頁</a>
 				</h4>
 			</td>
 		</tr>
@@ -78,7 +77,6 @@ th, td {
 			<th>刪除</th>
 		</tr>
 		<c:forEach var="contactUs" items="${list}">
-			<!-- 暫稱list之後再改 -->
 			<tr>
 				<td>${contactUs.formID}</td>
 				<td>${contactUs.gUserID}</td>

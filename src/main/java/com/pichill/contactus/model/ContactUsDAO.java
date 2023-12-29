@@ -7,11 +7,11 @@ import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
 
 public interface ContactUsDAO {
-	int add(ContactUs contactUs);
+	int add(ContactUs entity);
 
-	int update(ContactUs entity);
-
-	int delete(Integer formID);
+//	int update(ContactUs entity);
+//
+//	int delete(Integer formID);
 	
 	ContactUs getContactUsByFormID(Integer formID);
 //	ContactUs getContactUsByFormPurpose(String formPurpose);

@@ -100,7 +100,7 @@ h4 {
 		<li>
 			<FORM METHOD="post" ACTION="contactus.do">
 				<b>選擇要公告或一般事務:</b> <select size="1" name="formType">
-					<c:forEach var="form" items="${contactUsService.all}">
+					<c:forEach var="form" items="${contactUs.formType}">
 						<option value="${contactUs.formType}">${contactUs.formType}
 					</c:forEach>
 				</select> <input type="hidden" name="action" value="getOne_For_Display">

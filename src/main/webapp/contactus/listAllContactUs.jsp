@@ -3,7 +3,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
-<%-- 此頁練習採用 EL 的寫法取值 --%>
+
 
 <%
 ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
@@ -56,7 +56,7 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 <table id="table-1">
 	<tr><td>
 		 <h3>所有文章 - listAllContactUs.jsp</h3>
-		 <h4><a href="contactUs.jsp"><img src="images/back1.gif" width="100" height="32" border="0">回首頁</a></h4>
+		 <h4><a href="contactUs.jsp">回首頁</a></h4>
 	</td></tr>
 </table>
 
@@ -87,17 +87,17 @@ ContactUsServiceImpl contactUsService = new ContactUsServiceImpl();
 			<td>${contactUs.formType}</td>
 
 			<td>
-			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactUs/contactUs.do" style="margin-bottom: 0px;">
+			  <form method="post" action="<%=request.getContextPath()%>/contactUs.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="查看詳情">
-			     <input type="hidden" name="formID"  value="${contactUs.formID}">
-			     <input type="hidden" name="action"	value="getOne_For_Update"></FORM>
+			     <input type="hidden" name="formID" value="${contactUs.formID}">
+			     <input type="hidden" name="action"	value="getOne_For_display"></FORM>
 			</td>
-			<td>
+			<%-- <td>
 			  <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactus/contact.do" style="margin-bottom: 0px;">
 			     <input type="submit" value="新增">
 			     <input type="hidden" name="formID"  value="${contactUs.formID}">
 			     <input type="hidden" name="action" value="add"></FORM>
-			</td>
+			</td> --%>
 		</tr>
 	</c:forEach>
 </table>

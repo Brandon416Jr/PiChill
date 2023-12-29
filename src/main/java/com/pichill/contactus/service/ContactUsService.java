@@ -6,7 +6,7 @@ import com.pichill.contactus.entity.ContactUs;
 
 public interface ContactUsService {
 
-	ContactUs addContactUs(ContactUs contactUs);
+	ContactUs addContactUs();
 
 	ContactUs getOneContactUs(Integer formID);
 
@@ -15,4 +15,5 @@ public interface ContactUsService {
 	List<ContactUs> getByUID(Integer generalUser);
 
 	List<ContactUs> getByOID(Integer ownerUser);
+
 }

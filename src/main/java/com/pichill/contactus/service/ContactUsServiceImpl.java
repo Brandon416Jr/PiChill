@@ -5,6 +5,7 @@ import java.util.List;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.contactus.model.ContactUsDAO;
 import com.pichill.contactus.model.ContactUsDAOImpl;
+import com.pichill.owneruser.*;
 
 
 public class ContactUsServiceImpl implements ContactUsService {
@@ -17,13 +18,13 @@ public class ContactUsServiceImpl implements ContactUsService {
 		cDao = new ContactUsDAOImpl();
 	}
 		@Override
-		public ContactUs addContactUs(ContactUs contactUs) {
-			Integer id = cDao.add(contactUs);
-			System.out.println(id);
-			contactUs = cDao.getContactUsByFormID(id);
+		public ContactUs addContactUs() {
+			Integer id = cDao.add(null);
+//			System.out.println(id);
+			ContactUs contactUs = cDao.getContactUsByFormID(id);
 			System.out.println(contactUs);
 			return contactUs;
-//			return cDao.add(id);//返回給controller
+//			return cDao.add();//返回給controller
 		}
 
 //		public ContactUs addContactUs(String formPurpose,String formContent,Integer formtype) {
@@ -44,7 +45,7 @@ public class ContactUsServiceImpl implements ContactUsService {
 //		}
 		@Override
 		public ContactUs getOneContactUs(Integer formID) {
-			// TODO Auto-generated method stub
+			
 			return cDao.getContactUsByFormID(formID);
 		}
 		@Override
