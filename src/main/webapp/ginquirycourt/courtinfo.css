@@ -1,0 +1,323 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+    padding: 0;
+    background: #F7F7F7;
+    overflow: visible;
+}
+
+img{
+    max-width: 100%;
+}
+
+/*======================= header 區域 ============================*/
+header.header{
+    /* border: 1px solid black; */
+    background-color: #207DCA;
+    position: sticky;
+    margin: 0 auto 10px auto;
+    top: 0;
+    overflow: visible;
+    z-index: 3;
+}
+
+
+@media all and (min-width: 576px) and (max-width: 767.98px){
+    header.header{
+        width: 540px;
+    }
+}
+@media (max-width: 575.98px){
+    header.header{
+        width: 100%;
+    }
+}
+
+
+/*=== header導覽列 ===*/
+.nav-link{
+  color: white;
+  margin: 15px;
+}
+ul.nav.nav-pills{
+  position: relative;
+  right: 30px;
+}
+/*======================= body 區域 ============================*/
+div.main_content{
+    margin: 0 auto;
+    font-size: 0;
+    /* border: 1px solid red;   */
+}
+
+@media (min-width: 576px) and (max-width: 767.98px){
+    div.main_content{
+        width: 540px;
+    }
+}  
+
+@media (max-width: 575.98px){
+    div.main_content{
+        width: 100%;
+    }
+}
+
+body.p-3{
+  padding:0;
+}
+
+/*======================= aside 區域 ============================*/
+aside.aside{
+    width: 350px;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1rem;
+    margin-right: 10px;
+    /* border: 1px solid green; */
+}
+
+/*=== 我要預約(橘字) ===*/
+aside.aside h2.h6{
+  color: #FF9F1B;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 0 0 70px;
+}
+
+/*=== step1 step2===*/
+.my-2{
+  font-size: 16px;
+  color: #FF9F1B;
+  margin: 0 0 0 60px;
+}
+
+/*=== 下拉選單 ===*/
+.d-inline-flex{
+  font-size: 16px;
+  color: #207DCA;
+}
+
+aside.aside div.parent_container{
+  /* width: 350px; */
+  margin-right: 50px;
+  display: inline-block;
+  vertical-align: top; 
+  font-size: 1rem; 
+  box-sizing: border-box;
+}
+
+@media (max-width: 575.98px){
+    div.main_content{
+        width: 100%;
+    }
+}
+/*======================= main 區域 ============================*/
+main.main{
+    /* width: calc(100% - 350px - 10px); */
+    display: inline-block;
+    vertical-align: top;
+    font-size: 1rem;
+    /* border: 1px solid blue; */
+    box-sizing: border-box;
+    position: relative;
+    left:15%;
+}
+
+@media (max-width: 575.98px){
+    aside.aside,main.main{
+        display: block;
+        width: 100%;
+    }
+    aside.aside{
+        margin: 0 0 10px 0;
+    }
+    main.main{
+      margin: 0 auto;
+    }
+}  
+
+main.main div.col-md-5{
+  width: 400px;
+}
+
+main.main h2.h6{
+  color: #FF9F1B;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 24px 0 16px 8px;
+  width: 850px;
+}
+
+div.row{
+  width: 900px;
+}
+.h6{
+  color: #FF9F1B;
+  font-weight: bold;
+  font-size: 18px;
+}
+form.bararea{
+  margin: 0;
+}
+/* 預覽圖 */
+div.view{
+  border: 1px solid red;
+  height: 100px;
+  width: 100px;
+  position: fixed;
+  bottom: 470px;
+  left: 70%;
+}
+
+
+/* 預覽圖下bar */
+input.form-control{
+  width: 200px;
+  position: relative;
+  left: 65%;
+  bottom: 470px;
+  margin-top: 0px;
+  height: 35px;
+  padding:5px;
+}
+
+input#reserveDate{
+  width: 175px;
+  height: 30px;
+  padding: 1px 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+/*=== 送出按鈕 ===*/
+input.next{
+  border:0;
+  background-color:#FF9F1B;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  position: relative;
+  top: 30px;
+}
+
+input.next:hover{
+  color:#FF9F1B;
+  background-color:#fff;
+  border:2px #FF9F1B solid;
+}
+
+/* 聯絡我們按鈕 */
+#btn_click{
+  border:0;
+  background-color:#FF9F1B;
+  color:#fff;
+  border-radius:8px;
+  cursor:pointer;
+  position: relative;
+  top: 30px;
+  width:150px; 
+  height:44px
+}
+
+#btn_click:hover{
+  color:#FF9F1B;
+  background-color:#fff;
+  border:2px #FF9F1B solid;
+}
+
+main.main span.h6{
+  display: inline-block;
+  margin: 16px 0 0 0;
+}
+
+/* 60 */
+main.main span.num{
+  font-size: 50px;
+  color: #FF9F1B;
+  font-weight: bold;
+}
+
+main.main img{
+  width: 20px;
+  height: 20px;
+}
+
+/* 可用的π幣 */
+main.main span.word{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* 搜尋 */
+main.main div.keyword{
+  font-size: 12px;
+  padding-left: 42px;
+  padding-top: 5px;
+}
+
+main.main div#research{
+  display: inline-block;
+}
+
+/* 排序 */
+select#sortselect{
+  border: 1px solid grey;
+  width: 182.67px;
+  height: 30px;
+  padding: 3px 20px 3px 5px;
+  border-radius:2px;
+
+}
+
+main.main div#sort{
+  position: relative;
+  left: 690px;
+  bottom: 100px;
+}
+
+div#sort.col{
+  width:150px;
+}
+
+div#card{
+  position: relative;
+  bottom: 50px;
+}
+
+div.col a.btn{
+  width:65px;
+  height:32px;
+  font-size: 12px;
+  /* color: white; */
+  background: #FF9F1B;
+  border: grey;
+}
+/* 頁數 */
+ul.pagination{
+  position:relative;
+  margin-bottom: 0;
+  left: 40%;
+  width:170px;
+}
+/*======================= footer 區域 ============================*/
+footer.footer{
+    /* border: 1px solid black;  */
+    background-color: #207DCA;
+    /* width: 720px; */
+    margin: 10px auto 0 auto;
+    overflow: -moz-hidden-unscrollable;
+}
+
+@media (min-width: 576px) and (max-width: 767.98px){
+    footer.footer{
+        width: 540px;
+    }
+}
+
+@media (max-width: 575.98px){
+    footer.footer{
+        width: 100%;
+    }
+}
+
