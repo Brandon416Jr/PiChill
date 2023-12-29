@@ -62,7 +62,7 @@ System.out.println("ownerUser = " + ownerUser);
      <li class="nav-item"><a href="<%=request.getContextPath()%>/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
      <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
      <li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
-     <li class="nav-item"><a href="<%=request.getContextPath()%>/owneruser/owneruser.jsp" class="nav-link"> 
+     <li class="nav-item"><a href="<%=request.getContextPath()%>/testoUser/ouserlistOne.jsp" class="nav-link"> 
      <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
     </ul>
    </header>
@@ -74,39 +74,38 @@ System.out.println("ownerUser = " + ownerUser);
   <aside class="aside">
    <div class="parent_container">
     <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">企業會員中心</h2>
-    <nav class="small" id="toc">
-     <ul class="list-unstyled">
-
-                        <li class="my-2">
-                          <form method="POST" action="<%=request.getContextPath()%>/owneruser/owneruser.jsp"> 
-                             <button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
-                         </form>
+    	<nav class="small" id="toc">
+			<ul class="list-unstyled">
+            	<li class="my-2">
+                	<form method="POST" action="<%=request.getContextPath()%>/testoUser/ouserlistOne.jsp"> 
+                    	<button class="btn d-inline-flex align-items-center collapsed border-0">企業會員資料</button>
+                    </form>
                         </li>
                         <li class="my-2">
-                         <form method="POST" action="<%=request.getContextPath()%>/court/new_court.jsp"> 
-                             <button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
-                         </form>
+                        	<form method="POST" action="<%=request.getContextPath()%>/testCourt/new_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架球館</button>
+                        	</form>
                         </li>
                         <li class="my-2">
-                         <form method="POST" action="<%=request.getContextPath()%>/place/new_place.jsp">
-                          <button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
+                        	<form method="POST" action="<%=request.getContextPath()%>/testCourt/new_place.jsp">
+                        		<button class="btn d-inline-flex align-items-center collapsed border-0">申請上架場地</button>
                             </form> 
                         </li>                        
                         <li class="my-2">
-                            <form method="POST" action="<%=request.getContextPath()%>/court/all_court.jsp"> 
-                             <button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
-                         </form>
+                            <form method="POST" action="<%=request.getContextPath()%>/testCourt/all_court.jsp"> 
+                            	<button class="btn d-inline-flex align-items-center collapsed border-0">球館管理</button>
+                        	</form>
                         </li>
                         <br>
-
-      <li class="my-2">
-       <form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
-        <button class="btn btn-danger">登出</button>
-        <input type="hidden" name="action" value="logout">
-       </form>
-      </li>
-                    </ul>
-    </nav>
+						<li class="my-2">
+							<form method="POST" action="<%=request.getContextPath()%>/logoutfo.do"> 
+								<button class="btn btn-danger">登出</button>
+								<input type="hidden" name="action" value="logout">
+							</form>
+						</li>
+			</ul>
+    	</nav>
+    
    </div>
   </aside>
 
@@ -216,3 +215,30 @@ System.out.println("ownerUser = " + ownerUser);
        
    </main>
    </div>
+ <!----------------------------------------------- footer 區 ------------------------------------------------------->
+    <footer class="footer">
+
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3">
+                <a href="/"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+                    <img src="<%=request.getContextPath()%>/owneruser/pic/footerlogo.svg" alt="SVG"/>
+                </a>
+
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/otermOfUse.jsp" class="nav-link">使用者條款</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/oprivacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/odisclaimer.jsp" class="nav-link">免責條款</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="#" class="nav-link"></a></li>
+                </ul>
+            </header>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

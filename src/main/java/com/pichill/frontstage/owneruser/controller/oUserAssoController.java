@@ -207,7 +207,7 @@ public class oUserAssoController extends HttpServlet {
 		// 取得圖片
 		Part part = req.getPart("oProfilePic");
 		System.out.println(part);
-		InputStream in = req.getPart("oProfilePic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
+		InputStream in = res.getPart("oProfilePic").getInputStream(); //從javax.servlet.http.Part物件取得上傳檔案的InputStream
 		byte[] oProfilePic = null;
 		if(in.available()!=0){
 			oProfilePic = new byte[in.available()];
