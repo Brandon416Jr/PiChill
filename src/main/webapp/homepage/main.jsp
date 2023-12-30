@@ -116,7 +116,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
             <p class="fresh">公告</p>
                 <div class="texts">
                     <br>
-                    <span class="text">BOS運動館&emsp;&emsp;羽球場地費用調整價格,使用者反映失衡...</span><a class="see" href="" _blank>> see more</a>
+                    <span class="text">BOS運動館&emsp;&emsp;羽球場地費用調整價格,使用者反映失衡...</span><a class="see" href="<%=request.getContextPath()%>/homepage/announcement_single.jsp" _blank>> see more</a>
                     <p class="line">&emsp;&emsp;———————————————————————————————————————————</p>
                     <span class="text">陽明籃球館&emsp;&emsp;全國羽球排名賽5月在臺中舉行...</span><a class="see" href="" _blank>> see more</a>
                     <p class="line">&emsp;&emsp;———————————————————————————————————————————</p>
