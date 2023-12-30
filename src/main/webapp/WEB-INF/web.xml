@@ -19,12 +19,12 @@
 	<!-- <servlet-name>UploadServlet</servlet-name> -->
 	<!-- <servlet-class>com.example.UploadServlet</servlet-class> -->
 
-	<!-- <multipart-config> -->
+	<multipart-config>
 	<!-- <location>/tmp</location> -->
 	<!-- <max-file-size>20848820</max-file-size> -->
 	<!-- <max-request-size>418018841</max-request-size> -->
-	<!-- <file-size-threshold>1048576</file-size-threshold> -->
-	<!-- </multipart-config> -->
+	<file-size-threshold>500000</file-size-threshold>
+	</multipart-config>
 
 	<!-- </servlet> -->
 
@@ -94,9 +94,10 @@
 	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>GeneralUserLoginFilter</filter-name>
-<!-- 		<url-pattern>/homepage/main.jsp</url-pattern> -->
 		<url-pattern>/generaluser/generaluser.jsp</url-pattern>
 		<url-pattern>/generaluser/guserListOne.jsp</url-pattern>
+		<url-pattern>/contactUsForGUser/listAllContactUsForGUser.jsp</url-pattern>
+		<url-pattern>/contactUsForGUser/addContactUsForGUser.jsp</url-pattern>
 		<url-pattern>/reserveorder/listOneOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
@@ -107,5 +108,5 @@
 		<dispatcher>ERROR</dispatcher>
 		<dispatcher>ASYNC</dispatcher>
 	</filter-mapping>
-
+	
 </web-app>
