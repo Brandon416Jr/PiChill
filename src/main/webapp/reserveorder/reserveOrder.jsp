@@ -36,30 +36,31 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
 	
 </head>
 <body>
-	<!----------------------------------------------- header 區 ------------------------------------------------------->
+<!----------------------------------------------- header 區 ------------------------------------------------------->
     <header class="header">
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-1">
               <a href="/" class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <img src = "<%=request.getContextPath()%>/generaluser/pic/headerlogo.svg" alt="SVG"/>     
               </a>
-              
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/main.jsp" class="nav-link">首頁</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">公告</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">首頁</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/announcement/announcementHome.jsp" class="nav-link">公告</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/ginquirycourt/all_courtinfo.jsp" class="nav-link">場館資訊</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/post/forum.html" class="nav-link">論壇</a></li>
+                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link">
+                <img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                
               </ul>
-
+              
             </header>
           </div>
     </header>
     
     
-    <!----------------------------------------------- aside 區 ------------------------------------------------------->
+<!----------------------------------------------- aside 區 ------------------------------------------------------->
     <div class="main_content">
     <aside class="aside">
         <div class="parent_container">
@@ -82,7 +83,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
         </div>
     </aside>
     
-    <!----------------------------------------------- main 區 ------------------------------------------------------->
+<!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
     
     <%-- 錯誤表列 --%>
@@ -208,7 +209,7 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
     </main>
     </div>
     
-    <!----------------------------------------------- footer 區 ------------------------------------------------------->
+<!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
       
         <div class="container">
@@ -218,14 +219,13 @@ ReserveOrder reserveOrder = (ReserveOrder) request.getAttribute("reserveOrder");
             </a>
           
             <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-             
             </ul>
           </header>
         </div>
