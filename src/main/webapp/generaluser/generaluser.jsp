@@ -95,31 +95,37 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" enctype="multipart/form-data" class="bararea">
                 <span>會員編號:</span>
-                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>" disabled/>
+                <input type="text" id="guserID" name="guserID" value="${generalUser.getgUserID()}" disabled/>
                 <br><br>
                 <span>姓名:</span>
-                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "劉晉歆" : generalUser.getgName()%>"/>
+                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>" disabled/>
+                <input type="hidden" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>"/>
                 <br><br>
                 <span>帳號:</span>
-                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "jiojilellee" : generalUser.getgUsername()%>"/>
+                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>" disabled/>
+                <input type="hidden" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>"/>
                 <br><br>
                 <span>密碼:</span>
-                <input type="text" id="gPassword" name="gPassword" value="<%= (generalUser==null)? "v3PBw9Rs" : generalUser.getgPassword()%>"/>
+                <input type="text" id="gPassword" name="gPassword" value="<%= (generalUser==null)? "r27eeAVQDC" : generalUser.getgPassword()%>"/>
                 <br><br>
                 <span>暱稱:</span>
-                <input type="text" id="nicknameID" name="nicknameID" value="<%= (generalUser==null)? "bibibibibi" : generalUser.getNicknameID()%>"/>
+                <input type="text" id="nicknameID" name="nicknameID" value="<%= (generalUser==null)? "D180414511" : generalUser.getNicknameID()%>"/>
                 <br><br>
                 <span>電子信箱:</span>
-                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1306@gmail.com" : generalUser.getgEmail()%>"/>
+                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>" disabled/>
+                <input type="hidden" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>"/>
                 <br><br>
                 <span>身分證字號:</span>
-                <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "P130192176" : generalUser.getgIDNum()%>"/>
+                <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "D180414511" : generalUser.getgIDNum()%>" disabled/>
+                <input type="hidden" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "D180414511" : generalUser.getgIDNum()%>"/>
                 <br><br>
                 <span>性別:</span>
-                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? 0 : generalUser.getgGender()%>"/>
+                <input type="text" id="gGender" name="gGender" value="<%= (generalUser != null && generalUser.getgGender() == 0) ? '男' : '女' %>" disabled/>
+                <input type="hidden" id="gGender" name="gGender" value="<%= (generalUser != null && generalUser.getgGender() == 0) ? '男' : '女' %>"/>
                 <br><br>
                 <span>出生年月日:</span>
-                <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1983-07-26" : generalUser.getgBirth()%>"/>
+                <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1965-03-21" : generalUser.getgBirth()%>" disabled/>
+                <input type="hidden" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1965-03-21" : generalUser.getgBirth()%>"/>
                 <br><br>
                 <span>手機號碼:</span>
                 <input type="text" id="gTelephone" name="gTelephone" value="<%= (generalUser==null)? "0988059202" : generalUser.getgTelephone()%>"/>
@@ -135,7 +141,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                     <option value = "">請選擇鄉鎮市區</option>
                 </select>
                 <div><input type="text" id="gAddress" name="gAddress" placeholder="請輸入聯絡地址" 
-                value="<%= (generalUser==null) ? "新生北路3段40號6樓" : generalUser.getgAddress()%>"/></div>
+                value="<%= (generalUser==null) ? "寶山路12號" : generalUser.getgAddress()%>"/></div>
                 
                 <span hidden>帳號狀態:</span>
                 <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? 0 : generalUser.getStatus()%>"/>
@@ -235,7 +241,6 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
       $(document).ready(function(){
-      
         //第一層選單
           $.ajax({
               url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',              
@@ -256,7 +261,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
         //第二層選單
         $("#city").change(function(){
           cityvalue = $("#city").val();  //取值
-          $("#area").empty(); //清空上次的值
+//           $("#area").empty(); //清空上次的值
           $("#area").css("display","inline"); //顯現
           $.ajax({
             url:'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',

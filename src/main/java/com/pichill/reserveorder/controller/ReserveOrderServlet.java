@@ -137,6 +137,7 @@ public class ReserveOrderServlet extends HttpServlet {
 		OwnerUserService ownerUserSVC = new OwnerUserService();
 		OwnerUser ownerUser = ownerUserSVC.getOneOwnerUser(oUserID);
 		
+		
 		Integer totalCost = Integer.valueOf(req.getParameter("totalCost")!=null ? req.getParameter("totalCost") : "");
 		totalCost = totalCost * orderNum;
 		
