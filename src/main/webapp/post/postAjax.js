@@ -6,7 +6,7 @@ $(document).ready(function() {
 		dataType: "json",
 		url: "post.do?action=getUser",
 		success: function(data) {
-			console.log(data);
+			//			console.log(data);
 			if (data == null) {
 				$('#userID').val("null");
 				$('#userStatus').val("null");
@@ -25,6 +25,7 @@ $(document).ready(function() {
 
 		}
 	})
+	
 	$.ajax({
 		type: "GET",
 		url: "post.do",
@@ -350,27 +351,27 @@ $(document).ready(function() {
 			$('#deleteButton_o[data-post-id="' + postID + '"]').hide();
 		}
 	}
-	//=======+1預約球館=======
-	$("#post-list").on("click", "#pluscol", function() {
-		var reserveOrderID = $(this).attr("data-order-id");
-		console.log(reserveOrderID)
-		$.ajax({
-			type: "POST",
-			url: "post.do",
-			data: {
-				"action": "plus1",
-				"reserveOrderID": reserveOrderID
-			},
-			dataType: "Json",
-			success: function(data) {
-				window.location.href = "/PiChill/reserveorder/reserveOrderList.jsp"
-console.log(data.gUserID)
-			},
-			error: function(xhr, textStatus, errorThrown) {
-				console.log("Error: " + errorThrown);
-			}
-		})
-	})
+	//	//=======+1預約球館=======
+	//	$("#post-list").on("click", "#pluscol", function() {
+	//		var reserveOrderID = $(this).attr("data-order-id");
+	//		console.log(reserveOrderID)
+	//		$.ajax({
+	//			type: "POST",
+	//			url: "post.do",
+	//			data: {
+	//				"action": "plus1",
+	//				"reserveOrderID": reserveOrderID
+	//			},
+	//			dataType: "Json",
+	//			success: function(data) {
+	//				window.location.href = "/PiChill/reserveorder/reserveOrderList.jsp"
+	//console.log(data.gUserID)
+	//			},
+	//			error: function(xhr, textStatus, errorThrown) {
+	//				console.log("Error: " + errorThrown);
+	//			}
+	//		})
+	//	})
 	//=============新增文章(討論)===============//
 	$("#pb-discuss").on("click", function() {
 		var userID = $("#userID").val();
@@ -561,7 +562,7 @@ console.log(data.gUserID)
 		var newPostContent = $("#floatingTextarea4").val();
 		var groupType = $(".groupType").val();
 		var newPostPic = $("#p_file2")[0].files[0];
-		console.log(reserveOrderID);
+		//		console.log(reserveOrderID);
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
@@ -582,7 +583,6 @@ console.log(data.gUserID)
 		formData.append("postContent", newPostContent);
 		formData.append("groupType", groupType);
 		if (newPostPic) {
-			// 用户选择了图像文件，将其添加到 FormData 中
 			formData.append("postPic", newPostPic);
 		}
 		$.ajax({
@@ -706,10 +706,29 @@ console.log(data.gUserID)
 			}
 		});
 	}
-	// 初始化時獲取一次最新資料
-	//	$(document).ready(function() {
-	//		fetchAndDisplayLatestData();
-	//	});
+	//===========取得推撥館主的球館=====
+//	$("#create-post-button").on("click", function() {
+////		var oUserID = $('#userID').val();
+//		$.ajax({
+//			type: "POST",
+//			url: "post.do",
+//			data: {
+//				action: "get_courtName",
+////				"oUserID": "oUserID"
+//			},
+//			dataType: "json",
+//			success: function(data) {
+//				if (data && data.length > 0) {
+//					for (var i = 0; i < data.length; i++) {
+//						var courtName = data[i].courtName;
+//						//console.log(reserveDate)
+//						var newOption = $("<option></option>").val(courtName).text("選擇場館：" + courtName);
+//						$('#courtSelectOption').append(newOption);
+//					}
+//				}
+//			}
+//		})
+//	})
 	//===========新增文章(推撥)==========
 	$("#pb-promote").on("click", function() {
 		var newPostTitle = $("#floatingTextarea5").val();
@@ -725,6 +744,7 @@ console.log(data.gUserID)
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert_promote");
+		formData.append("oUserID", "oUserID");
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 
@@ -738,6 +758,7 @@ console.log(data.gUserID)
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
+				console.log(courtName)
 				fetchAndDisplayLatestData3(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime, response.ownerUser.oUserName, response.ownerUser.oProfilePic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
@@ -800,6 +821,7 @@ console.log(data.gUserID)
 	// ===找到原先的值(討論)===//
 	$("#post-list").on("click", ".edit_discuss", function() {
 		//		console.log("click");
+		document.getElementById('preview_edit').innerHTML = '';
 		var postID = $(this).data("post-id");
 		var saveButton = $(".save-button_discuss");
 
@@ -831,6 +853,7 @@ console.log(data.gUserID)
 				}
 
 				saveButton.attr("data-post-id", postData.post.postID);
+
 			},
 			error: function(xhr, status, error) {
 				console.error("Get Post Details Error:", status, error);
@@ -886,6 +909,8 @@ console.log(data.gUserID)
 				}
 
 				saveButton.attr("data-post-id", postData.post.postID);
+
+				//				document.getElementById('preview_edit2').innerHTML = '';
 			},
 			error: function(xhr, status, error) {
 				console.error("Get Post Details Error:", status, error);

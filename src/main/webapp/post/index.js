@@ -48,15 +48,7 @@
                 var reader = new FileReader(); // 用來讀取檔案
                 reader.readAsDataURL(file); // 讀取檔案
                 reader.addEventListener("load", function () {
-                    //console.log(reader.result);
-                    /*
-                    let img_node = document.createElement("img"); // <img>
-                    img_node.setAttribute("src", reader.result); // <img src="base64">
-                    img_node.setAttribute("class", "preview_img"); // <img src="base64" class="preview_img">
-                    preview_el.innerHTML = '';
-                    preview_el.append(img_node);
-                    */
-
+    
                     let img_str = '<img src="' + reader.result + '" class="preview_img">';
                     preview_el.innerHTML = img_str;
                 });
@@ -75,19 +67,13 @@
         window.addEventListener("load", function (e) {
             var preview_el = document.getElementById("preview2");
             var p_file_el = document.getElementById("p_file2");
+            var label = document.querySelector(".custom-file-label");
             var preview_img = function (file) {
 
                 var reader = new FileReader(); // 用來讀取檔案
                 reader.readAsDataURL(file); // 讀取檔案
                 reader.addEventListener("load", function () {
-//                    console.log(reader.result);
-                    /*
-                    let img_node = document.createElement("img"); // <img>
-                    img_node.setAttribute("src", reader.result); // <img src="base64">
-                    img_node.setAttribute("class", "preview_img"); // <img src="base64" class="preview_img">
-                    preview_el.innerHTML = '';
-                    preview_el.append(img_node);
-                    */
+
 
                     let img_str = '<img src="' + reader.result + '" class="preview_img">';
                     preview_el.innerHTML = img_str;
@@ -144,15 +130,7 @@
                 var reader = new FileReader(); // 用來讀取檔案
                 reader.readAsDataURL(file); // 讀取檔案
                 reader.addEventListener("load", function () {
-                    //console.log(reader.result);
-                    /*
-                    let img_node = document.createElement("img"); // <img>
-                    img_node.setAttribute("src", reader.result); // <img src="base64">
-                    img_node.setAttribute("class", "preview_img"); // <img src="base64" class="preview_img">
-                    preview_el.innerHTML = '';
-                    preview_el.append(img_node);
-                    */
-
+       
                     let img_str = '<img src="' + reader.result + '" class="preview_img">';
                     preview_el.innerHTML = img_str;
                 });

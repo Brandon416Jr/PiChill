@@ -29,11 +29,18 @@ $(document).ready(function() {
 		}
 	});
 	//=======顯示完整文章==========
-	$("#post-list").on("click", "#commentcol", function() {
-		var postID = $(this).attr("data-post-id");
+	$('#exampleModal6').on('hide.bs.modal', function() {
+		var currentURL = "http://localhost:8081/PiChill/post/forum.html";
+		history.replaceState({}, "", currentURL);
+	});
+	$('#exampleModal5').on('hide.bs.modal', function() {
+		var currentURL = "http://localhost:8081/PiChill/post/forum.html";
+		history.replaceState({}, "", currentURL);
+	});
+	function loadPostContent(postID) {
 		$.ajax({
 			type: "POST",
-			url: "http://localhost:8081/PiChill/post/post.do",
+			url: "post.do",
 			data: {
 				"action": "get_By_postID",
 				"postID": postID
@@ -112,7 +119,23 @@ $(document).ready(function() {
 				console.error("Get Post Details Error:", status, error);
 			}
 		});
-	});
+	}
+	$("#post-list").on("click", "#commentcol", function() {
+		var postID = $(this).attr("data-post-id");
+		var currentURL = "http://localhost:8081/PiChill/post/forum.html";
+		var newURL = currentURL + "?postID=" + postID;
+		history.pushState({}, "", newURL);
+		loadPostContent(postID);
+	})
+	//=======外部點擊連結顯示文章=========
+	$(document).ready(function() {
+		var urlParams = new URLSearchParams(window.location.search);
+		var postID = urlParams.get("postID");
+		if (postID) {
+			$('#exampleModal6').modal('show');
+			loadPostContent(postID);
+		}
+	})
 	$("#post-list").on("click", "#likecol", function() {
 		var postID = $(this).attr("data-post-id");
 		$.ajax({
