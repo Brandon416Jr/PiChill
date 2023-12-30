@@ -58,7 +58,7 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 			     <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forumowner.html" class="nav-link">論壇</a></li>
 			     <li class="nav-item"><a href="<%=request.getContextPath()%>/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
 			     <li class="nav-item"><a href="<%=request.getContextPath()%>/testoUser/ouserlistOne.jsp" class="nav-link"> 
-			     <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=${ownerUser.oUserID}"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
+			     <img src="<%=request.getContextPath()%>/owneruser/DBGifReader?oUserID=<%=ownerUser.getoUserID()%>"  alt="SVG" class="rounded-circle"/>企業會員中心</a></li>
 			    </ul>
 			</header>
 		</div>
@@ -197,14 +197,13 @@ OwnerUser ownerUser = (OwnerUser) session.getAttribute("ownerUser");
 					disabled> <font color="#FF0000" size="-1" nowrap="">電子信箱格式範例:abc@yahoo.com.tw</font>
 				<br> <br> <span>大頭貼:</span><br>
 				<div id="blob_holder">
-					<img
-						src="<%=request.getContextPath()%>/owneruserf/DBJPGReader?oUserID=${ownerUser.oUserID}"
+					<img src="<%=request.getContextPath()%>/owneruserf/DBJPGReader?oUserID=<%=ownerUser.getoUserID()%>"
 						width="300px">
 				</div>
 				<input type="file" id="oProfilePic" name="oProfilePic"
 					onclick="previewImage()" multiple="multiple" disabled /> <br>
 			<FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/ownerasso/owneruserassof.do?action=getOneUpdate&oUserID=${ownerUser.oUserID}"
+				ACTION="<%=request.getContextPath()%>/ownerasso/owneruserassof.do?action=getOneUpdate&oUserID=<%=ownerUser.getoUserID()%>"
 				enctype="multipart/form-data" class="bararea">
 				<input type="hidden" name="action" value="getOneUpdate"> <input
 					type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>">

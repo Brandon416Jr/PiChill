@@ -123,7 +123,9 @@ System.out.println("ownerUser = " + ownerUser);
     </ul>
    </c:if>
 
-
+<FORM METHOD="post"
+				ACTION="<%=request.getContextPath()%>/ownerasso/owneruserassof.do?action=update&oUserID=${ownerUser.oUserID}"
+				enctype="multipart/form-data" class="bararea">
 <%--   <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/ownerasso/owneruserassof.do" enctype="multipart/form-data" class="bararea"> --%>
             <span>企業會員編號:</span>
                 <input type="text" id="oUserID" name="oUserID" value="<%=ownerUser.getoUserID()%>" disabled/>
@@ -203,9 +205,7 @@ System.out.println("ownerUser = " + ownerUser);
                 <input type="file" id="oProfilePic" name="oProfilePic" onclick="previewImage()" multiple="multiple" />
                 <br>
                 
-                <FORM METHOD="post"
-				ACTION="<%=request.getContextPath()%>/ownerasso/owneruserassof.do?action=update&oUserID=${ownerUser.oUserID}"
-				enctype="multipart/form-data" class="bararea">
+                
 <!--                 <input type="hidden" name="action" value="update"> -->
 <%--     <input type="hidden" name="oUserID" value="<%=ownerUser.getoUserID()%>"> --%>
                 <input type="submit" id="next" value="送出修改" style="width:150px; height:44px;">
