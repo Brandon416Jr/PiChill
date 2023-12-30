@@ -37,11 +37,12 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
             
               <ul class="nav nav-pills">
                 <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">首頁</a></li>
-                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">公告</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/announcement/announcementHome.jsp" class="nav-link">公告</a></li>
                 <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">場館資訊</a></li>
                 <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
                 <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/post/forum.html"  class="nav-link">論壇</a></li>
-                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link">
+                <img src ="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
 
             </header>
@@ -80,51 +81,17 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
       
     <!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
-<!-- <p><a href="https://www.google.com.tw">ccc</a></p> -->
         <!------ 幻燈片 ------>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
             <div class="carousel-item active" data-bs-interval="2000">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="300"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="佔位符：第一張投影片"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#777"></rect>
-                <text x="50%" y="50%" fill="#555" dy=".3em">First slide</text>
-                </svg>
+            	<img src="<%=request.getContextPath()%>/generaluser/pic/basketball3.jpg" alt="First slide" width="823" height="300">
             </div>
             <div class="carousel-item" data-bs-interval="2000">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="300"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="佔位符：第二張投影片"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#666"></rect>
-                <text x="50%" y="50%" fill="#444" dy=".3em">Second slide</text>
-                </svg>
+                <img src="<%=request.getContextPath()%>/generaluser/pic/badminton.jpg" alt="Second slide" width="823" height="300">
             </div>
-            <div class="carousel-item">
-                <svg class="bd-placeholder-img bd-placeholder-img-lg d-block w-100"
-                width="800"
-                height="300"
-                xmlns="http://www.w3.org/2000/svg"
-                role="img"
-                aria-label="佔位符：第三張投影片"
-                preserveAspectRatio="xMidYMid slice"
-                focusable="false">
-                <title>Placeholder</title>
-                <rect width="100%" height="100%" fill="#555"></rect>
-                <text x="50%" y="50%" fill="#333" dy=".3em">Third slide</text>
-                </svg>
+            <div class="carousel-item" data-bs-interval="2000">
+                <img src="<%=request.getContextPath()%>/generaluser/pic/volleyball.jpg" alt="Third slide" width="823" height="300">
             </div>
             </div>
 
@@ -149,13 +116,13 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
             <p class="fresh">公告</p>
                 <div class="texts">
                     <br>
-                    <span class="text">OOO球館&emsp;&emsp;優惠時段</span><a class="see" href="" _blank>> see more</a>
+                    <span class="text">BOS運動館&emsp;&emsp;羽球場地費用調整價格,使用者反映失衡...</span><a class="see" href="" _blank>> see more</a>
                     <p class="line">&emsp;&emsp;———————————————————————————————————————————</p>
-                    <span class="text">OOO球館&emsp;&emsp;一起來運動</span><a class="see" href="" _blank>> see more</a>
+                    <span class="text">陽明籃球館&emsp;&emsp;全國羽球排名賽5月在臺中舉行...</span><a class="see" href="" _blank>> see more</a>
                     <p class="line">&emsp;&emsp;———————————————————————————————————————————</p>
-                    <span class="text">OOO球館&emsp;&emsp;讓你雙腳動起來</span><a class="see" href="" _blank>> see more</a>
+                    <span class="text">TFK羽球館&emsp;&emsp;夏日排球營即將開跑 報名從速...</span><a class="see" href="" _blank>> see more</a>
                     <p class="line">&emsp;&emsp;———————————————————————————————————————————</p>
-                    <span class="text">OOO球館&emsp;&emsp;飛奔健康人生</span><a class="see" href="" _blank>> see more</a><br><br>
+                    <span class="text">飛龍運動館&emsp;&emsp;臺北市政府體育局啟用新建籃球場...</span><a class="see" href="" _blank>> see more</a><br><br>
                     <br><br>
                     <input type="submit" id="more" value="查看更多" style="width:150px; height:44px;">
                 </div>
@@ -176,14 +143,13 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
             </a>
           
             <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-             
             </ul>
           </header>
         </div>

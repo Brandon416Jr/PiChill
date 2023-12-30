@@ -30,13 +30,13 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
               </a>
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link" id="head">首頁</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="head">公告</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link" id="head">我要預約</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" 
-                alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">首頁</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/announcement/announcementHome.jsp" class="nav-link">公告</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/ginquirycourt/all_courtinfo.jsp" class="nav-link">場館資訊</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/post/forum.html" class="nav-link">論壇</a></li>
+                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link">
+                <img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
                 
               </ul>
               
@@ -61,7 +61,11 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">聯絡我們</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
+                        </li>
+                        <li>&nbsp</li>
+                        <li class="my-2">
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
@@ -152,14 +156,13 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
             </a>
           
             <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-             
             </ul>
           </header>
         </div>
