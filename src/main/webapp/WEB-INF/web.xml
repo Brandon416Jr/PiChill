@@ -94,9 +94,10 @@
 	<!-- 配置過濾器 -->
 	<filter-mapping>
 		<filter-name>GeneralUserLoginFilter</filter-name>
-<!-- 		<url-pattern>/homepage/main.jsp</url-pattern> -->
 		<url-pattern>/generaluser/generaluser.jsp</url-pattern>
 		<url-pattern>/generaluser/guserListOne.jsp</url-pattern>
+		<url-pattern>/contactUsForGUser/listAllContactUsForGUser.jsp</url-pattern>
+		<url-pattern>/contactUsForGUser/addContactUsForGUser.jsp</url-pattern>
 		<url-pattern>/reserveorder/listOneOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrder.jsp</url-pattern>
 		<url-pattern>/reserveorder/reserveOrderList.jsp</url-pattern>
