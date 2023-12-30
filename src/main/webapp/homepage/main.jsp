@@ -36,12 +36,12 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
               
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/main.jsp" class="nav-link">首頁</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">公告</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/post/forum.html"  class="nav-link">論壇</a></li>
-                <li class="nav-item"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">首頁</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">公告</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">場館資訊</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/post/forum.html"  class="nav-link">論壇</a></li>
+                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
               </ul>
 
             </header>
@@ -80,7 +80,7 @@ GeneralUser generalUser = (GeneralUser) request.getAttribute("generalUser");
       
     <!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
-<p><a href="https://www.google.com.tw">ccc</a></p>
+<!-- <p><a href="https://www.google.com.tw">ccc</a></p> -->
         <!------ 幻燈片 ------>
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">

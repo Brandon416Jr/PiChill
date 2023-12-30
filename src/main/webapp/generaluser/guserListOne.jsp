@@ -30,12 +30,14 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
               </a>
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="main.jsp" class="nav-link" id="head">首頁</a></li>
+                <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link" id="head">首頁</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">公告</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">場館資訊</a></li>
                 <li class="nav-item"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link" id="head">我要預約</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" id="head">論壇</a></li>
-                <li class="nav-item"><a href="#" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="<%=request.getContextPath()%>/NoData/defaultpic.png" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" id="heads"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" 
+                alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                
               </ul>
               
             </header>

@@ -70,7 +70,7 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">查看聯絡我們紀錄</a>              
+                          <a class="asidearea" href="">聯絡我們紀錄</a>              
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">

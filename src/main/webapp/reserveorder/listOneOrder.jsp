@@ -65,7 +65,7 @@ pageContext.setAttribute("gUserID",gUserID);
 
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a
-						href="<%=request.getContextPath()%>/generaluser/main.jsp"
+						href="<%=request.getContextPath()%>/homepage/main.jsp"
 						class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">公告</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
@@ -99,6 +99,8 @@ pageContext.setAttribute("gUserID",gUserID);
 						</li>
 						<li>&nbsp;</li>
 						<li class="my-2"><a class="asidearea" href="">聯絡我們</a></li>
+						<li>&nbsp;</li>
+						<li class="my-2"><a class="asidearea" href="">聯絡我們紀錄</a></li>
 						<li>&nbsp;</li>
 						<li class="my-2">
 						  <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
