@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.pichill.manage.model.ManageDAO;
 import com.pichill.manage.model.ManageDAOImpl;
+import com.pichill.util.EncryptDataUtil;
 import com.pichill.manage.entity.Manage;
 
 public class ManageTest {
 	public static void main(String[] args) {
-//		ManageDAO dao = new ManageDAOImpl();
+		ManageDAO dao = new ManageDAOImpl();
 //
 //		// 新增
 //		Manage manage1 = new Manage();
@@ -29,28 +30,29 @@ public class ManageTest {
 //		manage1.setmStatus(null);
 //		dao.insert(manage1);
 		
-		// 修改
-//		Manage manage2 = new Manage();
-//		
-//		manage2.setmName("羅煒痾");
-//		manage2.setmUserName("chengogo");
-//		manage2.setmPassword("144kd4l4");
-//		manage2.setmBirth(java.sql.Date.valueOf("1997-12-12"));
-//		manage2.setmGender(0);
-//		manage2.setmTelephone("0922222222");
-//		manage2.setmEmgContact("陳致融");
-//		manage2.setmEmgPhone("0911111111");
-//		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
-//		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
-//		manage2.setmID("K736125622");
-//		manage2.setmEmail("fikoslfk555@gmail.com");
-//		manage2.setmProfilePic(null);
-//		manage2.setmStatus(1);
-//		manage2.setManageID(13000010);
-//		
-//		
-//		
-//		dao.update(manage2);
+//		 修改
+		Manage manage2 = new Manage();
+		String mPassword ="1111111111";
+		String rawPassword = EncryptDataUtil.encryptData(mPassword);
+		manage2.setmName("涂鴻欽");
+		manage2.setmUserName("1111111111");
+		manage2.setmPassword(rawPassword);
+		manage2.setmBirth(java.sql.Date.valueOf("1988-12-12"));
+		manage2.setmGender(0);
+		manage2.setmTelephone("0922456788");
+		manage2.setmEmgContact("陳致融");
+		manage2.setmEmgPhone("0911111111");
+		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
+		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
+		manage2.setmID("Q198019682");
+		manage2.setmEmail("clementine1476@gmail.com");
+		manage2.setmProfilePic(null);
+		manage2.setmStatus(0);
+		manage2.setManageID(13000010);
+		
+		
+		
+		dao.update(manage2);
 		
 		// 刪除
 //		dao.delete(13000012);

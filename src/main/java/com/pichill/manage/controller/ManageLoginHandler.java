@@ -4,6 +4,7 @@ import javax.servlet.annotation.WebServlet;
 
 import com.pichill.manage.entity.Manage;
 import com.pichill.manage.service.ManageService;
+import com.pichill.util.EncryptDataUtil;
 import com.pichill.util.VerifyCode;
 
 import javax.servlet.*;
@@ -55,6 +56,7 @@ public class ManageLoginHandler extends HttpServlet {
 		// 【取得使用者 帳號(account) 密碼(password)】
 		String mUserName = req.getParameter("mUserName");
 		String mPassword = req.getParameter("mPassword");
+		String encryptPassword = EncryptDataUtil.encryptData(mPassword);
 
 		Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
 		req.setAttribute("errorMsgs", errorMsgs);
@@ -83,7 +85,7 @@ public class ManageLoginHandler extends HttpServlet {
 
 		// 【檢查該帳號 , 密碼是否有效】
 
-		if (!allowAdmin(mUserName, mPassword)) { // 【帳號 , 密碼無效時】
+		if (!allowAdmin(mUserName, encryptPassword)) { // 【帳號 , 密碼無效時】
 
 			System.out.println("有進帳號密碼無效");
 			errorMsgs.put("mUserName", "查無資料");
@@ -122,10 +124,10 @@ public class ManageLoginHandler extends HttpServlet {
 			return;// 程式中斷
 		}
 
-		if (allowAdmin(mUserName, mPassword)) { // 帳號密碼有效
+		if (allowAdmin(mUserName, encryptPassword)) { // 帳號密碼有效
 			// 從資料庫獲取 adminStat 的值
 			ManageService manageSvc = new ManageService();
-			Manage manageStatus = manageSvc.userAuth(mUserName, mPassword);
+			Manage manageStatus = manageSvc.userAuth(mUserName, encryptPassword);
 			if (manageStatus != null) {
 				Integer mStatus = manageStatus.getmStatus();
 				// 設置mStatus 属性的值到 HttpSession

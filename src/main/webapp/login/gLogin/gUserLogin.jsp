@@ -1,5 +1,23 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+// 初始化帳號、密碼
+String gUsername = "";
+String gPassword = "";
+// 獲取cookie中帳密
+Cookie[] cookies = request.getCookies();
+// 如果cookie不為空值就取出帳密
+if (cookies != null) {
+	for(Cookie cookie: cookies) {
+		String name = cookie.getName();
+		if ("gUsername".equals(name)) {
+			gUsername = cookie.getValue();
+		} else if ("gPassword".equals(name)) {
+			gPassword = cookie.getValue();
+		}
+	}
+}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -104,7 +122,7 @@ label.pwd-see2 {
 										id="valistr_msg"></span>
 								</div>
 								<div class="login-checkbox">
-									<label> <input type="checkbox" name="remember" />記住我的帳號
+									<label> <input type="checkbox" name="saveAccount" />記住我的帳號
 									</label> <label> <a
 										href="${pageContext.request.contextPath }/login/gLogin/gUserForgotPwd.jsp">忘記密碼?</a>
 									</label>
