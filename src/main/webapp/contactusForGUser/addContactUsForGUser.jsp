@@ -8,7 +8,7 @@
 <%@ page import="java.util.*"%>
 
 <%
-//¨£com.emp.controller.EmpServlet.java²Ä238¦æ¦s¤JreqªºempVOª«¥ó (¦¹¬°¿é¤J®æ¦¡¦³¿ù»~®ÉªºempVOª«¥ó)
+//è¦‹com.emp.controller.EmpServlet.javaç¬¬238è¡Œå­˜å…¥reqçš„empVOç‰©ä»¶ (æ­¤ç‚ºè¼¸å…¥æ ¼å¼æœ‰éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
 ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 GeneralUser generalUser = (GeneralUser) session.getAttribute("generalUser");
 System.out.println("generalUser is " + generalUser);
@@ -27,7 +27,7 @@ pageContext.setAttribute("gUserID", gUserID);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>generalUser</title>
-<!----------------¶×¤Jjquery ------------------------>
+<!----------------åŒ¯å…¥jquery ------------------------>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 	crossorigin="anonymous"></script>
@@ -41,7 +41,8 @@ pageContext.setAttribute("gUserID", gUserID);
 
 </head>
 <body>
-	<!----------------------------------------------- header °Ï ------------------------------------------------------->
+
+	<!----------------------------------------------- header å€ ------------------------------------------------------->
 	<header class="header">
 		<div class="container">
 			<header class="d-flex flex-wrap justify-content-center py-1">
@@ -54,14 +55,14 @@ pageContext.setAttribute("gUserID", gUserID);
 
 
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a href="main.html" class="nav-link">­º­¶</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">¤½§i</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">³õÀ]¸ê°T</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">§Ú­n¹w¬ù</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">½×¾Â</a></li>
+					<li class="nav-item"><a href="main.html" class="nav-link">é¦–é </a></li>
+					<li class="nav-item"><a href="#" class="nav-link">å…¬å‘Š</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">å ´é¤¨è³‡è¨Š</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">æˆ‘è¦é ç´„</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">è«–å£‡</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"><img
 							src="<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}"
-							alt="SVG" class="rounded-circle" /> ·|­û¤¤¤ß</a></li>
+							alt="SVG" class="rounded-circle" /> æœƒå“¡ä¸­å¿ƒ</a></li>
 				</ul>
 
 
@@ -69,27 +70,27 @@ pageContext.setAttribute("gUserID", gUserID);
 		</div>
 	</header>
 
-	<!----------------------------------------------- aside °Ï ------------------------------------------------------->
+	<!----------------------------------------------- aside å€ ------------------------------------------------------->
 	<div class="main_content">
 		<aside class="aside">
 			<div class="parent_container">
-				<h2 class="h6 pt-4 pb-3 mb-4 border-bottom" id="ah6">·|­û¤¤¤ß</h2>
+				<h2 class="h6 pt-4 pb-3 mb-4 border-bottom" id="ah6">æœƒå“¡ä¸­å¿ƒ</h2>
 				<nav class="small" id="toc">
 					<ul class="list-unstyled">
 						<li class="my-2"><a class="asidearea"
-							href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp">·|­û¸ê®Æ</a>
+							href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp">æœƒå“¡è³‡æ–™</a>
 						</li>
 						<li>&nbsp</li>
-						<li class="my-2"><a class="asidearea" href="">²yÀ]¹w¬ù¬ö¿ı</a></li>
+						<li class="my-2"><a class="asidearea" href="">çƒé¤¨é ç´„ç´€éŒ„</a></li>
 						<li>&nbsp</li>
-						<li class="my-2"><a class="asidearea" href="">Ápµ¸§Ú­Ì</a></li>
+						<li class="my-2"><a class="asidearea" href="">è¯çµ¡æˆ‘å€‘</a></li>
 						<li>&nbsp</li>
-						<li class="my-2"><a class="asidearea" href="">Ápµ¸§Ú­Ì¬ö¿ı</a></li>
+						<li class="my-2"><a class="asidearea" href="">è¯çµ¡æˆ‘å€‘ç´€éŒ„</a></li>
 						<li>&nbsp</li>
 						<li class="my-2">
 							<form method="POST"
 								action="<%=request.getContextPath()%>/logoutfg.do">
-								<button class="asidearea">µn¥X</button>
+								<button class="asidearea">ç™»å‡º</button>
 								<input type="hidden" name="action" value="logout">
 							</form>
 						</li>
@@ -98,10 +99,11 @@ pageContext.setAttribute("gUserID", gUserID);
 			</div>
 		</aside>
 
-		<!----------------------------------------------- main °Ï ------------------------------------------------------->
+		<!----------------------------------------------- main å€ ------------------------------------------------------->
 		<main class="main">
 			<br>
 			<!--<br>
+
             <br> -->
 			<h2 class="h6 pt-4 pb-3 mb-4 border-bottom" id="h2">CONTACT US</h2>
 			<br>
@@ -110,20 +112,20 @@ pageContext.setAttribute("gUserID", gUserID);
 				action="<%=request.getContextPath()%>/contactUs.do" name="action">
 
 				<div>
-					<label for="formType" class="questiontype">°İÃDÃş§O : </label><br>
-					<input type="radio" id="other" name="questionType" value="¨ä¥L"
-						checked required> <label for="other" class="question">¤@¯ë°İÃD</label>
+					<label for="formType" class="questiontype">å•é¡Œé¡åˆ¥ : </label><br>
+					<input type="radio" id="other" name="questionType" value="å…¶ä»–"
+						checked required> <label for="other" class="question">ä¸€èˆ¬å•é¡Œ</label>
 				</div>
 				<br>
 
 				<div>
-					<label for="subject" class="title">¥D¦® : </label> <input type="text"
+					<label for="subject" class="title">ä¸»æ—¨ : </label> <input type="text"
 						id="subject" name="subject" required>
 				</div>
 				<br>
 
 				<div>
-					<label for="imageUpload" class="imageUpload">¤W¶Ç¹Ï¤ù : </label><br>
+					<label for="imageUpload" class="imageUpload">ä¸Šå‚³åœ–ç‰‡ : </label><br>
 					<input type="file" id="imageUpload" name="imageUpload[]"
 						accept="image/*" multiple>
 				</div>
@@ -133,16 +135,16 @@ pageContext.setAttribute("gUserID", gUserID);
 				<br> <br>
 
 				<div>
-					<label for="problemDescription" id="content">½Ğ¤j­P±Ô­z°İÃD¤º®e : </label><br>
+					<label for="problemDescription" id="content">è«‹å¤§è‡´æ•˜è¿°å•é¡Œå…§å®¹ : </label><br>
 					<textarea id="problemDescription" name="problemDescription"
 						rows="6" style="height: 300px; width: 500px" required></textarea>
 				</div>
 
-				<!-------- °e¥X«ö¶s  ------->
+				<!-------- é€å‡ºæŒ‰éˆ•  ------->
 				<input type="hidden" name="action" value="insert_gUser"> <input
-					type="submit" name="action" value="°e¥X"
+					type="submit" name="action" value="é€å‡º"
 					style="width: 150px; height: 44px; border: 0; background-color: #FF9F1B; color: #fff; border-radius: 8px; cursor: pointer; margin-top: 50px; margin-bottom: 130px;">
-				<!-- <input type="button" value="°e¥X" name="action" style="width: 150px; height: 44px;"> -->
+				<!-- <input type="button" value="é€å‡º" name="action" style="width: 150px; height: 44px;"> -->
 			</form>
 
 		</main>
@@ -150,7 +152,7 @@ pageContext.setAttribute("gUserID", gUserID);
 
 
 
-	<!----------------------------------------------- footer °Ï ------------------------------------------------------->
+	<!----------------------------------------------- footer å€ ------------------------------------------------------->
 	<footer class="footer">
 
 		<div class="container">
@@ -163,11 +165,11 @@ pageContext.setAttribute("gUserID", gUserID);
 				</a>
 
 				<ul class="nav nav-pillss">
-					<li class="nav-item"><a href="#" class="nav-link">¨Ï¥ÎªÌ±ø´Ú</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">ä½¿ç”¨è€…æ¢æ¬¾</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Áô¨pÅv¬Fµ¦</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">éš±ç§æ¬Šæ”¿ç­–</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-					<li class="nav-item"><a href="#" class="nav-link">§K³d±ø´Ú</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">å…è²¬æ¢æ¬¾</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
 
@@ -182,7 +184,7 @@ pageContext.setAttribute("gUserID", gUserID);
 		$(document)
 				.ready(
 						function() {
-							// ¹wÄı¤W¶Çªº¹Ï¤ù
+							// é è¦½ä¸Šå‚³çš„åœ–ç‰‡
 							$('#imageUpload')
 									.on(
 											'change',
@@ -195,14 +197,14 @@ pageContext.setAttribute("gUserID", gUserID);
 															event) {
 														$('#imagePreviews')
 																.append(
-																		'<div class="image-preview"><img src="' + event.target.result + '"><button class="delete-image">§R°£</button></div>');
+																		'<div class="image-preview"><img src="' + event.target.result + '"><button class="delete-image">åˆªé™¤</button></div>');
 													}
 													reader
 															.readAsDataURL(files[i]);
 												}
 											});
 
-							// §R°£¹Ï¤ù¹wÄı
+							// åˆªé™¤åœ–ç‰‡é è¦½
 							$(document).on(
 									'click',
 									'.delete-image',
@@ -211,32 +213,32 @@ pageContext.setAttribute("gUserID", gUserID);
 												.remove();
 									});
 
-							// ªí³æ´£¥æ
+							// è¡¨å–®æäº¤
 							$('#contactForm').button(
 									function(e) {
 										e.preventDefault();
-										// ¦b¦¹³B³B²zªí³æ´£¥æªºµ{¦¡½X¡A±z¥i¥H¨Ï¥Î AJAX ©Î¨ä¥L¤è¦¡¶i¦æ«áÄò³B²z
-										// ¨Ò¦p¡A±z¥i¥H¨Ï¥Î jQuery ªº $.ajax() ¤èªk¨Óµo°eªí³æ¼Æ¾Ú¨ì¦øªA¾¹
-										// Àò¨úªí³æ¼Æ¾Ú¡G$(this).serialize()
-										// Àò¨ú¹Ï¤ù¼Æ¾Ú¡G¨Ï¥Î FormData
+										// åœ¨æ­¤è™•è™•ç†è¡¨å–®æäº¤çš„ç¨‹å¼ç¢¼ï¼Œæ‚¨å¯ä»¥ä½¿ç”¨ AJAX æˆ–å…¶ä»–æ–¹å¼é€²è¡Œå¾ŒçºŒè™•ç†
+										// ä¾‹å¦‚ï¼Œæ‚¨å¯ä»¥ä½¿ç”¨ jQuery çš„ $.ajax() æ–¹æ³•ä¾†ç™¼é€è¡¨å–®æ•¸æ“šåˆ°ä¼ºæœå™¨
+										// ç²å–è¡¨å–®æ•¸æ“šï¼š$(this).serialize()
+										// ç²å–åœ–ç‰‡æ•¸æ“šï¼šä½¿ç”¨ FormData
 
-										// ¥Ü½d¡G
+										// ç¤ºç¯„ï¼š
 										var formData = new FormData(this);
 										$.ajax({
-											url : 'your_backend_endpoint', // §ó§ï¬°±zªº«áºİºİÂI
+											url : 'your_backend_endpoint', // æ›´æ”¹ç‚ºæ‚¨çš„å¾Œç«¯ç«¯é»
 											type : 'POST',
 											data : formData,
 											processData : false,
 											contentType : false,
 											success : function(response) {
-												console.log('ªí³æ¤w¦¨¥\´£¥æ¡I¦øªA¾¹¦^À³¡G',
+												console.log('è¡¨å–®å·²æˆåŠŸæäº¤ï¼ä¼ºæœå™¨å›æ‡‰ï¼š',
 														response);
-												// ¦b¦¹³B²K¥[¦¨¥\´£¥æ«áªº³B²z¤è¦¡¡A¨Ò¦pÅã¥Ü¦¨¥\°T®§©Î­«¸mªí³æ
+												// åœ¨æ­¤è™•æ·»åŠ æˆåŠŸæäº¤å¾Œçš„è™•ç†æ–¹å¼ï¼Œä¾‹å¦‚é¡¯ç¤ºæˆåŠŸè¨Šæ¯æˆ–é‡ç½®è¡¨å–®
 											},
 											error : function(error) {
-												console.error('ªí³æ´£¥æ¥¢±Ñ¡I¿ù»~°T®§¡G',
+												console.error('è¡¨å–®æäº¤å¤±æ•—ï¼éŒ¯èª¤è¨Šæ¯ï¼š',
 														error);
-												// ¦b¦¹³B²K¥[¥¢±Ñ´£¥æ«áªº³B²z¤è¦¡¡A¨Ò¦pÅã¥Ü¿ù»~°T®§©Î´£¨Ñ­«·s¹Á¸Õ
+												// åœ¨æ­¤è™•æ·»åŠ å¤±æ•—æäº¤å¾Œçš„è™•ç†æ–¹å¼ï¼Œä¾‹å¦‚é¡¯ç¤ºéŒ¯èª¤è¨Šæ¯æˆ–æä¾›é‡æ–°å˜—è©¦
 											}
 										});
 									});

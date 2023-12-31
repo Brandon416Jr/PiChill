@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -25,6 +26,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.pichill.court.Court;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.generaluser.service.GeneralUserService;
 import com.pichill.owneruser.entity.OwnerUser;
@@ -73,7 +75,7 @@ public class PostServlet2 extends HttpServlet {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonElement postJsonElement = gson.toJsonTree(post);
 			jsonResult.add("post", postJsonElement);
-
+System.out.println("PPPPP"+postJsonElement);
 			// Send the JSON response to the client directly
 			PrintWriter out = res.getWriter();
 			gson.toJson(jsonResult, out);
@@ -135,11 +137,12 @@ public class PostServlet2 extends HttpServlet {
 		// ======放session值(ouser)======
 		if ("getoUser".equals(action)) {
 			HttpSession session = req.getSession();
-			OwnerUser ownerUser2 = (OwnerUser) session.getAttribute("OwnerUser");
+			OwnerUser ownerUser2 = (OwnerUser) session.getAttribute("ownerUser");
 //				System.out.println("GGGGGGG=="+generalUs2);
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			String json = gson.toJson(ownerUser2);
 			PrintWriter out = res.getWriter();
+			System.out.println("JJJJJ"+json);
 			out.print(json);
 			out.flush();
 		}
@@ -227,7 +230,7 @@ public class PostServlet2 extends HttpServlet {
 			String json = gson.toJson(resultList);
 			PrintWriter out = res.getWriter();
 			out.print(json);
-			System.out.println("json===" + json);
+//			System.out.println("json===" + json);
 			out.flush();
 		}
 		if ("insert_group".equals(action)) {
@@ -294,13 +297,13 @@ public class PostServlet2 extends HttpServlet {
 			generalUser.setgPostAmount(gPostAmount);
 			generalUser = gUserSVC.updateByPostAmount(gUserID, gPostAmount);
 		}
-		if ("plus1".equals(action)) {
-			Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
-			ReserveOrderService roSVC = new ReserveOrderService();
-			ReserveOrder ro = roSVC.getOneReserveOrder(reserveOrderID);
-			 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
-			    // 使用Gson将ro对象转换为JSON字符串
-			 JsonObject jsonData = new JsonObject();
+//		if ("plus1".equals(action)) {
+//			Integer reserveOrderID = Integer.valueOf(req.getParameter("reserveOrderID"));
+//			ReserveOrderService roSVC = new ReserveOrderService();
+//			ReserveOrder ro = roSVC.getOneReserveOrder(reserveOrderID);
+//			 Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//			    // 使用Gson将ro对象转换为JSON字符串
+//			 JsonObject jsonData = new JsonObject();
 //			    jsonData.addProperty("reserveOrderID", ro.getReserveOrderID());
 //			    jsonData.addProperty("gUserID", ro.getGeneralUser().getgUserID());
 //			    jsonData.addProperty("gName", ro.getGeneralUser().getgName());
@@ -316,13 +319,31 @@ public class PostServlet2 extends HttpServlet {
 //			    jsonData.addProperty("orderNum", orderNum);
 //			    jsonData.addProperty("totalCost", totalCost);
 
-			    req.getSession().setAttribute("newReserveOrder",ro);
-			    String jsonStr = gson.toJson(jsonData);
-System.out.println("JJJJJ"+jsonStr);
-			    PrintWriter out = res.getWriter();
-			    out.print(jsonStr);
-			    out.flush();
-		}
+//			    req.getSession().setAttribute("newReserveOrder",ro);
+//			    String jsonStr = gson.toJson(jsonData);
+//System.out.println("JJJJJ"+jsonStr);
+//			    PrintWriter out = res.getWriter();
+//			    out.print(jsonStr);
+//			    out.flush();
+//		}
+//		if("get_courtName".equals(action)) {
+////			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
+//			System.out.println("here");
+//			OwnerUserService oUserSVC = new OwnerUserService();
+//			OwnerUser ownerUser = oUserSVC.getOneOwnerUser(12000003);
+//			Set<Court> courts = ownerUser.getCourt();
+//			for (Court court : courts) {
+//			    String courtName = court.getCourtName();
+//			    // 在这里你可以使用 courtName
+//			    System.out.println("Court Name: " + courtName);
+//			}
+//			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+//			System.out.println("????"+courts);
+//			String json = gson.toJson(courts);
+//			PrintWriter out = res.getWriter();
+//			out.print(json);
+//			out.flush();
+//		}
 		if ("insert_promote".equals(action)) {
 			Integer oUserID = Integer.valueOf(req.getParameter("oUserID"));
 			String postTitle = req.getParameter("postTitle");
@@ -342,7 +363,7 @@ System.out.println("JJJJJ"+jsonStr);
 			String jsonAddedPost = gson.toJson(addedPost);
 //			System.out.println("JJJJ" +jsonOwnerUser+"GGGG"+ jsonAddedPost);
 			PrintWriter out = res.getWriter();
-			out.print("{\"generalUser\":" + jsonOwnerUser + ",\"addedPost\":" + jsonAddedPost + "}");
+			out.print("{\"ownerUser\":" + jsonOwnerUser + ",\"addedPost\":" + jsonAddedPost + "}");
 			out.flush();
 
 			Integer oPostAmount = post.getOwnerUser().getoPostAmount();

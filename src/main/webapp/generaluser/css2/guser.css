@@ -21,7 +21,7 @@ aside.aside a.asidearea:hover{
 
 /* input 設定 */
 input{
-    width: 213px;
+	width: 300px;
 }
 input#guserID{
     position: relative;
@@ -54,7 +54,6 @@ input#gIDNum{
 input#gGender{
     position: relative;
     left: 50px;
-    width: 213px;
     height: 30px;
 }
 input#gBirth{
