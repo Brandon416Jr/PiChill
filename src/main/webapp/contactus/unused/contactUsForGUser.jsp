@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.contactus.model.*"%>
 <%@ page import="java.util.*"%>
@@ -133,20 +133,21 @@ ContactUs contactUs = (ContactUs) request.getAttribute("contactUs");
 
 				<div>
 					<label for="problemDescription">請大致敘述問題內容</label><br>
-					<textarea id="problemDescription" name="problemDescription"
-						rows="6" style="height: 300px; width: 500px" required></textarea>
+					<textarea id="problemDescription" name="getfomrContent"
+						rows="6" style="height: 300px; width: 500px" >
+				 <%=(contactUs == null) ? "教室裡有人嗎？" : contactUs.getformContent()%></textarea>
 				</div>
+			<!-------- 送出按鈕  ------->
+			<input type="button" value="getOne_For_Display" name="查詢"
+				style="width: 150px; height: 44px;"> 
+				<input type="submit"
+				value="取消" name="按鈕名稱" style="width: 150px; height: 44px;">
 
 			</form>
 
 
 
 
-			<!-------- 送出按鈕  ------->
-			<input type="button" value="getOne_For_Display" name="查詢"
-				style="width: 150px; height: 44px;"> 
-				<input type="submit"
-				value="取消" name="按鈕名稱" style="width: 150px; height: 44px;">
 
 		</main>
 	</div>

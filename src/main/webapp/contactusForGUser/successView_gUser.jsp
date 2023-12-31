@@ -86,7 +86,7 @@
 		</aside>
 		<main class="main">
             <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">感謝您提供寶貴的意見，我們將盡快回覆您</h2>
-            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactus/addContactUs.jsp" enctype="multipart/form-data" class="bararea">  
+            <FORM METHOD="post" ACTION="<%=request.getContextPath()%>/contactusForGUser/addContactUsForGUser.jsp" enctype="multipart/form-data" class="bararea">  
                 <%-- <input type="hidden" name="action" value="getOne_For_Update">
 				<input type="hidden" name="gUserID" value="${generalUser.gUserID}"> --%>
                 <input type="submit" id="next" value="回首頁" style="width:150px; height:44px;">
