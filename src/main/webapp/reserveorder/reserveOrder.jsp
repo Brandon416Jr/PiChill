@@ -490,7 +490,7 @@ $(document).ready(function() {
     var totalCost = $("#totalCost").val();
     var oUserID = $("#oUserID").val();
 
-    alert(totalCost);
+	//alert(totalCost);
     // 使用 AJAX 發送 POST 請求
     $.ajax({
       action: "insert",

@@ -64,11 +64,11 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactusForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactusForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
@@ -102,12 +102,10 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                 <input type="text" id="guserID" name="guserID" value="${generalUser.getgUserID()}" disabled/>
                 <br><br>
                 <span>姓名:</span>
-                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>" disabled/>
-                <input type="hidden" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>"/>
+                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>"/>
                 <br><br>
                 <span>帳號:</span>
-                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>" disabled/>
-                <input type="hidden" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>"/>
+                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>"/>
                 <br><br>
                 <span>密碼:</span>
                 <input type="text" id="gPassword" name="gPassword" value="<%= (generalUser==null)? "r27eeAVQDC" : generalUser.getgPassword()%>"/>
@@ -116,8 +114,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                 <input type="text" id="nicknameID" name="nicknameID" value="<%= (generalUser==null)? "D180414511" : generalUser.getNicknameID()%>"/>
                 <br><br>
                 <span>電子信箱:</span>
-                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>" disabled/>
-                <input type="hidden" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>"/>
+                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>"/>
                 <br><br>
                 <span>身分證字號:</span>
                 <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "D180414511" : generalUser.getgIDNum()%>" disabled/>
