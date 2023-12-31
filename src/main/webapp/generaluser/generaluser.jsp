@@ -24,31 +24,31 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
   
 </head>
 <body>
-    <!----------------------------------------------- header 區 ------------------------------------------------------->
+<!----------------------------------------------- header 區 ------------------------------------------------------->
     <header class="header">
         <div class="container">
             <header class="d-flex flex-wrap justify-content-center py-1">
               <a href="/" class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
                 <img src = "<%=request.getContextPath()%>/generaluser/pic/headerlogo.svg" alt="SVG"/>     
               </a>
-              
             
               <ul class="nav nav-pills">
-                <li class="nav-item"><a href="main.html" class="nav-link">首頁</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">公告</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/homepage/main.jsp" class="nav-link">首頁</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/announcement/announcementHome.jsp" class="nav-link">公告</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/ginquirycourt/all_courtinfo.jsp" class="nav-link">場館資訊</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/reserveorder/reserveOrder.jsp" class="nav-link">我要預約</a></li>
+                <li class="nav-item" id="head"><a href="<%=request.getContextPath()%>/post/forum.html" class="nav-link">論壇</a></li>
+                <li class="nav-item" id="head1"><a href="<%=request.getContextPath()%>/generaluser/guserListOne.jsp" class="nav-link">
+                <img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
+                
               </ul>
-
               
             </header>
           </div>
     </header>
       
       
-    <!----------------------------------------------- aside 區 ------------------------------------------------------->
+<!----------------------------------------------- aside 區 ------------------------------------------------------->
     <div class="main_content">
     <aside class="aside">
         <div class="parent_container">
@@ -60,25 +60,29 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">球館預約紀錄</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/reserveorder/listOneOrder.jsp">球館預約紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="">聯絡我們</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                        <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
+                        </li>
+                        <li>&nbsp</li>
+                        <li class="my-2">
+                          <form method="POST" action="<%=request.getContextPath()%>/logoutfg.do"> 
 	        				<button class="asidearea">登出</button>
 	        				<input type="hidden" name="action" value="logout">
-       					</form>                         
+       					  </form>                             
                         </li>
                     </ul>
                 </nav>
         </div>
     </aside>
 
-    <!----------------------------------------------- main 區 ------------------------------------------------------->
+<!----------------------------------------------- main 區 ------------------------------------------------------->
     <main class="main">
             <h2 class="h6 pt-4 pb-3 mb-4 border-bottom">會員資料</h2>
             
@@ -95,31 +99,37 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 
 			<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/generaluser/generaluser.do" enctype="multipart/form-data" class="bararea">
                 <span>會員編號:</span>
-                <input type="text" id="guserID" name="guserID" value="<%=generalUser.getgUserID()%>" disabled/>
+                <input type="text" id="guserID" name="guserID" value="${generalUser.getgUserID()}" disabled/>
                 <br><br>
                 <span>姓名:</span>
-                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "劉晉歆" : generalUser.getgName()%>"/>
+                <input type="text" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>" disabled/>
+                <input type="hidden" id="gName" name="gName" value="<%= (generalUser==null)? "吳永志帥哥" : generalUser.getgName()%>"/>
                 <br><br>
                 <span>帳號:</span>
-                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "jiojilellee" : generalUser.getgUsername()%>"/>
+                <input type="text" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>" disabled/>
+                <input type="hidden" id="gUsername" name="gUsername" value="<%= (generalUser==null)? "1kelri3l4" : generalUser.getgUsername()%>"/>
                 <br><br>
                 <span>密碼:</span>
-                <input type="text" id="gPassword" name="gPassword" value="<%= (generalUser==null)? "v3PBw9Rs" : generalUser.getgPassword()%>"/>
+                <input type="text" id="gPassword" name="gPassword" value="<%= (generalUser==null)? "r27eeAVQDC" : generalUser.getgPassword()%>"/>
                 <br><br>
                 <span>暱稱:</span>
-                <input type="text" id="nicknameID" name="nicknameID" value="<%= (generalUser==null)? "bibibibibi" : generalUser.getNicknameID()%>"/>
+                <input type="text" id="nicknameID" name="nicknameID" value="<%= (generalUser==null)? "D180414511" : generalUser.getNicknameID()%>"/>
                 <br><br>
                 <span>電子信箱:</span>
-                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1306@gmail.com" : generalUser.getgEmail()%>"/>
+                <input type="email" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>" disabled/>
+                <input type="hidden" id="gEmail" name="gEmail" value="<%= (generalUser==null)? "carlisle1406@gmail.com" : generalUser.getgEmail()%>"/>
                 <br><br>
                 <span>身分證字號:</span>
-                <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "P130192176" : generalUser.getgIDNum()%>"/>
+                <input type="text" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "D180414511" : generalUser.getgIDNum()%>" disabled/>
+                <input type="hidden" id="gIDNum" name="gIDNum" value="<%= (generalUser==null)? "D180414511" : generalUser.getgIDNum()%>"/>
                 <br><br>
                 <span>性別:</span>
-                <input type="text" id="gGender" name="gGender" value="<%= (generalUser==null)? 0 : generalUser.getgGender()%>"/>
+                <input type="text" id="gGender" name="gGender" value="<%= (generalUser != null && generalUser.getgGender() == 0) ? '男' : '女' %>" disabled/>
+                <input type="hidden" id="gGender" name="gGender" value="<%= (generalUser != null && generalUser.getgGender() == 0) ? '男' : '女' %>"/>
                 <br><br>
                 <span>出生年月日:</span>
-                <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1983-07-26" : generalUser.getgBirth()%>"/>
+                <input type="text" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1965-03-21" : generalUser.getgBirth()%>" disabled/>
+                <input type="hidden" id="gBirth" name="gBirth" value="<%= (generalUser==null)? "1965-03-21" : generalUser.getgBirth()%>"/>
                 <br><br>
                 <span>手機號碼:</span>
                 <input type="text" id="gTelephone" name="gTelephone" value="<%= (generalUser==null)? "0988059202" : generalUser.getgTelephone()%>"/>
@@ -135,7 +145,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                     <option value = "">請選擇鄉鎮市區</option>
                 </select>
                 <div><input type="text" id="gAddress" name="gAddress" placeholder="請輸入聯絡地址" 
-                value="<%= (generalUser==null) ? "新生北路3段40號6樓" : generalUser.getgAddress()%>"/></div>
+                value="<%= (generalUser==null) ? "寶山路12號" : generalUser.getgAddress()%>" class="form-control"/></div>
                 
                 <span hidden>帳號狀態:</span>
                 <input type="hidden" id="status" name="status" value="<%= (generalUser==null)? 0 : generalUser.getStatus()%>"/>
@@ -154,7 +164,7 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
     </div>
 
     
-    <!----------------------------------------------- footer 區 ------------------------------------------------------->
+<!----------------------------------------------- footer 區 ------------------------------------------------------->
     <footer class="footer">
       
         <div class="container">
@@ -164,14 +174,13 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
             </a>
           
             <ul class="nav nav-pillss">
-              <li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/privacyPolicy/privacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-              <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+              <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
               <li class="nav-item"><a href="#" class="nav-link"></a></li>
-             
             </ul>
           </header>
         </div>
@@ -235,14 +244,12 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
       $(document).ready(function(){
-      
         //第一層選單
           $.ajax({
               url: 'https://raw.githubusercontent.com/donma/TaiwanAddressCityAreaRoadChineseEnglishJSON/master/CityCountyData.json',              
               type: "get",
               dataType: "json",
               success: function (data) {
-            console.log(data);
             $.each(data,function(key,value){
               console.log(key,value)
               $('#city').append('<option value="'+data[key].CityName+'">'+ data[key].CityName + '</option>')

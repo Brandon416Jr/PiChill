@@ -180,7 +180,14 @@ public class GeneralUserServlet extends HttpServlet {
 			errorMsgs.add("請輸入正確的身分證格式");
 		}
 
-		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
+//		Integer gGender = Integer.valueOf(req.getParameter("gGender"));
+		String genderParameter = req.getParameter("gGender");
+		Integer gGender;
+		if ("男".equals(genderParameter)) {
+		    gGender = 0;
+		} else {
+		    gGender = 1;
+		}
 
 		Date gBirth = null;
 		try {
