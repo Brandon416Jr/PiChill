@@ -166,6 +166,25 @@ main.main {
 	cursor: pointer;
 }
 
+ .rounded-button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px; /* 圆弧边框的半径 */
+    cursor: pointer;
+    margin-left:50px;
+    margin-bottom:10px;
+  }
+
+  /* 鼠标悬停时按钮的样式 */
+  .rounded-button:hover {
+    background-color: #2980b9;
+  }
 /*================文章範例(討論版)=============*/
 .modal-title img {
 	width: 50px;
@@ -1167,6 +1186,7 @@ div.star_block>span.star.-on {
 				<option value="events">揪團版</option>
 			</select>
 		</div>
+<!-- 		<button class="rounded-button">#大大</button> -->
 		<!-- 文章列表 -->
 		<div id="post-list">
 			<!-- 文章由JavaScript添加到此 -->

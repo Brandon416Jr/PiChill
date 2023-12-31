@@ -6,14 +6,23 @@ $(document).ready(function() {
 		dataType: "json",
 		url: "post.do?action=getoUser",
 		success: function(data) {
-			//			console.log(data);
+						console.log(data);
 			if (data == null) {
 				$('#userID').val("null");
 			} else {
 				$('#userID').val(data.oUserID);
 			}
+			if (data == null) {
+				$(".rounded-circle").remove();
+			} else {
+				var imageDataArray2 = new Uint8Array(data.oProfilePic);
+				var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+				var url2 = URL.createObjectURL(blob2);
+				$(".rounded-circle").attr("src", url2);
+			}
 		}
 	})
+	
 	$.ajax({
 		type: "GET",
 		url: "post.do",
@@ -278,10 +287,6 @@ $(document).ready(function() {
                                     data-bs-target="#exampleModal6" ></button>
                                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
-                                                                   
-                            <div class="col-2" id="pluscol" data-order-id="${reserveOrderID}">
-                                <button type="button" class="fa-regular fa-square-plus" > +1
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,14 +323,14 @@ $(document).ready(function() {
 									<div class="post_timer">${postTime}</div>
 								</div>
 							</h1>
-	<!--						  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
+				  <button type="button" class="edit_promote" data-bs-toggle="modal" data-bs-target="#exampleModalo_edit" id="editButton" data-post-id="${postID}">
                               <i class="fa-regular fa-pen-to-square"></i>
                               <span class="tooltip-text">編輯</span>
                           </button>
                           <button type="button" class="delete" id="deleteButton_o" data-post-id="${postID}">
                               <i class="fa-regular fa-trash-can"></i>
                               <span class="tooltip-text">刪除</span>
-                          </button>-->
+                          </button>
 							<h5 class="card-title">${postTitle}</h5>
 	                          <p class="card-text">${postContent}</p>
 							</p>
@@ -334,9 +339,13 @@ $(document).ready(function() {
 				</div>
 			</div>`
 		$('#promote-list').prepend(newPromotePostElement);
-		if (currentUserId !== oUserID) {
+//		console.log(currentUserId);
+//		console.log(oUserID)
+		if (currentUserId == oUserID) {
+		}else{
 			$('#editButton[data-post-id="' + postID + '"]').hide();
 			$('#deleteButton_o[data-post-id="' + postID + '"]').hide();
+			
 		}
 	}
 	//	//=======+1預約球館=======
@@ -674,9 +683,6 @@ $(document).ready(function() {
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
 	                                  data-bs-target="#exampleModal6" > ${commentCnt}
 	                              </div>
-	                          <div class="col-2" id="pluscol">
-	                              <button type="button" class="fa-regular fa-square-plus"> +1
-	                          </div>
 	                      </div>
 	                  </div>
 	              </div>
@@ -695,19 +701,17 @@ $(document).ready(function() {
 		});
 	}
 	//===========取得推撥館主的球館=====
-//	$("#pb-promote").on("click", function() {
-//		var oUserID = $('#userID').val();
+//	$("#create-post-button").on("click", function() {
+////		var oUserID = $('#userID').val();
 //		$.ajax({
 //			type: "POST",
 //			url: "post.do",
 //			data: {
-//				"action": get_courtName,
-//				"oUserID": "oUserID"
+//				action: "get_courtName",
+////				"oUserID": "oUserID"
 //			},
 //			dataType: "json",
-//			processData: false,
-//			contentType: false,
-//			success: function(response) {
+//			success: function(data) {
 //				if (data && data.length > 0) {
 //					for (var i = 0; i < data.length; i++) {
 //						var courtName = data[i].courtName;
@@ -721,10 +725,11 @@ $(document).ready(function() {
 //	})
 	//===========新增文章(推撥)==========
 	$("#pb-promote").on("click", function() {
-		var userID = $("#userID").val();
+		var oUserID = $("#userID").val();
+//		console.log(oUserID)
 		var newPostTitle = $("#floatingTextarea5").val();
 		var newPostContent = $("#floatingTextarea6").val();
-		console.log(newPostTitle);
+//		console.log(newPostTitle);
 		if (newPostTitle.trim() === "") {
 			alert("標題不得為空");
 			return; // 如果標題為空，停止表單提交
@@ -735,7 +740,7 @@ $(document).ready(function() {
 		newPostContent = newPostContent.replace(/\n/g, '<br>');
 		let formData = new FormData();
 		formData.append("action", "insert_promote");
-		formData.append("oUserID", "oUserID");
+		formData.append("oUserID", oUserID);
 		formData.append("postTitle", newPostTitle);
 		formData.append("postContent", newPostContent);
 
@@ -749,8 +754,8 @@ $(document).ready(function() {
 			success: function(response) {
 				console.log("伺服器回應:", response);
 				// 	            	var newPostID = response.postID;
-				console.log(courtName)
-				fetchAndDisplayLatestData3(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime);
+//				console.log(courtName)
+				fetchAndDisplayLatestData3(response.addedPost.postID, newPostTitle, newPostContent, response.addedPost.postTime, response.ownerUser.oUserName, response.ownerUser.oProfilePic);
 				$("#exampleModal").modal("hide");
 				console.log("發布成功:", response);
 			},
@@ -766,13 +771,20 @@ $(document).ready(function() {
 			type: "GET",
 			url: "post.do",  // 替換成實際的後端處理檔案或API端點
 			success: function(data) {
+					if (oProfilePic) {
+			var imageDataArray2 = new Uint8Array(oProfilePic);
+			// 将二进制图像数据存储在Blob对象中
+			var blob2 = new Blob([imageDataArray2], { type: 'image/jpeg' });
+			// 创建一个Blob URL并将其设置为<img>标签的src属性
+			var url2 = URL.createObjectURL(blob2);
+		}
 				var newPost = `
 				<div class="card mb-3 article2" id="article${postID}" style="width: 22rem;">
 				<div class="row g-0">
 					<div class="col-md-8">
 						<div class="card-body">
 							<h1 class="modal-title fs-5" id="exampleModalLabel">
-								<img src=${oProfilePic} alt="大頭貼">
+								<img src=${url2} alt="大頭貼">
 								<div>
 									<a class="post_owner">${oUserName}</a>
 									<div class="post_timer">${postTime}</div>
@@ -917,16 +929,16 @@ $(document).ready(function() {
 		$.ajax({
 			action: "getOne_For_Update",
 			type: "GET",
-			url: "post.do",
+			url: "post.do?action=getOne_For_Update",
 			data: { "postID": postID },
 			dataType: "json",
 			success: function(postData) {
 				//				console.log("aa")
-				PostContent = postData.postContent.replace(/<br>/g, '\n');
-				$("#floatingTextarea5_edit").val(postData.postTitle);
+				PostContent = postData.post.postContent.replace(/<br>/g, '\n');
+				$("#floatingTextarea5_edit").val(postData.post.postTitle);
 				$("#floatingTextarea6_edit").val(PostContent);
 
-				saveButton.attr("data-post-id", postData.postID);
+				saveButton.attr("data-post-id", postData.post.postID);
 			},
 			error: function(xhr, status, error) {
 				console.error("Get Post Details Error:", status, error);
@@ -1388,10 +1400,6 @@ $(document).ready(function() {
                                     data-bs-target="#exampleModal6" ></button>
                                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
-                                                                   
-                            <div class="col-2" id="pluscol">
-                                <button type="button" class="fa-regular fa-square-plus"> +1
-                            </div>
                         </div>
                     </div>
                 </div>

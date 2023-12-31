@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.contactus.service.ContactUsService;
 import com.pichill.contactus.service.ContactUsServiceImpl;
+import com.pichill.owneruser.entity.OwnerUser;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 @WebServlet(name = "ContactUsServlet", value = "/contactUs.do")
@@ -56,11 +57,11 @@ public class ContactUsServlet extends HttpServlet {
 				return;// 程式中斷
 			}
 
-			Integer formID = null;
+			Integer oUserID = null;
 			try {
-				formID = Integer.valueOf(fID);
+				oUserID = Integer.valueOf(oUserID);
 			} catch (Exception e) {
-				errorMsgs.put("formID", "表單編號格式不正確");
+				errorMsgs.put("oUserID", "OuserID編號格式不正確");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -71,9 +72,11 @@ public class ContactUsServlet extends HttpServlet {
 
 			/*************************** 2.開始查詢資料 *****************************************/
 			ContactUsService contactUsSvc = new ContactUsServiceImpl();
-			ContactUs contactUs = contactUsSvc.getOneContactUs(Integer.valueOf(formID));
+			ContactUs contactUs;
+			
+				contactUs = contactUsSvc.getOneContactUs(Integer.valueOf(new OwnerUser().getoUserID()));
 			if (contactUs == null) {
-				errorMsgs.put("formID", "查無資料");
+				errorMsgs.put("oUserID", "查無此人");
 			}
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
@@ -101,12 +104,12 @@ public class ContactUsServlet extends HttpServlet {
 			String formPurpose = req.getParameter("formPurpose");
 			String formContent = req.getParameter("formContent");
 
-			java.sql.Date hiredate = null;
-			try {
-				hiredate = java.sql.Date.valueOf(req.getParameter("hiredate"));
-			} catch (IllegalArgumentException e) {
-				errorMsgs.put("hiredate", "雇用日期: 請勿空白");
-			}
+//			java.sql.Date hiredate = null;
+//			try {
+//				hiredate = java.sql.Date.valueOf(req.getParameter("hiredate"));
+//			} catch (IllegalArgumentException e) {
+//				errorMsgs.put("hiredate", "雇用日期: 請勿空白");
+//			}
 
 			// 照片
 //			InputStream in = req.getPart("upFiles").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
@@ -115,12 +118,12 @@ public class ContactUsServlet extends HttpServlet {
 //				upFiles = new byte[in.available()];
 //				in.read(upFiles);
 //				in.close();
-//			} else
+//			} else{
 //				errorMsgs.put("upFiles", "員工照片: 請上傳照片");
 //			}
 //			// Send the use back to the form, if there were errors
-//			if (!errorMsgs.isEmpty()) {
-//				RequestDispatcher failureView = req.getRequestDispatcher("/back-end/emp/addEmp.jsp");
+//			if ( !errorMsgs.isEmpty()) {
+//				RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/contactUs/addContactUs.jsp");
 //				failureView.forward(req, res);
 //				return;
 //			}
@@ -136,5 +139,50 @@ public class ContactUsServlet extends HttpServlet {
 			successView.forward(req, res);
 		}
 
+	
+	if ("insert_gUser".equals(action)) { // 來自addEmp.jsp的請求
+
+		Map<String, String> errorMsgs = new LinkedHashMap<String, String>();
+		req.setAttribute("errorMsgs", errorMsgs);
+
+		/*********************** 1.接收請求參數 - 輸入格式的錯誤處理 *************************/
+		String formPurpose = req.getParameter("formPurpose");
+		String formContent = req.getParameter("formContent");
+
+//		java.sql.Date hiredate = null;
+//		try {
+//			hiredate = java.sql.Date.valueOf(req.getParameter("hiredate"));
+//		} catch (IllegalArgumentException e) {
+//			errorMsgs.put("hiredate", "雇用日期: 請勿空白");
+//		}
+
+		// 照片
+//		InputStream in = req.getPart("upFiles").getInputStream(); // 從javax.servlet.http.Part物件取得上傳檔案的InputStream
+//		byte[] upFiles = null;
+//		if (in.available() != 0) {
+//			upFiles = new byte[in.available()];
+//			in.read(upFiles);
+//			in.close();
+//		} else{
+//			errorMsgs.put("upFiles", "員工照片: 請上傳照片");
+//		}
+//		// Send the use back to the form, if there were errors
+//		if ( !errorMsgs.isEmpty()) {
+//			RequestDispatcher failureView = req.getRequestDispatcher("<%=request.getContextPath()%>/contactUs/addContactUs.jsp");
+//			failureView.forward(req, res);
+//			return;
+//		}
+
+		/*************************** 2.開始新增資料 ***************************************/
+		ContactUsServiceImpl contactUsSvc = new ContactUsServiceImpl();
+		contactUsSvc.addContactUs();
+
+		/*************************** 3.新增完成,準備轉交(Send the Success view) ***********/
+		req.setAttribute("success", "- (新增成功)");
+		String url = "/contactusForGUser/successView_gUser.jsp";
+		RequestDispatcher successView = req.getRequestDispatcher(url); // 新增成功後轉交listAllEmp.jsp
+		successView.forward(req, res);
 	}
+
+}
 }

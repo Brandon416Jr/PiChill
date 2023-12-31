@@ -290,10 +290,6 @@ $(document).ready(function() {
                                     data-bs-target="#exampleModal6" ></button>
                                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
-                                                                   
-                            <div class="col-2" id="pluscol" data-order-id="${reserveOrderID}">
-                                <button type="button" class="fa-regular fa-square-plus" > +1
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -686,9 +682,6 @@ $(document).ready(function() {
 	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
 	                                  data-bs-target="#exampleModal6" > ${commentCnt}
 	                              </div>
-	                          <div class="col-2" id="pluscol">
-	                              <button type="button" class="fa-regular fa-square-plus"> +1
-	                          </div>
 	                      </div>
 	                  </div>
 	              </div>
@@ -1397,10 +1390,6 @@ $(document).ready(function() {
                                     data-bs-target="#exampleModal6" ></button>
                                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                                 </div>
-                                                                   
-                            <div class="col-2" id="pluscol">
-                                <button type="button" class="fa-regular fa-square-plus"> +1
-                            </div>
                         </div>
                     </div>
                 </div>
