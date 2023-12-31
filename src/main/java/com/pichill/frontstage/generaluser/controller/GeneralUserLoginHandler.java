@@ -105,7 +105,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			System.out.println("有近error提示區域");
+			System.out.println("gUser有進error提示區域");
 			RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserLogin.jsp");
 			failureView.forward(req, res);
 			return;// 程式中斷
@@ -128,12 +128,13 @@ public class GeneralUserLoginHandler extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				System.out.println("有近第二個error提示區域");
+				System.out.println("gUser有進第二個error提示區域");
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserLogin.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
 			}
-
+			
+			
 			HttpSession session = req.getSession();
 			String inputCode = req.getParameter("checkCode");
 			String valistr = (String) session.getAttribute("valistr");
@@ -143,7 +144,7 @@ public class GeneralUserLoginHandler extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				System.out.println("有進第三個error提示區域");
+				System.out.println("gUser有進第三個error提示區域");
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/gLogin/gUserLogin.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
@@ -153,6 +154,27 @@ public class GeneralUserLoginHandler extends HttpServlet {
 			session = req.getSession(); // 【帳號 , 密碼有效時, 才做以下工作】
 			GeneralUser generalUser = gUserSvcF.getGeneralUserBygUsername(gUsername);
 			session.setAttribute("generalUser", generalUser);
+			// 創建會員用戶名、密碼的cookie
+						Cookie gUsernameCookie = new Cookie("gUsername", gUsername);
+						Cookie gPasswordCookie = new Cookie("gPassword", gPassword);
+						// jsp記住我的帳號的選取框框
+						String saveAccount = req.getParameter("saveAccount");
+						// 邏輯部分
+						if (saveAccount != null) {
+							// 設置cookie有效期限
+							gUsernameCookie.setMaxAge(60*60*24*7);
+							gPasswordCookie.setMaxAge(60*60*24*7);
+						} else {
+							// 否則cookie失效
+							gUsernameCookie.setMaxAge(0);
+							gPasswordCookie.setMaxAge(0);
+						}
+						// 將cookie回應給客戶端
+						res.addCookie(gUsernameCookie);
+						res.addCookie(gPasswordCookie);
+//						String contextPath = req.getContextPath();
+//						res.sendRedirect(contextPath + "/homepage/main.jsp");
+
 
 //				session.setAttribute("gUsername", gUsername); // *工作1: 才在session內做已經登入過的標識
 			try {

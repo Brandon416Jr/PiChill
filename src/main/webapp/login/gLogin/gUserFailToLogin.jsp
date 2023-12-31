@@ -38,33 +38,25 @@ p {
 	<p id="lockMessage">由於你輸入多次錯誤帳號密碼，帳號已被鎖住，請10分鐘以後再進行登入。</p>
 
 	<script>
-	
 		// 定期檢查是否可以解鎖
-		var lockoutTime =
-	<%=request.getAttribute("lockoutTime")%>
-		;
-		console.log("鎖定時間：" + lockoutTime);
-		var delay = lockoutTime - new Date().getTime();
+		// 移除從request中獲取lockoutTime的代碼
+		var basePath = "<%=request.getContextPath()%>"; 
+		var lockoutTime = 10 * 1000; // 固定為10秒
+
+		var delay = lockoutTime;
+
 		function check() {
+
 			if (delay > 0) {
-				// 鎖定時間還沒到，停留在當前頁面
 				delay = delay - 1000;
 				setTimeout(check, 1000);
-				console.log("延遲：" + delay);
 			} else {
-		
-			    location.href = basePath + "/login/gLogin/gUserLogin.jsp";
-			  }
+				location.href = basePath + "/login/gLogin/gUserLogin.jsp";
+			}
+
 		}
-		setInterval(function() {
-			location.reload();
 
-			lockoutTime =<%=request.getAttribute("lockoutTime")%>;
-			delay = lockoutTime - new Date().getTime();
-
-			check();
-
-		}, 1000); 
+		setTimeout(check, 0); // 立即執行跳轉檢查
 	</script>
 </body>
 </html>

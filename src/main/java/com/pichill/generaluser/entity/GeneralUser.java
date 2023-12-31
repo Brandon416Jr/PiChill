@@ -67,15 +67,15 @@ public class GeneralUser {
 	@Expose
 	private String nicknameID;
 	
-	@Column(name="gPostAmount",insertable = false)
+	@Column(name="gPostAmount")
 	@Expose
 	private Integer gPostAmount;
 	
-	@Column(name="commentAmount",insertable = false)
+	@Column(name="commentAmount")
 	@Expose
 	private Integer commentAmount;
 	
-	@Column(name="gReportCnt",insertable = false)
+	@Column(name="gReportCnt")
 	private Integer gReportCnt;
 	
 	@Column(name="gRegistDate", updatable = false, insertable = false)
@@ -84,7 +84,7 @@ public class GeneralUser {
 	@Column(name="gBirth", updatable = false)
 	private Date gBirth;
 	
-	@Column(name="yoyakuCnt",insertable = false, updatable = false)
+	@Column(name="yoyakuCnt")
 	private Integer yoyakuCnt;
 	
 	@Column(name="gProfilePic", columnDefinition = "longblob")

@@ -7,7 +7,7 @@ import java.util.*;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
-
+import com.pichill.util.EncryptDataUtil;
 import com.alibaba.fastjson.JSON;
 import com.pichill.manage.entity.Manage;
 
@@ -16,6 +16,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 
 import com.pichill.manage.service.ManageService;
+import com.pichill.util.EncryptDataUtil;
 import com.pichill.util.testUtil;
 
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 1000 * 1024 * 1024)
@@ -112,7 +113,7 @@ public class ManageServlet extends HttpServlet {
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 
 		Manage updateManage = manageService.getOneManage(manageID);
-		
+		updateManage.setmPassword(EncryptDataUtil.decryptData(updateManage.getmPassword()));
 		HttpSession session = req.getSession();
 		try {
 			if(session != null) {
@@ -124,7 +125,7 @@ public class ManageServlet extends HttpServlet {
 		Manage manage = (Manage) session.getAttribute("manage");
 		System.out.println("manage: " + manage);
 		Enumeration<String> attrs = session.getAttributeNames();
-
+		
 		while (attrs.hasMoreElements()) {
 		  String name = attrs.nextElement();
 		  
@@ -185,6 +186,7 @@ public class ManageServlet extends HttpServlet {
 			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
 
+		String encryptPassword = EncryptDataUtil.encryptData(mPassword);
 //		Date mBirth;
 //		try {
 //			mBirth = java.sql.Date.valueOf(req.getParameter("mBirth"));
@@ -287,6 +289,7 @@ public class ManageServlet extends HttpServlet {
 		updateManage.setManageID(manageID);
 		updateManage.setmName(mName);
 		updateManage.setmUserName(mUserName);
+		updateManage.setmPassword(encryptPassword);
 		updateManage.setmPassword(mPassword);
 //		manage.setmBirth(mBirth);
 //		manage.setmGender(mGender);
@@ -308,7 +311,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 2.開始修改資料 *****************************************/
 		System.out.println("manage:"+updateManage.toString());
-		manageService.updateManage( manageID,  mName,  mUserName,  mPassword, 
+		manageService.updateManage( manageID,  mName,  mUserName,  encryptPassword, 
 				 mTelephone,  mEmgContact, mEmgPhone,  mAddress,  
 				   mEmail,  mProfilePic,  mStatus);
 		req.setAttribute("updateManage", updateManage);
@@ -325,7 +328,7 @@ public class ManageServlet extends HttpServlet {
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
 
 		Manage manage = manageService.getOneManage(manageID);
-		
+		manage.setmPassword(EncryptDataUtil.decryptData(manage.getmPassword()));
 //		String param = "?manageID="  +manage.getManageID()+
 //			       "&mName="  +manage.getmName()+
 //			       "&mUserName="    +manage.getmUserName()+
@@ -386,7 +389,7 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
-
+		String encryptPassword = EncryptDataUtil.encryptData(mPassword);
 //		Date mBirth;
 //		try {
 //			mBirth = java.sql.Date.valueOf(req.getParameter("mBirth"));
@@ -488,6 +491,7 @@ public class ManageServlet extends HttpServlet {
 		manage.setManageID(manageID);
 		manage.setmName(mName);
 		manage.setmUserName(mUserName);
+		manage.setmPassword(encryptPassword);
 		manage.setmPassword(mPassword);
 //		manage.setmBirth(mBirth);
 //		manage.setmGender(mGender);
@@ -509,7 +513,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 2.開始修改資料 *****************************************/
 		System.out.println("manage:"+manage.toString());
-		manageService.updateMyData( manageID,  mName,  mUserName,  mPassword, 
+		manageService.updateMyData( manageID,  mName,  mUserName,  encryptPassword, 
 				 mTelephone,  mEmgContact, mEmgPhone,  mAddress,  
 				   mEmail,  mProfilePic);
 		req.setAttribute("manage", manageService.getOneManage(manageID));
@@ -597,7 +601,7 @@ public class ManageServlet extends HttpServlet {
 		} else if (!mPassword.trim().matches(mPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.add("管理員密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
-
+		String encryptPassword = EncryptDataUtil.encryptData(mPassword);
 		Date mBirth;
 		try {
 			mBirth = java.sql.Date.valueOf(req.getParameter("mBirth").trim());
@@ -701,6 +705,7 @@ public class ManageServlet extends HttpServlet {
 		
 		newManage.setmName(mName);
 		newManage.setmUserName(mUserName);
+		newManage.setmPassword(encryptPassword);
 		newManage.setmPassword(mPassword);
 		newManage.setmBirth(mBirth);
 		newManage.setmGender(mGender);
@@ -722,7 +727,7 @@ public class ManageServlet extends HttpServlet {
 
 		/*************************** 2.開始新增資料 ***************************************/
 
-		manageService.insertManage( mName,  mUserName,  mPassword,  mBirth,  mGender,
+		manageService.insertManage( mName,  mUserName,  encryptPassword,  mBirth,  mGender,
 				 mTelephone,  mEmgContact,  mEmgPhone,  mAddress,  mHiredate,
 				 mID,  mEmail,  mProfilePic,  mStatus);
 		System.out.println(newManage);

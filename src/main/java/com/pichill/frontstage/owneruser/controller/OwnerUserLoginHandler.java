@@ -103,7 +103,7 @@ public class OwnerUserLoginHandler extends HttpServlet {
 		}
 		// Send the use back to the form, if there were errors
 		if (!errorMsgs.isEmpty()) {
-			System.out.println("有近error提示區域");
+			System.out.println("oUser有進error提示區域");
 			RequestDispatcher failureView = req.getRequestDispatcher("/login/oLogin/oUserLogin.jsp");
 			failureView.forward(req, res);
 			return;// 程式中斷
@@ -120,13 +120,13 @@ public class OwnerUserLoginHandler extends HttpServlet {
 				session.setAttribute("oStatus", oStatus);
 				// mStatus 為2（停權）的情況
 				if (oStatus == 0) {
-					errorMsgs.put("oStatus", "此帳號尚未被激活");
+					errorMsgs.put("oStatus", "此帳號尚未被驗證");
 				}
 			}
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				System.out.println("有近第二個error提示區域");
+				System.out.println("oUser有進第二個error提示區域");
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/oLogin/oUserLogin.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
@@ -141,7 +141,7 @@ public class OwnerUserLoginHandler extends HttpServlet {
 
 			// Send the use back to the form, if there were errors
 			if (!errorMsgs.isEmpty()) {
-				System.out.println("有進第三個error提示區域");
+				System.out.println("oUser有進第三個error提示區域");
 				RequestDispatcher failureView = req.getRequestDispatcher("/login/oLogin/oUserLogin.jsp");
 				failureView.forward(req, res);
 				return;// 程式中斷
