@@ -59,7 +59,10 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 /* 		  margin-bottom: 10px; */
 		  font-size: 18px;
 		}
-
+		.btn-primary{
+		border:0;
+		background-color:#FF9F1B;
+		}
 	</style>
 
 
