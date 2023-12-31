@@ -117,7 +117,7 @@ pageContext.setAttribute("reserveOrder",reserve);
                     </tr>
                     <tr id="courtName">
                         <td>≤y¿]°G</td>
-                        <td>${reserveOrder.court.courtName}</td>
+                        <td id="courtname">${reserveOrder.court.courtName}</td>
                     </tr>
                     <tr id="placeName">
                         <td>≥ı¶a°G</td>
