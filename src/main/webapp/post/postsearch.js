@@ -1,4 +1,8 @@
 $(document).ready(function() {
+	//=====tag查詢=====
+	$(".rounded-button").click(function() {
+ var buttonText = button.text();
+  });
 	//======顯示like狀態=======
 	$("#post-list").on("click", "#commentcol", function() {
 		var postID = $(this).attr("data-post-id");
@@ -392,9 +396,6 @@ $(document).ready(function() {
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
                      <span class="commentcnt">${posts[i].commentCnt > 0 ? posts[i].commentCnt : ''}</span>
                     </div>
-    	                          <div class="col-2" id="pluscol">
-    	                              <button type="button" class="fa-regular fa-square-plus"> +1
-    	                          </div>
     	                      </div>
     	                  </div>
     	              </div>
@@ -595,9 +596,6 @@ $(document).ready(function() {
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                     </div>
-              	                          <div class="col-2" id="pluscol">
-              	                              <button type="button" class="fa-regular fa-square-plus"> +1
-              	                          </div>
               	                      </div>
               	                  </div>
               	              </div>
@@ -791,9 +789,6 @@ $(document).ready(function() {
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                     </div>
-   	                          <div class="col-2" id="pluscol">
-   	                              <button type="button" class="fa-regular fa-square-plus"> +1
-   	                          </div>
    	                      </div>
    	                  </div>
    	              </div>
@@ -1024,9 +1019,6 @@ $(document).ready(function() {
                     <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
                      <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
                     </div>
-	                          <div class="col-2" id="pluscol">
-	                              <button type="button" class="fa-regular fa-square-plus"> +1
-	                          </div>
 	                      </div>
 	                  </div>
 	              </div>

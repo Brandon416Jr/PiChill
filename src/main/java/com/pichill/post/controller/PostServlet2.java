@@ -75,7 +75,7 @@ public class PostServlet2 extends HttpServlet {
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			JsonElement postJsonElement = gson.toJsonTree(post);
 			jsonResult.add("post", postJsonElement);
-
+System.out.println("PPPPP"+postJsonElement);
 			// Send the JSON response to the client directly
 			PrintWriter out = res.getWriter();
 			gson.toJson(jsonResult, out);
@@ -137,11 +137,12 @@ public class PostServlet2 extends HttpServlet {
 		// ======放session值(ouser)======
 		if ("getoUser".equals(action)) {
 			HttpSession session = req.getSession();
-			OwnerUser ownerUser2 = (OwnerUser) session.getAttribute("OwnerUser");
+			OwnerUser ownerUser2 = (OwnerUser) session.getAttribute("ownerUser");
 //				System.out.println("GGGGGGG=="+generalUs2);
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			String json = gson.toJson(ownerUser2);
 			PrintWriter out = res.getWriter();
+			System.out.println("JJJJJ"+json);
 			out.print(json);
 			out.flush();
 		}
@@ -362,7 +363,7 @@ public class PostServlet2 extends HttpServlet {
 			String jsonAddedPost = gson.toJson(addedPost);
 //			System.out.println("JJJJ" +jsonOwnerUser+"GGGG"+ jsonAddedPost);
 			PrintWriter out = res.getWriter();
-			out.print("{\"generalUser\":" + jsonOwnerUser + ",\"addedPost\":" + jsonAddedPost + "}");
+			out.print("{\"ownerUser\":" + jsonOwnerUser + ",\"addedPost\":" + jsonAddedPost + "}");
 			out.flush();
 
 			Integer oPostAmount = post.getOwnerUser().getoPostAmount();
