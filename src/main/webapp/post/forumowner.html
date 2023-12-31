@@ -28,63 +28,67 @@ html {
 }
 
 /*=====header=====*/
-header.header{
-    /* border: 1px solid black; */
-    background-color: #207DCA;
-    position: sticky;
-    margin: 0 auto 10px auto;
-    top: 0;
-    overflow: visible;
-    z-index: 3;
+header.header {
+	/* border: 1px solid black; */
+	background-color: #207DCA;
+	position: sticky;
+	margin: 0 auto 10px auto;
+	top: 0;
+	overflow: visible;
+	z-index: 3;
 }
 
-
-@media all and (min-width: 576px) and (max-width: 767.98px){
-    header.header{
-        width: 540px;
-    }
-}
-@media (max-width: 575.98px){
-    header.header{
-        width: 100%;
-    }
-}
-.nav-link{
-  color: white !important;
-  margin: 15px;
-  font-weight: bold !important;
+@media all and (min-width: 576px) and (max-width: 767.98px) {
+	header.header {
+		width: 540px;
+	}
 }
 
-ul.nav.nav-pills{
-  position: relative;
-  right: 30px;
+@media ( max-width : 575.98px) {
+	header.header {
+		width: 100%;
+	}
 }
-#head{
-  position: relative;
-  top:8px;
+
+.nav-link {
+	color: white !important;
+	margin: 15px;
+	font-weight: bold !important;
 }
-#heads{
-  position: relative;
-  top:5px;
+
+ul.nav.nav-pills {
+	position: relative;
+	right: 30px;
+}
+
+#head {
+	position: relative;
+	top: 8px;
+}
+
+#heads {
+	position: relative;
+	top: 5px;
 }
 /* header大頭貼剪裁成圓形 */
-img.rounded-circle{
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+img.rounded-circle {
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
 }
 
 /*=====aside=====*/
 aside.aside {
 	/* 	border: 1px solid blue; */
-	/* background-color: red; */
+	border-radius:2px;
+	background-color:#f7f7f7;
 	position: absolute;
 	top: var(--header-height);
 	bottom: var(--footer-height);
 	width: 31%;
-	top: 100px;
+	top: 120px;
 	right: 10px;
-	top: 100px;
+	top: 120px;
 	/* bottom: 0; */
 	height: 100vh;
 	overflow-y: auto;
@@ -106,22 +110,28 @@ aside.aside {
 main.main {
 	position: relative;
 	border: 1px solid rgb(206, 202, 202);
-	background-color: #f7f7f7;
+	border-radius:2px;
+	background-color: #f5f5f5;
 	width: calc(100% -var(--aside-width));
 	margin-right: var(--aside-width);
-	min-height: calc(100vh - var(--header-height)- var(--footer-height));
+	/* 	min-height: calc(100vh - var(--header-height)- var(--footer-height)); */
+	min-height: 100vh;
 }
 
 /*建立貼文*/
 #create-post-button {
-	background-color: #F7F7F7;
+	background-color: white;
 	color: #333;
 	border: 1px solid #ccc;
 	margin-top: 10px;
-	margin-left: 100px;
+	margin-left: 117px;
 	text-align: center;
 	padding: 5px 10px 5px 5px;
 	width: 65%;
+}
+
+#create-post-button:hover {
+	background-color: #E0E0E0; /* 鼠标悬停时的背景颜色 */
 }
 
 /* 新增的搜索框样式 */
@@ -134,6 +144,7 @@ main.main {
 
 #search-input {
 	padding: 5px;
+	margin-bottom: 5px;
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	width: 400px;
@@ -155,6 +166,25 @@ main.main {
 	cursor: pointer;
 }
 
+ .rounded-button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px; /* 圆弧边框的半径 */
+    cursor: pointer;
+    margin-left:50px;
+    margin-bottom:10px;
+  }
+
+  /* 鼠标悬停时按钮的样式 */
+  .rounded-button:hover {
+    background-color: #2980b9;
+  }
 /*================文章範例(討論版)=============*/
 .modal-title img {
 	width: 50px;
@@ -297,6 +327,8 @@ a.post_user {
 	max-height: 200px;
 	overflow: hidden;
 	/* 超過區塊大小的部分隱藏 */
+	display: flex;
+	flex-direction: column-reverse;
 }
 
 .card-body {
@@ -398,36 +430,69 @@ div.post-pic {
 }
 
 button.post-button {
-	border: 1px solid black;
-	margin-top: 20px;
-	width: 700px;
+	background: #207DCA;
+	color: white;
+	width: 750px;
+	border: none;
+	border-radius: 10px;
+	padding: 5px;
+	font-weight: bold;
 }
 
 button.save-button_discuss {
-	border: 1px solid black;
-	margin-top: 20px;
-	width: 700px;
+	background: #207DCA;
+	color: white;
+	width: 750px;
+	border: none;
+	border-radius: 10px;
+	padding: 5px;
+	font-weight: bold;
 }
 
 button.save-button_group {
-	border: 1px solid black;
-	margin-top: 20px;
-	width: 700px;
+		background: #207DCA;
+	color: white;
+	width: 750px;
+	border: none;
+	border-radius: 10px;
+	padding: 5px;
+	font-weight: bold;
 }
 
 button.save-button_promote {
-	border: 1px solid black;
-	margin-top: 20px;
-	width: 700px;
+		background: #207DCA;
+	color: white;
+	width: 750px;
+	border: none;
+	border-radius: 10px;
+	padding: 5px;
+	font-weight: bold;
 }
 
 #preview {
 	border: 1px solid lightgray;
 	margin-top: 10px;
 	display: inline-block;
-	width: 250px;
+	width: 440px;
 	min-height: 300px;
 	position: relative;
+}
+
+.custom-file-input {
+	display: none; /* 隐藏原始的文件输入框 */
+}
+
+.custom-file-label {
+	background-color: #007bff;
+	color: #fff;
+	padding: 5px 5px;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-left: -350px;
+}
+
+.custom-file-label:hover {
+	background-color: #0056b3;
 }
 
 #preview span.text {
@@ -448,7 +513,7 @@ button.save-button_promote {
 	border: 1px solid lightgray;
 	margin-top: 10px;
 	display: inline-block;
-	width: 250px;
+	width: 440px;
 	min-height: 300px;
 	position: relative;
 }
@@ -463,7 +528,7 @@ button.save-button_promote {
 	color: lightgray;
 }
 
- #preview_edit img.preview_img {
+#preview_edit img.preview_img {
 	width: 100%;
 }
 
@@ -471,7 +536,7 @@ button.save-button_promote {
 	border: 1px solid lightgray;
 	margin-top: 10px;
 	display: inline-block;
-	width: 250px;
+	width: 440px;
 	min-height: 300px;
 	position: relative;
 }
@@ -494,7 +559,7 @@ button.save-button_promote {
 	border: 1px solid lightgray;
 	margin-top: 10px;
 	display: inline-block;
-	width: 250px;
+	width: 440px;
 	min-height: 300px;
 	position: relative;
 }
@@ -527,6 +592,19 @@ input.title {
 	margin-top: 20px;
 }
 
+#dateSelectOption {
+    border: 1px solid ; /* 边框样式和颜色 */
+    padding: 5px; /* 边框内的填充 */
+    border-radius: 5px; /* 边框圆角 */
+    background-color: #f5f5f5; /* 背景颜色 */
+    color: #333; /* 文本颜色 */
+    width: 260px; /* 宽度 */
+}
+
+/* 鼠标悬停时的样式 */
+#dateSelectOption:hover {
+    border-color: #0056b3; /* 悬停时的边框颜色 */
+}
 #peoplecol {
 	padding: 3px 0 0 0;
 }
@@ -552,6 +630,10 @@ input.title {
 	background-color: #f5f5f5;
 }
 
+#timeInput {
+	width: 100px;
+}
+
 #locatecol {
 	padding: 3px 0 0 0;
 }
@@ -563,6 +645,10 @@ input.title {
 	background-color: #f5f5f5;
 }
 
+#locationInput {
+	width: 100px;
+}
+
 #ballcol {
 	padding: 3px 0 0 0;
 }
@@ -570,11 +656,11 @@ input.title {
 #ballcol2 {
 	padding-left: 0;
 	min-height: 30px;
-	background-color: #f5f5f5;
+	background-color: white;
 }
 
 #ballInput {
-	width: 80px;
+	width: 60px;
 }
 
 #costcol {
@@ -585,11 +671,11 @@ input.title {
 #costcol2 {
 	padding-left: 0;
 	min-height: 30px;
-	background-color: #f5f5f5;
+	background-color: white;
 }
 
 #costInput {
-	width: 80px;
+	width: 60px;
 }
 
 input.cost {
@@ -607,12 +693,14 @@ input.cost {
 .card-text.article1 {
 	white-space: pre-line;
 }
+
 a.post_user2 {
 	text-decoration: none;
 	color: #333;
 	font-size: 1.3rem;
 	font-weight: bold;
 }
+
 .edit-m {
 	border: 0 white;
 	background-color: white;
@@ -680,10 +768,7 @@ font-size: 62.5%;
 } */
 body {
 	margin: 0;
-	background: rgb(10, 0, 36);
-	background: radial-gradient(circle, rgba(10, 0, 36, 0.1110819327731093)
-		0%, rgba(9, 9, 121, 0.1110819327731093) 5%,
-		rgba(0, 212, 255, 0.04665616246498594) 100%);
+	background: #f7f7f7;
 }
 
 article.task_container {
@@ -725,6 +810,7 @@ div.task_add_block input.task_name {
 	display: inline-block;
 	vertical-align: top;
 }
+
 div.task_add_block input.task_name2 {
 	width: calc(100% - 50px);
 	border: 1px solid lightgray;
@@ -744,6 +830,7 @@ input.task_name::placeholder {
 input.task_name2::placeholder {
 	color: lightgray;
 }
+
 div.task_add_block button.task_add {
 	display: inline-block;
 	width: 50px;
@@ -832,12 +919,12 @@ div.task_list_parent ul.task_list>li>div.item_flex>div.left_block>div.comment_im
 a.comment_user {
 	text-decoration: none;
 	color: #333;
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	font-weight: bold;
 }
 
 .comment_time {
-	font-size: 0.6rem;
+	font-size: 0.4rem;
 	/* 調整時間字體大小 */
 	color: #777;
 	/* 調整時間字體顏色 */
@@ -873,9 +960,9 @@ div.task_list_parent ul.task_list>li>div.item_flex>div.middle_block {
 
 div.task_list_parent ul.task_list>li>div.item_flex>div.middle_block p.para
 	{
-	font-size: 1.3rem;
+	font-size: 1.1rem;
 	text-align: left;
-	padding-top: 20px;
+	padding-top: 10px;
 	margin: 0;
 }
 
@@ -924,12 +1011,15 @@ div.middle_block input.task_name2_update {
 	padding: 5px 10px;
 	outline: none;
 }
+
 div.middle_block input.task_name_update::placeholder {
 	color: lightgray;
 }
+
 div.middle_block input.task_name2_update::placeholder {
 	color: lightgray;
 }
+
 .-none {
 	display: none;
 }
@@ -990,6 +1080,8 @@ div.star_block>span.star.-on {
 	rel="stylesheet"
 	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
 	crossorigin="anonymous">
+<!-- 	<link rel="stylesheet" href="../generaluser/css2/css.css"> -->
+<!--     <link rel="stylesheet" href="../generaluser/css2/guser.css"> -->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -998,7 +1090,7 @@ div.star_block>span.star.-on {
 <script src="https://kit.fontawesome.com/2bd4419edb.js"
 	crossorigin="anonymous"></script>
 <script src="index.js"></script>
-<script src="postAjax.js"></script>
+<script src="postOOAjax.js"></script>
 <script src="postsearch.js"></script>
 <script src="otherAjax.js"></script>
 <script src="forumlogin.js"></script>
@@ -1013,25 +1105,19 @@ div.star_block>span.star.-on {
 					class="d-flex align-items-center mb-1 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
 					<img src="../image/headerlogo.svg" alt="SVG">
 				</a>
-
-
-				<ul class="nav nav-pills">
+			<ul class="nav nav-pills">
 					<li class="nav-item"><a href="/PiChill/homepage/owneruserhome.jsp" class="nav-link">首頁</a></li>
 					<li class="nav-item"><a href="/PiChill/ownerusernotify/notify.jsp" class="nav-link">通知</a></li>
 					<li class="nav-item"><a href="/PiChill/post/forumowner.html" class="nav-link">論壇</a></li>
 					<li class="nav-item"><a href="/PiChill/contactus/addContactUs.jsp" class="nav-link">聯絡我們</a></li>
 					<li class="nav-item"><a href="/PiChill/owneruser/ouserListOne.jsp" class="nav-link"> 
-					<img	src="../image/face.svg" alt="SVG">企業會員中心</a></li>
+						<img class="rounded-circle" src=> 企業會員中心</a></li>
 				</ul>
-
 				<!-- <label for="burger">☰</label>
               <input type="hidden" id="burger"> -->
 			</header>
 		</div>
 	</header>
-
-	<!-- <label for="burger">☰</label>
-        <input type="hidden" id="burger"> -->
 	<aside class=aside>
 
 		<div class="card" style="width: 22rem;">
@@ -1048,31 +1134,31 @@ div.star_block>span.star.-on {
 		</div>
 		<!------推撥範例------->
 		<div id="promote-list">
-<!-- 			<div class="card mb-3" id=article3 style="width: 22rem;"> -->
-<!-- 				<div class="row g-0"> -->
-<!-- 					<div class="col-md-8"> -->
-<!-- 						<div class="card-body"> -->
-<!-- 							<h1 class="modal-title fs-5" id="exampleModalLabel"> -->
-<!-- 								<img src="../image/Capybara.jpg" alt="大頭貼"> -->
-<!-- 								<div> -->
-<!-- 									<a class="post_owner">水豚君</a> -->
-<!-- 									<div class="post_timer">30分鐘前</div> -->
-<!-- 								</div> -->
-<!-- 							</h1> -->
-<!-- 							<h5 class="card-title">歡迎大家來運動!</h5> -->
-<!-- 							<p class="card-text">~~~~~~~~~~~~~~~~~</p> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-			</div>
+			<!-- 			<div class="card mb-3" id=article3 style="width: 22rem;"> -->
+			<!-- 				<div class="row g-0"> -->
+			<!-- 					<div class="col-md-8"> -->
+			<!-- 						<div class="card-body"> -->
+			<!-- 							<h1 class="modal-title fs-5" id="exampleModalLabel"> -->
+			<!-- 								<img src="../image/Capybara.jpg" alt="大頭貼"> -->
+			<!-- 								<div> -->
+			<!-- 									<a class="post_owner">水豚君</a> -->
+			<!-- 									<div class="post_timer">30分鐘前</div> -->
+			<!-- 								</div> -->
+			<!-- 							</h1> -->
+			<!-- 							<h5 class="card-title">歡迎大家來運動!</h5> -->
+			<!-- 							<p class="card-text">~~~~~~~~~~~~~~~~~</p> -->
+			<!-- 						</div> -->
+			<!-- 					</div> -->
+			<!-- 				</div> -->
+		</div>
 	</aside>
 
 	<main class=main>
-										<input type="hidden" id="userID"   >
+		<input type="hidden" id="userID"> 
 		<!--建立貼文-->
-				<button type="button" class="btn btn-primary" data-bs-toggle="modal"
-					data-bs-target="#exampleModal_o" id="create-post-button">
-					在想些什麼...</button>
+						<button type="button" class="btn btn-primary" data-bs-toggle="modal"
+							data-bs-target="#exampleModal_o" id="create-post-button">
+							在想些什麼...</button>
 <!-- 		<button type="button" class="btn btn-primary" data-bs-toggle="modal" -->
 <!-- 			data-bs-target="#exampleModal" id="create-post-button"> -->
 <!-- 			在想些什麼...</button> -->
@@ -1087,6 +1173,7 @@ div.star_block>span.star.-on {
 				<option value="events">揪團版</option>
 			</select>
 		</div>
+<!-- 		<button class="rounded-button">#大大</button> -->
 		<!-- 文章列表 -->
 		<div id="post-list">
 			<!-- 文章由JavaScript添加到此 -->
@@ -1130,8 +1217,10 @@ div.star_block>span.star.-on {
 										</div>
 									</div>
 									<div>
-										<label>上傳圖片：</label> <input type="file" id="p_file_edit"
-											multiple>
+										<div>
+											<input type="file" id="p_file_edit" class="custom-file-input" />
+											<label for="p_file_edit" class="custom-file-label">選擇圖片</label>
+										</div>
 										<div id="preview_edit">
 											<span class="text">預覽圖</span>
 										</div>
@@ -1186,76 +1275,90 @@ div.star_block>span.star.-on {
 											<label for="floatingTextarea3">請輸入標題</label>
 										</div>
 										<div class="content">
-												<div class="content">
-				<div class="container text-center">
-					<div class="row align-items-start">
-						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
-						<div class="col-3" id="datecol2">
-							<button class="btn btn-secondary btn-sm dropdown-toggle"
-								type="button" data-bs-toggle="dropdown" aria-expanded="false" disabled>選擇預約訂單</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">11/20 09:00</a></li>
-								<li><a class="dropdown-item" href="#">12/20 20:00</a></li>
-								<li><a class="dropdown-item" href="#">01/20 15:00</a></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="container text-center">
-					<div class="row align-items-start">
-						<div class="col-2" id="locatecol">地點 :</div>
-						<div class="col-2" id="locatecol2">
-							<input type="text" class="custom-input" readonly
-								id="locationInput">
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="container text-center">
-					<div class="row align-items-start">
-						<div class="col-2" id="ballcol">球類 :</div>
-						<div class="col-2" id="ballcol2">
-							<input type="text" class="custom-input" readonly id="ballInput">
-						</div>
-					</div>
-				</div>
-				<br>
-				<div class="container text-center">
-					<div class="row align-items-start">
-						<div class="col-2" id="costcol">費用 :</div>
-						<div class="col-2" id="costcol2">
-							<input type="text" class="custom-input" readonly id="costInput">
-						</div>
-					</div>
-				</div>
-			</div>
-										<div class="form-floating" id="comment">
-											<textarea class="form-control"
-												placeholder="Leave a comment here"
-												id="floatingTextarea4_edit" style="height: 100px"></textarea>
-											<label for="floatingTextarea4">請輸入內文</label>
+											<div class="content">
+												<div class="container text-center">
+													<div class="row align-items-start">
+														<input type=hidden id=reserveOrder2>
+														<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
+														<div class="container text-center">
+															<div class="row align-items-start">
+																<div class="col-3" id="datecol">預約日期 :</div>
+																<div class="col-2" id="datecol2">
+																	<input type="text" class="custom-input" readonly
+																		id="dateInput2">
+																</div>
+															</div>
+														</div>
+														<br>
+														<div class="container text-center">
+															<div class="row align-items-start">
+																<div class="col-2" id="timecol">時段 :</div>
+																<div class="col-2" id="timecol2">
+																	<input type="text" class="custom-input" readonly
+																		id="timeInput2">
+																</div>
+															</div>
+														</div>
+														<br>
+														<div class="container text-center">
+															<div class="row align-items-start">
+																<div class="col-2" id="locatecol">地點 :</div>
+																<div class="col-2" id="locatecol2">
+																	<input type="text" class="custom-input" readonly
+																		id="locationInput2">
+																</div>
+															</div>
+														</div>
+														<br>
+														<div class="container text-center">
+															<div class="row align-items-start">
+																<div class="col-2" id="ballcol">球類 :</div>
+																<div class="col-2" id="ballcol2">
+																	<input type="text" class="custom-input" readonly
+																		id="ballInput2">
+																</div>
+															</div>
+														</div>
+														<br>
+														<div class="container text-center">
+															<div class="row align-items-start">
+																<div class="col-2" id="costcol">費用 :</div>
+																<div class="col-2" id="costcol2">
+																	<input type="text" class="custom-input" readonly
+																		id="costInput2">
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="form-floating" id="comment">
+														<textarea class="form-control"
+															placeholder="Leave a comment here"
+															id="floatingTextarea4_edit" style="height: 100px"></textarea>
+														<label for="floatingTextarea4">請輸入內文</label>
+													</div>
+												</div>
+												<div>
+													<div>
+														<input type="file" id="p_file2_edit"
+															class="custom-file-input" /> <label for="p_file2_edit"
+															class="custom-file-label">選擇圖片</label>
+													</div>
+													<div id="preview2_edit">
+														<span class="text">預覽圖</span>
+													</div>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="save-button_group"
+														id="save-group" data-post-id="${postID}">儲存</button>
+												</div>
+											</div>
 										</div>
-									</div>
-
-									<div>
-										<label>上傳圖片：</label> <input type="file" id="p_file2_edit">
-										<div id="preview2_edit">
-											<span class="text">預覽圖</span>
-										</div>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="save-button_group"
-											id="save-group" data-post-id="${postID}">儲存</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			</div>
-			</div>
 			</div>
 		</form>
 		<!-- 編輯推撥 -->
@@ -1317,19 +1420,19 @@ div.star_block>span.star.-on {
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-<!-- 						<button type="button" class="edit-m"> -->
-<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
-<!-- 								class="tooltip-text2">編輯</span> -->
-<!-- 						</button> -->
-<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
-<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
-<!-- 								class="tooltip-text2">刪除</span> -->
-<!-- 						</button> -->
-<!-- 						<button type="button" class="report-m" data-bs-toggle="modal" -->
-<!-- 							data-bs-target="#exampleModal2"> -->
-<!-- 							<i class="fa-solid fa-triangle-exclamation"></i> <span -->
-<!-- 								class="tooltip-text">檢舉</span> -->
-<!-- 						</button> -->
+						<!-- 						<button type="button" class="edit-m"> -->
+						<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+						<!-- 								class="tooltip-text2">編輯</span> -->
+						<!-- 						</button> -->
+						<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+						<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+						<!-- 								class="tooltip-text2">刪除</span> -->
+						<!-- 						</button> -->
+						<!-- 						<button type="button" class="report-m" data-bs-toggle="modal" -->
+						<!-- 							data-bs-target="#exampleModal2"> -->
+						<!-- 							<i class="fa-solid fa-triangle-exclamation"></i> <span -->
+						<!-- 								class="tooltip-text">檢舉</span> -->
+						<!-- 						</button> -->
 						<button type="button" class="btn-close" data-bs-dismiss="modal"
 							aria-label="Close"></button>
 					</div>
@@ -1343,14 +1446,14 @@ div.star_block>span.star.-on {
 						</div>
 						<div class="container text-center">
 							<div class="row align-items-start do">
-							  <div class="col-2 likecol" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton_click"> </button>
-                    </div>
+								<div class="col-2 likecol" id="likecol" data-post-id="${postID}">
+									<button type="button"
+										class="fa-regular fa-thumbs-up likebutton_click"></button>
+								</div>
 								<div class="col-2 commentcol" id="commentcol">
 									<i class="fa-regular fa-comment"></i>
 								</div>
-								<input type="hidden" class="postType" name="postType"
-											value="0">
+								<input type="hidden" class="postType" name="postType" value="0">
 								<article class="task_container">
 									<div class="task_add_block">
 										<input type="text" class="task_name" placeholder="留言…">
@@ -1380,14 +1483,14 @@ div.star_block>span.star.-on {
 								<div class="post_time posttime">${postTime}</div>
 							</div>
 						</h1>
-<!-- 						<button type="button" class="edit-m"> -->
-<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
-<!-- 								class="tooltip-text2">編輯</span> -->
-<!-- 						</button> -->
-<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
-<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
-<!-- 								class="tooltip-text2">刪除</span> -->
-<!-- 						</button> -->
+						<!-- 						<button type="button" class="edit-m"> -->
+						<!-- 							<i class="fa-regular fa-pen-to-square"></i> <span -->
+						<!-- 								class="tooltip-text2">編輯</span> -->
+						<!-- 						</button> -->
+						<!-- 						<button type="button" class="delete-m" id="deleteButton"> -->
+						<!-- 							<i class="fa-regular fa-trash-can"></i> <span -->
+						<!-- 								class="tooltip-text2">刪除</span> -->
+						<!-- 						</button> -->
 						<!-- <button type="button" class="report-m" data-bs-toggle="modal" data-bs-target="#exampleModal2">
                             <i class="fa-solid fa-triangle-exclamation"></i>
                             <span class="tooltip-text">檢舉</span>
@@ -1402,23 +1505,23 @@ div.star_block>span.star.-on {
 								<div class="container text-left">
 									<div class="row">
 										<div class="col-2 col-sm-2">日期:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 dateRO"></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">時間:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 timeRO"></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">地點:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 locRO"></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">球類:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 ballRO"></div>
 										<div class="w-100 d-none d-md-block"></div>
 
 										<div class="col-2 col-sm-2">費用:</div>
-										<div class="col-2 col-sm-4"></div>
+										<div class="col-2 col-sm-4 feeRO"></div>
 									</div>
 								</div>
 								<br>
@@ -1427,15 +1530,15 @@ div.star_block>span.star.-on {
 							<img class="modal-image card-img-bottom">
 						</div>
 						<div class="container text-center">
-								<div class="row align-items-start do">
-							  <div class="col-2 likecol" id="likecol" data-post-id="${postID}">
-                    <button type="button" class="fa-regular fa-thumbs-up likebutton"> </button>
-                    </div>
+							<div class="row align-items-start do">
+								<div class="col-2 likecol" id="likecol" data-post-id="${postID}">
+									<button type="button"
+										class="fa-regular fa-thumbs-up likebutton"></button>
+								</div>
 								<div class="col-2 commentcol" id="commentcol">
 									<i class="fa-regular fa-comment"></i>
 								</div>
-								<input type="hidden" class="postType" name="postType"
-											value="0">
+								<input type="hidden" class="postType" name="postType" value="0">
 								<article class="task_container">
 									<div class="task_add_block">
 										<input type="text" class="task_name2" placeholder="留言…">
@@ -1499,13 +1602,14 @@ div.star_block>span.star.-on {
 						</div>
 					</div>
 					<div class="modal-footer">
-					 <button class="btn btn-primary" data-bs-target="#exampleModal5" data-bs-toggle="modal"  id="send_report">送出</button>
-<!-- 						<button type="button" class="btn btn-primary" id="send_report">送出</button> -->
+						<button class="btn btn-primary" data-bs-target="#exampleModal5"
+							data-bs-toggle="modal" id="send_report">送出</button>
+						<!-- 						<button type="button" class="btn btn-primary" id="send_report">送出</button> -->
 					</div>
 				</div>
 			</div>
 		</div>
-			<!--==== 檢舉Modal (完整文章揪團版的)======-->
+		<!--==== 檢舉Modal (完整文章揪團版的)======-->
 		<div class="modal fade" id="exampleModal11" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm modal-dialog-centered ">
@@ -1552,13 +1656,14 @@ div.star_block>span.star.-on {
 						</div>
 					</div>
 					<div class="modal-footer">
-					 <button class="btn btn-primary" data-bs-target="#exampleModal6" data-bs-toggle="modal"  id="send_report3">送出</button>
-<!-- 						<button type="button" class="btn btn-primary" id="send_report3">送出</button> -->
+						<button class="btn btn-primary" data-bs-target="#exampleModal6"
+							data-bs-toggle="modal" id="send_report3">送出</button>
+						<!-- 						<button type="button" class="btn btn-primary" id="send_report3">送出</button> -->
 					</div>
 				</div>
 			</div>
 		</div>
-			<!--==== 檢舉Modal(文章列表的) ======-->
+		<!--==== 檢舉Modal(文章列表的) ======-->
 		<div class="modal fade" id="exampleModal10" tabindex="-1"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm modal-dialog-centered ">
@@ -1605,7 +1710,7 @@ div.star_block>span.star.-on {
 						</div>
 					</div>
 					<div class="modal-footer">
-<!-- 					 <button class="btn btn-primary" data-bs-target="#exampleModal5" data-bs-toggle="modal"  id="send_report2">送出</button> -->
+						<!-- 					 <button class="btn btn-primary" data-bs-target="#exampleModal5" data-bs-toggle="modal"  id="send_report2">送出</button> -->
 						<button type="button" class="btn btn-primary" id="send_report2">送出</button>
 					</div>
 				</div>
@@ -1623,17 +1728,17 @@ div.star_block>span.star.-on {
 				</a>
 
 				<ul class="nav nav-pills">
-					<li class="nav-item"><a href="#" class="nav-link">使用者條款</a></li>
+					<li class="nav-item"><a href="/PiChill/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-					<li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
+					<li class="nav-item"><a href="/PiChill/homepage/privacyPolicy/privacyPolicy.js" class="nav-link">隱私權政策</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-					<li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
+					<li class="nav-item"><a href="/PiChill/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
 					<li class="nav-item"><a href="#" class="nav-link"></a></li>
-
 				</ul>
 			</header>
 		</div>
+
 	</footer>
 
 	<!--========發文燈箱========-->
@@ -1690,7 +1795,10 @@ div.star_block>span.star.-on {
 									</div>
 								</div>
 								<div>
-									<label>上傳圖片：</label> <input type="file" id="p_file" multiple>
+									<div>
+										<input type="file" id="p_file" class="custom-file-input" /> <label
+											for="p_file" class="custom-file-label">選擇圖片</label>
+									</div>
 									<div id="preview">
 										<span class="text">預覽圖</span>
 									</div>
@@ -1724,15 +1832,20 @@ div.star_block>span.star.-on {
 			<div class="content">
 				<div class="container text-center">
 					<div class="row align-items-start">
+						<input type=hidden id=reserveOrder>
 						<!-- 						<div class="col-4" id="datecol">選擇預約訂單 :</div> -->
-						<div class="col-3" id="datecol2">
-							<button class="btn btn-secondary btn-sm dropdown-toggle"
-								type="button" data-bs-toggle="dropdown" aria-expanded="false">選擇預約訂單</button>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">11/20 09:00</a></li>
-								<li><a class="dropdown-item" href="#">12/20 20:00</a></li>
-								<li><a class="dropdown-item" href="#">01/20 15:00</a></li>
-							</ul>
+						<select id="dateSelectOption">
+							<option value="option1">預約日期</option>
+
+						</select>
+					</div>
+				</div>
+				<br>
+				<div class="container text-center">
+					<div class="row align-items-start">
+						<div class="col-2" id="timecol">時段 :</div>
+						<div class="col-2" id="timecol2">
+							<input type="text" class="custom-input" readonly id="timeInput">
 						</div>
 					</div>
 				</div>
@@ -1771,9 +1884,12 @@ div.star_block>span.star.-on {
 				<label for="floatingTextarea4">請輸入內文</label>
 			</div>
 		</div>
-
 		<div>
-			<label>上傳圖片：</label> <input type="file" id="p_file2">
+			<div>
+				<input type="file" id="p_file2" class="custom-file-input" /> <label
+					for="p_file2" class="custom-file-label">選擇圖片</label>
+			</div>
+			<!-- 			<label>上傳圖片：</label> <input type="file" id="p_file2"> -->
 			<div id="preview2">
 				<span class="text">預覽圖</span>
 			</div>
@@ -1878,8 +1994,7 @@ div.star_block>span.star.-on {
 							<div class="col-2" id="commentcol">
 								<i class="fa-regular fa-comment"></i> 99
 							</div>
-							<input type="hidden" class="postType" name="postType"
-											value="0">
+							<input type="hidden" class="postType" name="postType" value="0">
 							<article class="task_container">
 								<div class="task_add_block">
 									<input type="text" class="task_name" placeholder="留言…">
