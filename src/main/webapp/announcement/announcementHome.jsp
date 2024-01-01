@@ -1,14 +1,23 @@
+<%@page import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.announcementgetone.model.*"%>
-<%@ page
+<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
+<%@ page import="com.pichill.backstage.announcement.*"%>
+<%@ page import="com.pichill.backstage.announcement.service.*"%>
+ <%@ page
 	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
 <%@ page
-	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
-<%
+	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%> 
+<%-- <%
 AnnouncementGetOneService annoGetOneSvc = new AnnouncementGetOneService();
 List<AnnouncementGetOne> list = annoGetOneSvc.getAll();
+pageContext.setAttribute("list", list);
+%> --%>
+<%
+AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
+List<Announcement> list = annoSvcB.getAll();
 pageContext.setAttribute("list", list);
 %>
 
@@ -128,10 +137,10 @@ pageContext.setAttribute("list", list);
 				<tr>
 					<td>
 						<h3>最新消息與公告</h3>
-						<h4>
+						 <h4>
 							<a
-								href="<%=request.getContextPath()%>/announcement/announcement_select.jsp">回首頁</a>
-						</h4>
+								href="<%=request.getContextPath()%>/announcement/announcement_search.jsp">查詢其他公告</a>
+						</h4> 
 					</td>
 				</tr>
 			</table>

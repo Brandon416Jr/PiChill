@@ -1,17 +1,35 @@
+<%@page import="com.pichill.generaluser.entity.GeneralUser"%>
 <%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.announcementgetone.model.*"%>
+<%-- <%@ page import="com.pichill.announcementgetone.model.*"%> --%>
+<%@ page import="com.pichill.generaluser.*"%>
+<%@ page import="com.pichill.owneruser.*"%>
+<%@ page import="com.pichill.backstage.announcement.model.*"%>
+<%@ page import="com.pichill.backstage.announcement.*"%>
+<%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
+<%@ page import="com.pichill.backstage.announcement.model.*"%>
 <%@ page
+	import="com.pichill.backstage.announcement.service.AnnouncementServiceBack"%>
+<%-- <%@ page
 	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
 <%@ page
-	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
-<%
+	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%> --%>
+<%-- <%
 AnnouncementGetOneService annoGetOneSvc = new AnnouncementGetOneService();
 List<AnnouncementGetOne> list = annoGetOneSvc.getAll();
 pageContext.setAttribute("list", list);
+%> --%>
+<%
+AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
+List<Announcement> list = annoSvcB.getAll();
+pageContext.setAttribute("list", list);
 %>
-
+<%
+GeneralUser generalUser = (GeneralUser) session.getAttribute("generalUser");
+System.out.println("generalUser is " + generalUser);
+Integer gUserID = generalUser.getgUserID();
+System.out.println("gUser is " + gUserID); %>
 
 <html>
 <head>
@@ -128,7 +146,7 @@ pageContext.setAttribute("list", list);
 						<h3>公告搜尋結果</h3>
 						<h4>
 							<a
-								href="<%=request.getContextPath()%>/announcement/announcement_select.jsp">回首頁</a>
+								href="<%=request.getContextPath()%>/homepage/main.jsp">回首頁</a>
 						</h4>
 					</td>
 				</tr>
