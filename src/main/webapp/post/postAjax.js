@@ -17,6 +17,7 @@ $(document).ready(function() {
 			if ($('#userStatus').val() === "2") {
 				var createPostButton = document.getElementById("create-post-button");
 				createPostButton.removeAttribute("data-bs-target");
+				  $('.task_add').removeClass('task_add').addClass('task_add2');
 			}
 			if ($('#userID').val() === "null") {
 				var createPostButton = document.getElementById("create-post-button");
