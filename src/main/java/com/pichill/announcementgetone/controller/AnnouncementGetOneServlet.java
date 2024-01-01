@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.announcementgetone.service.AnnouncementGetOneService;
+import com.pichill.backstage.announcement.entity.Announcement;
+import com.pichill.backstage.announcement.service.AnnouncementServiceBack;
 
 @SuppressWarnings("serial")
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
-@WebServlet(name = "AnnouncementGetOneServlet", value = "/announcement/announcement.do")
+@WebServlet(name = "AnnouncementServlet", value = "/announcement/announcement.do")
 public class AnnouncementGetOneServlet extends HttpServlet {
-	private AnnouncementGetOneService annoGetOneSvc;
+	private AnnouncementServiceBack annoSvcB;
 
 	@Override
 	public void init() throws ServletException {
 		// TODO Auto-generated method stub
-		annoGetOneSvc = new AnnouncementGetOneService();
+		annoSvcB = new AnnouncementServiceBack();
 	}
 
 	@Override
@@ -58,10 +60,10 @@ public class AnnouncementGetOneServlet extends HttpServlet {
 		Integer announceID = Integer.valueOf(req.getParameter("announceID"));
 		String annoTitle = req.getParameter("annoTitle");
 
-		AnnouncementGetOne announcementGetOne = annoGetOneSvc.getOneAnnouncementID(announceID);
+		Announcement announcement = annoSvcB.getOneAnnouncement(announceID);
 //		AnnouncementGetOne announcementGetOneByAnnoTitle = annoGetOneSvc.getAnnouncementByAnnoTitle(annoTitle);
 
-		req.setAttribute("announcement", announcementGetOne);
+		req.setAttribute("announcement", announcement);
 //		req.setAttribute("announcement", announcementGetOneByAnnoTitle);
 		return "/announcement/announcement_single.jsp";
 	}

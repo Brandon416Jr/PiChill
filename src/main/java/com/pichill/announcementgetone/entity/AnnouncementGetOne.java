@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import com.pichill.backstage.announcement.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.pichill.manage.entity.Manage;

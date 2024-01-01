@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="com.pichill.announcementgetone.model.*"%>
+    <%-- <%@ page import="com.pichill.announcementgetone.model.*"%> --%>
+    <%@ page import="com.pichill.backstage.announcement.*"%>
     <%@ page import="java.util.*"%>
-<%@ page
+    
+<%-- <%@ page
 	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
 <%@ page
-	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
+	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%> --%>
 	
 <!DOCTYPE html>
 <html>
@@ -57,8 +59,8 @@
 	                        近期羽毛球賽用品價格持續飆漲,因此Multiple羽球館經理表示,
 	                        他們有計畫在下個月對場地使用收費進行調漲,每小時費用將提高約15%。
 	                        消息一出立刻遭到球友的抗議,大家反映漲幅太高,使用意願將大減。</span>  
-	                    </div>
-	                    <input type="submit" id="next" value="返回" style="width:150px; height:44px;">
+	                    </div><a href="<%=request.getContextPath()%>/announcement/announcementHome.jsp">
+	                    <input type="submit" id="next" value="返回" style="width:150px; height:44px;"></a>
 	                </div>
 	            </div>
 	        </div>

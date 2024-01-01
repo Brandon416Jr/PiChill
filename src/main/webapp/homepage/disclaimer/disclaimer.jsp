@@ -7,12 +7,14 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>免責條款</title>
-  <link rel="stylesheet" href="../../bootstrap1/bootstrap-5.3.2-dist/css/bootstrap.min.css">
-  <!--<link rel="stylesheet" href="./CSS/bootstrap.min.css">
-     <link rel="stylesheet" href="./css1.css/css.css"> -->
+  <!--<link rel="stylesheet" href="./CSS/bootstrap.min.css">-->
+  <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/CSS/bootstrap.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/css2/css.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/css2/guser.css">
+ 
   <link rel="stylesheet" href="./css.css">
   <link rel="stylesheet" href="./disclaimer.css">
-  <link rel="shortcut icon" href="../../newPiChillLogo.png">
+  <link rel="shortcut icon" href="/newPiChillLogo.png">
 </head>
 
 <body>
@@ -27,11 +29,11 @@
 
         <ul class="nav nav-pills">
           <li class="nav-item"><a href="#" class="nav-link">首頁</a></li>
-          <li class="nav-item"><a href="../announcement.html" class="nav-link">公告</a></li>
+          <li class="nav-item"><a href="<%=request.getContextPath()%>/announcement.jsp" class="nav-link">公告</a></li>
           <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
           <li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
           <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><img src="../../bootstrap1/pic/face.svg" alt="SVG" />
+          <li class="nav-item"><a href="#" class="nav-link"><img src = "<%=request.getContextPath()%>/generaluser/pic/headerlogo.svg" alt="SVG"/>
               會員中心</a></li>
         </ul>
 
@@ -79,8 +81,8 @@
         </a>
 
         <ul class="nav nav-pillss">
-          <li class="nav-item"><a href="../termOfUse/termOfUse.html" class="nav-link">使用者條款</a></li>
-          <li class="nav-item"><a href="../privacyPolicy/privacyPolicy.html" class="nav-link">隱私權政策</a></li>
+          <li class="nav-item"><a href="<%=request.getContextPath()%>/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
+          <li class="nav-item"><a href="<%=request.getContextPath()%>/privacyPolicy/privacyPolicy.jsp" class="nav-link">隱私權政策</a></li>
           <li class="nav-item"><a href="#" class="nav-link">免責條款</a></li>
         </ul>
       </header>
