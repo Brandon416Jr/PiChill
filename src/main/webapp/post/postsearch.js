@@ -1,8 +1,20 @@
 $(document).ready(function() {
-	//=====tag查詢=====
-	$(".rounded-button").click(function() {
- var buttonText = button.text();
-  });
+//	//=====tag查詢=====
+//	$(".rounded-button").click(function() {
+// var buttonText =   $("#tag1").text();
+// 	$.ajax({
+//					type: "POST",
+//					url: "post.do",
+//					data: {
+//						"action": "getByTag",
+//						"tag":buttonText
+//					},
+//					dataType: "Json",
+//					success: function(postData) {
+//						
+//						}
+//						})
+//  });
 	//======顯示like狀態=======
 	$("#post-list").on("click", "#commentcol", function() {
 		var postID = $(this).attr("data-post-id");
