@@ -31,8 +31,7 @@
           <li class="nav-item"><a href="#" class="nav-link">場館資訊</a></li>
           <li class="nav-item"><a href="#" class="nav-link">我要預約</a></li>
           <li class="nav-item"><a href="#" class="nav-link">論壇</a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><img src="../../bootstrap1/pic/face.svg" alt="SVG" />
-              會員中心</a></li>
+         <img src = "<%=request.getContextPath()%>/generaluser/DBGifReader?gUserID=${generalUser.gUserID}" alt="SVG" class="rounded-circle"/> 會員中心</a></li>
         </ul>
 
 
@@ -46,7 +45,7 @@
   <!----------------------------------------------- main 區 ------------------------------------------------------->
   <div class="privacyPolicy">
 
-    <h1 class="headline">πChill使用者條款</h1>
+    <h1 class="headline">πChill隱私權政策</h1>
     <div class="introText">
       <p class="introText">
         非常歡迎您光臨πChill（以下簡稱本網站），為了讓您能夠安心的使用本網站的各項服務與資訊，特此向您說明本網站的隱私權保護政策，以保障您的權益，請您詳閱下列內容：
@@ -145,9 +144,9 @@
         </a>
 
         <ul class="nav nav-pillss">
-          <li class="nav-item"><a href="../termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
+          <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/termOfUse/termOfUse.jsp" class="nav-link">使用者條款</a></li>
           <li class="nav-item"><a href="#" class="nav-link">隱私權政策</a></li>
-          <li class="nav-item"><a href="../disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
+          <li class="nav-item"><a href="<%=request.getContextPath()%>/homepage/disclaimer/disclaimer.jsp" class="nav-link">免責條款</a></li>
         </ul>
       </header>
     </div>

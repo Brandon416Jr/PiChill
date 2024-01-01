@@ -7,12 +7,11 @@
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>使用者條款</title>
-     <link rel="stylesheet" href="./css1.css/css.css"> -->
+     <link rel="stylesheet" href="./css.css">
      <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/CSS/bootstrap.min.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/css2/css.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/generaluser/css2/guser.css">
   <link rel="stylesheet" href="./termOfUse.css">
-  <link rel="stylesheet" href="./css.css">
 </head>
 
 <body>

@@ -1,10 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="com.pichill.announcementgetone.model.*"%>
+<%-- <%@ page import="com.pichill.announcementgetone.model.*"%> --%>
+<%@ page import="com.pichill.backstage.announcement.model.*"%>
+<%-- <%@ page import="com.pichill.announcementgetone.model.*"%>
 <%@ page
 	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
 <%@ page
-	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>
+	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%> --%>
 <!-- 用來搜公告的頁面 -->
 <html>
 <head>
@@ -134,7 +136,7 @@
 				<br></li>
 
 
-			<li>
+			<%-- <li>
 				<FORM METHOD="post" ACTION="<%=request.getContextPath()%>/announcement/announcement.do">
 					<!-- 送出成功後回到列表 -->
 					<b>輸入欲查詢的關鍵字:</b> <input type="text" name="annoTitle"> <input
@@ -142,7 +144,7 @@
 						type="submit" value="送出">
 				</FORM>
 			</li>
-
+ --%>
 			<jsp:useBean id="announcement" scope="page"
 				class="com.pichill.announcementgetone.service.AnnouncementGetOneService" />
 

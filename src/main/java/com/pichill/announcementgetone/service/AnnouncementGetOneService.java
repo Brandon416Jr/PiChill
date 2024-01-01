@@ -5,6 +5,7 @@ import java.util.List;
 import com.pichill.announcementgetone.entity.AnnouncementGetOne;
 import com.pichill.announcementgetone.model.AnnouncementGetOneDAO;
 import com.pichill.announcementgetone.model.AnnouncementGetOneDAOImpl;
+import com.pichill.backstage.announcement.entity.Announcement;
 
 public class AnnouncementGetOneService {
 	private final AnnouncementGetOneDAO dao;
@@ -12,15 +13,18 @@ public class AnnouncementGetOneService {
 	public AnnouncementGetOneService() {
 		dao = new AnnouncementGetOneDAOImpl();
 	}
+//	public AnnouncementGetOneService() {
+//		dao = new AnnouncementGetOneDAOImpl();
+//	}
 
-	public AnnouncementGetOne getOneAnnouncementID(Integer announceID) {
+	public Announcement getOneAnnouncementID(Integer announceID) {
 		return dao.getAnnouncementByAnnounceID(announceID);
 	}
 //	public AnnouncementGetOne getAnnouncementByAnnoTitle(String annoTitle) {
 //		return dao.getAnnouncementByAnnoTitle(annoTitle);
 //	}
 
-	public List<AnnouncementGetOne> getAll() {
+	public List<Announcement> getAll() {
 		return dao.getAll();
 	}
 

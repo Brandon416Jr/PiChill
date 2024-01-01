@@ -1,6 +1,6 @@
 <%@page import="com.pichill.contactus.service.ContactUsServiceImpl"%>
 <%@page import="com.pichill.contactus.service.ContactUsService"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.contactus.entity.ContactUs"%>
 <%@ page import="com.pichill.contactus.*"%>
@@ -26,7 +26,7 @@ pageContext.setAttribute("gUserID", gUserID);
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>generalUser</title>
+<title>Contact Us for ownerUser</title>
 <!----------------匯入jquery ------------------------>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
