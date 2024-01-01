@@ -6,8 +6,8 @@
 //從資料庫取出的owneruser, 也可以是輸入格式有錯誤時的owneruser物件
 GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
 System.out.println("gUser = " + gUser);
-Integer gUserID = gUser.getgUserID();
-System.out.println("gUser is" + gUserID);
+// Integer gUserID = gUser.getgUserID();
+// System.out.println("gUser is" + gUserID);
 %> 
 <%
 //從資料庫取出的generaluser, 也可以是輸入格式有錯誤時的generaluser物件
