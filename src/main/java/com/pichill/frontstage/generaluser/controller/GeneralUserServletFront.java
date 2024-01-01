@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import com.pichill.util.EncryptDataUtil;
 import redis.clients.jedis.Jedis;
 
 import com.google.gson.Gson;
@@ -156,7 +156,9 @@ public class GeneralUserServletFront extends HttpServlet {
 		} else if (!gPassword.trim().matches(gPasswordReg)) { // 以下練習正則(規)表示式(regular-expression)
 			errorMsgs.put("gPassword", "密碼: 可以是英文大小寫及數字, 且長度必需介於8到12個字");
 		}
-
+		
+//		String encryptPassword = EncryptDataUtil.encryptData(gPassword);
+		
 		String gPassword2 = req.getParameter("gPassword2");
 		if (!gPassword2.equals(gPassword)) {
 			errorMsgs.put("gPassword2", "請輸入相同的密碼");
@@ -179,11 +181,11 @@ public class GeneralUserServletFront extends HttpServlet {
 		}
 
 		String nicknameID = req.getParameter("nicknameID");
-		String nickReg = "^[a-zA-Z0-9_@$%^]{10}$";
+		String nickReg = "[\\u4e00-\\u9fa5]{5}";
 		if (nicknameID == null || nicknameID.trim().isEmpty()) {
 			nicknameID = "";
 		} else if (!nicknameID.trim().matches(nickReg)) {
-			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式:字數10個，可以有符號、大小寫英文及數字，請勿填寫中文");
+			errorMsgs.put("nicknameID", "請輸入正確的匿名ID格式: 五個中文字");
 		}
 
 		Boolean gUserNN = gUserSvcF.existsNicknameID(nicknameID);
@@ -222,7 +224,7 @@ public class GeneralUserServletFront extends HttpServlet {
 			in.read(gProfilePic);
 			in.close();
 		} else
-			errorMsgs.put("gProfilePic", "員工照片: 請上傳照片");
+			errorMsgs.put("gProfilePic", "會員照片: 請上傳照片");
 
 		String agree = req.getParameter("agree");
 		if (agree == null) {
@@ -237,6 +239,7 @@ public class GeneralUserServletFront extends HttpServlet {
 		generalUser.setStatus(status);
 		generalUser.setgGender(gGender);
 		generalUser.setgUsername(gUsername);
+//		generalUser.setgPassword(encryptPassword);
 		generalUser.setgPassword(gPassword);
 		generalUser.setgIDNum(gIDNum);
 		generalUser.setNicknameID(nicknameID);
@@ -253,17 +256,7 @@ public class GeneralUserServletFront extends HttpServlet {
 			req.setAttribute("generalUser", generalUser); // 含有輸入格式錯誤的empVO物件,也存入req
 			return "/login/gLogin/gUserRegist.jsp";
 		}
-
-//		Boolean gUser = gUserSvcF.existsUsername(generalUser.getgUsername());
-//		if (gUser) {
-//			errorMsgs.put("gUsername", "此帳號已存在");
-//		} 
-//		Boolean gUser = gUserSvcF.existsUsername(gUsername);
-//		if (gUser == true) {
-//			errorMsgs.put("gUsername", "此帳號已存在");
-//			req.setAttribute("generalUser", generalUser); 
-//			return "/frontstage/generalUserFront/gUserRegist.jsp";
-//		} 
+		
 
 		/*************************** 2.開始新增資料 ***************************************/
 
@@ -317,4 +310,5 @@ public class GeneralUserServletFront extends HttpServlet {
 	public String generateVerificationCode() {
 		  return UUID.randomUUID().toString().substring(0,6); 
 		}
+	
 }

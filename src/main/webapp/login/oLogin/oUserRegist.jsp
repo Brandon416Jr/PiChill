@@ -383,13 +383,13 @@ button.agreeterm {
 										name="oBankAccount" placeholder="請輸入銀行帳號"
 										value="<%=(ownerUser == null) ? "" : ownerUser.getoBankAccount()%>">
 								</div>
-								<div class="form-group">
+<!-- 								<div class="form-group"> -->
 
-									<label>註冊日期</label> <input class="au-input au-input--full"
-										type="date" name="oRegisterDate"
-										value="<%=(ownerUser == null) ? "" : ownerUser.getoRegisterDate()%>">
+<!-- 									<label>註冊日期</label> <input class="au-input au-input--full" -->
+<!-- 										type="date" name="oRegisterDate" -->
+<%-- 										value="<%=(ownerUser == null) ? "" : ownerUser.getoRegisterDate()%>"> --%>
 
-								</div>
+<!-- 								</div> -->
 								<div class="form-group">
 									<label for="file-input">上傳大頭貼</label><font color=red>${errorMsgs.oProfilePic}</font>
 									<input type="file" name="oProfilePic" onclick="previewImage()"

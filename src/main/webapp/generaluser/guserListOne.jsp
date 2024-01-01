@@ -61,11 +61,11 @@ GeneralUser gUser = (GeneralUser) session.getAttribute("generalUser");
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactusForGUser/addContactUsForGUser.jsp">聯絡我們</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">
-                          <a class="asidearea" href="<%=request.getContextPath()%>/contactUsForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
+                          <a class="asidearea" href="<%=request.getContextPath()%>/contactusForGUser/listAllContactUsForGUser.jsp">聯絡我們紀錄</a>                         
                         </li>
                         <li>&nbsp</li>
                         <li class="my-2">

@@ -167,6 +167,9 @@ tr#courtName{
     position: relative;
     top: 50px;
 }
+td#courtname{
+	width:200px;
+}
 tr#placeName{
     position: relative;
     top: 60px;
