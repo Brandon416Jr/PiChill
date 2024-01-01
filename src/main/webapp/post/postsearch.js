@@ -589,7 +589,7 @@ $(document).ready(function() {
               	                                  <div class="w-100 d-none d-md-block"></div>
 
               	                                  <div class="col-2 col-sm-2">費用:</div>
-              	                                  <div class="col-2 col-sm-4">${placeFee}</div>
+              	                                  <div class="col-2 col-sm-4">${placeFee}元</div>
               	                              </div>
               	                          </div>
               	                          <p class="card-text2">${post.postContent}</p>
@@ -782,7 +782,7 @@ $(document).ready(function() {
    	                                  <div class="w-100 d-none d-md-block"></div>
 
    	                                  <div class="col-2 col-sm-2">費用:</div>
-   	                                  <div class="col-2 col-sm-4">${placeFee}</div>
+   	                                  <div class="col-2 col-sm-4">${placeFee}元</div>
    	                              </div>
    	                          </div>
    	                          <p class="card-text2">${post.postContent}</p>
