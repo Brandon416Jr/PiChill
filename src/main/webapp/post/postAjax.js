@@ -6,13 +6,21 @@ $(document).ready(function() {
 		dataType: "json",
 		url: "post.do?action=getUser",
 		success: function(data) {
-//						console.log(data);
+			//						console.log(data);
 			if (data == null) {
 				$('#userID').val("null");
 				$('#userStatus').val("null");
 			} else {
 				$('#userID').val(data.gUserID);
 				$('#userStatus').val(data.status);
+			}
+			if ($('#userStatus').val() === "2") {
+				var createPostButton = document.getElementById("create-post-button");
+				createPostButton.removeAttribute("data-bs-target");
+			}
+			if ($('#userID').val() === "null") {
+				var createPostButton = document.getElementById("create-post-button");
+				createPostButton.removeAttribute("data-bs-target");
 			}
 			if (data == null) {
 				$(".rounded-circle").remove();
@@ -25,7 +33,7 @@ $(document).ready(function() {
 
 		}
 	})
-	
+
 	$.ajax({
 		type: "GET",
 		url: "post.do",
@@ -458,11 +466,14 @@ $(document).ready(function() {
   ${newPostPic ? `<img src="${URL.createObjectURL(newPostPic)}" alt="Selected Image">` : ''}		              </div>
 		                  <div class="container text-center">
 		                      <div class="row align-items-start" id="card-footer">
-		                          <div class="col-2" id="likecol" data-post-id="${postID}">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> ${likeCnt > 0 ? likeCnt : ''}</button>		                          </div>
-		                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-	                                <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                    data-bs-target="#exampleModal5" > ${commentCnt}
+ <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+                    <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
 	                                </div>
 		                      </div>
 		                  </div>
@@ -503,6 +514,7 @@ $(document).ready(function() {
 				if (data && data.length > 0) {
 					for (var i = 0; i < data.length; i++) {
 						var reserveOrderID = data[i].reserveOrderID;
+//						console.log(reserveOrderID)
 						var courtName = data[i].courtName;
 						var ball = data[i].ball;
 						var fee = data[i].fee;
@@ -511,6 +523,7 @@ $(document).ready(function() {
 						//console.log(reserveDate)
 						var newOption = $("<option></option>").val(reserveDate).text("預約日期：" + reserveDate);
 						$('#dateSelectOption').append(newOption);
+//						console.log(reserveDate)
 					}
 
 					$("#dateSelectOption").on("change", function() {
@@ -665,7 +678,7 @@ $(document).ready(function() {
 	                                  <div class="w-100 d-none d-md-block"></div>
 
 	                                  <div class="col-2 col-sm-2">費用:</div>
-	                                  <div class="col-2 col-sm-4">${fee}</div>
+	                                  <div class="col-2 col-sm-4">${fee}元</div>
 	                              </div>
 	                          </div>
 	                          <p class="card-text2">${newPostContent}</p>
@@ -676,11 +689,14 @@ $(document).ready(function() {
 	              </div>
 	                  <div class="container text-center">
 	                      <div class="row align-items-start" id="card-footer">
-	                          <div class="col-2" id="likecol">
-<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal6"> ${likeCnt > 0 ? likeCnt : ''}</button>	                          </div>
-	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
-	                              <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal"
-	                                  data-bs-target="#exampleModal6" > ${commentCnt}
+	                           <div class="col-2" id="likecol" data-post-id="${postID}">
+<button type="button" class="fa-regular fa-thumbs-up likebutton" data-bs-toggle="modal" data-bs-target="#exampleModal5"> </button>
+<span class="likecnt"> ${likeCnt > 0 ? likeCnt : ''}</span>
+                            </div>
+              	                          <div class="col-2" id="commentcol" data-post-id="${postID}">
+                    <button type="button" class="fa-regular fa-comment" data-bs-toggle="modal" data-bs-target="#exampleModal5"></button>
+                     <span class="commentcnt"> ${commentCnt > 0 ? commentCnt : ''}</span>
+                    </div>
 	                              </div>
 	                      </div>
 	                  </div>
@@ -700,28 +716,28 @@ $(document).ready(function() {
 		});
 	}
 	//===========取得推撥館主的球館=====
-//	$("#create-post-button").on("click", function() {
-////		var oUserID = $('#userID').val();
-//		$.ajax({
-//			type: "POST",
-//			url: "post.do",
-//			data: {
-//				action: "get_courtName",
-////				"oUserID": "oUserID"
-//			},
-//			dataType: "json",
-//			success: function(data) {
-//				if (data && data.length > 0) {
-//					for (var i = 0; i < data.length; i++) {
-//						var courtName = data[i].courtName;
-//						//console.log(reserveDate)
-//						var newOption = $("<option></option>").val(courtName).text("選擇場館：" + courtName);
-//						$('#courtSelectOption').append(newOption);
-//					}
-//				}
-//			}
-//		})
-//	})
+	//	$("#create-post-button").on("click", function() {
+	////		var oUserID = $('#userID').val();
+	//		$.ajax({
+	//			type: "POST",
+	//			url: "post.do",
+	//			data: {
+	//				action: "get_courtName",
+	////				"oUserID": "oUserID"
+	//			},
+	//			dataType: "json",
+	//			success: function(data) {
+	//				if (data && data.length > 0) {
+	//					for (var i = 0; i < data.length; i++) {
+	//						var courtName = data[i].courtName;
+	//						//console.log(reserveDate)
+	//						var newOption = $("<option></option>").val(courtName).text("選擇場館：" + courtName);
+	//						$('#courtSelectOption').append(newOption);
+	//					}
+	//				}
+	//			}
+	//		})
+	//	})
 	//===========新增文章(推撥)==========
 	$("#pb-promote").on("click", function() {
 		var newPostTitle = $("#floatingTextarea5").val();
