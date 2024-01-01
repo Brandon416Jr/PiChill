@@ -40,7 +40,7 @@ public class ContactUs {
 	@Column(name = "formContent" , columnDefinition = "text", updatable = false)
 	private String formContent;
 	
-	@Column(name = "formPic" , columnDefinition = "longblob", updatable = false)
+	@Column(name = "formPic" , columnDefinition = "longblob")
 	private byte[] formPic;
 	
 	@Column(name = "formTime" ,  updatable = false)
