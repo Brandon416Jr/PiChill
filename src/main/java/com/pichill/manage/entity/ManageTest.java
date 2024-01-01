@@ -31,25 +31,25 @@ public class ManageTest {
 //		dao.insert(manage1);
 		
 //		 修改13000001
-		Manage manage1 = new Manage();
-		String mPassword ="ldjoedsk";
-		String rawPassword = EncryptDataUtil.encryptData(mPassword);
-		manage1.setmName("林孝呈");
-		manage1.setmUserName("AndyLSSin");
-		manage1.setmPassword(rawPassword);
-		manage1.setmBirth(java.sql.Date.valueOf("1989-09-26"));
-		manage1.setmGender(0);
-		manage1.setmTelephone("0945642566");
-		manage1.setmEmgContact("連亭竹");
-		manage1.setmEmgPhone("0934974098");
-		manage1.setmAddress("台中市北區建仁路八段414號");
-		manage1.setmHiredate(java.sql.Date.valueOf("2012-03-21"));
-		manage1.setmID("H236618827");
-		manage1.setmEmail("evie3641@gmail.com");
-		manage1.setmProfilePic(null);
-		manage1.setmStatus(1);
-		manage1.setManageID(13000001);
-		dao.update(manage1);
+//		Manage manage1 = new Manage();
+//		String mPassword ="ldjoedsk";
+//		String rawPassword = EncryptDataUtil.encryptData(mPassword);
+//		manage1.setmName("林孝呈");
+//		manage1.setmUserName("AndyLSSin");
+//		manage1.setmPassword(rawPassword);
+//		manage1.setmBirth(java.sql.Date.valueOf("1989-09-26"));
+//		manage1.setmGender(0);
+//		manage1.setmTelephone("0945642566");
+//		manage1.setmEmgContact("連亭竹");
+//		manage1.setmEmgPhone("0934974098");
+//		manage1.setmAddress("台中市北區建仁路八段414號");
+//		manage1.setmHiredate(java.sql.Date.valueOf("2012-03-21"));
+//		manage1.setmID("H236618827");
+//		manage1.setmEmail("evie3641@gmail.com");
+//		manage1.setmProfilePic(null);
+//		manage1.setmStatus(1);
+//		manage1.setManageID(13000001);
+//		dao.update(manage1);
 		
 //		 修改13000002
 //		Manage manage2 = new Manage();
@@ -136,25 +136,25 @@ public class ManageTest {
 //		dao.update(manage2);
 		
 //		 修改13000006
-//		Manage manage2 = new Manage();
-//		String mPassword ="Xs33F38s";
-//		String rawPassword = EncryptDataUtil.encryptData(mPassword);
-//		manage2.setmName("林智勝");
-//		manage2.setmUserName("Bkdlel554");
-//		manage2.setmPassword(rawPassword);
-//		manage2.setmBirth(java.sql.Date.valueOf("1995-09-20"));
-//		manage2.setmGender(0);
-//		manage2.setmTelephone("0956975066");
-//		manage2.setmEmgContact("陳姣慧");
-//		manage2.setmEmgPhone("0937532364");
-//		manage2.setmAddress("彰化縣社頭鄉員集路３段20號");
-//		manage2.setmHiredate(java.sql.Date.valueOf("2023-04-30"));
-//		manage2.setmID("U133209824");
-//		manage2.setmEmail("rodriguez4463@yahoo.com");
-//		manage2.setmProfilePic(null);
-//		manage2.setmStatus(1);
-//		manage2.setManageID(13000006);
-//		dao.update(manage2);
+		Manage manage2 = new Manage();
+		String mPassword ="1234567890";
+		String rawPassword = EncryptDataUtil.encryptData(mPassword);
+		manage2.setmName("林智勝");
+		manage2.setmUserName("1234567890");
+		manage2.setmPassword(rawPassword);
+		manage2.setmBirth(java.sql.Date.valueOf("1995-09-20"));
+		manage2.setmGender(0);
+		manage2.setmTelephone("0956975066");
+		manage2.setmEmgContact("陳姣慧");
+		manage2.setmEmgPhone("0937532364");
+		manage2.setmAddress("彰化縣社頭鄉員集路３段20號");
+		manage2.setmHiredate(java.sql.Date.valueOf("2023-04-30"));
+		manage2.setmID("U133209824");
+		manage2.setmEmail("rodriguez4463@yahoo.com");
+		manage2.setmProfilePic(null);
+		manage2.setmStatus(1);
+		manage2.setManageID(13000006);
+		dao.update(manage2);
 		
 //		 修改13000007
 //		Manage manage2 = new Manage();
