@@ -1,17 +1,17 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="Big5"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="com.pichill.court.Court"%>
 <%@ page import="com.pichill.manage.entity.Manage"%>
 <%
 Manage manage = (Manage) session.getAttribute("manage");
-// ¼g¦º
+// å¯«æ­»
 // Integer manageID = 13000003;
 // ManageService manageSvc = new ManageService();
 // Manage manage = manageSvc.getOneManage(manageID);
 // pageContext.setAttribute("manage",manage);
 %>
 <%
-//¨£com.emp.controller.EmpServlet.java²Ä238¦æ¦s¤JreqªºempVOª«¥ó (¦¹¬°¿é¤J®æ¦¡¦³¿ù»~®ÉªºempVOª«¥ó)
+//è¦‹com.emp.controller.EmpServlet.javaç¬¬238è¡Œå­˜å…¥reqçš„empVOç‰©ä»¶ (æ­¤ç‚ºè¼¸å…¥æ ¼å¼æœ‰éŒ¯èª¤æ™‚çš„empVOç‰©ä»¶)
 Court court = (Court) request.getAttribute("court");
 %>
 
@@ -20,7 +20,7 @@ Court court = (Court) request.getAttribute("court");
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>­×§ï²yÀ]¸ê®Æ</title>
+<title>ä¿®æ”¹çƒé¤¨è³‡æ–™</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/backEnd-Website/vendor/bootstrap-4.1/bootstrap.min.css" />
 <style type="text/css"></style>
@@ -78,69 +78,69 @@ Court court = (Court) request.getAttribute("court");
 				<nav class="navbar-sidebar">
 					<ul class="list-unstyled navbar__list expanded">
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>­û¤uºŞ²z
+								class="fas fa-tachometer-alt"></i>å“¡å·¥ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
-								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">©Ò¦³­û¤u¸ê®Æ</a></li>
+								<li><a class="active" href="<%=request.getContextPath()%>/backstage/manage/all_manage.jsp">æ‰€æœ‰å“¡å·¥è³‡æ–™</a></li>
 								<li><a
 										href="<%=request.getContextPath()%>/manage/manage.do?action=getOne_For_insert"
-										onclick="return checkmStatus();">·s¼W­û¤u¸ê®Æ</a></li>
+										onclick="return checkmStatus();">æ–°å¢å“¡å·¥è³‡æ–™</a></li>
 									<li><a
-										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">§Úªº¸ê®Æ</a></li>
+										href="<%=request.getContextPath()%>/manage/manage.do?action=getMyData_Update&manageID=${manage.manageID}">æˆ‘çš„è³‡æ–™</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>¤@¯ë·|­ûºŞ²z
+								class="fas fa-tachometer-alt"></i>ä¸€èˆ¬æœƒå“¡ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">©Ò¦³·|­û¸ê®Æ</a></li>
+									href="<%=request.getContextPath()%>/backstage/generalUserBack/all_gUser.jsp">æ‰€æœ‰æœƒå“¡è³‡æ–™</a></li>
 							
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>¥ø·~·|­ûºŞ²z
+								class="fas fa-tachometer-alt"></i>ä¼æ¥­æœƒå“¡ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">©Ò¦³·|­û¸ê®Æ</a></li>
+									href="<%=request.getContextPath()%>/backstage/ownerUserBack/all_oUser.jsp">æ‰€æœ‰æœƒå“¡è³‡æ–™</a></li>
 								
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>³Ì·s®ø®§ºŞ²z
+								class="fas fa-tachometer-alt"></i>æœ€æ–°æ¶ˆæ¯ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">ªí³æºŞ²z</a></li>
+									href="<%=request.getContextPath()%>/backstage/contactUsBack/all_form.jsp">è¡¨å–®ç®¡ç†</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">¤½§iºŞ²z</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/all_announcement.jsp">å…¬å‘Šç®¡ç†</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">·s¼W¤½§i</a></li>
+									href="<%=request.getContextPath()%>/backstage/announcementBack/new_announcement.jsp">æ–°å¢å…¬å‘Š</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>½×¾ÂºŞ²z
+								class="fas fa-tachometer-alt"></i>è«–å£‡ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">©Ò¦³¤å³¹</a></li>
+									href="<%=request.getContextPath()%>/backstage/postBack/all_post.jsp">æ‰€æœ‰æ–‡ç« </a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">©Ò¦³¯d¨¥</a></li>
+									href="<%=request.getContextPath()%>/backstage/commentBack/all_comment.jsp">æ‰€æœ‰ç•™è¨€</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">ÀËÁ|ºŞ²z</a></li>
+									href="<%=request.getContextPath()%>/backstage/reportBack/all_report.jsp">æª¢èˆ‰ç®¡ç†</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#"> <i
-								class="fas fa-tachometer-alt"></i>²yÀ]ºŞ²z
+								class="fas fa-tachometer-alt"></i>çƒé¤¨ç®¡ç†
 						</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">©Ò¦³²yÀ]</a></li>
+									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp">æ‰€æœ‰çƒé¤¨</a></li>
 								<li><a
-									href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">©Ò¦³³õ¦a</a></li>
+									href="<%=request.getContextPath()%>/backstage/placeBack/all_place.jsp">æ‰€æœ‰å ´åœ°</a></li>
 							</ul></li>
 						<li class="has-sub"><a class="js-arrow" href="#">
-									<i class="fas fa-tachometer-alt"></i>¹w¬ùºŞ²z
+									<i class="fas fa-tachometer-alt"></i>é ç´„ç®¡ç†
 							</a>
 							<ul class="list-unstyled navbar__sub-list js-sub-list">
 									<li><a
-										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">©Ò¦³¹w¬ù­q³æ</a></li>
+										href="<%=request.getContextPath()%>/backstage/reserveOrderBack/all_reserveOrder.jsp">æ‰€æœ‰é ç´„è¨‚å–®</a></li>
 								</ul></li>
 					</ul>
 				</nav>
@@ -169,7 +169,7 @@ Court court = (Court) request.getAttribute("court");
 									<div class="s-logo">
 										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
 									</div>
-									<p class="welcome">£k Chill«á»OºŞ²z¨t²Î</p>
+									<p class="welcome">Ï€ Chillå¾Œè‡ºç®¡ç†ç³»çµ±</p>
 									<div class="s-logo">
 										<img src="${pageContext.request.contextPath }/backEnd-Website/pic/smallLogo.png" alt="">
 									</div>
@@ -182,14 +182,14 @@ Court court = (Court) request.getAttribute("court");
 									<div class="image">
 										<img
 											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
-											alt="¨Ï¥ÎªÌÀY¹³" /> 
+											alt="ä½¿ç”¨è€…é ­åƒ" /> 
 <!-- 											<img -->
 <%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
-<!-- 											alt="¨Ï¥ÎªÌÀY¹³" /> -->
+<!-- 											alt="ä½¿ç”¨è€…é ­åƒ" /> -->
 									</div>
 									<div class="content">
-<!-- 										<a class="js-acc-btn" href="#">ºŞ²z­ûÃ¹¸ÎÄP¡A±z¦n</a> -->
-										<a class="js-acc-btn" href="#">ºŞ²z­û<%=manage.getmName() %>¡A±z¦n</a>
+<!-- 										<a class="js-acc-btn" href="#">ç®¡ç†å“¡ç¾…è£•éµ¬ï¼Œæ‚¨å¥½</a> -->
+										<a class="js-acc-btn" href="#">ç®¡ç†å“¡<%=manage.getmName() %>ï¼Œæ‚¨å¥½</a>
 									</div>
 									<div class="account-dropdown js-dropdown">
 										<div class="info clearfix">
@@ -197,7 +197,7 @@ Court court = (Court) request.getAttribute("court");
 												<a href="#"> 
 												<img
 											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
-											alt="¨Ï¥ÎªÌÀY¹³" /> 
+											alt="ä½¿ç”¨è€…é ­åƒ" /> 
 <!-- 												<img -->
 <%-- 													src="<%=request.getContextPath()%>/image/Group 115.png" --%>
 <!-- 													alt="John Doe" /> -->
@@ -215,7 +215,7 @@ Court court = (Court) request.getAttribute("court");
 										<div class="account-dropdown__footer">
 											<form method="POST"
 													action="<%=request.getContextPath()%>/manage/manage.do">
-													<button class="btn btn-danger">µn¥X</button>
+													<button class="btn btn-danger">ç™»å‡º</button>
 													<input type="hidden" name="action" value="logout">
 												</form>
 										</div>
@@ -235,18 +235,18 @@ Court court = (Court) request.getAttribute("court");
 				<div class="container-fluid2">
 					<div class="card">
 						<div class="card-header">
-							<strong>­×§ï ${court.courtName}²yÀ]</strong>
+							<strong>ä¿®æ”¹ ${court.courtName}çƒé¤¨</strong>
 							<h4>
 								<a
 									href="<%=request.getContextPath()%>/backstage/courtBack/all_court.jsp"><img
 									src="<%=request.getContextPath()%>/image/smallLogo.png"
-									width="20" height="20" border="0">¦^©Ò¦³²yÀ]</a>
+									width="20" height="20" border="0">å›æ‰€æœ‰çƒé¤¨</a>
 							</h4>
 						</div>
 
-						<%-- ¿ù»~ªí¦C --%>
+						<%-- éŒ¯èª¤è¡¨åˆ— --%>
 						<c:if test="${not empty errorMsgs}">
-							<font style="color: red">½Ğ­×¥¿¥H¤U¿ù»~:</font>
+							<font style="color: red">è«‹ä¿®æ­£ä»¥ä¸‹éŒ¯èª¤:</font>
 							<ul style="list-style-type: none">
 								<c:forEach var="message" items="${errorMsgs}">
 									<li style="color: red">${message}</li>
@@ -262,7 +262,7 @@ Court court = (Court) request.getAttribute("court");
 
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="disabled-input" class="form-control-label">²yÀ]½s¸¹</label>
+													<label for="disabled-input" class="form-control-label">çƒé¤¨ç·¨è™Ÿ</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input"
@@ -272,7 +272,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">¥ø·~·|­û½s¸¹</label>
+													<label for="text-input" class="form-control-label">ä¼æ¥­æœƒå“¡ç·¨è™Ÿ</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="oUserID"
@@ -282,7 +282,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">ºŞ²z­û½s¸¹</label>
+													<label for="text-input" class="form-control-label">ç®¡ç†å“¡ç·¨è™Ÿ</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="manageID"
@@ -292,7 +292,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">¤W¬[®É¶¡</label>
+													<label for="text-input" class="form-control-label">ä¸Šæ¶æ™‚é–“</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="courtOnTime" disabled="disabled"
@@ -302,7 +302,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="disabled-input" class="form-control-label">¥Ó½Ğ¤W¬[®É¶¡</label>
+													<label for="disabled-input" class="form-control-label">ç”³è«‹ä¸Šæ¶æ™‚é–“</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input"
@@ -312,7 +312,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="disabled-input" class="form-control-label">²yÀ]¦WºÙ</label>
+													<label for="disabled-input" class="form-control-label">çƒé¤¨åç¨±</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" disabled="disabled"
@@ -328,7 +328,7 @@ Court court = (Court) request.getAttribute("court");
 
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="file-input" class="form-control-label">²yÀ]¹Ï¤ù</label>
+													<label for="file-input" class="form-control-label">çƒé¤¨åœ–ç‰‡</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="file" id="file-input" name="courtPic" disabled="disabled"
@@ -344,7 +344,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">²yÀ]¹q¸Ü</label>
+													<label for="text-input" class="form-control-label">çƒé¤¨é›»è©±</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="courtTelephone" disabled="disabled"
@@ -354,7 +354,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="text-input" class="form-control-label">²yÀ]¦a§}</label>
+													<label for="text-input" class="form-control-label">çƒé¤¨åœ°å€</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="text-input" disabled="disabled"
@@ -364,7 +364,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="disabled-input" class="form-control-label">²yÀ]¶·ª¾</label>
+													<label for="disabled-input" class="form-control-label">çƒé¤¨é ˆçŸ¥</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<textarea name="courtRule" id="textarea-input"
@@ -374,7 +374,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="disabled-input" class="form-control-label">¦a°Ï</label>
+													<label for="disabled-input" class="form-control-label">åœ°å€</label>
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="disabled-input" disabled="disabled"
@@ -384,7 +384,7 @@ Court court = (Court) request.getAttribute("court");
 											</div>
 											<div class="row form-group">
 												<div class="col col-md-3">
-													<label for="selectLg" class="form-control-label">¥Ó½Ğª¬ºA</label>
+													<label for="selectLg" class="form-control-label">ç”³è«‹ç‹€æ…‹</label>
 												</div>
 												<div class="col-10 col-md-8">
 												<%
@@ -392,9 +392,9 @@ Court court = (Court) request.getAttribute("court");
 													%>
 													<select name="courtApplyStatus" id="selectLm"
 														class="form-control-sm form-control">
-														<option value="0" <%=status == 0 ? "selected" : ""%>>¼f®Ö¤¤</option>
-														<option value="1" <%=status == 1 ? "selected" : ""%>>¼f®Ö³q¹L</option>
-														<option value="2" <%=status == 2 ? "selected" : ""%>>¼f®Ö¥¼³q¹L</option>
+														<option value="0" <%=status == 0 ? "selected" : ""%>>å¯©æ ¸ä¸­</option>
+														<option value="1" <%=status == 1 ? "selected" : ""%>>å¯©æ ¸é€šé</option>
+														<option value="2" <%=status == 2 ? "selected" : ""%>>å¯©æ ¸æœªé€šé</option>
 													</select>
 												</div>
 											</div>
@@ -403,7 +403,7 @@ Court court = (Court) request.getAttribute("court");
 													<input type="hidden" name="action" value="update">
 													<input type="hidden" name="courtID"
 														value="<%=court.getCourtID()%>"> <input
-														type="submit" class="btn btn-primary btn-sm" value="°e¥X­×§ï">
+														type="submit" class="btn btn-primary btn-sm" value="é€å‡ºä¿®æ”¹">
 													<i class="fa fa-dot-circle-o"></i>
 												</div>
 											</div>
@@ -427,8 +427,8 @@ Court court = (Court) request.getAttribute("court");
 			if (mStatus === 1) {
 				Swal.fire({
 					icon : 'error',
-					title : 'Åv­­¤£¨¬!!',
-					text : '½ĞÁpÃ´¨t²ÎºŞ²z­û',
+					title : 'æ¬Šé™ä¸è¶³!!',
+					text : 'è«‹è¯ç¹«ç³»çµ±ç®¡ç†å“¡',
 					showConfirmButton : false,
 					timer : 50000000
 				})
