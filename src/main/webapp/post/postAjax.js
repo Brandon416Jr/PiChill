@@ -6,7 +6,7 @@ $(document).ready(function() {
 		dataType: "json",
 		url: "post.do?action=getUser",
 		success: function(data) {
-			//			console.log(data);
+//						console.log(data);
 			if (data == null) {
 				$('#userID').val("null");
 				$('#userStatus').val("null");

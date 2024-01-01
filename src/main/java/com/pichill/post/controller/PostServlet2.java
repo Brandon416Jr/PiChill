@@ -37,6 +37,8 @@ import com.pichill.post.service.PostServiceImpl;
 import com.pichill.reserveorder.entity.ReserveOrder;
 import com.pichill.reserveorder.service.ReserveOrderService;
 
+import redis.clients.jedis.Jedis;
+
 @WebServlet("/post/post.do")
 @MultipartConfig(fileSizeThreshold = 0 * 1024 * 1024, maxFileSize = 1 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024)
 public class PostServlet2 extends HttpServlet {
@@ -130,6 +132,7 @@ System.out.println("PPPPP"+postJsonElement);
 			GeneralUser generalUser2 = (GeneralUser) session.getAttribute("generalUser");
 			Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 			String json = gson.toJson(generalUser2);
+			System.out.println("JJJJJ"+json);
 			PrintWriter out = res.getWriter();
 			out.print(json);
 			out.flush();
@@ -383,6 +386,23 @@ System.out.println("PPPPP"+postJsonElement);
 			out.print(json);
 			out.flush();
 		}
+//		if("getByTag".equals(action)) {
+//			Jedis jedis = new Jedis("localhost", 6379);
+//			jedis.sadd("post:31000009:tags", "大大");
+//			String tag = req.getParameter("tag");
+//			System.out.println("TAG"+tag);
+//			 Set<String> postIDs = jedis.smembers("tag:" + tag + ":posts");
+//			 System.out.println("ID"+postIDs);
+//		        if (!postIDs.isEmpty()) {
+//		            System.out.println("包含標籤 '" + tag + "' 的文章ID:");
+//		            for (String postID : postIDs) {
+//		                System.out.println(postID);
+//		            }
+//		        } else {
+//		            System.out.println("沒有包含標籤 '" + tag + "' 的文章");
+//		        }
+//			jedis.close();
+//		}
 		if ("get_By_Title".equals(action)) {
 			String postTitle = req.getParameter("postTitle");
 			PostService postSvc = new PostServiceImpl();
