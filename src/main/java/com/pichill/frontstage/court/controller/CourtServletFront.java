@@ -249,7 +249,7 @@ public class CourtServletFront extends HttpServlet {
 		Integer oUserID = ownerUser.getoUserID();
 
 		// manageID
-//		Integer manageID = null;
+		Integer manageID = 13000009;
 		
 		// courtOnTime
 		Timestamp courtOnTime = null;

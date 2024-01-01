@@ -6,15 +6,11 @@
 <%@ page import="com.pichill.backstage.announcement.entity.Announcement"%>
 <%@ page import="com.pichill.backstage.announcement.*"%>
 <%@ page import="com.pichill.backstage.announcement.service.*"%>
- <%@ page
-	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%>
-<%@ page
-	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%> 
-<%-- <%
-AnnouncementGetOneService annoGetOneSvc = new AnnouncementGetOneService();
-List<AnnouncementGetOne> list = annoGetOneSvc.getAll();
-pageContext.setAttribute("list", list);
-%> --%>
+<%--  <%@ page --%>
+<%-- 	import="com.pichill.announcementgetone.service.AnnouncementGetOneService"%> --%>
+<%-- <%@ page --%>
+<%-- 	import="com.pichill.announcementgetone.entity.AnnouncementGetOne"%>  --%>
+
 <%
 AnnouncementServiceBack annoSvcB = new AnnouncementServiceBack();
 List<Announcement> list = annoSvcB.getAll();
@@ -78,55 +74,26 @@ pageContext.setAttribute("list", list);
 			<div class="row row-cols-1 row-cols-md-1 g-1" id="card">
 				<div class="col">
 					<div class="card h-100">
-						<svg class="bd-placeholder-img card-img-top" width="100%"
-							height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-							aria-label="佔位符：影像上限" preserveAspectRatio="xMidYMid slice"
-							focusable="false">
-							<title>Placeholder</title><rect width="100%" height="100%"
-								fill="#868e96"></rect>
-							<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-						<div class="card-body">
-							<h6 class="card-title">
-								<font style="vertical-align: inherit; font-weight: bold;"><font
-									style="vertical-align: inherit;">揪團文章</font></font>
-							</h6>
-							<p class="card-text">
-								<font style="vertical-align: inherit;"><font
-									style="vertical-align: inherit;"></font><font
-									style="vertical-align: inherit;"></font></font>
-							</p>
-							<a href="#" class="btn1 btn-primary"><font
-								style="vertical-align: inherit;"><font
-									style="vertical-align: inherit; font-weight: bold; font-size: 14px;">揪Me!</font></font></a>
-						</div>
-					</div>
+						 <img src="<%=request.getContextPath()%>/generaluser/pic/31000009.jpg" class="card-img-top" alt="jpg">
+                    <div class="card-body">
+                      <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">揪團文章</font></font></h6>
+                      <p class="card-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font><font style="vertical-align: inherit;"></font></font></p>
+                      <a href="http://localhost:8081/PiChill/post/forum.html?postID=31000009" class="btn1 btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: bold; font-size: 14px;">揪Me!</font></font></a>
+                    </div>
+                  </div>
 				</div>
 				<div></div>
 				<div></div>
 				<div></div>
 				<div class="col">
 					<div class="card h-100">
-						<svg class="bd-placeholder-img card-img-top" width="100%"
-							height="140" xmlns="http://www.w3.org/2000/svg" role="img"
-							aria-label="佔位符：影像上限" preserveAspectRatio="xMidYMid slice"
-							focusable="false">
-							<title>Placeholder</title><rect width="100%" height="100%"
-								fill="#868e96"></rect>
-							<text x="50%" y="50%" fill="#dee2e6" dy=".3em">Image cap</text></svg>
-						<div class="card-body">
-							<h6 class="card-title">
-								<font style="vertical-align: inherit; font-weight: bold;"><font
-									style="vertical-align: inherit;">揪團文章</font></font>
-							</h6>
-							<p class="card-text">
-								<font style="vertical-align: inherit;"><font
-									style="vertical-align: inherit;"></font></font>
-							</p>
-							<a href="#" class="btn1 btn-primary"><font
-								style="vertical-align: inherit;"><font
-									style="vertical-align: inherit; font-weight: bold; font-size: 14px;">揪Me!</font></font></a>
-						</div>
-					</div>
+						<img src="<%=request.getContextPath()%>/generaluser/pic/31000006.jpg" class="card-img-top" alt="jpg">
+                    <div class="card-body">
+                        <h6 class="card-title"><font style="vertical-align: inherit; font-weight: bold;"><font style="vertical-align: inherit;">揪團文章</font></font></h6>
+                      <p class="card-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font></p>
+                      <a href="http://localhost:8081/PiChill/post/forum.html?postID=31000006" class="btn1 btn-primary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-weight: bold; font-size: 14px;">揪Me!</font></font></a>
+                    </div>
+                  </div>
 				</div>
 			</div>
 		</aside>
@@ -159,16 +126,19 @@ pageContext.setAttribute("list", list);
 								<th>內文圖片</th>
 								<th>發文時間</th>
 							</tr>
-							<c:forEach var="announcementGetOne" items="${list}">
+							<c:forEach var="announcement" items="${list}">
 								<!-- 暫稱list之後再改 -->
 								<tr>
-									<td>${announcementGetOne.announceID}</td>
-									<td>${announcementGetOne.manage.mName}</td>
-									<td>${announcementGetOne.formID}</td>
-									<td>${announcementGetOne.annoTitle}</td>
-									<td>${announcementGetOne.annoContent}</td>
-									<td>${announcementGetOne.annoPic}</td>
-									<td>${announcementGetOne.annoTime}</td>
+									<td>${announcement.announceID}</td>
+									<td>${announcement.manage.mName}</td>
+									<td>${announcement.formID}</td>
+									<td>${announcement.annoTitle}</td>
+									<td>${announcement.annoContent}</td>
+<%-- 									<td>${announcement.annoPic}</td> --%>
+<td><img
+								src="<%=request.getContextPath()%>/announcement/DBJPGReader?announceID=${announcement.announceID}"
+								width="400px"></td>
+									<td>${announcement.annoTime}</td>
 									<td>
 										<FORM METHOD="post"
 											ACTION="<%=request.getContextPath()%>/announcement/announcement_single.jsp"
