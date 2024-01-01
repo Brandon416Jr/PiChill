@@ -96,7 +96,7 @@ public class CommentServlet extends HttpServlet {
 			Integer CommentAmount = comment.getGeneralUser().getCommentAmount();
 			CommentAmount += 1;
 			generalUser.setCommentAmount(CommentAmount);
-			generalUser = generalUserService.updateByCommentAmount(11000001, CommentAmount);
+			generalUser = generalUserService.updateByCommentAmount(gUserID, CommentAmount);
 		}
 		if ("delete".equals(action)) {
 //			System.out.println("=================");

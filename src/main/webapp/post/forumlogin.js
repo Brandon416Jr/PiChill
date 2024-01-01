@@ -5,6 +5,7 @@ $(document).ready(function() {
     // 在這裡附加事件處理程序
 
     $("#create-post-button").on("click", Userlogin);
+    $('.task_add2').on("click", Userlogin);
     $('#send_report2').on("click", Userlogin);
     $('#send_report').on("click", Userlogin);
     $('#send_report3').on("click", Userlogin);
