@@ -21,6 +21,7 @@ import com.pichill.backstage.generaluser.service.GeneralUserServiceBack;
 import com.pichill.contactus.entity.ContactUs;
 import com.pichill.generaluser.entity.GeneralUser;
 import com.pichill.owneruser.entity.OwnerUser;
+import com.pichill.util.SendMailService;
 
 
 /**
@@ -178,6 +179,18 @@ public class ContactUsServletBack extends HttpServlet {
 //		}
 
 		Integer formStatus = Integer.valueOf(req.getParameter("formStatus"));
+		if (formStatus == 1) {
+			
+			// 寄上架成功信件
+			String gEmail = contactUs.getGeneralUser().getgEmail();
+			String gName = contactUs.getGeneralUser().getgName();
+			Timestamp formTime = contactUs.getformTime();
+			String formPurpose = contactUs.getformPurpose();
+			String subject = " PiChill_球館回覆通知";
+			String messageText = gName + "您好,您於" + formTime + "所填寫的表單，主旨為「" + formPurpose + "」，已經處理完成!";
+			SendMailService sendMailService = new SendMailService();
+			sendMailService.sendMail(gEmail, subject, messageText);
+		}
 
 //		Integer formType = Integer.valueOf(req.getParameter("formType"));
 

@@ -219,25 +219,25 @@ public class ManageTest {
 //		manage2.setManageID(13000010);
 //		dao.update(manage2);
 		
-//		 修改13000001
+//		 修改13000008
 //		Manage manage2 = new Manage();
-//		String mPassword ="1111111111";
+//		String mPassword ="3333333333";
 //		String rawPassword = EncryptDataUtil.encryptData(mPassword);
-//		manage2.setmName("涂鴻欽");
-//		manage2.setmUserName("1111111111");
+//		manage2.setmName("王建民");
+//		manage2.setmUserName("3333333333");
 //		manage2.setmPassword(rawPassword);
-//		manage2.setmBirth(java.sql.Date.valueOf("1988-12-12"));
+//		manage2.setmBirth(java.sql.Date.valueOf("1985-06-09"));
 //		manage2.setmGender(0);
-//		manage2.setmTelephone("0922456788");
-//		manage2.setmEmgContact("陳致融");
-//		manage2.setmEmgPhone("0911111111");
-//		manage2.setmAddress("屏東縣中正區中正路一段117號之三19樓");
-//		manage2.setmHiredate(java.sql.Date.valueOf("2016-01-30"));
-//		manage2.setmID("Q198019682");
-//		manage2.setmEmail("clementine1476@gmail.com");
+//		manage2.setmTelephone("0912949250");
+//		manage2.setmEmgContact("錢慈鈞");
+//		manage2.setmEmgPhone("0926630312");
+//		manage2.setmAddress("臺中市北屯區崇德二路１段70號10樓");
+//		manage2.setmHiredate(java.sql.Date.valueOf("2018-05-14"));
+//		manage2.setmID("G132564496");
+//		manage2.setmEmail("wilson4897@gmail.com");
 //		manage2.setmProfilePic(null);
 //		manage2.setmStatus(0);
-//		manage2.setManageID(13000010);
+//		manage2.setManageID(13000008);
 //		dao.update(manage2);
 		
 		// 刪除
