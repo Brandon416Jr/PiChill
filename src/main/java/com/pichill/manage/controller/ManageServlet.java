@@ -326,7 +326,7 @@ public class ManageServlet extends HttpServlet {
 		Map<String,String> errorMsgs = new LinkedHashMap<String,String>();
 		req.setAttribute("errorMsgs", errorMsgs);
 		Integer manageID = Integer.valueOf(req.getParameter("manageID"));
-
+		
 		Manage manage = manageService.getOneManage(manageID);
 		manage.setmPassword(EncryptDataUtil.decryptData(manage.getmPassword()));
 //		String param = "?manageID="  +manage.getManageID()+

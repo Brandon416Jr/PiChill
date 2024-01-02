@@ -276,7 +276,7 @@ Court court = (Court) request.getAttribute("court");
 												</div>
 												<div class="col-10 col-md-8">
 													<input type="text" id="text-input" name="oUserID"
-														value="<%=court.getCourtID()%>" disabled="disabled" class="form-control" />
+														value="<%=court.getOwnerUser().getoUserID()%>" disabled="disabled" class="form-control" />
 													<!-- <small class="form-text text-muted">This is a help text</small> -->
 												</div>
 											</div>

@@ -81,7 +81,7 @@ public class EcpayController extends HttpServlet {
 		AioCheckOutALL obj = new AioCheckOutALL();
 		int currentYear = getCurrentYear();
 		int merchantTradeNoSet = 10000 + reserveOrderID;
-		obj.setMerchantTradeNo("PC" + currentYear + merchantTradeNoSet);	
+		obj.setMerchantTradeNo("PiChill2" + currentYear + merchantTradeNoSet);	
 		obj.setMerchantTradeDate(formattedTradeDate);
 		obj.setTradeDesc(reserveOrder.getCourt().getCourtName());
 		obj.setItemName(reserveOrder.getCourt().getCourtName() + "  " + reserveOrder.getReserveDate() 
@@ -90,7 +90,7 @@ public class EcpayController extends HttpServlet {
 		obj.setCustomField1(String.valueOf(reserveOrder.getCourt().getCourtID())); // 訂單成立接收到CourtNo
 		obj.setCustomField2(String.valueOf(reserveOrderID)); // 預約單編號（資料庫的）
 		obj.setCustomField4(Integer.toString(gUserID)); // 會員編號
-		obj.setReturnURL("https://8cda-2001-b011-6-36f6-808c-a1d0-434c-858c.ngrok-free.app/PiChill/reserveorder/ecpayreturn.do");	// 使用時要記得換成外網
+		obj.setReturnURL("https://2501-2001-b011-3803-5b6d-dc69-64b4-957a-f1a8.ngrok-free.app/PiChill/reserveorder/ecpayreturn.do");	// 使用時要記得換成外網
 		obj.setOrderResultURL("http://localhost:8081/PiChill/reserveorder/listOneOrder.jsp");  // 使用者付款完成跳轉頁面
 //		obj.setOrderResultURL("http://localhost:8081/PiChill/reserveorder/listOneOrder.jsp?ecpay=1");  // 使用者付款完成跳轉頁面
 //		obj.setOrderResultURL("http://localhost:8081/PiChill/reserveorder/reserveOrder.jsp"); 

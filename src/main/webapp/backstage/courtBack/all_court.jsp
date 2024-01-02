@@ -240,7 +240,7 @@ border-radius: 10px;
 								<div class="account-item clearfix js-item-menu">
 									<div class="image">
 										<img
-											src="<%=request.getContextPath()%>/manage/DBGJPGReader?manageID=<%=manage.getManageID()%>"
+											src="<%=request.getContextPath()%>/manage/DBJPGReader?manageID=<%=manage.getManageID()%>"
 											alt="使用者頭像" /> 
 <!-- 											<img -->
 <%-- 											src="<%=request.getContextPath()%>/image/Group 115.png" --%>
