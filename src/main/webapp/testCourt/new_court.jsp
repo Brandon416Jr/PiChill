@@ -167,7 +167,7 @@ System.out.println(ownerUser);
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="">
                 <label  for="time">開館時間</label>
-                <input type="time" value="<%=(court==null)? "09:00:00" : court.getCourtOpenTime()%>"  min="09:00" max="18:00" name="courtOpenTime">
+                <input type="time" value="<%=(court==null)? "09:00:00" : court.getCourtOpenTime()%>" name="courtOpenTime">
 
                 <img src="<%=request.getContextPath()%>/owneruser/pic/stR01.png" width="20" height="20" alt="" style="position: relative; left: 15px;">
                 <label style="position: relative; left: 15px;" for="time">閉館時間</label>

@@ -217,10 +217,10 @@ pageContext.setAttribute("list",list);
                     <c:forEach var="place" items="${list}" >
 		
 			<tr>
-		
+				<td>${place.ball}</td>
 				<td>${place.placeName}</td>
 				<td>${place.placeFee}</td>
-				<td>${place.ball}</td>
+				
 	
 				
 			</tr>
