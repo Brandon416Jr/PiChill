@@ -123,7 +123,7 @@ pageContext.setAttribute("oUserID",oUserID);
                     <tr>
                     
                         <th class="text-center">訂單編號</th>
-                        <th class="text-center">企業會員編號</th>
+<!--                         <th class="text-center">企業會員編號</th> -->
                         <th class="text-center">預約日期</th>
                         <th class="text-center">預約時間</th>
                         <th class="text-center">球館</th>
@@ -139,11 +139,11 @@ pageContext.setAttribute("oUserID",oUserID);
                     <!-- 表格內容 -->
                     <tr>
                     	<td class="text-center">${reserveOrder.reserveOrderID}</td>
-                        <td class="text-center">${reserveOrder.ownerUser.oUserID}</td>
+<%--                         <td class="text-center">${reserveOrder.ownerUser.oUserID}</td> --%>
                         <td class="text-center">${reserveOrder.reserveDate}</td>
                         <td class="text-center">${reserveOrder.timeRef.reserveTime}</td>
-                        <td class="text-center">${reserveOrder.place.placeName}</td>
                         <td class="text-center">${reserveOrder.court.courtName}</td>
+                        <td class="text-center">${reserveOrder.place.placeName}</td>                        
                         <td class="text-center">${reserveOrder.orderNum}</td>
                         <td class="text-center">${reserveOrder.generalUser.gName}</td>
                         <td class="text-center">${reserveOrder.generalUser.gTelephone}</td>
